@@ -28,7 +28,7 @@ The Analyst reads the whole source in one call. All our texts fit: the longest, 
 | **Style sheet** | Register, honorific and name-order policy, ruby and italics policy, quotation conventions, notes on the author's voice, annotation density per edition, standing rules with their scope | The house style for this text; the editor approves it |
 | **Hard spots** | Poems, wordplay, allusions, dialect passages, classical quotations, with segment IDs | Where heads may commission an intern; where Source check looks hardest |
 
-The bible is JSON with a schema, versioned, and stored with the run. A human-readable view of it is published with each edition: readers can see the cast and ledger the house worked from.
+The bible is one flat JSON file per work, with a schema, versioned and stored with the run. Code reads it for the checks in §4; prompts get it rendered as plain Markdown. Deliberately no knowledge graph, vector store or embeddings: a short story's cast and ledger fit in a few thousand tokens, and every extra layer is another place for errors to hide. We'd revisit that only for a house-wide memory across many works. A human-readable view of it is published with each edition: readers can see the cast and ledger the house worked from.
 
 ## 2. Keeping it up to date
 
