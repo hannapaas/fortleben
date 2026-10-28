@@ -36,7 +36,7 @@ flowchart TD
   RD -. "queries by reason" .-> SC & ED & FC
 ```
 
-Rounds are capped at two per query. If it's unresolved after that, it goes to the editor as a fork with a one-line trade-off per option (at most 5 forks per checkpoint, global ones first). Critics edit **flagged spans only** and may answer "none". The English-only pass never sees the Japanese, and every change it makes goes back through Source check. Sensitivity flags (dated or harmful content in the source) are a query type routed to the editor. They lead to context notes, never bowdlerising.
+How a whole text moves through this (passes, difficulty tiers, the budget per 1,000 characters, and what gets cut when money is short) is in `RUNNING-A-TEXT.md`. Rounds are capped at two per query. If it's unresolved after that, it goes to the editor as a fork with a one-line trade-off per option (at most 5 forks per checkpoint, global ones first). Critics edit **flagged spans only** and may answer "none". The English-only pass never sees the Japanese, and every change it makes goes back through Source check. Sensitivity flags (dated or harmful content in the source) are a query type routed to the editor. They lead to context notes, never bowdlerising.
 
 ## 2. Data model (SQLite)
 
