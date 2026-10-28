@@ -6,7 +6,9 @@ Written 27 Oct 2026, the second day of the hackathon. Architecture: `ARCHITECTUR
 
 **keikaku is a small publishing house of Meta Muse agents, run by one human editor, that brings Japanese stories nobody has translated into English, and shows every doubt, argument and decision behind each line.**
 
-Thousands of Japanese books are free to read in Japanese, on Aozora Bunko, and no translator is coming for most of them. keikaku doesn't claim to replace one. It produces honest, labelled, annotated editions, a window into another world, and shows its working.
+Thousands of Japanese books are free to read on Aozora Bunko, and no translator is coming for most of them. Today an English reader who wants one gets Google Translate on a badly formatted page. keikaku gives them a readable, annotated edition, honest about being machine-made, with every decision behind it visible: a window into another world. And it's a starting point, not a final word: readers react, argue and propose fixes, the way Wikipedia articles and fan translations get better.
+
+It's useful without anyone's sign-off. When a person does check a passage, the page says so; until then, it says it hasn't been.
 
 ## What it makes
 
@@ -25,8 +27,8 @@ Thousands of Japanese books are free to read in Japanese, on Aozora Bunko, and n
 | Culturally curious reader | Switches to **Curious**: honorifics kept, ruby over key terms, two-sentence tap-notes. Taps a line to see the debate behind it. |
 | Student | **Student** edition: parallel Japanese with furigana, a literal crib, sourced notes, decision history. Browses the Catalogue for a text to study. It's an edition, not a tutor. |
 | Translator | Browses the **Catalogue**. Reads the style sheet and queries. Finds something to pitch to a press. |
-| Bilingual reader / reviewer | Flags "I think this is wrong" with a reason; proposes a fix to a span. Invited reviewers mark segments *source-checked*, and their name goes on the seal. |
-| The editor | Approves the style sheet, sets the sample checkpoint, decides forks, makes standing rules, locks lines, dictates notes, signs the edition. |
+| Bilingual reader | Flags "I think this is wrong" with a reason; proposes a fix to a span. A bilingual reader who checks a passage against the Japanese can mark it *human-reviewed*, and their name goes on it. |
+| The editor | Approves the style sheet, sets the sample checkpoint, decides forks, makes standing rules, locks lines, dictates notes, signs the edition. None of it blocks the house: until the editor rules, the department head's pick stands and is labelled as such. |
 
 ## The community concept
 
@@ -36,8 +38,8 @@ Built from publishing, fan translation, Wikipedia and web-fiction comments, all 
 - **Reactions on two axes.** *How it reads* (beautiful / confusing / sounds off / made me stop) is kept apart from *Is it right* (needs a reason). No counts as rankings. The editor sees a heatmap.
 - **Proposals become queries.** Select a span, suggest a replacement, pick a reason. Accuracy goes to Source check, flow to Editorial, notes to Fact-check. The owner answers *accepted / stet / revised*. Rejections stay visible with a reason.
 - **Talk starts from the record.** Each passage's thread opens with the agents' original debate, so readers argue with the record rather than from scratch.
-- **Trust ladder.** Reader → contributor → bilingual reviewer → editor. For now, reviewers come in by invite.
-- **Honest labels.** Every paragraph shows *machine draft / edited / source-checked / reviewed* in words. People are round and named; agents are square and named by department, never given personas. A seal marks human sign-off. Credits and a colophon (奥付) are on every edition, with the Aozora Bunko attribution.
+- **Trust ladder.** Reader → contributor → bilingual reviewer → editor. For now, the editor promotes people by hand.
+- **Honest labels.** Every paragraph says in words how far it got: *draft* (one machine pass), *house-checked* (through Source check, Editorial and Fact-check), *editor-approved*, or *human-reviewed* (a bilingual reader checked it against the Japanese). People are round and named; agents are square and named by department, never given personas. A seal marks human sign-off. Credits and a colophon (奥付) are on every edition, with the Aozora Bunko attribution.
 
 ## What gets translated next
 
@@ -51,7 +53,7 @@ Readers help choose. The editor still decides.
 
 ## Scope
 
-**By 4 Nov:** the showcase in Casual and Curious editions (Student if it holds); the experiments as labelled machine drafts, including the hard text's visible failures; the Setsu 1918 comparison; the Catalogue (~100–200 reader's reports generated on Meta models) with votes and requests; the live House on preset passages, with replay; reactions, proposals (pre-moderated) and invited reviewers; the evals; README and video.
+**By 4 Nov:** the showcase in Casual and Curious editions (Student if it holds); the experiments as labelled machine drafts, including the hard text's visible failures; the Setsu 1918 comparison; the Catalogue (~100–200 reader's reports generated on Meta models) with votes and requests; the live House on preset passages, with replay; reactions and proposals (pre-moderated); the evals; README and video.
 
 **Later:** open accounts and a trust ladder with a calibration set; any Aozora text on request; longer works; EPUB and print; other languages.
 

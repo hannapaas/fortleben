@@ -11,12 +11,12 @@ Written 27 Oct 2026, the second day of the hackathon; updated 28 Oct with the fi
 | M2a ‖ | **Engine core** | The runtime, budgets, response cache, carried state, Analyst, Translation and Source check run 晩餐 end to end, writing events and revisions. |
 | M2b ‖ | **Reader site** | The pamphlet design ported to templates: per-book accent colour, ruby, seals and colophon, a near-black dark mode. A reader settings panel (edition, layout, what to show, a quiet preset, text size, furigana) that never loses your place. The margin variorum, two-axis reactions, proposals into a moderation queue, labels, credits. Everything renders from the fixture. Works at phone width. |
 | M2c ‖ | **House view + streaming** | The floor plan and message stream play a fake event fixture over SSE, with resume and replay at 8×. |
-| M2d ‖ | **Deterministic checkers + eval harness** | Tic detector, ledger checker and length-ratio flagger (shared with the copy desk). E4 stats. S0 and S1 baselines. T1/T3 sets assembled and frozen. A blind A/B form for reviewers. |
+| M2d ‖ | **Deterministic checkers + eval harness** | Tic detector, ledger checker and length-ratio flagger (shared with the copy desk). E4 stats. S0 and S1 baselines. T1/T3 sets assembled and frozen. A blind A/B form, in case a bilingual reader has time. |
 | M2e ‖ | **Catalogue** | A Glimmer vs Spark spot check on 10 works. Reader's reports generated on Meta models for the long-list. Catalogue pages with evidence and date for "untranslated". "I'd read this" votes, a request form (search the Aozora index or give an outside reference) and a wanted list. Acquisitions checks outside requests and the editor confirms. |
 | M2f ‖ | **Ops** | Fly deploy. Spend caps (live run / daily / total), kill switch, one-run queue, per-IP limits, invite-link auth for editor and reviewers. The replay fallback works when the house is closed. |
 | **M3** | **Full pipeline on 晩餐** (needs M2a; then adds Editorial, Copy desk, Notes, Fact-check, forks, interns, rules) | One run produces queries with stet / accept / revise, ≥1 fork with verbatim dissent, ≥1 intern with a logged reason, a standing rule that propagates and skips locked lines. Cost per 1k chars is within the pessimistic figure. The run streams into M2c and renders in M2b. |
 | **M4** | **Experiments + prompt freeze** | 我牢獄, 雪をんな and the Setsu passage run. The hard text's failures are written up honestly. Prompts are tagged `frozen-v1`. **Midpoint check (below).** |
-| M5 ‖ | **Showcase with the editor** | The editor approves the style sheet for 三十三の死. Sample checkpoint (first ~1 page): notes become scoped rules, ≤5 forks. The full run follows, and reviewers source-check. The edition carries honest labels, an editor's note and credits. |
+| M5 ‖ | **Showcase with the editor** | The editor approves the style sheet for 三十三の死. Sample checkpoint (first ~1 page): notes become scoped rules, ≤5 forks. The full run follows. The edition carries honest labels, an editor's note and credits. If a bilingual reader has time to check passages, those are labelled *human-reviewed*; nothing waits for it. |
 | M6 ‖ | **Evals** | E1–E6 done (timing below). Charts render on the Evals page and in the README. |
 | M7 | **Integrate** | Live site: showcase, experiments, Setsu comparison, Catalogue, House (live + replay), Evals, Credits, "Where this comes from". A live run on a preset passage succeeds three times in a row from a phone. |
 | M8 | **Ship** | 3-min video, README first screen, LICENSE, a secrets scan of the full history. Submitted on **3 Nov**, a day early. Caps set for the judging period. |
@@ -25,7 +25,7 @@ Written 27 Oct 2026, the second day of the hackathon; updated 28 Oct with the fi
 - **After M0:** S0 one-shot on dev passages, used to build Spark's own excess-vocabulary list for the tic detector (E4, free).
 - **After M4 freeze:** S0, S1 and S2 on T1 (8–12 passages: the Setsu/1918 pair plus 2–3 more public-domain works with published translations) and on T3 (20–30 probes).
   - Then the E2 accuracy audit and the E1 jury.
-  - **E1 pairs go to the bilingual reviewers the same day.** Their hours are the bottleneck.
+  - **No eval depends on human raters.** LLM judges are known to reward fluent drift, so the headline numbers are the reference-based comparisons (against the 1918 translations) and E2's span-level accuracy audit; the model jury is reported with that caveat. If a bilingual reader does blind A/B pairs, they're reported separately as a bonus.
 - **During M5:** the snapshots after each stage give E5 (errors fixed vs errors introduced, per department, interns on vs off) at no extra cost.
 - **After M5:** E3, the long-context experiment below. E6 judge calibration comes out of the E1 data.
 - **All numbers are frozen before the video is recorded.**
@@ -65,9 +65,8 @@ These must be true:
 1. M3 is done: a real end-to-end run on 晩餐, within the pessimistic cost.
 2. A real run streams into the House view.
 3. The reader site renders 晩餐 from the database in two editions.
-4. The showcase is parsed, and its style sheet is drafted.
-5. Reviewers have confirmed their hours.
-6. Credit spend is ≤ $45.
+4. The showcase is parsed, its story bible built, and its style sheet drafted.
+5. Credit spend is ≤ $45.
 
 **If 1 or 2 fails:** fall back to the minimal pipeline (Analyst → Translation → Source check → Copy desk → Notes). Interns and forks then appear only in the recorded run.
 **If more than two items fail:** stop adding, ship the showcase and evals, and cut from the list below.

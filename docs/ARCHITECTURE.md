@@ -51,7 +51,7 @@ Rounds are capped at two per query. If it's unresolved after that, it goes to th
 | `fork` | Options (author + one-line trade-off), head's pick, the editor's decision, the rule it created |
 | `rule` | Standing rule text, **explicit scope** (line / character / term / work / house), origin, lines it touched |
 | `lock` | Segment, who locked it. Rules don't rewrite locked lines; they raise a query to the editor instead |
-| `status` | Per segment: machine draft / edited / source-checked / reviewed, plus names |
+| `status` | Per segment: draft / house-checked / editor-approved / human-reviewed, plus who. Nothing waits on the last two |
 | `event` | Append-only log: run, seq, actor (department + role, or person), type, payload, cost. The single source for history, the House stream and replay |
 | `call` | Model, effort, tokens (input / cached / output / reasoning), $, prompt hash, cache key |
 | `intern` | Department, brief, logged reason, budget, spend, report |
