@@ -90,7 +90,11 @@ A head can call the tool `commission_intern(question, reason, budget)`. The runt
 
 ## 6. Long context
 
+The full design, including the story bible the Analyst builds and why we avoid large raw overlaps, is in `STORY-STATE.md`. In short:
+
 - **Chunks** of about 1K source tokens, never splitting a paragraph.
+- **Look-ahead:** each call also sees the next paragraph of Japanese, read-only, because Japanese often resolves a subject or speaker after the fact.
+- **Whole source by default** for texts up to ~30k characters (all of ours), cached; E3 decides whether it stays.
 - **Prompt order** (stable first, so it caches):
   1. House rules and the department prompt.
   2. Style sheet, ledger, character sheet, standing rules.
