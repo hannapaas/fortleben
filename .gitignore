@@ -1,0 +1,10 @@
+# Private prompts, rubrics and style guides are loaded at runtime from KEIKAKU_PRIVATE_DIR and must never be committed here
+/private/
+/prompts.private/
+
+.env
+.env.*
+!.env.example
+.DS_Store
+__pycache__/
+node_modules/
