@@ -13,7 +13,7 @@ Thousands of Japanese books are free to read in Japanese, on Aozora Bunko, and n
 | Part | What it is |
 |---|---|
 | **The Library** | A showcase edition plus experiments, each in reader editions, with every line's history a tap away |
-| **The Catalogue** | Reader's reports on untranslated works: what each is about, why read it, how hard it is, and the evidence for "untranslated" |
+| **The Catalogue** | Reader's reports on untranslated works: what each is about, why read it, how hard it is, and the evidence for "untranslated". Readers vote for what they'd read and request texts from Aozora or beyond |
 | **The House** | The agents at work, live or replayed: departments, queries, forks, interns, budgets |
 | **The Evals** | One-shot vs a translate–reflect–revise loop vs keikaku vs a 1918 human translation; a long-context test; honest losses |
 
@@ -39,9 +39,19 @@ Built from publishing, fan translation, Wikipedia and web-fiction comments, all 
 - **Trust ladder.** Reader → contributor → bilingual reviewer → editor. For now, reviewers come in by invite.
 - **Honest labels.** Every paragraph shows *machine draft / edited / source-checked / reviewed* in words. People are round and named; agents are square and named by department, never given personas. A seal marks human sign-off. Credits and a colophon (奥付) are on every edition, with the Aozora Bunko attribution.
 
+## What gets translated next
+
+Readers help choose. The editor still decides.
+
+- **"I'd read this"** on every Catalogue entry, one vote per reader. The Catalogue can sort by most wanted, but its default order isn't a leaderboard.
+- **Request any text, from Aozora or beyond.** Search the Aozora index, or give a title, author and link. No uploads and no pasted text.
+- **Rights first.** Aozora works show their status straight from the index. Requests from elsewhere go to Acquisitions: an agent checks the author's dates, first publication and any existing English translation, writes a short reader's report, and marks the request *eligible*, *in copyright* or *can't tell*. The editor confirms before anything is translated.
+- **In-copyright books stay on the wanted list.** We never translate them, but the list shows what readers want brought into English, which is useful to translators and presses.
+- Reasons attached to requests are pre-moderated and flat, like comments. Votes and requests are rate-limited.
+
 ## Scope
 
-**By 4 Nov:** the showcase in Casual and Curious editions (Student if it holds); the experiments as labelled machine drafts, including the hard text's visible failures; the Setsu 1918 comparison; the Catalogue (~100–200 reader's reports generated on Meta models); the live House on preset passages, with replay; reactions, proposals (pre-moderated) and invited reviewers; the evals; README and video.
+**By 4 Nov:** the showcase in Casual and Curious editions (Student if it holds); the experiments as labelled machine drafts, including the hard text's visible failures; the Setsu 1918 comparison; the Catalogue (~100–200 reader's reports generated on Meta models) with votes and requests; the live House on preset passages, with replay; reactions, proposals (pre-moderated) and invited reviewers; the evals; README and video.
 
 **Later:** open accounts and a trust ladder with a calibration set; any Aozora text on request; longer works; EPUB and print; other languages.
 

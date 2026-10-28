@@ -58,6 +58,8 @@ Rounds are capped at two per query. If it's unresolved after that, it goes to th
 | `reaction`, `proposal`, `person` | Two-axis reactions; span proposals that become queries; trust level and how each person wants to be credited |
 | `report` | Catalogue reader's report: reader-facing fields, internal scores, what it was based on, label, translation-status evidence and date |
 | `release` | Edition version (v1, v1.1), changelog, credits |
+| `vote` | "I'd read this": work, voter token (cookie + IP hash), date. One per voter per work |
+| `request` | An Aozora work ID or an outside reference (title, author, link), the requester's reason (pre-moderated), the Acquisitions verdict (*eligible / in copyright / can't tell*) with evidence, the editor's decision, status |
 
 ## 3. Agent runtime
 
@@ -76,6 +78,7 @@ Rounds are capped at two per query. If it's unresolved after that, it goes to th
 | Copy desk (English-side tics, register, consistency) | Muse Glimmer 30B: locally via Ollama for batch runs; on Modal for the live site (Muse Spark Open on Baseten if that falls through) | Open weights, near-free. Rewrites flagged spans only |
 | Fact-check | Spark + `web_search` | Every note cites a source or dies |
 | Catalogue | Spark low as the acquisitions editor; Glimmer as chunk reader if it passes a 10-report spot check, else Spark | Cheap at 200 reports |
+| Requests from outside Aozora | Spark low + `web_search`: author dates, first publication, existing English translations; a short reader's report if a text is found | Capped per day; the editor confirms every verdict |
 | Editor's dictated notes | `muse-voice-transcribe-1.0`, ledger names as keyword bias | The editor works from a phone |
 | Covers | `muse-image-1.0` | Decorative, $0.01 each. Cut first |
 

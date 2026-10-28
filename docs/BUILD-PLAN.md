@@ -12,7 +12,7 @@ Written 27 Oct 2026, the second day of the hackathon; updated 28 Oct with the fi
 | M2b ‖ | **Reader site** | The pamphlet design ported to templates: per-book accent colour, ruby, seals and colophon, a near-black dark mode. A reader settings panel (edition, layout, what to show, a quiet preset, text size, furigana) that never loses your place. The margin variorum, two-axis reactions, proposals into a moderation queue, labels, credits. Everything renders from the fixture. Works at phone width. |
 | M2c ‖ | **House view + streaming** | The floor plan and message stream play a fake event fixture over SSE, with resume and replay at 8×. |
 | M2d ‖ | **Deterministic checkers + eval harness** | Tic detector, ledger checker and length-ratio flagger (shared with the copy desk). E4 stats. S0 and S1 baselines. T1/T3 sets assembled and frozen. A blind A/B form for reviewers. |
-| M2e ‖ | **Catalogue** | A Glimmer vs Spark spot check on 10 works. Reader's reports generated on Meta models for the long-list. Catalogue pages with evidence and date for "untranslated". |
+| M2e ‖ | **Catalogue** | A Glimmer vs Spark spot check on 10 works. Reader's reports generated on Meta models for the long-list. Catalogue pages with evidence and date for "untranslated". "I'd read this" votes, a request form (search the Aozora index or give an outside reference) and a wanted list. Acquisitions checks outside requests and the editor confirms. |
 | M2f ‖ | **Ops** | Fly deploy. Spend caps (live run / daily / total), kill switch, one-run queue, per-IP limits, invite-link auth for editor and reviewers. The replay fallback works when the house is closed. |
 | **M3** | **Full pipeline on 晩餐** (needs M2a; then adds Editorial, Copy desk, Notes, Fact-check, forks, interns, rules) | One run produces queries with stet / accept / revise, ≥1 fork with verbatim dissent, ≥1 intern with a logged reason, a standing rule that propagates and skips locked lines. Cost per 1k chars is within the pessimistic figure. The run streams into M2c and renders in M2b. |
 | **M4** | **Experiments + prompt freeze** | 我牢獄, 雪をんな and the Setsu passage run. The hard text's failures are written up honestly. Prompts are tagged `frozen-v1`. **Midpoint check (below).** |
@@ -77,7 +77,7 @@ These must be true:
 2. Muse Image covers (typographic covers instead) and Voice Transcribe dictation.
 3. The Student edition (keep Casual + Curious).
 4. E3's long-book windows and C0 (keep C1/C3/C5 on the showcase).
-5. The Catalogue cut to 30 reports.
+5. The Catalogue cut to 30 reports; the Acquisitions agent for outside requests (requests are still collected, and the editor checks them by hand).
 6. Proposals (keep reactions).
 7. Live runs on arbitrary Aozora cards (presets only), then replay-only House.
 8. Live interns (keep them in the recorded run).
