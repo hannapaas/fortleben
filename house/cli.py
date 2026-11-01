@@ -41,6 +41,15 @@ def cmd_run(args) -> int:
     return 0
 
 
+def cmd_fixture(args) -> int:
+    from house import fixture, orchestrator
+
+    conn = connect(args.db)
+    run_id = args.run or orchestrator.latest_run(conn, args.work)
+    print(fixture.export(conn, args.work, run_id))
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="keikaku", description="Run the translation house.")
     parser.add_argument("--db", help="SQLite file (default var/keikaku.db)")
@@ -64,6 +73,11 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--compare-referents", type=int, metavar="PAGES",
                    help="also draft the first PAGES pages without referent entries, for comparison")
     p.set_defaults(func=cmd_run)
+
+    p = sub.add_parser("fixture", help="export a recorded run to fixtures/<work>/ for replay and the site")
+    p.add_argument("work")
+    p.add_argument("--run", type=int)
+    p.set_defaults(func=cmd_fixture)
 
     p = sub.add_parser("calibrate", help="M0: first real calls and reasoning-token costs")
     p.add_argument("work", nargs="?", default="bansan")

@@ -57,6 +57,7 @@ def run(conn, client, work_id: str, *, to: str | None = None, from_: str | None 
     else:
         stored = conn.execute("SELECT options FROM run WHERE id=?", (run_id,)).fetchone()
         options = {**json.loads(stored["options"] or "{}"), **options}
+        conn.execute("UPDATE run SET options=? WHERE id=?", (dumps(options), run_id))
 
     names = NAMES
     if only:
