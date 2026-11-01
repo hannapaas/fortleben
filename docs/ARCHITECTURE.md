@@ -132,7 +132,7 @@ Every event is written to `event` and then broadcast in-process. `GET /runs/{id}
 - **Abuse:**
   - Live runs only on preset passages, or on Aozora works from the eligible index, ≤2,000 chars. No free paste, so we're not a free translation proxy and there's no copyright risk. **Presets are pre-briefed:** their reading and bible are built in advance, so a live run drafts and checks with the real state rather than translating a passage cold. A whole work under 2,000 characters gets its brief live, inside the run cap.
   - 2 triggered runs per IP per day.
-  - Reactions are rate-limited by cookie and IP. Proposals and comments are pre-moderated, with flat comments and no reply threads, and a takedown contact.
+  - Reactions are rate-limited by cookie and IP. Comments and proposals are screened by a model, published if they pass, removable by the editor, flat with no reply threads, capped per day, with a takedown contact.
   - Editor and reviewer powers come through signed, revocable invite links. No passwords.
 
 ## 9. What's in this repo

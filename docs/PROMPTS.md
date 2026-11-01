@@ -57,7 +57,7 @@ Everything shares one **house brief** (below), which sits first in every cached 
 | Prompt | Model | Job | Returns |
 |---|---|---|---|
 | **editor-note-to-rule** | Spark (after `muse-voice-transcribe`) | Turn the editor's dictated or typed note into a scoped standing rule or a ruling on a fork | Rule + scope, or a decision |
-| **reader-proposal** | Glimmer | Screen a reader's proposed fix for moderation and turn it into a query | Pass / hold + query |
+| **reader-proposal** | Glimmer | Screen a reader's comment or proposed fix (spam, abuse, off-topic) and turn a proposal into a query | Pass / fail with the reason shown to the author; the query |
 | **reader-report** | Spark | Catalogue reader's report on an untranslated work | Report fields |
 | **acquisitions-rights** | Spark + web search | A requested work: author's death year, first publication, existing translations | *Eligible / in copyright / can't tell* + evidence |
 | **cover** | `muse-image` | A cover from the reading's imagery and the house design | An image prompt template, not an agent |

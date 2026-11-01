@@ -36,8 +36,8 @@ Built from publishing, fan translation, Wikipedia and web-fiction comments, all 
 
 - **Editions, not versions.** One base translation and three presentations. Switching keeps your place and says what changed ("3 terms differ in this paragraph"), so the switch itself teaches.
 - **Reactions on two axes.** *How it reads* (beautiful / confusing / sounds off / made me stop) is kept apart from *Is it right* (needs a reason). No counts as rankings. The editor sees a heatmap.
-- **Proposals become queries.** Select a span, suggest a replacement, pick a reason. Accuracy goes to Source check, flow to Editorial, notes to Fact-check. The owner answers *accepted / stet / revised*. Rejections stay visible with a reason.
-- **Talk starts from the record.** Each paragraph has a flat, pre-moderated comment thread that opens with the agents' original debate, so readers argue with the record rather than from scratch. Comments don't change the text; proposals can. Page by page, with moderation: `SITE.md`.
+- **Proposals become queries.** Select a span, suggest a replacement, pick a reason. Accuracy goes to Source check, flow to Editorial, notes to Fact-check. The owner answers *accepted / stet / revised*. Rejections stay visible with a reason. No person has to approve a comment or a proposal first; a model screens for abuse and the editor can remove (`SITE.md`).
+- **Talk starts from the record.** Each paragraph has a flat comment thread, screened by a model rather than a person, that opens with the agents' original debate, so readers argue with the record rather than from scratch. Comments don't change the text; proposals can. Page by page, with moderation: `SITE.md`.
 - **Trust ladder.** Reader → contributor → bilingual reviewer → editor. For now, the editor promotes people by hand.
 - **Honest labels.** Every paragraph says in words how far it got: *draft* (one machine pass), *house-checked* (through Source check, Editorial and Fact-check), *editor-approved*, or *human-reviewed* (a bilingual reader checked it against the Japanese). People are round and named; agents are square and named by department, never given personas. A seal marks human sign-off. Credits and a colophon (奥付) are on every edition, with the Aozora Bunko attribution.
 
@@ -49,11 +49,11 @@ Readers help choose. The editor still decides.
 - **Request any text, from Aozora or beyond.** Search the Aozora index, or give a title, author and link. No uploads and no pasted text.
 - **Rights first.** Aozora works show their status straight from the index. Requests from elsewhere go to Acquisitions: an agent checks the author's dates, first publication and any existing English translation, writes a short reader's report, and marks the request *eligible*, *in copyright* or *can't tell*. The editor confirms before anything is translated.
 - **In-copyright books stay on the wanted list.** We never translate them, but the list shows what readers want brought into English, which is useful to translators and presses.
-- Reasons attached to requests are pre-moderated and flat, like comments. Votes and requests are rate-limited.
+- Reasons attached to requests are screened and flat, like comments. Votes and requests are rate-limited.
 
 ## Scope
 
-**By 4 Nov:** the showcase in Casual and Curious editions (Student if it holds); the experiments as labelled machine drafts, including the hard text's visible failures; the Setsu 1918 comparison; **the shelf**: as many of the short Catalogue titles as the budget allows, run through the house with no editor and labelled *house-checked*, so the library is something to browse rather than a promise; the Catalogue (~100–200 reader's reports generated on Meta models) with votes and requests; the live House on preset passages, with replay; reactions and proposals (pre-moderated); the evals; README and video.
+**By 4 Nov:** the showcase in Casual and Curious editions (Student if it holds); the experiments as labelled machine drafts, including the hard text's visible failures; the Setsu 1918 comparison; **the shelf**: as many of the short Catalogue titles as the budget allows, run through the house with no editor and labelled *house-checked*, so the library is something to browse rather than a promise; the Catalogue (~100–200 reader's reports generated on Meta models) with votes and requests; the live House on preset passages, with replay; reactions, comments and proposals (model-screened); the evals; README and video.
 
 **Later:** open accounts and a trust ladder with a calibration set; any Aozora text on request; longer works; funding targets for wanted books; EPUB and print; other source languages (the house is built per language; see `SITE.md`, "How it grows").
 
