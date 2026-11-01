@@ -151,6 +151,17 @@ Everything the demo needs runs from this repo: the engine, orchestrator, schemas
 - Stable prefix ~5k tokens, 80% of it cached.
 - **Reasoning is billed as output.** Base case: medium effort ≈ 2× visible output, low ≈ 1k tokens per call (Wonder 1.5k). **Pessimistic: double the reasoning.** The first calls (M0) measure the real ratio, and this table gets updated.
 
+**Measured at M0, 1 Nov** (`keikaku calibrate`, 「晩餐」, the whole text in the input, drafting p1–p8, 1,055 characters, with no reading or bible yet):
+
+| Call | Input | Cached | Output | of which reasoning | Reasoning ÷ visible | $ |
+|---|---|---|---|---|---|---|
+| Spark draft, low | 6,046 | 0 | 3,793 | 621 | 0.20 | 0.024 |
+| Spark draft, medium | 6,046 | 0 | 6,925 | 2,533 | 0.58 | 0.037 |
+| Spark + web search (8 searches), low | 56,278 | 44,853 | 2,798 | 512 | 0.22 | 0.053 |
+| Wonder crux check, whole text, low | 4,070 | 0 | 1,335 | 557 | 0.72 | 0.043 |
+
+What it changes: reasoning is far cheaper than assumed (medium ≈ 0.6× visible, not 2×; Wonder low ≈ 550 tokens, not 1.5k). Visible output is far larger: the draft returned ~3–4k visible tokens for 1,055 characters, against the 630 assumed, because sentence spans repeated the English and every paragraph carried notes. Spans now anchor by first words. Drafting at medium is ≈ $0.035 per 1,000 characters, about 1.6× the base row below; Wonder is ≈ $0.013 per 1,000 characters of a whole-text read at low effort, about a third of the assumption. Web search is dominated by the search results fed back as input (56k tokens), not by the $2.50 per 1,000 searches. The second identical prefix (low then medium, 15 s apart) got no cache hit; caching is re-measured on the real run, where the prefix repeats page after page. The rows below stand until the first full run on 「晩餐」 (M3) replaces them.
+
 Prices per million tokens (in / cached / out): Spark $1.25 / $0.15 / $4.25; Wonder $4 / $0.20 / $20; Glimmer hosted ≈ $0.30 / $0.04 / $1.20; web_search $2.50 per 1k searches.
 
 | Full pipeline, per 1,000 Japanese chars | Base | Pessimistic |
