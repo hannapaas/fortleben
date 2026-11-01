@@ -14,9 +14,9 @@ keikaku copies that. A **fixed allowance per manuscript sheet** sets the budget 
 
 ## 1. The allowance: 100 drops a sheet
 
-- **Length is counted in manuscript sheets** (原稿用紙, 400 characters), the unit Japanese writers of the period were paid by and Japanese publishing still counts in. 「晩餐」 is about 8½ sheets; the showcase, 「三十三の死」, about 34.
+- **Length is counted in manuscript sheets** (原稿用紙, 400 characters), the unit Japanese writers of the period were paid by and Japanese publishing still counts in. 「晩餐」 is about 8½ sheets; the showcase, 「炭燒のむすめ」 (provisional), about 20.
 - **Effort is counted in drops of ink** (墨). A house unit, not money: it keeps the budget easy to picture and separate from token prices, and "45 drops" reads naturally where "45 ink" doesn't. One setting in config turns a drop into real API spend; it's calibrated at M0, and ARCHITECTURE §10 has the build's actual dollar estimates. **The site shows drops only.** Prices and recipes change, so a dollar figure on a page would go stale; dollars go in the README and the evals for developers and judges.
-- **Every sheet gets 100 drops**, so a text's budget is its length: about 850 drops for 「晩餐」 and 3,400 for the showcase. Spend reads naturally as a share of a sheet: a plain sheet that takes 45 drops used under half its allowance.
+- **Every sheet gets 100 drops**, so a text's budget is its length: about 850 drops for 「晩餐」 and 2,000 for the showcase. Spend reads naturally as a share of a sheet: a plain sheet that takes 45 drops used under half its allowance.
 - As a rough guide until M0 measures it: a plain sheet ≈ 45 drops, a tricky one ≈ 100, a hard one ≈ 200; the whole-text reads (first read, Analyst, continuity) ≈ 15 a sheet; about 15 a sheet is held back as reserve for hard spots.
 - The allowance is a pool for the whole text, not a per-sentence ration. Easy pages leave effort for hard ones, as a translator's quick pages buy time for the difficult chapter.
 - **When the pool runs out, the house stops resolving and starts flagging.** Remaining hard spots are published as *flagged, unresolved*, with the options and the dissent on the page. That's the translator's bracket, made visible, and it's an open invitation for readers to help.

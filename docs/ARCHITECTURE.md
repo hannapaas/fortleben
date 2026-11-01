@@ -182,7 +182,7 @@ The English-alone side (editor's letter, Editorial) got more and notes got less 
 | Kitamura Tōkoku 「我牢獄」 (the hard text) | 4,500 | $0.72 / $1.22 | 3 runs: $2.2 / $3.6 |
 | Kasai Zenzō 「雪をんな」 (plain control) | 3,200 | $0.51 / $0.86 | 3 runs: $1.5 / $2.6 |
 | Koizumi Setsu 「思い出の記」 (vs its 1918 translation) | 30,700 whole; the brief always runs on the whole text | $4.9 / $8.3 whole; ~$0.9 / $1.5 for three windows after the brief | 1 whole run if the budget holds, else windows |
-| **Showcase: Shiraki Shizu 「三十三の死」** | 13,500 | **$2.16 / $3.65** | 2 runs + rule reruns: $6.5 / $11 |
+| **Showcase (provisional, 1 Nov): Nagatsuka Takashi 「炭燒のむすめ」** | 8,000 | **$1.28 / $2.16**; ~$3.1 at the rate the first real run on 「晩餐」 measured | 2 runs + rule reruns: $3.8 / $6.5 |
 | Stretch: Natsume Sōseki 「幻影の盾」 | 22,100 | $3.54 / $5.97 | 1 run |
 | Live demo run (preset passage) | ~1,500 | $0.24 / $0.41 | — |
 
@@ -190,12 +190,12 @@ The English-alone side (editor's letter, Editorial) got more and notes got less 
 |---|---|---|
 | Dev: smoke tests, prompt tuning, failed runs, 晩餐 ×5 | $25 | $40 |
 | The other texts (Tōkoku, Kasai, Setsu whole) | $8.6 | $14.5 |
-| Showcase | $6.5 | $11 |
+| Showcase | $3.8 | $6.5 |
 | The exhibit (audit on all versions, both auditors) and the planted test | $8 | $14 |
 | Catalogue, 200 reports | $4 | $7 |
 | Rehearsals and video takes; covers | $6 | $11 |
 | Stretch, one run | $3.5 | $6 |
-| **Total** | **≈ $61** | **≈ $103** |
+| **Total** | **≈ $58** | **≈ $99** |
 
 **Headline:** everything, the stretch included, fits in the $150 credits even in the pessimistic case. The live site after submission runs on separate billing, capped at $10 a day.
 
