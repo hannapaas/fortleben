@@ -38,6 +38,32 @@ Rule propagation (an editor's rule or an accepted bible amendment) is not a stag
 
 **The minimal pipeline** (the fallback in `BUILD-PLAN.md`) is stages 0, 2, 4, 6, 7, 9, 12 (code only), 13, 16. It must work before anything else is added.
 
+## How a debate actually runs
+
+No agent talks to another agent. There's no shared chat, no transcript passed around, and no agent chooses who to address. A debate is a **query**: one row in the `query` table with a fixed shape, and a short sequence of separate model calls that the orchestrator makes in a fixed order. Think of a publishing house's query sheet, where each note has a line reference, a reason and a box for the answer, and the editor decides whose turn it is.
+
+A query carries: who raised it (department and role), who owns the answer (always Translation for the English; the Analyst for the bible; Notes for a note), the span, a category, the reason, the evidence (a quote from the source, a bible entry, a rule), a recommendation, a status, the round, and a one-sentence `say` for the House.
+
+One query, step by step:
+
+| Step | What happens | Who | Call |
+|---|---|---|---|
+| 1 | Source check reads paragraph `p12` against the Japanese and returns a list of issues, possibly empty | critic | `source-check` on `p12` |
+| 2 | The orchestrator writes each issue as a query, `open`, round 0, and emits events | code | none |
+| 3 | When a paragraph's queries are in, one call answers them all: for each, *accepted* (with the fix), *stet* (with a reason) or *revised* (with the new text) | owner | `translate-answer` on `p12` + its open queries |
+| 4 | Revisions become a new revision row; the orchestrator sends **the diff** back to the critic that raised the query | code, then critic | `source-check` on the changed span |
+| 5 | The critic either closes (fine now) or raises once more with new evidence: round 1 | critic | same call's output |
+| 6 | The owner answers again | owner | `translate-answer` |
+| 7 | **Round 2 is the end.** Still open: on a hard paragraph it becomes a fork for the editor, each side's case in a paragraph; otherwise the head picks (`head-select`) and the paragraph is labelled *head's pick, unresolved* | code, head | `head-select` |
+
+Every call sees only its own inputs: the paragraph, the queries addressed to it, the bible, the reading and the rules. The critic never sees the owner's reasoning except the written answer; the owner never sees the critic's beyond the written query. That's the "letters" picture, and it's deliberate: written, specific, with evidence, and short.
+
+**Why it can't explode.** The routing graph is fixed and acyclic apart from two bounded loops:
+- the query loop (critic → owner → critic → owner), capped at two rounds;
+- the revision loop (any change to the English goes back through Source check), capped at three revision cycles per paragraph per run.
+
+Editorial, the editor's letter and the final read each raise queries into the same mechanism but never receive queries back, so nothing cycles between departments. Interns report to a head and raise nothing. Forks stop at the editor. A critic may always answer "none", and schemas limit how many issues one call can raise (eight per paragraph). On top sit the pool of drops and the spend caps: when they run low the house stops resolving and starts labelling (`RUNNING-A-TEXT.md` §5). Nothing in this section is asked of the prompts; it's all the orchestrator.
+
 ## What code enforces, whatever the prompts say
 
 | Limit | Value | Where |
