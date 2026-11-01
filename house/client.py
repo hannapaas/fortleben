@@ -45,12 +45,20 @@ def sha(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
+BARE = "## Sent to the model"
+
+
 def instructions(prompt: str) -> str:
-    """The house brief, then the department prompt. Both are files; neither is edited here."""
+    """The house brief, then the department prompt. Both are files; neither is edited here.
+    A prompt with a "Sent to the model" section (the one-shot baseline) sends only that section,
+    with no house brief: it is the control, what the model does when simply asked."""
     brief = (PROMPTS / "house-brief.md").read_text(encoding="utf-8")
     if prompt == "house-brief":
         return brief
-    return brief + "\n\n---\n\n" + (PROMPTS / f"{prompt}.md").read_text(encoding="utf-8")
+    text = (PROMPTS / f"{prompt}.md").read_text(encoding="utf-8")
+    if BARE in text:
+        return text.split(BARE, 1)[1].split("\n## ", 1)[0].strip()
+    return brief + "\n\n---\n\n" + text
 
 
 def load_schema(prompt: str) -> dict | None:
@@ -111,6 +119,7 @@ class Call:
     schema: dict | None = None
     cache_key: str | None = None  # prompt_cache_key: one per work + style-sheet version
     web_search: bool = False
+    strict: bool = False  # strict decoding; costs the prompt cache, so only for one-off calls
     expected_output_tokens: int = 4000
     max_output_tokens: int = 32000
     run_id: int | None = None
@@ -127,6 +136,7 @@ class Call:
             "input": sha(self.input),
             "schema": sha(json.dumps(self.schema, sort_keys=True)) if self.schema else None,
             "web_search": self.web_search,
+            **({"strict": True} if self.strict else {}),
         }
         return sha(json.dumps(parts, sort_keys=True))
 
@@ -224,7 +234,7 @@ class ModelClient(BaseClient):
             # strict: False on purpose. With strict: True, Meta's API serves no prompt-cache hits
             # (measured 1 Nov); non-strict output still follows the schema, and parse() validates it.
             req["text"] = {"format": {"type": "json_schema", "name": call.prompt.replace("-", "_"),
-                                      "schema": strict(call.schema), "strict": False}}
+                                      "schema": strict(call.schema), "strict": call.strict}}
         if call.web_search:
             req["tools"] = [{"type": "web_search"}]
         return req

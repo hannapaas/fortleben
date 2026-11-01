@@ -1,6 +1,8 @@
 # Baseline: one-shot
 
-This is deliberately bare. It is the control the exhibit compares the house against: what the model does when simply asked.
+This is deliberately bare. It is the control the exhibit compares the house against: what the model does when simply asked. Only the section below is sent, without the house brief.
+
+## Sent to the model
 
 Translate the following Japanese text into English.
 
