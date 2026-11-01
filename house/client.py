@@ -276,17 +276,22 @@ class ModelClient(BaseClient):
 
     @staticmethod
     def output(resp) -> tuple[str, list]:
-        texts, citations = [], []
+        """The final answer. With tools on, Meta also sends 'commentary' messages between
+        searches; those are skipped, and their citations kept."""
+        final, citations = "", []
         for item in resp.output:
             if item.type != "message":
                 continue
+            texts = []
             for part in item.content or []:
                 if part.type == "output_text":
                     texts.append(part.text)
                     for a in part.annotations or []:
                         if getattr(a, "type", None) == "url_citation":
                             citations.append({"url": a.url, "title": getattr(a, "title", None)})
-        return "".join(texts), citations
+            if getattr(item, "phase", None) != "commentary":
+                final = "".join(texts)
+        return final, citations
 
 
 def make_client(conn, replay: bool = False, run_cap=None) -> BaseClient:
