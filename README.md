@@ -17,6 +17,10 @@ Work in progress for the Meta Global AI Developer Hackathon. Everything in this 
 - [Prompts](docs/PROMPTS.md): every model call in the house, and when each is needed.
 - [Build plan](docs/BUILD-PLAN.md): milestones, evals and the cut list.
 
+## Running it
+
+Setup steps, the keyless replay of recorded runs, and how to add a Meta Model API key will be here once the engine exists (`docs/BUILD-PLAN.md`, "The judge path"). Every model this repo calls is a Meta model; the README will list which one does what and where it runs.
+
 ## Licence
 
 The code is published to be read and run for evaluation; it isn't open source at this stage, and may become so later. Other people run the house on the site, signed in as editors. The English the house produces is CC BY-SA 4.0. See `LICENSE`.

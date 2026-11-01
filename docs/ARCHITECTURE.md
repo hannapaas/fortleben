@@ -65,7 +65,7 @@ flowchart TD
 | `call` | Model, effort, tokens (input / cached / output / reasoning), $, prompt hash, cache key |
 | `intern` | Department, brief, logged reason, budget, spend, report |
 | `allowance` | Per editor: drops granted, reserved, spent; every grant with its reason (invite, funding target, house) |
-| `reaction`, `proposal`, `person` | Two-axis reactions; span proposals that become queries; trust level and how each person wants to be credited |
+| `reaction`, `proposal`, `person` | Two-axis reactions on a target (paragraph, note, or an alternative in a debate), with their counts never used to order or change anything; span proposals that become queries; trust level and how each person wants to be credited |
 | `report` | Catalogue reader's report: reader-facing fields, internal scores, what it was based on, label, translation-status evidence and date |
 | `edition` | One translation of a work: the editor (a person, or the house), its runs, current release |
 | `release` | Edition version (v1, v1.1), changelog, credits |
@@ -95,7 +95,7 @@ flowchart TD
 | Editor's dictated notes | `muse-voice-transcribe-1.0`, ledger names as keyword bias | The editor works from a phone |
 | Covers | `muse-image-1.0` | Decorative, $0.01 each. Cut first |
 
-**About the shared lineage:** Glimmer is distilled from Spark, and Spark Open is Spark released as open weights. Wonder is a different, larger model but from the same family. So "a different model as critic" here means a different checkpoint, not independence, and the README will say so. **The product makes only Meta calls.** The eval jury is Wonder, Glimmer and one non-Meta model used only as a judge, never in the product: the cleanest answer to "Meta judging Meta". Spark Open joins if partner credits arrive.
+**About the shared lineage:** Glimmer is distilled from Spark, and Spark Open is Spark released as open weights. Wonder is a different, larger model but from the same family. So "a different model as critic" here means a different checkpoint, not independence, and the README will say so. **Every model this repo calls is a Meta model**, in the product and in the evals alike: the hackathon's rule is strict (a participant's own tiny checker was ruled out), and the eval harness runs from this repo. So the eval jury and auditors are Wonder, Glimmer and Spark Open (open weights, run on any host), three checkpoints of one family, and the README says plainly that this is weaker than a cross-vendor judge. What's independent of any model is the reference-based comparison against the 1918 human translation and the deterministic checks.
 
 ## 5. Interns
 
@@ -124,7 +124,7 @@ Every event is written to `event` and then broadcast in-process. `GET /runs/{id}
 
 ## 8. Stack, hosting, abuse
 
-- **Stack:** Python 3.12 + FastAPI + SQLite (WAL) + Jinja templates. The front end is vanilla JS and CSS, with no build step. `uv` for packaging; pytest. One language serves the engine, evals (spaCy, fugashi) and site.
+- **Stack:** Python 3.12 + FastAPI + SQLite (WAL) + Jinja templates. The front end is vanilla JS and CSS, with no build step. `uv` for packaging; pytest. One language serves the engine, evals and site. **No non-Meta ML model runs anywhere in the repo**, so the eval statistics use rule-based tokenising (regex sentence and word splitting, 。 for Japanese) rather than spaCy or MeCab; where tagging is needed, Glimmer does it.
 - **Hosting:** one Fly.io machine plus a volume for SQLite (daily snapshots), with secrets in Fly. Prompts and keys stay on the server; the browser only ever receives events, text and notes.
 - **Spend:**
   - Every call is priced from `usage` into a spend ledger.
