@@ -98,7 +98,11 @@ flowchart TD
 
 ## 5. Interns
 
-A head can call the tool `commission_intern(question, reason, budget)`. The runtime enforces the rules: one level only (interns can't hire), at most 3 per run, $0.10 per department per run, and a report rather than edits. The reason is logged and shown. Interns run on Spark low, with web_search allowed. Typical triggers are the analyst's flags: an embedded poem, dialect, a classical quotation, a Buddhist term. In the House they're dotted squares. We make no quality claim for them; they're shown, not scored.
+When a head meets something no department covers (an embedded poem, a dialect line, a classical quotation, a Buddhist term, a period object), it can ask for an intern: one research question with a reason. A real house would ring a specialist reader. Here the intern is a single Spark call at low effort with web search that returns a short report with sources; the head then continues with the report in hand. Interns never edit text and never hire.
+
+**Mechanics, no tool calls.** The head's output schema has an optional `needs_intern: {question, reason}`. If it's set, the orchestrator checks the caps, runs the `intern` prompt, and re-runs the head with the report added to its input. Two plain calls instead of a tool call inside a structured-output call, which the API makes awkward (`tool_choice` is `auto` only). It replays from the cache like everything else.
+
+**The runtime enforces:** one level only; at most 3 interns per run; $0.10 per department per run; a report, never edits; first thing given up when the pool runs low. The reason is logged and shown; in the House an intern is a dotted square attached to its department. Typical triggers are the Analyst's hard-spot flags. We make no quality claim for them; they're shown, not scored.
 
 ## 6. Long context
 

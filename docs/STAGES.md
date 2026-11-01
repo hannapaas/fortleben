@@ -30,7 +30,7 @@ Each stage is a module `house/stages/<name>.py` with `run(ctx) -> events`. The o
 | 11 | **editorial** | scene by scene | `editorial-scene` · Spark low | span queries | English only: never sees the source text. Plain paragraphs are read, not line-edited. |
 | 12 | **copy-desk** | work | code (ledger, callbacks, length, tic list); `copy-desk` · Glimmer low | mechanical fixes applied by code; everything else as queries with a suggested replacement | Glimmer proposes, never writes the base text. Glimmer is optional: without it the code checks still run. |
 | 13 | **notes** | paragraph | `notes` · Spark low | notes per edition with anchors | The keikaku test: only what the sentence can't give you. |
-| 14 | **fact-check** | note | `fact-check` · Spark low + web_search | verified (with sources) / killed | Every note cites or dies. Casual notes can skip this when the pool is short. Interns may be commissioned from 8, 13 or 14 (`ARCHITECTURE.md` §5). |
+| 14 | **fact-check** | note | `fact-check` · Spark low + web_search | verified (with sources) / killed | Every note cites or dies. Casual notes can skip this when the pool is short. Interns may be asked for from 8, 13 or 14: the head's output sets `needs_intern`, the orchestrator runs the `intern` call and re-runs the head with the report (`ARCHITECTURE.md` §5). |
 | 15 | **final-read** | work | `final-read` · Wonder low | queries | The English as a whole, then against the source: seams, voice drift, crux, continuity. A second final read only if the resulting changes were large (over 10% of paragraphs). |
 | 16 | **release** | work | code | editions (Casual / Curious / Student) from the base text + tokens + notes; statuses; colophon; the bible and reading published; the author file updated with this work's entries | Proof/QC is code: every paragraph present, every token resolved, every note anchored. |
 
@@ -71,7 +71,7 @@ Editorial, the editor's letter and the final read each raise queries into the sa
 | Rounds per query | 2, then a fork (hard) or the head's pick stands, labelled | orchestrator |
 | Revision cycles per paragraph | 3 per run; after that it's *flagged, unresolved* | orchestrator |
 | Forks per checkpoint | 5, global first | orchestrator |
-| Interns | one level; 3 per run; $0.10 per department per run; reports, never edits | tool runtime |
+| Interns | one level; 3 per run; $0.10 per department per run; reports, never edits; a head asks via its output, never by a tool call | orchestrator |
 | Drops of ink | 100 per sheet; when it's gone the house flags instead of resolving, in the order in `RUNNING-A-TEXT.md` §5 | budget module |
 | Spend caps | pre-call estimate against live-run / daily / total caps; kill switch | budget module |
 | Output shape | strict JSON schema per prompt; a call that fails validation is retried once, then the stage records a failure event and moves on | model client |
