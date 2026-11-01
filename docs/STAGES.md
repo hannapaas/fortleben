@@ -6,7 +6,7 @@ Written 30 Oct 2026. **This is the one list the orchestrator implements.** `ARCH
 
 - **Work:** one text. **Run:** one pass of a work through the house. **Segment:** a paragraph of the source, `p12`. Sentences inside it, `p12-s3`, exist only as anchors for queries and notes.
 - **The paragraph is the unit of English.** Translation returns one English string per paragraph, plus best-effort spans saying which English renders which source sentence (one to one, two to one, reordered, or absent). Nothing forces one English sentence per Japanese one; a literary translator restructures, and a sentence-locked schema would push the model back towards literalism. The parallel layout aligns paragraph to paragraph, always; the sentence spans are used only to highlight the matching stretch on tap, and where there's no clean span the whole paragraph is the match.
-- **Page:** the unit of *translation*. A drafting chunk of about 1k source tokens (~650 characters) of whole paragraphs, breaking at scene breaks where possible, drafted with the whole book, the reading and the bible in view. The paragraph is only where the English is *stored* and *aligned*; nothing is ever translated a paragraph at a time. The Analyst can set the **drafting grain** per text in the style sheet: page (default) or scene, for dialogue-heavy texts or texts in very short paragraphs, and where the breaks fall. Checking, queries and revisions happen per paragraph.
+- **Page:** the unit of *translation*. A drafting chunk of about 1k source tokens (~650 characters) of whole paragraphs, breaking at scene breaks where possible, drafted with the whole book, the reading and the bible in view. The paragraph is only where the English is *stored* and *aligned*; nothing is ever translated a paragraph at a time. The Analyst can set the **drafting grain** per text in the style sheet: page (default) or scene, for dialogue-heavy texts or texts in very short paragraphs, and where the breaks fall. Checking and notes happen per page too; queries, revisions and labels are recorded per paragraph.
 - **Groups.** When the English wants two short source paragraphs as one, or one long one split, the drafter returns the English against a group of paragraphs and says so; alignment is group to group for that stretch. Rare, and logged.
 - **What a paragraph is** is decided by the parser from the source (line breaks, the indent mark, dialogue lines on their own line), deterministically, before any model sees the text. A dialogue line is a paragraph.
 - **Tier:** every paragraph is *plain*, *tricky* or *hard* (`RUNNING-A-TEXT.md` §2).
@@ -61,7 +61,7 @@ One query, step by step:
 
 | Step | What happens | Who | Call |
 |---|---|---|---|
-| 1 | Source check reads paragraph `p12` against the Japanese and returns a list of issues, possibly empty | critic | `source-check` on `p12` |
+| 1 | Source check reads a page against the Japanese and returns a list of issues per paragraph, possibly empty; take paragraph `p12` | critic | `source-check` on the page |
 | 2 | The orchestrator writes each issue as a query, `open`, round 0, and emits events | code | none |
 | 3 | When a paragraph's queries are in, one call answers them all: for each, *accepted* (with the fix), *stet* (with a reason) or *revised* (with the new text) | owner | `translate-answer` on `p12` + its open queries |
 | 4 | Revisions become a new revision row; the orchestrator sends **the diff** back to the critic that raised the query | code, then critic | `source-check` on the changed span |
