@@ -17,7 +17,7 @@ Nothing is built yet: the repo holds plans. Five days remain, and the last push 
 - `house/client.py`: one call to `muse-spark-1.3` on the Responses API with a strict JSON schema, `prompt_cache_key` and `prompt_cache_retention: "24h"`, logging input / cached / output / reasoning tokens and dollars from `usage` into the spend ledger; the response cache keyed on (model, prompt hash, input hash); `FakeClient`. One call each to `muse-wonder-1.0` and, with web search, to Spark. Measure reasoning tokens at low and medium on a 1k-character chunk and update the cost table in `ARCHITECTURE.md` §10.
 - `house/lang/ja/`: fetch and parse the four demo texts from Aozora (「晩餐」, 「我牢獄」, 「三十三の死」, 「思い出の記」), round-trip tests, paragraphs with IDs, scene breaks, ruby, gaiji, colophon.
 - `db/schema.sql`, `house/events.py`, `house/schemas/` for the seven minimal-pipeline prompts, and a fixture for 「晩餐」 (segments, a few queries, notes, a fork, events) so the site and House lanes can start.
-Then the minimal pipeline on 「晩餐」, stage by stage, stopping after each to read the output.
+Then the minimal pipeline on 「晩餐」, stage by stage, stopping after each to read the output. The one design question that run settles: whether the sentence-level referent map earns its place (`STORY-STATE.md` §1); the same pages are drafted with and without it.
 
 What to translate is being settled separately; it only matters at M5. The engine is built and tuned on 「晩餐」 whatever the showcase turns out to be, and the exhibit's comparison texts come at M6.
 
