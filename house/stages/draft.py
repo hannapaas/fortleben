@@ -46,6 +46,7 @@ def latest_english(ctx, variant: str = "lead") -> dict[str, str]:
 
 
 def draft_page(ctx, paras, all_paras, stable, voice_ref, refmap, with_referents: bool):
+    stable = context.join(stable, context.source_text(ctx.work, paras, ctx.latest("bible").get("chapter_summaries")))
     english = latest_english(ctx)
     idx = all_paras.index(paras[0])
     before = [(p, english.get(p.id)) for p in all_paras[max(0, idx - 2):idx]]
@@ -104,7 +105,7 @@ def run(ctx) -> dict:
     breaks = (ss.get("grain_breaks") or None) if ss["drafting_grain"] == "scene" else None
     pages = pager.pages(ctx.work.paragraphs, breaks=breaks)
     ctx.emit("house", "page.cut", {"pages": [[p.id for p in pg] for pg in pages]})
-    stable = context.join(context.reading(reading), voice_take(ctx), context.bible(bible), context.source_text(ctx.work))
+    stable = context.join(context.reading(reading), voice_take(ctx), context.bible(bible))  # the source is added per page
 
     compare = int(ctx.options.get("compare_referents") or 0)
     done = set(latest_english(ctx))

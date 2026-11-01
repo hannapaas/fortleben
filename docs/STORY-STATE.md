@@ -32,7 +32,7 @@ The reading is what turns the rest of the house from rule-followers into colleag
 
 ## 1. The story bible (built from the reading)
 
-The Analyst (Spark) then builds the bible, with the whole source and the reading in its cached prefix. All our texts fit: the longest, 「幻影の盾」, is ~22k characters, about 33k tokens. Cast, ledger, narration, motifs, style sheet and hard spots come from one call. The referent map is built paragraph by paragraph in a few further calls, because it's long and needs close attention to each line; each of those calls still sees the whole text. For a novel the Analyst works chapter by chapter, updating the same bible. It produces:
+The Analyst (Spark) then builds the bible, with the whole source and the reading in its cached prefix. All our texts fit: the longest, 「幻影の盾」, is ~22k characters, about 33k tokens. Cast, ledger, narration, motifs, style sheet and hard spots come from one call. The referent map is built paragraph by paragraph in a few further calls, because it's long and needs close attention to each line; each of those calls sees the whole text of a short work, or its own chapter of a long one (§3). For a novel the Analyst works chapter by chapter, updating the same bible, and writes a one-line summary of each chapter (`chapter_summaries`) for the other chapters' calls to carry. It produces:
 
 | Part | Holds | Why it matters |
 |---|---|---|
@@ -58,7 +58,7 @@ The house keeps the same thing, as **an author file**: one per author, built onl
 - **Rules can be scoped `author`**, alongside line / character / term / work / house. Like every rule they're visible and revocable, and a rule from one work never rewrites a locked line in another.
 - **It's published**, on the author's page, with its provenance, the same way the bible is. It's also honest about size: with two works by one author it's a few entries, and the page says so rather than dressing it up.
 
-For the hackathon the only author with two works is Shiraki Shizu (「晩餐」 then 「三十三の死」), which makes it a real but small piece of evidence that the house isn't translating each text cold. It should be described that way.
+For the hackathon the only author with two works in the plan is Shiraki Shizu: 「晩餐」, the development text, and 「三十三の死」 if it runs as one of the other texts. Since the showcase moved to Nagatsuka's 「炭燒のむすめ」 (1 Nov, provisional), the author file is a small side piece rather than part of the showcase, and a real but small piece of evidence that the house isn't translating each text cold. It should be described that way.
 
 
 ## 2. Changing its mind
@@ -79,7 +79,7 @@ In this order, stable first (cached) and the passage last (where models attend b
 
 1. House rules and the department prompt.
 2. The house's reading (§0) and the whole bible: style sheet, cast, ledger, motifs, standing rules. A few thousand tokens for a short story.
-3. **The whole source text.** Every text we run is under ~30k characters, which is cheap in the cached prefix and lets the model look anywhere in the book. If it ever seems to hurt, the exhibit will show it.
+3. **The source, scoped by length.** Up to about 15k characters the whole source goes in: cheap in the cached prefix, and the model can look anywhere in the book. Above that, a call about a page gets **its own chapter in full and every other chapter as one line** (the Analyst's summary, or the heading). Chapters are cut by code: at headings where the text has them, else at scene breaks merged to a few thousand characters. This is the one place the length of a work changes what a call sees (`house/context.py`), and it is what keeps the cost of a call flat: a novel costs its pages, not its pages times its length. Whole-book reads (the first read, the editor's letter, the final read) still get the whole book.
 4. The voice reference: the chosen first page.
 5. **A window of real text either side:** the previous two paragraphs in Japanese and English, and **the next paragraph in Japanese, marked read-only** (Japanese often resolves a subject or speaker after the fact).
 6. The passage itself, with its referent-map entries printed under each sentence that needs one, naming the cast entry and what the text shows about it:
@@ -93,7 +93,7 @@ In this order, stable first (cached) and the passage last (where models attend b
 
    So a pronoun is read off the annotation, not inferred from the paragraph. Where the entry is low-confidence or deliberately ambiguous, the drafting prompt teaches the model not to commit a pronoun the text doesn't support.
 
-That's all. No rolling summary and no retrieval of earlier passages: with the whole source in the prefix and the bible carrying the decisions, both would be a second copy of what's already there. They come back only for novels (§5), where the whole source can't sit in the prefix.
+That's all. No rolling summary and no retrieval of earlier passages: with the source (or the chapter) in the prefix and the bible carrying the decisions, both would be a second copy of what's already there. The chapter summaries are the one concession for long works, and they are a line each, not a history.
 
 ## 4. Checking that it held
 
@@ -103,6 +103,14 @@ That's all. No rolling summary and no retrieval of earlier passages: with the wh
 - **Omission guard (code):** length ratio per paragraph against the text's own baseline; outliers go to Source check.
 - **Final read (Wonder):** once per release, the finished English read as a whole and then against the source: seams left by revision, voice drift, whether the crux holds, and continuity (contradictions, a speaker confused across scenes, a fact that changes).
 
-## 5. Novels, later
+## 5. Short texts and novels: one pipeline
 
-Same machinery, chapter by chapter: the Analyst updates the bible per chapter, and the whole-source block becomes the current chapter plus short summaries of the neighbouring ones, which is where a rolling summary and retrieved earlier passages earn a place. Measured before it's claimed; not built for the hackathon.
+There is no novel mode. The stages, the prompts and the limits are the same for a 3,000-character story and a 300,000-character novel; only two things read the length of the work: what a per-page call sees of the source (§3, point 3) and the size of the pool (`RUNNING-A-TEXT.md` §1, which grows with the sheets). The first run on 「晩餐」 (1 Nov) showed why that line matters: with the whole text in every call, a call's input grows with the book, so a novel would have cost hundreds of dollars for *worse* attention (the research above). With the chapter in the call instead, a 200k-character novel costs roughly its pages times the per-page cost measured on short texts, a few tens of dollars. The Analyst's chapter summaries are not built yet; until they are, the other chapters appear as their headings or first words, which is honest and cheap. Measured before it's claimed.
+
+## 6. What the first run taught about the debate
+
+The recorded run on 「晩餐」 raised 18 queries and the translator accepted 17. Fourteen re-checks by Wonder then confirmed what code could see: the fix was in. Three lessons the design now follows:
+
+- **A re-check is for a contested answer.** Stet and revised go back to the critic with the diff; an accepted fix is closed by code once the English has actually changed. A translator who accepts everything leaves nothing to argue about, and a near-100% accept rate (the answer stage reports it) means the answer call has become a rubber stamp and the drafter needs to be stronger, not the critic louder.
+- **The bible is evidence, not law.** Eight of the 18 queries were the house correcting itself: the drafter had forced a ledger token for 安息 onto 安らかさ because the ledger read as a rule, and two queries were a token expanding to "the dark the dark", a rendering fault code had already flagged. The approved rendering is what the ledger *suggests*; only a term the editor locks is mandatory, and mechanical faults are fixed by code, never sent round the house.
+- **Upstream claims need a blind check.** A wrong referent at p7 went into the map, then the draft, then the critic enforced it. For low and medium entries, Source check reads the passage without the map's conclusion, the way the crux is already checked by a reader who never saw the first reading; disagreement lowers the confidence and queries the Analyst, it doesn't instruct the drafter.

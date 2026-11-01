@@ -1,5 +1,6 @@
 """Stage 4: bible. The Analyst writes the story bible from the whole source and the reading,
-then the referent map and tiers, one call per ~5 pages, each still seeing the whole text."""
+then the referent map and tiers, one call per ~5 pages, each seeing the whole text of a short work
+or its own chapter of a long one (context.source_text)."""
 
 from house import context, pager
 from house.client import SPARK, Call, load_schema
@@ -38,10 +39,11 @@ def run(ctx) -> dict:
             (t["id"], ctx.work_id, t["source"], t.get("reading"), t["casual"], t["curious"], t["student"], t["rationale"]))
     ctx.conn.commit()
 
-    # the referent map, a few pages per call, the whole text and the bible in the stable prefix
-    with_bible = context.join(stable, context.bible(bible))
+    # the referent map, a few pages per call, the source and the bible in the stable prefix
     refmap, amendments = {}, []
     for paras in ranges(ctx.work):
+        with_bible = context.join(context.work_card(ctx.work), context.source_text(ctx.work, paras), reading,
+                                  context.bible(bible))
         res = ctx.call("analyst", Call("analyst-referents", SPARK, "low", context.join(with_bible, paragraph_range(paras)),
                                        load_schema("analyst-referents"), f"{ctx.work_id}:analyst-referents",
                                        expected_output_tokens=6000))

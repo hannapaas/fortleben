@@ -15,9 +15,12 @@ def terms(ctx) -> dict:
     return {r["id"]: dict(r) for r in ctx.conn.execute("SELECT * FROM term WHERE work_id=?", (ctx.work_id,))}
 
 
-def stable(ctx) -> str:
-    return context.join(context.reading(ctx.latest("reading")), context.bible(ctx.latest("bible")),
-                        context.source_text(ctx.work))
+def stable(ctx, around=None) -> str:
+    """The cached prefix for a call about a page: the reading, the bible, and as much of the source
+    as the length of the work allows (context.source_text)."""
+    bible = ctx.latest("bible")
+    return context.join(context.reading(ctx.latest("reading")), context.bible(bible),
+                        context.source_text(ctx.work, around, bible.get("chapter_summaries")))
 
 
 def page_block(paras, english: dict, refmap: dict, flags: dict) -> str:
@@ -45,7 +48,7 @@ def record(ctx, data: dict, paras, round_: int = 0) -> int:
 
 
 def check_page(ctx, paras, english, refmap, flags, extra: str = "", round_: int = 0) -> int:
-    inp = context.join(stable(ctx), page_block(paras, english, refmap, flags), extra)
+    inp = context.join(stable(ctx, paras), page_block(paras, english, refmap, flags), extra)
     res = ctx.call(ACTOR, Call("source-check", WONDER, "low", inp, load_schema("source-check"),
                                f"{ctx.cache_key()}:source-check", expected_output_tokens=3000))
     return record(ctx, res.data, paras, round_)

@@ -3,9 +3,17 @@
 
 These are data blocks with plain labels, not instructions: the instructions are the prompt
 files. The bible is stored as JSON and rendered here as Markdown for the model.
+
+What a call sees of the source depends on the length of the work, and only here (STORY-STATE
+§3 and §5): a short text goes in whole; a long one is cut into chapters, and a per-page call
+gets its own chapter in full with the other chapters as one-line summaries, so the cost of a
+call stays flat however long the book is.
 """
 
 from house.parser import Paragraph, ParsedWork
+
+WHOLE_TEXT_CHARS = 15_000  # up to here the whole source goes in every call
+CHAPTER_CHARS = 4_000  # with no headings, scene breaks are merged into chapters of at least this
 
 
 def block(label: str, body: str) -> str:
@@ -21,14 +29,73 @@ def work_card(work: ParsedWork) -> str:
     return block("The work", "\n".join(lines))
 
 
-def source_text(work: ParsedWork) -> str:
-    """The whole source with paragraph IDs. Ruby is kept as base《reading》; editorial notes are dropped."""
+def _lines(paras: list[Paragraph]) -> str:
     out = []
-    for p in work.translatable():
+    for p in paras:
         if p.scene_break_before:
             out.append("◇")
         out.append(f"{p.id}　{p.model_text.strip('　 ')}")
-    return block("The whole source text, with paragraph IDs", "\n".join(out))
+    return "\n".join(out)
+
+
+def is_long(work: ParsedWork) -> bool:
+    return sum(len(p.text) for p in work.translatable()) > WHOLE_TEXT_CHARS
+
+
+def chapters(work: ParsedWork) -> list[list[Paragraph]]:
+    """Cut the translatable paragraphs into chapters, deterministically: at headings where the text
+    has them, else at scene breaks merged until a chapter is at least CHAPTER_CHARS long."""
+    paras = work.translatable()
+    if any(p.kind == "heading" for p in paras):
+        out, cur = [], []
+        for p in paras:
+            if p.kind == "heading" and cur:
+                out.append(cur)
+                cur = []
+            cur.append(p)
+        return out + ([cur] if cur else [])
+    out, cur, size = [], [], 0
+    for p in paras:
+        if p.scene_break_before and cur and size >= CHAPTER_CHARS:
+            out.append(cur)
+            cur, size = [], 0
+        cur.append(p)
+        size += len(p.text)
+    return out + ([cur] if cur else [])
+
+
+def chapter_of(work: ParsedWork, pid: str) -> int:
+    return next(i for i, ch in enumerate(chapters(work)) if any(p.id == pid for p in ch))
+
+
+def chapter_line(ch: list[Paragraph], summaries: dict | None, i: int) -> str:
+    """One line for a chapter the call doesn't see in full: the Analyst's summary if the bible has one,
+    else the heading or the first words."""
+    if summaries and summaries.get(str(i)):
+        return summaries[str(i)]
+    head = next((p for p in ch if p.kind == "heading"), ch[0])
+    return head.model_text.strip("　 ")[:40]
+
+
+def source_text(work: ParsedWork, around: list[Paragraph] | None = None, summaries: dict | None = None) -> str:
+    """The source with paragraph IDs. Ruby is kept as base《reading》; editorial notes are dropped.
+
+    A short work goes in whole. A long one, for a call about a page (`around`), is the page's own
+    chapter in full, with every other chapter as one line (`summaries` is the bible's
+    `chapter_summaries`, keyed by chapter index as a string). With no `around`, a long work still
+    goes in whole: that is the whole-book reads (first read, the editor's letter, the final read).
+    """
+    if around is None or not is_long(work):
+        return block("The whole source text, with paragraph IDs", _lines(work.translatable()))
+    chs = chapters(work)
+    here = chapter_of(work, around[0].id)
+    out = []
+    for i, ch in enumerate(chs):
+        if i == here:
+            out.append(f"### Chapter {i + 1} of {len(chs)}, in full ({ch[0].id}–{ch[-1].id})\n\n{_lines(ch)}")
+        else:
+            out.append(f"- Chapter {i + 1} ({ch[0].id}–{ch[-1].id}): {chapter_line(ch, summaries, i)}")
+    return block("The source text: this chapter in full, the others in one line each", "\n".join(out))
 
 
 def reading(r: dict) -> str:
