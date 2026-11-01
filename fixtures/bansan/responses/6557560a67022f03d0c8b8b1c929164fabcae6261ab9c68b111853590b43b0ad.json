@@ -1,0 +1,34 @@
+{
+ "prompt": "notes",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": {
+  "notes": [
+   {
+    "anchor": "p11",
+    "body": "The potato is jagaimo in a sweet-soft simmered stew; zaku-zaku names its gritty, crunching hardness when badly cooked. The translation keeps the small, literal disappointment that gives her distance.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "gritty and crunching",
+    "variants": []
+   }
+  ],
+  "say": "Kept one Curious food-texture note; no Casual or Student notes needed on this page."
+ },
+ "usage": {
+  "input_tokens": 11833,
+  "cached_tokens": 10737,
+  "output_tokens": 2238,
+  "reasoning_tokens": 2116,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01249205,
+ "response_id": "resp_6ae7a684f773be33db7844fd",
+ "latency_s": 10.2,
+ "citations": [],
+ "created": "2026-11-01T20:52:20Z"
+}

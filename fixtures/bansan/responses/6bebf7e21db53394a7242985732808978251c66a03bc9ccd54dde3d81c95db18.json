@@ -1,0 +1,27 @@
+{
+ "prompt": "source-check",
+ "model": "muse-wonder-1.0",
+ "effort": "low",
+ "data": {
+  "paragraphs": [
+   {
+    "id": "p18",
+    "needs_second_draft": false,
+    "queries": []
+   }
+  ],
+  "say": "Re-check p18: both earlier queries are closed by the accepted revisions, and no new source problem remains."
+ },
+ "usage": {
+  "input_tokens": 11524,
+  "cached_tokens": 10612,
+  "output_tokens": 457,
+  "reasoning_tokens": 397,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.014910399999999999,
+ "response_id": "resp_6ae7a5fdc8d1cf6481794e56",
+ "latency_s": 4.04,
+ "citations": [],
+ "created": "2026-11-01T20:50:05Z"
+}

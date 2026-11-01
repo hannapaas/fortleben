@@ -1,0 +1,109 @@
+{
+ "prompt": "source-check",
+ "model": "muse-wonder-1.0",
+ "effort": "low",
+ "data": {
+  "paragraphs": [
+   {
+    "id": "p28",
+    "needs_second_draft": false,
+    "queries": [
+     {
+      "category": "omission",
+      "confidence": "high",
+      "evidence_ja": "一日々々いろ〳〵なことに疲らされなやまされ苦しまされても",
+      "reason": "The concessive ても is dropped. The Japanese is “even though [we are] tired out, troubled and made to suffer day by day by all sorts of things”, but the English becomes a bare participial list followed by the two-years clause, losing the husband's concession—he is conceding the suffering, not merely listing it.",
+      "say": "The concessive in the husband's count of the years is missing.",
+      "sentence": "s1",
+      "span": "Tired and troubled and made to suffer day by day by one thing and another",
+      "suggested_fix": "Even if we are worn out and troubled and made to suffer day by day by one thing and another"
+     },
+     {
+      "category": "mistranslation",
+      "confidence": "medium",
+      "evidence_ja": "二年はもう過ぎたんだからな",
+      "reason": "二年は with the emphatic は means “two years at least have already passed”. Without “at least”, the English flatly contradicts the three-years count the house reading requires be kept exact and repeated (p14, p22, p25, p27): the reader is told the marriage is three years old and then that two years are past.",
+      "say": "“Two years are already past” reads as an exact figure against the three years elsewhere.",
+      "sentence": "s1",
+      "span": "two years are already past",
+      "suggested_fix": "two years at least are already past"
+     }
+    ]
+   },
+   {
+    "id": "p29",
+    "needs_second_draft": false,
+    "queries": []
+   },
+   {
+    "id": "p30",
+    "needs_second_draft": false,
+    "queries": []
+   },
+   {
+    "id": "p31",
+    "needs_second_draft": false,
+    "queries": []
+   },
+   {
+    "id": "p32",
+    "needs_second_draft": false,
+    "queries": []
+   },
+   {
+    "id": "p33",
+    "needs_second_draft": false,
+    "queries": []
+   },
+   {
+    "id": "p34",
+    "needs_second_draft": false,
+    "queries": []
+   },
+   {
+    "id": "p35",
+    "needs_second_draft": false,
+    "queries": []
+   },
+   {
+    "id": "p36",
+    "needs_second_draft": false,
+    "queries": [
+     {
+      "category": "mistranslation",
+      "confidence": "medium",
+      "evidence_ja": "さ、あとを片づけよう",
+      "reason": "あとを片づける is tidying up after the meal, not clearing away “what is left”, which in English suggests leftover food. The distinction matters to the crux: the close must stay deliberately practical housework, not a remark about the meal's remains.",
+      "say": "“Clear up what is left” points at leftovers rather than tidying up after supper.",
+      "sentence": "s1",
+      "span": "let us clear up what is left",
+      "suggested_fix": "let us clear up"
+     }
+    ]
+   },
+   {
+    "id": "p37",
+    "needs_second_draft": false,
+    "queries": []
+   },
+   {
+    "id": "p38",
+    "needs_second_draft": false,
+    "queries": []
+   }
+  ],
+  "say": "Two queries on p28, where the husband's concession and his “two years at least” are flattened against the three-years measure, and one small practical mistranslation at p36; the storm frame and the closing quiet come through plain and linked, and the rest of the page is clean."
+ },
+ "usage": {
+  "input_tokens": 12186,
+  "cached_tokens": 10612,
+  "output_tokens": 2017,
+  "reasoning_tokens": 1233,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0487584,
+ "response_id": "resp_6ae7a563fb3434ded89240b5",
+ "latency_s": 15.91,
+ "citations": [],
+ "created": "2026-11-01T20:47:31Z"
+}

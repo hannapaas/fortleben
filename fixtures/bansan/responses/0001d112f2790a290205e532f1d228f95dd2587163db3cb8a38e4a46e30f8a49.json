@@ -1,0 +1,27 @@
+{
+ "prompt": "source-check",
+ "model": "muse-wonder-1.0",
+ "effort": "low",
+ "data": {
+  "paragraphs": [
+   {
+    "id": "p3",
+    "needs_second_draft": false,
+    "queries": []
+   }
+  ],
+  "say": "The rest/peace conflation is fixed and nothing else in p3 warrants a query."
+ },
+ "usage": {
+  "input_tokens": 11321,
+  "cached_tokens": 10612,
+  "output_tokens": 560,
+  "reasoning_tokens": 504,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0161584,
+ "response_id": "resp_6ae7a5b3cf7f7c0a59b24a06",
+ "latency_s": 4.36,
+ "citations": [],
+ "created": "2026-11-01T20:48:51Z"
+}

@@ -1,0 +1,29 @@
+{
+ "prompt": "translate-answer",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": {
+  "answers": [
+   {
+    "query_id": 15,
+    "reason": "The Japanese repeats the same phrase twice, some great / some great hope; varying the second to thing thins the key word the sentence is reaching for. Restoring hope keeps the deliberate repetition.",
+    "status": "accepted"
+   }
+  ],
+  "notes": [],
+  "revised_english": "\"Quite true.\" She lowered her eyes again to try to see that picture. But at once, \"But still only three years have passed, haven't they,\" she said, her eyes shining as if she had to tell him some great hope, though she did not herself know what great hope it was.",
+  "say": "Accepted query 15 and restored the repeated great hope."
+ },
+ "usage": {
+  "input_tokens": 11117,
+  "cached_tokens": 10737,
+  "output_tokens": 710,
+  "reasoning_tokens": 553,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0051030500000000005,
+ "response_id": "resp_6ae7a6134e78800e9da44673",
+ "latency_s": 2.99,
+ "citations": [],
+ "created": "2026-11-01T20:50:27Z"
+}

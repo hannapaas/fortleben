@@ -1,0 +1,27 @@
+{
+ "prompt": "source-check",
+ "model": "muse-wonder-1.0",
+ "effort": "low",
+ "data": {
+  "paragraphs": [
+   {
+    "id": "p27",
+    "needs_second_draft": false,
+    "queries": []
+   }
+  ],
+  "say": "Query 15 is settled by the restored repetition of “hope,” and the amended paragraph matches the Japanese with no further queries."
+ },
+ "usage": {
+  "input_tokens": 11292,
+  "cached_tokens": 10612,
+  "output_tokens": 579,
+  "reasoning_tokens": 510,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0164224,
+ "response_id": "resp_6ae7a61816f8b2e89f0347e7",
+ "latency_s": 5.09,
+ "citations": [],
+ "created": "2026-11-01T20:50:32Z"
+}

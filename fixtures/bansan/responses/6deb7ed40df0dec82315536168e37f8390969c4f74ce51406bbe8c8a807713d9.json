@@ -1,0 +1,88 @@
+{
+ "prompt": "notes",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": {
+  "notes": [
+   {
+    "anchor": "p30",
+    "body": "Bōya literally means ‘little boy,’ but here both parents use it as a fond, generic call for their baby girl.",
+    "editions": [
+     "curious",
+     "student"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "\"{t:boya}.\"",
+    "variants": [
+     {
+      "body": "Bōya (bōya) literally means ‘little boy,’ but both parents address their stated baby girl (onna no ko) with it. The draft keeps Bōya untranslated as a fond generic for a baby rather than silently fixing it to ‘girl’; how to render it is left open by the house.",
+      "edition": "student"
+     }
+    ]
+   },
+   {
+    "anchor": "p35",
+    "body": "Rest here is yasurakasa, a quiet peacefulness, not the night-like ansoku rest of the vision in p17. The English keeps the two words distinct.",
+    "editions": [
+     "curious",
+     "student"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "She said it calmly, with {t:rest}.",
+    "variants": [
+     {
+      "body": "Yasurakasa here is ordinary calm/peacefulness in her manner of speaking, distinct from ansoku in p17 (eien ni yoru no yō na ansoku), which can mean ordinary rest or eternal rest. Keeping them distinct preserves the story's refusal to turn practical resolve into religious consolation.",
+      "edition": "student"
+     }
+    ]
+   },
+   {
+    "anchor": "p38",
+    "body": "The same bare word, storm (arashi), opened the story and returned quietly inside her vision; the husband now whispers it again after the child sleeps. Nothing is solved.",
+    "editions": [
+     "curious",
+     "student"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "\"It's a {t:storm}.\"",
+    "variants": [
+     {
+      "body": "Arashi (storm) frames the evening: bare perception in p1, forgotten in noise in p8, re-heard quietly inside her vision in p19, whispered here. The three appearances are kept plain and verbally linked; the storm is not a symbol to be underlined.",
+      "edition": "student"
+     }
+    ]
+   },
+   {
+    "anchor": "p28",
+    "body": "The Japanese says two years are already past here, though the marriage is counted as three years elsewhere; the draft keeps the inconsistency literal.",
+    "editions": [
+     "student"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "two years are already past",
+    "variants": []
+   }
+  ],
+  "say": "No Casual notes; three Curious notes for what blocks sense and one Student-only note on the two-year/three-year count."
+ },
+ "usage": {
+  "input_tokens": 12014,
+  "cached_tokens": 10737,
+  "output_tokens": 2072,
+  "reasoning_tokens": 1482,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.012012799999999999,
+ "response_id": "resp_6ae7a6a3771f1eea74684bb5",
+ "latency_s": 9.93,
+ "citations": [],
+ "created": "2026-11-01T20:52:51Z"
+}

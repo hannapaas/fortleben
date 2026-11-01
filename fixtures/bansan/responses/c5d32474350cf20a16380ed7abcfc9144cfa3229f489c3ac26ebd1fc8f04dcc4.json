@@ -1,0 +1,27 @@
+{
+ "prompt": "source-check",
+ "model": "muse-wonder-1.0",
+ "effort": "low",
+ "data": {
+  "paragraphs": [
+   {
+    "id": "p25",
+    "needs_second_draft": false,
+    "queries": []
+   }
+  ],
+  "say": "Re-check of p25: Query 14 is settled by the restored “all sorts of troubles,” and no other problem remains."
+ },
+ "usage": {
+  "input_tokens": 11104,
+  "cached_tokens": 10612,
+  "output_tokens": 446,
+  "reasoning_tokens": 382,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0130104,
+ "response_id": "resp_6ae7a6101cb2b76e560446ab",
+ "latency_s": 4.12,
+ "citations": [],
+ "created": "2026-11-01T20:50:24Z"
+}

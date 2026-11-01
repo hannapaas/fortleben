@@ -1,0 +1,165 @@
+{
+ "prompt": "translate-draft",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "alternatives": [],
+    "english": "\"Why are you so quiet?\" The man looked at the woman's face in sudden wonder and spoke to her. She hurried to say something, but unable to say it all at once she fell silent, and again her eyes ran far away. And she saw the phantom picture again. Then for the first time she quietly heard the sound of the {t:storm} outside the door. She said nothing.",
+    "flags": [],
+    "ids": [
+     "p19"
+    ],
+    "notes": [
+     "Kept far/quiet link and storm re-hearing plain and quiet per frame; phantom picture kept literal, not dream/vision explained."
+    ],
+    "spans": [
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "『どうして黙ってるの。』",
+       "男は、ふと不思議さうに女の顔を見て声をかけた。",
+       "彼女は、あわてゝなにかを云はうとしたが、一口には何事も云ひかねて黙ってしまふと、再びその眼が遠く走ってしまった。",
+       "そして彼女は、また幻の絵を見たのだった。",
+       "彼女は、その時はじめて戸の外の嵐の音を、静かに耳にした。",
+       "彼女はなにも云はずにゐた。"
+      ],
+      "starts": "\"Why are you so quiet?\""
+     }
+    ]
+   },
+   {
+    "alternatives": [],
+    "english": "Yes. There is {t:that-day}. There is {t:that-day} when everything changes into nostalgia and forgiveness and {t:rest}. After a long life, and after a long grief, and after a long suffering, on the day after that, there is {t:that-day} of {t:rest} nostalgia and forgiveness. What is the suffering and grief of each single day. What is the tiredness and worry of each single day. Before she knew it she was smiling a smile.",
+    "flags": [],
+    "ids": [
+     "p20"
+    ],
+    "notes": [
+     "Kept incantatory repetition: three that-days, three longs, nostalgia/forgiveness/rest trio in order; smile kept as smile; questions left as plain what-is, not answered."
+    ],
+    "spans": [
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "さうだ。",
+       "あの日があるのだ。",
+       "あのすべてがなつかしみと許しと、安らかさに変る日があるのだった。",
+       "ながい生活の後に、またながい悲しみの後に、またながい苦しみのその後の日に、あの安らかななつかしみと許しの日があるのだ。",
+       "一日々々の苦しみや悲しみがなんだらう。",
+       "一日々々の疲れやなやみがなんだらう。",
+       "彼女はいつとなしに微笑を浮べてゐた。"
+      ],
+      "starts": "Yes. There is {t:that-day}."
+     }
+    ]
+   },
+   {
+    "alternatives": [],
+    "english": "\"Why are you so quiet?\" The man spoke to her again. She raised her head as if startled, smiling as if with nostalgia, \"It really has been only a little while, hasn't it, since we married.\"",
+    "flags": [],
+    "ids": [
+     "p21",
+     "p22"
+    ],
+    "notes": [
+     "Grouped dangling nagara clause with its speech; kept smile-nostalgia thread; kept non-sequitur arithmetic without harmonising; same quiet-question English as p19 despite doshite/naze difference."
+    ],
+    "spans": [
+     {
+      "relation": "merged",
+      "sentences": [
+       "『なぜ黙ってるの。』",
+       "男は再び声をかけた。",
+       "彼女は驚いたやうに頭を上げて、なつかしさうに笑ひながら、",
+       "『まだ本当にわづかしか経ちませんのね、結婚してから。』"
+      ],
+      "starts": "\"Why are you so quiet?\""
+     }
+    ]
+   },
+   {
+    "alternatives": [],
+    "english": "She said it as if asking him too to remember, and all sorts of things, even the happy things from before they married, to remember.",
+    "flags": [],
+    "ids": [
+     "p23"
+    ],
+    "notes": [
+     "Plain invitation to remember; did not ennoble into happy memories gloss."
+    ],
+    "spans": [
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "と男にも思出して、種々のことを、結婚前の楽しかったことまでも、思出して下さいと云ふやうに云った。"
+      ],
+      "starts": "She said it as"
+     }
+    ]
+   },
+   {
+    "alternatives": [],
+    "english": "\"Yes,\" the man said too, lifting his eyes. \"It is only three years, isn't it. And yet we have been through a lot of troubles.\"",
+    "flags": [],
+    "ids": [
+     "p24",
+     "p25"
+    ],
+    "notes": [
+     "Kept just/only three-years count in his blunt plain register; troubles kept practical, not visionary."
+    ],
+    "spans": [
+     {
+      "relation": "merged",
+      "sentences": [
+       "『さうだなァ。』",
+       "男も眼を上げて云った。",
+       "『たった三年にしかならないんだな。",
+       "けれども、俺たちはいろ〳〵苦労したなァ。』"
+      ],
+      "starts": "\"Yes,\" the man said"
+     }
+    ]
+   },
+   {
+    "alternatives": [],
+    "english": "\"Quite true.\" She lowered her eyes again to try to see that picture. But at once, \"But still only three years have passed, haven't they,\" she said, her eyes shining as if she had to tell him some great hope, though she did not herself know what great thing it was.",
+    "flags": [],
+    "ids": [
+     "p26",
+     "p27"
+    ],
+    "notes": [
+     "Grouped cut-off ga-suguni clause with its speech; kept still-only-three-years as her marvel-key distinct from his; great hope left large and unknown, not clarified."
+    ],
+    "spans": [
+     {
+      "relation": "merged",
+      "sentences": [
+       "『本当にね。』",
+       "彼女は、また眼を伏せてあの絵を見ようとした。",
+       "が、すぐに、",
+       "『けれども、まだ三年しか経たないんですものね。』と、なにか大きな、彼女にはわからないけれども、なにか大きな希みを彼に話さなければならないやうに瞳を輝かした。"
+      ],
+      "starts": "\"Quite true.\" She lowered"
+     }
+    ]
+   }
+  ],
+  "say": "Drafted p19-p27 keeping storm, far/quiet/smile/long and that-day/rest links plain and unharmonised."
+ },
+ "usage": {
+  "input_tokens": 13127,
+  "cached_tokens": 11633,
+  "output_tokens": 5739,
+  "reasoning_tokens": 4323,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.028003200000000002,
+ "response_id": "resp_6ae7a4461e600c6f550543e7",
+ "latency_s": 21.08,
+ "citations": [],
+ "created": "2026-11-01T20:42:46Z"
+}

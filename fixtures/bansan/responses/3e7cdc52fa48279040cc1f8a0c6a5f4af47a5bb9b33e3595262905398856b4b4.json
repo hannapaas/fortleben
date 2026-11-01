@@ -1,0 +1,29 @@
+{
+ "prompt": "translate-answer",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": {
+  "answers": [
+   {
+    "query_id": 4,
+    "reason": "Accepted: 掻き廻す means to rake/rummage things about on the table, not to sweep them off it; the draft added a removal the Japanese does not state.",
+    "status": "accepted"
+   }
+  ],
+  "notes": [],
+  "revised_english": "Standing unsteadily, the child with fat, round, ball-like short hands tried without a moment's pause, and far too fast, to rake everything on the {t:table} about. So, smiling, they put all the rice bowls and the teapot and the aluminum pots and the rest under the {t:table}. On top of the {t:table} there was left only the small spoon the child held and a single small plate.",
+  "say": "Accepted query 4 and corrected the grabbing to raking about on the table."
+ },
+ "usage": {
+  "input_tokens": 11175,
+  "cached_tokens": 10737,
+  "output_tokens": 785,
+  "reasoning_tokens": 592,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.005494300000000001,
+ "response_id": "resp_6ae7a5c0102559fc574b49d0",
+ "latency_s": 3.99,
+ "citations": [],
+ "created": "2026-11-01T20:49:04Z"
+}

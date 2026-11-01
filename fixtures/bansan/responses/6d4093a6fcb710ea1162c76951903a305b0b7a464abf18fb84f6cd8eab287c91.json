@@ -1,0 +1,27 @@
+{
+ "prompt": "source-check",
+ "model": "muse-wonder-1.0",
+ "effort": "low",
+ "data": {
+  "paragraphs": [
+   {
+    "id": "p16",
+    "needs_second_draft": false,
+    "queries": []
+   }
+  ],
+  "say": "NONE"
+ },
+ "usage": {
+  "input_tokens": 11918,
+  "cached_tokens": 11124,
+  "output_tokens": 774,
+  "reasoning_tokens": 741,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.020880799999999998,
+ "response_id": "resp_6ae7a5e77379b51b0e3e468e",
+ "latency_s": 6.21,
+ "citations": [],
+ "created": "2026-11-01T20:49:43Z"
+}

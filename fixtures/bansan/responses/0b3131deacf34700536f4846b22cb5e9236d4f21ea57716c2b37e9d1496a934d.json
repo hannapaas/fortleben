@@ -1,0 +1,53 @@
+{
+ "prompt": "notes",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": {
+  "notes": [
+   {
+    "anchor": "p19",
+    "body": "The storm opened the story and was then forgotten in the table noise; here she hears it again, quietly, from inside her distance.",
+    "editions": [
+     "curious",
+     "student"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "Then for the first time she quietly heard the sound of the {t:storm} outside the door.",
+    "variants": []
+   },
+   {
+    "anchor": "p20",
+    "body": "That day stays vague in the Japanese, not heaven or a better future; rest here is quiet peace, not the night-like eternal rest named elsewhere.",
+    "editions": [
+     "curious",
+     "student"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "There is {t:that-day} when everything changes into nostalgia and forgiveness and {t:rest}.",
+    "variants": [
+     {
+      "body": "That day renders the vague ano hi / sono hi, deliberately unfixed as to old age or death; rest here is yasurakasa, quiet peace, distinct from the night-like ansoku named elsewhere, and the trio nostalgia, forgiveness, peace is kept in order as the story's crux chord.",
+      "edition": "student"
+     }
+    ]
+   }
+  ],
+  "say": "Kept two Curious notes on storm re-hearing and that-day/rest vagueness, no Casual notes."
+ },
+ "usage": {
+  "input_tokens": 12114,
+  "cached_tokens": 10737,
+  "output_tokens": 2127,
+  "reasoning_tokens": 1840,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.012371549999999999,
+ "response_id": "resp_6ae7a69943a64186227d489b",
+ "latency_s": 10.06,
+ "citations": [],
+ "created": "2026-11-01T20:52:41Z"
+}

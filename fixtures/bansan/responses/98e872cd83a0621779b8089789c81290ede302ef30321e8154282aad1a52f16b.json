@@ -1,0 +1,29 @@
+{
+ "prompt": "head-select",
+ "model": "muse-spark-1.3",
+ "effort": "minimal",
+ "data": {
+  "decision": "pick",
+  "fork": {
+   "options": [],
+   "question": ""
+  },
+  "pick": 0,
+  "queries_for_owner": [],
+  "reason": "Both name the same crux: bad potato taste opening interior time where suffering seen from far end becomes nostalgia and forgiveness, served by repetition and non-resolution. Option 0 states it more fully, adding the three-year shock, change of tense rather than consolation, and husband's non-understanding with smaller practical resolve.",
+  "same_or_different": "same",
+  "say": "Both cruxes name the same temporal slippage; proceeding on first read."
+ },
+ "usage": {
+  "input_tokens": 5489,
+  "cached_tokens": 0,
+  "output_tokens": 415,
+  "reasoning_tokens": 279,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.008625,
+ "response_id": "resp_6ae7a216d14948645a444787",
+ "latency_s": 2.57,
+ "citations": [],
+ "created": "2026-11-01T20:33:26Z"
+}

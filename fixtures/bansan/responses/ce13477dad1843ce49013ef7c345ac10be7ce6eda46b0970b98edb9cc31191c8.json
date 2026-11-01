@@ -1,0 +1,52 @@
+{
+ "prompt": "source-check",
+ "model": "muse-wonder-1.0",
+ "effort": "low",
+ "data": {
+  "paragraphs": [
+   {
+    "id": "p10",
+    "needs_second_draft": false,
+    "queries": []
+   },
+   {
+    "id": "p11",
+    "needs_second_draft": false,
+    "queries": []
+   },
+   {
+    "id": "p12",
+    "needs_second_draft": false,
+    "queries": []
+   },
+   {
+    "id": "p13",
+    "needs_second_draft": false,
+    "queries": []
+   },
+   {
+    "id": "p14",
+    "needs_second_draft": false,
+    "queries": []
+   },
+   {
+    "id": "p15",
+    "needs_second_draft": false,
+    "queries": []
+   }
+  ],
+  "say": "The potato passage preserves the literal taste, the dropped references, and the far/quiet/nostalgia repetitions without clarifying the vision."
+ },
+ "usage": {
+  "input_tokens": 11969,
+  "cached_tokens": 10612,
+  "output_tokens": 1796,
+  "reasoning_tokens": 1661,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0434704,
+ "response_id": "resp_6ae7a52bee7cdef6ec28422e",
+ "latency_s": 15.17,
+ "citations": [],
+ "created": "2026-11-01T20:46:35Z"
+}

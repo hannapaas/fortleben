@@ -1,0 +1,198 @@
+{
+ "prompt": "translate-draft",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "alternatives": [],
+    "english": "Outside the door, grown dark, a violent sound of rain and wind — a {t:storm}.",
+    "flags": [],
+    "ids": [
+     "p1"
+    ],
+    "notes": [
+     "Kept as bare perception, no verb of being added beyond dash; storm kept plain for three-way link."
+    ],
+    "spans": [
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p1-s1"
+      ],
+      "starts": "Outside the door, grown dark,"
+     }
+    ]
+   },
+   {
+    "alternatives": [],
+    "english": "The parents and child had gathered at the {t:table} under the dark {t:electric-light} hanging by the wall of the narrow room, about to have their supper. Father and mother were still really young. And the child was a chubby round baby girl, just able to stand holding on to the {t:table}.",
+    "flags": [],
+    "ids": [
+     "p2"
+    ],
+    "notes": [
+     "Table kept same word twice; electric-light kept dim/dark; baby girl stated plainly, address term not yet involved."
+    ],
+    "spans": [
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p2-s1"
+      ],
+      "starts": "The parents and child"
+     },
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p2-s2"
+      ],
+      "starts": "Father and mother were"
+     },
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p2-s3"
+      ],
+      "starts": "And the child was"
+     }
+    ]
+   },
+   {
+    "alternatives": [],
+    "english": "Neither the man nor the woman had yet a single wrinkle in the face. But in the man's hollowed gentle eyes in the shadow of his thick brows there was a look of languid tiredness. And about the woman's dark hair and slight shoulders there was a still deeper sunken tiredness, and a drowsy {t:rest}.",
+    "flags": [],
+    "ids": [
+     "p3"
+    ],
+    "notes": [
+     "Kept tiredness repeated, not varied; drowsy kept distinct from tired; rest token for yasurakasa."
+    ],
+    "spans": [
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p3-s1"
+      ],
+      "starts": "Neither the man nor"
+     },
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p3-s2"
+      ],
+      "starts": "But in the man's"
+     },
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p3-s3"
+      ],
+      "starts": "And about the woman's"
+     }
+    ]
+   },
+   {
+    "alternatives": [],
+    "english": "The day had ended. The grief and suffering of the day were about to flow into the {t:rest} of night. And they smiled in silence, fixing their eyes on all that was the child.",
+    "flags": [],
+    "ids": [
+     "p4"
+    ],
+    "notes": [
+     "Smile kept as smile for thread to vision; rest kept for yasurakasa, not peace as theological."
+    ],
+    "spans": [
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p4-s1"
+      ],
+      "starts": "The day had ended."
+     },
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p4-s2"
+      ],
+      "starts": "The grief and suffering"
+     },
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p4-s3"
+      ],
+      "starts": "And they smiled in"
+     }
+    ]
+   },
+   {
+    "alternatives": [],
+    "english": "Standing unsteadily, the child tried with fat short hands round as balls to sweep at the things on the {t:table}, without a gap and far too fast. So smiling, they put all the bowls and the teapot and the aluminum pots under the {t:table}. On the {t:table} there was left only the small spoon the child held and a single small dish.",
+    "flags": [],
+    "ids": [
+     "p5"
+    ],
+    "notes": [
+     "Smiling kept same; table repeated same word three times; disorder kept physical, not tidied."
+    ],
+    "spans": [
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p5-s1"
+      ],
+      "starts": "Standing unsteadily, the child"
+     },
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p5-s2"
+      ],
+      "starts": "So smiling, they put"
+     },
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p5-s3"
+      ],
+      "starts": "On the table there"
+     }
+    ]
+   },
+   {
+    "alternatives": [],
+    "english": "But the child gave a noisy little cry full of joy and banged spoon and dish down on the {t:table}.",
+    "flags": [],
+    "ids": [
+     "p6"
+    ],
+    "notes": [
+     "Kept noisy joy and banging plain; cry not varied to laugh to keep smile network intact."
+    ],
+    "spans": [
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p6-s1"
+      ],
+      "starts": "But the child gave"
+     }
+    ]
+   }
+  ],
+  "say": "Drafted opening supper tableau plain and warm, keeping storm, table, tiredness, smile and rest linked for vision to detach from."
+ },
+ "usage": {
+  "input_tokens": 12087,
+  "cached_tokens": 0,
+  "output_tokens": 2321,
+  "reasoning_tokens": 1257,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.024973,
+ "response_id": "resp_6ae7a3e08ac25754de6a4c96",
+ "latency_s": 10.37,
+ "citations": [],
+ "created": "2026-11-01T20:41:04Z"
+}

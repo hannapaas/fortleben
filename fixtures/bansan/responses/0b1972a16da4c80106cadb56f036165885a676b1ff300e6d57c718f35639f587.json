@@ -1,0 +1,100 @@
+{
+ "prompt": "source-check",
+ "model": "muse-wonder-1.0",
+ "effort": "low",
+ "data": {
+  "paragraphs": [
+   {
+    "id": "p19",
+    "needs_second_draft": false,
+    "queries": []
+   },
+   {
+    "id": "p20",
+    "needs_second_draft": false,
+    "queries": [
+     {
+      "category": "mistranslation",
+      "confidence": "high",
+      "evidence_ja": "あの安らかななつかしみと許しの日",
+      "reason": "安らかな is an adjective modifying 日 (\"that peaceful ... day\"), modifying the day whose content is nostalgia and forgiveness. Rendering it as a noun coordinated with them (\"{t:rest} nostalgia and forgiveness\") breaks the grammar of the phrase and conflates the 安らかさ chord with 安息/rest.",
+      "say": "The peaceful adjective on 'day' has become a third noun in the list.",
+      "sentence": "p20-s4",
+      "span": "there is {t:that-day} of {t:rest} nostalgia and forgiveness",
+      "suggested_fix": "there is that peaceful day of nostalgia and forgiveness"
+     }
+    ]
+   },
+   {
+    "id": "p21",
+    "needs_second_draft": false,
+    "queries": []
+   },
+   {
+    "id": "p22",
+    "needs_second_draft": false,
+    "queries": []
+   },
+   {
+    "id": "p23",
+    "needs_second_draft": false,
+    "queries": []
+   },
+   {
+    "id": "p24",
+    "needs_second_draft": false,
+    "queries": []
+   },
+   {
+    "id": "p25",
+    "needs_second_draft": false,
+    "queries": [
+     {
+      "category": "omission",
+      "confidence": "medium",
+      "evidence_ja": "俺たちはいろ〳〵苦労したなァ",
+      "reason": "いろいろ (\"all sorts of, various\") is dropped, flattening his count of the three years into a general \"a lot of troubles\"; the variety of hardships is part of what the couple keep enumerating (cf. 種々のこと in p23).",
+      "say": "いろいろ in his \"we've suffered\" is not carried over.",
+      "sentence": "p25-s2",
+      "span": "we have been through a lot of troubles",
+      "suggested_fix": "we have been through all sorts of troubles"
+     }
+    ]
+   },
+   {
+    "id": "p26",
+    "needs_second_draft": false,
+    "queries": []
+   },
+   {
+    "id": "p27",
+    "needs_second_draft": false,
+    "queries": [
+     {
+      "category": "impoverishment",
+      "confidence": "medium",
+      "evidence_ja": "なにか大きな、彼女にはわからないけれども、なにか大きな希《のぞ》みを彼に話さなければならないやうに",
+      "reason": "The Japanese repeats なにか大きな around 希み (\"some great hope\"), an incantatory doubling the reading asks to keep. The English repeats \"some great\" only in varied form — \"some great hope\" then \"what great thing it was\" — swapping 希み/hope for the flat \"thing\" on its second occurrence, breaking the repetition and thinning the word the passage is reaching for.",
+      "say": "The repeated \"some great hope\" is varied away to \"great thing\" the second time.",
+      "sentence": "p27-s1",
+      "span": "though she did not herself know what great thing it was",
+      "suggested_fix": "though she did not herself know what great hope it was"
+     }
+    ]
+   }
+  ],
+  "say": "Page checked against the crux; two real queries (the 安らかな adjective made a noun at p20, the varied \"great hope\" repetition at p27) plus one minor omission, the rest clean."
+ },
+ "usage": {
+  "input_tokens": 12303,
+  "cached_tokens": 10612,
+  "output_tokens": 2227,
+  "reasoning_tokens": 1467,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0534264,
+ "response_id": "resp_6ae7a55379b4ef3df25d4f22",
+ "latency_s": 18.02,
+ "citations": [],
+ "created": "2026-11-01T20:47:15Z"
+}

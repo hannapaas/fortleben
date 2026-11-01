@@ -1,0 +1,281 @@
+{
+ "prompt": "translate-draft",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "alternatives": [],
+    "english": "\"That's right. Tired and troubled and made to suffer day by day by one thing and another, two years are already past. In a little while {t:boya} will be walking too.\"",
+    "flags": [],
+    "ids": [
+     "p28"
+    ],
+    "notes": [
+     "Kept 'two years are already past' literal though the marriage count elsewhere is three years; not harmonised per reading."
+    ],
+    "spans": [
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p28-s1"
+      ],
+      "starts": "\"That's right. Tired and"
+     },
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p28-s2"
+      ],
+      "starts": "In a little while"
+     }
+    ]
+   },
+   {
+    "alternatives": [
+     {
+      "options": [
+       "\"{t:boya}.\" kept as ledger token for view-dependent rendering",
+       "\"little one.\" / \"baby.\" as plain familiar call"
+      ],
+      "span": "\"{t:boya}.\"",
+      "what_would_settle": "Editor ruling on boya for a stated girl: keep Japanese with note or render as generic baby English"
+     }
+    ],
+    "english": "The man looked at the child standing there holding the spoon with nothing to do. She at once cried gladly, \"{t:boya}.\" And at the same moment the child gave a great cry, and looking at her mother's face, \"Umma-umma-umma-umma,\" banged the spoon down on the {t:table}.",
+    "flags": [],
+    "ids": [
+     "p29",
+     "p30",
+     "p31"
+    ],
+    "notes": [
+     "Grouped p29-p31 as one English paragraph: p29-s2 hangs on p30 speech and p30 hangs on p31 babble and banging.",
+     "Kept babble as quoted sound, no italics in draft; address kept as {t:boya} token, not fixed to boy/girl."
+    ],
+    "spans": [
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p29-s1"
+      ],
+      "starts": "The man looked at"
+     },
+     {
+      "relation": "merged",
+      "sentences": [
+       "p29-s2",
+       "p30-s1"
+      ],
+      "starts": "She at once cried"
+     },
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p31-s1"
+      ],
+      "starts": "And at the same"
+     }
+    ]
+   },
+   {
+    "alternatives": [],
+    "english": "The young father hurriedly put {t:rice} into the child's mouth.",
+    "flags": [],
+    "ids": [
+     "p32"
+    ],
+    "notes": [],
+    "spans": [
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p32-s1"
+      ],
+      "starts": "The young father hurriedly"
+     }
+    ]
+   },
+   {
+    "alternatives": [],
+    "english": "They at last laid down their chopsticks.",
+    "flags": [],
+    "ids": [
+     "p33"
+    ],
+    "notes": [],
+    "spans": [
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p33-s1"
+      ],
+      "starts": "They at last laid"
+     }
+    ]
+   },
+   {
+    "alternatives": [],
+    "english": "\"Just a little while longer.\" The man said it strongly, as if to himself.",
+    "flags": [],
+    "ids": [
+     "p34"
+    ],
+    "notes": [
+     "Kept as quoted mutter with tag, practical and parallel, not shared understanding."
+    ],
+    "spans": [
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p34-s1"
+      ],
+      "starts": "\"Just a little while"
+     },
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p34-s2"
+      ],
+      "starts": "The man said it"
+     }
+    ]
+   },
+   {
+    "alternatives": [],
+    "english": "\"Yes, let us work, shall we.\" She said it calmly, with {t:rest}. And holding the child on her lap, she put out her small nipple and began to nurse.",
+    "flags": [],
+    "ids": [
+     "p35"
+    ],
+    "notes": [
+     "安らかに rendered via {t:rest} token to keep rest/peace chord; feminine polite carried by soft 'Yes, let us ... shall we' without ennobling."
+    ],
+    "spans": [
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p35-s1"
+      ],
+      "starts": "\"Yes, let us work,"
+     },
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p35-s2"
+      ],
+      "starts": "She said it calmly,"
+     },
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p35-s3"
+      ],
+      "starts": "And holding the child"
+     }
+    ]
+   },
+   {
+    "alternatives": [],
+    "english": "\"Come, let us clear up what is left. And let us sleep; tomorrow let us get up early, shall we?\"",
+    "flags": [],
+    "ids": [
+     "p36"
+    ],
+    "notes": [
+     "Speaker given as father at medium confidence; draft keeps bare quoted resolve without attribution to avoid committing beyond tag."
+    ],
+    "spans": [
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p36-s1"
+      ],
+      "starts": "\"Come, let us clear"
+     },
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p36-s2"
+      ],
+      "starts": "And let us sleep;"
+     }
+    ]
+   },
+   {
+    "alternatives": [],
+    "english": "At last the man stood up. And as he was about to begin clearing the {t:table}, the child had already closed her eyes with her cheek against the breast. All around had fallen quiet.",
+    "flags": [],
+    "ids": [
+     "p37"
+    ],
+    "notes": [
+     "Kept quiet for 静まりかへった to hold quiet chord; same {t:table} word as supper tableau."
+    ],
+    "spans": [
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p37-s1"
+      ],
+      "starts": "At last the man"
+     },
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p37-s2"
+      ],
+      "starts": "And as he was"
+     },
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p37-s3"
+      ],
+      "starts": "All around had fallen"
+     }
+    ]
+   },
+   {
+    "alternatives": [],
+    "english": "\"It's a {t:storm}.\" The man stopped still and whispered.",
+    "flags": [],
+    "ids": [
+     "p38"
+    ],
+    "notes": [
+     "Kept final line bare and verbally linked to opening frame, nothing solved."
+    ],
+    "spans": [
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p38-s1"
+      ],
+      "starts": "\"It's a {t:storm}.\""
+     },
+     {
+      "relation": "one-to-one",
+      "sentences": [
+       "p38-s2"
+      ],
+      "starts": "The man stopped still"
+     }
+    ]
+   }
+  ],
+  "say": "Drafted the closing supper through the whispered storm keeping dialogue plain, repetitions literal, and vision unclarified."
+ },
+ "usage": {
+  "input_tokens": 12893,
+  "cached_tokens": 11633,
+  "output_tokens": 5354,
+  "reasoning_tokens": 3545,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.02607445,
+ "response_id": "resp_6ae7a45a6e6653539fc94362",
+ "latency_s": 19.89,
+ "citations": [],
+ "created": "2026-11-01T20:43:06Z"
+}

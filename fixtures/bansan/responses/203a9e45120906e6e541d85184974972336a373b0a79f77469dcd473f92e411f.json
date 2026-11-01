@@ -1,0 +1,36 @@
+{
+ "prompt": "translate-answer",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": {
+  "answers": [
+   {
+    "query_id": 16,
+    "reason": "Concession dropped: ても makes the suffering conceded, not listed. Restored with 'even though' while keeping tiredness wording and plain husband register.",
+    "status": "accepted"
+   },
+   {
+    "query_id": 17,
+    "reason": "Stet: Japanese says 二年はもう過ぎた; は is topical, not 'at least'. Adding 'at least' would harmonise the three-years count the reading requires be kept distinct; the odd two-years wording must stand literal.",
+    "status": "stet"
+   }
+  ],
+  "notes": [
+   "Two-years vs three-years tension left visible for Analyst/editor; no silent harmonisation."
+  ],
+  "revised_english": "\"That's right. Even though day by day we are tired out and troubled and made to suffer by one thing and another, two years are already past. In a little while {t:boya} will be walking too.\"",
+  "say": "Restored the husband's even-though concession and kept the literal two years."
+ },
+ "usage": {
+  "input_tokens": 11211,
+  "cached_tokens": 10737,
+  "output_tokens": 1724,
+  "reasoning_tokens": 1476,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.00953005,
+ "response_id": "resp_6ae7a621da1c826f39de4ddd",
+ "latency_s": 9.06,
+ "citations": [],
+ "created": "2026-11-01T20:50:42Z"
+}
