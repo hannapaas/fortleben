@@ -85,6 +85,6 @@ It sounds a lot, but most are short, and seven are enough to run a text end to e
 ## Examples the prompts need
 
 The examples matter more than the wording. The ones that need the most care:
-- **first-read:** two example readings of very different texts, each built on its own crux. These teach the most and set the tone for everything downstream.
+- **first-read:** two example readings of very different texts, each built on its own crux. These teach the most and set the tone for everything downstream. They also risk anchoring: if the reading of 「晩餐」 on the first run echoes either example, the examples come out and the prompt relies on description alone.
 - **source-check:** a real wrong-speaker error, a real omission, and a clean page answered "none".
 - **editors-letter:** one short letter on a draft that's accurate and still wrong as a whole.
