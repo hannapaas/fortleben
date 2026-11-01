@@ -1,0 +1,87 @@
+{
+ "prompt": "translate-draft",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "The mother, leaning against the wall, silent and gazing down, was serving the beef and onion, and carrot and {t:jagaimo}, simmered in the {t:aiiro-nabe}, onto a white plate. And as if about to say something, she put a {t:jagaimo} simmered sweet and soft into her mouth and looked at the man's face, but as if noticing something, she shut her mouth and gazed vaguely at a far place.",
+    "flags": [],
+    "ids": [
+     "p10"
+    ],
+    "notes": [
+     "kabe ni yotte taken as leaning against the wall, not sitting by the wall; posture carries the drift into downcast stillness.",
+     "bonyari for bozen kept as vaguely to match voice reference and bible, not vacantly."
+    ]
+   },
+   {
+    "english": "The {t:jagaimo} in her mouth was hard and gritty, as if frozen, and very bad. As if taken by surprise, she silently chewed it again with her front teeth, but her heart had already gazed down, lonely.",
+    "flags": [],
+    "ids": [
+     "p11"
+    ],
+    "notes": [
+     "kept potato adjectives exact and unconnected per hard spot: hard and gritty as if frozen, very bad; no diagnosis of undercooking.",
+     "kokoro ga sabishiku utsumuite: kept lonely with gaze down to hold network pair, against fluent urge to psychologize as saddened."
+    ]
+   },
+   {
+    "english": "She remembered the suffering and sadness and tiredness of her days. And the flavourless, unconnected, cold badness of the {t:jagaimo} gave her a quiet, lonely, far-removed heart. She pictured the poor, sorrow-filled, real life after marriage.",
+    "flags": [],
+    "ids": [
+     "p12"
+    ],
+    "notes": [
+     "mumyona, kakawari no nai, tsumetai mazusa kept as three unlinked adjectives — flavourless, unconnected, cold — per bible; not smoothed into one tastelessness.",
+     "far-removed heart keeps tooi/tooku as spatial distance for interior state."
+    ]
+   },
+   {
+    "english": "And it seemed, too, like a life drawn out very long. She felt suddenly as if she herself had quite grown old. And of quietly tear-filled days, and of days spent threatened and afraid over material things, and of each day grieved and suffered through illness, her far heart was quietly remembering. But to her remembering now, everything was like a dream. Suffering and sadness too were like a dear dream.",
+    "flags": [],
+    "ids": [
+     "p13"
+    ],
+    "notes": [
+     "natsukashii yume kept as dear dream per network, not nostalgic dream; tenderness toward what is not yet past.",
+     "long soshite/keredomo circling kept as paratactic And-sentences; far heart repeated, not varied."
+    ]
+   },
+   {
+    "english": "And when she thought, it was no more than barely three years of life after marriage.",
+    "flags": [],
+    "ids": [
+     "p14"
+    ],
+    "notes": [
+     "single bare arithmetic sentence kept short against the long drift either side; no expansion."
+    ]
+   },
+   {
+    "english": "Before she knew, as if caught by something, she was gazing vaguely far away. Her quiet heart was, before she knew, seeing a picture as if a phantom.",
+    "flags": [],
+    "ids": [
+     "p15"
+    ],
+    "notes": [
+     "itsutonaku twice kept as before she knew to keep durative vagueness, not tidied to suddenly.",
+     "maboroshi no you na e kept as picture as if a phantom, not vision or apparition, to avoid clarifying into heaven/death; no added she thought / in her mind."
+    ]
+   }
+  ],
+  "say": "Drafted p10-p15 keeping potato wrongness physical and vision-language unclarified with network words steady."
+ },
+ "usage": {
+  "input_tokens": 12230,
+  "cached_tokens": 10609,
+  "output_tokens": 2713,
+  "reasoning_tokens": 1799,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.015147850000000001,
+ "response_id": "resp_6ae7c4517246751bed5040ae",
+ "latency_s": 9.97,
+ "citations": [],
+ "created": "2026-11-01T22:59:29Z"
+}

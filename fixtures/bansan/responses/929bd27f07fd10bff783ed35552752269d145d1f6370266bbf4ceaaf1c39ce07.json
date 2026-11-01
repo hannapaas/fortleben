@@ -1,0 +1,83 @@
+{
+ "prompt": "translate-draft",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"Why are you silent?\" The man looked wonderingly at the woman's face and spoke to her. Hurriedly she tried to say something, but unable to say anything at once she fell silent, and again her eyes ran far away. And she saw the phantom picture again. It was then for the first time that she quietly heard the sound of the {t:arashi} outside the door. She said nothing.",
+    "flags": [],
+    "ids": [
+     "p19"
+    ],
+    "notes": [
+     "Kept p19-s3 as unmarked drift without adding she thought: eyes running far is the picture returning. Kept storm line bare to hold unheard / heard-inwardly / spoken progression."
+    ]
+   },
+   {
+    "english": "Yes. That day is there. There is the day when all will change into dearness and forgiveness and peace. After a long life, and after a long sadness again, and after a long suffering again, on the day after that, there is that peaceful day of dearness and forgiveness. What is the suffering and sadness of each day? What is the tiredness and worry of each day? Without her knowing, she was smiling.",
+    "flags": [],
+    "ids": [
+     "p20"
+    ],
+    "notes": [
+     "Kept soshite-less circling by returning with long / again / each day rather than tidy subordination. Kept dearness, forgiveness, peace invariant and did not upgrade into heaven, death or epiphany."
+    ]
+   },
+   {
+    "english": "\"Why are you silent?\" The man spoke again. She raised her head as if surprised, smiling with dearness, \"It has really been only such a little while since we married, hasn't it,\" she said, as if asking the man too to remember, to remember all kinds of things, even the happy things from before they married.",
+    "flags": [],
+    "ids": [
+     "p21",
+     "p22",
+     "p23"
+    ],
+    "notes": [
+     "Grouped p21-p23 as one English paragraph because p21 narration, p22 speech, and p23 quotative are one utterance. Kept her quiet polite-formal register in hasn't it / asking to remember, and kept smile and dear in network words. Second why-are-you-silent keeps same English as first to preserve repetition."
+    ]
+   },
+   {
+    "english": "\"That's so, eh.\" The man too raised his eyes and said.",
+    "flags": [],
+    "ids": [
+     "p24"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"It comes to only three years, doesn't it. And yet we have been through a lot, haven't we.\"",
+    "flags": [],
+    "ids": [
+     "p25"
+    ],
+    "notes": [
+     "Kept his plain rough we without marking ore-tachi in line; roughness carried across his short speeches."
+    ]
+   },
+   {
+    "english": "\"Truly, yes.\" She gazed down again, about to try to see that picture. But at once, \"But it is only three years that have passed, you know,\" she said, her eyes shining as if she must tell him of something large, something large she herself did not understand, a hope.",
+    "flags": [],
+    "ids": [
+     "p26",
+     "p27"
+    ],
+    "notes": [
+     "Grouped p26-p27 as one English paragraph because ga, sugu ni joins the gaze-down attempt to the speech. Kept large repeated and hope unnamed; did not fill silence with thought-tags. Kept gaze down steady against gaze far."
+    ]
+   }
+  ],
+  "say": "Drafted p19-p27 keeping the storm heard inwardly, the circling resolve unclarified, and network words steady."
+ },
+ "usage": {
+  "input_tokens": 11727,
+  "cached_tokens": 10609,
+  "output_tokens": 3458,
+  "reasoning_tokens": 2708,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01768535,
+ "response_id": "resp_6ae7c46b2e4ab377ca3340c1",
+ "latency_s": 15.45,
+ "citations": [],
+ "created": "2026-11-01T22:59:55Z"
+}

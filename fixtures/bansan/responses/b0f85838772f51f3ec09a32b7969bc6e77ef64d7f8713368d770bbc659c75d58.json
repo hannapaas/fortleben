@@ -1,0 +1,54 @@
+{
+ "prompt": "translate-draft",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"Won't listen, will you.\" The young father, gazing steadily at the small round arms and at the child's long-lashed, darkish eyes moving nimbly and shrewdly without a moment's pause, as if at a loss what to do, at last with a face full of smile pinched the round jutting cheek lightly with his fingers, and taking a large bowl from under the {t:table} as if groping for it, put it into her hands.",
+    "flags": [],
+    "ids": [
+     "p7"
+    ],
+    "notes": [
+     "彼女の手 is left as 'her hands' to preserve the ambiguity: narrator's 彼女 is otherwise the mother, but here the bowl after the cheek-pinch could go to the girl child's hands. Passage, not bible, should settle it.",
+     "怜悧 with ruby れいり rendered as 'shrewdly' per style sheet; 微笑 with ruby ほゝゑみ kept in smile network as 'smile'."
+    ]
+   },
+   {
+    "english": "She served the {t:takitate-gohan} from the pot, hot, with white steam rising thick, and handed it to him. And her young large eyes too, full of a mother's gladness, gazed at the child who was not still for an instant, lovely like a small bird. And as if she could not bear it, muttering in her mouth, \"Whatever is to be done with this child,\" as if she found her adorable beyond all help, she said firmly, \"{t:boya},\" but the smile overflowed from her face, and as if to borrow help she looked at the man's face. And the three, as if having forgotten everything, smiled together as if wondering what each should do for the child. And for the child they set about their meal with a warm bustle and with the smile and gladness overflowing of itself on top of it. And in the cluttering noisiness they did not hear the sound of the wind and rain.",
+    "flags": [],
+    "ids": [
+     "p8"
+    ],
+    "notes": [
+     "口のうちに独言 kept as half-aloud muttering in quoted speech, not italicised thought, per style sheet.",
+     "雨風の音 here is not given as {t:arashi}; kept as 'wind and rain' to preserve the frame progression from unheard noise to named storm."
+    ]
+   },
+   {
+    "english": "The young father kept his red, large hand spread busily over the {t:table}. And his eyes holding back the smile that welled up helplessly because of the child, he steadied the child and put a little food into that small red mouth. In the gap he opened a large mouth hastily, and pushed rice into his own mouth.",
+    "flags": [],
+    "ids": [
+     "p9"
+    ],
+    "notes": [
+     "彼 / 彼自身 repetition kept as 'he / his own mouth,' both clearly the father steadying the child; 笑 kept in smile network."
+    ]
+   }
+  ],
+  "say": "Drafted p7-p9 keeping the feeding business exact and the smile network steady before the potato turn."
+ },
+ "usage": {
+  "input_tokens": 11715,
+  "cached_tokens": 0,
+  "output_tokens": 4300,
+  "reasoning_tokens": 3637,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.03291875,
+ "response_id": "resp_6ae7c44718e97a5a1def45ba",
+ "latency_s": 17.53,
+ "citations": [],
+ "created": "2026-11-01T22:59:19Z"
+}

@@ -1,0 +1,31 @@
+{
+ "prompt": "head-select",
+ "model": "muse-wonder-1.0",
+ "effort": "low",
+ "data": {
+  "decision": "pick",
+  "fork": {
+   "options": [],
+   "question": ""
+  },
+  "pick": 1,
+  "queries_for_owner": [
+   "Option 0, as supplied, ends at the heading 'For the English:' and names no crux: please supply the missing text if that truncation was not intended, so it can be checked against the passage rather than against an absence."
+  ],
+  "reason": "Option 1 names a testable crux — the tasteless potato opening the still, unsettled vision of p11–p20, and its return to the plain resumed supper of the frame — where Option 0, in the form before the desk, states nothing that could be said either to coincide with or differ from it. Option 1 also follows the reading: it protects the vision's vagueness and repeated abstract words, and keeps the affirmation embodied in the tired domestic close rather than clarified into consolation.",
+  "same_or_different": "different",
+  "say": "Pick: Option 1, the crux check (Wonder). Option 0 as received contains no crux to compare — only the truncated heading 'For the English:' — so the two do not name the same thing in different words, and there is nothing in Option 0 the desk could responsibly choose as written. Option 1 does the work the choice is for: it locates the story's turn in the hard, tasteless potato of p11, holds the p16–p20 vision unsettled between death, old age and exhausted trance, ties the revaluation of the three years (p13 against p14, p22, p27) to that vision, and binds the whole to the exact frame of storm heard, unheard and named again (p8, p19, p38). Query to the owner of Option 0: supply the missing text if the truncation was unintended. House log: The desk adopts Option 1 as the crux for 『晩餐』 and asks that Option 0's missing crux be supplied for the record."
+ },
+ "usage": {
+  "input_tokens": 4889,
+  "cached_tokens": 0,
+  "output_tokens": 678,
+  "reasoning_tokens": 245,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.033116,
+ "response_id": "resp_6ae7c3ff1741407d6cc549e4",
+ "latency_s": 7.09,
+ "citations": [],
+ "created": "2026-11-01T22:58:07Z"
+}

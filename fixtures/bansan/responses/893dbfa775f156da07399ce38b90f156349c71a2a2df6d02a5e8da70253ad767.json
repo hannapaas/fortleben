@@ -1,0 +1,86 @@
+{
+ "prompt": "reader-readable",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "notes": [
+   {
+    "japanese": "暗い電燈の下の卓《テーブル》",
+    "paragraph": "p2",
+    "problem": "Doubled word reads as a typo, not as the author's repetition, and stops an English reader at the opening tableau.",
+    "span": "dim dim electric light",
+    "suggestion": "dim electric light",
+    "sureness": "Certain; a check of the Japanese for a single 暗い would settle it."
+   },
+   {
+    "japanese": "その顔にはまだ少しの皺もよってなかった",
+    "paragraph": "p3",
+    "problem": "Wrong preposition and number for English; no writer puts a wrinkle in the singular face.",
+    "span": "had yet a single wrinkle in the face",
+    "suggestion": "had not yet a single wrinkle on their faces",
+    "sureness": "Sure on the English; the faithful reader can confirm number is not meaningful in Japanese."
+   },
+   {
+    "japanese": "その子供のすべてに瞳を注いだ。",
+    "paragraph": "p4",
+    "problem": "Literal rendering of an idiom; English eyes are not poured, so the tender looking turns grotesque.",
+    "span": "they poured their eyes upon all that was the child",
+    "suggestion": null,
+    "sureness": "Sure this is translationese, unsure of the best verb that keeps 注いだ; faithful note should decide."
+   },
+   {
+    "japanese": "顔一ぱいな微笑《ほゝゑみ》を持って、子供のまるくつき出た頬を指で一寸つまみながら",
+    "paragraph": "p7",
+    "problem": "Grammar collapses so the face seems to do the pinching; has to be read twice to parse.",
+    "span": "with a face full of smile pinched the round jutting cheek lightly with his fingers",
+    "suggestion": null,
+    "sureness": "Certain it is ungrammatical as it stands; how to recast is for the desk."
+   },
+   {
+    "japanese": "ごた〳〵した騒がしさの為に",
+    "paragraph": "p8",
+    "problem": "Cluttering is the wrong English word for noisy clatter and sounds like a machine habit rather than a kitchen.",
+    "span": "in the cluttering noisiness",
+    "suggestion": "in the clattering bustle",
+    "sureness": "Fairly sure; need the faithful reader to confirm the Japanese is sound-noise, not mess."
+   },
+   {
+    "japanese": "あわたゞしく大きな口を開けた、彼は彼自身の口のなかに御飯を押し込んだ。",
+    "paragraph": "p9",
+    "problem": "A large mouth opened and rice pushed makes him sound monstrous, not hurried; no English writer phrases a bite that way.",
+    "span": "he opened a large mouth hastily, and pushed rice into his own mouth",
+    "suggestion": "he opened his mouth wide and shovelled rice in",
+    "sureness": "Sure on the English effect; faithful side to confirm no grotesque is intended."
+   },
+   {
+    "japanese": "かゝはりのない冷やかな不味《まづ》さ",
+    "paragraph": "p12",
+    "problem": "Unconnected leaves an English reader with nothing to taste; it reads as a dictionary word, not a mouthful.",
+    "span": "unconnected",
+    "suggestion": null,
+    "sureness": "Fairly sure this is literal stiffness, though unsure what relation かゝはり denies; faithful note would settle it."
+   },
+   {
+    "japanese": "手持ぶさたのやうに",
+    "paragraph": "p29–p31",
+    "problem": "Literal version of an idiom that has no meaning in English; hands with nothing to do stops the domestic beat.",
+    "span": "as if with nothing to do with his hands",
+    "suggestion": "at a loose end, not knowing what to do with his hands",
+    "sureness": "Sure this is a set-phrase rendered word-for-word; any native phrasing of idleness would do."
+   }
+  ],
+  "say": "Supper business is vivid when left alone, but literal wordings stop the English reader cold in eight places; otherwise clean."
+ },
+ "usage": {
+  "input_tokens": 11890,
+  "cached_tokens": 0,
+  "output_tokens": 5372,
+  "reasoning_tokens": 4450,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0376935,
+ "response_id": "resp_6ae7cb7b6020104690174fa1",
+ "latency_s": 22.4,
+ "citations": [],
+ "created": "2026-11-01T23:30:03Z"
+}

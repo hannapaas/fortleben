@@ -1,0 +1,109 @@
+{
+ "prompt": "translate-draft",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"That's right — though day by day we are tired and worried and made to suffer by all sorts of things, two years are already past, you know. In a little while {t:boya} will be walking too.\"",
+    "flags": [],
+    "ids": [
+     "p28"
+    ],
+    "notes": [
+     "p28-s1 keeps 二年 as two years though p26-p27 and p25 say three years; preserving the inconsistency rather than correcting to three, passage wins over consistency."
+    ]
+   },
+   {
+    "english": "The man, as if with nothing to do with his hands, looked at the child standing holding the spoon. She at once called gladly, in a loud voice, \"{t:boya},\" and at the same moment the child let out a loud shout, looking at her mother's face, \"{t:umauma},\" and banged the spoon down upon the {t:table}.",
+    "flags": [],
+    "ids": [
+     "p29",
+     "p30",
+     "p31"
+    ],
+    "notes": [
+     "Grouped p29-p31 as one English paragraph: p29-s2 breaks off mid-speech into p30-p31 action and cannot stand alone.",
+     "p29-s1: reading 手持ぶさたのやうに as the man's idleness as he looks, not the child's manner of standing."
+    ]
+   },
+   {
+    "english": "The father hurriedly put rice into the child's mouth.",
+    "flags": [],
+    "ids": [
+     "p32"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Before long they laid down their chopsticks.",
+    "flags": [],
+    "ids": [
+     "p33"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Only a little while longer.\" The man said it strongly, as if in monologue.",
+    "flags": [],
+    "ids": [
+     "p34"
+    ],
+    "notes": [
+     "Keeps 独言のやうに as spoken aloud, not italicised thought, per style sheet."
+    ]
+   },
+   {
+    "english": "\"Yes, we shall work, shall we.\" She said it, settled and at peace. And with the child held upon her knees, she bared her small nipple and began to give her milk.",
+    "flags": [],
+    "ids": [
+     "p35"
+    ],
+    "notes": [
+     "Keeps おちついて安らかに as settled and at peace to hold the yasuraka network word invariant."
+    ]
+   },
+   {
+    "english": "\"Now, let's clear what is left. And sleep — let's get up early tomorrow, shall we.\"",
+    "flags": [],
+    "ids": [
+     "p36"
+    ],
+    "notes": [
+     "No speaker is marked; carrying forward as unattributed speech in the room after her nursing begins, most likely his, but leaving it unassigned as the Japanese does."
+    ]
+   },
+   {
+    "english": "Before long the man stood up. And when he was about to begin clearing the {t:table}, the child was already with cheek against the breast and eyes closed. All about had fallen quiet.",
+    "flags": [],
+    "ids": [
+     "p37"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"A {t:arashi}.\" The man whispered, standing still.",
+    "flags": [],
+    "ids": [
+     "p38"
+    ],
+    "notes": [
+     "Keeps first and last lines equally bare for the storm frame; no added atmosphere."
+    ]
+   }
+  ],
+  "say": "Drafted the supper's close from resolve to whispered storm, keeping dialogue reticent and nursing and clearing exact."
+ },
+ "usage": {
+  "input_tokens": 11460,
+  "cached_tokens": 10609,
+  "output_tokens": 3808,
+  "reasoning_tokens": 3029,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.018839099999999998,
+ "response_id": "resp_6ae7c47bde8f7c765ad44e9c",
+ "latency_s": 15.76,
+ "citations": [],
+ "created": "2026-11-01T23:00:11Z"
+}

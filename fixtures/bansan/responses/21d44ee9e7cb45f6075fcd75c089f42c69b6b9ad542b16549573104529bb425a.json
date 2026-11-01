@@ -1,0 +1,60 @@
+{
+ "prompt": "notes",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": {
+  "notes": [
+   {
+    "anchor": "p29",
+    "body": "Bōya is a fond way to call a little child, usually a boy. Here both parents use it for their baby girl.",
+    "editions": [
+     "casual",
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "\"{t:boya},\"",
+    "variants": []
+   },
+   {
+    "anchor": "p31",
+    "body": "Umma-umma is baby talk for food, something like yum-yum, cried out with delight.",
+    "editions": [
+     "casual",
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "\"{t:umauma},\"",
+    "variants": []
+   },
+   {
+    "anchor": "p38",
+    "body": "The same bare word opened the story. Heard at last after the room has gone quiet, it closes the evening without comment.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "A {t:arashi}.",
+    "variants": []
+   }
+  ],
+  "say": "Kept Casual to Bōya and umma-umma and held the storm-frame note for Curious, with nothing the context already gives."
+ },
+ "usage": {
+  "input_tokens": 11168,
+  "cached_tokens": 9841,
+  "output_tokens": 1810,
+  "reasoning_tokens": 1552,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0108274,
+ "response_id": "resp_6ae7cd3d719ee6368d7245a1",
+ "latency_s": 9.54,
+ "citations": [],
+ "created": "2026-11-01T23:37:33Z"
+}

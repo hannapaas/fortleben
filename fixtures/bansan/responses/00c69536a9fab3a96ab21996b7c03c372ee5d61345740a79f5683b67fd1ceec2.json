@@ -1,0 +1,70 @@
+{
+ "prompt": "reader-faithful",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "notes": [
+   {
+    "japanese": "暗い電燈の下の卓《テーブル》に",
+    "paragraph": "p2",
+    "problem": "Duplicated adjective: 'dim dim' is a typo for a single 暗い.",
+    "span": "dim dim electric light",
+    "suggestion": "dim electric light",
+    "sureness": "Certain; visual check against the Japanese settles it."
+   },
+   {
+    "japanese": "親子は、狭い部屋の壁際にぶらさがった、暗い電燈の下の卓《テーブル》に集まって",
+    "paragraph": "p2",
+    "problem": "Mistranslation: 親子 includes the child, but 'parents' excludes her.",
+    "span": "The parents had gathered",
+    "suggestion": "Parent and child had gathered",
+    "sureness": "Fairly sure; 親子 standardly means parent(s) and child, and the child is at the table throughout, which settles it."
+   },
+   {
+    "japanese": "そのすきに彼は、あわたゞしく大きな口を開けた",
+    "paragraph": "p9",
+    "problem": "Literalism that misreads the idiom: he opened his mouth wide, not 'a large mouth' as an object.",
+    "span": "opened a large mouth hastily",
+    "suggestion": "hastily opened his mouth wide",
+    "sureness": "Fairly sure; ordinary usage settles it, though period usage could be checked."
+   },
+   {
+    "japanese": "遠い絵が暗く静かに、彼女の眼の底に映ってゐた",
+    "paragraph": "p18",
+    "problem": "Impoverishment of the optical verb: 映ってゐた is being reflected, not lying, and the reflection is the vision's mechanism.",
+    "span": "lay dark and silent at the bottom of her eyes",
+    "suggestion": "was reflected dark and silent at the bottom of her eyes",
+    "sureness": "Sure about the verb sense; whether 'lay' was a stylistic choice the desk prefers would need the desk's view."
+   },
+   {
+    "japanese": "俺たちはいろ〳〵苦労したなァ",
+    "paragraph": "p25",
+    "problem": "Impoverishment: 'been through a lot' generalizes 苦労, toil/hardship, which carries the married-poverty weight.",
+    "span": "we have been through a lot",
+    "suggestion": "we have known a good deal of hardship",
+    "sureness": "Fairly sure; the ledger has no fixed render for 苦労, so the passage governs."
+   },
+   {
+    "japanese": "一日々々いろ〳〵なことに疲らされなやまされ苦しまされても",
+    "paragraph": "p28",
+    "problem": "Destroyed network of repetition: three parallel passives are rendered as two states plus one passive.",
+    "span": "we are tired and worried and made to suffer",
+    "suggestion": "we are made tired, made anxious, made to suffer",
+    "sureness": "Moderately sure the parallelism matters; exact English verbs for the three passives would need the desk to decide."
+   }
+  ],
+  "say": "Chapter is faithful on crux, repetition network and frame; six notes for mechanical slips and two repetition losses."
+ },
+ "usage": {
+  "input_tokens": 12679,
+  "cached_tokens": 0,
+  "output_tokens": 9525,
+  "reasoning_tokens": 8819,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.05633,
+ "response_id": "resp_6ae7cb642e58b11478ce4b3b",
+ "latency_s": 37.45,
+ "citations": [],
+ "created": "2026-11-01T23:29:40Z"
+}

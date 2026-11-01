@@ -1,0 +1,34 @@
+{
+ "prompt": "crux-check",
+ "model": "muse-wonder-1.0",
+ "effort": "low",
+ "data": {
+  "confidence": "high",
+  "crux": [
+   {
+    "for_the_english": "Do not clarify the vision into old age, heaven, a memory, or a symbol with named participants. Keep its vagueness, its level abstract vocabulary, and its repetitions — 安らかさ, なつかしみ/懐しみ, 許し, 静か — returning as the same English words, not elegant synonyms. Let tense and distance drift as hers does; rationalising the syntax into a explained consolation would make the consolation cheaper and more certain than it is.",
+    "point": "The tasteless potato opens a still, distant vision (p11–p20) in which an only-three-years marriage feels like a whole life, and the whole of life is imagined from beyond itself — three quiet figures telling an endless story in which good, evil, sorrow, anger and joy remain, but are wrapped in なつかしみ, 許し and 安らかさ, on the threshold of a night-like eternal rest. Whether this is death, extreme old age, or a trance of exhaustion is never settled, and that unsettledness is the story.",
+    "why": "The turn is deliberately slight — a hard, tasteless mouthful, 凍ったかのやうに固くざくざく — and then her heart slips 遠く, repeatedly, until time itself revalues: what oppressed her as endless (p13) becomes, on return, the same fact as hope, わづかに…三年ばかり (p14) and まだ三年しか (p22, p27)."
+   },
+   {
+    "for_the_english": "Keep the diction plain, tired and repetitive rather than lyrical in a polished way, and keep the mirrored phrasing of the closing exchanges so the reader hears the same three years first as a lifetime of suffering and then as only three years, with work and tomorrow still ahead. Do not sentimentalise the child into a 'message': the hope has to stay embodied — spoon banging, feeding, nursing, clearing up, the storm heard again at the end (p38) — not stated as uplift.",
+    "point": "The return from the vision is not an argument but a resumed supper: the second crux is that the story's affirmation is made by the same tired young bodies, cheap food and storm it began with, not by escaping them.",
+    "why": "The frame is exact: the storm unheard in absorption (p8), heard inside the vision (p19), and named last, 嵐だな (p38); the table cleared, the child asleep at the breast, 起きよう for tomorrow (p36). If the English ennobles the poverty or separates the visionary middle from this domestic plainness, she becomes a poetess commenting on life instead of a exhausted mother whose distance is briefly real and then set down."
+   }
+  ],
+  "say": "Crux check — 晩餐 (Shiraki Shizu)\n\n**1. The vision must stay unresolved.** The tasteless potato (p11) slips the mother into a distant stillness (p15–p20) where three years of marriage feel like a lifetime, and life itself is seen from beyond its end — three quiet figures, an endless story containing good and evil, sorrow and joy, all held in なつかしみ, 許し and 安らかさ before a night-like rest. Whether this is death, old age, or exhaustion is never settled; settling it would rewrite the story. *For the English:* do not gloss the vision as heaven, memory, or symbol; keep its vagueness, and repeat the same plain words for 安らかさ／なつかしみ／許し each time rather than varying them elegantly. Let tense and distance drift as hers do.\n\n**2. The hope is the same fact read again, inside the same supper.** What crushes her as an endless life (p13) returns, unchanged, as わづかに三年ばかり (p14) and まだ三年しか (p22, p27) — and becomes grounds for もう少しの間だ, 働きませうね, and rising early tomorrow (p34–p36), framed by the storm unheard (p8), heard (p19), and named again at the close (p38). *For the English:* keep the mirrored phrasing so the reversal is heard, keep the diction plain and repetitive rather than polished, and never sentimentalise the child into a message — the affirmation must stay embodied in spoon-banging, feeding, nursing and clearing the table.\n\n**Confidence:** High on both, from the text's own repetitions and frame. What would change my mind: house evidence from elsewhere in Shizu's work that the p16 figures are a specific doctrinal or biographical reference — then the vision should be pinned to that, not left open.",
+  "what_would_change_my_mind": "House evidence from elsewhere in Shizu's work that the three figures of p16 are a specific doctrinal or biographical reference; then the vision should be pinned to that, not left open."
+ },
+ "usage": {
+  "input_tokens": 4150,
+  "cached_tokens": 0,
+  "output_tokens": 1551,
+  "reasoning_tokens": 459,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.04762,
+ "response_id": "resp_6ae7c3f8a5ba2f4a7a6d4d09",
+ "latency_s": 20.16,
+ "citations": [],
+ "created": "2026-11-01T22:58:00Z"
+}
