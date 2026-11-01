@@ -40,6 +40,17 @@ Rule propagation (an editor's rule or an accepted bible amendment) is not a stag
 
 **The minimal pipeline** (the fallback in `BUILD-PLAN.md`) is stages 0, 2, 4, 6, 7, 9, 12 (code only), 13, 16. It must work before anything else is added.
 
+## How pages are cut and handed over
+
+Code, before any model is involved.
+
+1. **The parser** turns the source file into an ordered list of paragraphs with IDs, marking scene breaks (blank lines, section numbers, Aozora's ※ and ◇ markers) and dialogue lines.
+2. **The pager** (`house/pager.py`, deterministic) walks the list and builds pages: it adds whole paragraphs until the next would take the page past the target (~650 characters), preferring to close at a scene break near the limit. It never splits a paragraph; a paragraph longer than the target is a page on its own. If the style sheet sets the grain to *scene*, it closes at the Analyst's break points instead.
+3. **The orchestrator** goes page by page in order, assembles the context (`STORY-STATE.md` §3) and makes one `translate-draft` call per page.
+4. **The answer** is a list of items, each naming the paragraph IDs it covers (one, or a group), with the English, sentence spans, notes and alternatives. The orchestrator checks every paragraph in the page is covered exactly once (retry once, then a failure event), stores a revision per paragraph, emits events, and moves on.
+
+The model never decides where a page starts or ends and never sees half a paragraph. The only chunking choices a model makes are the Analyst's, at bible time: the grain and the break points, which the pager obeys.
+
 ## How a debate actually runs
 
 No agent talks to another agent. There's no shared chat, no transcript passed around, and no agent chooses who to address. A debate is a **query**: one row in the `query` table with a fixed shape, and a short sequence of separate model calls that the orchestrator makes in a fixed order. Think of a publishing house's query sheet, where each note has a line reference, a reason and a box for the answer, and the editor decides whose turn it is.
