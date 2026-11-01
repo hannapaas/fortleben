@@ -31,29 +31,29 @@ Started at the back of the queue, not cut: the Catalogue beyond the 15 launch ti
 | **M1** | **Contract** (serial) | `schema.sql`, the event-type list and JSON schemas for every department output are committed. The Aozora parser round-trips 晩餐, 我牢獄, 三十三の死 and the Setsu passage (ruby, emphasis, IDs, colophon). Fixture JSON for 晩餐 (segments, a few queries, notes, a fork, events) exists. |
 | M2a ‖ | **Engine core** | The runtime, budgets, response cache, carried state, Analyst, Translation and Source check run 晩餐 end to end, writing events and revisions. |
 | M2b ‖ | **Reader site** | The pamphlet design ported to templates: per-book accent colour, ruby, seals and colophon, a near-black dark mode. A reader settings panel (edition, layout, what to show, a quiet preset, text size, furigana) that never loses your place. The margin variorum, two-axis reactions, comments and proposals through the model screen, labels, credits. Everything renders from the fixture. Works at phone width. |
-| M2c ‖ | **House view + streaming** | The floor plan and message stream play a fake event fixture over SSE, with resume and replay at 8×. |
+| M2c ‖ | **The House walkthrough** | The route through the stages renders from a fixture run: stations with what each does, its model and its drops; picked moments from a list of event IDs; every station's full output. A plain diagram with no animation; works at phone width. The reader site (M2b) gets the polish first. |
 | M2d ‖ | **Checkers + the exhibit harness** | Ledger checker and length-ratio flagger (shared with the copy desk). The S0 one-shot baseline. The audit prompt and the exhibit renderer (two or three columns, arrows, margin notes) working on fixture text. The S-GT passages fetched and dated. |
 | M2e ‖ | **Catalogue** | A Glimmer vs Spark spot check on 10 works. Reader's reports generated on Meta models, the 15 launch titles first and the long-list only if time allows. Catalogue pages with evidence and date for "untranslated". "I'd read this" votes, a request form (search the Aozora index or give an outside reference) and a wanted list. Acquisitions checks outside requests and the editor confirms. |
-| M2f ‖ | **Ops** | Fly deploy. Spend caps (live run / daily / total), kill switch, one-run queue, per-IP limits, invite-link auth for editor and reviewers. The replay fallback works when the house is closed. |
-| **M3** | **Full pipeline on 晩餐** (needs M2a; then adds Editorial, Copy desk, Notes, Fact-check, forks, interns, rules) | One run produces queries with stet / accept / revise, ≥1 fork with verbatim dissent, ≥1 intern with a logged reason, a standing rule that propagates and skips locked lines. Cost per 1k chars is within the pessimistic figure. The run streams into M2c and renders in M2b. |
+| M2f ‖ | **Ops** | Fly deploy. Spend caps (run reservation / daily / total), kill switch, one run at a time, invite-link auth for editor and reviewers. The site works in full when the house is closed. |
+| **M3** | **Full pipeline on 晩餐** (needs M2a; then adds Editorial, Copy desk, Notes, Fact-check, forks, interns, rules) | One run produces queries with stet / accept / revise, ≥1 fork with verbatim dissent, ≥1 intern with a logged reason, a standing rule that propagates and skips locked lines. Cost per 1k chars is within the pessimistic figure. The run renders in M2c and M2b. |
 | **M4** | **The other texts + prompt freeze** | 我牢獄, 雪をんな and 思い出の記 run. The hard text's failures are written up honestly. Prompts are tagged `frozen-v1`. **Midpoint check (below).** |
 | M4b | **Translation re-check** | Every text to be published (showcase, shelf, the other texts) searched again for existing translations, including fan and blog ones, dated; any found is credited and linked on the work's page. 「晩餐」 already has one (M Skeels, 2020) and stays as the development text. |
 | M5 ‖ | **Showcase with the editor** | The brief runs on the showcase (provisionally Nagatsuka's 「炭燒のむすめ」, 8k characters; it may still change) and stops at the checkpoint (`RUNNING-A-TEXT.md` §4): the editor's changes become scoped rules, ≤5 forks. The full run follows. The edition carries honest labels, an editor's note and credits. If a bilingual reader has time to check passages, those are labelled *human-reviewed*; nothing waits for it. |
 | M5b ‖ | **The shelf** | After M5's full run holds: the short Catalogue titles (under ~15k characters, the 15 launch titles first) run through the house with no editor, Spark calls on the Contributor tier (approved for public-domain texts), labelled *house-checked*. Target ten or more editions; each costs a dollar or two. The first thing cut if M5 slips. |
 | M6 ‖ | **The exhibit** (a deliverable) | The exhibit component renders passage pairs with anchored margin notes and arrows, on the site and as a recordable view. The audit run on the showcase in all versions; the editor has struck what the auditor got wrong; the exhibit is built from the best passages, with the full list under it, and one passage is in the README as an image. Extras only after that: the planted continuity test, the era guess. |
 | M7b | **Guest editors** (the stretch, in place of the Sōseki text) | The editors' desk per `EDITORS-DESK.md`: start a run on a whole work with the estimate reserved first; per-editor allowances in drops; pause and resume; the edition carries the editor's name. Invite links with an allowance and a suggested short story go in the submission for judges. If this isn't built, the desk says "coming" and the house editor starts runs by hand. |
-| M7 | **Integrate** | Live site: showcase, the other texts, Setsu comparison, Catalogue, House (live + replay), the Exhibit, Credits, "Where this comes from". Presets are pre-briefed (reading and bible built ahead). A live run on a preset passage succeeds three times in a row from a phone. `keikaku serve --replay` shows the recorded run from a clean clone with no key. |
+| M7 | **Integrate** | Live site: showcase, the other texts, Setsu comparison, Catalogue, the House walkthrough of the showcase run with its moments picked, the Exhibit, Credits, "Where this comes from". The House works from a phone. `keikaku serve --replay` shows the recorded run from a clean clone with no key. |
 | M8 | **Ship** | 3-min video, README first screen, LICENSE, a secrets scan of the full history. **The judge path (below) works from a clean clone.** A dry run of the submission form on 3 Nov; the final push and submission on 4 Nov, hours before 9 PM ET. Caps set for the judging period. |
 
 ## The judge path
 
 What the organisers have said judges do: watch the 3-minute video, read the public repo, and run the project from its setup instructions, possibly with their own key. A hosted site is optional and nothing in the submission depends on it. So the repo must, from a clean clone:
 
-1. **Run keyless.** `uv sync` then `keikaku serve --replay` serves the site with the recorded runs from `fixtures/`: the showcase and shelf editions, the House replaying a real run, the Exhibit. No key, no network.
+1. **Run keyless.** `uv sync` then `keikaku serve --replay` serves the site with the recorded runs from `fixtures/`: the showcase and shelf editions, the House walkthrough of a real run, the Exhibit. No key, no network.
 2. **Carry provenance.** Each recorded run in `fixtures/` is the complete event log with every model call's request hash, model, token counts, cost and response, so a judge can see the Meta calls that produced the text without re-running them. The README links a recording of the live run too.
-3. **Run live with a key.** `.env.example` lists the names; with `MODEL_API_KEY` set, `keikaku run <work>` runs a text and `keikaku serve` runs the House live, under the same caps as the hosted site.
+3. **Run live with a key.** `.env.example` lists the names; with `MODEL_API_KEY` set, `keikaku run <work>` runs a text, under the same caps as the hosted site, and `keikaku serve` shows it.
 4. **Say which Meta model does what and where it runs**, in the README's first screen: Spark and Wonder through the Meta Model API, Glimmer on Modal, Spark Open through a partner host. No licence links are required.
-5. **Say how to use the hosted version**, including that it has replay mode and rate limits, and give the guest-editor invite if M7b is built.
+5. **Say how to use the hosted version**, including that visitors can't start runs and editors' runs are capped, and give the guest-editor invite if M7b is built.
 
 **The video's fixed rules** (from the organisers): 3:00 at most; only what was built during the event, no slides; one opening line on what existed before the event and what was built during it; the working flow end to end with live Meta model calls visible on screen (logs or responses, not mocked); a brief segment on which part uses which Meta model; understandable in English. Content and shots are decided later.
 
@@ -110,7 +110,7 @@ It's built as one reusable thing: a passage pair (or triple, with the 1918 human
 
 These must be true:
 1. M3 is done: a real end-to-end run on 晩餐, within the pessimistic cost.
-2. A real run streams into the House view.
+2. A real run renders in the House walkthrough.
 3. The reader site renders 晩餐 from the database in two editions.
 4. The showcase is parsed, its story bible built, and its style sheet drafted.
 5. Credit spend is ≤ $45.
@@ -125,7 +125,7 @@ These must be true:
 4. The Setsu column of the exhibit (keep the showcase passages).
 5. The Catalogue cut to 30 reports; the Acquisitions agent for outside requests (requests are still collected, and the editor checks them by hand).
 6. Proposals (keep reactions).
-7. Live runs on arbitrary Aozora cards (presets only), then replay-only House.
+7. The House's picked moments beyond one per station (keep the diagram and the full outputs).
 8. Live interns (keep them in the recorded run).
 
-**Never cut:** the showcase with honest labels, Source check, the exhibit (passages side by side with arrows and margin notes), the House replay, the video.
+**Never cut:** the showcase with honest labels, Source check, the exhibit (passages side by side with arrows and margin notes), the House walkthrough, the video.
