@@ -26,7 +26,7 @@ It's useful without anyone's sign-off. When a person does check a passage, the p
 | **The Library** | A showcase edition plus experiments, each in three views, with every line's history a tap away |
 | **The Catalogue** | Reader's reports on untranslated works: what each is about, why read it, how hard it is, and the evidence for "untranslated". Readers vote for what they'd read and request texts from Aozora or beyond |
 | **The House** | The agents at work, live or replayed: departments, queries, forks, interns, budgets |
-| **The Evals** | One exhibit: passages side by side with one-shot machine translation and, for one, a 1918 human translation, with arrows and margin notes saying in plain words what went wrong and why, ours included |
+| **The Exhibit** | Passages side by side with one-shot machine translation and, for one, a 1918 human translation, with arrows and margin notes saying in plain words what went wrong and why, ours included |
 
 ## Who it's for, and what they do
 

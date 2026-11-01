@@ -30,7 +30,7 @@ Started at the back of the queue, not cut: the Catalogue beyond the 15 launch ti
 | **M4** | **Experiments + prompt freeze** | 我牢獄, 雪をんな and the Setsu passage run. The hard text's failures are written up honestly. Prompts are tagged `frozen-v1`. **Midpoint check (below).** |
 | M5 ‖ | **Showcase with the editor** | The brief runs on 三十三の死 and stops at the checkpoint (`RUNNING-A-TEXT.md` §4): the editor's changes become scoped rules, ≤5 forks. The full run follows. The edition carries honest labels, an editor's note and credits. If a bilingual reader has time to check passages, those are labelled *human-reviewed*; nothing waits for it. |
 | M5b ‖ | **The shelf** | After M5's full run holds: the short Catalogue titles (under ~15k characters, the 15 launch titles first) run through the house with no editor, Spark calls on the Contributor tier (approved for public-domain texts), labelled *house-checked*. Target ten or more editions; each costs a dollar or two. The first thing cut if M5 slips. |
-| M6 ‖ | **The exhibit** | The audit run on the showcase in all versions; the editor has struck what the auditor got wrong; the exhibit is built and renders on the Evals page and in the README with the full list under it. The planted continuity test, if the planting time exists. |
+| M6 ‖ | **The exhibit** (a deliverable) | The exhibit component renders passage pairs with anchored margin notes and arrows, on the site and as a recordable view. The audit run on the showcase in all versions; the editor has struck what the auditor got wrong; the exhibit is built from the best passages, with the full list under it, and one passage is in the README as an image. Extras only after that: the planted continuity test, the era guess. |
 | M7b | **Guest editors** (the stretch, in place of the Sōseki text) | The editors' desk per `EDITORS-DESK.md`: start a run on a whole work with the estimate reserved first; per-editor allowances in drops; pause and resume; the edition carries the editor's name. Invite links with an allowance and a suggested short story go in the submission for judges. If this isn't built, the desk says "coming" and the house editor starts runs by hand. |
 | M7 | **Integrate** | Live site: showcase, experiments, Setsu comparison, Catalogue, House (live + replay), Evals, Credits, "Where this comes from". Presets are pre-briefed (reading and bible built ahead). A live run on a preset passage succeeds three times in a row from a phone. `keikaku serve --replay` shows the recorded run from a clean clone with no key. |
 | M8 | **Ship** | 3-min video, README first screen, LICENSE, a secrets scan of the full history. **The judge path (below) works from a clean clone.** A dry run of the submission form on 3 Nov; the final push and submission on 4 Nov, hours before 9 PM ET. Caps set for the judging period. |
@@ -39,7 +39,7 @@ Started at the back of the queue, not cut: the Catalogue beyond the 15 launch ti
 
 What the organisers have said judges do: watch the 3-minute video, read the public repo, and run the project from its setup instructions, possibly with their own key. A hosted site is optional and nothing in the submission depends on it. So the repo must, from a clean clone:
 
-1. **Run keyless.** `uv sync` then `keikaku serve --replay` serves the site with the recorded runs from `fixtures/`: the showcase and shelf editions, the House replaying a real run, the Evals page. No key, no network.
+1. **Run keyless.** `uv sync` then `keikaku serve --replay` serves the site with the recorded runs from `fixtures/`: the showcase and shelf editions, the House replaying a real run, the Exhibit. No key, no network.
 2. **Carry provenance.** Each recorded run in `fixtures/` is the complete event log with every model call's request hash, model, token counts, cost and response, so a judge can see the Meta calls that produced the text without re-running them. The README links a recording of the live run too.
 3. **Run live with a key.** `.env.example` lists the names; with `META_API_KEY` set, `keikaku run <work>` runs a text and `keikaku serve` runs the House live, under the same caps as the hosted site.
 4. **Say which Meta model does what and where it runs**, in the README's first screen: Spark and Wonder through the Meta Model API, Glimmer on Modal, Spark Open through a partner host. No licence links are required.
@@ -63,9 +63,11 @@ Most of the back-and-forth is between the developer and the outputs: run a stage
 
 Under an hour across the week. Each touchpoint is a single review page with specific questions answerable in a line, sent when it's ready and answered when there's time. Nothing waits for an answer: if none has come by the next session, the developer's pick stands and is noted, and the answer is applied when it comes. The editor's answers become prompt examples and test cases, which is how taste gets into the house.
 
-## The proof: an annotated side-by-side, not a benchmark
+## The exhibit: the deliverable, not a benchmark
 
-Translation is an art, and the honest way to show one translation is better than another is the way an editor or a reviewer does it: put them next to each other and point. So the proof is **one exhibit**, and the Evals page is that exhibit plus the full list behind it.
+Translation is an art, and the honest way to show one translation is better than another is the way an editor or a reviewer does it: put them next to each other and point. So **the exhibit is a deliverable of the project, on a par with the showcase edition**: a set of short passages with the one-shot machine version beside ours, and margin notes with arrows saying in plain words what went wrong and why. It lives on the site, and the same component, recorded, is the material the video uses (the highlighted notes, not whole passages). Anything that looks like an evaluation study is extra, done only if there's time, and dropped without regret.
+
+It's built as one reusable thing: a passage pair (or triple, with the 1918 human translation) plus anchored notes, each with a category, a one-line reason and the span it points at. The site renders it as margin notes with arrows; the video records that render. Judges see the same artefact in the README (one static image of one passage), on the site and in the video.
 
 **What a reader uses today** is the baseline: the same passage pasted into browser Google Translate (S-GT, fetched by hand and dated), and one-shot Spark with a bare prompt (S0), so it's also clear what the house adds over the model alone. The copy says "a one-shot machine translation" and puts the method in a footnote.
 
@@ -90,7 +92,7 @@ Translation is an art, and the honest way to show one translation is better than
 
 **Passages are never translated cold.** For every passage, including the Setsu one, the house's brief runs on the whole text first (a few whole-text calls, mostly cached input, under a dollar for a 30k-character work) and only then is the passage drafted, with the real reading and bible. Setsu's 「思い出の記」 is 30.7k characters, so it's run whole if the budget holds. One-shot and Google Translate get the passage alone, which is exactly the difference being pointed at.
 
-**What's not done:** model juries, preference votes, sentence statistics, ablation grids. The research behind the house considered them; none of them shows a judge or a reader anything the exhibit doesn't show better. **No human rater is required**; if a bilingual reader does look at the exhibit, their notes go on the page with their name.
+**What's not done:** model juries, preference votes, sentence statistics, ablation grids. The research behind the house considered them; none of them shows a judge or a reader anything the exhibit doesn't show better. The planted test and the small experiments above are the only extras, and they're extras. **No human rater is required**; if a bilingual reader does look at the exhibit, their notes go on the page with their name.
 
 ## Midpoint exit check (end of 1 Nov)
 
@@ -114,4 +116,4 @@ These must be true:
 7. Live runs on arbitrary Aozora cards (presets only), then replay-only House.
 8. Live interns (keep them in the recorded run).
 
-**Never cut:** the showcase with honest labels, Source check, the exhibit against one-shot and Google Translate with its full list, the House replay, the video.
+**Never cut:** the showcase with honest labels, Source check, the exhibit (passages side by side with arrows and margin notes), the House replay, the video.
