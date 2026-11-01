@@ -94,7 +94,7 @@ flowchart TD
 | Requests from outside Aozora | Spark low + `web_search`: author dates, first publication, existing English translations; a short reader's report if a text is found | Capped per day; the editor confirms every verdict |
 | Covers | `muse-image-1.0` | Decorative, $0.01 each. Cut first |
 
-**About the shared lineage:** Glimmer is distilled from Spark, and Spark Open is Spark released as open weights. Wonder is a different, larger model but from the same family. So "a different model as critic" here means a different checkpoint, not independence, and the README will say so. **Every model this repo calls is a Meta model**, in the product and in the evals alike: the hackathon's rule is strict (a participant's own tiny checker was ruled out), and the eval harness runs from this repo. So the eval jury and auditors are Wonder, Glimmer and Spark Open (open weights, run on any host), three checkpoints of one family, and the README says plainly that this is weaker than a cross-vendor judge. What's independent of any model is the reference-based comparison against the 1918 human translation and the deterministic checks.
+**About the shared lineage:** Glimmer is distilled from Spark, and Spark Open is Spark released as open weights. Wonder is a different, larger model but from the same family. So "a different model as critic" here means a different checkpoint, not independence, and the README will say so. **Every model this repo calls is a Meta model**, in the product and in the evals alike: the hackathon's rule is strict (a participant's own tiny checker was ruled out), and the eval harness runs from this repo. So the auditor behind the exhibit is Wonder, cross-checked by Spark Open (open weights, run on any host), two checkpoints of one family, and the page says so. What's independent of any model is the editor's read of the marked-up passages, the 1918 human translation in the exhibit, and the deterministic checks.
 
 ## 5. Interns
 
@@ -109,7 +109,7 @@ The full design is in `STORY-STATE.md`. In short:
 - **Look-ahead:** each call also sees the next paragraph of Japanese, read-only, because Japanese often resolves a subject or speaker after the fact.
 - **Prompt order** (stable first, so it caches): house rules and department prompt; reading and bible; whole source; voice reference; the previous two paragraphs; the page with the analyst's speaker and subject notes.
 - **Rule changes** bump the style-sheet version, which bumps the cache key, so rules are batched at the checkpoint.
-- **Continuity** is checked in the final read, one Wonder call over the whole source and translation; the planted test (`BUILD-PLAN.md`, E-long) measures what that catches.
+- **Continuity** is checked in the final read, one Wonder call over the whole source and translation; the planted test (`BUILD-PLAN.md`, "The proof") measures what that catches.
 - Novels, where the whole source can't sit in the prefix, are a later design (`STORY-STATE.md` §5).
 
 ## 7. Streaming the house at work
@@ -118,7 +118,7 @@ Every event is written to `event` and then broadcast in-process. `GET /runs/{id}
 
 ## 8. Stack, hosting, abuse
 
-- **Stack:** Python 3.12 + FastAPI + SQLite (WAL) + Jinja templates. The front end is vanilla JS and CSS, with no build step. `uv` for packaging; pytest. One language serves the engine, evals and site. **No non-Meta ML model runs anywhere in the repo**, so the eval statistics use rule-based tokenising (regex sentence and word splitting, 。 for Japanese) rather than spaCy or MeCab; where tagging is needed, Glimmer does it.
+- **Stack:** Python 3.12 + FastAPI + SQLite (WAL) + Jinja templates. The front end is vanilla JS and CSS, with no build step. `uv` for packaging; pytest. One language serves the engine, the exhibit harness and the site. **No non-Meta ML model runs anywhere in the repo.**
 - **Hosting:** one Fly.io machine plus a volume for SQLite (daily snapshots), with secrets in Fly. Prompts and keys stay on the server; the browser only ever receives events, text and notes.
 - **Spend:**
   - Every call is priced from `usage` into a spend ledger.
@@ -172,11 +172,11 @@ The English-alone side (editor's letter, Editorial) got more and notes got less 
 | Dev: smoke tests, prompt tuning, failed runs, 晩餐 ×5 | $25 | $40 |
 | Experiments (Tōkoku, Kasai, Setsu whole) | $8.6 | $14.5 |
 | Showcase | $6.5 | $11 |
-| Evals (E2, E-ref, E4, E-long, E1) | $15 | $25 |
+| The exhibit (audit on all versions, both auditors) and the planted test | $8 | $14 |
 | Catalogue, 200 reports | $4 | $7 |
 | Rehearsals and video takes; covers | $6 | $11 |
 | Stretch, one run | $3.5 | $6 |
-| **Total** | **≈ $68** | **≈ $114** |
+| **Total** | **≈ $61** | **≈ $103** |
 
 **Headline:** everything, the stretch included, fits in the $150 credits even in the pessimistic case. The live site after submission runs on separate billing, capped at $10 a day.
 

@@ -77,7 +77,7 @@ In this order, stable first (cached) and the passage last (where models attend b
 
 1. House rules and the department prompt.
 2. The house's reading (§0) and the whole bible: style sheet, cast, ledger, motifs, standing rules. A few thousand tokens for a short story.
-3. **The whole source text.** Every text we run is under ~30k characters, which is cheap in the cached prefix and lets the model look anywhere in the book. E-long (b) checks that it helps.
+3. **The whole source text.** Every text we run is under ~30k characters, which is cheap in the cached prefix and lets the model look anywhere in the book. If it ever seems to hurt, the exhibit will show it.
 4. The voice reference: the chosen first page.
 5. **A window of real text either side:** the previous two paragraphs in Japanese and English, and **the next paragraph in Japanese, marked read-only** (Japanese often resolves a subject or speaker after the fact).
 6. The passage itself, with its referent-map entries inline (`p12-s3: subject = narrator; speaker of 「…」 = Okinu (medium)`).

@@ -100,4 +100,4 @@ The recipes don't change with length; the context strategy and the pool do. This
 | Editor's letter and final read | Whole text, one call each | Whole book, one call each, costed per release; whether a very long book needs them per part is open |
 | Pool | 100 drops a sheet | The same, so the pool grows with the book; a novel's hard chapter is paid for by its plain ones |
 
-Open questions: whether the whole source in the prefix helps or hurts (E-long (b) measures it); where the short/long threshold really sits; and, later, whether sampled windows stand in for a sequential run, which is what would let us quote a novel's cost honestly before running one.
+Open questions: whether the whole source in the prefix helps or hurts; where the short/long threshold really sits; and, later, whether sampled windows stand in for a sequential run, which is what would let us quote a novel's cost honestly before running one.

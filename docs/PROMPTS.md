@@ -67,9 +67,8 @@ Everything shares one **house brief** (below), which sits first in every cached 
 | Prompt | Model | Job |
 |---|---|---|
 | **baseline-oneshot** (S0) | Spark | Deliberately bare: "translate this into English". The control |
-| **audit-spans** (E2) | Wonder | Blind span audit of any translation against the source, with the reading and bible: errors by type, and which a reader of the English alone couldn't spot |
+| **audit-spans** | Wonder, cross-checked by Spark Open | Blind read of any translation against the source, with the reading and bible: every problem marked with a one-line reason in plain words (name translated, wrong referent, missing sentence, anachronism, model tic, flat tone, varied repetition) |
 | **exhibit-notes** | Wonder | For the side-by-side exhibit: plain-words margin notes an engineer with no Japanese can follow |
-| **jury-pairwise** (E1) | Wonder, Spark Open, Glimmer | Which of two translations is better and why, order shuffled |
 
 ## When each is needed
 
@@ -79,9 +78,9 @@ Everything shares one **house brief** (below), which sits first in every cached 
 | **M3** (full pipeline) | crux-check, head-select, editors-letter, editorial-scene, copy-desk, notes, fact-check, final-read, analyst-amend, rule-scope, intern, background-brief |
 | **M5** (showcase with the editor) | editor-note-to-rule |
 | **M2e / M7** (site) | reader-proposal, reader-report, acquisitions-rights, cover |
-| **M6** (evals) | audit-spans, exhibit-notes, jury-pairwise |
+| **M6** (the exhibit) | audit-spans, exhibit-notes |
 
-Twenty-eight prompts sounds a lot, but most are short, and seven are enough to run a text end to end.
+It sounds a lot, but most are short, and seven are enough to run a text end to end.
 
 ## Examples the prompts need
 

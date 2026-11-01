@@ -15,7 +15,7 @@ Work in progress for the Meta Global AI Developer Hackathon. Everything in this 
 - [Conventions](docs/CONVENTIONS.md): repo layout, the contract between lanes, tests, git.
 - [From translators](docs/FROM-TRANSLATORS.md): what we took from how literary translators and editors work, and where it lives in the design.
 - [Prompts](docs/PROMPTS.md): every model call in the house, and when each is needed.
-- [Build plan](docs/BUILD-PLAN.md): milestones, evals and the cut list.
+- [Build plan](docs/BUILD-PLAN.md): milestones, the exhibit that serves as proof, and the cut list.
 
 ## Running it
 

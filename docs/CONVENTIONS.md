@@ -17,7 +17,7 @@ house/            the engine
   checks/         deterministic checkers (ledger, callbacks, length ratio, tics)
 prompts/          one Markdown file per prompt (docs/PROMPTS.md), with examples
 site/             FastAPI app, Jinja templates, static CSS/JS (no build step)
-evals/            harness, test sets, results, raw verdicts
+exhibit/          the audit harness, frozen passages, the marked-up results, the exhibit renderer
 fixtures/         recorded runs and sample data; the site and House must run from these alone
 db/schema.sql     the SQLite schema
 tests/            pytest; every lane adds its own
@@ -37,7 +37,7 @@ tests/            pytest; every lane adds its own
 - **Tests:** parser round-trips on the four demo texts; schema validation for every prompt; orchestrator runs 晩餐 end to end on `FakeClient` under a minute; budget caps are tested with a client that lies about usage.
 - **Copy** in the UI and docs is plain British English: blunt, no marketing. Agents are square and named by department; people are round and named. Labels say *draft / house-checked / editor-approved / human-reviewed* in words.
 - **Nothing here depends on a private overlay.** `KEIKAKU_PRIVATE_DIR` may add voice profiles and word lists; the demo runs at full quality without it.
-- **Only Meta models run here**, in the product and in the evals, by the hackathon's rule. No other provider's model, and no non-Meta ML library model (spaCy, MeCab) in anything that runs; stats use rule-based tokenising, Glimmer tags where tagging is needed.
+- **Only Meta models run here**, in the product and in the evals, by the hackathon's rule. No other provider's model, and no non-Meta ML library model in anything that runs.
 - **Rights:** only Aozora works that pass the rights record (author died ≤1931, first published ≤1930) are fetched or stored. Published human translations used in evals are quoted in short excerpts only.
 
 ## Git
