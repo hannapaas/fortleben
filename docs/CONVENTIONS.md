@@ -42,6 +42,13 @@ tests/            pytest; every lane adds its own
 - **Only Meta models run here**, in the product and in the evals, by the hackathon's rule. No other provider's model, and no non-Meta ML library model in anything that runs.
 - **Rights:** only Aozora works that pass the rights record (author died ≤1931, first published ≤1930) are fetched or stored. Published human translations used in evals are quoted in short excerpts only.
 
+## Security, given that the code is public
+
+- **Nothing secret in the code or its history.** Keys, tokens and the invite-link signing key live in `.env` locally and in Fly's secret store; `.env.example` has the names only. A full-history secrets scan runs before submission.
+- **Invite links** are long random tokens made server-side, stored hashed, scoped (house editor / guest editor with an allowance / reviewer) and revocable. Reading the scheme gives nothing without a token.
+- **Spending is capped in code**, not hidden: live-run cap, daily and total caps, one run at a time, per-IP limits, reservation before a run, kill switch. The worst case is the House closing and showing a replay.
+- **Reader text is data.** Comments, proposals and request reasons go through the model screen as quoted content, never as instructions, and nothing a reader types reaches a drafting prompt except as a query the owner answers.
+
 ## Git
 
 - Work on `build`; each lane on its own branch (`engine`, `site`, `house-view`, `evals`, `catalogue`, `ops`), in its own worktree when lanes run at the same time, merged into `build` with normal merges. Small commits, one working change each, one-sentence messages. No squashing, no rebasing shared history.
