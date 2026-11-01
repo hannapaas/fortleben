@@ -57,6 +57,7 @@ Readers help choose. The editor still decides.
 - **"I'd read this"** on every Catalogue entry, one vote per reader. The Catalogue can sort by most wanted, but its default order isn't a leaderboard.
 - **Request any text, from Aozora or beyond.** Search the Aozora index, or give a title, author and link. No uploads and no pasted text.
 - **Rights first.** Aozora works show their status straight from the index. Requests from elsewhere go to Acquisitions: an agent checks the author's dates, first publication and any existing English translation, writes a short reader's report, and marks the request *eligible*, *in copyright* or *can't tell*. The editor confirms before anything is translated.
+- **Existing translations are named, not hidden.** Before any edition is published, a search that includes fan and blog translations. If one exists, the work's page says so, credits the translator and links to it; "untranslated" is never claimed without that search, dated. (「晩餐」 has one: M Skeels, 2020.)
 - **In-copyright books stay on the wanted list.** We never translate them, but the list shows what readers want brought into English, which is useful to translators and presses.
 - Reasons attached to requests are screened and flat, like comments. Votes and requests are rate-limited.
 
