@@ -1,0 +1,96 @@
+"""Drops of ink, the spend ledger, caps and the kill switch.
+
+Every call is priced from the API's own usage figures. Before a call, an estimate is
+checked against the run, daily and total caps; a call that would pass a cap is refused.
+The caps are code, not a request in a prompt (docs/STAGES.md, "What code enforces").
+"""
+
+import os
+import sqlite3
+from dataclasses import dataclass
+
+# Dollars per million tokens: (input, cached input, output). Reasoning is billed as output.
+PRICES = {
+    "muse-spark-1.3": (1.25, 0.15, 4.25),
+    "muse-spark-1.3-contributor": (0.10, 0.002, 0.20),
+    "muse-wonder-1.0": (4.00, 0.20, 20.00),
+}
+WEB_SEARCH_USD = 2.50 / 1000
+
+# One drop of ink in dollars. Calibrated on the first real runs (docs/RUNNING-A-TEXT.md §7).
+DROP_USD = float(os.environ.get("KEIKAKU_DROP_USD", "0.0006"))
+SHEET_CHARS = 400
+DROPS_PER_SHEET = 100
+
+
+class CapExceeded(Exception):
+    """A call was refused because it would pass a spend cap."""
+
+
+class HouseClosed(Exception):
+    """The kill switch is off: no live calls."""
+
+
+@dataclass
+class Usage:
+    input_tokens: int = 0
+    cached_tokens: int = 0
+    output_tokens: int = 0
+    reasoning_tokens: int = 0
+    web_searches: int = 0
+
+    def cost(self, model: str) -> float:
+        p_in, p_cached, p_out = PRICES[model]
+        uncached = max(self.input_tokens - self.cached_tokens, 0)
+        return (
+            uncached * p_in + self.cached_tokens * p_cached + self.output_tokens * p_out
+        ) / 1e6 + self.web_searches * WEB_SEARCH_USD
+
+
+def drops(usd: float) -> float:
+    return usd / DROP_USD
+
+
+def sheets(chars: int) -> float:
+    return chars / SHEET_CHARS
+
+
+def estimate(model: str, input_chars: int, expected_output_tokens: int) -> float:
+    """A cautious pre-call estimate: Japanese-heavy input at ~1.5 tokens a character, none of it cached."""
+    p_in, _, p_out = PRICES[model]
+    return (input_chars * 1.5 * p_in + expected_output_tokens * p_out) / 1e6
+
+
+def _cap(name: str, default: float) -> float:
+    return float(os.environ.get(name) or default)
+
+
+class Budget:
+    """Caps for one process. The run cap is per run; daily and total are read from the ledger."""
+
+    def __init__(self, conn: sqlite3.Connection, run_cap: float | None = None):
+        self.conn = conn
+        self.run_cap = run_cap if run_cap is not None else _cap("KEIKAKU_CAP_RUN", 0.75)
+        self.daily_cap = _cap("KEIKAKU_CAP_DAILY", 10)
+        self.total_cap = _cap("KEIKAKU_CAP_TOTAL", 100)
+
+    def spent(self, run_id: int | None = None, today: bool = False) -> float:
+        sql, args = "SELECT COALESCE(SUM(cost_usd), 0) FROM call WHERE 1=1", []
+        if run_id is not None:
+            sql += " AND run_id = ?"
+            args.append(run_id)
+        if today:
+            sql += " AND date(created_at) = date('now')"
+        return self.conn.execute(sql, args).fetchone()[0]
+
+    def check(self, est_usd: float, run_id: int | None) -> None:
+        if os.environ.get("HOUSE_OPEN", "true").lower() == "false":
+            raise HouseClosed("HOUSE_OPEN=false: the house is closed to live calls")
+        checks = [("total", self.spent(), self.total_cap), ("daily", self.spent(today=True), self.daily_cap)]
+        if run_id is not None:
+            checks.append(("run", self.spent(run_id), self.run_cap))
+        for name, spent, cap in checks:
+            if spent + est_usd > cap:
+                raise CapExceeded(
+                    f"{name} cap ${cap:.2f}: spent ${spent:.4f}, this call ~${est_usd:.4f}"
+                )
