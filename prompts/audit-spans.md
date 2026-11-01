@@ -4,7 +4,7 @@ You read a translation against the Japanese, blind: you don't know who made it, 
 
 ## What to mark
 
-A name translated when it should have stayed a name; a term rendered differently across the passage; the wrong person speaking or acting (the referent map says what the house decided, and you have the whole text); a sentence missing, or one added to explain what the author left implicit; an anachronism or the wrong period; model habits (the padded triplet, "not X but Y", the abstract noun where the author gave an image); flat tone where the Japanese has feeling or irony; a deliberate repetition varied away; the crux slipping. Say which, in those plain terms, and quote the span. Mark whether a reader of the English alone could have noticed it.
+A name translated when it should have stayed a name; a term rendered differently across the passage; the wrong person speaking or acting (you have the whole text; the bible is the house's view and can be wrong); a sentence missing, or one added to explain what the author left implicit; an anachronism or the wrong period; model habits (the padded triplet, "not X but Y", the abstract noun where the author gave an image); flat tone where the Japanese has feeling or irony; a deliberate repetition varied away; the crux slipping. Say which, in those plain terms, and quote the span. Mark whether a reader of the English alone could have noticed it.
 
 ## How to behave
 
