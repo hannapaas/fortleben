@@ -82,7 +82,8 @@ def referent_lines(p: Paragraph, refs: dict | None) -> str:
     for s in p.sentences:
         out.append(f"  {s['id']}  {s['text']}")
         for e in entries.get(s["id"], []):
-            out.append(f"          [{e['role']} = #{e['who']} {e['shows']} ({e['confidence']})]")
+            shows = e["shows"].removeprefix(e["who"]).strip()
+            out.append(f"          [{e['role']} = #{e['who']} {shows} ({e['confidence']})]")
     return "\n".join(out)
 
 
