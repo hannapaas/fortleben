@@ -8,15 +8,31 @@ Japanese literary prose drops subjects, leaves speakers unattributed and shifts 
 
 ## What the research says (and why we don't use big overlaps)
 
-- **Paragraph-sized units beat sentences**, but critical errors and omissions remain (Karpinska & Iyyer 2023). So we translate whole paragraphs and still check for omissions.
+- **Paragraph-sized units beat sentences**, but critical errors and omissions remain (Karpinska & Iyyer 2023), and models skip more as the output gets longer. So Translation drafts **about a page at a time** (~1k source tokens, ~650 characters): several whole paragraphs, never splitting one, and breaking at scene breaks where it can. Bigger isn't automatically better: a longer draft hides more dropped sentences, and checking and redoing a page is precise and cheap. Continuity comes from the context in §3 rather than from a longer draft. E3 tests one page against three on the same text.
 - **A small curated memory beats a big raw history.** DelTA (ICLR 2025) keeps proper-noun records, a bilingual summary and retrieved earlier pairs, and improves consistency. Loong (2026) finds that unfiltered context, including full history, sometimes scores *below* no context at all.
 - **Models use long contexts worse than their windows suggest.** Information in the middle is used worst (Liu et al. 2024); when the link isn't a literal word match, most long-context models lose half their accuracy by ~32K tokens (NoLiMa 2025).
 
 So we don't feed large raw overlaps (say, the previous two chapters) into every call. That is the "big history" the evidence warns against: it costs tokens, buries the current passage in the middle of the prompt, and still leaves the model to work out who's who by itself. Instead, a source-side **Analyst** reads the whole text first and writes down the decisions explicitly, and every call gets those decisions plus a short window of real text either side.
 
-## 1. The story bible (built before any translation)
+## 0. The first read: forming a reading
 
-The Analyst reads the whole source in one call. All our texts fit: the longest, 「幻影の盾」, is ~22k characters, about 33k tokens. For a novel it works chapter by chapter, updating the same bible. It produces:
+Most literary translators read the whole book before translating a word, often twice. The first time they're not taking notes on names; they're forming a reading: what the book is doing, how it sounds, where it turns, what the ending does to everything before it. Every later choice (how formal, how much to explain, when a repetition matters) comes from that reading. A model translating paragraph by paragraph never has one unless we give it one.
+
+So before anything else, **Wonder reads the whole source once and writes the house's reading**: a page of plain prose, not a form to fill in.
+
+**The reading starts from the crux: what a translation of *this* text stands or falls on.** Every book has its own. In one, it's a narrator who has had almost no education: an English version that gives her an educated vocabulary has betrayed the book, however well it reads. In another it's a single word that changes meaning by the last page, or an irony that only works if the English stays deadpan, or a dialect that marks who belongs. The reading names the one or two things that matter most here and says why, in the text's own terms.
+
+Beyond that, it covers whatever this text needs. Often that's tone and voice, the shape of the story, ambiguity the author left open, and where a fluent English draft is likely to go wrong. But those are what readings usually turn out to contain, not headings to fill in. A reading that dutifully covers every usual topic and misses the crux has failed. The prompt teaches what a reading is for and shows a couple of very different examples; it doesn't hand over a template.
+
+**A second, independent reader checks the crux.** Spark reads the text separately, without seeing Wonder's reading, and answers one question: what does a translation of this stand or fall on? It's a cheap call. Where the two agree, the crux goes straight into the reading. Where they disagree, that's the first and most important fork for the editor, at the point where a decision is cheapest and touches everything. As everywhere, the house doesn't wait: until the editor rules, Wonder's reading stands and the disagreement is shown. Any other open questions of interpretation the reading can't settle become forks too.
+
+Wonder writes the reading because it's the strongest reader we have, and one call over the whole text is cheap (it's counted in the whole-text reads in `RUNNING-A-TEXT.md`). Its 1M-token context holds even a full novel, so a novel gets a whole-book first read too, not a chapter-by-chapter one.
+
+The reading is what turns the rest of the house from rule-followers into colleagues with judgement. Every department gets it in its cached prefix, so a drafting call that meets something no rule covers can ask "what fits the reading?" Critics check the crux first: a draft that is accurate line by line but gets the crux wrong is the most serious kind of error, because no single line looks wrong. It's also the editor's best point of leverage: a page to read, and a comment on it changes everything downstream. As everywhere, nothing waits for that comment. And it's published with the edition as **the house's reading**, labelled as the house's and never presented as the author's view or as a human introduction.
+
+## 1. The story bible (built from the reading)
+
+The Analyst (Spark) then builds the bible, with the whole source and the reading in its cached prefix. All our texts fit: the longest, 「幻影の盾」, is ~22k characters, about 33k tokens. Cast, ledger, narration, motifs, style sheet and hard spots come from one call. The referent map is built paragraph by paragraph in a few further calls, because it's long and needs close attention to each line; each of those calls still sees the whole text. For a novel the Analyst works chapter by chapter, updating the same bible. It produces:
 
 | Part | Holds | Why it matters |
 |---|---|---|
@@ -30,18 +46,24 @@ The Analyst reads the whole source in one call. All our texts fit: the longest, 
 
 The bible is one flat JSON file per work, with a schema, versioned and stored with the run. Code reads it for the checks in §4; prompts get it rendered as plain Markdown. Deliberately no knowledge graph, vector store or embeddings: a short story's cast and ledger fit in a few thousand tokens, and every extra layer is another place for errors to hide. We'd revisit that only for a house-wide memory across many works. A human-readable view of it is published with each edition: readers can see the cast and ledger the house worked from.
 
-## 2. Keeping it up to date
+## 2. Changing its mind
 
-- **Nobody edits the bible silently.** Translation, Source check or Editorial can propose an amendment (a character the Analyst missed, a corrected reading, a better rendering) as a query to the Analyst. Accepted amendments bump the version.
-- A version bump changes the cache key, so amendments are batched: at the end of each chunk, not mid-call.
-- When a ledger rendering changes, rule propagation (ARCHITECTURE §3) finds every earlier segment that used the old one and queues revisions. Locked items need the editor.
+Translators' understanding of a book grows while they translate it; close work turns up things a read-through doesn't. Halfway through, a word turns out to echo something on page two, and the rendering chosen for page two now looks wrong. That's why translators draft the whole book before revising anything: late discoveries are cheap until the revision starts. The house works the same way. The reading and the bible are the best view at the start, not a verdict.
+
+- **The view comes from the whole text, not the opening.** The first read sees the whole book, so the reading and the voice trial aren't built on the first few pages alone. The voice trial is judged against the whole reading.
+- **Anyone can propose a change**, and nobody makes one silently. Translation, Source check or Editorial can propose an amendment (a missed echo, a character the Analyst missed, a corrected reading, a better rendering) as a query to the Analyst. Accepted amendments bump the version. The reading can be amended the same way, through Wonder.
+- **Changes reach backwards.** When a rendering changes, or a new motif is found, rule propagation (ARCHITECTURE §3) finds every earlier segment that used the old rendering or holds the motif and queues revisions, each going back through Source check. Locked items need the editor. The reserve in each text's budget is there partly to pay for this.
+- **The editor's letter is the formal second look.** After the full draft, Wonder reads the whole English against the reading. Whatever the house has learned by then, including "the reading was wrong about this", comes out there, and the reading is updated before revision. The published reading is the final one, with a line on what changed.
+- **Old views are kept.** Every version of the bible and the reading stays in the event log, so readers can see how the house's view changed and why.
+
+A version bump changes the cache key, so amendments are batched at the end of each chunk, not applied mid-call.
 
 ## 3. What each translation call sees
 
 In this order, stable first (cached) and the passage last (where models attend best):
 
 1. House rules and the department prompt.
-2. The style sheet, cast and ledger. For short texts, the whole bible (a few thousand tokens). For long ones, only the entries present in this passage, the previous two paragraphs and the next paragraph.
+2. The house's reading (§0), the style sheet, cast and ledger. For short texts, the whole bible (a few thousand tokens). For long ones, only the entries present in this passage, the previous two paragraphs and the next paragraph.
 3. **The whole source text**, for texts up to ~30k characters (our default for now: cached at $0.15/M, so cheap, and it lets the model look anywhere). E3 tests whether this helps or hurts; if it hurts, we drop it.
 4. The rolling summary (≤300 words: what has happened, who knows what).
 5. 2–3 earlier approved passage pairs that share characters or address terms with this one.
@@ -56,7 +78,7 @@ Everything except (3) stays under ~5k tokens.
 - **Voice checker (code + Glimmer):** first-person voice and address forms match the cast entry.
 - **Callback checker (code):** every motif occurrence is rendered consistently, or carries a translator's note saying why not.
 - **Omission guard (code):** length ratio per paragraph against the text's own baseline; outliers go to Source check.
-- **Continuity read (Wonder):** once per release, one call over the whole source and translation, looking for contradictions, a speaker confused across scenes, a fact that changes.
+- **Final read (Wonder):** once per release, the finished English read as a whole and then against the source: seams left by revision, voice drift, whether the crux holds, and continuity (contradictions, a speaker confused across scenes, a fact that changes).
 
 ## 5. Novels, later
 
