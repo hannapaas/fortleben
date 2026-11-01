@@ -23,7 +23,7 @@ It's useful without anyone's sign-off. When a person does check a passage, the p
 
 | Part | What it is |
 |---|---|
-| **The Library** | A showcase edition plus experiments, each in three views, with every line's history a tap away |
+| **The Library** | A showcase edition, the shelf and the other texts (one deliberately hard), each in three views, with every line's history a tap away |
 | **The Catalogue** | Reader's reports on untranslated works: what each is about, why read it, how hard it is, and the evidence for "untranslated". Readers vote for what they'd read and request texts from Aozora or beyond |
 | **The House** | The agents at work, live or replayed: departments, queries, forks, interns, budgets |
 | **The Exhibit** | Passages side by side with one-shot machine translation and, for one, a 1918 human translation, with arrows and margin notes saying in plain words what went wrong and why, ours included |
@@ -62,7 +62,7 @@ Readers help choose. The editor still decides.
 
 ## Scope
 
-**By 4 Nov:** the showcase in Casual and Curious views (Student if it holds); the experiments as labelled machine drafts, including the hard text's visible failures; the Setsu 1918 comparison; **the shelf**: as many of the short Catalogue titles as the budget allows, run through the house with no editor and labelled *house-checked*, so the library is something to browse rather than a promise; the Catalogue (~100–200 reader's reports generated on Meta models) with votes and requests; the live House on preset passages, with replay; reactions, comments and proposals (model-screened); the evals; README and video.
+**By 4 Nov:** the showcase in Casual and Curious views (Student if it holds); the other texts as labelled machine drafts, including the hard text's visible failures; the Setsu 1918 comparison; **the shelf**: as many of the short Catalogue titles as the budget allows, run through the house with no editor and labelled *house-checked*, so the library is something to browse rather than a promise; the Catalogue (~100–200 reader's reports generated on Meta models) with votes and requests; the live House on preset passages, with replay; reactions, comments and proposals (model-screened); the evals; README and video.
 
 **Later:** open accounts and a trust ladder with a calibration set; any Aozora text on request; longer works; funding targets for wanted books; EPUB and print; other source languages (the house is built per language; see `SITE.md`, "How it grows").
 

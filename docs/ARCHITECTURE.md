@@ -94,7 +94,7 @@ flowchart TD
 | Requests from outside Aozora | Spark low + `web_search`: author dates, first publication, existing English translations; a short reader's report if a text is found | Capped per day; the editor confirms every verdict |
 | Covers | `muse-image-1.0` | Decorative, $0.01 each. Cut first |
 
-**About the shared lineage:** Glimmer is distilled from Spark, and Spark Open is Spark released as open weights. Wonder is a different, larger model but from the same family. So "a different model as critic" here means a different checkpoint, not independence, and the README will say so. **Every model this repo calls is a Meta model**, in the product and in the evals alike: the hackathon's rule is strict (a participant's own tiny checker was ruled out), and the eval harness runs from this repo. So the auditor behind the exhibit is Wonder, cross-checked by Spark Open (open weights, run on any host), two checkpoints of one family, and the page says so. What's independent of any model is the editor's read of the marked-up passages, the 1918 human translation in the exhibit, and the deterministic checks.
+**About the shared lineage:** Glimmer is distilled from Spark, and Spark Open is Spark released as open weights. Wonder is a different, larger model but from the same family. So "a different model as critic" here means a different checkpoint, not independence, and the README will say so. **Every model this repo calls is a Meta model**, in the product and in the exhibit's audit alike: the hackathon's rule is strict (a participant's own tiny checker was ruled out), and the audit runs from this repo. So the auditor behind the exhibit is Wonder, cross-checked by Spark Open (open weights, run on any host), two checkpoints of one family, and the page says so. What's independent of any model is the editor's read of the marked-up passages, the 1918 human translation in the exhibit, and the deterministic checks.
 
 ## 5. Interns
 
@@ -133,7 +133,7 @@ Every event is written to `event` and then broadcast in-process. `GET /runs/{id}
 
 ## 9. What's in this repo
 
-Everything the demo needs runs from this repo: the engine, orchestrator, schemas, the department prompts the demo uses, the demo texts' style sheets and voice briefs, a sample tic list, the Aozora parser, the UI, the eval harness, results and raw verdicts, and replay fixtures. An optional private overlay (`KEIKAKU_PRIVATE_DIR`) can add voice profiles for other authors and longer word lists; the demo never depends on it. Copyrighted human translations used in evals are quoted in short excerpts only and never committed whole.
+Everything the demo needs runs from this repo: the engine, orchestrator, schemas, the department prompts the demo uses, the demo texts' style sheets and voice briefs, a sample tic list, the Aozora parser, the UI, the exhibit harness, results and raw verdicts, and replay fixtures. An optional private overlay (`KEIKAKU_PRIVATE_DIR`) can add voice profiles for other authors and longer word lists; the demo never depends on it. Copyrighted human translations used in evals are quoted in short excerpts only and never committed whole.
 
 ## 10. Cost model
 
@@ -160,7 +160,7 @@ The English-alone side (editor's letter, Editorial) got more and notes got less 
 | Text | Chars | One full run (base / pessimistic) | Planned spend |
 |---|---|---|---|
 | Shiraki Shizu 「晩餐」 (development text) | 3,400 | $0.54 / $0.92 | 5 tuning runs, inside "dev" below |
-| Kitamura Tōkoku 「我牢獄」 (hard experiment) | 4,500 | $0.72 / $1.22 | 3 runs: $2.2 / $3.6 |
+| Kitamura Tōkoku 「我牢獄」 (the hard text) | 4,500 | $0.72 / $1.22 | 3 runs: $2.2 / $3.6 |
 | Kasai Zenzō 「雪をんな」 (plain control) | 3,200 | $0.51 / $0.86 | 3 runs: $1.5 / $2.6 |
 | Koizumi Setsu 「思い出の記」 (vs its 1918 translation) | 30,700 whole; the brief always runs on the whole text | $4.9 / $8.3 whole; ~$0.9 / $1.5 for three windows after the brief | 1 whole run if the budget holds, else windows |
 | **Showcase: Shiraki Shizu 「三十三の死」** | 13,500 | **$2.16 / $3.65** | 2 runs + rule reruns: $6.5 / $11 |
@@ -170,7 +170,7 @@ The English-alone side (editor's letter, Editorial) got more and notes got less 
 | Budget line, inside the $150 credits | Base | Pessimistic |
 |---|---|---|
 | Dev: smoke tests, prompt tuning, failed runs, 晩餐 ×5 | $25 | $40 |
-| Experiments (Tōkoku, Kasai, Setsu whole) | $8.6 | $14.5 |
+| The other texts (Tōkoku, Kasai, Setsu whole) | $8.6 | $14.5 |
 | Showcase | $6.5 | $11 |
 | The exhibit (audit on all versions, both auditors) and the planted test | $8 | $14 |
 | Catalogue, 200 reports | $4 | $7 |
@@ -182,5 +182,5 @@ The English-alone side (editor's letter, Editorial) got more and notes got less 
 
 If reasoning turns out worse than pessimistic, there are three levers, in this order:
 1. Move routine Source check to Spark Open on a partner host, and keep Wonder for flagged chunks.
-2. Use Meta's cheaper Contributor tier for the experiments on public-domain text.
+2. Use Meta's cheaper Contributor tier for the shelf and the other texts.
 3. Drop the stretch.
