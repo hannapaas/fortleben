@@ -72,6 +72,10 @@ flowchart TD
 | `vote` | "I'd read this": work, voter token (cookie + IP hash), date. One per voter per work |
 | `request` | An Aozora work ID or an outside reference (title, author, link), the requester's reason (screened), the Acquisitions verdict (*eligible / in copyright / can't tell*) with evidence, the editor's decision, status |
 
+### The margin: how the debate reaches the page
+
+Nothing is collected for the margin specially; it falls out of the record. Every query, answer, fork, ruling, rule application, note, intern report and revision is stored with an anchor: a paragraph ID, and a span inside it where there is one. The reader's margin for paragraph `p12` is simply everything anchored to `p12`, in time order, rendered by kind: the critic's query with its evidence, the translator's answer, the head's pick or the fork with both cases, the editor's ruling and the rule it made, the alternatives the drafter left, the notes with their sources, and the revision history. Each agent's one-sentence `say` is the plain-words line at the top of its entry. A paragraph nobody queried shows *drafted · checked · no queries* and nothing else. So the margin is a database read, the same read the House replay and the editor's desk use, and it is complete by construction: there is no way for a decision to happen that isn't anchored somewhere.
+
 ## 3. Agent runtime
 
 - Python `asyncio`, with the OpenAI SDK pointed at Meta's API on the **Responses API** (needed for caching hints, web_search and reasoning summaries). No agent framework.
