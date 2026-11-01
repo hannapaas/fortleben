@@ -1,0 +1,58 @@
+# keikaku — the stages, in order
+
+Written 30 Oct 2026. **This is the one list the orchestrator implements.** `ARCHITECTURE.md`, `RUNNING-A-TEXT.md` and `STORY-STATE.md` explain why; this says what runs, in what order, on what, and what code enforces. When another doc and this one disagree about the order of work, this one is right until it's changed, and the change goes here first.
+
+## Units
+
+- **Work:** one text. **Run:** one pass of a work through the house. **Segment:** a paragraph of the source, `p12`. Sentences inside it, `p12-s3`, exist only as anchors for queries and notes.
+- **The paragraph is the unit of English.** Translation returns one English string per paragraph, plus best-effort spans saying which English renders which source sentence. Nothing forces one English sentence per Japanese one; a literary translator restructures, and a sentence-locked schema would push the model back towards literalism.
+- **Page:** a drafting chunk of about 1k source tokens (~650 characters) of whole paragraphs, breaking at scene breaks where possible. Drafting happens per page; checking, queries and revisions happen per paragraph.
+- **Tier:** every paragraph is *plain*, *tricky* or *hard* (`RUNNING-A-TEXT.md` §2).
+
+## The stages
+
+Each stage is a module `house/stages/<name>.py` with `run(ctx) -> events`. The orchestrator may pause and resume between any two stages; in production it stops only at the checkpoint.
+
+| # | Stage | Scope | Calls (prompt · model) | Produces | Notes |
+|---|---|---|---|---|---|
+| 0 | **parse** | work | code | segments with ruby, emphasis, scene breaks, colophon, rights record | Deterministic. Round-trip tested. |
+| 1 | **background** | work | `background-brief` · Spark low + web_search | a page of notes with sources | A fixed stage, not an intern; doesn't count against intern caps. |
+| 2 | **first-read** | work | `first-read` · Wonder medium | the house's reading; open questions; 2–3 voice takes | Whole source in one call. |
+| 3 | **crux-check** | work | `crux-check` · Spark low, then `head-select` · Spark minimal | Spark's crux; *same / different* with a line | Spark never sees Wonder's reading. The head-select call compares the two cruxes; "different" opens the first fork. |
+| 4 | **bible** | work | `analyst-bible` · Spark medium; `analyst-referents` · Spark low, one call per ~5 pages | `bible.json` v1 (cast, ledger, narration, motifs, style sheet, hard spots, referent map, tiers) | Whole source and reading in the cached prefix. Schema-validated. |
+| 5 | **voice-trial** | first page | `translate-draft` × 2–3 · Spark medium (one voice take each); `source-check` · Wonder low on each; `head-select` · Spark low | the voice reference page; the alternatives, kept | |
+| — | **checkpoint** | run | none | one screen for the editor: crux (and any disagreement), reading, voice trial, key bible choices, open forks | **Stop** here if an editor is assigned and hasn't switched it off. Each editor change becomes a scoped rule. With no editor: continue, and the edition says so. Everything above is "the brief", about 15% of the allowance. |
+| 6 | **draft** | page by page, in order | `translate-draft` · Spark medium | English per paragraph; translator notes; marked alternatives; `{t:id}` tokens on ledger terms; a `so_far` update (the rolling summary) | Sequential, because `so_far` and approved pairs carry forward. Context per `STORY-STATE.md` §3. |
+| 7 | **source-check** | paragraph | `source-check` · Wonder low | error spans → queries, or "none" | Runs behind drafting (page n checked while page n+1 drafts). Code first: omission guard (length ratio), ledger checker. |
+| 8 | **second-draft** | tricky and hard paragraphs | `translate-draft` · Spark medium (the paragraph, with its page's draft as context); `head-select` · Spark low | the head's pick, or a fork (hard only) | Can run alongside 7. |
+| 9 | **answer** | open queries | `translate-answer` · Spark low | per query: accepted / stet / revised + reason; revised text | Every revision goes back through 7 on the diff. |
+| 10 | **editors-letter** | work | `editors-letter` · Wonder low | a short letter; amendments to the reading | After the whole draft exists. Translation answers it via 9. |
+| 11 | **editorial** | scene by scene | `editorial-scene` · Spark low | span queries | English only: never sees the source text. Plain paragraphs are read, not line-edited. |
+| 12 | **copy-desk** | work | code (ledger, callbacks, length, tic list); `copy-desk` · Glimmer low | mechanical fixes applied by code; everything else as queries with a suggested replacement | Glimmer proposes, never writes the base text. Glimmer is optional: without it the code checks still run. |
+| 13 | **notes** | paragraph | `notes` · Spark low | notes per edition with anchors | The keikaku test: only what the sentence can't give you. |
+| 14 | **fact-check** | note | `fact-check` · Spark low + web_search | verified (with sources) / killed | Every note cites or dies. Casual notes can skip this when the pool is short. Interns may be commissioned from 8, 13 or 14 (`ARCHITECTURE.md` §5). |
+| 15 | **final-read** | work | `final-read` · Wonder low | queries | The English as a whole, then against the source: seams, voice drift, crux, continuity. A second final read only if the resulting changes were large (over 10% of paragraphs). |
+| 16 | **release** | work | code | editions (Casual / Curious / Student) from the base text + tokens + notes; statuses; colophon; the bible and reading published | Proof/QC is code: every paragraph present, every token resolved, every note anchored. |
+
+Rule propagation (an editor's rule or an accepted bible amendment) is not a stage: it queues revisions (`rule-scope` · Spark minimal on candidates found by ledger and regex), which go through 9 and 7 like any other.
+
+**The minimal pipeline** (the fallback in `BUILD-PLAN.md`) is stages 0, 2, 4, 6, 7, 9, 12 (code only), 13, 16. It must work before anything else is added.
+
+## What code enforces, whatever the prompts say
+
+| Limit | Value | Where |
+|---|---|---|
+| Rounds per query | 2, then a fork (hard) or the head's pick stands, labelled | orchestrator |
+| Revision cycles per paragraph | 3 per run; after that it's *flagged, unresolved* | orchestrator |
+| Forks per checkpoint | 5, global first | orchestrator |
+| Interns | one level; 3 per run; $0.10 per department per run; reports, never edits | tool runtime |
+| Ink pool | 100 per sheet; when it's gone the house flags instead of resolving, in the order in `RUNNING-A-TEXT.md` §5 | budget module |
+| Spend caps | pre-call estimate against live-run / daily / total caps; kill switch | budget module |
+| Output shape | strict JSON schema per prompt; a call that fails validation is retried once, then the stage records a failure event and moves on | model client |
+| Locked lines | never rewritten by a rule or a revision; a query to the editor instead | orchestrator |
+| Tier changes | up any time; down only with a logged reason | orchestrator |
+| Source check | never skipped by the budget | budget module |
+
+## Stop and resume
+
+Every stage writes its outputs to the database before the next starts, so a run can stop after any stage and resume from the record. The response cache (model, prompt hash, input hash) makes a resumed or repeated stage free. Development uses stops after every stage; production stops only at the checkpoint.
