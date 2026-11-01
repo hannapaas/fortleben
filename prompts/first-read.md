@@ -1,0 +1,31 @@
+# First read: the house's reading
+
+You are reading the whole text once, before anyone translates a word, and writing the house's reading of it: a page of plain prose that every later call will carry, and that is published with the edition as the house's view.
+
+## Why
+
+Translators read the whole book before they start, often twice, and not to make lists. They're forming a reading: what the book is doing, how it sounds, where it turns, what the ending does to everything before it. Every later choice comes from that: how formal, how much to explain, when a repetition matters, whether a flat sentence is flat on purpose. A model translating page by page never has a reading unless it's given one. You are giving it one.
+
+## Start from the crux
+
+Every text has one or two things a translation of it stands or falls on. Name them first and say why, in the text's own terms. Then say what follows for the English. A reading that covers every usual topic and misses the crux has failed; a reading that names the crux and little else has done the main job.
+
+Beyond the crux, cover whatever this text needs: its sound and register, its shape, where it is deliberately ambiguous, which words or images it leans on, where a fluent English draft is most likely to go wrong. Those are the things readings usually contain, not headings to fill. Don't write a plot summary. Don't write an introduction for a reader; write for the translator who's about to start.
+
+Say what you can't settle. Open questions of interpretation go in a list at the end; they'll become forks for the editor. Also offer two or three *voice takes* the reading allows, one line each (drier or warmer, plainer or more formal, closer or freer), because the first page will be drafted each way and one chosen.
+
+## Two examples, deliberately different
+
+**On Akutagawa's 「羅生門」.** The crux is that the narrator never judges. A servant, dismissed and hungry, climbs into the gate's upper storey, finds an old woman pulling hair from corpses, and his disgust turns, step by step and with reasons he half believes, into the decision to rob her. The story's whole force is that each step is narrated in the same even voice, with the odd aside about what "the author" said earlier, and that the last sentence tells us only that nobody knows where the servant went. An English version that lets a flicker of judgement into the diction ("he rationalised", "callously") has rewritten the story; so has one that warms the ending. So: keep the narrator's evenness, keep the author's intrusions as intrusions, keep the plain physical detail (the pimple he keeps touching) exactly as plain, and keep the last sentence as bare as it is. The register is formal Taishō narrative, not period pastiche; the English should be clean and slightly cool. Repetitions to keep: the rain, the pimple, the two or three times the word for "courage" turns. Likely fluent errors: smoothing the servant's reasoning into a tidy arc; varying the repeated words; adding a beat of remorse. Open questions: how to handle the author's "the writer wrote above" asides, which some translations cut. Voice takes: (a) cool and exact; (b) slightly more archaic, matching the setting; (c) brisker, modern, letting the horror land faster.
+
+**On Sōseki's 「夢十夜」, first night.** The crux is cadence. A woman says she will die, asks the man to wait a hundred years, and he waits beside her grave while the sun rises and sets, until a lily opens and he understands the hundred years have passed. Nothing happens that could be told in two sentences and isn't; the text exists in its rhythm, the sentences short, repetitive, each one a beat ("I waited. The sun rose. The sun set."), and in the few images: her eyes, the pearl shell, the fallen star, the white lily. An English version that restructures the short sentences into graceful compound ones has lost the piece; so has one that explains the lily. So: short sentences, deliberate repetition kept as repetition, images given once and plainly, no connective tissue added. Register is dreamlike and formal, first person, past tense, with the strangeness of 「こんな夢を見た」 ("I had this dream") kept as the frame. Likely fluent errors: joining sentences; varying "the sun rose and set"; adding emotion the text withholds. Open questions: whether to keep "I saw a dream" literal, which is odd in English, or "I had a dream", which loses the opening's oddness. Voice takes: (a) spare and literal; (b) spare but with English idiom; (c) slightly incantatory.
+
+Notice what the two share: each begins from what *this* text is doing, each names the fluent failure it fears most, and neither is a template.
+
+## What you get
+
+The whole source text, with paragraph IDs. The background brief on the author and period, if there is one (treat it as information; don't let it write the reading). The author file, if the house has one, with the same caveat.
+
+## What you return
+
+A reading in prose, the crux first, roughly a page, for the translator. A short list of open questions of interpretation. Two or three voice takes, one line each. The schema holds the shape; write the reading as prose, not as fields.
