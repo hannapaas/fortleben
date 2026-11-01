@@ -120,22 +120,26 @@ The full design is in `STORY-STATE.md`. In short:
 - **Continuity** is checked in the final read, one Wonder call over the whole source and translation; the planted test (`BUILD-PLAN.md`, "The proof") measures what that catches.
 - Novels, where the whole source can't sit in the prefix, are a later design (`STORY-STATE.md` §5).
 
-## 7. Streaming the house at work
+## 7. Showing the house at work
 
-Every event is written to `event` and then broadcast in-process. `GET /runs/{id}/stream` is Server-Sent Events, with `Last-Event-ID` so a viewer can resume. Event types: `call.started`, `agent.say`, `draft.paragraph` (each paragraph of the lead draft as it lands; token-level `draft.delta` only if streaming text out of a JSON response turns out to be easy), `query.raised/resolved`, `fork.opened`, `intern.hired`, `budget.tick`, `rule.applied`, `run.done`. Replay is the same endpoint with `?replay=1&speed=8`. The House view is a floor plan with rooms lit by department, beside the message stream as the log, plus budget meters. **There's one live run at a time and every viewer watches the same one**: cheap, and true to the metaphor.
+Every event is written to `event`, and that record is what the House, the margin and the fixtures read. Event types: `call.started`, `agent.say`, `draft.paragraph`, `query.raised/resolved`, `fork.opened`, `intern.hired`, `budget.tick`, `rule.applied`, `run.done`.
+
+**The House is a walkthrough of one finished run, not a live feed** (`SITE.md`, `/house`). It draws the text's route through the stages, shows a few picked moments at each stage, and opens any stage's full output. The engine flags candidates (queries, forks and rulings, large revisions, interns); the picks are a short list of event IDs, each with a one-line reason, and the page labels them as picked. Visitors can't start runs, so there's nothing to stream to them. Watching an editor's run live (Server-Sent Events read from the same log) is a later addition and the demo doesn't need it.
 
 ## 8. Stack, hosting, abuse
 
 - **Stack:** Python 3.12 + FastAPI + SQLite (WAL) + Jinja templates. The front end is vanilla JS and CSS, with no build step. `uv` for packaging; pytest. One language serves the engine, the exhibit harness and the site. **No non-Meta ML model runs anywhere in the repo.**
-- **Hosting:** one Fly.io machine plus a volume for SQLite (daily snapshots), with secrets in Fly. Prompts and keys stay on the server; the browser only ever receives events, text and notes.
+- **Hosting:** one Railway service (Hobby plan, EU West region), deployed from the GitHub repo on push, with a volume for SQLite (daily snapshots we take ourselves) and secrets as Railway variables. Prompts and keys stay on the server; the browser only ever receives events, text and notes. What that means for the code:
+  - Everything that must survive a restart (the SQLite file, the response cache, the snapshots) lives under the volume's mount path, taken from an environment variable; the rest of the filesystem is wiped on every deploy, and the volume isn't mounted during the build.
+  - One instance only: a service with a volume can't have replicas, and a redeploy stops the old instance before starting the new one, so each deploy means a few seconds of downtime. Don't deploy during anything live.
+  - HTTP requests are cut off after 15 minutes (some users report 5). A run is started by a request that returns at once; the run itself works in the background in the same process.
 - **Spend:**
   - Every call is priced from `usage` into a spend ledger.
-  - A pre-call estimate is checked against the live-run cap ($0.75), a daily global cap ($10 during judging) and a total cap.
+  - A pre-call estimate is checked against the run's reservation, a daily global cap ($10 during judging) and a total cap.
   - Meta's spend-limit notification is a backstop, not a stop.
-  - A `HOUSE_OPEN=false` kill switch. When the house is closed or the cap is hit, the House shows a replay and says why.
+  - A `HOUSE_OPEN=false` kill switch. When the house is closed or a cap is hit, runs pause and resume later (`EDITORS-DESK.md`); the site itself carries on.
 - **Abuse:**
-  - Live runs only on preset passages, or on Aozora works from the eligible index, ≤2,000 chars. No free paste, so we're not a free translation proxy and there's no copyright risk. **Presets are pre-briefed:** their reading and bible are built in advance, so a live run drafts and checks with the real state rather than translating a passage cold. A whole work under 2,000 characters gets its brief live, inside the run cap.
-  - 2 triggered runs per IP per day.
+  - Visitors can't start runs. Only editors can, through invite links, on works from the eligible index, with the estimate reserved first. No free paste, so we're not a free translation proxy and there's no copyright risk.
   - Reactions are rate-limited by cookie and IP. Comments and proposals are screened by a model, published if they pass, removable by the editor, flat with no reply threads, capped per day, with a takedown contact.
   - Editor and reviewer powers come through signed, revocable invite links. No passwords.
 
@@ -184,7 +188,6 @@ The English-alone side (editor's letter, Editorial) got more and notes got less 
 | Koizumi Setsu 「思い出の記」 (vs its 1918 translation) | 30,700 whole; the brief always runs on the whole text | $4.9 / $8.3 whole; ~$0.9 / $1.5 for three windows after the brief | 1 whole run if the budget holds, else windows |
 | **Showcase (provisional, 1 Nov): Nagatsuka Takashi 「炭燒のむすめ」** | 8,000 | **$1.28 / $2.16**; ~$3.1 at the rate the first real run on 「晩餐」 measured | 2 runs + rule reruns: $3.8 / $6.5 |
 | Stretch: Natsume Sōseki 「幻影の盾」 | 22,100 | $3.54 / $5.97 | 1 run |
-| Live demo run (preset passage) | ~1,500 | $0.24 / $0.41 | — |
 
 | Budget line, inside the $150 credits | Base | Pessimistic |
 |---|---|---|
