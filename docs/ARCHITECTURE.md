@@ -70,7 +70,7 @@ flowchart TD
 | `edition` | One translation of a work: the editor (a person, or the house), its runs, current release |
 | `release` | Edition version (v1, v1.1), changelog, credits |
 | `vote` | "I'd read this": work, voter token (cookie + IP hash), date. One per voter per work |
-| `request` | An Aozora work ID or an outside reference (title, author, link), the requester's reason (pre-moderated), the Acquisitions verdict (*eligible / in copyright / can't tell*) with evidence, the editor's decision, status |
+| `request` | An Aozora work ID or an outside reference (title, author, link), the requester's reason (screened), the Acquisitions verdict (*eligible / in copyright / can't tell*) with evidence, the editor's decision, status |
 
 ## 3. Agent runtime
 

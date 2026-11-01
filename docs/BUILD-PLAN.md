@@ -104,12 +104,12 @@ These must be true:
 5. Credit spend is ≤ $45.
 
 **If 1 or 2 fails:** fall back to the minimal pipeline (Analyst → Translation → Source check → Copy desk → Notes). Interns and forks then appear only in the recorded run.
-**If more than two items fail:** stop adding, ship the showcase and evals, and cut from the list below.
+**If more than two items fail:** stop adding, ship the showcase and the exhibit, and cut from the list below.
 
 ## Cut list (cut from the top)
 1. Guest editors (M7b); the house editor's desk stays.
 2. Muse Image covers (typographic covers instead).
-3. The Student edition (keep Casual + Curious).
+3. The Student view (keep Casual + Curious).
 4. The Setsu column of the exhibit (keep the showcase passages).
 5. The Catalogue cut to 30 reports; the Acquisitions agent for outside requests (requests are still collected, and the editor checks them by hand).
 6. Proposals (keep reactions).

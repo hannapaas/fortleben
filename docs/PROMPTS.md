@@ -62,7 +62,7 @@ Everything shares one **house brief** (below), which sits first in every cached 
 | **acquisitions-rights** | Spark + web search | A requested work: author's death year, first publication, existing translations | *Eligible / in copyright / can't tell* + evidence |
 | **cover** | `muse-image` | A cover from the reading's imagery and the house design | An image prompt template, not an agent |
 
-## Evals
+## The exhibit
 
 | Prompt | Model | Job |
 |---|---|---|
