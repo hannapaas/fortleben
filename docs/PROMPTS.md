@@ -36,7 +36,7 @@ Everything shares one **house brief** (below), which sits first in every cached 
 |---|---|---|---|
 | **translate-draft** | Spark medium | Draft a page in order, in the chosen voice. Also used for the voice trial, given one voice take, and for second drafts of a single paragraph | English per paragraph with best-effort sentence spans; `{t:id}` tokens on ledger terms; translator notes; marked alternatives |
 | **translate-answer** | Spark | Answer queries, and the editor's letter: accept, stet with a reason, or revise | Per query: status, reason, revised text |
-| **head-select** | Spark | A department head choosing between drafts or options, or opening a fork with one-line trade-offs and dissent quoted | Pick + reason, or a fork |
+| **head-select** | Spark | A department head choosing between drafts or options, or opening a fork: one-line trade-offs, each side's case in a paragraph by its author, dissent quoted | Pick + reason, or a fork |
 
 ## Checking and revising
 
