@@ -1,0 +1,84 @@
+{
+  "type": "object",
+  "properties": {
+    "changes": {
+      "type": "array",
+      "description": "Only what you changed: each an exact span of the current English and its replacement",
+      "items": {
+        "type": "object",
+        "properties": {
+          "paragraph": {
+            "type": "string",
+            "description": "Paragraph ID as given, e.g. p12, or p21–p23 for a group"
+          },
+          "find": {
+            "type": "string",
+            "description": "The exact text to replace, copied from the paragraph's English as given, {t:id} tokens included"
+          },
+          "replace": {
+            "type": "string",
+            "description": "What goes in its place, with any {t:id} tokens kept"
+          },
+          "answers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Note numbers this change answers (F1, R2); empty if no note asked for it"
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "declined": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "note": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "disagreements": {
+      "type": "array",
+      "description": "Where the readers pulled opposite ways, or a note you couldn't settle",
+      "items": {
+        "type": "object",
+        "properties": {
+          "notes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "paragraph": {
+            "type": "string"
+          },
+          "faithful_side": {
+            "type": "string"
+          },
+          "readable_side": {
+            "type": "string"
+          },
+          "choice": {
+            "type": "string"
+          },
+          "send_up": {
+            "type": "boolean",
+            "description": "True only where the reading doesn't settle it and being wrong would matter"
+          }
+        }
+      }
+    },
+    "say": {
+      "type": "string"
+    }
+  }
+}
