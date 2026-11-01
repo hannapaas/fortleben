@@ -35,7 +35,7 @@ It's useful without anyone's sign-off. When a person does check a passage, the p
 | Student | **Student** view: sourced notes, alternatives and decision history (a literal crib later). Parallel Japanese with furigana is a layout any view can switch on. Browses the Catalogue for a text to study. It's an edition, not a tutor. |
 | Translator | Browses the **Catalogue**. Reads the style sheet and queries. Finds something to pitch to a press. |
 | Bilingual reader | Flags "I think this is wrong" with a reason; proposes a fix to a span. A bilingual reader who checks a passage against the Japanese can mark it *human-reviewed*, and their name goes on it. |
-| The editor | Reviews the checkpoint before a full run (crux, reading, voice, key bible choices), decides forks, makes standing rules, locks lines, dictates notes, signs the edition. Only the checkpoint holds a run, and only when an editor is assigned; everywhere else, until the editor rules, the department head's pick stands and is labelled as such. A text with no editor runs straight through and says so. |
+| The editor | Reviews the checkpoint before a full run (crux, reading, voice, key bible choices), decides forks, makes standing rules, locks lines, writes notes, signs the edition. Only the checkpoint holds a run, and only when an editor is assigned; everywhere else, until the editor rules, the department head's pick stands and is labelled as such. A text with no editor runs straight through and says so. |
 
 ## The community concept
 

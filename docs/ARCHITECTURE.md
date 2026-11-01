@@ -92,31 +92,25 @@ flowchart TD
 | Fact-check | Spark + `web_search` | Every note cites a source or dies |
 | Catalogue | Spark low as the acquisitions editor; Glimmer as chunk reader if it passes a 10-report spot check, else Spark | Cheap at 200 reports |
 | Requests from outside Aozora | Spark low + `web_search`: author dates, first publication, existing English translations; a short reader's report if a text is found | Capped per day; the editor confirms every verdict |
-| Editor's dictated notes | `muse-voice-transcribe-1.0`, ledger names as keyword bias | The editor works from a phone |
 | Covers | `muse-image-1.0` | Decorative, $0.01 each. Cut first |
 
 **About the shared lineage:** Glimmer is distilled from Spark, and Spark Open is Spark released as open weights. Wonder is a different, larger model but from the same family. So "a different model as critic" here means a different checkpoint, not independence, and the README will say so. **Every model this repo calls is a Meta model**, in the product and in the evals alike: the hackathon's rule is strict (a participant's own tiny checker was ruled out), and the eval harness runs from this repo. So the eval jury and auditors are Wonder, Glimmer and Spark Open (open weights, run on any host), three checkpoints of one family, and the README says plainly that this is weaker than a cross-vendor judge. What's independent of any model is the reference-based comparison against the 1918 human translation and the deterministic checks.
 
 ## 5. Interns
 
-A head can call the tool `commission_intern(question, reason, budget)`. The runtime enforces the rules: one level only (interns can't hire), at most 3 per run, $0.10 per department per run, and a report rather than edits. The reason is logged and shown. Interns run on Spark low, with web_search allowed. Typical triggers are the analyst's flags: an embedded poem, dialect, a classical quotation, a Buddhist term. In the House they're dotted squares. We make no quality claim unless the E5 ablation shows one.
+A head can call the tool `commission_intern(question, reason, budget)`. The runtime enforces the rules: one level only (interns can't hire), at most 3 per run, $0.10 per department per run, and a report rather than edits. The reason is logged and shown. Interns run on Spark low, with web_search allowed. Typical triggers are the analyst's flags: an embedded poem, dialect, a classical quotation, a Buddhist term. In the House they're dotted squares. We make no quality claim for them; they're shown, not scored.
 
 ## 6. Long context
 
-The full design, including the story bible the Analyst builds and why we avoid large raw overlaps, is in `STORY-STATE.md`. In short:
+The full design is in `STORY-STATE.md`. In short:
 
-- **Chunks** of about 1K source tokens, never splitting a paragraph.
+- **Pages** of about 1K source tokens, never splitting a paragraph.
+- **The whole source sits in the cached prefix** for every text we run (all under ~30k characters). At $0.15 per million cached tokens, 24k tokens cost about $0.004 a call. So the model can look anywhere in the book, and the bible carries the decisions.
 - **Look-ahead:** each call also sees the next paragraph of Japanese, read-only, because Japanese often resolves a subject or speaker after the fact.
-- **Whole source by default** for texts up to ~30k characters (all of ours), cached; E3 decides whether it stays.
-- **Prompt order** (stable first, so it caches):
-  1. House rules and the department prompt.
-  2. The house's reading, style sheet, ledger, character sheet, standing rules.
-  3. *Optional:* the whole source text (cached at $0.15/M, so 24k tokens cost about $0.004 a call).
-  4. Volatile material: a rolling summary of ≤300 words; 2–3 retrieved earlier pairs that share entities (locked lines first; no embeddings, found by ledger overlap); the previous two paragraphs; the chunk with the analyst's speaker and subject notes.
-- **Carried state** is capped at ~5K tokens, not counting the optional source.
-- **Rule changes** bump the style-sheet version, which bumps the cache key. So rules are batched at checkpoints.
-- **Continuity** is checked once per release by a Wonder call over the whole source and translation.
-- **"Small curated state vs the 1M window"** is tested, not assumed (`BUILD-PLAN.md`, E3).
+- **Prompt order** (stable first, so it caches): house rules and department prompt; reading and bible; whole source; voice reference; the previous two paragraphs; the page with the analyst's speaker and subject notes.
+- **Rule changes** bump the style-sheet version, which bumps the cache key, so rules are batched at the checkpoint.
+- **Continuity** is checked in the final read, one Wonder call over the whole source and translation; the planted test (`BUILD-PLAN.md`, E-long) measures what that catches.
+- Novels, where the whole source can't sit in the prefix, are a later design (`STORY-STATE.md` §5).
 
 ## 7. Streaming the house at work
 
@@ -178,11 +172,11 @@ The English-alone side (editor's letter, Editorial) got more and notes got less 
 | Dev: smoke tests, prompt tuning, failed runs, 晩餐 ×5 | $25 | $40 |
 | Experiments (Tōkoku, Kasai, Setsu whole) | $8.6 | $14.5 |
 | Showcase | $6.5 | $11 |
-| Evals E1–E6, including the long-context experiment | $25 | $44 |
+| Evals (E2, E-ref, E4, E-long, E1) | $15 | $25 |
 | Catalogue, 200 reports | $4 | $7 |
 | Rehearsals and video takes; covers | $6 | $11 |
 | Stretch, one run | $3.5 | $6 |
-| **Total** | **≈ $78** | **≈ $133** |
+| **Total** | **≈ $68** | **≈ $114** |
 
 **Headline:** everything, the stretch included, fits in the $150 credits even in the pessimistic case. The live site after submission runs on separate billing, capped at $10 a day.
 

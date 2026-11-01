@@ -34,7 +34,7 @@ Everything shares one **house brief** (below), which sits first in every cached 
 
 | Prompt | Model | Job | Returns |
 |---|---|---|---|
-| **translate-draft** | Spark medium | Draft a page in order, in the chosen voice. Also used for the voice trial, given one voice take, and for second drafts of a single paragraph | English per paragraph with best-effort sentence spans; `{t:id}` tokens on ledger terms; translator notes; marked alternatives; a `so_far` update (the rolling summary carried to the next page) |
+| **translate-draft** | Spark medium | Draft a page in order, in the chosen voice. Also used for the voice trial, given one voice take, and for second drafts of a single paragraph | English per paragraph with best-effort sentence spans; `{t:id}` tokens on ledger terms; translator notes; marked alternatives |
 | **translate-answer** | Spark | Answer queries, and the editor's letter: accept, stet with a reason, or revise | Per query: status, reason, revised text |
 | **head-select** | Spark | A department head choosing between drafts or options, or opening a fork with one-line trade-offs and dissent quoted | Pick + reason, or a fork |
 
@@ -56,7 +56,7 @@ Everything shares one **house brief** (below), which sits first in every cached 
 
 | Prompt | Model | Job | Returns |
 |---|---|---|---|
-| **editor-note-to-rule** | Spark (after `muse-voice-transcribe`) | Turn the editor's dictated or typed note into a scoped standing rule or a ruling on a fork | Rule + scope, or a decision |
+| **editor-note-to-rule** | Spark | Turn the editor's typed note into a scoped standing rule or a ruling on a fork | Rule + scope, or a decision |
 | **reader-proposal** | Glimmer | Screen a reader's comment or proposed fix (spam, abuse, off-topic) and turn a proposal into a query | Pass / fail with the reason shown to the author; the query |
 | **reader-report** | Spark | Catalogue reader's report on an untranslated work | Report fields |
 | **acquisitions-rights** | Spark + web search | A requested work: author's death year, first publication, existing translations | *Eligible / in copyright / can't tell* + evidence |

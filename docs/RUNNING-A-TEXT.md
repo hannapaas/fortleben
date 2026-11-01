@@ -96,8 +96,8 @@ The recipes don't change with length; the context strategy and the pool do. This
 |---|---|---|
 | First read | One Wonder call over the whole text | Still one call: the 1M window holds a novel, so the reading is of the book, not of chapter one |
 | Bible | One Analyst call plus referent passes | Built chapter by chapter, the same bible updated as the Analyst goes |
-| What a drafting call sees | The whole source in the cached prefix, plus the small carried state (`STORY-STATE.md` §3) | The current chapter plus the neighbouring chapters' summaries in place of the whole source; the rolling summary becomes chapter summaries |
+| What a drafting call sees | The whole source in the cached prefix, the bible, the voice page, the neighbouring paragraphs (`STORY-STATE.md` §3) | The current chapter plus short summaries of the neighbouring ones in place of the whole source |
 | Editor's letter and final read | Whole text, one call each | Whole book, one call each, costed per release; whether a very long book needs them per part is open |
 | Pool | 100 drops a sheet | The same, so the pool grows with the book; a novel's hard chapter is paid for by its plain ones |
 
-Open questions, in the order E3 answers them: whether the whole source in the prefix helps or hurts (C5 against C3); where the short/long threshold really sits; whether sampled windows stand in for a sequential run, which is what would let us quote a novel's cost honestly before running one.
+Open questions: whether the whole source in the prefix helps or hurts (E-long (b) measures it); where the short/long threshold really sits; and, later, whether sampled windows stand in for a sequential run, which is what would let us quote a novel's cost honestly before running one.

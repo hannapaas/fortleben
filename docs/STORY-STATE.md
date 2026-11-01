@@ -8,7 +8,7 @@ Japanese literary prose drops subjects, leaves speakers unattributed and shifts 
 
 ## What the research says (and why we don't use big overlaps)
 
-- **Paragraph-sized units beat sentences**, but critical errors and omissions remain (Karpinska & Iyyer 2023), and models skip more as the output gets longer. So Translation drafts **about a page at a time** (~1k source tokens, ~650 characters): several whole paragraphs, never splitting one, and breaking at scene breaks where it can. Bigger isn't automatically better: a longer draft hides more dropped sentences, and checking and redoing a page is precise and cheap. Continuity comes from the context in §3 rather than from a longer draft. E3 tests one page against three on the same text.
+- **Paragraph-sized units beat sentences**, but critical errors and omissions remain (Karpinska & Iyyer 2023), and models skip more as the output gets longer. So Translation drafts **about a page at a time** (~1k source tokens, ~650 characters): several whole paragraphs, never splitting one, and breaking at scene breaks where it can. Bigger isn't automatically better: a longer draft hides more dropped sentences, and checking and redoing a page is precise and cheap. Continuity comes from the context in §3 rather than from a longer draft.
 - **A small curated memory beats a big raw history.** DelTA (ICLR 2025) keeps proper-noun records, a bilingual summary and retrieved earlier pairs, and improves consistency. Loong (2026) finds that unfiltered context, including full history, sometimes scores *below* no context at all.
 - **Models use long contexts worse than their windows suggest.** Information in the middle is used worst (Liu et al. 2024); when the link isn't a literal word match, most long-context models lose half their accuracy by ~32K tokens (NoLiMa 2025).
 
@@ -76,14 +76,13 @@ A version bump changes the cache key, so amendments are batched at the end of ea
 In this order, stable first (cached) and the passage last (where models attend best):
 
 1. House rules and the department prompt.
-2. The house's reading (§0), the style sheet, cast and ledger. For short texts, the whole bible (a few thousand tokens). For long ones, only the entries present in this passage, the previous two paragraphs and the next paragraph.
-3. **The whole source text**, for texts up to ~30k characters (our default for now: cached at $0.15/M, so cheap, and it lets the model look anywhere). E3 tests whether this helps or hurts; if it hurts, we drop it.
-4. The rolling summary (≤300 words: what has happened, who knows what).
-5. 2–3 earlier approved passage pairs that share characters or address terms with this one.
-6. **A window of real text either side:** the previous two paragraphs in Japanese and English, and **the next paragraph in Japanese, marked read-only** (Japanese often resolves a subject or speaker after the fact).
-7. The passage itself, with its referent-map entries inline (`p12-s3: subject = narrator; speaker of 「…」 = Okinu (medium)`).
+2. The house's reading (§0) and the whole bible: style sheet, cast, ledger, motifs, standing rules. A few thousand tokens for a short story.
+3. **The whole source text.** Every text we run is under ~30k characters, which is cheap in the cached prefix and lets the model look anywhere in the book. E-long (b) checks that it helps.
+4. The voice reference: the chosen first page.
+5. **A window of real text either side:** the previous two paragraphs in Japanese and English, and **the next paragraph in Japanese, marked read-only** (Japanese often resolves a subject or speaker after the fact).
+6. The passage itself, with its referent-map entries inline (`p12-s3: subject = narrator; speaker of 「…」 = Okinu (medium)`).
 
-Everything except (3) stays under ~5k tokens.
+That's all. No rolling summary and no retrieval of earlier passages: with the whole source in the prefix and the bible carrying the decisions, both would be a second copy of what's already there. They come back only for novels (§5), where the whole source can't sit in the prefix.
 
 ## 4. Checking that it held
 
@@ -95,4 +94,4 @@ Everything except (3) stays under ~5k tokens.
 
 ## 5. Novels, later
 
-Same machinery, chapter by chapter: the Analyst updates the bible per chapter, the rolling summary becomes chapter summaries, and the whole-source block becomes the current chapter plus neighbouring chapter summaries. E3 measures whether this keeps book-length consistency on a short-story budget before we claim it.
+Same machinery, chapter by chapter: the Analyst updates the bible per chapter, and the whole-source block becomes the current chapter plus short summaries of the neighbouring ones, which is where a rolling summary and retrieved earlier passages earn a place. Measured before it's claimed; not built for the hackathon.
