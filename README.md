@@ -1,6 +1,8 @@
-# keikaku
+# Fortleben
 
-A human-directed translation house for literature nobody has translated into English, run by agents on Meta's models. Japanese first.
+A platform for literature nobody has translated into English, Japanese first, where the translations are made by **keikaku**, a human-directed translation house run by agents on Meta's models, and go on changing after they're made.
+
+*Fortleben*, living on: Walter Benjamin's word for what a work does in translation. (It also happens to echo the Future of Books Fund behind Aozora Bunko.) *keikaku*, plan: the fansub joke about a translator's note that explains nothing, which is the test every note here has to pass.
 
 Work in progress for the Meta Global AI Developer Hackathon. Everything in this repo was written during the event (from 27 Oct 2026); the commit history is the record.
 

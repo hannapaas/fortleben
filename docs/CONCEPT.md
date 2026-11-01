@@ -1,17 +1,19 @@
-# keikaku — concept
+# Fortleben — concept
 
 Written 27 Oct 2026, the second day of the hackathon. Architecture: `ARCHITECTURE.md`. Order of work: `BUILD-PLAN.md`.
 
 ## Pitch
 
-**keikaku is a small publishing house of Meta Muse agents, run by one human editor, that brings stories nobody has translated into English, starting with Japanese, and shows every doubt, argument and decision behind each line.**
+**Fortleben is a platform for stories nobody has translated into English, starting with Japanese. Its translations are made by keikaku, a small publishing house of Meta Muse agents run by one human editor, and every doubt, argument and decision behind each line is a tap away.**
 
-Thousands of Japanese books are free to read on Aozora Bunko, and no translator is coming for most of them. Today an English reader who wants one gets Google Translate on a badly formatted page. keikaku gives them a readable, annotated edition, honest about being machine-made, with every decision behind it visible: a window into another world. And it's a starting point, not a final word: readers react, argue and propose fixes, the way Wikipedia articles and fan translations get better.
+Thousands of Japanese books are free to read on Aozora Bunko, and no translator is coming for most of them. Today an English reader who wants one gets Google Translate on a badly formatted page. Fortleben gives them a readable, annotated edition, honest about being machine-made, with every decision behind it visible: a window into another world. And it's a starting point, not a final word: readers react, argue and propose fixes, the way Wikipedia articles and fan translations get better.
 
 It's useful without anyone's sign-off. When a person does check a passage, the page says so; until then, it says it hasn't been.
 
 ## Words
 
+- **Fortleben:** the platform and the project. German for living on; Walter Benjamin's word, in "The Task of the Translator", for the afterlife a work has in translation. The translations here aren't final texts; they go on changing.
+- **keikaku:** the translation house inside it: the agents, departments, queries and editors' desk. Japanese for plan, from the fansub joke about a translator's note that explains nothing; the test every note here has to pass.
 - **Work:** the original text, with its rights record. You browse by work.
 - **Edition:** one translation of a work, by the house alone or steered by a named editor, versioned (v1, v1.1). A work can have several editions by different editors; for now each has one.
 - **View:** how an edition is shown: **Casual**, **Curious** or **Student**. One base text with controlled tokens, so the views differ by design, not by drift. (Earlier drafts of these docs called the views "editions"; where that wording survives, it means views.)

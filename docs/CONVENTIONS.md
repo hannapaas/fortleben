@@ -1,4 +1,6 @@
-# keikaku — how this repo is built
+# Fortleben — how this repo is built
+
+The platform is Fortleben; the translation house inside it is keikaku, and the engine's package and CLI keep that name.
 
 Written 30 Oct 2026. The rules of the road for anyone (or any agent) working in this repo, so parallel lanes don't tangle. Short on purpose.
 

@@ -1,4 +1,4 @@
-# keikaku — the site, page by page
+# Fortleben — the site, page by page
 
 Written 1 Nov 2026. What a visitor finds at each address, what they can do there, and what's live at submission versus later. This is the contract for the site lane; `CONCEPT.md` says why, `STAGES.md` says how the text got there.
 
@@ -10,7 +10,7 @@ Two rules run through every page:
 
 | Address | What's on it | What a visitor can do | At submission |
 |---|---|---|---|
-| `/` | Three lines on what this is. The showcase. The shelf (every edition, with its label, language and length). The House, live or replaying. Links to the Catalogue and Evals. | Start reading | Live |
+| `/` | Three lines on what Fortleben is and what keikaku, the house, does. The showcase. The shelf (every edition, with its label, language and length). The House, live or replaying. Links to the Catalogue and Evals. | Start reading | Live |
 | `/library` | Every edition: title, author, language, length in sheets, how far it got, when it was last revised. No ranking; newest first. | Filter by label or language | Live |
 | `/read/<work>` | **The reader.** The work's edition (an edition picker appears only when there's more than one), in three views (Casual · Curious · Student) and three layouts (English · parallel · interleaved), chosen in the settings panel, which never loses your place. Ruby and furigana options for Japanese. Per-paragraph status in words; a thin margin strip showing where the house spent its effort; *flagged, unresolved* marks. The house's reading, the bible view and the author file, linked from the top. Colophon and credits at the end, with the Aozora attribution. | Tap a paragraph for the **margin**: the debate behind it (queries, dissent, forks, alternatives, the editor's rulings), notes with their sources, revision history. React on two axes (*how it reads* / *is it right*). **Comment** (below). **Propose a fix** to a span with a reason. | Live. Student view if it holds; parallel layout is independent of it |
 | `/read/<work>/reading` | The house's reading of this text, labelled as the house's, with what changed between versions. | Read; comment | Live |
@@ -20,7 +20,7 @@ Two rules run through every page:
 | `/house` | The floor plan with rooms lit by department, the message stream (every agent's `say`), the budget meter in drops, interns as dotted squares, forks as they open. One live run at a time; everyone watches the same one. When closed or capped, a replay and a line saying why. | Start a run on a preset passage (2 per visitor a day). Watch. Scrub the replay. | Live, presets only. Presets are pre-briefed: their reading and bible are built in advance so the live run is drafting and checking with the real state, not a cold passage |
 | `/evals` | The exhibit: passages side by side (one-shot, ours, and for one passage the 1918 human translation), with arrows and margin notes in plain words, including where ours is worse. Under it, the full list of every problem the auditor marked in every version, and the method in a paragraph. The planted continuity result if it was run. | Read the list | Live |
 | `/how-it-grows` | How a text gets translated here and how that could widen (below). | Vote, request | Live |
-| `/about` | Where this comes from (publishing, fan translation, Wikipedia, web fiction), who built it, the licence (CC BY-SA 4.0 for our English), Aozora's terms, the honest-labels policy, contact and takedown. | | Live |
+| `/about` | Where this comes from (publishing, fan translation, Wikipedia, web fiction), the two names and where they're from, who built it, the licence (CC BY-SA 4.0 for our English), Aozora's terms, the honest-labels policy, contact and takedown. | | Live |
 | `/desk/<token>` | The editors' desk, by invite link (`EDITORS-DESK.md`): start a run (whole work, estimate reserved first), the checkpoint screen, open forks, rules and their scope, locks, pause and resume, the allowance in drops, reports on comments, promote a reader. | Start, rule, lock, approve, remove | Live for the house editor; guest editors as the stretch (`BUILD-PLAN.md` M7b) |
 | `/review/<token>` | A bilingual reviewer's desk, by invite link: read a paragraph against the source and mark it *human-reviewed*, or raise a query. | Mark, query | Live, probably unused by 4 Nov; that's fine and the labels will show it |
 

@@ -1,4 +1,4 @@
-# keikaku — build plan
+# Fortleben — build plan
 
 Written 27 Oct 2026, the second day of the hackathon; updated 28 Oct with the final text picks and design direction. The work is in dependency order. **‖** marks lanes that can be built at the same time. Lanes code against the M1 contract (schema, event types, fixtures), not against each other.
 
