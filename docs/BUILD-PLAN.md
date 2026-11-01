@@ -6,11 +6,20 @@ Written 27 Oct 2026, the second day of the hackathon; updated 28 Oct with the fi
 
 Nothing is built yet: the repo holds plans. Five days remain, and the last push has to be in by the evening of 4 Nov UK time. So the order below is the order, with the thinnest working path first and everything else added only once it runs:
 
-1. **M0 and M1** (serial, now). M0 is blocked until `public/.env` holds a working `META_API_KEY`; `uv` is also missing.
+1. **M0 and M1** (serial, now). M0 needs `public/.env` with `MODEL_API_KEY` (Meta's own name for it) and `uv` installed.
 2. **The minimal pipeline** (`STAGES.md`: parse, first read, bible, draft, source check, answer, code checks, notes, release) on 「晩餐」, writing events; the site and House view rendering the fixture in parallel (M2b, M2c), deploy (M2f).
 3. **M3:** the remaining stages, forks, interns, rules. Midpoint check at the end of 1 Nov.
 4. **M5 and M6:** the showcase brief and checkpoint, the full run, S-GT fetched, the audit and the exhibit, the planted continuity test. Then the shelf (M5b) and the other texts (Tōkoku, Kasai).
 5. **M7 and M8:** integrate, README, video, a clean-clone replay check, submit.
+
+**The first session, concretely (M0 then M1):**
+- `uv init` in `public/` with Python 3.12 pinned; the layout in `CONVENTIONS.md`; `.env.example` with `MODEL_API_KEY=`; pytest wired up.
+- `house/client.py`: one call to `muse-spark-1.3` on the Responses API with a strict JSON schema, `prompt_cache_key` and `prompt_cache_retention: "24h"`, logging input / cached / output / reasoning tokens and dollars from `usage` into the spend ledger; the response cache keyed on (model, prompt hash, input hash); `FakeClient`. One call each to `muse-wonder-1.0` and, with web search, to Spark. Measure reasoning tokens at low and medium on a 1k-character chunk and update the cost table in `ARCHITECTURE.md` §10.
+- `house/lang/ja/`: fetch and parse the four demo texts from Aozora (「晩餐」, 「我牢獄」, 「三十三の死」, 「思い出の記」), round-trip tests, paragraphs with IDs, scene breaks, ruby, gaiji, colophon.
+- `db/schema.sql`, `house/events.py`, `house/schemas/` for the seven minimal-pipeline prompts, and a fixture for 「晩餐」 (segments, a few queries, notes, a fork, events) so the site and House lanes can start.
+Then the minimal pipeline on 「晩餐」, stage by stage, stopping after each to read the output.
+
+What to translate is being settled separately; it only matters at M5. The engine is built and tuned on 「晩餐」 whatever the showcase turns out to be, and the exhibit's comparison texts come at M6.
 
 Started at the back of the queue, not cut: the Catalogue beyond the 15 launch titles, the acquisitions agent for outside requests, the Student edition, Glimmer on Modal (the code checks run without it), covers. The Sōseki stretch text is dropped; the stretch is now guest editors (M7b).
 
@@ -27,7 +36,7 @@ Started at the back of the queue, not cut: the Catalogue beyond the 15 launch ti
 | M2e ‖ | **Catalogue** | A Glimmer vs Spark spot check on 10 works. Reader's reports generated on Meta models, the 15 launch titles first and the long-list only if time allows. Catalogue pages with evidence and date for "untranslated". "I'd read this" votes, a request form (search the Aozora index or give an outside reference) and a wanted list. Acquisitions checks outside requests and the editor confirms. |
 | M2f ‖ | **Ops** | Fly deploy. Spend caps (live run / daily / total), kill switch, one-run queue, per-IP limits, invite-link auth for editor and reviewers. The replay fallback works when the house is closed. |
 | **M3** | **Full pipeline on 晩餐** (needs M2a; then adds Editorial, Copy desk, Notes, Fact-check, forks, interns, rules) | One run produces queries with stet / accept / revise, ≥1 fork with verbatim dissent, ≥1 intern with a logged reason, a standing rule that propagates and skips locked lines. Cost per 1k chars is within the pessimistic figure. The run streams into M2c and renders in M2b. |
-| **M4** | **The other texts + prompt freeze** | 我牢獄, 雪をんな and the Setsu passage run. The hard text's failures are written up honestly. Prompts are tagged `frozen-v1`. **Midpoint check (below).** |
+| **M4** | **The other texts + prompt freeze** | 我牢獄, 雪をんな and 思い出の記 run. The hard text's failures are written up honestly. Prompts are tagged `frozen-v1`. **Midpoint check (below).** |
 | M5 ‖ | **Showcase with the editor** | The brief runs on 三十三の死 and stops at the checkpoint (`RUNNING-A-TEXT.md` §4): the editor's changes become scoped rules, ≤5 forks. The full run follows. The edition carries honest labels, an editor's note and credits. If a bilingual reader has time to check passages, those are labelled *human-reviewed*; nothing waits for it. |
 | M5b ‖ | **The shelf** | After M5's full run holds: the short Catalogue titles (under ~15k characters, the 15 launch titles first) run through the house with no editor, Spark calls on the Contributor tier (approved for public-domain texts), labelled *house-checked*. Target ten or more editions; each costs a dollar or two. The first thing cut if M5 slips. |
 | M6 ‖ | **The exhibit** (a deliverable) | The exhibit component renders passage pairs with anchored margin notes and arrows, on the site and as a recordable view. The audit run on the showcase in all versions; the editor has struck what the auditor got wrong; the exhibit is built from the best passages, with the full list under it, and one passage is in the README as an image. Extras only after that: the planted continuity test, the era guess. |
@@ -41,7 +50,7 @@ What the organisers have said judges do: watch the 3-minute video, read the publ
 
 1. **Run keyless.** `uv sync` then `keikaku serve --replay` serves the site with the recorded runs from `fixtures/`: the showcase and shelf editions, the House replaying a real run, the Exhibit. No key, no network.
 2. **Carry provenance.** Each recorded run in `fixtures/` is the complete event log with every model call's request hash, model, token counts, cost and response, so a judge can see the Meta calls that produced the text without re-running them. The README links a recording of the live run too.
-3. **Run live with a key.** `.env.example` lists the names; with `META_API_KEY` set, `keikaku run <work>` runs a text and `keikaku serve` runs the House live, under the same caps as the hosted site.
+3. **Run live with a key.** `.env.example` lists the names; with `MODEL_API_KEY` set, `keikaku run <work>` runs a text and `keikaku serve` runs the House live, under the same caps as the hosted site.
 4. **Say which Meta model does what and where it runs**, in the README's first screen: Spark and Wonder through the Meta Model API, Glimmer on Modal, Spark Open through a partner host. No licence links are required.
 5. **Say how to use the hosted version**, including that it has replay mode and rate limits, and give the guest-editor invite if M7b is built.
 
