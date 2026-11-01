@@ -3,7 +3,7 @@ import pytest
 from house import works
 from house.lang.ja import aozora
 
-DEMO = ["bansan", "sanjusan", "warogoku", "omoide"]
+DEMO = ["bansan", "sumiyaki", "sanjusan", "warogoku", "omoide"]
 
 
 @pytest.mark.parametrize("work_id", DEMO)

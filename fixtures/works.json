@@ -19,6 +19,26 @@
       "verdict": "public domain (author died 1918, published 1917)"
     }
   },
+  "sumiyaki": {
+    "aozora_id": "002545",
+    "author_id": "000118",
+    "title": "炭燒のむすめ",
+    "title_en": "The Charcoal-Burner's Daughter",
+    "author": "長塚節",
+    "author_en": "Nagatsuka Takashi",
+    "card_url": "https://www.aozora.gr.jp/cards/000118/card2545.html",
+    "zip_url": "https://www.aozora.gr.jp/cards/000118/files/2545_ruby_21606.zip",
+    "role": "showcase (provisional, 1 Nov)",
+    "rights": {
+      "author_died": 1915,
+      "first_published": "「馬醉木」1906（明治39）年7月",
+      "first_published_year": 1906,
+      "basis": "Aozora index 初出",
+      "existing_translations": [],
+      "translation_search": "No English translation found (Japan Foundation database, web, 1 Nov). Two leads unresolved: an Open Library record 'Daughter of a charcoal maker' (probably an English parallel title on the Iwanami edition; page blocked) and a Columbia dissertation discussing the story as 'The Girl of the Kiln' (not read).",
+      "verdict": "public domain (author died 1915, published 1906)"
+    }
+  },
   "sanjusan": {
     "aozora_id": "000002",
     "author_id": "000012",
