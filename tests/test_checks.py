@@ -20,3 +20,9 @@ def test_omission_guard_uses_the_texts_own_baseline():
     pairs = {f"p{i}": (ja, "x" * 300) for i in range(6)}
     pairs["p9"] = (ja, "x" * 100)
     assert list(checks.omissions(pairs)) == ["p9"]
+
+
+def test_a_token_that_starts_a_sentence_is_capitalised():
+    assert checks.render('"{t:storm}." He whispered it.', TERMS) == '"Storm." He whispered it.'
+    assert checks.render("Rain. {t:storm} came.", TERMS) == "Rain. Storm came."
+    assert checks.render("rain and wind — a {t:storm}.", TERMS) == "rain and wind — a storm."

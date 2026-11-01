@@ -16,8 +16,20 @@ TICS = [
 ]
 
 
+SENTENCE_START = re.compile(r"(?:^|[.!?]\s+|[\"“‘'(])$")
+
+
 def render(english: str, terms: dict, view: str = "casual") -> str:
-    return TOKEN.sub(lambda m: terms[m.group(1)][view] if m.group(1) in terms else m.group(0), english)
+    """The English as a view shows it: each {t:id} token replaced by that view's rendering,
+    capitalised where the token starts a sentence."""
+    def sub(m):
+        if m.group(1) not in terms:
+            return m.group(0)
+        out = terms[m.group(1)][view]
+        if out and SENTENCE_START.search(english[:m.start()]):
+            out = out[0].upper() + out[1:]
+        return out
+    return TOKEN.sub(sub, english)
 
 
 def ledger(english: str, terms: dict) -> list[str]:
