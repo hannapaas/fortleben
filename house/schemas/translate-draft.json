@@ -16,7 +16,7 @@
               "type": "object",
               "properties": {
                 "sentences": {"type": "array", "items": {"type": "string"}},
-                "english": {"type": "string"},
+                "starts": {"type": "string", "description": "The first four to six words of the English stretch, exactly as written: an anchor, not a copy"},
                 "relation": {"type": "string", "enum": ["one-to-one", "merged", "split", "reordered", "absent"]}
               }
             }
