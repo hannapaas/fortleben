@@ -25,10 +25,10 @@ It's useful without anyone's sign-off. When a person does check a passage, the p
 |---|---|
 | Casual reader | Reads the **Casual** edition: clean text, no notes in the flow. Reacts to a paragraph. |
 | Culturally curious reader | Switches to **Curious**: honorifics kept, ruby over key terms, two-sentence tap-notes. Taps a line to see the debate behind it. |
-| Student | **Student** edition: parallel Japanese with furigana, a literal crib, sourced notes, decision history. Browses the Catalogue for a text to study. It's an edition, not a tutor. |
+| Student | **Student** edition: parallel Japanese with furigana, sourced notes, decision history (a literal crib later). Browses the Catalogue for a text to study. It's an edition, not a tutor. |
 | Translator | Browses the **Catalogue**. Reads the style sheet and queries. Finds something to pitch to a press. |
 | Bilingual reader | Flags "I think this is wrong" with a reason; proposes a fix to a span. A bilingual reader who checks a passage against the Japanese can mark it *human-reviewed*, and their name goes on it. |
-| The editor | Approves the style sheet, sets the sample checkpoint, decides forks, makes standing rules, locks lines, dictates notes, signs the edition. None of it blocks the house: until the editor rules, the department head's pick stands and is labelled as such. |
+| The editor | Reviews the checkpoint before a full run (crux, reading, voice, key bible choices), decides forks, makes standing rules, locks lines, dictates notes, signs the edition. Only the checkpoint holds a run, and only when an editor is assigned; everywhere else, until the editor rules, the department head's pick stands and is labelled as such. A text with no editor runs straight through and says so. |
 
 ## The community concept
 

@@ -16,35 +16,42 @@ No manager agent. A deterministic orchestrator (plain code, a state machine per 
 flowchart TD
   ACQ["Acquisitions<br/>readers' reports + rights check"] --> P{{"Editor: provenance"}}
   P --> PARSE["Aozora parser (code)<br/>ruby, IDs, colophon"]
-  PARSE --> AN["Analyst · Spark<br/>ledger, character sheet, style sheet draft,<br/>speaker/subject notes, hard-paragraph flags"]
-  AN --> SS{{"Editor: approves style sheet"}}
-  SS --> TR["Translation desk · Spark — OWNER<br/>lead draft + translator_notes;<br/>2nd draft only on flagged paragraphs"]
-  TR -->|"draft"| SC["Source check · Wonder<br/>error spans vs the Japanese"]
+  PARSE --> BG["Background brief · Spark + web_search"]
+  BG --> RDG["First read · Wonder<br/>the house's reading, from the crux"]
+  RDG --> CX["Crux check · Spark, independent<br/>same crux, or the first fork"]
+  CX --> AN["Analyst · Spark<br/>story bible: cast, ledger, referent map,<br/>narration, motifs, style sheet, hard spots, tiers"]
+  AN --> VT["Voice trial · Spark ×2–3, checked by Wonder;<br/>head selects"]
+  VT --> CP{{"Editor: checkpoint<br/>crux, reading, voice, key bible choices"}}
+  CP --> TR["Translation desk · Spark — OWNER<br/>draft page by page; 2nd draft on tricky/hard paragraphs"]
+  TR -->|"draft"| SC["Source check · Wonder<br/>every paragraph, every diff"]
   SC -->|"queries"| TR
-  TR --> ED["Editorial · Spark, English only<br/>line edit + voice defender"]
+  TR --> EL["Editor's letter · Wonder, English only<br/>the whole draft against the reading"]
+  EL -->|"notes"| TR
+  TR --> ED["Editorial · Spark, English only<br/>a scene at a time"]
   ED -->|"span queries"| TR
-  TR -->|"every later diff"| SC
-  TR --> CD["Copy desk · code + Glimmer<br/>ledger, length, tic checks"]
+  TR --> CD["Copy desk · code + Glimmer<br/>ledger, callbacks, length, tics"]
   CD -->|"queries"| TR
-  TR --> NE["Notes & editions · Spark<br/>notes, controlled tokens"]
-  NE --> FC["Fact-check & continuity · Spark+web_search<br/>sceptic; Wonder whole-text read"]
-  FC -->|"kill / cite"| NE
-  TR -. "forks + verbatim dissent" .-> EIC{{"Editor: sample checkpoint,<br/>forks, standing rules, locks"}}
+  TR --> NE["Notes · Spark<br/>per edition, anchored"]
+  NE --> FC["Fact-check · Spark + web_search<br/>cite or kill"]
+  FC --> FR["Final read · Wonder<br/>whole, then against the source: seams, drift, crux, continuity"]
+  FR -->|"queries"| TR
+  TR -. "forks + verbatim dissent" .-> EIC{{"Editor: forks, standing rules, locks"}}
   EIC -. "rules (scoped)" .-> TR
-  FC --> QC["Proof/QC (code)"] --> ED3["Editions: Casual · Curious · Student"]
+  FR --> QC["Proof/QC (code)"] --> ED3["Editions: Casual · Curious · Student"]
   ED3 --> RD["Reader desk<br/>reactions, proposals"]
   RD -. "queries by reason" .-> SC & ED & FC
 ```
 
-How a whole text moves through this (passes, difficulty tiers, the budget per 1,000 characters, and what gets cut when money is short) is in `RUNNING-A-TEXT.md`. Rounds are capped at two per query. If it's unresolved after that, it goes to the editor as a fork with a one-line trade-off per option (at most 5 forks per checkpoint, global ones first). Critics edit **flagged spans only** and may answer "none". The English-only pass never sees the Japanese, and every change it makes goes back through Source check. Sensitivity flags (dated or harmful content in the source) are a query type routed to the editor. They lead to context notes, never bowdlerising.
+**The exact order of stages, what each call takes and returns, and the limits code enforces are in `STAGES.md`; that list is what the orchestrator implements.** How a whole text moves through it (passes, difficulty tiers, the allowance per manuscript sheet, and what gets cut when money is short) is in `RUNNING-A-TEXT.md`. Rounds are capped at two per query. If it's unresolved after that, it goes to the editor as a fork with a one-line trade-off per option (at most 5 forks per checkpoint, global ones first). Critics edit **flagged spans only** and may answer "none". The English-only pass never sees the Japanese, and every change it makes goes back through Source check. Sensitivity flags (dated or harmful content in the source) are a query type routed to the editor. They lead to context notes, never bowdlerising.
 
 ## 2. Data model (SQLite)
 
 | Table | Holds |
 |---|---|
 | `work` | Aozora card, full colophon, rights record (death year, 初出, translation search + date), status |
-| `segment` | `p12-s3` IDs from the source; Japanese with structured ruby; paragraph link. Alignment is by ID, with paragraph fallback when sentences merge |
-| `revision` | Base English per segment, versioned. Each revision points at the event that caused it (draft, accepted query, rule, human edit) |
+| `bible` | The story bible and the house's reading per work, as versioned JSON (`STORY-STATE.md`); each version points at the event that changed it |
+| `segment` | Paragraphs `p12` from the source, Japanese with structured ruby, with sentence anchors `p12-s3` inside them for queries and notes. **The paragraph is the unit of English** (`STAGES.md`); which English renders which sentence is best-effort metadata the drafter returns, not a constraint on it |
+| `revision` | Base English per paragraph, versioned, with the drafter's sentence spans. Each revision points at the event that caused it (draft, accepted query, rule, human edit) |
 | `term` | Ledger: entity, reading, rendering per edition (Casual / Curious / Student), first-use note. Base text carries `{t:genin}` tokens, so **editions are presentations of one base text**, checked once |
 | `note` | Anchor, editions it shows in, body, sources[], status `verified / unverified / killed`, author (department or person). Student hides anything unsourced |
 | `query` | From → owner, span, category, reason, evidence[], recommendation, verbatim dissent, status, resolver |
@@ -65,6 +72,8 @@ How a whole text moves through this (passes, difficulty tiers, the budget per 1,
 
 - Python `asyncio`, with the OpenAI SDK pointed at Meta's API on the **Responses API** (needed for caching hints, web_search and reasoning summaries). No agent framework.
 - A department is a module: prompt files, a strict JSON schema, and `run(task, state) → queries | edits | notes`. Every output schema has a `say` field, one plain sentence for the House log. Muse never exposes its reasoning, so the visible debate *is* what the agents write.
+- **Prompts teach principles; code enforces limits.** A department prompt explains what the job is for and why (fidelity over fluency, keep deliberate ambiguity, raise a query only when it matters), so the agent can make a sensible call on a case nobody foresaw. Absolute "always / never" lines are kept for the few things that are crucial, because models follow them literally even where they stop making sense. Anything that must hold no matter what (the spend cap, two rounds per query, output schemas, locked lines) is enforced by the orchestrator, not by the prompt. Prompts stay short as a result.
+- The model client has a `FakeClient` that serves recorded responses from `fixtures/`, so the site, the House view and the tests run with no key. A paragraph gets at most three revision cycles per run; after that it's *flagged, unresolved* rather than argued over again.
 - Translation runs chunk by chunk in order, because the state is carried forward. Other departments work behind it in parallel, under a concurrency semaphore. 429s and 5xx get retries with backoff.
 - **A response cache** keyed on (model, prompt hash, input hash) makes reruns in development free and replays deterministic.
 - **Standing-rule propagation:** a scoped search (ledger plus regex, then a cheap Spark classifier on the candidates) finds the affected segments. Translation revises them as queries. The UI shows "R4 · 12 lines, 2 locked lines sent to the editor".
@@ -73,16 +82,16 @@ How a whole text moves through this (passes, difficulty tiers, the budget per 1,
 
 | Job | Model | Why |
 |---|---|---|
-| Analyst, translation, editorial, notes, query answers | `muse-spark-1.3`, effort medium for drafting and low elsewhere; `prompt_cache_key` per work + style-sheet version | Strong and cheap. The stable prefix caches at 88% off |
-| Source check (every chunk, every diff); critic at forks; whole-text continuity read | `muse-wonder-1.0`, effort low | A different and stronger checkpoint from the drafter. The 1M context holds the whole source and translation in one call |
-| Copy desk (English-side tics, register, consistency) | Muse Glimmer 30B: locally via Ollama for batch runs; on Modal for the live site (Muse Spark Open on Baseten if that falls through) | Open weights, near-free. Rewrites flagged spans only |
+| Analyst, translation, editorial, notes, query answers | `muse-spark-1.3`, effort medium for drafting, low elsewhere, minimal for classifiers (rule scope, crux comparison); reasoning can't be switched off. `prompt_cache_key` per work + style-sheet version, `prompt_cache_retention: "24h"` | Strong and cheap. The stable prefix caches at 88% off |
+| First read (the house's reading); Source check (every chunk, every diff); critic at forks; whole-text continuity read | `muse-wonder-1.0`, effort low (medium for the first read) | A different and stronger checkpoint from the drafter. The 1M context holds the whole source and translation in one call |
+| Copy desk (English-side tics, register, consistency) | Muse Glimmer 30B hosted on Modal ($30 of credits, a listed partner, so the open-weight bonus can be verified) for the recorded runs and the live site; the laptop is too slow to rely on. Until the Modal endpoint exists the code checks run alone | Open weights, near-free. Proposes replacements for flagged spans; never writes the base text |
 | Fact-check | Spark + `web_search` | Every note cites a source or dies |
 | Catalogue | Spark low as the acquisitions editor; Glimmer as chunk reader if it passes a 10-report spot check, else Spark | Cheap at 200 reports |
 | Requests from outside Aozora | Spark low + `web_search`: author dates, first publication, existing English translations; a short reader's report if a text is found | Capped per day; the editor confirms every verdict |
 | Editor's dictated notes | `muse-voice-transcribe-1.0`, ledger names as keyword bias | The editor works from a phone |
 | Covers | `muse-image-1.0` | Decorative, $0.01 each. Cut first |
 
-**About the shared lineage:** Glimmer is distilled from Spark, and Spark Open is Spark released as open weights. Wonder is a different, larger model but from the same family. So "a different model as critic" here means a different checkpoint, not independence, and the README will say so. **The product makes only Meta calls.** The eval jury is Wonder, Spark Open and Glimmer.
+**About the shared lineage:** Glimmer is distilled from Spark, and Spark Open is Spark released as open weights. Wonder is a different, larger model but from the same family. So "a different model as critic" here means a different checkpoint, not independence, and the README will say so. **The product makes only Meta calls.** The eval jury is Wonder, Glimmer and one non-Meta model used only as a judge, never in the product: the cleanest answer to "Meta judging Meta". Spark Open joins if partner credits arrive.
 
 ## 5. Interns
 
@@ -97,7 +106,7 @@ The full design, including the story bible the Analyst builds and why we avoid l
 - **Whole source by default** for texts up to ~30k characters (all of ours), cached; E3 decides whether it stays.
 - **Prompt order** (stable first, so it caches):
   1. House rules and the department prompt.
-  2. Style sheet, ledger, character sheet, standing rules.
+  2. The house's reading, style sheet, ledger, character sheet, standing rules.
   3. *Optional:* the whole source text (cached at $0.15/M, so 24k tokens cost about $0.004 a call).
   4. Volatile material: a rolling summary of ≤300 words; 2–3 retrieved earlier pairs that share entities (locked lines first; no embeddings, found by ledger overlap); the previous two paragraphs; the chunk with the analyst's speaker and subject notes.
 - **Carried state** is capped at ~5K tokens, not counting the optional source.
@@ -107,7 +116,7 @@ The full design, including the story bible the Analyst builds and why we avoid l
 
 ## 7. Streaming the house at work
 
-Every event is written to `event` and then broadcast in-process. `GET /runs/{id}/stream` is Server-Sent Events, with `Last-Event-ID` so a viewer can resume. Event types: `call.started`, `agent.say`, `draft.delta` (the lead draft, streamed token by token), `query.raised/resolved`, `fork.opened`, `intern.hired`, `budget.tick`, `rule.applied`, `run.done`. Replay is the same endpoint with `?replay=1&speed=8`. The House view is a floor plan with rooms lit by department, beside the message stream as the log, plus budget meters. **There's one live run at a time and every viewer watches the same one**: cheap, and true to the metaphor.
+Every event is written to `event` and then broadcast in-process. `GET /runs/{id}/stream` is Server-Sent Events, with `Last-Event-ID` so a viewer can resume. Event types: `call.started`, `agent.say`, `draft.paragraph` (each paragraph of the lead draft as it lands; token-level `draft.delta` only if streaming text out of a JSON response turns out to be easy), `query.raised/resolved`, `fork.opened`, `intern.hired`, `budget.tick`, `rule.applied`, `run.done`. Replay is the same endpoint with `?replay=1&speed=8`. The House view is a floor plan with rooms lit by department, beside the message stream as the log, plus budget meters. **There's one live run at a time and every viewer watches the same one**: cheap, and true to the metaphor.
 
 ## 8. Stack, hosting, abuse
 
@@ -140,20 +149,22 @@ Prices per million tokens (in / cached / out): Spark $1.25 / $0.15 / $4.25; Wond
 
 | Full pipeline, per 1,000 Japanese chars | Base | Pessimistic |
 |---|---|---|
-| Analyst, summaries, continuity read (amortised) | $0.015 | $0.025 |
+| First read, Analyst, summaries, continuity read (amortised) | $0.015 | $0.025 |
 | Translation lead draft + second drafts on ~20% of chunks | $0.022 | $0.035 |
 | **Source check, Wonder, draft + diffs** | **$0.068** | **$0.12** |
-| Editorial + copy desk | $0.013 | $0.021 |
-| Notes + fact-check (with search) | $0.032 | $0.05 |
+| Editor's letter (Wonder, whole draft) + Editorial + copy desk | $0.025 | $0.04 |
+| Notes + fact-check (with search) | $0.022 | $0.035 |
 | Query answers, heads, interns | $0.010 | $0.02 |
 | **Total** | **≈ $0.16** | **≈ $0.27** |
+
+The English-alone side (editor's letter, Editorial) got more and notes got less on 30 Oct: for an edition that's pleasant to read, the revision without the source matters more than another note. The first read (one Wonder call at medium effort over the whole text, plus Spark's independent crux read) adds roughly $0.015 base / $0.025 pessimistic per 1,000 chars on top of the first row; the background brief and the voice trial are fixed costs of a few cents per text. The per-text table below hasn't been rescaled for these; M0 replaces all of these figures anyway.
 
 | Text | Chars | One full run (base / pessimistic) | Planned spend |
 |---|---|---|---|
 | Shiraki Shizu 「晩餐」 (development text) | 3,400 | $0.54 / $0.92 | 5 tuning runs, inside "dev" below |
 | Kitamura Tōkoku 「我牢獄」 (hard experiment) | 4,500 | $0.72 / $1.22 | 3 runs: $2.2 / $3.6 |
 | Kasai Zenzō 「雪をんな」 (plain control) | 3,200 | $0.51 / $0.86 | 3 runs: $1.5 / $2.6 |
-| Koizumi Setsu 「思い出の記」 passage (vs its 1918 translation) | ~1,500 | $0.24 / $0.41 | 3 runs: $0.7 / $1.2 |
+| Koizumi Setsu 「思い出の記」 (vs its 1918 translation) | 30,700 whole; the brief always runs on the whole text | $4.9 / $8.3 whole; ~$0.9 / $1.5 for three windows after the brief | 1 whole run if the budget holds, else windows |
 | **Showcase: Shiraki Shizu 「三十三の死」** | 13,500 | **$2.16 / $3.65** | 2 runs + rule reruns: $6.5 / $11 |
 | Stretch: Natsume Sōseki 「幻影の盾」 | 22,100 | $3.54 / $5.97 | 1 run |
 | Live demo run (preset passage) | ~1,500 | $0.24 / $0.41 | — |
@@ -161,13 +172,13 @@ Prices per million tokens (in / cached / out): Spark $1.25 / $0.15 / $4.25; Wond
 | Budget line, inside the $150 credits | Base | Pessimistic |
 |---|---|---|
 | Dev: smoke tests, prompt tuning, failed runs, 晩餐 ×5 | $25 | $40 |
-| Experiments (Tōkoku, Kasai, Setsu) | $4.4 | $7.4 |
+| Experiments (Tōkoku, Kasai, Setsu whole) | $8.6 | $14.5 |
 | Showcase | $6.5 | $11 |
 | Evals E1–E6, including the long-context experiment | $25 | $44 |
 | Catalogue, 200 reports | $4 | $7 |
 | Rehearsals and video takes; covers | $6 | $11 |
 | Stretch, one run | $3.5 | $6 |
-| **Total** | **≈ $74** | **≈ $126** |
+| **Total** | **≈ $78** | **≈ $133** |
 
 **Headline:** everything, the stretch included, fits in the $150 credits even in the pessimistic case. The live site after submission runs on separate billing, capped at $10 a day.
 
