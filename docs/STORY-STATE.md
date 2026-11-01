@@ -46,6 +46,19 @@ The Analyst (Spark) then builds the bible, with the whole source and the reading
 
 The bible is one flat JSON file per work, with a schema, versioned and stored with the run. Code reads it for the checks in §4; prompts get it rendered as plain Markdown. Deliberately no knowledge graph, vector store or embeddings: a short story's cast and ledger fit in a few thousand tokens, and every extra layer is another place for errors to hide. We'd revisit that only for a house-wide memory across many works. A human-readable view of it is published with each edition: readers can see the cast and ledger the house worked from.
 
+## 1a. The author file
+
+Translators who do several books by one author build up a knowledge of that writer: favoured sentence shapes, the words she leans on, how she handles dialogue, where she's deliberately rough, how her recurring terms were rendered last time and why. Each new book is still read on its own terms; the knowledge is what lets the translator notice when the author has changed register.
+
+The house keeps the same thing, as **an author file**: one per author, built only from completed runs, never written in advance. Each entry says where it came from (which work, which stage: a ledger rendering, a line from the editor's letter or final read, an editor's ruling scoped `author`) and whether the latest reading agreed with it.
+
+- **It informs; it never binds.** The first read gets it as information to weigh. The reading of *this* text, starting from its crux, decides what applies; a habit list can't override that, and a reading that finds the author has changed says so and the file records the disagreement.
+- **Rules can be scoped `author`**, alongside line / character / term / work / house. Like every rule they're visible and revocable, and a rule from one work never rewrites a locked line in another.
+- **It's published**, on the author's page, with its provenance, the same way the bible is. It's also honest about size: with two works by one author it's a few entries, and the page says so rather than dressing it up.
+
+For the hackathon the only author with two works is Shiraki Shizu (「晩餐」 then 「三十三の死」), which makes it a real but small piece of evidence that the house isn't translating each text cold. It should be described that way.
+
+
 ## 2. Changing its mind
 
 Translators' understanding of a book grows while they translate it; close work turns up things a read-through doesn't. Halfway through, a word turns out to echo something on page two, and the rendering chosen for page two now looks wrong. That's why translators draft the whole book before revising anything: late discoveries are cheap until the revision starts. The house works the same way. The reading and the bible are the best view at the start, not a verdict.

@@ -3,6 +3,7 @@
 Written 27 Oct 2026, the second day of the hackathon; updated 28 Oct with the final text picks. The plan, not yet the code: sections change as the build proves or disproves them. See `CONCEPT.md` for what it's for and `BUILD-PLAN.md` for the order of work.
 
 Design choices worth knowing first:
+- **Built per source language, Japanese first.** `work.language` is a field; a text enters through a source adapter (Aozora is the first); the bible, departments and site are language-neutral; anything Japanese-specific (the Aozora parser, ruby and furigana, the honorific policy, `fugashi` for stats) sits in `house/lang/ja/`. Nothing else assumes Japanese.
 - **Source check runs on Wonder for every chunk**, not only on hard passages. It's affordable (§10), and same-model critique does most damage in exactly this department.
 - **Editions share one base text**: one English string per sentence with controlled tokens, not three separate translations.
 - **The catalogue's reader's reports are generated on Meta models.**
@@ -50,13 +51,14 @@ flowchart TD
 |---|---|
 | `work` | Aozora card, full colophon, rights record (death year, 初出, translation search + date), status |
 | `bible` | The story bible and the house's reading per work, as versioned JSON (`STORY-STATE.md`); each version points at the event that changed it |
+| `author_file` | Per author: what the house learned across their works, each entry with its provenance (`STORY-STATE.md` §1a) |
 | `segment` | Paragraphs `p12` from the source, Japanese with structured ruby, with sentence anchors `p12-s3` inside them for queries and notes. **The paragraph is the unit of English** (`STAGES.md`); which English renders which sentence is best-effort metadata the drafter returns, not a constraint on it |
 | `revision` | Base English per paragraph, versioned, with the drafter's sentence spans. Each revision points at the event that caused it (draft, accepted query, rule, human edit) |
 | `term` | Ledger: entity, reading, rendering per edition (Casual / Curious / Student), first-use note. Base text carries `{t:genin}` tokens, so **editions are presentations of one base text**, checked once |
 | `note` | Anchor, editions it shows in, body, sources[], status `verified / unverified / killed`, author (department or person). Student hides anything unsourced |
 | `query` | From → owner, span, category, reason, evidence[], recommendation, verbatim dissent, status, resolver |
 | `fork` | Options (author + one-line trade-off), head's pick, the editor's decision, the rule it created |
-| `rule` | Standing rule text, **explicit scope** (line / character / term / work / house), origin, lines it touched |
+| `rule` | Standing rule text, **explicit scope** (line / character / term / work / author / house), origin, lines it touched |
 | `lock` | Segment, who locked it. Rules don't rewrite locked lines; they raise a query to the editor instead |
 | `status` | Per segment: draft / house-checked / editor-approved / human-reviewed, plus who. Nothing waits on the last two |
 | `event` | Append-only log: run, seq, actor (department + role, or person), type, payload, cost. The single source for history, the House stream and replay |
@@ -128,7 +130,7 @@ Every event is written to `event` and then broadcast in-process. `GET /runs/{id}
   - Meta's spend-limit notification is a backstop, not a stop.
   - A `HOUSE_OPEN=false` kill switch. When the house is closed or the cap is hit, the House shows a replay and says why.
 - **Abuse:**
-  - Live runs only on preset passages, or on Aozora works from the eligible index, ≤2,000 chars. No free paste, so we're not a free translation proxy and there's no copyright risk.
+  - Live runs only on preset passages, or on Aozora works from the eligible index, ≤2,000 chars. No free paste, so we're not a free translation proxy and there's no copyright risk. **Presets are pre-briefed:** their reading and bible are built in advance, so a live run drafts and checks with the real state rather than translating a passage cold. A whole work under 2,000 characters gets its brief live, inside the run cap.
   - 2 triggered runs per IP per day.
   - Reactions are rate-limited by cookie and IP. Proposals and comments are pre-moderated, with flat comments and no reply threads, and a takedown contact.
   - Editor and reviewer powers come through signed, revocable invite links. No passwords.

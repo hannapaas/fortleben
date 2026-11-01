@@ -9,7 +9,7 @@ Nothing is built yet: the repo holds plans. Five days remain, and the last push 
 1. **M0 and M1** (serial, now). M0 is blocked until `public/.env` holds a working `META_API_KEY`; `uv` and the Glimmer Ollama pull are also missing.
 2. **The minimal pipeline** (`STAGES.md`: parse, first read, bible, draft, source check, answer, code checks, notes, release) on 「晩餐」, writing events; the site and House view rendering the fixture in parallel (M2b, M2c), deploy (M2f).
 3. **M3:** the remaining stages, forks, interns, rules. Midpoint check at the end of 1 Nov.
-4. **M5 and M6:** the showcase brief and checkpoint, the full run, S-GT fetched, E2 + E4 + the planted continuity test, the exhibit. The experiments (Tōkoku, Kasai) and E1 run only after these.
+4. **M5 and M6:** the showcase brief and checkpoint, the full run, S-GT fetched, E2 + E4 + the planted continuity test, the exhibit. Then the shelf (M5b), the experiments (Tōkoku, Kasai) and E1.
 5. **M7 and M8:** integrate, README, video, a clean-clone replay check, submit.
 
 Started at the back of the queue, not cut: the Catalogue beyond the 15 launch titles, the acquisitions agent for outside requests, the Student edition, E3's long-book windows and C0, Glimmer on Modal (the code checks run without it), covers and dictation, the stretch text.
@@ -29,8 +29,9 @@ Started at the back of the queue, not cut: the Catalogue beyond the 15 launch ti
 | **M3** | **Full pipeline on 晩餐** (needs M2a; then adds Editorial, Copy desk, Notes, Fact-check, forks, interns, rules) | One run produces queries with stet / accept / revise, ≥1 fork with verbatim dissent, ≥1 intern with a logged reason, a standing rule that propagates and skips locked lines. Cost per 1k chars is within the pessimistic figure. The run streams into M2c and renders in M2b. |
 | **M4** | **Experiments + prompt freeze** | 我牢獄, 雪をんな and the Setsu passage run. The hard text's failures are written up honestly. Prompts are tagged `frozen-v1`. **Midpoint check (below).** |
 | M5 ‖ | **Showcase with the editor** | The brief runs on 三十三の死 and stops at the checkpoint (`RUNNING-A-TEXT.md` §4): the editor's changes become scoped rules, ≤5 forks. The full run follows. The edition carries honest labels, an editor's note and credits. If a bilingual reader has time to check passages, those are labelled *human-reviewed*; nothing waits for it. |
+| M5b ‖ | **The shelf** | After M5's full run holds: the short Catalogue titles (under ~15k characters, the 15 launch titles first) run through the house with no editor, Spark calls on the Contributor tier (approved for public-domain texts), labelled *house-checked*. Target ten or more editions; each costs a dollar or two. The first thing cut if M5 slips. |
 | M6 ‖ | **Evals** | E1–E6 done (timing below), with the comparison against S-GT as the headline. The annotated side-by-side exhibit is made. Charts render on the Evals page and in the README. |
-| M7 | **Integrate** | Live site: showcase, experiments, Setsu comparison, Catalogue, House (live + replay), Evals, Credits, "Where this comes from". A live run on a preset passage succeeds three times in a row from a phone. `keikaku serve --replay` shows the recorded run from a clean clone with no key. |
+| M7 | **Integrate** | Live site: showcase, experiments, Setsu comparison, Catalogue, House (live + replay), Evals, Credits, "Where this comes from". Presets are pre-briefed (reading and bible built ahead). A live run on a preset passage succeeds three times in a row from a phone. `keikaku serve --replay` shows the recorded run from a clean clone with no key. |
 | M8 | **Ship** | 3-min video, README first screen, LICENSE, a secrets scan of the full history. A dry run of the submission form on 3 Nov; the final push and submission on 4 Nov, hours before 9 PM ET. Caps set for the judging period. |
 
 ## Working with the editor while we build

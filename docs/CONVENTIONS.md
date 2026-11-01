@@ -7,12 +7,13 @@ Written 30 Oct 2026. The rules of the road for anyone (or any agent) working in 
 ```
 house/            the engine
   client.py       one model client: Responses API, pricing from usage, response cache, FakeClient
-  budget.py       ink, spend ledger, caps, kill switch
+  budget.py       drops of ink, spend ledger, caps, kill switch
   orchestrator.py stages in order (docs/STAGES.md), stop/resume, queries, rules, locks
   stages/         one module per stage
   schemas/        JSON schema per prompt output; the contract
   events.py       event types; the only way state changes are recorded
-  parser/         Aozora text → segments
+  lang/ja/        everything Japanese-specific: the Aozora parser and source adapter, ruby, honorific policy, JA stats
+  parser/         source adapter interface; other languages add house/lang/<code>/
   checks/         deterministic checkers (ledger, callbacks, length ratio, tics)
 prompts/          one Markdown file per prompt (docs/PROMPTS.md), with examples
 site/             FastAPI app, Jinja templates, static CSS/JS (no build step)

@@ -17,7 +17,7 @@ Each stage is a module `house/stages/<name>.py` with `run(ctx) -> events`. The o
 |---|---|---|---|---|---|
 | 0 | **parse** | work | code | segments with ruby, emphasis, scene breaks, colophon, rights record | Deterministic. Round-trip tested. |
 | 1 | **background** | work | `background-brief` · Spark low + web_search | a page of notes with sources | A fixed stage, not an intern; doesn't count against intern caps. |
-| 2 | **first-read** | work | `first-read` · Wonder medium | the house's reading; open questions; 2–3 voice takes | Whole source in one call. |
+| 2 | **first-read** | work | `first-read` · Wonder medium | the house's reading; open questions; 2–3 voice takes | Whole source in one call. Gets the author file (`STORY-STATE.md` §1a) if the house has one, as information to weigh, not instructions. |
 | 3 | **crux-check** | work | `crux-check` · Spark low, then `head-select` · Spark minimal | Spark's crux; *same / different* with a line | Spark never sees Wonder's reading. The head-select call compares the two cruxes; "different" opens the first fork. |
 | 4 | **bible** | work | `analyst-bible` · Spark medium; `analyst-referents` · Spark low, one call per ~5 pages | `bible.json` v1 (cast, ledger, narration, motifs, style sheet, hard spots, referent map, tiers) | Whole source and reading in the cached prefix. Schema-validated. |
 | 5 | **voice-trial** | first page | `translate-draft` × 2–3 · Spark medium (one voice take each); `source-check` · Wonder low on each; `head-select` · Spark low | the voice reference page; the alternatives, kept | |
@@ -32,7 +32,7 @@ Each stage is a module `house/stages/<name>.py` with `run(ctx) -> events`. The o
 | 13 | **notes** | paragraph | `notes` · Spark low | notes per edition with anchors | The keikaku test: only what the sentence can't give you. |
 | 14 | **fact-check** | note | `fact-check` · Spark low + web_search | verified (with sources) / killed | Every note cites or dies. Casual notes can skip this when the pool is short. Interns may be commissioned from 8, 13 or 14 (`ARCHITECTURE.md` §5). |
 | 15 | **final-read** | work | `final-read` · Wonder low | queries | The English as a whole, then against the source: seams, voice drift, crux, continuity. A second final read only if the resulting changes were large (over 10% of paragraphs). |
-| 16 | **release** | work | code | editions (Casual / Curious / Student) from the base text + tokens + notes; statuses; colophon; the bible and reading published | Proof/QC is code: every paragraph present, every token resolved, every note anchored. |
+| 16 | **release** | work | code | editions (Casual / Curious / Student) from the base text + tokens + notes; statuses; colophon; the bible and reading published; the author file updated with this work's entries | Proof/QC is code: every paragraph present, every token resolved, every note anchored. |
 
 Rule propagation (an editor's rule or an accepted bible amendment) is not a stage: it queues revisions (`rule-scope` · Spark minimal on candidates found by ledger and regex), which go through 9 and 7 like any other.
 
@@ -46,7 +46,7 @@ Rule propagation (an editor's rule or an accepted bible amendment) is not a stag
 | Revision cycles per paragraph | 3 per run; after that it's *flagged, unresolved* | orchestrator |
 | Forks per checkpoint | 5, global first | orchestrator |
 | Interns | one level; 3 per run; $0.10 per department per run; reports, never edits | tool runtime |
-| Ink pool | 100 per sheet; when it's gone the house flags instead of resolving, in the order in `RUNNING-A-TEXT.md` §5 | budget module |
+| Drops of ink | 100 per sheet; when it's gone the house flags instead of resolving, in the order in `RUNNING-A-TEXT.md` §5 | budget module |
 | Spend caps | pre-call estimate against live-run / daily / total caps; kill switch | budget module |
 | Output shape | strict JSON schema per prompt; a call that fails validation is retried once, then the stage records a failure event and moves on | model client |
 | Locked lines | never rewritten by a rule or a revision; a query to the editor instead | orchestrator |

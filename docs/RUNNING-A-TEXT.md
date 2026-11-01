@@ -1,6 +1,6 @@
 # keikaku — running a text: passes, triage and budget
 
-Written 28 Oct 2026, budget unit changed 29 Oct. How one text goes through the house, and how we keep the effort per page sane. Builds on `ARCHITECTURE.md` and `STORY-STATE.md`.
+Written 28 Oct 2026; budget unit changed 29 Oct and named drops on 1 Nov. How one text goes through the house, and how we keep the effort per page sane. Builds on `ARCHITECTURE.md` and `STORY-STATE.md`.
 
 ## The idea: work like a translator on a fee
 
@@ -12,12 +12,12 @@ A literary translator is usually paid a flat fee per 1,000 words and given a dea
 
 keikaku copies that. A **fixed allowance per manuscript sheet** sets the budget for a text. The Analyst **triages** every paragraph by difficulty, most paragraphs get a short, cheap path, and debate happens only where it earns its cost. Debate on every line would be expensive theatre anyway: the research shows multi-round agent debate gets worse, not better, over rounds.
 
-## 1. The allowance: 100 ink a sheet
+## 1. The allowance: 100 drops a sheet
 
 - **Length is counted in manuscript sheets** (原稿用紙, 400 characters), the unit Japanese writers of the period were paid by and Japanese publishing still counts in. 「晩餐」 is about 8½ sheets; the showcase, 「三十三の死」, about 34.
-- **Effort is counted in ink** (墨). A house unit, not money: it keeps the budget easy to picture and separate from token prices. One setting in config turns ink into real API spend; it's calibrated at M0, and ARCHITECTURE §10 has the build's actual dollar estimates.
-- **Every sheet gets 100 ink**, so a text's budget is its length: about 850 ink for 「晩餐」 and 3,400 for the showcase. Spend reads naturally as a share of a sheet: a plain sheet that takes 45 ink used under half its allowance.
-- As a rough guide until M0 measures it: a plain sheet ≈ 45 ink, a tricky one ≈ 100, a hard one ≈ 200; the whole-text reads (first read, Analyst, continuity) ≈ 15 a sheet; about 15 a sheet is held back as reserve for hard spots.
+- **Effort is counted in drops of ink** (墨). A house unit, not money: it keeps the budget easy to picture and separate from token prices, and "45 drops" reads naturally where "45 ink" doesn't. One setting in config turns a drop into real API spend; it's calibrated at M0, and ARCHITECTURE §10 has the build's actual dollar estimates. **The site shows drops only.** Prices and recipes change, so a dollar figure on a page would go stale; dollars go in the README and the evals for developers and judges.
+- **Every sheet gets 100 drops**, so a text's budget is its length: about 850 drops for 「晩餐」 and 3,400 for the showcase. Spend reads naturally as a share of a sheet: a plain sheet that takes 45 drops used under half its allowance.
+- As a rough guide until M0 measures it: a plain sheet ≈ 45 drops, a tricky one ≈ 100, a hard one ≈ 200; the whole-text reads (first read, Analyst, continuity) ≈ 15 a sheet; about 15 a sheet is held back as reserve for hard spots.
 - The allowance is a pool for the whole text, not a per-sentence ration. Easy pages leave effort for hard ones, as a translator's quick pages buy time for the difficult chapter.
 - **When the pool runs out, the house stops resolving and starts flagging.** Remaining hard spots are published as *flagged, unresolved*, with the options and the dissent on the page. That's the translator's bracket, made visible, and it's an open invitation for readers to help.
 
@@ -85,5 +85,19 @@ Most lines don't have a debate behind them, and the page says so plainly: *draft
 ## 7. Calibrating it
 
 - **M0:** price one paragraph of each tier on real calls, including reasoning tokens.
-- **M3:** a full run on 「晩餐」. Compare actual spend per tier and per department with the guide above, then adjust the ink-to-spend setting, the tier shares or the tier recipes. The 100 ink a sheet stays fixed; what a unit of ink buys is what moves.
-- Every run reports ink per sheet, split by tier and department, alongside its real API spend. These figures go in the README.
+- **M3:** a full run on 「晩餐」. Compare actual spend per tier and per department with the guide above, then adjust the drop-to-spend setting, the tier shares or the tier recipes. The 100 ink a sheet stays fixed; what a unit of ink buys is what moves.
+- Every run reports drops per sheet, split by tier and department, alongside its real API spend. The spend figures go in the README and the evals, not on the site.
+
+## 8. Works of different lengths
+
+The recipes don't change with length; the context strategy and the pool do. This is the part we expect to keep tuning after the hackathon, and the pool and the tiers are the knobs.
+
+| | Short (up to ~30k characters: everything we run now) | Long (a novel, later) |
+|---|---|---|
+| First read | One Wonder call over the whole text | Still one call: the 1M window holds a novel, so the reading is of the book, not of chapter one |
+| Bible | One Analyst call plus referent passes | Built chapter by chapter, the same bible updated as the Analyst goes |
+| What a drafting call sees | The whole source in the cached prefix, plus the small carried state (`STORY-STATE.md` §3) | The current chapter plus the neighbouring chapters' summaries in place of the whole source; the rolling summary becomes chapter summaries |
+| Editor's letter and final read | Whole text, one call each | Whole book, one call each, costed per release; whether a very long book needs them per part is open |
+| Pool | 100 drops a sheet | The same, so the pool grows with the book; a novel's hard chapter is paid for by its plain ones |
+
+Open questions, in the order E3 answers them: whether the whole source in the prefix helps or hurts (C5 against C3); where the short/long threshold really sits; whether sampled windows stand in for a sequential run, which is what would let us quote a novel's cost honestly before running one.
