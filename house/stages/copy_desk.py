@@ -3,8 +3,7 @@ doubled words where a token meets the text, stray scripts, tics and length outli
 current English. Everything becomes a query with the reason; nothing rewrites the base text."""
 
 from house import checks, queries
-from house.stages.draft import latest_english
-from house.stages.source_check import terms
+from house.stages.common import latest_english, terms
 
 ACTOR = "copy-desk/code"
 

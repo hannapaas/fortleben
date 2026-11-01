@@ -6,8 +6,7 @@ import json
 from house import context, pager
 from house.client import SPARK, Call, load_schema
 from house.db import dumps
-from house.stages import source_check
-from house.stages.draft import latest_english
+from house.stages.common import latest_english, stable
 
 ACTOR = "notes"
 
@@ -29,7 +28,7 @@ def run(ctx) -> dict:
         body = "\n\n".join(
             f"{p.id}　{p.model_text.strip('　 ')}\n{p.id}　{english.get(p.id, '')}"
             + "".join(f"\n  translator's note: {n}" for n in translator_notes(ctx, p.id)) for p in paras)
-        inp = context.join(source_check.stable(ctx, paras), context.block("The page, Japanese and English", body))
+        inp = context.join(stable(ctx, paras), context.block("The page, Japanese and English", body))
         res = ctx.call(ACTOR, Call("notes", SPARK, "low", inp, load_schema("notes"), f"{ctx.cache_key()}:notes",
                                    expected_output_tokens=2500))
         ids = {p.id for p in paras}

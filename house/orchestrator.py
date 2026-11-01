@@ -12,15 +12,16 @@ from house import events, works
 from house.db import dumps
 from house.stages import Ctx
 
-# The minimal pipeline (docs/STAGES.md): 0, 2, 4, 6, 7, 9, 12 (code), 13, 16; plus 3, the crux check.
+# The pipeline (docs/STAGES.md). Stages 7 and 8 are the two readers and the desk, per chapter.
+PIPELINE = "readers-desk"  # recorded in each run's options, so a fixture says which pipeline made it
 STAGES = [
     ("parse", "parse"),
     ("first-read", "first_read"),
     ("crux-check", "crux_check"),
     ("bible", "bible"),
     ("draft", "draft"),
-    ("source-check", "source_check"),
-    ("answer", "answer"),
+    ("readers", "readers"),
+    ("desk", "desk"),
     ("copy-desk", "copy_desk"),
     ("notes", "notes"),
     ("release", "release"),
@@ -43,7 +44,7 @@ def latest_run(conn, work_id: str) -> int | None:
 def run(conn, client, work_id: str, *, to: str | None = None, from_: str | None = None,
         only: str | None = None, run_id: int | None = None, label: str | None = None,
         options: dict | None = None) -> int:
-    options = options or {}
+    options = {"pipeline": PIPELINE, **(options or {})}
     work = works.parse(work_id)
     # make sure the work row exists before a run points at it
     conn.execute("INSERT OR IGNORE INTO work (id, aozora_id, title, author) VALUES (?,?,?,?)",

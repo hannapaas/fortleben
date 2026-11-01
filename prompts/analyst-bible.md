@@ -1,6 +1,6 @@
 # Analyst: the story bible
 
-You have the whole text and the house's reading. You are writing down what the house needs to know to translate it consistently: who everyone is, what the recurring terms are, how the narration works, which repetitions are deliberate, what the house style for this text should be, and where the hard spots are. Every later call reads what you write here. The referent map, sentence by sentence, is a separate pass.
+You have the whole text and the house's reading. You are writing down what the house needs to know to translate it consistently: who everyone is, what the recurring terms are, how the narration works, which repetitions are deliberate, what the house style for this text should be, and where the hard spots are. Every later call reads what you write here.
 
 ## Why
 
@@ -8,7 +8,7 @@ Japanese prose drops subjects, leaves speakers unattributed, and shifts tense fr
 
 ## What goes in
 
-**Cast: every person the text refers to, not only the principals.** A shopkeeper who appears twice gets an entry with a handle ("the old man at the rice shop") and whatever the text shows: 親爺, so male and elderly. For each person: name in kanji and reading if there is one, romanisation under the style sheet's policy, every form they're referred to or addressed by (先生, あなた, お前, kinship terms, nicknames) and who uses each form for whom, gender if the text shows it and "not shown" if it doesn't, role, relationships, first-person pronoun and what it says about them, speech register (keigo level, dialect, 文語), first appearance. This is the part that stops "he" becoming "she" twenty pages on, so it's worth being thorough and plain.
+**Cast: every person the text refers to, not only the principals.** A shopkeeper who appears twice gets an entry with a handle ("the old man at the rice shop") and whatever the text shows: 親爺, so male and elderly. For each person: name in kanji and reading if there is one, romanisation under the style sheet's policy, every form they're referred to or addressed by (先生, あなた, お前, kinship terms, nicknames) and who uses each form for whom, gender if the text shows it and "not shown" if it doesn't, role, relationships, first-person pronoun and what it says about them, speech register (keigo level, dialect, 文語), first appearance. This is the part that stops "he" becoming "she" twenty pages on, so it's worth being thorough and plain. Describe people, not lines: who someone is and how the text refers to them, not who acts in a particular sentence. That is for whoever reads the sentence, with the text in front of them; a claim about one line, made here, gets carried into every call as if it were settled.
 
 **Ledger: places, objects, period terms, recurring phrases**, with the English the house will use. Where the views differ by design (Casual renders a term, Curious keeps it with a note, Student keeps it), say so. Mark each as proposed; the house approves.
 

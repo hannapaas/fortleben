@@ -41,7 +41,7 @@ class Ctx:
             self.emit(actor, "agent.say", {"say": res.data["say"], "prompt": call.prompt}, call_id=res.call_id)
         return res
 
-    # the versioned knowledge of a work: reading, crux check, bible, referents
+    # the versioned knowledge of a work: reading, crux check, bible
     def latest(self, kind: str) -> dict | None:
         row = self.conn.execute(
             "SELECT body FROM bible WHERE work_id=? AND kind=? ORDER BY version DESC LIMIT 1",

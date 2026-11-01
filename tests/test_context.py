@@ -38,3 +38,16 @@ def test_a_long_work_shows_one_chapter_in_full_and_the_rest_in_a_line():
     assert "Chapter 1 (p1–p11): The first chapter: a dinner." in out
     # whole-book reads still get everything
     assert "あ" * 1000 in context.source_text(w)
+
+
+def test_a_group_the_drafter_joined_appears_once():
+    from house.stages.common import unit_of
+    w = work([para(1, "あ"), para(2, "い"), para(3, "う")])
+    units = {("p1",): "One.", ("p2", "p3"): "Two and three."}
+    out = context.chapter_pairs(w.paragraphs, units, "en")
+    assert out.count("Two and three.") == 2  # once in the whole chapter, once in the pairs
+    assert "p2–p3　Two and three." in out
+    assert unit_of(units, "p2-p3") == ("p2", "p3") and unit_of(units, "p3") == ("p2", "p3")
+    assert unit_of(units, "p9") is None
+    assert unit_of(units, "change to p1: the opening") == ("p1",)
+    assert unit_of(units, "Japanese rendering of p2 - p3: ...") == ("p2", "p3")

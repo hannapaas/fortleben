@@ -3,40 +3,40 @@
   "properties": {
     "items": {
       "type": "array",
-      "description": "One per paragraph, or per group when the English wants two paragraphs as one.",
+      "description": "One per paragraph, or per group when the English wants two paragraphs as one",
       "items": {
         "type": "object",
         "properties": {
-          "ids": {"type": "array", "items": {"type": "string"}, "minItems": 1},
-          "english": {"type": "string", "description": "The English, with {t:id} tokens on ledger terms"},
-          "spans": {
-            "type": "array",
-            "description": "Best effort: which English renders which source sentences",
-            "items": {
-              "type": "object",
-              "properties": {
-                "sentences": {"type": "array", "items": {"type": "string"}},
-                "starts": {"type": "string", "description": "The first four to six words of the English stretch, exactly as written: an anchor, not a copy"},
-                "relation": {"type": "string", "enum": ["one-to-one", "merged", "split", "reordered", "absent"]}
-              }
-            }
-          },
-          "notes": {"type": "array", "items": {"type": "string"}, "description": "Translator notes, for the house"},
-          "alternatives": {
+          "ids": {
             "type": "array",
             "items": {
-              "type": "object",
-              "properties": {
-                "span": {"type": "string"},
-                "options": {"type": "array", "items": {"type": "string"}},
-                "what_would_settle": {"type": "string"}
-              }
-            }
+              "type": "string"
+            },
+            "minItems": 1
           },
-          "flags": {"type": "array", "items": {"type": "string"}, "description": "Anything beyond you"}
+          "english": {
+            "type": "string",
+            "description": "The English, with {t:id} tokens on ledger terms"
+          },
+          "notes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Translator notes, if any"
+          },
+          "flags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Anything beyond you"
+          }
         }
       }
     },
-    "say": {"type": "string"}
+    "say": {
+      "type": "string"
+    }
   }
 }

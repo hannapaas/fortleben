@@ -7,21 +7,26 @@ from pathlib import Path
 
 from house import checks, queries
 from house.db import dumps
-from house.stages.draft import latest_english
-from house.stages.source_check import terms
+from house.stages.common import latest_units, terms
 
 ROOT = Path(__file__).resolve().parents[2]
 VIEWS = ("casual", "curious", "student")
 
 
 def label(ctx, pid: str) -> str:
-    checked = ctx.conn.execute("SELECT 1 FROM event WHERE run_id=? AND type='page.checked' AND payload LIKE ?",
+    checked = ctx.conn.execute("SELECT 1 FROM event WHERE run_id=? AND type='chapter.read' AND payload LIKE ?",
                                (ctx.run_id, f'%"{pid}"%')).fetchone()
     return "house-checked" if checked else "draft"
 
 
 def run(ctx) -> dict:
-    english = latest_english(ctx)
+    # A group the drafter joined is aligned group to group: its English sits on the first paragraph,
+    # and the others say which paragraph carries it (docs/STAGES.md, "Groups").
+    english, grouped = {}, {}
+    for unit, en in latest_units(ctx).items():
+        english[unit[0]] = en
+        for pid in unit[1:]:
+            english[pid], grouped[pid] = "", unit[0]
     t = terms(ctx)
     paras = ctx.work.translatable()
     problems = [f"{p.id} has no English" for p in paras if p.id not in english]
@@ -35,7 +40,7 @@ def run(ctx) -> dict:
     for view in VIEWS:
         views[view] = [{
             "id": p.id, "ja": p.text, "en": checks.render(english.get(p.id, ""), t, view),
-            "scene_break_before": p.scene_break_before, "label": label(ctx, p.id),
+            "grouped_with": grouped.get(p.id), "scene_break_before": p.scene_break_before, "label": label(ctx, p.id),
             "open_queries": len(queries.open_queries(ctx, p.id)),
             "notes": [{"anchor": n["anchor"], "span": n["span"], "body": n["body"], "sources": json.loads(n["sources"]),
                        "status": n["status"]} for n in notes if n["anchor"].split("-")[0] == p.id

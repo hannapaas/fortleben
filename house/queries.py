@@ -5,7 +5,6 @@ import json
 
 from house.db import dumps
 
-MAX_ROUNDS = 2  # rounds per query; then a fork (hard) or the head's pick, labelled
 MAX_PER_PARAGRAPH = 8
 
 

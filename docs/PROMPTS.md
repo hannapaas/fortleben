@@ -25,9 +25,9 @@ Everything shares one **house brief** (below), which sits first in every cached 
 |---|---|---|---|
 | **background-brief** | Spark low + web search (as an intern) | Read around the text: author's life, period, reception, allusions | A page of notes with sources |
 | **first-read** | Wonder medium | Read the whole text and write the house's reading, starting from the crux | Prose reading; open questions; two or three voice takes the reading allows |
-| **crux-check** | Spark | Read the whole text independently, without Wonder's reading, and say what a translation of it stands or falls on | A short answer with reasons. A `head-select` call then says whether the two cruxes are the same; if not, it's the first fork |
+| **crux-check** | Wonder | Read the whole text independently, without Wonder's reading, and say what a translation of it stands or falls on | A short answer with reasons. A `head-select` call then says whether the two cruxes are the same; if not, it's the first fork |
 | **analyst-bible** | Spark | Build the story bible from the text and the reading: cast, ledger, narration, motifs, style sheet, hard spots | Bible JSON |
-| **analyst-referents** | Spark | Per section: speakers, implicit subjects, confidence, deliberate ambiguity, and each paragraph's tier | Referent-map JSON + tiers |
+| ~~**analyst-referents**~~ (retired 2 Nov: the referent map was dropped) | Spark | Per section: speakers, implicit subjects, confidence, deliberate ambiguity, and each paragraph's tier | Referent-map JSON + tiers |
 | **analyst-amend** | Spark | Rule on a proposed bible amendment (a missed echo, a better rendering) | Accept / reject with reason; the patch |
 
 ## Translation
@@ -35,16 +35,19 @@ Everything shares one **house brief** (below), which sits first in every cached 
 | Prompt | Model | Job | Returns |
 |---|---|---|---|
 | **translate-draft** | Spark medium | Draft a page in order, in the chosen voice. Also used for the voice trial, given one voice take, and for second drafts of a single paragraph | English per paragraph with best-effort sentence spans; `{t:id}` tokens on ledger terms; translator notes; marked alternatives |
-| **translate-answer** | Spark | Answer queries, and the editor's letter: accept, stet with a reason, or revise | Per query: status, reason, revised text |
+| ~~**translate-answer**~~ (retired 2 Nov: the desk decides; nobody answers) | Spark | Answer queries, and the editor's letter: accept, stet with a reason, or revise | Per query: status, reason, revised text |
 | **head-select** | Spark | A department head choosing between drafts or options, or opening a fork: one-line trade-offs, each side's case in a paragraph by its author, dissent quoted | Pick + reason, or a fork |
 
 ## Checking and revising
 
 | Prompt | Model | Job | Returns |
 |---|---|---|---|
-| **source-check** | Wonder low | Read the English against the Japanese: omissions, additions, wrong speaker, misread tone, the crux slipping. Answer "none" when there's nothing | Error spans + queries with evidence |
+| **reader-faithful** | Spark or Wonder | Read a chapter for the author's side: what her language does that the English doesn't. Margin notes, or none | Notes: span, what's wrong, the Japanese, a wording if obvious, how sure |
+| **reader-readable** | Spark or Wonder | Read a chapter for the English reader's side: is it prose a good writer would sign. Margin notes, or none | Notes, same shape |
+| **desk** | Spark or Wonder | The only call that writes after the draft: weigh both readers' notes against the reading, change what needs changing, decline with reasons, record disagreements | Changed paragraphs with the notes they answer; declined notes; disagreements, sent up or not |
+| ~~**source-check**~~ (retired 2 Nov: replaced by the two readers) | Wonder low | Read the English against the Japanese: omissions, additions, wrong speaker, misread tone, the crux slipping. Answer "none" when there's nothing | Error spans + queries with evidence |
 | **editors-letter** | Wonder | Read the whole English draft against the reading, as an editor reads a manuscript | A short letter of big-picture notes |
-| **editorial-scene** | Spark | Read a scene of English alone, as a reader: voice, rhythm, clarity, deformations | Span queries |
+| ~~**editorial-scene**~~ (folded into reader-readable, 2 Nov) | Spark | Read a scene of English alone, as a reader: voice, rhythm, clarity, deformations | Span queries |
 | **copy-desk** | Glimmer | Style sheet, ledger, anachronisms, consistency | Queries |
 | **notes** | Spark | Write notes for each edition (Casual / Curious / Student), passing the keikaku test: only what the sentence can't give you | Notes with anchors and sources |
 | **fact-check** | Spark + web search | Verify, cite or kill each note | Verdict + sources |

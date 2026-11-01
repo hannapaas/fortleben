@@ -29,6 +29,6 @@ def test_schema_is_valid_and_strict_ready(path):
 
 
 def test_minimal_pipeline_prompts_have_schemas():
-    for name in ["first-read", "analyst-bible", "analyst-referents", "translate-draft",
-                 "translate-answer", "source-check", "notes"]:
+    for name in ["first-read", "crux-check", "analyst-bible", "translate-draft",
+                 "reader-faithful", "reader-readable", "desk", "notes"]:
         assert (cl.SCHEMAS / f"{name}.json").exists(), name

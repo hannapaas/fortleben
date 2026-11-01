@@ -106,15 +106,7 @@ def reading(r: dict) -> str:
     return block("The house's reading", body)
 
 
-def bible(b: dict) -> str:
-    parts = []
-    ss = b["style_sheet"]
-    parts.append("### Style sheet\n" + "\n".join(
-        f"- **{k.replace('_', ' ')}:** {v if not isinstance(v, list) else '; '.join(v) or 'none'}"
-        for k, v in ss.items()))
-    n = b["narration"]
-    parts.append("### Narration\n" + "\n".join(
-        f"- **{k.replace('_', ' ')}:** {v if not isinstance(v, list) else '; '.join(v)}" for k, v in n.items()))
+def cast_and_ledger(b: dict, tokens: bool = True) -> str:
     cast = []
     for c in b["cast"]:
         forms = "; ".join(f"{f['form']} ({f['used_by']}{': ' + f['note'] if f['note'] else ''})" for f in c["forms"])
@@ -124,11 +116,25 @@ def bible(b: dict) -> str:
             f" ({c['gender_evidence']}). Forms: {forms or 'none'}. First person: {c['first_person']}."
             f" Register: {c['register']}. Relationships: {'; '.join(c['relationships']) or 'none'}."
             f" First appears {c['first_appearance']}.")
-    parts.append("### Cast\n" + "\n".join(cast))
+    parts = ["### Cast\n" + "\n".join(cast)]
     if b["ledger"]:
-        parts.append("### Ledger (use the token {t:id} in the English)\n" + "\n".join(
+        head = "### Ledger (the English carries these as {t:id} tokens)" if tokens else "### Ledger (shown in the English as the Casual view renders it)"
+        parts.append(head + "\n" + "\n".join(
             f"- `{t['id']}` {t['source']}{' (' + t['reading'] + ')' if t.get('reading') else ''}: casual “{t['casual']}”,"
             f" curious “{t['curious']}”, student “{t['student']}”. {t['rationale']}" for t in b["ledger"]))
+    return "\n\n".join(parts)
+
+
+def bible(b: dict) -> str:
+    parts = []
+    ss = b["style_sheet"]
+    parts.append("### Style sheet\n" + "\n".join(
+        f"- **{k.replace('_', ' ')}:** {v if not isinstance(v, list) else '; '.join(v) or 'none'}"
+        for k, v in ss.items()))
+    n = b["narration"]
+    parts.append("### Narration\n" + "\n".join(
+        f"- **{k.replace('_', ' ')}:** {v if not isinstance(v, list) else '; '.join(v)}" for k, v in n.items()))
+    parts.append(cast_and_ledger(b))
     if b["motifs"]:
         parts.append("### Motifs and callbacks\n" + "\n".join(
             f"- **{m['motif']}** ({', '.join(m['source_forms'])}) at {', '.join(m['occurrences'])}. {m['why']} {m['english']}"
@@ -136,27 +142,38 @@ def bible(b: dict) -> str:
     if b["hard_spots"]:
         parts.append("### Hard spots\n" + "\n".join(
             f"- {', '.join(h['anchors'])} ({h['kind']}): {h['why_hard']}" for h in b["hard_spots"]))
-    return block("The story bible", "\n\n".join(parts))
+    return block("The story bible: the house's best understanding before drafting, which can be wrong", "\n\n".join(parts))
 
 
-def referent_lines(p: Paragraph, refs: dict | None) -> str:
-    """The paragraph sentence by sentence, each with its referent entries under it."""
-    entries = {}
-    if refs:
-        for e in refs.get("entries", []):
-            entries.setdefault(e["sentence"], []).append(e)
-    out = [f"{p.id}"]
-    for s in p.sentences:
-        out.append(f"  {s['id']}  {s['text']}")
-        for e in entries.get(s["id"], []):
-            shows = e["shows"].removeprefix(e["who"]).strip()
-            out.append(f"          [{e['role']} = #{e['who']} {shows} ({e['confidence']})]")
-    return "\n".join(out)
+def sentence_lines(p: Paragraph) -> str:
+    """The paragraph sentence by sentence, with the parser's sentence IDs."""
+    return "\n".join([p.id] + [f"  {s['id']}  {s['text']}" for s in p.sentences])
 
 
-def page(paras: list[Paragraph], referents: dict | None, with_referents: bool) -> str:
-    body = "\n\n".join(referent_lines(p, referents.get(p.id) if (referents and with_referents) else None) for p in paras)
-    return block("The page to draft", body)
+def page(paras: list[Paragraph]) -> str:
+    return block("The page to draft", "\n\n".join(sentence_lines(p) for p in paras))
+
+
+def chapter_pairs(paras: list[Paragraph], units: dict[tuple, str], first: str) -> str:
+    """A chapter in both languages, paragraph by paragraph; where the drafter joined paragraphs into
+    a group, the group's English appears once, labelled p21–p23. `first` says which language a reader
+    meets first: the whole chapter in that language, then the pairs in that order."""
+    rows = []  # (label, [paragraphs], english)
+    for p in paras:
+        ids = next((k for k in units if p.id in k), (p.id,))
+        if rows and rows[-1][0] == ids:
+            rows[-1][1].append(p)
+        else:
+            rows.append((ids, [p], units.get(ids, "(missing)")))
+    label = lambda ids: ids[0] if len(ids) == 1 else f"{ids[0]}–{ids[-1]}"  # noqa: E731
+    ja = lambda ps: "\n".join(f"{p.id}　{p.model_text.strip('　 ')}" for p in ps)  # noqa: E731
+    if first == "ja":
+        whole = block("The chapter in Japanese", "\n".join(ja([p]) for p in paras))
+        pairs = "\n\n".join(f"{ja(ps)}\n{label(ids)}　{en}" for ids, ps, en in rows)
+        return whole + block("Paragraph by paragraph: the Japanese, then the house's English", pairs)
+    whole = block("The chapter in the house's English", "\n\n".join(f"{label(ids)}　{en}" for ids, _, en in rows))
+    pairs = "\n\n".join(f"{label(ids)}　{en}\n{ja(ps)}" for ids, ps, en in rows)
+    return whole + block("Paragraph by paragraph: the house's English, then the Japanese", pairs)
 
 
 def window(before: list[tuple[Paragraph, str | None]], after: Paragraph | None) -> str:
