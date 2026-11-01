@@ -5,7 +5,7 @@ Written 30 Oct 2026. **This is the one list the orchestrator implements.** `ARCH
 ## Units
 
 - **Work:** one text. **Run:** one pass of a work through the house. **Segment:** a paragraph of the source, `p12`. Sentences inside it, `p12-s3`, exist only as anchors for queries and notes.
-- **The paragraph is the unit of English.** Translation returns one English string per paragraph, plus best-effort spans saying which English renders which source sentence. Nothing forces one English sentence per Japanese one; a literary translator restructures, and a sentence-locked schema would push the model back towards literalism.
+- **The paragraph is the unit of English.** Translation returns one English string per paragraph, plus best-effort spans saying which English renders which source sentence (one to one, two to one, reordered, or absent). Nothing forces one English sentence per Japanese one; a literary translator restructures, and a sentence-locked schema would push the model back towards literalism. The parallel layout aligns paragraph to paragraph, always; the sentence spans are used only to highlight the matching stretch on tap, and where there's no clean span the whole paragraph is the match.
 - **Page:** a drafting chunk of about 1k source tokens (~650 characters) of whole paragraphs, breaking at scene breaks where possible. Drafting happens per page; checking, queries and revisions happen per paragraph.
 - **Tier:** every paragraph is *plain*, *tricky* or *hard* (`RUNNING-A-TEXT.md` §2).
 
