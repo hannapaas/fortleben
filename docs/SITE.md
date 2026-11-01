@@ -21,7 +21,7 @@ Two rules run through every page:
 | `/evals` | The headline side-by-side exhibit (one-shot vs keikaku, annotated in plain words); the audit counts beside it, including where we're worse; the long-context and planted-continuity results; judge calibration; method and raw verdicts. | Read; download the raw verdicts | Live |
 | `/how-it-grows` | How a text gets translated here and how that could widen (below). | Vote, request | Live |
 | `/about` | Where this comes from (publishing, fan translation, Wikipedia, web fiction), who built it, the licence (CC BY-SA 4.0 for our English), Aozora's terms, the honest-labels policy, contact and takedown. | | Live |
-| `/desk/<token>` | The editors' desk, by invite link (`EDITORS-DESK.md`): start a text (estimate, whole or sample), the checkpoint screen, open forks, rules and their scope, locks, pause and resume, the allowance in drops, reports on comments, promote a reader. | Start, rule, lock, approve, remove | Live for the house editor; guest editors as the stretch (`BUILD-PLAN.md` M7b) |
+| `/desk/<token>` | The editors' desk, by invite link (`EDITORS-DESK.md`): start a run (whole work, estimate reserved first), the checkpoint screen, open forks, rules and their scope, locks, pause and resume, the allowance in drops, reports on comments, promote a reader. | Start, rule, lock, approve, remove | Live for the house editor; guest editors as the stretch (`BUILD-PLAN.md` M7b) |
 | `/review/<token>` | A bilingual reviewer's desk, by invite link: read a paragraph against the source and mark it *human-reviewed*, or raise a query. | Mark, query | Live, probably unused by 4 Nov; that's fine and the labels will show it |
 
 ## Comments, reactions, proposals
