@@ -221,8 +221,10 @@ class ModelClient(BaseClient):
             req["prompt_cache_key"] = call.cache_key
             req["prompt_cache_retention"] = "24h"
         if call.schema:
+            # strict: False on purpose. With strict: True, Meta's API serves no prompt-cache hits
+            # (measured 1 Nov); non-strict output still follows the schema, and parse() validates it.
             req["text"] = {"format": {"type": "json_schema", "name": call.prompt.replace("-", "_"),
-                                      "schema": strict(call.schema), "strict": True}}
+                                      "schema": strict(call.schema), "strict": False}}
         if call.web_search:
             req["tools"] = [{"type": "web_search"}]
         return req
@@ -263,7 +265,7 @@ class ModelClient(BaseClient):
         if schema is None:
             return text
         data = json.loads(text)
-        jsonschema.validate(data, schema)
+        jsonschema.validate(data, strict(schema))  # every key present, nothing extra
         return data
 
     @staticmethod
