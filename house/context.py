@@ -1,0 +1,111 @@
+"""Assemble what a call sees, in the order of docs/STORY-STATE.md §3: stable blocks first
+(so the prefix caches), the passage last (where models attend best).
+
+These are data blocks with plain labels, not instructions: the instructions are the prompt
+files. The bible is stored as JSON and rendered here as Markdown for the model.
+"""
+
+from house.parser import Paragraph, ParsedWork
+
+
+def block(label: str, body: str) -> str:
+    return f"## {label}\n\n{body.strip()}\n"
+
+
+def work_card(work: ParsedWork) -> str:
+    m = work.meta
+    lines = [f"{work.title} ({m.get('title_en', '')}), by {work.author} ({m.get('author_en', '')})"]
+    r = m.get("rights", {})
+    if r:
+        lines.append(f"Author died {r.get('author_died')}; first published {r.get('first_published')}.")
+    return block("The work", "\n".join(lines))
+
+
+def source_text(work: ParsedWork) -> str:
+    """The whole source with paragraph IDs. Ruby is kept as base《reading》; editorial notes are dropped."""
+    out = []
+    for p in work.translatable():
+        if p.scene_break_before:
+            out.append("◇")
+        out.append(f"{p.id}　{p.model_text.strip('　 ')}")
+    return block("The whole source text, with paragraph IDs", "\n".join(out))
+
+
+def reading(r: dict) -> str:
+    crux = "\n".join(f"- **{c['point']}** {c['why']} *For the English:* {c['for_the_english']}" for c in r["crux"])
+    body = f"**The crux**\n\n{crux}\n\n{r['reading']}"
+    if r.get("open_questions"):
+        body += "\n\n**Open questions**\n\n" + "\n".join(f"- {q['question']}" for q in r["open_questions"])
+    return block("The house's reading", body)
+
+
+def bible(b: dict) -> str:
+    parts = []
+    ss = b["style_sheet"]
+    parts.append("### Style sheet\n" + "\n".join(
+        f"- **{k.replace('_', ' ')}:** {v if not isinstance(v, list) else '; '.join(v) or 'none'}"
+        for k, v in ss.items()))
+    n = b["narration"]
+    parts.append("### Narration\n" + "\n".join(
+        f"- **{k.replace('_', ' ')}:** {v if not isinstance(v, list) else '; '.join(v)}" for k, v in n.items()))
+    cast = []
+    for c in b["cast"]:
+        forms = "; ".join(f"{f['form']} ({f['used_by']}{': ' + f['note'] if f['note'] else ''})" for f in c["forms"])
+        name = " ".join(x for x in (c.get("name_ja"), c.get("romanised")) if x)
+        cast.append(
+            f"- **{c['id']} {c['handle']}**{' — ' + name if name else ''}. {c['role']}. Gender: {c['gender']}"
+            f" ({c['gender_evidence']}). Forms: {forms or 'none'}. First person: {c['first_person']}."
+            f" Register: {c['register']}. Relationships: {'; '.join(c['relationships']) or 'none'}."
+            f" First appears {c['first_appearance']}.")
+    parts.append("### Cast\n" + "\n".join(cast))
+    if b["ledger"]:
+        parts.append("### Ledger (use the token {t:id} in the English)\n" + "\n".join(
+            f"- `{t['id']}` {t['source']}{' (' + t['reading'] + ')' if t.get('reading') else ''}: casual “{t['casual']}”,"
+            f" curious “{t['curious']}”, student “{t['student']}”. {t['rationale']}" for t in b["ledger"]))
+    if b["motifs"]:
+        parts.append("### Motifs and callbacks\n" + "\n".join(
+            f"- **{m['motif']}** ({', '.join(m['source_forms'])}) at {', '.join(m['occurrences'])}. {m['why']} {m['english']}"
+            for m in b["motifs"]))
+    if b["hard_spots"]:
+        parts.append("### Hard spots\n" + "\n".join(
+            f"- {', '.join(h['anchors'])} ({h['kind']}): {h['why_hard']}" for h in b["hard_spots"]))
+    return block("The story bible", "\n\n".join(parts))
+
+
+def referent_lines(p: Paragraph, refs: dict | None) -> str:
+    """The paragraph sentence by sentence, each with its referent entries under it."""
+    entries = {}
+    if refs:
+        for e in refs.get("entries", []):
+            entries.setdefault(e["sentence"], []).append(e)
+    out = [f"{p.id}"]
+    for s in p.sentences:
+        out.append(f"  {s['id']}  {s['text']}")
+        for e in entries.get(s["id"], []):
+            out.append(f"          [{e['role']} = #{e['who']} {e['shows']} ({e['confidence']})]")
+    return "\n".join(out)
+
+
+def page(paras: list[Paragraph], referents: dict | None, with_referents: bool) -> str:
+    body = "\n\n".join(referent_lines(p, referents.get(p.id) if (referents and with_referents) else None) for p in paras)
+    return block("The page to draft", body)
+
+
+def window(before: list[tuple[Paragraph, str | None]], after: Paragraph | None) -> str:
+    parts = []
+    if before:
+        parts.append("Previous paragraphs, Japanese and the house's English:\n\n" + "\n\n".join(
+            f"{p.id}　{p.model_text.strip('　 ')}\n{p.id}　{en or '(not drafted)'}" for p, en in before))
+    if after is not None:
+        parts.append(f"Next paragraph, Japanese only, read-only (for context; don't translate it):\n\n{after.id}　{after.model_text.strip('　 ')}")
+    return block("The text either side", "\n\n".join(parts) if parts else "This is the first page and there is nothing either side yet.")
+
+
+def voice_reference(english_by_id: list[tuple[str, str]] | None) -> str:
+    if not english_by_id:
+        return ""
+    return block("The voice reference: the house's chosen first page", "\n\n".join(f"{pid}　{en}" for pid, en in english_by_id))
+
+
+def join(*blocks: str) -> str:
+    return "\n".join(b for b in blocks if b)
