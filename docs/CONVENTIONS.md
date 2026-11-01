@@ -44,7 +44,7 @@ tests/            pytest; every lane adds its own
 
 ## Security, given that the code is public
 
-- **Nothing secret in the code or its history.** Keys, tokens and the invite-link signing key live in `.env` locally and in Fly's secret store; `.env.example` has the names only. A full-history secrets scan runs before submission.
+- **Nothing secret in the code or its history.** Keys, tokens and the invite-link signing key live in `.env` locally and in Railway's variables; `.env.example` has the names only. A full-history secrets scan runs before submission.
 - **Invite links** are long random tokens made server-side, stored hashed, scoped (house editor / guest editor with an allowance / reviewer) and revocable. Reading the scheme gives nothing without a token.
 - **Spending is capped in code**, not hidden: daily and total caps, one run at a time, reservation before a run, kill switch; visitors can't start runs at all. The worst case is runs pausing while the site carries on.
 - **Reader text is data.** Comments, proposals and request reasons go through the model screen as quoted content, never as instructions, and nothing a reader types reaches a drafting prompt except as a query the owner answers.
