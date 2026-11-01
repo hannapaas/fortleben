@@ -1,0 +1,78 @@
+{
+  "bansan": {
+    "aozora_id": "000223",
+    "author_id": "000012",
+    "title": "晩餐",
+    "title_en": "Supper",
+    "author": "素木しづ",
+    "author_en": "Shiraki Shizu",
+    "card_url": "https://www.aozora.gr.jp/cards/000012/card223.html",
+    "zip_url": "https://www.aozora.gr.jp/cards/000012/files/223_ruby_2389.zip",
+    "rights": {
+      "author_died": 1918,
+      "first_published": "「文章倶楽部」1917（大正6）年2月号",
+      "first_published_year": 1917,
+      "basis": "Aozora index 初出; the text's own closing note agrees",
+      "existing_translations": [
+        {"by": "M Skeels", "year": 2020, "where": "skeelstranslations.wordpress.com", "kind": "hobbyist, complete, no licence stated", "checked": "2026-11-01"}
+      ],
+      "verdict": "public domain (author died 1918, published 1917)"
+    }
+  },
+  "sanjusan": {
+    "aozora_id": "000002",
+    "author_id": "000012",
+    "title": "三十三の死",
+    "title_en": "Death at Thirty-Three",
+    "author": "素木しづ",
+    "author_en": "Shiraki Shizu",
+    "card_url": "https://www.aozora.gr.jp/cards/000012/card2.html",
+    "zip_url": "https://www.aozora.gr.jp/cards/000012/files/2_ruby_20958.zip",
+    "rights": {
+      "author_died": 1918,
+      "first_published": "「新小説」1914（大正3）年5月",
+      "first_published_year": 1914,
+      "basis": "dated note at the end of the text",
+      "existing_translations": [],
+      "verdict": "public domain (author died 1918, published 1914)"
+    }
+  },
+  "warogoku": {
+    "aozora_id": "043505",
+    "author_id": "000157",
+    "title": "我牢獄",
+    "title_en": "My Prison",
+    "author": "北村透谷",
+    "author_en": "Kitamura Tōkoku",
+    "card_url": "https://www.aozora.gr.jp/cards/000157/card43505.html",
+    "zip_url": "https://www.aozora.gr.jp/cards/000157/files/43505_ruby_16177.zip",
+    "rights": {
+      "author_died": 1894,
+      "first_published": "「女學雜誌　三二〇號」女學雜誌社、1892（明治25）年6月4日",
+      "first_published_year": 1892,
+      "basis": "Aozora index 初出",
+      "existing_translations": [],
+      "verdict": "public domain (author died 1894, published 1892)"
+    }
+  },
+  "omoide": {
+    "aozora_id": "001119",
+    "author_id": "000224",
+    "title": "思い出の記",
+    "title_en": "Reminiscences",
+    "author": "小泉節子",
+    "author_en": "Koizumi Setsu",
+    "card_url": "https://www.aozora.gr.jp/cards/000224/card1119.html",
+    "zip_url": "https://www.aozora.gr.jp/cards/000224/files/1119_ruby_4794.zip",
+    "rights": {
+      "author_died": 1932,
+      "first_published": "not given by Aozora; the source edition is 「小泉八雲全集　別冊」1927（昭和2）年",
+      "first_published_year": null,
+      "basis": "source edition 1927 (≤1930); the English translation of 1918 shows the text existed by then",
+      "existing_translations": [
+        {"by": "Paul Kiyoshi Hisada and Frederick Johnson", "year": 1918, "where": "Reminiscences of Lafcadio Hearn, Houghton Mifflin", "kind": "published, public domain", "checked": "2026-10-28"}
+      ],
+      "verdict": "public domain in the US (published ≤1930); author died 1932, used with a strong reason: the 1918 translation to compare against"
+    }
+  }
+}
