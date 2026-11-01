@@ -80,7 +80,16 @@ In this order, stable first (cached) and the passage last (where models attend b
 3. **The whole source text.** Every text we run is under ~30k characters, which is cheap in the cached prefix and lets the model look anywhere in the book. If it ever seems to hurt, the exhibit will show it.
 4. The voice reference: the chosen first page.
 5. **A window of real text either side:** the previous two paragraphs in Japanese and English, and **the next paragraph in Japanese, marked read-only** (Japanese often resolves a subject or speaker after the fact).
-6. The passage itself, with its referent-map entries inline (`p12-s3: subject = narrator; speaker of 「…」 = Okinu (medium)`).
+6. The passage itself, with its referent-map entries printed under each sentence that needs one, naming the cast entry and what the text shows about it:
+
+   ```
+   p47-s2  親爺はそれを聞いて笑った。
+           [subject = #12 the rice-shop keeper, male (high)]
+   p47-s3  「それは売れませんよ」
+           [speaker = #19 the tobacconist, female (medium)]
+   ```
+
+   So a pronoun is read off the annotation, not inferred from the paragraph. Where the entry is low-confidence or deliberately ambiguous, the drafting prompt teaches the model not to commit a pronoun the text doesn't support.
 
 That's all. No rolling summary and no retrieval of earlier passages: with the whole source in the prefix and the bible carrying the decisions, both would be a second copy of what's already there. They come back only for novels (§5), where the whole source can't sit in the prefix.
 
