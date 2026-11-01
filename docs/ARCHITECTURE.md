@@ -129,7 +129,10 @@ Every event is written to `event`, and that record is what the House, the margin
 ## 8. Stack, hosting, abuse
 
 - **Stack:** Python 3.12 + FastAPI + SQLite (WAL) + Jinja templates. The front end is vanilla JS and CSS, with no build step. `uv` for packaging; pytest. One language serves the engine, the exhibit harness and the site. **No non-Meta ML model runs anywhere in the repo.**
-- **Hosting:** one Fly.io machine plus a volume for SQLite (daily snapshots), with secrets in Fly. Prompts and keys stay on the server; the browser only ever receives events, text and notes.
+- **Hosting:** one Railway service (Hobby plan, EU West region), deployed from the GitHub repo on push, with a volume for SQLite (daily snapshots we take ourselves) and secrets as Railway variables. Prompts and keys stay on the server; the browser only ever receives events, text and notes. What that means for the code:
+  - Everything that must survive a restart (the SQLite file, the response cache, the snapshots) lives under the volume's mount path, taken from an environment variable; the rest of the filesystem is wiped on every deploy, and the volume isn't mounted during the build.
+  - One instance only: a service with a volume can't have replicas, and a redeploy stops the old instance before starting the new one, so each deploy means a few seconds of downtime. Don't deploy during anything live.
+  - HTTP requests are cut off after 15 minutes (some users report 5). A run is started by a request that returns at once; the run itself works in the background in the same process.
 - **Spend:**
   - Every call is priced from `usage` into a spend ledger.
   - A pre-call estimate is checked against the run's reservation, a daily global cap ($10 during judging) and a total cap.
