@@ -36,6 +36,7 @@ TYPES = {
     "draft.paragraph": "a paragraph (or group) of English landed: revision id, variant",
     "revision.created": "the English for a paragraph changed: cause (query, rule, editor)",
     "check.flagged": "a code check flagged a paragraph: which check, why",
+    "page.checked": "Source check finished a page: paragraph ids, queries raised",
     # the debate
     "query.raised": "a department raised a query on a span",
     "query.answered": "the owner answered: accepted / stet / revised",
