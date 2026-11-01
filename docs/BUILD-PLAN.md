@@ -12,7 +12,7 @@ Nothing is built yet: the repo holds plans. Five days remain, and the last push 
 4. **M5 and M6:** the showcase brief and checkpoint, the full run, S-GT fetched, E2 + E4 + the planted continuity test, the exhibit. Then the shelf (M5b), the experiments (Tōkoku, Kasai) and E1.
 5. **M7 and M8:** integrate, README, video, a clean-clone replay check, submit.
 
-Started at the back of the queue, not cut: the Catalogue beyond the 15 launch titles, the acquisitions agent for outside requests, the Student edition, E3's long-book windows and C0, Glimmer on Modal (the code checks run without it), covers and dictation, the stretch text.
+Started at the back of the queue, not cut: the Catalogue beyond the 15 launch titles, the acquisitions agent for outside requests, the Student edition, E3's long-book windows and C0, Glimmer on Modal (the code checks run without it), covers and dictation. The Sōseki stretch text is dropped; the stretch is now guest editors (M7b).
 
 ## Milestones
 
@@ -31,6 +31,7 @@ Started at the back of the queue, not cut: the Catalogue beyond the 15 launch ti
 | M5 ‖ | **Showcase with the editor** | The brief runs on 三十三の死 and stops at the checkpoint (`RUNNING-A-TEXT.md` §4): the editor's changes become scoped rules, ≤5 forks. The full run follows. The edition carries honest labels, an editor's note and credits. If a bilingual reader has time to check passages, those are labelled *human-reviewed*; nothing waits for it. |
 | M5b ‖ | **The shelf** | After M5's full run holds: the short Catalogue titles (under ~15k characters, the 15 launch titles first) run through the house with no editor, Spark calls on the Contributor tier (approved for public-domain texts), labelled *house-checked*. Target ten or more editions; each costs a dollar or two. The first thing cut if M5 slips. |
 | M6 ‖ | **Evals** | E1–E6 done (timing below), with the comparison against S-GT as the headline. The annotated side-by-side exhibit is made. Charts render on the Evals page and in the README. |
+| M7b | **Guest editors** (the stretch, in place of the Sōseki text) | The editors' desk per `EDITORS-DESK.md`: start a text with an estimate, whole or sample; per-editor allowances in drops; pause, resume, out-of-allowance handling; the edition carries the editor's name. Invite links with a generous allowance go in the submission for judges. |
 | M7 | **Integrate** | Live site: showcase, experiments, Setsu comparison, Catalogue, House (live + replay), Evals, Credits, "Where this comes from". Presets are pre-briefed (reading and bible built ahead). A live run on a preset passage succeeds three times in a row from a phone. `keikaku serve --replay` shows the recorded run from a clean clone with no key. |
 | M8 | **Ship** | 3-min video, README first screen, LICENSE, a secrets scan of the full history. A dry run of the submission form on 3 Nov; the final push and submission on 4 Nov, hours before 9 PM ET. Caps set for the judging period. |
 
@@ -113,7 +114,7 @@ These must be true:
 **If more than two items fail:** stop adding, ship the showcase and evals, and cut from the list below.
 
 ## Cut list (cut from the top)
-1. The stretch text.
+1. Guest editors (M7b); the house editor's desk stays.
 2. Muse Image covers (typographic covers instead) and Voice Transcribe dictation.
 3. The Student edition (keep Casual + Curious).
 4. E3's long-book windows and C0 (keep C1/C3/C5 on the showcase).

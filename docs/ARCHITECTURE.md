@@ -5,7 +5,7 @@ Written 27 Oct 2026, the second day of the hackathon; updated 28 Oct with the fi
 Design choices worth knowing first:
 - **Built per source language, Japanese first.** `work.language` is a field; a text enters through a source adapter (Aozora is the first); the bible, departments and site are language-neutral; anything Japanese-specific (the Aozora parser, ruby and furigana, the honorific policy, `fugashi` for stats) sits in `house/lang/ja/`. Nothing else assumes Japanese.
 - **Source check runs on Wonder for every chunk**, not only on hard passages. It's affordable (§10), and same-model critique does most damage in exactly this department.
-- **Editions share one base text**: one English string per sentence with controlled tokens, not three separate translations.
+- **Views share one base text**: one English per paragraph with controlled tokens, not three separate translations. (Work → edition → view: `CONCEPT.md`, "Words".)
 - **The catalogue's reader's reports are generated on Meta models.**
 - **Glimmer works only on the English** unless a spot check shows it reads Japanese well. Its model card doesn't list Japanese.
 
@@ -38,7 +38,7 @@ flowchart TD
   FR -->|"queries"| TR
   TR -. "forks + verbatim dissent" .-> EIC{{"Editor: forks, standing rules, locks"}}
   EIC -. "rules (scoped)" .-> TR
-  FR --> QC["Proof/QC (code)"] --> ED3["Editions: Casual · Curious · Student"]
+  FR --> QC["Proof/QC (code)"] --> ED3["Views: Casual · Curious · Student"]
   ED3 --> RD["Reader desk<br/>reactions, proposals"]
   RD -. "queries by reason" .-> SC & ED & FC
 ```
@@ -64,8 +64,10 @@ flowchart TD
 | `event` | Append-only log: run, seq, actor (department + role, or person), type, payload, cost. The single source for history, the House stream and replay |
 | `call` | Model, effort, tokens (input / cached / output / reasoning), $, prompt hash, cache key |
 | `intern` | Department, brief, logged reason, budget, spend, report |
+| `allowance` | Per editor: drops granted, reserved, spent; every grant with its reason (invite, funding target, house) |
 | `reaction`, `proposal`, `person` | Two-axis reactions; span proposals that become queries; trust level and how each person wants to be credited |
 | `report` | Catalogue reader's report: reader-facing fields, internal scores, what it was based on, label, translation-status evidence and date |
+| `edition` | One translation of a work: the editor (a person, or the house), its runs, current release |
 | `release` | Edition version (v1, v1.1), changelog, credits |
 | `vote` | "I'd read this": work, voter token (cookie + IP hash), date. One per voter per work |
 | `request` | An Aozora work ID or an outside reference (title, author, link), the requester's reason (pre-moderated), the Acquisitions verdict (*eligible / in copyright / can't tell*) with evidence, the editor's decision, status |

@@ -55,4 +55,6 @@ Rule propagation (an editor's rule or an accepted bible amendment) is not a stag
 
 ## Stop and resume
 
+What the editor sees of this, and what's published at each point, is `EDITORS-DESK.md`.
+
 Every stage writes its outputs to the database before the next starts, so a run can stop after any stage and resume from the record. The response cache (model, prompt hash, input hash) makes a resumed or repeated stage free. Development uses stops after every stage; production stops only at the checkpoint.
