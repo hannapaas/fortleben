@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "properties": {
+    "sections": {
+      "type": "array",
+      "items": {"type": "object", "properties": {"heading": {"type": "string"}, "body": {"type": "string"}, "sources": {"type": "array", "items": {"type": "string"}}}}
+    },
+    "allusions": {
+      "type": "array",
+      "items": {"type": "object", "properties": {"anchor": {"type": "string"}, "reference": {"type": "string"}, "line": {"type": "string"}}}
+    },
+    "couldnt_find": {"type": "array", "items": {"type": "string"}},
+    "say": {"type": "string"}
+  }
+}

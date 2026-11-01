@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "properties": {
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "anchor": {"type": "string", "description": "Paragraph or sentence ID"},
+          "span": {"type": "string", "description": "The English the note hangs on, quoted exactly"},
+          "editions": {"type": "array", "items": {"type": "string", "enum": ["casual", "curious", "student"]}},
+          "body": {"type": "string"},
+          "variants": {
+            "type": "array",
+            "description": "A different body for a view, where the views differ",
+            "items": {"type": "object", "properties": {"edition": {"type": "string", "enum": ["casual", "curious", "student"]}, "body": {"type": "string"}}}
+          },
+          "sources": {"type": "array", "items": {"type": "string"}, "description": "Sources, or ['unsourced']"}
+        }
+      }
+    },
+    "say": {"type": "string"}
+  }
+}

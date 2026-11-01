@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "properties": {
+    "crux": {
+      "type": "array",
+      "description": "The one or two things a translation of this text stands or falls on.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "point": {"type": "string"},
+          "why": {"type": "string"},
+          "for_the_english": {"type": "string"}
+        }
+      },
+      "minItems": 1, "maxItems": 3
+    },
+    "reading": {"type": "string", "description": "The reading in prose, crux first, about a page, for the translator."},
+    "open_questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "question": {"type": "string"},
+          "why_it_matters": {"type": "string"},
+          "anchors": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "voice_takes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {"label": {"type": "string"}, "line": {"type": "string"}}
+      },
+      "minItems": 2, "maxItems": 3
+    },
+    "say": {"type": "string"}
+  }
+}

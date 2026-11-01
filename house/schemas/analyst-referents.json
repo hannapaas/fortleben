@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "properties": {
+    "paragraphs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "tier": {"type": "string", "enum": ["plain", "tricky", "hard"]},
+          "tier_reason": {"type": ["string", "null"]},
+          "entries": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "sentence": {"type": "string", "description": "Sentence ID, e.g. p12-s3"},
+                "role": {"type": "string", "enum": ["speaker", "subject", "addressee", "possessor", "object"]},
+                "who": {"type": "string", "description": "Cast id (c2), 'narrator', or a thing"},
+                "shows": {"type": "string", "description": "The handle and what the text shows about them, e.g. 'the mother, female'"},
+                "confidence": {"type": "string", "enum": ["high", "medium", "low", "deliberately ambiguous"]},
+                "evidence": {"type": "string"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "amendments": {"type": "array", "items": {"type": "string"}},
+    "say": {"type": "string"}
+  }
+}

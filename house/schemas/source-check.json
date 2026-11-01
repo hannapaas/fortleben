@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "properties": {
+    "paragraphs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "queries": {
+            "type": "array",
+            "maxItems": 8,
+            "items": {
+              "type": "object",
+              "properties": {
+                "span": {"type": "string", "description": "The English it points at, quoted exactly"},
+                "sentence": {"type": ["string", "null"]},
+                "category": {"type": "string", "enum": ["omission", "addition", "mistranslation", "wrong-referent", "crux", "repetition-varied", "tone", "rationalisation", "clarification", "expansion", "ennoblement", "impoverishment", "rhythm", "vernacular", "ledger", "other"]},
+                "reason": {"type": "string"},
+                "evidence_ja": {"type": "string"},
+                "confidence": {"type": "string", "enum": ["high", "medium", "low"]},
+                "suggested_fix": {"type": ["string", "null"]},
+                "say": {"type": "string"}
+              }
+            }
+          },
+          "needs_second_draft": {"type": "boolean"}
+        }
+      }
+    },
+    "say": {"type": "string"}
+  }
+}
