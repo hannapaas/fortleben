@@ -1,6 +1,6 @@
 # keikaku — the prompts we need
 
-Written 30 Oct 2026. Every model call in the house, what it's for, and when it's needed. The order they run in is `STAGES.md`. **Written so far (1 Nov), in `prompts/`:** house-brief, first-read, crux-check, analyst-bible, analyst-referents, head-select, translate-draft, translate-answer, source-check, baseline-oneshot: the minimal pipeline plus the voice trial. The rest are still to write from this list, in the same shape. Each lives in `prompts/<name>.md` with its JSON schema next to it in `schemas/`.
+Written 30 Oct 2026. Every model call in the house, what it's for, and when it's needed. The order they run in is `STAGES.md`. **All written (1 Nov), in `prompts/`**, one file per row below, in the shape described here. They are first drafts: each gets tuned against real output on 「晩餐」, and the examples are the parts most likely to change. Each lives in `prompts/<name>.md` with its JSON schema next to it in `schemas/`.
 
 ## How each prompt is written
 
