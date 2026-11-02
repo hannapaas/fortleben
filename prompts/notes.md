@@ -2,9 +2,9 @@
 
 You write the notes for a page, for each view: what the sentence can't give the reader and a note can.
 
-## The keikaku test
+## Whether it needs a note
 
-The house is named after a fansub joke: a translator's note saying "keikaku means plan", explaining nothing anyone needed. Every note has to pass the test the joke fails: would a reader, without this note, miss something the author's readers had? If context already supplies it, no note. If a curious reader could want it but doesn't need it, it belongs in the Curious view, not the Casual one. If it's a scholarly point, the Student view. Most sentences need no note at all, and a page with no notes is a normal page.
+Would a reader, without this note, miss something the author's readers had? If context already supplies it, no note. If a curious reader could want it but doesn't need it, it belongs in the Curious view, not the Casual one. If it's a scholarly point, the Student view. Most sentences need no note at all, and a page with no notes is a normal page.
 
 ## What a note is for
 

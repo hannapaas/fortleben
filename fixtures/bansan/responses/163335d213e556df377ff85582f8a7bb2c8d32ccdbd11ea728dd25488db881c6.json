@@ -1,0 +1,123 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"Yes, though day by day this and that wears us out and troubles us and makes us suffer, two years are past already. In a little while our baby will be walking.\"",
+    "flags": [
+     "number: two years here against three years just before"
+    ],
+    "ids": [
+     "p28"
+    ],
+    "notes": [
+     "Japanese says two years are already gone here, after three years in p25 and p27. I keep it as written, though it reads like a slip."
+    ]
+   },
+   {
+    "english": "The man looked at the child standing there holding the spoon idly. At once she called out gladly in a loud voice, \"Baby!\" and at the same moment the child raised a loud cry and, looking into her mother's face, banged the spoon upon the table, \"Umma-umma-umma-umma.\"",
+    "flags": [
+     "naming: boya against girl"
+    ],
+    "ids": [
+     "p29",
+     "p30",
+     "p31"
+    ],
+    "notes": [
+     "Boy word rendered neutral: Japanese has boya here and in p30 though the child was introduced as a girl in p2. I use Baby to preserve the fork without choosing boy in English.",
+     "Umma-umma is the nursing baby's food-cry, not words, banged out with spoon and dish."
+    ]
+   },
+   {
+    "english": "The father hastily put rice into the child's mouth.",
+    "flags": [],
+    "ids": [
+     "p32"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Presently they laid down their chopsticks.",
+    "flags": [],
+    "ids": [
+     "p33"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Only a little longer,\" the man said strongly, as if to himself.",
+    "flags": [],
+    "ids": [
+     "p34"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Yes, we shall work,\" she said, calm and peaceful. And holding the child upon her knees, she put out her small nipple and began to give her suck.",
+    "flags": [],
+    "ids": [
+     "p35"
+    ],
+    "notes": [
+     "Calm and peaceful keeps the repeated quiet and peace words that run from the supper through the vision to this resolve."
+    ]
+   },
+   {
+    "english": "\"Come, let us clear away what is left. And let us sleep. Tomorrow let us rise early.\"",
+    "flags": [
+     "speaker unstated"
+    ],
+    "ids": [
+     "p36"
+    ],
+    "notes": [
+     "Japanese leaves the speaker unstated. I leave it as bare speech rather than assigning it to husband or wife."
+    ]
+   },
+   {
+    "english": "Presently the man stood up. And as he began to clear the table, the child had already closed her eyes with her cheek against the breast. All about them was quiet.",
+    "flags": [],
+    "ids": [
+     "p37"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"A storm,\" the man said, standing still, in a whisper.",
+    "flags": [],
+    "ids": [
+     "p38"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted the close of the supper from practical reply to whispered storm, keeping day by day and quiet in the same words."
+ },
+ "usage": {
+  "input_tokens": 10514,
+  "cached_tokens": 9841,
+  "output_tokens": 5123,
+  "reasoning_tokens": 4476,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.02409015,
+ "response_id": "resp_6ae91eb6b858ab01e4644687",
+ "latency_s": 48.57,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2458
+  }
+ ],
+ "created": "2026-11-02T23:37:26Z"
+}

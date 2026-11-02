@@ -1,0 +1,46 @@
+{
+ "prompt": "crux-check",
+ "model": "muse-wonder-1.0",
+ "effort": "low",
+ "data": {
+  "confidence": "high",
+  "crux": [
+   {
+    "for_the_english": "Keep the vision indeterminate and unlabelled: no 'she imagined death', 'in heaven', 'when they were old' where the Japanese does not say it. Preserve the vague deictics and drifting tense — 'that day', 'a day will come' — and let the reader feel, as she does, past and future looking the same from far away. Clarification here (Berman's term) rewrites the story.",
+    "point": "The story stands or falls on the mother's vision in p16–17 staying a vision, not becoming an explanation. Triggered by a mouthful of badly cooked, almost frozen-tasting potato (p11–12), she drifts into a dim picture of three quiet figures telling an endless story in which all good, evil, sorrow, anger and joy are recounted, yet no one moves — only 'natsukashimi' (longing/nostalgia) and 'forgiveness' and a deep, night-like rest. She herself never names it: it may be old age after a long life, it may be death, it may be simply the far future from which the present will at last look bearable (p17, p20). That refusal to resolve is what turns a scene of poverty into consolation without denying the poverty — they go back to clearing the table and getting up early (p36).",
+    "why": "The text marks the shift only by soft hedges — 'like a phantom picture' (p15), 'it seemed', 'would surely', repeated 'far away' — and by time collapsing: three years of marriage (p14) already feel like a whole aged life (p13), and are then seen from a distance at which suffering is already 'a nostalgic dream' (p13, p20)."
+   },
+   {
+    "for_the_english": "Resist variation and ennoblement: let the same plain English words recur — tired, sorrow, suffering, quiet, peaceful, far away, dream, smile — even where elegant English would vary them, and keep sentences loose and additive rather than tightening them into logical subordination. Keep the dialogue equally plain and slightly bare, especially his rough 'なァ' and her softer forms, without making either quaint dialect.",
+    "point": "The second crux is the repetitive, incantatory plainness of the narration. The prose does its work by circling the same small stock of words — 疲れ, 悲しみ/苦しみ, 静か, 安らか, 遠い, 微笑, 夢のやう — across the noisy supper, the vision, and the resolve to keep working (p8–35). It is also what holds the opening and close together: the storm unheard in the family's absorption (p8), heard by her inside the vision (p19), and noticed again, quietly, at the end (p38).",
+    "why": "These are not accidental repetitions to be thinned; they are the network that makes the vision grow out of an ordinary tired evening rather than arrive as an inserted meditation. The couple are explicitly young and unwrinkled (p2–3) yet already exhausted; flat, recurring diction is how that premature weariness sounds."
+   }
+  ],
+  "say": "The crux (one or two)",
+  "what_would_change_my_mind": "Evidence from Shiraki's other writing or contemporary commentary that the picture in p16 was a conventional, recognisable image for her first readers (e.g. a specific Buddhist afterlife scene); then a note, though still not an in-text label, might be owed to the reader."
+ },
+ "usage": {
+  "input_tokens": 4125,
+  "cached_tokens": 0,
+  "output_tokens": 1247,
+  "reasoning_tokens": 473,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.04144,
+ "response_id": "resp_6ae91d842e8f8fc2de174575",
+ "latency_s": 16.71,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 3105
+  }
+ ],
+ "created": "2026-11-02T23:32:20Z"
+}

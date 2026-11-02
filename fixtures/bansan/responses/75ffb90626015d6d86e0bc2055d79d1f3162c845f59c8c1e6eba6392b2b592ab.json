@@ -1,0 +1,303 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": {
+  "beyond_this_chapter": [],
+  "changes": [
+   {
+    "answers": [
+     "F6"
+    ],
+    "find": "round-eyed, plump little girl,",
+    "paragraph": "p2",
+    "reason": "The Japanese has round plumpness and no word for eyes, so the inserted eyes are expansion.",
+    "replace": "round, plump little girl,"
+   },
+   {
+    "answers": [
+     "R1"
+    ],
+    "find": "had yet a single wrinkle in the face.",
+    "paragraph": "p3",
+    "reason": "A wrinkle cannot sit 'in the face' in signable English; 'on their faces' keeps the sense without changing it.",
+    "replace": "had yet a single wrinkle on their faces."
+   },
+   {
+    "answers": [
+     "R2"
+    ],
+    "find": "And about the dark colour of her thick hair and her slender shoulders there lay a still deeper, weighed-down weariness, and a drowsy sort of peace.",
+    "paragraph": "p3",
+    "reason": "The inverted literal shape makes weariness lie about a colour; the replacement lets hair and shoulders carry the weariness as the Japanese shows it on her.",
+    "replace": "And her thick dark hair and her slender shoulders carried a still deeper, weighed-down weariness, and a drowsy sort of peace."
+   },
+   {
+    "answers": [
+     "R3"
+    ],
+    "find": "they bent all their gaze upon the child.",
+    "paragraph": "p4",
+    "reason": "'Bent all their gaze' is not idiomatic English; 'fixed' keeps the concentrated looking.",
+    "replace": "they fixed all their gaze upon the child."
+   },
+   {
+    "answers": [
+     "R4"
+    ],
+    "find": "with fat round arms short as balls,",
+    "paragraph": "p5",
+    "reason": "The ball image is in the Japanese and is kept, but 'short as balls' alone reads comic in English; 'little balls' restores the child's scale.",
+    "replace": "with fat round arms, short as little balls,"
+   },
+   {
+    "answers": [
+     "R5",
+     "F8"
+    ],
+    "find": "The young father gazed at the small round arms, and at the child's long, dark-lashed eyes moving busily and sharply without a pause, as if wondering what was to be done, and then with a smile filling his whole face, pinching the child's round thrust-out cheek lightly with his fingers, he felt under the table for a large bowl and put it into her little hands.",
+    "paragraph": "p7",
+    "reason": "The single overloaded sentence leaves who wonders and who smiles unclear; breaking where English breath fails keeps the father's wondering and smile distinct, and 'little' is dropped because the Japanese clause has no word for it.",
+    "replace": "The young father watched the small round arms and the child's long dark-lashed eyes darting busily without pause, as if wondering what to do. Then, his whole face breaking into a smile, he pinched her round thrust-out cheek lightly and felt under the table for a large bowl to put into her hands."
+   },
+   {
+    "answers": [
+     "F1"
+    ],
+    "find": "gazed at the child, never still for an instant, lovely as a little bird.",
+    "paragraph": "p8",
+    "reason": "In the Japanese the never-still clause modifies the child, not her gaze; 'who was' attaches it to the child.",
+    "replace": "gazed at the child, who was never still for an instant, lovely as a little bird."
+   },
+   {
+    "answers": [
+     "R8"
+    ],
+    "find": "she said, \"Baby,\" firmly,",
+    "paragraph": "p8",
+    "reason": "'Firmly' reads stern against the helpless fondness of the moment; the Japanese strong saying is emphasis, not sternness.",
+    "replace": "she said, \"Baby,\" with emphasis,"
+   },
+   {
+    "answers": [
+     "R7"
+    ],
+    "find": "with laughter and gladness welling up of themselves.",
+    "paragraph": "p8",
+    "reason": "'Welling up of themselves' is reflexive machine English; 'of their own accord' says the same in prose a writer would sign.",
+    "replace": "with laughter and gladness welling up of their own accord."
+   },
+   {
+    "answers": [
+     "R6"
+    ],
+    "find": "And for all their clattering noise they did not hear the sound of the rain and wind.",
+    "paragraph": "p8",
+    "reason": "'For all their noise' means despite the noise in English and reverses the cause; the Japanese says the racket is why they do not hear the storm, which the ring of the story depends on.",
+    "replace": "And with all their clattering racket they did not hear the sound of the rain and wind."
+   },
+   {
+    "answers": [
+     "R9"
+    ],
+    "find": "but her heart had already sunk and bowed itself in loneliness.",
+    "paragraph": "p11",
+    "reason": "No English heart 'bowed itself'; dropping the reflexive loses nothing of the sinking and bowing.",
+    "replace": "but her heart had already sunk, bowed in loneliness."
+   },
+   {
+    "answers": [
+     "F2"
+    ],
+    "find": "the tasteless, cold badness of the potato, having no connection with her,",
+    "paragraph": "p12",
+    "reason": "The Japanese leaves what the bad taste is unrelated to unsaid, and the reading asks for its unrelated ordinariness to stay undecoded; 'unrelated' keeps that without adding 'with her'.",
+    "replace": "the tasteless, unrelated, cold badness of the potato"
+   },
+   {
+    "answers": [
+     "F9"
+    ],
+    "find": "And with a distant heart she quietly remembered",
+    "paragraph": "p13",
+    "reason": "The Japanese makes the distant heart itself the remembering subject; keeping it as subject also holds the repeated far/ distant network rather than smoothing it into an instrument.",
+    "replace": "And a distant heart quietly remembered"
+   },
+   {
+    "answers": [
+     "F14",
+     "R10"
+    ],
+    "find": "as if her heed had been taken by something,",
+    "paragraph": "p15",
+    "reason": "Both readers find 'heed had been taken' unsignable; 'attention had been caught' is the plain idiom for the same distractedness.",
+    "replace": "as if her attention had been caught by something,"
+   },
+   {
+    "answers": [
+     "F3"
+    ],
+    "find": "with a fixed gaze,",
+    "paragraph": "p16",
+    "reason": "There is no gaze noun in the Japanese; the adverb steadies the continuing smile, so the invented fixed gaze is expansion in the vision the reading protects from added detail.",
+    "replace": "steadily,"
+   },
+   {
+    "answers": [
+     "F10"
+    ],
+    "find": "be changed into nostalgia and forgiveness.",
+    "paragraph": "p17",
+    "reason": "The Japanese verb is intransitive, with no agent changing things; 'change' keeps the general law agentless as the text leaves it.",
+    "replace": "change into nostalgia and forgiveness."
+   },
+   {
+    "answers": [
+     "R11"
+    ],
+    "find": "they would be forever before a rest like night.",
+    "paragraph": "p17",
+    "reason": "Bare 'before' reads as time in English; 'stand before' keeps the spatial standing-in-presence of the Japanese without deciding what the rest is.",
+    "replace": "they would stand forever before a rest like night."
+   },
+   {
+    "answers": [
+     "R12"
+    ],
+    "find": "The young woman sighed a lonely hidden sigh alone,",
+    "paragraph": "p18",
+    "reason": "'Lonely' and 'alone' jingle and blur feeling with by-herself; 'on her own' keeps the Japanese by-herself distinct from the lonely sigh.",
+    "replace": "The young woman, on her own, sighed a lonely hidden sigh,"
+   },
+   {
+    "answers": [
+     "R13"
+    ],
+    "find": "again her eyes ran far away.",
+    "paragraph": "p19",
+    "reason": "Eyes do not 'run' in English stillness and the verb breaks the quiet at the moment she hears the storm; 'strayed' keeps the slipping away to the far place.",
+    "replace": "again her eyes strayed far away."
+   },
+   {
+    "answers": [
+     "F4"
+    ],
+    "find": "There was that day. There was the day when all would be changed into nostalgia and forgiveness, and peace.",
+    "paragraph": "p20",
+    "reason": "The Japanese is present interior certainty, and the reading asks that her present conviction not be flattened into past conditional; the present keeps the vision alive beside the supper.",
+    "replace": "There is that day. There is the day when all changes into nostalgia and forgiveness, and peace."
+   },
+   {
+    "answers": [
+     "F5"
+    ],
+    "find": "What were the suffering and sorrow of day by day? What were the weariness and trouble of day by day?",
+    "paragraph": "p20",
+    "reason": "The Japanese conjecture is present, dismissing today's suffering from inside the vision; the past tense makes it retrospect the text has not reached.",
+    "replace": "What are the suffering and sorrow of day by day? What are the weariness and trouble of day by day?"
+   },
+   {
+    "answers": [
+     "F11"
+    ],
+    "find": "But we have been through a good deal, you and I.",
+    "paragraph": "p25",
+    "reason": "The husband's rough plain first person and sentence-final warmth are flattened into polite 'you and I'; the replacement keeps his plain young-husband register.",
+    "replace": "But we've been through a lot, we have."
+   },
+   {
+    "answers": [
+     "F12"
+    ],
+    "find": "began to give her suck.",
+    "paragraph": "p35",
+    "reason": "'Give her suck' is biblical archaism where the Japanese is plain bodily nursing; 'nurse' is the plain word.",
+    "replace": "began to nurse her."
+   }
+  ],
+  "declined": [
+   {
+    "note": "F7",
+    "reason": "Rendering 坊や as 'Boy' here and at p28 and p30 would decide in English, and against the girl of p2, a contradiction the Japanese passes over lightly; the reading names this an open fork, so 'Baby' stands for now and the choice goes up rather than being quietly made at the desk."
+   },
+   {
+    "note": "F13",
+    "reason": "The note is itself unsure and its suggestion settles the idleness on the man, which is the very ambiguity it flags; the text is left as it stands until a second Japanese check of the attachment settles whose at-a-loss it is."
+   },
+   {
+    "note": "R14",
+    "reason": "Its archaic 'give her suck' is met by the F12 change to 'nurse her', but its 'small breast' is declined: the Japanese says the small nipple she puts out, and replacing it with breast softens a plain bodily word the text chose."
+   }
+  ],
+  "disagreements": [
+   {
+    "choice": "Keep 'Baby' in the text for this chapter and send the boy-word up as a fork.",
+    "faithful_side": "F7: neutral 'Baby' hides the evidence that both parents call a girl 坊や, and the fork should be visible as 'Boy' with a note.",
+    "notes": [
+     "F7",
+     "R8"
+    ],
+    "paragraph": "p8",
+    "readable_side": "R8 and the current rendering keep a neutral baby-word in English, so the parents' address reads as ordinary baby-talk rather than as a statement about the child's sex.",
+    "send_up": true
+   },
+   {
+    "choice": "Drop 'little', as in the p7 change, so the bowl goes into 'her hands'.",
+    "faithful_side": "F8: the Japanese clause says only her hands, and 'little' is added expansion.",
+    "notes": [
+     "F8",
+     "R5"
+    ],
+    "paragraph": "p7",
+    "readable_side": "R5's rewrite keeps 'her little hands' as part of a signable sentence about the baby's small hands.",
+    "send_up": false
+   },
+   {
+    "choice": "Keep 'her small nipple' and change only 'give her suck' to 'nurse her'.",
+    "faithful_side": "F12: the Japanese is plain bodily language, a small nipple put out and nursing begun; only the English archaism needs removing.",
+    "notes": [
+     "F12",
+     "R14"
+    ],
+    "paragraph": "p35",
+    "readable_side": "R14: 'small nipple' is clinical in English and 'bared her small breast' is the phrase a good writer would sign.",
+    "send_up": false
+   },
+   {
+    "choice": "Leave 'holding the spoon idly' in the text and send it up unsettled.",
+    "faithful_side": "F13: the Japanese lets the at-a-loss hang between the man and the child, and the current English settles it on the child without warrant.",
+    "notes": [
+     "F13"
+    ],
+    "paragraph": "p29",
+    "readable_side": "No readable note covers this span; the present wording reads smoothly as the child's idleness.",
+    "send_up": true
+   }
+  ],
+  "say": "The desk held the potato and the vision undecoded, restored the present tense and the repeated triad in p20, kept 坊や neutral as an open fork for the editor, and let plain English win only where the Japanese itself is plain."
+ },
+ "usage": {
+  "input_tokens": 16234,
+  "cached_tokens": 0,
+  "output_tokens": 6784,
+  "reasoning_tokens": 3650,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.200616,
+ "response_id": "resp_6ae91f9b24f36caa8075444f",
+ "latency_s": 42.28,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 12672
+  }
+ ],
+ "created": "2026-11-02T23:41:16Z"
+}
