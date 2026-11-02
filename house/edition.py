@@ -81,8 +81,8 @@ def shelf(conn) -> list[dict]:
 
 def editions(conn, meta: dict, current: int | None = None) -> list[dict]:
     """Every English translation of a work we know of: keikaku's, then any commissioned by an editor
-    from the desk, then people's by year. A person's is named and credited but not linked, unless the
-    record says they're happy to be linked (`link`)."""
+    from the desk, then people's by year. A person's is named with its year, and linked only where it is
+    freely published (`link`, e.g. Project Gutenberg); one marked `shown: false` isn't mentioned at all."""
     ours = []
     for e in conn.execute("SELECT e.id, e.editor, r.created_at FROM edition e JOIN release r ON r.id = e.current_release "
                           "WHERE e.work_id=? ORDER BY e.editor != 'the house', e.id", (meta["id"],)):
@@ -91,8 +91,9 @@ def editions(conn, meta: dict, current: int | None = None) -> list[dict]:
                      "year": (e["created_at"] or "")[:4], "here": True, "current": e["id"] == current,
                      "url": f"/read/{meta['id']}" + ("" if house else f"?edition={e['id']}")})
     people = [{"kind": "person", "by": t["by"], "year": str(t.get("year", "")), "here": False,
-               "url": t.get("link")}
-              for t in sorted(meta["rights"].get("existing_translations") or [], key=lambda t: t.get("year", 0))]
+               "url": t.get("link"), "where": t.get("link_label")}
+              for t in sorted(meta["rights"].get("existing_translations") or [], key=lambda t: t.get("year", 0))
+              if t.get("shown", True)]
     return ours + people
 
 
@@ -234,8 +235,9 @@ def _meta(conn, work_id: str) -> dict:
         reg = works.info(work_id)
     except KeyError:
         reg = {}
+    # works.json is the rights record as it stands now; the copy taken when the work was fetched may be older
     rights = row["rights"]
-    rights = json.loads(rights) if isinstance(rights, str) else (rights or reg.get("rights", {}))
+    rights = reg.get("rights") or (json.loads(rights) if isinstance(rights, str) else rights or {})
     return {"id": work_id, "title": row["title"], "title_en": row["title_en"] or reg.get("title_en") or row["title"],
             "author": row["author"], "author_en": row["author_en"] or reg.get("author_en") or row["author"],
             "card_url": row["card_url"] or reg.get("card_url"), "colophon": row["colophon"], "rights": rights,

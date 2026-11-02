@@ -4,12 +4,12 @@
 {% set PEOPLE = {'editor-approved': 'An editor has read it and signed it off.'} %}
 {% macro seal(label) -%}<span class="seal" title="{{ PEOPLE[label] }}" aria-hidden="true"></span>{%- endmacro %}
 {% set total = ed.units|length %}
-{% set others = ed.rights.existing_translations or [] %}
+{% set others = ed.editions|selectattr('kind', 'equalto', 'person')|list %}
 {% block title %}{{ ed.title_en }} · Fortleben{% endblock %}
 {% block bodyclass %}layout-english marks-essential hide-status{% endblock %}
 {% block main %}
 <div class="form four">
-  <div><span class="q">What?</span><span class="a">An English translation of {{ ed.author_en }}'s short story <i>{{ ed.title_en }}</i>{% if ed.rights.first_published_year %}, first published in {{ ed.rights.first_published_year }}{% endif %}.{% if others %} There's also an English translation by a person; see below the title.{% endif %}</span></div>
+  <div><span class="q">What?</span><span class="a">An English translation of {{ ed.author_en }}'s short story <i>{{ ed.title_en }}</i>{% if ed.rights.first_published_year %}, first published in {{ ed.rights.first_published_year }}{% endif %}.</span></div>
   <div><span class="q">By whom?</span><span class="a">keikaku, a set of AI agents: one drafts, two more check the draft separately, one against the Japanese and one as English, and another decides what to change.</span></div>
   <div><span class="q">Checked?</span><span class="a">Every paragraph went through those checks. {% set checked = ed.counts['editor-approved'] %}{% if checked %}{{ checked }} of {{ total }} paragraphs have also been signed off by an editor, and say so.{% else %}No editor has signed it off.{% endif %}</span></div>
   <div><span class="q">How was it made?</span><span class="a">Tap any paragraph to see what was queried there and what was decided.</span></div>
@@ -27,11 +27,11 @@
   <div class="a"><ul class="edl">
     {% for e in ed.editions %}
     {% if e.here and e.current %}
-    <li class="here"><span class="bx r" aria-hidden="true"></span><span><b>{{ e.by }}, {{ e.year }}.</b> The one you're reading: translated and checked by AI agents.</span></li>
+    <li class="here" aria-current="true"><span class="bx r" aria-hidden="true"></span><span><b>{{ e.by }}</b></span></li>
     {% elif e.here %}
-    <li><span class="bx r" aria-hidden="true"></span><span><a href="{{ e.url }}">{{ e.by }}, {{ e.year }}</a>. Translated and checked by AI agents.</span></li>
+    <li><span class="bx r" aria-hidden="true"></span><span><a href="{{ e.url }}">{{ e.by }}</a></span></li>
     {% else %}
-    <li><span class="bx r" aria-hidden="true"></span><span>{% if e.url %}<a class="at" href="{{ e.url }}" rel="noopener">{{ e.by }}, {{ e.year }}</a> ↗{% else %}<span class="at">{{ e.by }}, {{ e.year }}</span>{% endif %} A translation by a person, published elsewhere.</span></li>
+    <li><span class="bx r" aria-hidden="true"></span><span>{{ e.by }}, {{ e.year }}{% if e.url %} · <a href="{{ e.url }}" rel="noopener">{{ e.where or 'read it' }}</a> ↗{% endif %}</span></li>
     {% endif %}
     {% endfor %}
   </ul></div>
@@ -167,7 +167,7 @@
     <div class="a">Drafted, checked and revised by keikaku's AI agents on Meta's models ({{ ed.models|join(', ') }}): {{ ed.calls }} model calls, costing {{ '$%.2f'|format(ed.cost) }}. They raised {{ ed.queries.total }} queries; {{ ed.queries.taken }} led to {{ 'a change' if ed.queries.taken == 1 else 'changes' }} and {{ ed.queries.declined }} {{ 'was' if ed.queries.declined == 1 else 'were' }} kept as drafted.{% if not ed.counts['editor-approved'] %} No person has edited it.{% endif %} Free to share and adapt under CC BY-SA 4.0.</div>
     {% if others %}
     <div class="q">Other English?</div>
-    <div class="a">{% for t in others %}{{ t.by }} translated it into English in {{ t.year }} and published it online.{% if not loop.last %}<br>{% endif %}{% endfor %}</div>
+    <div class="a">{% for t in others %}{{ t.by }} translated it in {{ t.year }}{% if t.url %}; it's free on <a href="{{ t.url }}" rel="noopener">{{ t.where or 'the web' }}</a>{% endif %}.{% if not loop.last %}<br>{% endif %}{% endfor %}</div>
     {% endif %}
   </div>
 </section>

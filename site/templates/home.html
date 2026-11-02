@@ -22,7 +22,7 @@
         <a class="ttl" href="/read/{{ w.id }}">{{ w.title_en }}</a><br>
         <span class="meta">{{ w.author_en }}{% if w.rights.first_published_year %}, {{ w.rights.first_published_year }}{% endif %} · {{ w.paragraphs }} paragraphs</span><br>
         {% if w.blurb %}{% if w.about %}<details class="blurb"><summary>{{ w.blurb }}</summary><p>{{ w.about }}</p></details>{% else %}<p class="blurb">{{ w.blurb }}</p>{% endif %}{% endif %}
-        <span class="meta">In English: {% for e in w.editions %}{% if e.here %}<a href="{{ e.url }}">{{ e.by }}, {{ e.year }}</a>{% elif e.url %}<a href="{{ e.url }}" rel="noopener">{{ e.by }}, {{ e.year }}</a> ↗{% else %}{{ e.by }}, {{ e.year }}{% endif %}{% if not loop.last %} · {% endif %}{% endfor %}</span>
+        <span class="meta">In English: {% for e in w.editions %}{% if e.here %}<a href="{{ e.url }}">{{ e.by }}</a>{% else %}{{ e.by }}, {{ e.year }}{% endif %}{% if not loop.last %} · {% endif %}{% endfor %}</span>
       </span>
       <span class="meta">{% if w.label == 'editor-approved' %}{{ w.label }}{% endif %}</span>
     </li>
