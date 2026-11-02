@@ -1,0 +1,97 @@
+{
+ "prompt": "notes",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": {
+  "notes": [
+   {
+    "anchor": "p11",
+    "body": "A hollow bolster woven from bamboo, leaned against in summer to keep cool while reclining.",
+    "editions": [
+     "casual",
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "bamboo wife",
+    "variants": []
+   },
+   {
+    "anchor": "p10",
+    "body": "A mu is a traditional Chinese unit of field area; three hundred mu marks Liu as a very large landowner.",
+    "editions": [
+     "casual",
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "three hundred mu",
+    "variants": []
+   },
+   {
+    "anchor": "p7",
+    "body": "Lord Guan is the deified general Guan Yu, commonly enshrined in village temples; his stern clay images were known for rigid, impassive silence.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "clay images enshrined in a Lord Guan temple",
+    "variants": []
+   },
+   {
+    "anchor": "p51",
+    "body": "A sun is a traditional unit of about three centimetres, so about nine centimetres long.",
+    "editions": [
+     "casual",
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "three sun",
+    "variants": []
+   },
+   {
+    "anchor": "p46",
+    "body": "Cao Mengde is Cao Cao, the Three Kingdoms strategist; the tale has him quenching his soldiers' thirst by talking of a plum grove ahead.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "Cao Mengde",
+    "variants": []
+   }
+  ],
+  "say": "Kept five recoverability notes and left in-line glosses and parody close to carry the rest."
+ },
+ "usage": {
+  "input_tokens": 22934,
+  "cached_tokens": 0,
+  "output_tokens": 2091,
+  "reasoning_tokens": 1713,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.03755425,
+ "response_id": "resp_6ae8a28e4036c35e6f994597",
+ "latency_s": 14.48,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1339
+  }
+ ],
+ "created": "2026-11-02T14:47:43Z"
+}

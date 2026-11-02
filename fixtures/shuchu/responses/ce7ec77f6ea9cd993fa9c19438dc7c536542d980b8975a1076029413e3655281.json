@@ -1,0 +1,106 @@
+{
+ "prompt": "reader-faithful",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "notes": [
+   {
+    "japanese": "竹婦人を撫《な》でながら、",
+    "paragraph": "p21",
+    "problem": "The clause dangles on 'as' and disconnects the stroking from the speech it introduces in the next paragraph.",
+    "span": "stroking his bamboo wife as",
+    "suggestion": "Join the paragraphs: '...wore a dubious look, stroking his bamboo wife as he said:' followed by the p22 speech, so the Japanese ながら linkage survives.",
+    "sureness": "Certain on the syntax; the paragraph break in the house text created the fragment."
+   },
+   {
+    "japanese": "内心、こんな横柄な坊主に会つたり何ぞする主人の劉を、莫迦げてゐると思ひ出した。",
+    "paragraph": "p33",
+    "problem": "'Recalled' turns a present contemptuous judgment into a memory; the Japanese means it occurred to him / he thought.",
+    "span": "he recalled within himself that his host Liu, who would meet such an arrogant monk, was absurd.",
+    "suggestion": "And at the same time it struck him inwardly how foolish his host Liu was to meet such an arrogant monk.",
+    "sureness": "Fairly sure; a check of Taisho と思ひ出した as 'came to think' would settle it."
+   },
+   {
+    "japanese": "甚、迂濶《うくわつ》なやうに思はれるが",
+    "paragraph": "p42",
+    "problem": "Ennoblement: 'improvident' is managerial and soft where the narrator allows a sly dig at Liu and at schooled people.",
+    "span": "may seem exceedingly improvident",
+    "suggestion": "may seem exceedingly fatuous / crassly heedless — e.g. 'Liu, gone out naked into the blazing sun knowing nothing, may seem grossly fatuous.'",
+    "sureness": "Fairly sure that improvident is too elegant; the exact pejorative grade could be settled by the desk."
+   },
+   {
+    "japanese": "顔と云はず体と云はず、上になつてゐる部分の皮膚が",
+    "paragraph": "p45",
+    "problem": "'Upper parts' mislocates the pain as upper body; the Japanese means the sunward-facing surfaces of the bound lying body.",
+    "span": "in the skin of the upper parts of him, face or body alike.",
+    "suggestion": "in the skin of the upward-facing parts of him, face or body alike.",
+    "sureness": "Sure from the posture — face-up on the ground under the sun; no further check needed."
+   },
+   {
+    "japanese": "芬々《ふんぷん》たる酒香が、間断なく、劉の鼻を襲つて来る。…その酒香が、一分毎に、益々高くなつて来る",
+    "paragraph": "p46",
+    "problem": "Impoverishment and destroyed repetition: neutral fragrant 酒香 becomes 'rich fumes' then pejorative 'reek', colouring the thirst with disgust.",
+    "span": "that reek seems to grow stronger with every minute.",
+    "suggestion": "Keep one neutral term throughout, e.g. 'the rich wine-aroma assails his nose without pause... that aroma seems to grow stronger with every minute.'",
+    "sureness": "Sure on 芬々たる酒香 as fragrant; keeping the verbal network is what the reading requires."
+   },
+   {
+    "japanese": "鰌《どぜう》か何かのやうにぬるりと暗い所をぬけ出して",
+    "paragraph": "p48",
+    "problem": "The explicit tactile ぬるりと is dropped, prettifying the climax whose disgust lives in that sequence of similes.",
+    "span": "all at once it slips like a loach or something out of the dark and flies outwards with force.",
+    "suggestion": "all at once, slimily, like a loach or something, it slipped out of the dark place and flew outwards with force.",
+    "sureness": "Certain the adverb is missing; loach alone does not carry it in English."
+   },
+   {
+    "japanese": "蛮僧が、急に落ちつけてゐた尻を持ち上げて",
+    "paragraph": "p50",
+    "problem": "Drops 'barbarian' where the Japanese keeps 蛮僧, breaking the stable monk-naming at the moment of success.",
+    "span": "At this the monk abruptly lifts the haunches he had settled",
+    "suggestion": "At this the barbarian monk abruptly lifts the haunches he had settled",
+    "sureness": "Certain; a consistency check of 蛮僧 across the chapter settles it."
+   },
+   {
+    "japanese": "療治の中止を申込むつもりで",
+    "paragraph": "p47",
+    "problem": "'Beg' makes Liu abject and victim-like; the Japanese is a flat proposal to stop, keeping Liu neither fool nor victim.",
+    "span": "meaning to beg the monk at his pillow to stop the cure.",
+    "suggestion": "meaning to ask the monk at his pillow to call off the cure.",
+    "sureness": "Fairly sure; 申込む is request/propose, not begging."
+   },
+   {
+    "japanese": "勿体《もつたい》らしくしやがんでゐる。",
+    "paragraph": "p4",
+    "problem": "Ennoblement: 'solemnly' dignifies what is comic-pompous self-importance next to the turkey simile.",
+    "span": "squats there solemnly, in the posture of a turkey.",
+    "suggestion": "squats there with ponderous self-importance, in the posture of a turkey.",
+    "sureness": "Fairly sure on the ironic charge of 勿体らしく; the desk's sense of the tableau will settle the exact word."
+   }
+  ],
+  "say": "Tableau, interview and ordeal read faithfully in manner, with small losses to naming stability, visceral detail and the narrator's flat digs noted above."
+ },
+ "usage": {
+  "input_tokens": 19301,
+  "cached_tokens": 0,
+  "output_tokens": 15340,
+  "reasoning_tokens": 14072,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.08932125,
+ "response_id": "resp_6ae8a1b845a1af59de8448b5",
+ "latency_s": 84.5,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 4419
+  }
+ ],
+ "created": "2026-11-02T14:44:08Z"
+}
