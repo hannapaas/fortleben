@@ -277,6 +277,10 @@ def go(db, run_id: int, from_: str | None) -> None:
         conn.commit()
         try:
             orchestrator.run(conn, client, row["work_id"], run_id=run_id, from_=from_)
+            options = _options(conn, run_id)
+            if options.pop("error", None):  # an earlier attempt's failure, now made good
+                conn.execute("UPDATE run SET options=? WHERE id=?", (dumps(options), run_id))
+                conn.commit()
         except Exception as e:  # a failed stage or a cap: the orchestrator has recorded which
             conn.rollback()
             conn.execute("UPDATE run SET status='failed' WHERE id=?", (run_id,))
