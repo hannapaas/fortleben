@@ -191,3 +191,50 @@ def test_startup_marks_an_orphaned_run_interrupted_and_it_resumes(conn, db, held
     assert desk.state(conn, token)["allowance"]["reserved"] == estimate()
     with pytest.raises(desk.Refused, match="still going"):
         desk.resume(db, token, run_id)
+
+
+@pytest.fixture
+def site(db, monkeypatch):
+    monkeypatch.setenv("MODEL_API_KEY", "test")
+    monkeypatch.setenv("HOUSE_OPEN", "true")
+    # The routes are tested against a tiny stand-in for the page; the real template has its own tests.
+    stand_in = jinja2.DictLoader({"desk.html": "<p>{{ desk.editor.name }}</p><p>{{ closed or '' }}</p>"})
+    monkeypatch.setattr(web.templates.env, "loader", jinja2.ChoiceLoader([stand_in, web.templates.env.loader]))
+    return TestClient(web.create_app(db, screen=False))
+
+
+def test_the_desk_page_and_its_routes(site, conn, held, monkeypatch):
+    token = desk.invite(conn, "Ines Example")
+    r = site.get(f"/desk/{token}")
+    assert r.status_code == 200 and "Ines Example" in r.text and r.headers["x-robots-tag"] == "noindex"
+    assert site.get("/desk/nope").status_code == 404
+
+    r = site.post(f"/desk/{token}/runs", json={"work": "bansan", "agree": False, "credit": ""})
+    assert r.status_code == 400 and "Agree to publication" in r.json()["error"]
+    r = site.post(f"/desk/{token}/runs", json={"work": "bansan", "agree": True, "credit": "Ines"})
+    run_id = r.json()["run_id"]
+    assert site.get(f"/desk/{token}/runs/{run_id}").json()["status"] == "queued"
+    assert site.get(f"/desk/{desk.invite(conn, 'B')}/runs/{run_id}").status_code == 404
+    r = site.post(f"/desk/{token}/runs", json={"work": "bansan", "agree": True, "credit": ""})
+    assert r.status_code == 409
+
+    conn.execute("UPDATE run SET status='interrupted' WHERE id=?", (run_id,))
+    conn.commit()
+    desk._live.clear()
+    assert site.post(f"/desk/{token}/runs/{run_id}/resume").json() == {"ok": True}
+
+
+def test_runs_cant_start_without_a_key_or_in_replay(db, conn, monkeypatch):
+    monkeypatch.delenv("MODEL_API_KEY", raising=False)
+    monkeypatch.setattr("house.web.load_dotenv", lambda *a, **k: None)
+    stand_in = jinja2.DictLoader({"desk.html": "<p>{{ closed }}</p>"})
+    monkeypatch.setattr(web.templates.env, "loader", jinja2.ChoiceLoader([stand_in, web.templates.env.loader]))
+    token = desk.invite(conn, "Ines")
+    site = TestClient(web.create_app(db, screen=False))
+    assert "start here: this copy of the site has no model key" in site.get(f"/desk/{token}").text
+    r = site.post(f"/desk/{token}/runs", json={"work": "bansan", "agree": True, "credit": ""})
+    assert r.status_code == 403 and "no model key" in r.json()["error"]
+
+    replay = TestClient(web.create_app(replay=True))
+    r = replay.get(f"/desk/{token}")
+    assert "start here" in r.text and r.headers["x-robots-tag"] == "noindex"
