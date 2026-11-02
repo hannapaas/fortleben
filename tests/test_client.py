@@ -13,7 +13,7 @@ SCHEMA = {"type": "object", "properties": {"say": {"type": "string"}}}
 class LyingAPI:
     """Returns valid output but reports whatever usage it's told to."""
 
-    def __init__(self, usage: Usage, text='{"say": "hello"}'):
+    def __init__(self, usage: Usage, text='{"say": "Nothing to change here."}'):
         self.u, self.text, self.calls = usage, text, 0
         self.responses = self
 
@@ -31,7 +31,7 @@ class LyingAPI:
         )
 
 
-def live_client(tmp_path, monkeypatch, usage, run_cap=1.0, text='{"say": "hello"}'):
+def live_client(tmp_path, monkeypatch, usage, run_cap=1.0, text='{"say": "Nothing to change here."}'):
     monkeypatch.setattr(cl, "CACHE", tmp_path / "cache")
     conn = connect(":memory:")
     c = cl.ModelClient.__new__(cl.ModelClient)
@@ -56,7 +56,7 @@ def test_second_identical_call_is_free(tmp_path, monkeypatch):
     b = c.call(make_call())
     assert c.api.calls == 1
     assert a.cost_usd > 0 and b.cost_usd == 0 and b.from_cache
-    assert b.data == {"say": "hello"}
+    assert b.data == {"say": "Nothing to change here."}
     rows = c.conn.execute("SELECT from_cache, cost_usd FROM call ORDER BY id").fetchall()
     assert [r["from_cache"] for r in rows] == [0, 1]
 
@@ -82,7 +82,7 @@ def test_fake_client_serves_recorded_responses(tmp_path, monkeypatch):
     live = live_client(tmp_path, monkeypatch, Usage(10, 0, 10, 0))
     live.call(make_call())
     fake = cl.FakeClient(connect(":memory:"), cache_dirs=[tmp_path / "cache"])
-    assert fake.call(make_call()).data == {"say": "hello"}
+    assert fake.call(make_call()).data == {"say": "Nothing to change here."}
     with pytest.raises(cl.FixtureMissing):
         fake.call(make_call("something never recorded"))
 
@@ -100,3 +100,15 @@ def test_strict_closes_every_object():
     inner = s["properties"]["a"]["items"]
     assert inner["additionalProperties"] is False and inner["required"] == ["b"]
     json.dumps(s)
+
+
+def test_a_valid_answer_whose_log_sentence_is_junk_counts_as_broken():
+    from house.client import looks_broken
+    schema = {"type": "object", "properties": {"fixes": {"type": "array"}, "say": {"type": "string"}}}
+    assert looks_broken({"fixes": [], "say": "safdsdfkjjhjk"}, schema)
+    assert looks_broken({"fixes": [], "say": "׳"}, schema)
+    assert not looks_broken({"fixes": [], "say": "A clean chapter; nothing to change."}, schema)
+    assert not looks_broken({"fixes": [], "say": None}, schema)
+    assert not looks_broken({"fixes": [], "say": "None."}, schema)
+    assert not looks_broken({"fixes": [], "say": "Strengths and rhythms intact."}, schema)
+    assert not looks_broken("plain text", None)
