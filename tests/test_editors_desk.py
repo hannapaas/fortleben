@@ -85,8 +85,36 @@ def test_unknown_and_revoked_tokens_are_refused(conn, db):
 
 def test_the_estimate_comes_from_the_sheets(conn):
     w = next(w for w in desk.eligible_works() if w["id"] == "bansan")
-    assert w["estimate"] == math.ceil(budget.sheets(w["chars"]) * budget.DROPS_PER_SHEET)
+    assert w["estimate"] == math.ceil(budget.sheets(w["chars"]) * desk.FALLBACK_DROPS_PER_SHEET)
     assert w["chars"] > 0 and w["first_published_year"] == 1917
+
+
+def test_the_rate_follows_finished_runs_in_the_ledger(conn, db, held):
+    token = desk.invite(conn, "Ines")
+    run_id = desk.start(db, token, "bansan", True, "")
+    conn.execute("UPDATE run SET status='done' WHERE id=?", (run_id,))
+    conn.execute("INSERT INTO call (run_id, prompt, model, list_cost_usd, prompt_hash, input_hash, response_key) "
+                 "VALUES (?, 'x', 'm', 1.2, 'p', 'i', 'k')", (run_id,))  # 2,000 drops for 8.5 sheets
+    conn.commit()
+    rate = desk.drops_per_sheet(conn)
+    assert rate == pytest.approx(budget.drops(1.2) / budget.sheets(desk.eligible_works()[0]["chars"]) * 1.1, rel=0.2)
+    assert rate > desk.FALLBACK_DROPS_PER_SHEET
+
+
+def test_a_run_stopped_at_its_cap_resumes_with_a_top_up(conn, db, held):
+    token = desk.invite(conn, "Ines")
+    run_id = desk.start(db, token, "bansan", True, "")
+    reserved = desk._options(conn, run_id)["reserved_drops"]
+    o = desk._options(conn, run_id)
+    o.update(charged_drops=reserved, held_drops=0)
+    conn.execute("UPDATE allowance SET drops_reserved=0, drops_spent=?", (reserved,))
+    conn.execute("UPDATE run SET status='failed', stage='copy-desk', options=? WHERE id=?", (json.dumps(o), run_id))
+    conn.commit()
+    desk._live.clear()  # that attempt has ended
+    desk.resume(db, token, run_id)
+    o = desk._options(conn, run_id)
+    assert o["reserved_drops"] == reserved + math.ceil(reserved / 4) and o["held_drops"] == math.ceil(reserved / 4)
+    assert conn.execute("SELECT cap_usd FROM run WHERE id=?", (run_id,)).fetchone()[0] > 0
 
 
 def test_refusals_reserve_nothing(conn, db, held):
