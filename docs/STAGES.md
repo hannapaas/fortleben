@@ -5,87 +5,94 @@ Written 30 Oct 2026. **This is the one list the orchestrator implements.** `ARCH
 ## Units
 
 - **Work:** one text. **Run:** one pass of a work through the house. **Segment:** a paragraph of the source, `p12`. Sentences inside it, `p12-s3`, exist only as anchors for queries and notes.
-- **The paragraph is the unit of English.** Translation returns one English string per paragraph, plus best-effort spans saying which English renders which source sentence (one to one, two to one, reordered, or absent). Nothing forces one English sentence per Japanese one; a literary translator restructures, and a sentence-locked schema would push the model back towards literalism. The parallel layout aligns paragraph to paragraph, always; the sentence spans are used only to highlight the matching stretch on tap, and where there's no clean span the whole paragraph is the match.
-- **Page:** the unit of *translation*. A drafting chunk of about 1k source tokens (~650 characters) of whole paragraphs, breaking at scene breaks where possible, drafted with the source (whole, or the page's chapter: `STORY-STATE.md` §3), the reading and the bible in view. The paragraph is only where the English is *stored* and *aligned*; nothing is ever translated a paragraph at a time. The Analyst can set the **drafting grain** per text in the style sheet: page (default) or scene, for dialogue-heavy texts or texts in very short paragraphs, and where the breaks fall. Checking and notes happen per page too; queries, revisions and labels are recorded per paragraph.
+- **The paragraph is the unit of English.** Translation returns one English string per paragraph (or per group, below). Nothing forces one English sentence per Japanese one; a literary translator restructures, and a sentence-locked schema would push the model back towards literalism. The parallel layout aligns paragraph to paragraph, always.
+- **Page:** the unit of *translation*. A drafting chunk of about 1k source tokens (~650 characters) of whole paragraphs, breaking at scene breaks where possible, drafted with the source (whole, or the page's part: `STORY-STATE.md` §3), the reading and the bible in view. The paragraph is only where the English is *stored* and *aligned*; nothing is translated a paragraph at a time, except a paragraph a draft left out (below). Queries, revisions and labels are recorded per paragraph.
+- **Part:** the unit of *reading*. The readers, the desk, the final read (for a long text) and the notes work a part at a time: what one careful reader can judge whole, at most 25,000 characters (`context.MAX_PART_CHARS`). The planner proposes the parts (stage 1); a short story is usually one part.
 - **IDs are in the prompt.** Paragraph IDs (`p47`) and sentence IDs (`p47-s2`) come from the parser, in source order, and never change. The drafting call receives its paragraphs with their IDs printed and answers keyed by the same IDs; the readers' notes and the desk's changes use them too. Pages are an internal unit for calls and budgeting only: readers never see a page number, the reader is continuous and anchored by paragraph.
 - **Groups.** When the English wants two short source paragraphs as one, or one long one split, the drafter returns the English against a group of paragraphs and says so; alignment is group to group for that stretch. Rare, and logged.
 - **What a paragraph is** is decided by the parser from the source (line breaks, the indent mark, dialogue lines on their own line), deterministically, before any model sees the text. A dialogue line is a paragraph.
-- **Tier:** every paragraph is *plain*, *tricky* or *hard* (`RUNNING-A-TEXT.md` §2).
+- **No tiers.** Every paragraph takes the same path. Tiers (*plain*, *tricky*, *hard*) were planned (`RUNNING-A-TEXT.md` §2) and never set.
 
 ## The stages
 
-Each stage is a module `house/stages/<name>.py` with `run(ctx) -> events`. The orchestrator may pause and resume between any two stages; in production it stops only at the checkpoint.
+Each stage is a module `house/stages/<name>.py` with `run(ctx)`, which records what it does as events and returns a summary. The orchestrator (`house/orchestrator.py`, `STAGES`) can stop and resume between any two stages. The numbers are the plan's, kept so code and docs agree; the gaps are stages not built (below).
 
 | # | Stage | Scope | Calls (prompt · model) | Produces | Notes |
 |---|---|---|---|---|---|
 | 0 | **parse** | work | code | segments with ruby, emphasis, scene breaks, colophon, rights record | Deterministic. Round-trip tested. |
-| 1 | **background** | work | `background-brief` · Spark low + web_search | a page of notes with sources | A fixed stage, not an intern; doesn't count against intern caps. |
-| 2 | **first-read** | work | `first-read` · Wonder medium | the house's reading; open questions; 2–3 voice takes | Whole source in one call. Gets the author file (`STORY-STATE.md` §1a) if the house has one, as information to weigh, not instructions. |
-| 3 | **crux-check** | work | `crux-check` · Wonder low, then `head-select` · Wonder low | a second reader's crux; *same / different* with a line | The second reader never sees the first reading; it's a separate call with a different prompt, which matters more than a different model. The head-select call compares the two cruxes; "different" opens the first fork. About $0.04 on 「晩餐」, once per text. |
-| 4 | **bible** | work | `analyst-bible` · Spark medium | `bible.json` v1 (cast, ledger, narration, motifs, style sheet, hard spots) | Whole source and reading in the cached prefix. Schema-validated. No referent map since 2 Nov: who speaks and acts in a sentence is worked out by whoever reads it (`STORY-STATE.md` §6). |
-| 5 | **voice-trial** | first page | `translate-draft` × 2–3 (one voice take each); the readers on each; `head-select` · Spark low | the voice reference page; the alternatives, kept | |
-| — | **checkpoint** | run | none | one screen for the editor: crux (and any disagreement), reading, voice trial, key bible choices, open forks | **Stop** here if an editor is assigned and hasn't switched it off. Each editor change becomes a scoped rule. With no editor: continue, and the edition says so. Everything above is "the brief", about 15% of the allowance. |
-| 6 | **draft** | page by page, in order | `translate-draft` · Spark or Wonder (a run option), medium | English per paragraph; translator notes; flags; `{t:id}` tokens on ledger terms | Sequential, because each page sees the previous pages' English. Context per `STORY-STATE.md` §3. Sentence spans, if wanted, are computed later. |
-| 7 | **readers** | chapter | `reader-faithful` and `reader-readable` · Spark or Wonder (a run option), medium | margin notes, at most eight per reader per chapter, or none | Two readers, independent: neither sees the other, nor the translator's notes. The faithful reader holds the author's side and meets the Japanese first; the readable reader holds the English reader's side and meets the English first. Each gets the reading, the cast and ledger, and the chapter in both languages. A note is a span, what's wrong, the Japanese quoted, a wording only if one is obvious, and how sure, in words. |
-| 8 | **desk** | chapter | `desk` · Spark or Wonder (a run option), medium | its edits, each an exact span of the English and its replacement, with the notes it answers and a reason; the notes it declined and why; the disagreements, each sent up or not | The only call that writes after the draft. Never called for a chapter with no notes. Code checks every changed paragraph and accounts for every note (below). |
-| 10 | **editors-letter** | work | `editors-letter` · Wonder low | a short letter; amendments to the reading | After the whole draft exists. The desk acts on it. Not built yet. |
-| 11 | **editorial** | — | — | — | Folded into stage 7 on 2 Nov: the readable reader does this job, with the Japanese to hand. |
-| 12 | **copy-desk** | work | code (ledger, callbacks, length, tic list); `copy-desk` · Glimmer low | mechanical fixes applied by code; everything else as queries with a suggested replacement | Glimmer proposes, never writes the base text. Glimmer is optional: without it the code checks still run. |
-| 13 | **notes** | page, notes anchored per paragraph | `notes` · Spark low | notes per view with anchors | One call per page. The keikaku test: only what the sentence can't give you. |
-| 14 | **fact-check** | note | `fact-check` · Spark low + web_search | verified (with sources) / killed | Every note cites or dies. Casual notes can skip this when the pool is short. Interns may be asked for from 8, 13 or 14: the head's output sets `needs_intern`, the orchestrator runs the `intern` call and re-runs the head with the report (`ARCHITECTURE.md` §5). |
-| 15 | **final-read** | work | `final-read` · Wonder low | queries | The English as a whole, then against the source: seams, voice drift, crux, continuity. A second final read only if the resulting changes were large (over 10% of paragraphs). |
-| 16 | **release** | work | code | editions (Casual / Curious / Student) from the base text + tokens + notes; statuses; colophon; the bible and reading published; the author file updated with this work's entries | Proof/QC is code: every paragraph present, every token resolved, every note anchored. |
+| 1 | **parts** | work | `parts` · Spark low | where each part starts | The planner sees the book's shape (each paragraph's ID, length, kind, first words) and divides it into parts for the readers, the desk, the final read and the notes: the book's own divisions where it has them, joined or split so each part can be judged whole. Code checks the answer covers the book once, in order, with no part over 25,000 characters; if not, it's flagged and the fallback split is used (headings, then scene breaks merged to at least 4,000 characters). |
+| 2 | **first-read** | work | `first-read` · Wonder medium | the house's reading; open questions; up to 3 voice takes | Whole source in one call. |
+| 3 | **crux-check** | work | `crux-check` · Wonder low, then `head-select` · Wonder low | a second reader's crux; *same / different* with a line | The second reader never sees the first reading; it's a separate call with a different prompt, which matters more than a different model. The head-select call compares the two cruxes; "different" opens the first fork, and the first reading stands until the editor rules. About $0.04 on 「晩餐」, once per text. |
+| 4 | **bible** | work | `analyst-bible` · Spark medium | the bible (cast, narration, motifs, style sheet, hard spots) | Whole source and reading in the cached prefix. No ledger and no referent map since 2 Nov: who speaks and acts in a sentence is worked out by whoever reads it (`STORY-STATE.md` §6). |
+| 6 | **draft** | page by page, in order | `translate-draft-plain` (default) or `translate-draft` (faithful first) · Spark by default (a run option), medium | English per paragraph or group; translator's notes; flags | Sequential, because each page sees the previous pages' English. Context per `STORY-STATE.md` §3: the reading, the first voice take, the bible, the source, from page 2 the house's first page as the voice reference, the two paragraphs before and the next one in Japanese. Code repairs coverage (below). |
+| 7 | **readers** | part | `reader-faithful` and `reader-readable` · Spark by default (a run option), medium, strict | margin notes, at most twenty per reader per part, or none | Two readers, independent: neither sees the other, nor the translator's notes. The faithful reader holds the author's side and meets the Japanese first; the readable reader holds the English reader's side and meets the English first. Each gets the reading, the cast, and the part in both languages. A note is a span, what's wrong, the Japanese quoted, a suggested wording where the reader sees one (a sentence or a whole passage if that's what it takes), and how sure, in words. |
+| 8 | **desk** | part | `desk` · Wonder by default (a run option), medium, strict | its edits, each an exact span of the English and its replacement, with the notes it answers and a reason; the notes it declined and why; the disagreements, each sent up or not; findings that change an earlier part | The only call that writes after the draft. Sees the reading, the cast, standing rules and locked lines, the part in both languages, the translator's notes and both readers' notes. Never called for a part with no notes. Code applies the edits and accounts for every note (below). |
+| 9 | **final-read** | whole text up to 50,000 characters, else part by part | `final-read` · Spark by default (a run option), medium, strict | small exact fixes, applied by code; notes for the editor; a short verdict | The finished English as a whole, then against the source, with the reading and the bible: seams revision left, voice drift, the crux, continuity, a word an edit doubled. It fixes what matters as exact edits and sends the editor notes only for real judgement calls. Wonder sometimes returned filler here, so it runs on Spark. Runs right after the desk, so footnotes anchor to the final text. |
+| 12 | **copy-desk** | work | code | queries | Stray scripts, and the omission guard: a paragraph whose length ratio is well under the text's own median. Everything becomes a query with the reason; nothing rewrites the English. |
+| 13 | **notes** | part, anchored per paragraph | `notes` · Spark low | notes per edition with anchors and sources | One call per part, on the finished English and the translator's notes. The keikaku test: only what the sentence can't give you. Notes are stored *unverified*: nothing checks them yet. |
+| 16 | **release** | work | code | three editions (Casual / Curious / Student): one English, differing only in which notes they show; a label per paragraph; the colophon, the reading and the bible; `var/releases/<work>-v0.N.json` | Proof/QC is code: every paragraph has English, every note is anchored; problems are listed in the release. A paragraph is *house-checked* if a reader read its part, otherwise *draft*. |
 
-Rule propagation (an editor's rule or an accepted bible amendment) is not a stage: it queues revisions (`rule-scope` · Spark minimal on candidates found by ledger and regex), which go to the desk like any other change.
+**Tried and dropped:** a voice trial (the first page drafted in each voice the reading offers, one picked) and a read-through (the translator re-reading its own part before the readers), in experiment 3 (`experiments/03-stiffness.md`): neither helped. Editorial was folded into the readable reader on 2 Nov.
 
-**The pipeline as built** (2 Nov) is stages 0, 2, 3, 4, 6, 7, 8, 12 (code only), 13, 16. The final read (15) comes next.
+**Not built:** the background brief, the checkpoint before the full run, the editor's letter, fact-check, Glimmer at the copy desk, interns, and rule propagation. Their prompts are in `prompts/` (`PROMPTS.md`). The desk is told the standing rules and locked lines, and code refuses edits to a locked line, but nothing writes rules or locks yet.
+
+**The pipeline as built** (2 Nov): parse, parts, first-read, crux-check, bible, draft, readers, desk, final-read, copy-desk, notes, release.
 
 ## How pages are cut and handed over
 
 Code, before any model is involved.
 
 1. **The parser** turns the source file into an ordered list of paragraphs with IDs, marking scene breaks (blank lines, section numbers, Aozora's ※ and ◇ markers) and dialogue lines.
-2. **The pager** (`house/pager.py`, deterministic) walks the list and builds pages: it adds whole paragraphs until the next would take the page past the target (~650 characters), preferring to close at a scene break near the limit. It never splits a paragraph; a paragraph longer than the target is a page on its own. If the style sheet sets the grain to *scene*, it closes at the Analyst's break points instead.
-3. **The orchestrator** goes page by page in order, assembles the context (`STORY-STATE.md` §3) and makes one `translate-draft` call per page.
-4. **The answer** is a list of items, each naming the paragraph IDs it covers (one, or a group), with the English, translator notes and flags. The orchestrator checks every paragraph in the page is covered exactly once (retry once, then a failure event), stores a revision per paragraph, emits events, and moves on.
+2. **The pager** (`house/pager.py`, deterministic) walks the list and builds pages: it adds whole paragraphs until the next would take the page past the target (~650 characters), closing early at a scene break once the page is past 60% of the target. It never splits a paragraph; a paragraph longer than the target is a page on its own.
+3. **The draft stage** goes page by page in order, assembles the context (`STORY-STATE.md` §3) and makes one drafting call per page (`translate-draft-plain` by default).
+4. **The answer** is a list of items, each naming the paragraph IDs it covers (one, or a group), with the English, translator's notes and flags. Code keeps what the answer got right: a paragraph not on the page is dropped (the drafter sometimes translates the next paragraph it was shown), and a paragraph drafted twice keeps its first draft. Any paragraph left out is flagged and drafted again on its own; left out twice, the stage fails. Then it stores a revision per paragraph or group, emits events, and moves on.
 
-The model never decides where a page starts or ends and never sees half a paragraph. The only chunking choices a model makes are the Analyst's, at bible time: the grain and the break points, which the pager obeys.
+The model never decides where a page starts or ends and never sees half a paragraph. The only division a model makes is the planner's parts (stage 1), which decide what the readers, the desk and the final read judge at once, never what a drafting call drafts; and code checks those.
 
 ## How the readers and the desk work
 
-No agent talks to another agent. There's no shared chat, no transcript passed around, and no agent chooses who to address. Think of a publishing house where two readers mark up a chapter in the margin, separately, and one desk editor goes through both sets of notes and decides.
+No agent talks to another agent. There's no shared chat, no transcript passed around, and no agent chooses who to address. Think of a publishing house where two readers mark up a part in the margin, separately, and one desk editor goes through both sets of notes and decides.
 
 | Step | What happens | Who | Call |
 |---|---|---|---|
-| 1 | The translator drafts the chapter's pages, in order | translator | `translate-draft` per page |
-| 2 | The faithful reader and the readable reader each read the chapter, independently, and leave notes or none | readers | `reader-faithful`, `reader-readable` per chapter |
-| 3 | The orchestrator stores each note as a row in the `query` table, owned by the desk, and numbers them per chapter (F1… and R1…) | code | none |
-| 4 | If there are notes, the desk weighs them against the reading and returns only its edits (exact span → replacement), with the notes each change answers, the notes it declined and why, and every place the readers pulled opposite ways | desk | `desk` per chapter |
-| 5 | Code applies each edit, refusing one whose span isn't in the English, then checks each changed paragraph (ledger tokens kept, no stray script, not shrunk, not rewritten far beyond its notes), refuses changes to locked lines, marks each note *taken*, *declined* or *forked*, and flags any the desk didn't address. Disagreements are recorded beside the line; the ones the desk sends up become forks for the editor | code | none |
+| 1 | The translator drafts every page of the text, in order | translator | `translate-draft-plain` per page |
+| 2 | The faithful reader and the readable reader each read the part, independently, and leave notes or none | readers | `reader-faithful`, `reader-readable` per part |
+| 3 | Code stores each note as a row in the `query` table, owned by the desk, and numbers them per part (F1… and R1…) | code | none |
+| 4 | If there are notes, the desk weighs them against the reading and the translator's notes and returns only its edits (exact span → replacement), with the notes each change answers, the notes it declined and why, and every place the readers pulled opposite ways. An answer that decides none of the notes is asked for once more, saying so | desk | `desk` per part |
+| 5 | Code applies each edit, refusing one whose span isn't in the paragraph exactly once, is outside the part, or is on a locked line; then checks each changed paragraph (no stray script, not shrunk below 70%). It marks each note *taken*, *declined* or *forked*, and *unaddressed* if the desk didn't address it or its edit was refused, with a flag. Disagreements are recorded beside the line; the ones the desk sends up become forks for the editor | code | none |
 
 That's all: no answer from the translator, no re-check, no rounds. The margin for a paragraph is the readers' notes and the desk's reasons, with the revision they caused. The final read is the whole-text check on what the desk changed.
 
-**Why it can't explode.** The graph is a straight line per chapter: draft, two readers, desk. Nothing loops. Schemas cap each reader at eight notes a chapter; a reader may always answer "none"; a chapter with no notes skips the desk. On top sit the pool of drops and the spend caps. Nothing in this section is asked of the prompts; it's all the orchestrator.
+**When a later part changes an earlier one: the emergency lever.** The desk may say that something it learned in this part changes how an earlier one should read: who a character is, what a word means here. Later parts' desks are told. Once every part has been through the desk, each earlier part goes back to it once, with those findings as its notes (S1, S2…), to act on or decline. No human is needed, and nothing loops: at most five findings a run, one pass back.
+
+**Why it can't explode.** The graph is a straight line per part: draft, two readers, desk. Nothing loops. Schemas cap each reader at twenty notes a part; a reader may always answer "none"; a part with no notes skips the desk. On top sit the up-front estimate and the spend caps. Nothing in this section is asked of the prompts; it's all code.
 
 ## What code enforces, whatever the prompts say
 
 | Limit | Value | Where |
 |---|---|---|
-| Notes per reader | 8 per chapter, or none | schema |
-| Who writes after the draft | the desk only; a chapter with no notes isn't sent | orchestrator |
-| Every note accounted for | taken, declined or forked; otherwise flagged *unaddressed* | orchestrator |
-| A desk change | checked for dropped ledger tokens, stray scripts, shrinking, and a change far larger than its notes; flagged, not blocked | orchestrator |
-| Forks | 5 per run from the desk, plus the crux fork | orchestrator |
-| Interns | one level; 3 per run; $0.10 per department per run; reports, never edits; a head asks via its output, never by a tool call | orchestrator |
-| Drops of ink | 100 per sheet; when it's gone the house flags instead of resolving, in the order in `RUNNING-A-TEXT.md` §5 | budget module |
-| Spend caps | pre-call estimate against live-run / daily / total caps; kill switch | budget module |
-| Output shape | a JSON schema per prompt, sent non-strict (strict mode gets no prompt-cache hits) and validated by the client; a call that fails validation is retried once, then the stage records a failure event | model client |
-| Locked lines | never rewritten by a rule or the desk; refused and flagged | orchestrator |
-| The readers | never skipped by the budget | budget module |
-| Source in a per-page call | the whole text up to 15k characters; above that, the page's chapter in full and the other chapters in one line each | context module |
+| Notes per reader | 20 per part, or none | schema |
+| Parts | cover the book once, in order, none over 25,000 characters; otherwise the fallback split | parts stage |
+| Draft coverage | every paragraph of a page drafted once; one left out is drafted again on its own; left out twice, the stage fails | draft stage |
+| Who writes after the draft | the desk, and the final read's small fixes; a part with no notes isn't sent to the desk | desk and final-read stages |
+| An edit (desk or final read) | an exact find and replace: refused and flagged if the words aren't in the paragraph exactly once, the paragraph is outside the part, or the line is locked | stages |
+| A changed paragraph | checked for stray scripts and for shrinking below 70% of its length; flagged, not blocked | stages |
+| Every note accounted for | taken, declined or forked; otherwise *unaddressed*, flagged | desk stage |
+| A desk answer that decides none of its notes | asked for once more, saying so | desk stage |
+| Forks | 5 per run from the desk, plus the crux fork | desk stage |
+| Findings beyond a part (the emergency lever) | 5 per run; each goes back once to every earlier part, at the end of the desk stage; findings made on the way back are recorded, not taken back again | desk stage |
+| The run's cost | estimated before it starts, on purpose high (every stage live with no cache, the lever's pass back, ×1.5), from the measured rates in `house/budget.py`; refused if it's over the run cap or what's left of the daily or total budget | orchestrator, budget module |
+| Spend caps | before every live call, an estimate against the run, daily and total caps; `HOUSE_OPEN=false` closes the house to live calls | budget module |
+| Output shape | a JSON schema per prompt. Wonder's calls, and the readers', desk's and final read's, are sent strict; Spark's others go non-strict (strict mode gets no prompt-cache hits on Meta's API) and the client validates them against the same schema. An incomplete or invalid answer, or a valid one whose House-log sentence is junk, is retried once. A Wonder call that fails twice is made again on Spark and logged as `call.downgraded`; any other call that fails twice fails its stage | model client |
+| Source in a per-page call | the whole text up to 50,000 characters; above that, the page's part in full and the other parts in one line each | context module |
 
 ## Stop and resume
 
 What the editor sees of this, and what's published at each point, is `EDITORS-DESK.md`.
 
-Every stage writes its outputs to the database before the next starts, so a run can stop after any stage and resume from the record. The response cache (model, prompt hash, input hash) makes a resumed or repeated stage free. Development uses stops after every stage; production stops only at the checkpoint.
+Every stage writes its outputs to the database before the next starts, so a run can stop after any stage and resume from the record (`keikaku run <work> --to <stage>`, then `--from <stage>`). The draft, readers, desk, final read and notes also skip pages and parts already done, so a stage cut off half-way resumes where it stopped. The response cache (model, effort, prompt, input, schema, tools) makes a resumed or repeated call free. A resumed run keeps its own options and parts, and its cap unless a new `--cap` is given.
+
+- **A stage that fails** records `stage.failed` with the error, and the run stops there; the message says how to resume.
+- **A run the budget stops mid-way** records `run.stopped`, releases nothing, and says which cap to raise and how to resume.
+
+There's no checkpoint yet: a run goes straight through unless it's told where to stop.

@@ -24,8 +24,8 @@ Both exist because we don't know how much time anyone will give this. Someone wi
 
 ## What pauses, and what doesn't
 
-- **The checkpoint**, once, after the brief: crux (and any disagreement between the two readers), the reading, the voice trial, the handful of bible decisions that touch everything, and open forks. About ten minutes to read. The editor approves, changes things (each change is a scoped rule, before a line of the full run is drafted) or sends it back for another first read. An editor can switch this pause off for a text; a text with no editor never pauses here.
-- **Nothing else waits.** Forks, queries that went two rounds, sensitivity flags and the editor's letter all land on the desk as they arise, and the run carries on with the head's pick, labelled as such. The editor's rulings apply when they come: to lines not yet drafted directly, and to drafted lines as revisions through Source check. Locked lines are never touched by a rule; they raise a query to the editor instead.
+- **The checkpoint**, once, after the brief: crux (and any disagreement between the two readers), the reading and its voice takes, the handful of bible decisions that touch everything, and open forks. About ten minutes to read. The editor approves, changes things (each change is a scoped rule, before a line of the full run is drafted) or sends it back for another first read. An editor can switch this pause off for a text; a text with no editor never pauses here.
+- **Nothing else waits.** Forks, the final read's notes for the editor, sensitivity flags and the editor's letter all land on the desk as they arise, and the run carries on with the house's pick, labelled as such. The editor's rulings apply when they come: to lines not yet drafted directly, and to drafted lines as revisions through the desk. Locked lines are never touched by a rule; they raise a query to the editor instead.
 - **The editor can pause or stop a run at any time.** Pausing finishes the call in flight, commits, and holds. Stopping does the same and releases what exists.
 
 ## What is committed when
@@ -35,8 +35,8 @@ Every stage writes its results to the record before the next stage starts (`STAG
 ## Money
 
 - **Reserved before it starts.** The full estimate comes off the allowance at start. No reservation, no run. This is the rule that stops anyone spending the house's tokens without cover.
-- **The pool manages itself.** An estimate is an estimate, so within the run the house keeps to its pool the way `RUNNING-A-TEXT.md` §5 describes: it gives up interns, second drafts and some notes before it would run short, and Source check is the last thing to go. The result is a complete text, with *flagged, unresolved* spots where it economised, never a text cut off mid-page.
-- **A small overrun is the house's.** If a run still exceeds its reservation (the estimate was wrong), the house covers up to a fixed margin (20%) so the text finishes; beyond that the hard caps stop it, it's committed where it stands, and the house editor decides whether to finish it on the house. That's an operational failure to fix in the estimate, not a state the product offers.
+- **The estimate is high on purpose.** The engine prices the whole run before it starts (every stage live with no cache, the lever's pass back, then ×1.5) and refuses to start one that won't fit (`RUNNING-A-TEXT.md` §5). Nothing is given up part-way.
+- **If it still runs out**, the hard caps stop it: it's committed where it stands, nothing is released, and the house editor decides whether to raise the cap and resume it on the house. That's an operational failure to fix in the estimate, not a state the product offers. (Planned for the site: the house covering a small overrun, up to 20%, so the text finishes.)
 - **Unused reservation is released** at the end of the run.
 
 ## States of a run

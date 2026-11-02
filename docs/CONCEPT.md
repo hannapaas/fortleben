@@ -16,7 +16,7 @@ It's useful without anyone's sign-off. When a person does check a passage, the p
 - **keikaku:** the translation house inside it: the agents, departments, queries and editors' desk. Japanese for plan, from the fansub joke about a translator's note that explains nothing; the test every note here has to pass.
 - **Work:** the original text, with its rights record. You browse by work.
 - **Edition:** one translation of a work, by the house alone or steered by a named editor, versioned (v1, v1.1). A work can have several editions by different editors; for now each has one.
-- **View:** how an edition is shown: **Casual**, **Curious** or **Student**. One base text with controlled tokens, so the views differ by design, not by drift. (Earlier drafts of these docs called the views "editions"; where that wording survives, it means views.)
+- **View:** how an edition is shown: **Casual**, **Curious** or **Student**. One English shared by all three, differing only in their notes, so the views differ by design, not by drift. (Earlier drafts of these docs called the views "editions"; where that wording survives, it means views.)
 - **Run:** one pass of a work through the house, producing or revising an edition. **Release:** a published version of an edition.
 
 ## What it makes
@@ -37,18 +37,18 @@ It's useful without anyone's sign-off. When a person does check a passage, the p
 | Student | **Student** view: sourced notes, alternatives and decision history (a literal crib later). Parallel Japanese with furigana is a layout any view can switch on. Browses the Catalogue for a text to study. It's an edition, not a tutor. |
 | Translator | Browses the **Catalogue**. Reads the style sheet and queries. Finds something to pitch to a press. |
 | Bilingual reader | Flags "I think this is wrong" with a reason; proposes a fix to a span. A bilingual reader who checks a passage against the Japanese can mark it *human-reviewed*, and their name goes on it. |
-| The editor | Reviews the checkpoint before a full run (crux, reading, voice, key bible choices), decides forks, makes standing rules, locks lines, writes notes, signs the edition. Only the checkpoint holds a run, and only when an editor is assigned; everywhere else, until the editor rules, the department head's pick stands and is labelled as such. A text with no editor runs straight through and says so. |
+| The editor | Reviews the checkpoint before a full run (crux, reading, voice, key bible choices; not built yet), decides forks, makes standing rules, locks lines, writes notes, signs the edition. Only the checkpoint holds a run, and only when an editor is assigned; everywhere else, until the editor rules, the department head's pick stands and is labelled as such. A text with no editor runs straight through and says so. |
 
 ## The community concept
 
 Built from publishing, fan translation, Wikipedia and web-fiction comments, all of it visible in the UI.
 
-- **Views, not rival translations.** One base text and three views. Switching keeps your place and says what changed ("3 terms differ in this paragraph"), so the switch itself teaches. A second translation of the same work by another editor is a second edition, shown side by side as such.
+- **Views, not rival translations.** One base text and three views. Switching keeps your place and says what changed ("2 more notes in this paragraph"), so the switch itself teaches. A second translation of the same work by another editor is a second edition, shown side by side as such.
 - **Reactions on two axes.** *How it reads* (beautiful / confusing / sounds off / made me stop) is kept apart from *Is it right* (needs a reason). Readers can react to a paragraph, a note or an alternative in the debate. No counts as rankings, and a reaction never changes the text by itself. The editor sees a heatmap.
-- **Proposals become queries.** Select a span, suggest a replacement, pick a reason. Accuracy goes to Source check, flow to Editorial, notes to Fact-check. The owner answers *accepted / stet / revised*. Rejections stay visible with a reason. No person has to approve a comment or a proposal first; a model screens for abuse and the editor can remove (`SITE.md`).
+- **Proposals become queries.** Select a span, suggest a replacement, pick a reason. It goes to the desk as a note, beside the readers' (a note on a footnote goes to fact-check), and comes back *taken*, *declined* or *forked*, with the reason. Rejections stay visible with a reason. No person has to approve a comment or a proposal first; a model screens for abuse and the editor can remove (`SITE.md`).
 - **Talk starts from the record.** Each paragraph has a flat comment thread, screened by a model rather than a person, that opens with the agents' original debate, so readers argue with the record rather than from scratch. Comments don't change the text; proposals can. Page by page, with moderation: `SITE.md`.
 - **Trust ladder.** Reader → contributor → bilingual reviewer → editor. For now, the editor promotes people by hand.
-- **Honest labels.** Every paragraph says in words how far it got: *draft* (one machine pass), *house-checked* (through Source check, Editorial and Fact-check), *editor-approved*, or *human-reviewed* (a bilingual reader checked it against the Japanese). People are round and named; agents are square and named by department, never given personas. A seal marks human sign-off. Credits and a colophon (奥付) are on every edition, with the Aozora Bunko attribution.
+- **Honest labels.** Every paragraph says in words how far it got: *draft* (one machine pass), *house-checked* (the house's readers have read its part against the Japanese), *editor-approved*, or *human-reviewed* (a bilingual reader checked it against the Japanese). People are round and named; agents are square and named by department, never given personas. A seal marks human sign-off. Credits and a colophon (奥付) are on every edition, with the Aozora Bunko attribution.
 
 ## What gets translated next
 
