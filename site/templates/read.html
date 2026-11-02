@@ -18,7 +18,7 @@
 <section class="poster">
   <div class="plate" lang="ja" aria-hidden="true">{{ ed.title }}</div>
   <h1>{{ ed.title_en }}<span class="sub">(translated from the Japanese)</span></h1>
-  <p class="by">by {{ ed.author_en }} <span lang="ja">{{ ed.author }}</span>{% if ed.rights.first_published_year %}, {{ ed.rights.first_published_year }}{% endif %}.<br>English by keikaku.</p>
+  <p class="by">by {{ ed.author_en }} <span lang="ja">{{ ed.author }}</span>{% if ed.rights.first_published_year %}, {{ ed.rights.first_published_year }}{% endif %}.<br>English by keikaku{% if ed.commissioned_by %}, commissioned by {{ ed.commissioned_by }}{% endif %}.</p>
 </section>
 
 {% if ed.editions|length > 1 %}
@@ -26,8 +26,10 @@
   <div class="q">In English?</div>
   <div class="a"><ul class="edl">
     {% for e in ed.editions %}
-    {% if e.here %}
-    <li class="here"><span class="bx r" aria-hidden="true"></span><span><b>keikaku, {{ e.year }}.</b> The one you're reading: translated and checked by AI agents.</span></li>
+    {% if e.here and e.current %}
+    <li class="here"><span class="bx r" aria-hidden="true"></span><span><b>{{ e.by }}, {{ e.year }}.</b> The one you're reading: translated and checked by AI agents.</span></li>
+    {% elif e.here %}
+    <li><span class="bx r" aria-hidden="true"></span><span><a href="{{ e.url }}">{{ e.by }}, {{ e.year }}</a>. Translated and checked by AI agents.</span></li>
     {% else %}
     <li><span class="bx r" aria-hidden="true"></span><span>{% if e.url %}<a class="at" href="{{ e.url }}" rel="noopener">{{ e.by }}, {{ e.year }}</a> ↗{% else %}<span class="at">{{ e.by }}, {{ e.year }}</span>{% endif %} A translation by a person, published elsewhere.</span></li>
     {% endif %}

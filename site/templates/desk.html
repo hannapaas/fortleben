@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{# The editors' desk (docs/EDITORS-DESK.md): an invited editor picks a work their allowance covers,
+   agrees to publication and starts a run; desk.js starts it, watches it and resumes it.
+   A run's row is drawn here and again by desk.js when it changes, so keep the wording in step. #}
+{% macro n(x) %}{{ "{:,}".format(x or 0) }}{% endmacro %}
+{% macro run_row(r, blocked) -%}
+<li class="run st-{{ r.status }}" data-run="{{ r.id }}" data-status="{{ r.status }}">
+  <span class="rt"><i>{{ r.title_en }}</i> <span class="sm">started {{ r.started }}</span></span>
+  <span class="rs" aria-live="polite">{% if r.status == 'queued' %}Queued.{% elif r.status == 'running' %}In progress: {{ r.stage_label }}.{% elif r.status == 'done' %}Done: {{ r.stage_label }}.{% elif r.status == 'failed' %}Failed at {{ r.stage_label }}.{% else %}Interrupted at {{ r.stage_label }}.{% endif %}
+    <span class="sm">{{ n(r.spent) }} drops spent{% if r.reserved %}, {{ n(r.reserved) }} still held{% endif %}.</span></span>
+  {% if r.status == 'done' and r.edition_url %}<a class="read" href="{{ r.edition_url }}">Read it</a>{% endif %}
+  {% if r.status in ('interrupted', 'failed') %}<span class="rr"><button type="button" class="btn resume"{% if blocked %} disabled{% endif %}>Resume</button>
+    <span class="sm">It carries on from the last finished stage; nothing is paid for twice.</span>
+    <span class="err" aria-live="polite" hidden></span></span>{% endif %}
+</li>
+{%- endmacro %}
+{% block title %}Editors' desk · Fortleben{% endblock %}
+{% block head %}<link rel="stylesheet" href="{{ url_for('static', path='desk.css') }}">{% endblock %}
+{% block main %}
+<h1 class="desk-h">The editors' desk</h1>
+{% if not desk %}
+<p class="desk-lead">Translations can't be started from this copy of Fortleben.</p>
+{% else %}
+{% set al = desk.allowance %}
+{% set works = (desk.works|selectattr('id', 'equalto', desk.suggested)|list) + (desk.works|rejectattr('id', 'equalto', desk.suggested)|list) %}
+{% set open = works|selectattr('covered')|list %}
+{% set pick = open[0] if open else none %}
+{% set name = desk.editor.credit_as or desk.editor.name %}
+{% set blocked = closed or desk.busy %}
+<p class="desk-lead">Pick a work and keikaku translates the whole of it, checks it and publishes it here. You can close this page while it runs.</p>
+
+<form class="form two desk" id="desk" data-token="{{ desk.token }}" data-granted="{{ al.granted }}" data-spent="{{ al.spent }}" data-reserved="{{ al.reserved }}" data-available="{{ al.available }}" novalidate>
+  <div class="q">Who?</div>
+  <div class="a">{{ desk.editor.name }}, invited as an editor.</div>
+
+  <div class="q">Allowance?</div>
+  <div class="a"><b class="big" id="avail">{{ n(al.available) }}</b> drops of ink to spend.
+    <span class="sm" id="altail">{{ n(al.granted) }} granted, {{ n(al.spent) }} spent{% if al.reserved %}, {{ n(al.reserved) }} held for a translation in progress{% endif %}.</span>
+    <span class="sm block">A sheet is 400 characters of the original Japanese.</span></div>
+
+  <div class="q" id="work-q">Translate a work?</div>
+  <div class="a">
+    {% if works %}
+    <div class="works" role="radiogroup" aria-labelledby="work-q">
+      {% for w in works %}
+      <label class="work{% if not w.covered %} short{% endif %}">
+        <input type="radio" name="work" value="{{ w.id }}" data-estimate="{{ w.estimate }}" data-title="{{ w.title_en }}"{% if pick and w.id == pick.id %} checked{% endif %}{% if not w.covered %} disabled{% endif %}>
+        <span class="bx r" aria-hidden="true"></span>
+        <span class="wb">
+          <span class="wj" lang="ja">{{ w.title }}</span>
+          <span class="wt">{{ w.title_en }}</span>{% if w.id == desk.suggested %} <span class="stamp">suggested</span>{% endif %}
+          <span class="meta">{{ w.author_en }}{% if w.year %}, {{ w.year }}{% endif %} · {{ '%g' % (w.sheets|round(1)) }} sheets · {{ n(w.estimate) }} drops.
+            {% if w.covered %}Your allowance covers it.{% else %}That's {{ n(w.estimate - al.available) }} more than you have.{% endif %}</span>
+          {% if w.blurb %}<span class="meta blurb">{{ w.blurb }}</span>{% endif %}
+          {% if w.has_edition %}<span class="meta">Already on the shelf. Yours would be a separate edition, under your credit.</span>{% endif %}
+        </span>
+      </label>
+      {% endfor %}
+    </div>
+    {% if not open %}<p class="sm">Your allowance doesn't cover any of these.</p>{% endif %}
+    {% else %}
+    <p>No works are open to translate.</p>
+    {% endif %}
+  </div>
+
+  <div class="q" id="credit-q">Credit?</div>
+  <div class="a">
+    <div class="row" role="radiogroup" aria-labelledby="credit-q">
+      <label class="opt"><input type="radio" name="credit" value="{{ name }}"{% if desk.editor.credit_as != '' %} checked{% endif %}><span class="bx r" aria-hidden="true"></span>{{ name }}</label>
+      <label class="opt"><input type="radio" name="credit" value=""{% if desk.editor.credit_as == '' %} checked{% endif %}><span class="bx r" aria-hidden="true"></span>an editor</label>
+    </div>
+    <span class="sm block">How the edition names you.</span>
+  </div>
+
+  <div class="q">Published?</div>
+  <div class="a">
+    <label class="opt"><input type="checkbox" name="agree" id="agree" required><span class="bx" aria-hidden="true"></span>Publish the result on Fortleben under these labels</label>
+    <span class="sm block">Everything translated here is published here, labelled as keikaku's work, with your credit on it. There are no private translations.</span>
+  </div>
+
+  <div class="q" aria-hidden="true"></div>
+  <div class="a">
+    <div class="startrow">
+      <button type="submit" class="btn go" id="start"{% if blocked or not pick %} disabled{% endif %}>Start</button>
+      <span class="sm" id="hold"{% if not pick %} hidden{% endif %}>Holds <span id="holdn">{{ n(pick.estimate if pick else 0) }}</span> drops from your allowance; whatever isn't used comes back at the end.</span>
+    </div>
+    {% if closed %}<p class="line" id="busy">{{ closed }}</p>{% elif desk.busy %}<p class="line" id="busy">Another translation is running on the site. Try again when it's finished.</p>{% endif %}
+    <p class="err" id="err" aria-live="polite" hidden></p>
+  </div>
+
+  <div class="q">Your translations?</div>
+  <div class="a">
+    <ul class="runs" id="runs">
+      {% for r in desk.runs %}{{ run_row(r, blocked) }}{% endfor %}
+    </ul>
+    <p class="sm" id="noruns"{% if desk.runs %} hidden{% endif %}>None started.</p>
+  </div>
+</form>
+{% endif %}
+{% endblock %}
+{% block scripts %}{% if desk %}<script src="{{ url_for('static', path='desk.js') }}"></script>{% endif %}{% endblock %}

@@ -73,6 +73,36 @@ def cmd_serve(args) -> int:
     return 0
 
 
+def cmd_invite(args) -> int:
+    import os
+
+    from dotenv import load_dotenv
+
+    from house import desk
+    from house.db import ROOT
+
+    load_dotenv(ROOT / ".env")  # KEIKAKU_SECRET salts the token's hash; the site must hash it the same way
+    conn = connect(args.db)
+    if args.list:
+        for i in desk.invites(conn):
+            state = f"revoked {i['revoked']}" if i["revoked"] else f"last used {i['last_used'] or 'never'}"
+            print(f"{i['id']:>4}  {i['name']:<30} {i['left']:>7,} drops left  made {i['created']}  {state}")
+        return 0
+    if args.revoke:
+        if not desk.revoke(conn, args.revoke):
+            print("no such invite", file=sys.stderr)
+            return 1
+        print("revoked")
+        return 0
+    if not args.name:
+        print("give a name, or --list or --revoke", file=sys.stderr)
+        return 2
+    token = desk.invite(conn, args.name, drops=args.drops, work=args.work)
+    base = (args.base_url or os.environ.get("KEIKAKU_BASE_URL") or "http://127.0.0.1:8000").rstrip("/")
+    print(f"{base}/desk/{token}")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="keikaku", description="Run the translation house.")
     parser.add_argument("--db", help="SQLite file (default var/keikaku.db)")
@@ -113,6 +143,15 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--port", type=int, default=8000)
     p.add_argument("--replay", dest="serve_replay", action="store_true", help="serve fixtures/ only")
     p.set_defaults(func=cmd_serve)
+
+    p = sub.add_parser("invite", help="make an invite link to the editors' desk, with an allowance; or list or revoke them")
+    p.add_argument("name", nargs="?", help="the editor's name")
+    p.add_argument("--drops", type=int, default=4000, help="allowance in drops (default 4000)")
+    p.add_argument("--work", choices=list(works.registry()), help="a work to suggest on the desk")
+    p.add_argument("--base-url", help="the site's address (default KEIKAKU_BASE_URL, else http://127.0.0.1:8000)")
+    p.add_argument("--revoke", metavar="TOKEN_OR_ID", help="revoke an invite by its token or id")
+    p.add_argument("--list", action="store_true", help="list invites: name, drops left, made, revoked")
+    p.set_defaults(func=cmd_invite)
 
     p = sub.add_parser("calibrate", help="M0: first real calls and reasoning-token costs")
     p.add_argument("work", nargs="?", default="bansan")
