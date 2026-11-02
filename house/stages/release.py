@@ -1,5 +1,7 @@
 """Stage 16: release, code only. The views (Casual / Curious / Student) share one English and
-differ in their notes. Proof/QC is code: every paragraph present, every note anchored. Labels say what happened to each paragraph, in words."""
+differ in their notes. Proof/QC is code: every paragraph present, every note anchored. Labels say what
+happened to each paragraph, in words; "reviewed" is kept for a second, different person, as Wikisource keeps
+it (docs/REFERENCES.md). The release carries the Aozora colophon, as Aozora's terms ask."""
 
 import json
 

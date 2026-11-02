@@ -1,5 +1,7 @@
-"""Stage 13: notes, one call per chapter, on the finished English. The keikaku test: only what the sentence can't give you.
-Notes start unverified; fact-check (stage 14) verifies or kills them."""
+"""Stage 13: notes, one call per part, on the finished English. The keikaku test, after the fansub joke
+about a note explaining that "keikaku means plan": only what the sentence can't give the reader. Notes are
+the house's and never voiced as the author (Japanese Copyright Act art. 60; docs/REFERENCES.md). They start
+unverified; a fact-check stage, not built yet, would verify or kill them."""
 
 import json
 

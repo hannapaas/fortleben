@@ -51,7 +51,7 @@ The model never decides where a page starts or ends and never sees half a paragr
 
 ## How the readers and the desk work
 
-No agent talks to another agent. There's no shared chat, no transcript passed around, and no agent chooses who to address. Think of a publishing house where two readers mark up a part in the margin, separately, and one desk editor goes through both sets of notes and decides.
+No agent talks to another agent. There's no shared chat, no transcript passed around, and no agent chooses who to address. Think of a publishing house where two readers mark up a part in the margin, separately, and one desk editor goes through both sets of notes and decides. Three findings shaped it: a model revising its own draft favours it (Xu et al. 2024), rounds of debate talk agents out of right answers (Wynn et al. 2025), and readers of the English alone reward a fluent translation that has drifted from the source (Wu et al. 2025; Ferstler et al. 2026). Full references are in `REFERENCES.md`.
 
 | Step | What happens | Who | Call |
 |---|---|---|---|

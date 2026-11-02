@@ -1,7 +1,9 @@
 """The blind audit behind the exhibit (docs/BUILD-PLAN.md, "The exhibit"). Each version of a text,
 the house's runs and the one-shot baseline alike, goes to the same audit call with the same
 reading and bible, as plain paragraphs with no labels or IDs, so the auditor can't tell which is
-which. The one-shot baseline is Spark given the bare prompt and the Japanese, nothing else."""
+which. The one-shot baseline is Spark given the bare prompt and the Japanese, nothing else.
+Blind, and always against the Japanese, because judges favour fluent output and their own model's
+(Panickssery et al. 2024; Ferstler et al. 2026; docs/REFERENCES.md)."""
 
 import json
 import re

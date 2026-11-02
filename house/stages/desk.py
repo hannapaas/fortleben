@@ -1,4 +1,5 @@
-"""Stage 8: the desk. One call per chapter, the only one that writes after the draft. It gets the
+"""Stage 8: the desk. One call per part, the only one that writes after the draft, as the translator owns the
+wording in a publishing house and everyone else queries. It gets the
 chapter in both languages, both readers' notes numbered side by side (F1… faithful, R1… readable)
 and the house's reading, and returns only its edits, each an exact span of the current English and its
 replacement, with the notes it answers; the notes it declined and why; and where the readers disagreed.
