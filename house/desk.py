@@ -9,6 +9,7 @@ reservation) and the rest released. One run goes at a time, across the whole sit
 
 import json
 import math
+import os
 import re
 import secrets
 import threading
@@ -128,8 +129,29 @@ def _chars(work_id: str, mtime: float) -> int:
     return sum(len(p.text) for p in works.parse(work_id).translatable())
 
 
-def eligible_works() -> list[dict]:
+# What a run really costs per sheet, before the ledger has finished runs of its own to go on:
+# measured on 「晩餐」, 2 Nov 2026 (1,486 drops for 8.5 sheets). The engine's own pool, DROPS_PER_SHEET,
+# is what it aims to spend; an estimate that reserves less than a run costs leaves runs stuck at the cap.
+FALLBACK_DROPS_PER_SHEET = int(os.environ.get("DESK_DROPS_PER_SHEET", 175))
+
+
+def drops_per_sheet(conn=None) -> float:
+    """The rate estimates use: the average cost per sheet of the last finished runs in the ledger, as
+    first made (so a run served from the cache still counts at its real price), with a tenth on top."""
+    rates = []
+    if conn is not None:
+        for r in conn.execute("SELECT r.id, r.work_id, SUM(c.list_cost_usd) AS usd FROM run r JOIN call c ON c.run_id = r.id "
+                              "WHERE r.status='done' GROUP BY r.id ORDER BY r.id DESC LIMIT 5"):
+            path = works.source_path(r["work_id"])
+            if path.exists() and r["usd"]:
+                rates.append(budget.drops(r["usd"]) / budget.sheets(_chars(r["work_id"], path.stat().st_mtime)))
+    measured = sum(rates) / len(rates) * 1.1 if rates else FALLBACK_DROPS_PER_SHEET
+    return max(budget.DROPS_PER_SHEET, measured)
+
+
+def eligible_works(conn=None) -> list[dict]:
     """The works a run can start on: the rights record passes and the source is stored."""
+    rate = drops_per_sheet(conn)
     out = []
     for wid, w in works.registry().items():
         path = works.source_path(wid)
@@ -140,7 +162,7 @@ def eligible_works() -> list[dict]:
         out.append({"id": wid, "title": w["title"], "title_en": w.get("title_en") or w["title"],
                     "author_en": w.get("author_en") or w["author"],
                     "first_published_year": w["rights"].get("first_published_year"), "blurb": w.get("blurb"),
-                    "chars": chars, "sheets": sheets, "estimate": math.ceil(sheets * budget.DROPS_PER_SHEET)})
+                    "chars": chars, "sheets": sheets, "estimate": math.ceil(sheets * rate)})
     return out
 
 
@@ -163,6 +185,13 @@ def _hold(conn, run_id: int, person_id: int) -> None:
     """Reserve what's left of a run's reservation before an attempt at it."""
     options = _options(conn, run_id)
     hold = max(options["reserved_drops"] - options.get("charged_drops", 0), 0)
+    if not hold:
+        # It used its whole reservation and stopped at the cap: resuming holds a quarter more and
+        # raises the cap to match, so what's left can finish.
+        hold = math.ceil(options["reserved_drops"] / 4)
+        options["reserved_drops"] += hold
+        spent_usd = conn.execute("SELECT COALESCE(SUM(cost_usd),0) FROM call WHERE run_id=?", (run_id,)).fetchone()[0]
+        conn.execute("UPDATE run SET cap_usd=? WHERE id=?", (spent_usd + hold * budget.DROP_USD * OVERRUN, run_id))
     left = allowance(conn, person_id)["available"]
     if hold > left:
         raise Refused(f"This needs {hold:,} drops and you have {left:,} left.")
@@ -180,7 +209,7 @@ def start(db, token: str, work_id: str, agree: bool, credit: str | None) -> int:
         raise Refused("That invite link isn't valid.", 404)
     if not agree:
         raise Refused("Agree to publication first: everything run here is published here.")
-    work = {w["id"]: w for w in eligible_works()}.get(work_id)
+    work = {w["id"]: w for w in eligible_works(conn)}.get(work_id)
     if not work:
         raise Refused("That work isn't one a run can start on.")
     credit = _credit(credit)
@@ -346,7 +375,7 @@ def state(conn, token: str) -> dict | None:
     listed = [{"id": w["id"], "title": w["title"], "title_en": w["title_en"], "author_en": w["author_en"],
                "year": w["first_published_year"], "blurb": w["blurb"], "sheets": round(w["sheets"], 1),
                "estimate": w["estimate"], "covered": w["estimate"] <= left["available"],
-               "has_edition": w["id"] in published} for w in eligible_works()]
+               "has_edition": w["id"] in published} for w in eligible_works(conn)]
     suggested = inv["suggested_work"]
     if suggested is None:  # the shortest work the allowance covers
         covered = sorted((w for w in listed if w["covered"]), key=lambda w: w["estimate"])
