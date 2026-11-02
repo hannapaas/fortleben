@@ -1,0 +1,37 @@
+{
+  "type": "object",
+  "properties": {
+    "marks": {
+      "type": "array",
+      "maxItems": 60,
+      "items": {
+        "type": "object",
+        "properties": {
+          "span": {
+            "type": "string",
+            "description": "The English, quoted exactly"
+          },
+          "why": {
+            "type": "string",
+            "description": "What's wrong, in a line"
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "minor",
+              "serious"
+            ]
+          }
+        }
+      }
+    },
+    "overall": {
+      "type": "string",
+      "minLength": 1
+    },
+    "say": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

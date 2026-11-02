@@ -4,6 +4,7 @@ reading and bible, as plain paragraphs with no labels or IDs, so the auditor can
 which. The one-shot baseline is Spark given the bare prompt and the Japanese, nothing else."""
 
 import json
+import re
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -23,11 +24,13 @@ def baseline(client, work) -> str:
 
 
 def run_english(conn, run_id: int) -> str:
-    """A run's English as the Casual view renders it, one paragraph per line, grouped units once."""
+    """A run's English, one paragraph per line, grouped units once. Runs made before the ledger was
+    dropped carry {t:id} placeholders; they're filled from the old term table as Casual showed them."""
     work_id = conn.execute("SELECT work_id FROM run WHERE id=?", (run_id,)).fetchone()[0]
-    t = {r["id"]: dict(r) for r in conn.execute("SELECT * FROM term WHERE work_id=?", (work_id,))}
+    t = {r["id"]: r["casual"] for r in conn.execute("SELECT id, casual FROM term WHERE work_id=?", (work_id,))}
     units = sorted(latest_units(SimpleNamespace(conn=conn, run_id=run_id)).items(), key=lambda kv: int(kv[0][0][1:]))
-    return "\n\n".join(checks.render(en, t, "casual") for _, en in units)
+    old = lambda en: re.sub(r"\{t:([\w-]+)\}", lambda m: t.get(m.group(1), m.group(0)), en)  # noqa: E731
+    return "\n\n".join(old(en) for _, en in units)
 
 
 def audit(client, conn, work, label: str, english: str) -> dict:
@@ -42,6 +45,22 @@ def audit(client, conn, work, label: str, english: str) -> dict:
     OUT.mkdir(parents=True, exist_ok=True)
     record = {"label": label, "english": english, "audit": res.data, "usd": res.list_cost_usd}
     (OUT / f"{work.meta['work_id']}-{label}.json").write_text(json.dumps(record, ensure_ascii=False, indent=1), encoding="utf-8")
+    return record
+
+
+def audit_readable(client, conn, work, label: str, english: str) -> dict:
+    """The second instrument: blind marks of translationese, so a drafting change can be judged on the prose."""
+    ctx = Ctx(conn, client, work, None)
+    inp = context.join(
+        context.reading(ctx.latest("reading")),
+        context.block("The English version", english),
+        context.block("The Japanese", "\n".join(p.text.strip("　 ") for p in work.translatable())),
+    )
+    res = client.call(Call("audit-readable", WONDER, "medium", inp, load_schema("audit-readable"),
+                           f"{work.meta['work_id']}:audit-readable", expected_output_tokens=4000, strict=True, stage="audit"))
+    OUT.mkdir(parents=True, exist_ok=True)
+    record = {"label": label, "english": english, "audit": res.data, "usd": res.list_cost_usd}
+    (OUT / f"{work.meta['work_id']}-{label}-readable.json").write_text(json.dumps(record, ensure_ascii=False, indent=1), encoding="utf-8")
     return record
 
 
