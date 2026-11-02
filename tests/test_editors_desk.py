@@ -255,3 +255,12 @@ def test_keikaku_invite_prints_a_working_link_and_never_the_hash(db, capsys, mon
     assert "Ines Example" in listed and "2,000 drops left" in listed and digest(token) not in listed
     assert cli.main(["--db", str(db), "invite", "--revoke", token]) == 0
     assert desk.editor(conn, token) is None
+
+
+def test_startup_leaves_a_command_line_run_alone(conn):
+    conn.execute("INSERT INTO work (id, title, author) VALUES ('bansan', '晩餐', '素木しづ')")
+    run_id = orchestrator.new_run(conn, "bansan", "dev-1", 1.0, {})
+    conn.execute("UPDATE run SET status='running' WHERE id=?", (run_id,))
+    conn.commit()
+    assert desk.recover(conn) == []
+    assert conn.execute("SELECT status FROM run WHERE id=?", (run_id,)).fetchone()[0] == "running"

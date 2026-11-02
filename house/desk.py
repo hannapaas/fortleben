@@ -275,7 +275,9 @@ def settle(conn, run_id: int) -> None:
 def recover(conn) -> list[int]:
     """At startup: a run left going with no thread behind it was interrupted. Desk runs are settled,
     so their hold is released until the editor resumes them."""
-    stuck = [r["id"] for r in conn.execute(f"SELECT id FROM run WHERE status IN {GOING}") if r["id"] not in _live]
+    # Only desk runs: a run started from the command line on the same database may still be going.
+    stuck = [r["id"] for r in conn.execute(f"SELECT id FROM run WHERE status IN {GOING} AND label LIKE 'desk:%'")
+             if r["id"] not in _live]
     for run_id in stuck:
         conn.execute("UPDATE run SET status='interrupted' WHERE id=?", (run_id,))
         conn.commit()
