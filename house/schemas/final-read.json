@@ -1,0 +1,68 @@
+{
+  "type": "object",
+  "properties": {
+    "fixes": {
+      "type": "array",
+      "description": "Every repair that matters; none for a clean text",
+      "items": {
+        "type": "object",
+        "properties": {
+          "paragraph": {
+            "type": "string",
+            "description": "Paragraph ID, e.g. p12"
+          },
+          "find": {
+            "type": "string",
+            "description": "The exact words to replace, as they stand in the English"
+          },
+          "replace": {
+            "type": "string",
+            "description": "What goes in their place"
+          },
+          "reason": {
+            "type": "string",
+            "description": "Why, in a sentence"
+          }
+        }
+      }
+    },
+    "notes": {
+      "type": "array",
+      "description": "For the editor: only a judgement call the text can't settle. Usually none",
+      "items": {
+        "type": "object",
+        "properties": {
+          "paragraph": {
+            "type": "string"
+          },
+          "span": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The English it points at, quoted exactly, if it's one place"
+          },
+          "problem": {
+            "type": "string",
+            "description": "What's wrong, in a sentence or two"
+          },
+          "evidence": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The Japanese, or the earlier passage, it rests on"
+          }
+        }
+      }
+    },
+    "verdict": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Ready or not, and why, in a sentence or two"
+    },
+    "say": {
+      "type": "string"
+    }
+  }
+}
