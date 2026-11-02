@@ -259,6 +259,30 @@ CREATE TABLE IF NOT EXISTS reaction (
   created_at    TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
+-- Comments in the margin: anyone, no account. Shown to everyone once the screen passes them;
+-- until then only to their writer (matched by a cookie token, stored hashed). Removed ones are deleted.
+CREATE TABLE IF NOT EXISTS comment (
+  id            INTEGER PRIMARY KEY,
+  work_id       TEXT NOT NULL,
+  segment_id    TEXT NOT NULL,
+  body          TEXT NOT NULL,
+  name          TEXT,                      -- optional, screened like the body
+  status        TEXT NOT NULL DEFAULT 'pending',  -- pending / published / failed
+  reason        TEXT,                      -- the screen's one line, shown to the writer if it failed
+  author        TEXT NOT NULL,             -- hash of the writer's cookie token
+  ip            TEXT NOT NULL,             -- hash of the address, for rate limits
+  created_at    TEXT NOT NULL DEFAULT (datetime('now')),
+  screened_at   TEXT
+);
+CREATE INDEX IF NOT EXISTS comment_work ON comment(work_id, status);
+
+CREATE TABLE IF NOT EXISTS comment_report (
+  comment_id    INTEGER NOT NULL REFERENCES comment(id) ON DELETE CASCADE,
+  ip            TEXT NOT NULL,
+  created_at    TEXT NOT NULL DEFAULT (datetime('now')),
+  PRIMARY KEY (comment_id, ip)
+);
+
 CREATE TABLE IF NOT EXISTS proposal (
   id            INTEGER PRIMARY KEY,
   work_id       TEXT NOT NULL,

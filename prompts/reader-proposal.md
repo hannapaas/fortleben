@@ -12,7 +12,7 @@ Anything about the text, the translation, the notes or the house's choices, howe
 
 ## What fails
 
-Spam and advertising; abuse of a person (a reader, the editor, the author, a translator); content unrelated to the text; personal data about anyone; anything that would be unlawful to publish. Fail with a one-line reason the author can read and act on; they can reword. When in doubt, pass: the editor can remove, and a removed comment leaves a visible stub.
+Spam and advertising; abuse of a person (a reader, the editor, the author, a translator); content plainly unrelated to the book (a tangent about the author, the period, or the reader's own life is what margins are for, and passes); personal data about anyone; anything that would be unlawful to publish. The writer's chosen name is judged the same way. Fail with a one-line reason the author can read and act on; they can reword. When in doubt, pass: a reader can report it and the editor can remove it.
 
 ## Proposals
 
