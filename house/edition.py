@@ -15,6 +15,7 @@ from house import works
 from house.client import FIXTURES
 
 VIEWS = ("casual", "curious", "student")
+NUMBER = re.compile(r"[一二三四五六七八九十〇]+")
 LANGUAGES = {"ja": ("Japanese", "日本語")}
 LABELS = ("draft", "house-checked", "editor-approved", "human-reviewed")
 READERS = {"reader/faithful": "faithful reader", "reader/readable": "readable reader"}
@@ -117,6 +118,8 @@ def edition(conn, work_id: str, edition_id: int | None = None) -> dict | None:
             continue
         unit = {"id": p["id"], "n": len(units) + 1, "paras": [p["id"]], "label": p["label"],
                 "scene_break": p["scene_break_before"], "en": p["en"], "notes": _notes(body, i)}
+        # A paragraph that is only a section number (一, 二) is a heading, whatever the parser called it
+        unit["number"] = bool(NUMBER.fullmatch(p["ja"].strip("\u3000 ")))
         units.append(unit)
         by_id[p["id"]] = unit
 
@@ -158,7 +161,7 @@ def _notes(body: dict, i: int) -> list[dict]:
             if key in seen:
                 continue
             seen.add(key)
-            out.append({**n, "essential": view == "casual", "span_html": html.escape(n["span"] or "")})
+            out.append({**n, "essential": view == "casual", "span_html": n["span"] or ""})
     return out
 
 
@@ -176,6 +179,16 @@ def ruby_html(seg: dict) -> str:
         elif t["t"] == "odoriji" and t.get("s") == "〳〵" and len(plain) >= 2:
             out.append(html.escape(plain[-2:]))  # the vertical repeat mark, written out for horizontal text
             plain += plain[-2:]
+        elif t["t"] == "emph":
+            # 傍点 and the like: dots beside the words just before, as the print edition has them
+            target = html.escape(t.get("target") or "")
+            for k in range(len(out) - 1, -1, -1):
+                if target and target in out[k]:
+                    head, _, tail = out[k].rpartition(target)
+                    out[k] = f'{head}<em class="bouten">{target}</em>{tail}'
+                    break
+        elif t.get("raw", "").startswith("［＃"):
+            continue  # any other notation the parser kept as a token
         else:
             s = t.get("s", t.get("raw", ""))
             out.append(html.escape(s))

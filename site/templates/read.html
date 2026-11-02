@@ -41,7 +41,8 @@
 <div class="page">
 <main class="reader" id="reader">
   {% for u in ed.units %}
-  {% if u.scene_break and not loop.first %}<div class="brk" aria-hidden="true">*</div>{% endif %}
+  {% if u.number %}<h2 class="secnum" id="{{ u.id }}"><span lang="ja" class="secnum-ja">{{ u.ja[0].html|safe }}</span>{{ u.en }}</h2>{% else %}
+  {% if u.scene_break and not loop.first and not loop.previtem.number %}<div class="brk" aria-hidden="true">*</div>{% endif %}
   <section class="unit st-{{ u.label }}" id="{{ u.id }}" data-unit="{{ u.id }}">
     {% set busy = u.queries or u.changed or u.notes %}
     <div class="hang">
@@ -100,6 +101,7 @@
       </div>
     </aside>
   </section>
+  {% endif %}
   {% endfor %}
 </main>
 

@@ -50,6 +50,12 @@ def test_margin_accounts_for_every_reader_note(tmp_path, recorded):
 
 def test_aozora_editorial_notes_are_not_shown(client):
     assert "［＃" not in client.get("/read/bansan").text
+    page = client.get("/read/shuchu").text
+    assert "［＃" not in page and '<em class="bouten">つぶつぶ</em>' in page
+
+
+def test_a_bare_section_number_is_a_heading(client):
+    assert '<h2 class="secnum" id="p1">' in client.get("/read/shuchu").text
 
 
 def test_loading_fixtures_twice_adds_nothing(tmp_path):
