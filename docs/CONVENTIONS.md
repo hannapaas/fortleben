@@ -8,7 +8,7 @@ Written 30 Oct 2026. The rules of the road for anyone (or any agent) working in 
 
 ```
 house/            the engine
-  cli.py          the keikaku command: fetch, run, fixture, download, audit, serve, invite
+  cli.py          the keikaku command: fetch, run, fixture, download, audit, serve, invite, comments
   client.py       one model client: Responses API, pricing from usage, response cache, FakeClient
   budget.py       spend ledger, run estimates, caps, kill switch
   orchestrator.py stages in order (docs/STAGES.md), stop and resume, the up-front estimate

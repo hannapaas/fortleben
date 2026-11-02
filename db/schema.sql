@@ -279,8 +279,8 @@ CREATE TABLE IF NOT EXISTS comment (
   segment_id    TEXT NOT NULL,
   body          TEXT NOT NULL,
   name          TEXT,                      -- optional, screened like the body
-  status        TEXT NOT NULL DEFAULT 'pending',  -- pending / published / failed
-  reason        TEXT,                      -- the screen's one line, shown to the writer if it failed
+  status        TEXT NOT NULL DEFAULT 'pending',  -- pending / published / failed / hidden; nothing is deleted
+  reason        TEXT,                      -- why it failed the screen (shown to its writer) or was hidden
   author        TEXT NOT NULL,             -- hash of the writer's cookie token
   ip            TEXT NOT NULL,             -- hash of the address, for rate limits
   created_at    TEXT NOT NULL DEFAULT (datetime('now')),
@@ -293,6 +293,12 @@ CREATE TABLE IF NOT EXISTS comment_report (
   ip            TEXT NOT NULL,
   created_at    TEXT NOT NULL DEFAULT (datetime('now')),
   PRIMARY KEY (comment_id, ip)
+);
+
+-- When the editor's daily comments email went (house/comments.py, send_digest); one row a day at most.
+CREATE TABLE IF NOT EXISTS comment_digest (
+  id            INTEGER PRIMARY KEY,
+  sent_at       TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
 CREATE TABLE IF NOT EXISTS proposal (

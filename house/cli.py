@@ -134,6 +134,34 @@ def cmd_invite(args) -> int:
     return 0
 
 
+def cmd_comments(args) -> int:
+    from dotenv import load_dotenv
+
+    from house import comments
+    from house.db import ROOT
+
+    load_dotenv(ROOT / ".env")  # KEIKAKU_SECRET signs the links in the email
+    conn = connect(args.db)
+    if args.hide or args.restore:
+        cid = args.hide or args.restore
+        done = comments.hide(conn, cid, "hidden by the editor") if args.hide else comments.restore(conn, cid)
+        print(("hidden" if args.hide else "published") if done else "nothing to change")
+        return 0 if done else 1
+    if args.email:
+        since = conn.execute("SELECT datetime('now', ?)", (f"-{args.days} days",)).fetchone()[0]
+        mail = comments.digest_email(conn, since)
+        print(f"{mail[0]}\n\n{mail[1]}" if mail else "nothing in that time")
+        return 0
+    where = "" if args.status == "all" else "WHERE status = ?"
+    for r in conn.execute(f"SELECT c.*, (SELECT COUNT(*) FROM comment_report r WHERE r.comment_id = c.id) AS reports "
+                          f"FROM comment c {where} ORDER BY id DESC LIMIT ?",
+                          (() if args.status == "all" else (args.status,)) + (args.limit,)):
+        extra = "; ".join(x for x in [f"{r['reports']} reports" if r["reports"] else "", r["reason"] or ""] if x)
+        print(f"#{r['id']:<5} {r['created_at']}  {r['status']:<9} {r['work_id']} {r['segment_id']}  {r['name'] or '-'}"
+              + (f"  ({extra})" if extra else "") + f"\n       {r['body'][:200]}")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="keikaku", description="Run the translation house.")
     parser.add_argument("--db", help="SQLite file (default keikaku.db in KEIKAKU_DATA_DIR, else var/)")
@@ -191,6 +219,15 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--revoke", metavar="TOKEN_OR_ID", help="revoke an invite by its token or id")
     p.add_argument("--list", action="store_true", help="list invites: name, drops left, made, revoked")
     p.set_defaults(func=cmd_invite)
+
+    p = sub.add_parser("comments", help="list readers' comments, hide or restore one, or print the daily email")
+    p.add_argument("--status", default="all", choices=["all", "published", "failed", "hidden", "pending"])
+    p.add_argument("--limit", type=int, default=50)
+    p.add_argument("--hide", type=int, metavar="ID", help="hide a published comment (it stays in the database)")
+    p.add_argument("--restore", type=int, metavar="ID", help="publish a hidden or failed comment")
+    p.add_argument("--email", action="store_true", help="print the editor's email for the last --days, without sending it")
+    p.add_argument("--days", type=int, default=1)
+    p.set_defaults(func=cmd_comments)
 
     args = parser.parse_args(argv)
     if args.command is None:

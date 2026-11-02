@@ -44,6 +44,12 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
     def conn():
         return connect(db)
 
+    NOINDEX = {"X-Robots-Tag": "noindex"}
+
+    def plain(message: str, status: int) -> HTMLResponse:
+        return HTMLResponse(f"<!doctype html><meta charset=utf-8><title>Fortleben</title><p>{message}</p>",
+                            status_code=status, headers=NOINDEX)
+
     def address(request: Request) -> str:
         # Railway puts the visitor's address first in X-Forwarded-For.
         fwd = request.headers.get("x-forwarded-for", "")
@@ -100,16 +106,31 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
             raise HTTPException(404)
         if result == "limited":
             return JSONResponse({"error": "That's a lot of reports in a short time. Try again later."}, status_code=429)
-        if result == "sent":
-            background.add_task(comments.email_report, db, comment_id)
         return {"ok": True}
 
-    # The editors' desk. An invite link is the only way in; desk pages are never indexed.
-    NOINDEX = {"X-Robots-Tag": "noindex"}
+    # The editor's links from the daily email. Opening one only asks; the button does it, so a mail
+    # scanner that follows links changes nothing.
+    @app.get("/moderate/{action}/{comment_id}", response_class=HTMLResponse)
+    def moderate_ask(request: Request, action: str, comment_id: int, sig: str = ""):
+        if not comments.signed(action, comment_id, sig):
+            return plain("That link isn't valid.", 404)
+        c = conn().execute("SELECT * FROM comment WHERE id=?", (comment_id,)).fetchone()
+        if not c:
+            return plain("There's no such comment.", 404)
+        page = templates.TemplateResponse(request, "moderate.html", {"c": c, "action": action, "sig": sig, "replay": replay})
+        page.headers.update(NOINDEX)
+        return page
 
-    def plain(message: str, status: int) -> HTMLResponse:
-        return HTMLResponse(f"<!doctype html><meta charset=utf-8><title>Fortleben</title><p>{message}</p>",
-                            status_code=status, headers=NOINDEX)
+    @app.post("/moderate/{action}/{comment_id}", response_class=HTMLResponse)
+    def moderate(action: str, comment_id: int, sig: str = ""):
+        if not comments.signed(action, comment_id, sig):
+            return plain("That link isn't valid.", 404)
+        done = (comments.hide(conn(), comment_id, "hidden by the editor") if action == "hide"
+                else comments.restore(conn(), comment_id))
+        return plain(f"Comment {comment_id} is {'hidden' if action == 'hide' else 'published'}." if done
+                     else f"Comment {comment_id} was already {'hidden' if action == 'hide' else 'published'}.", 200)
+
+    # The editors' desk. An invite link is the only way in; desk pages are never indexed.
 
     def refused(e: desk.Refused) -> JSONResponse:
         return JSONResponse({"error": str(e)}, status_code=e.code, headers=NOINDEX)
@@ -160,4 +181,7 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
 def serve(db: str | None, replay: bool, host: str, port: int) -> None:
     import uvicorn
 
-    uvicorn.run(create_app(db, replay=replay), host=host, port=port)
+    app = create_app(db, replay=replay)
+    if not replay:
+        comments.start_digests(db)  # the editor's daily comments email
+    uvicorn.run(app, host=host, port=port)
