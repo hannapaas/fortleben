@@ -126,10 +126,15 @@ Every event is written to `event`, and that record is what the House, the margin
 ## 8. Stack, hosting, abuse
 
 - **Stack:** Python 3.12 + FastAPI + SQLite (WAL) + Jinja templates. The front end is vanilla JS and CSS, with no build step. `uv` for packaging; pytest. One language serves the engine, the exhibit harness and the site. **No non-Meta ML model runs anywhere in the repo.**
-- **Hosting:** one Railway service (Hobby plan, EU West region), deployed from the GitHub repo on push, with a volume for SQLite (daily snapshots we take ourselves) and secrets as Railway variables. Prompts and keys stay on the server; the browser only ever receives events, text and notes. What that means for the code:
-  - Everything that must survive a restart (the SQLite file, the response cache, the snapshots) lives under the volume's mount path, taken from an environment variable; the rest of the filesystem is wiped on every deploy, and the volume isn't mounted during the build.
+- **Hosting:** one Railway service (Hobby plan, EU West region), deployed from the GitHub repo on push, with a volume for the data folder and secrets as Railway variables. Prompts and keys stay on the server; the browser only ever receives events, text and notes. What that means for the code:
+  - Everything a run makes (the SQLite file, the response cache, audits, releases) lives in one data folder, `KEIKAKU_DATA_DIR`, set to the volume's mount path (`var/` when it's unset); the rest of the filesystem is wiped on every deploy, and the volume isn't mounted during the build.
   - One instance only: a service with a volume can't have replicas, and a redeploy stops the old instance before starting the new one, so each deploy means a few seconds of downtime. Don't deploy during anything live.
   - HTTP requests are cut off after 15 minutes (some users report 5). A run is started by a request that returns at once; the run itself works in the background in the same process.
+- **Backup:**
+  - The database on the volume is the record. Litestream (`litestream.yml`) streams it continuously to S3-compatible object storage; bucket, endpoint and keys are Railway variables (`.env.example`).
+  - To restore, onto an empty volume with the service stopped: `litestream restore -config litestream.yml "$KEIKAKU_DATA_DIR/keikaku.db"`.
+  - The response cache isn't backed up: it only saves money.
+  - `keikaku download` (later a button) zips a run's full record and its editions as Markdown. That's the editor's own copy, not the backup.
 - **Spend:**
   - Every call is priced from `usage` into a spend ledger.
   - The whole run is estimated before it starts and refused if it won't fit the run's cap or what's left of the daily or total cap. Before each live call, an estimate is checked against all three (defaults: $0.75 a run, $10 a day, $100 in total).
