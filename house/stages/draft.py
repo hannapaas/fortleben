@@ -8,7 +8,9 @@ The model and the prompt are run options (orchestrator.DEFAULTS).
 Why the draft leans to English, from our experiments on 晩餐: a lost image or a varied repetition
 is a few words, and the faithful reader can point the desk at it. A sentence built in Japanese
 order needs a new sentence, and after this stage nobody writes whole sentences. A draft that wrote
-English first came out more faithful as well as more readable than one written to be faithful first.
+English first came out more faithful as well as more readable than one written to be faithful first. It's also
+the order translators describe (Hahn, Catching Fire, 2022), and literalness is the models' trained-in default
+(Li et al. 2025), so the draft is where to push against it (docs/REFERENCES.md).
 """
 
 from types import SimpleNamespace

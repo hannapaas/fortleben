@@ -19,6 +19,7 @@ Work in progress for the Meta Global AI Developer Hackathon. Everything in this 
 - [Prompts](docs/PROMPTS.md): every model call in the house, and when each is needed.
 - [Build plan](docs/BUILD-PLAN.md): milestones, the exhibit (passages side by side with margin notes, the project's proof), and the cut list.
 - [Experiments](docs/experiments/README.md): what we tried while building the house, the numbers, and what changed because of them.
+- [References](docs/REFERENCES.md): the papers and books the design draws on, by the decision each bears on.
 
 ## Running it
 

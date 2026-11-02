@@ -6,7 +6,7 @@ Deterministic; the model never decides where a page starts or ends (docs/STAGES.
 
 from house.parser import Paragraph
 
-TARGET = 650
+TARGET = 650  # about 1k source tokens of whole paragraphs; paragraphs beat sentences (Karpinska & Iyyer 2023)
 NEAR = 0.6  # a scene break past 60% of the target closes the page early
 
 

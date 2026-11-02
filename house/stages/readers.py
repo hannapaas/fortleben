@@ -3,7 +3,8 @@ translator's notes. The faithful reader holds the author's side and meets the Ja
 readable reader holds the English reader's side and meets the English first. Each returns margin
 notes or none (at most twenty a chapter, by schema). Notes are stored as queries owned by the desk.
 
-The model is a run option, options['reader_model'] = 'spark' (default) or 'wonder'.
+Separate readers, not the translator revising itself: a model judging its own draft favours it (Xu et al.
+2024, docs/REFERENCES.md). The model is a run option, options['reader_model'] (stages.common.DEFAULTS).
 """
 
 import json

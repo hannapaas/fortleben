@@ -9,6 +9,9 @@ nothing the desk didn't name can change; a changed paragraph is checked for stra
 scripts and shrinking; locked lines are never
 changed; disagreements the reading doesn't settle go up as forks, at most five a run.
 
+One decision per note, with no rounds of debate: rounds can talk agents out of a right answer (Wynn et al.
+2025) and into simply agreeing (Yao et al. 2025, docs/REFERENCES.md).
+
 The emergency lever, with no human in it: when the desk learns something in one chapter that changes an
 earlier one (who a character is, what a word means here), it says so. Later chapters' desks are told,
 and once every chapter has been through the desk, each earlier chapter goes back to the desk once with

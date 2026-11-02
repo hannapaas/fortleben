@@ -12,7 +12,10 @@ call stays flat however long the book is.
 
 from house.parser import Paragraph, ParsedWork
 
-WHOLE_TEXT_CHARS = 50_000  # up to here the whole source goes in every call (it's cached, so cheap)
+# Up to here the whole source goes in every per-page call. Kept small on purpose: models use the middle of a
+# long context worst (Liu et al. 2024; NoLiMa, Modarressi et al. 2025), so a long text gets its own part and a
+# short summary of the others instead (docs/REFERENCES.md).
+WHOLE_TEXT_CHARS = 15_000
 MAX_PART_CHARS = 25_000  # the most one reader, desk or final-read call is given to judge at once
 CHAPTER_CHARS = 4_000  # the fallback split: scene breaks merged into chapters of at least this
 
