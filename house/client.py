@@ -22,16 +22,21 @@ import jsonschema
 
 from house import budget, events
 from house.budget import Usage
+from house.db import data_dir
 
 ROOT = Path(__file__).resolve().parent.parent
 PROMPTS = ROOT / "prompts"
 SCHEMAS = Path(__file__).resolve().parent / "schemas"
-CACHE = ROOT / "var" / "cache" / "responses"
 FIXTURES = ROOT / "fixtures"
 BASE_URL = "https://api.meta.ai/v1"
 
 SPARK = "muse-spark-1.3"
 WONDER = "muse-wonder-1.0"
+
+
+def cache_dir() -> Path:
+    """The response cache, in the data folder. It only saves money, so it isn't backed up."""
+    return data_dir() / "cache" / "responses"
 
 
 def looks_broken(data, schema: dict | None) -> str | None:
@@ -181,7 +186,7 @@ class BaseClient:
 
     def __init__(self, conn: sqlite3.Connection, cache_dirs: list[Path] | None = None, run_cap=None):
         self.conn = conn
-        self.cache_dirs = cache_dirs if cache_dirs is not None else [CACHE, *sorted(FIXTURES.glob("*/responses"))]
+        self.cache_dirs = cache_dirs if cache_dirs is not None else [cache_dir(), *sorted(FIXTURES.glob("*/responses"))]
         self.budget = budget.Budget(conn, run_cap)
 
     def lookup(self, key: str) -> dict | None:
@@ -192,10 +197,11 @@ class BaseClient:
         return None
 
     def store(self, key: str, record: dict) -> None:
-        CACHE.mkdir(parents=True, exist_ok=True)
-        tmp = CACHE / f"{key}.json.tmp"  # written whole, then moved, so a kill mid-write leaves no half file
+        cache = cache_dir()
+        cache.mkdir(parents=True, exist_ok=True)
+        tmp = cache / f"{key}.json.tmp"  # written whole, then moved, so a kill mid-write leaves no half file
         tmp.write_text(json.dumps(record, ensure_ascii=False, indent=1), encoding="utf-8")
-        os.replace(tmp, CACHE / f"{key}.json")
+        os.replace(tmp, cache / f"{key}.json")
 
     def ledger(self, call: Call, res: Result, ok=True, error=None) -> int:
         u = res.usage

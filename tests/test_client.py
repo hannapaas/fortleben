@@ -32,10 +32,9 @@ class LyingAPI:
 
 
 def live_client(tmp_path, monkeypatch, usage, run_cap=1.0, text='{"say": "Nothing to change here."}'):
-    monkeypatch.setattr(cl, "CACHE", tmp_path / "cache")
     conn = connect(":memory:")
     c = cl.ModelClient.__new__(cl.ModelClient)
-    cl.BaseClient.__init__(c, conn, cache_dirs=[tmp_path / "cache"], run_cap=run_cap)
+    cl.BaseClient.__init__(c, conn, cache_dirs=[cl.cache_dir()], run_cap=run_cap)
     c.api = LyingAPI(usage, text)
     return c
 
@@ -81,7 +80,7 @@ def test_invalid_output_is_retried_once_then_fails(tmp_path, monkeypatch):
 def test_fake_client_serves_recorded_responses(tmp_path, monkeypatch):
     live = live_client(tmp_path, monkeypatch, Usage(10, 0, 10, 0))
     live.call(make_call())
-    fake = cl.FakeClient(connect(":memory:"), cache_dirs=[tmp_path / "cache"])
+    fake = cl.FakeClient(connect(":memory:"), cache_dirs=[cl.cache_dir()])
     assert fake.call(make_call()).data == {"say": "Nothing to change here."}
     with pytest.raises(cl.FixtureMissing):
         fake.call(make_call("something never recorded"))

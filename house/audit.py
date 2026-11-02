@@ -5,16 +5,14 @@ which. The one-shot baseline is Spark given the bare prompt and the Japanese, no
 
 import json
 import re
-from pathlib import Path
 from types import SimpleNamespace
 
 from house import checks, context
 from house.client import SPARK, WONDER, Call, load_schema
 from house.stages import Ctx
+from house.db import data_dir
 from house.stages.common import latest_units
 
-ROOT = Path(__file__).resolve().parent.parent
-OUT = ROOT / "var" / "audit"
 
 
 def baseline(client, work) -> str:
@@ -42,9 +40,10 @@ def audit(client, conn, work, label: str, english: str) -> dict:
     )
     res = client.call(Call("audit-spans", WONDER, "medium", inp, load_schema("audit-spans"),
                            f"{work.meta['work_id']}:audit", expected_output_tokens=4000, strict=True, stage="audit"))
-    OUT.mkdir(parents=True, exist_ok=True)
+    out = data_dir() / "audit"
+    out.mkdir(parents=True, exist_ok=True)
     record = {"label": label, "english": english, "audit": res.data, "usd": res.list_cost_usd}
-    (OUT / f"{work.meta['work_id']}-{label}.json").write_text(json.dumps(record, ensure_ascii=False, indent=1), encoding="utf-8")
+    (out / f"{work.meta['work_id']}-{label}.json").write_text(json.dumps(record, ensure_ascii=False, indent=1), encoding="utf-8")
     return record
 
 
@@ -58,9 +57,10 @@ def audit_readable(client, conn, work, label: str, english: str) -> dict:
     )
     res = client.call(Call("audit-readable", WONDER, "medium", inp, load_schema("audit-readable"),
                            f"{work.meta['work_id']}:audit-readable", expected_output_tokens=4000, strict=True, stage="audit"))
-    OUT.mkdir(parents=True, exist_ok=True)
+    out = data_dir() / "audit"
+    out.mkdir(parents=True, exist_ok=True)
     record = {"label": label, "english": english, "audit": res.data, "usd": res.list_cost_usd}
-    (OUT / f"{work.meta['work_id']}-{label}-readable.json").write_text(json.dumps(record, ensure_ascii=False, indent=1), encoding="utf-8")
+    (out / f"{work.meta['work_id']}-{label}-readable.json").write_text(json.dumps(record, ensure_ascii=False, indent=1), encoding="utf-8")
     return record
 
 

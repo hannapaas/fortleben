@@ -2,13 +2,11 @@
 differ in their notes. Proof/QC is code: every paragraph present, every note anchored. Labels say what happened to each paragraph, in words."""
 
 import json
-from pathlib import Path
 
 from house import queries
-from house.db import dumps
+from house.db import data_dir, dumps
 from house.stages.common import latest_units
 
-ROOT = Path(__file__).resolve().parents[2]
 VIEWS = ("casual", "curious", "student")
 
 
@@ -59,7 +57,7 @@ def run(ctx) -> dict:
                                 "SELECT DISTINCT model FROM call WHERE run_id=? AND ok=1", (ctx.run_id,))})}), dumps(body)))
     ctx.conn.execute("UPDATE edition SET current_release=? WHERE id=?", (cur.lastrowid, ed_id))
     ctx.conn.commit()
-    out = ROOT / "var" / "releases" / f"{ctx.work_id}-{version}.json"
+    out = data_dir() / "releases" / f"{ctx.work_id}-{version}.json"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(body, ensure_ascii=False, indent=1), encoding="utf-8")
     ctx.emit("house", "release.made", {"version": version, "release_id": cur.lastrowid, "qc": problems,

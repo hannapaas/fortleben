@@ -61,7 +61,7 @@ Planned and not built: Acquisitions and the editor's provenance check, the backg
 | `reaction`, `proposal`, `person` | Two-axis reactions on a target (paragraph, note, or an alternative in a debate), with their counts never used to order or change anything; span proposals that become queries; trust level and how each person wants to be credited |
 | `report` | Catalogue reader's report: reader-facing fields, internal scores, what it was based on, label, translation-status evidence and date |
 | `edition` | One translation of a work: the editor (a person, or the house), its runs, current release. A house run releases to the house's edition |
-| `release` | Edition version (v0.1, v0.2…), changelog, credits, and the released body (also written to `var/releases/`) |
+| `release` | Edition version (v0.1, v0.2…), changelog, credits, and the released body (also written to `releases/` in the data folder) |
 | `vote` | "I'd read this": work, voter token (cookie + IP hash), date. One per voter per work |
 | `request` | An Aozora work ID or an outside reference (title, author, link), the requester's reason (screened), the Acquisitions verdict (*eligible / in copyright / can't tell*) with evidence, the editor's decision, status |
 

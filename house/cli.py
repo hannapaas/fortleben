@@ -82,7 +82,7 @@ def cmd_audit(args) -> int:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="keikaku", description="Run the translation house.")
-    parser.add_argument("--db", help="SQLite file (default var/keikaku.db)")
+    parser.add_argument("--db", help="SQLite file (default keikaku.db in KEIKAKU_DATA_DIR, else var/)")
     parser.add_argument("--replay", action="store_true", help="no live calls: serve recorded responses only")
     parser.add_argument("--cap", type=float, help="run cap in dollars (default KEIKAKU_CAP_RUN)")
     sub = parser.add_subparsers(dest="command")

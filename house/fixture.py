@@ -10,7 +10,7 @@ import json
 import shutil
 from pathlib import Path
 
-from house.client import CACHE, FIXTURES
+from house.client import FIXTURES, cache_dir
 
 TABLES = {
     "segment": "SELECT * FROM segment WHERE work_id=:work ORDER BY seq",
@@ -50,7 +50,7 @@ def export(conn, work_id: str, run_id: int) -> Path:
               "run": rows(conn, "run", "SELECT * FROM run WHERE id=:run", args)[0]}
     record.update({name: rows(conn, name, sql, args) for name, sql in TABLES.items()})
     for c in record["call"]:
-        src = CACHE / f"{c['response_key']}.json"
+        src = cache_dir() / f"{c['response_key']}.json"
         if src.exists():
             shutil.copy(src, responses / src.name)
     release = conn.execute("SELECT body FROM release WHERE run_id=? ORDER BY id DESC LIMIT 1", (run_id,)).fetchone()
