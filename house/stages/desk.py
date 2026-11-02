@@ -5,23 +5,29 @@ replacement, with the notes it answers; the notes it declined and why; and where
 
 Code does the rest: a chapter with no notes is never sent; every note must come back taken,
 declined or in a disagreement, or it's flagged; an edit whose span isn't in the English is refused, so
-nothing the desk didn't name can change; a changed paragraph is checked for dropped ledger
-tokens, stray scripts, shrinking and a change far larger than its notes; locked lines are never
+nothing the desk didn't name can change; a changed paragraph is checked for stray
+scripts and shrinking; locked lines are never
 changed; disagreements the reading doesn't settle go up as forks, at most five a run.
 
-The model is a run option, options['desk_model'] = 'spark' (default) or 'wonder'.
+The emergency lever, with no human in it: when the desk learns something in one chapter that changes an
+earlier one (who a character is, what a word means here), it says so. Later chapters' desks are told,
+and once every chapter has been through the desk, each earlier chapter goes back to the desk once with
+those findings as its notes. At most five findings a run, one pass back, no loop.
+
+The model is a run option, options['desk_model'] (orchestrator.DEFAULTS).
 """
 
-import difflib
 import json
 
 from house import checks, context, queries
 from house.client import Call, load_schema
 from house.db import dumps
-from house.stages.common import latest_units, model, terms, unit_of
+from house.stages.common import apply_edits, change_flags, latest_units, model, new_revision, translator_notes
 
 ACTOR = "desk"
 MAX_FORKS = 5
+MAX_FINDINGS = 5  # findings taken back to earlier chapters, per run
+LABELS = {"F": "the faithful reader", "R": "the readable reader", "S": "the desk, from a later chapter"}
 
 
 def chapter_notes(ctx, paras) -> dict[str, dict]:
@@ -39,13 +45,31 @@ def chapter_notes(ctx, paras) -> dict[str, dict]:
 def render_notes(notes: dict[str, dict]) -> str:
     out = []
     for label, q in notes.items():
-        reader = "the faithful reader" if label.startswith("F") else "the readable reader"
         ja = "; ".join(json.loads(q["evidence"] or "[]"))
-        out.append(f"{label} ({reader}) on {q['segment_id']}: “{q['span']}”\n  {q['reason']}"
-                   + (f"\n  Japanese: {ja}" if ja else "")
+        on = f"on {q['segment_id']}: “{q['span']}”" if q["span"] else f"found at {q['segment_id']}"
+        out.append(f"{label} ({LABELS[label[0]]}) {on}\n  {q['reason']}"
+                   + (f"\n  {'Why' if label[0] == 'S' else 'Japanese'}: {ja}" if ja else "")
                    + (f"\n  Suggested: {q['recommendation']}" if q["recommendation"] else "")
-                   + f"\n  How sure: {q['confidence']}")
+                   + (f"\n  How sure: {q['confidence']}" if q["confidence"] else ""))
     return context.block("The readers' notes", "\n\n".join(out))
+
+
+def decided(d: dict) -> set[str]:
+    """The note labels an answer from the desk takes, declines or records as a disagreement."""
+    return ({n for ch in d["changes"] for n in ch["answers"]} | {x["note"] for x in d["declined"]}
+            | {n for dis in d["disagreements"] for n in dis["notes"]})
+
+
+def drafter_notes(ctx, paras) -> str:
+    """The translator's notes on the draft, so the desk knows what a line was meant to do. The readers
+    don't get them: their first reaction is worth more uncoached."""
+    seen, out = set(), []
+    for p in paras:
+        for n in translator_notes(ctx, p.id):
+            if n not in seen:
+                seen.add(n)
+                out.append(f"{p.id}: {n}")
+    return context.block("The translator's notes on the draft", "\n".join(out) or "None.")
 
 
 def standing(ctx) -> str:
@@ -57,82 +81,75 @@ def standing(ctx) -> str:
                          + ("Locked: " + ", ".join(locks) if locks else "No locked lines."))
 
 
-def change_flags(old: str, new: str, answered: list[dict], t: dict) -> list[str]:
-    flags = []
-    lost = set(checks.TOKEN.findall(old)) - set(checks.TOKEN.findall(new))
-    flags += [f"ledger token {{t:{x}}} dropped" for x in sorted(lost)]
-    flags += checks.ledger(new, t) + checks.stray_scripts(new)
-    if len(new) < 0.7 * len(old):
-        flags.append(f"paragraph shrank to {len(new) / max(len(old), 1):.0%} of its length")
-    sm = difflib.SequenceMatcher(None, old, new)
-    changed = len(old) + len(new) - 2 * sum(b.size for b in sm.get_matching_blocks())
-    allowance = 2 * sum(len(q["span"] or "") for q in answered) + 60
-    if changed > allowance and sm.ratio() < 0.8:
-        flags.append(f"change of {changed} characters is far larger than the notes it answers")
-    return flags
-
-
-def new_revision(ctx, unit: tuple, english: str, cause: dict) -> int:
-    v = ctx.conn.execute("SELECT COALESCE(MAX(version), 0) + 1 FROM revision WHERE run_id=? AND segment_ids=? AND variant='lead'",
-                         (ctx.run_id, dumps(list(unit)))).fetchone()[0]
-    cur = ctx.conn.execute("INSERT INTO revision (run_id, work_id, segment_ids, version, english) VALUES (?,?,?,?,?)",
-                           (ctx.run_id, ctx.work_id, dumps(list(unit)), v, english))
-    eid = ctx.emit(ACTOR, "revision.created", {"segment_id": unit[0], "ids": list(unit), "revision_id": cur.lastrowid, "version": v,
-                                               "english": english, "cause": cause})
-    ctx.conn.execute("UPDATE revision SET event_id=? WHERE id=?", (eid, cur.lastrowid))
-    ctx.conn.commit()
-    return cur.lastrowid
-
-
 def forks_so_far(ctx) -> int:
     return ctx.conn.execute("SELECT COUNT(*) FROM fork WHERE run_id=? AND anchor != 'work'", (ctx.run_id,)).fetchone()[0]
 
 
-def desk_chapter(ctx, paras, units: dict, stats: dict) -> None:
-    notes = chapter_notes(ctx, paras)
+def findings(ctx) -> list[dict]:
+    """What the desk has learned so far that reaches beyond its chapter."""
+    return [dict(r) for r in ctx.conn.execute(
+        "SELECT * FROM query WHERE run_id=? AND owner='desk-recheck' ORDER BY id", (ctx.run_id,))]
+
+
+def findings_block(found: list[dict]) -> str:
+    if not found:
+        return ""
+    return context.block("What the desk learned in earlier chapters",
+                         "\n".join(f"- {q['reason']} Why: {'; '.join(json.loads(q['evidence'] or '[]'))} (found at {q['segment_id']})"
+                                   for q in found))
+
+
+def record_findings(ctx, paras, d: dict, recheck: bool) -> None:
+    for f in d["beyond_this_chapter"]:
+        if recheck:
+            ctx.emit("house", "check.flagged", {"segment_id": paras[0].id,
+                                                "check": f"finding on the way back, not taken back again: {f['finding']}"})
+        elif len(findings(ctx)) >= MAX_FINDINGS:
+            ctx.emit("house", "check.flagged", {"segment_id": paras[0].id, "check": f"findings cap reached, not taken back: {f['finding']}"})
+        else:
+            queries.raise_query(ctx, paras[0].id, ACTOR, {"category": "beyond-chapter", "reason": f["finding"],
+                                                          "evidence_ja": f["why"], "say": f["finding"]}, owner="desk-recheck")
+
+
+def desk_chapter(ctx, paras, units: dict, stats: dict, notes: dict | None = None) -> None:
+    recheck = notes is not None  # a chapter taken back to the desk with findings from later chapters
+    notes = notes if recheck else chapter_notes(ctx, paras)
     if not notes:
         ctx.emit(ACTOR, "desk.done", {"ids": [p.id for p in paras], "skipped": True, "reason": "no notes"})
         stats["skipped"] += 1
         return
     inp = context.join(context.reading(ctx.latest("reading")),
-                       context.block("The cast and ledger", context.cast_and_ledger(ctx.latest("bible"))),
-                       standing(ctx), context.chapter_pairs(paras, units, "ja"), render_notes(notes))
-    res = ctx.call(ACTOR, Call("desk", model(ctx, "desk_model"), "medium", inp, load_schema("desk"),
-                               f"{ctx.cache_key()}:desk", expected_output_tokens=4000, strict=True))  # once a chapter
+                       context.block("The cast", context.cast(ctx.latest("bible"))),
+                       standing(ctx), context.chapter_pairs(paras, units, "ja"), drafter_notes(ctx, paras),
+                       "" if recheck else findings_block(findings(ctx)), render_notes(notes))
+    for attempt in range(2):  # an answer that decides none of the notes is asked for once more
+        res = ctx.call(ACTOR, Call("desk", model(ctx, "desk_model"), "medium", inp, load_schema("desk"),
+                                   f"{ctx.cache_key()}:desk", expected_output_tokens=7000, strict=True))  # once a chapter
+        if decided(res.data) & set(notes) or attempt:
+            break
+        ctx.emit("house", "check.flagged", {"segment_id": paras[0].id, "check": "the desk decided none of the notes: asked again"})
+        inp = context.join(inp, context.block("A note on the previous attempt",
+                                              f"The previous answer decided none of the {len(notes)} notes. Each one needs a decision: "
+                                              "a change that answers it, or a reason it's declined."))
     d = res.data
+    record_findings(ctx, paras, d, recheck)
     ids = {p.id for p in paras}
-    locked = {r["segment_id"] for r in ctx.conn.execute("SELECT segment_id FROM lock WHERE work_id=?", (ctx.work_id,))}
-    t = terms(ctx)
     accounted = set()
-
-    # Apply the edits: each replaces an exact span of the current English. An edit whose span isn't
-    # there is refused, so nothing the desk didn't name can change or go missing.
-    edited: dict[tuple, dict] = {}  # unit -> {"english", "answers", "reasons"}
-    for ch in d["changes"]:
-        unit = unit_of(units, ch["paragraph"])
-        if unit is None or unit[0] not in ids or set(unit) & locked:
-            why = "locked line: change refused" if unit and set(unit) & locked else f"change to {ch['paragraph']}, not in this chapter: refused"
-            ctx.emit("house", "check.flagged", {"segment_id": unit[0] if unit else ch["paragraph"], "check": why})
-            stats["refused"] += 1
-            continue
-        cur = edited.setdefault(unit, {"english": units[unit], "answers": [], "reasons": []})
-        if not ch["find"] or cur["english"].count(ch["find"]) != 1:
-            why = "not found" if ch["find"] not in cur["english"] else "found more than once"
-            ctx.emit("house", "check.flagged", {"segment_id": unit[0], "check": f"desk edit refused: “{ch['find'][:60]}” {why}"})
-            stats["refused"] += 1
-            continue
-        cur["english"] = cur["english"].replace(ch["find"], ch["replace"])
-        cur["answers"] += [n for n in ch["answers"] if n in notes]
-        cur["reasons"].append(ch["reason"])
-        stats["unprompted"] += int(not ch["answers"])
-
+    edited, refused = apply_edits(ctx, units, d["changes"], ids, "desk")
+    stats["refused"] += len(refused)
+    for ch in refused:  # the desk answered these notes, but its edit didn't match the English
+        for n in ch["answers"]:
+            if n in notes and n not in accounted:
+                queries.set_status(ctx, notes[n]["id"], "unaddressed", "house", {"note": n, "reason": "the desk's edit didn't match the English"})
+                accounted.add(n)
+                stats["unaddressed"] += 1
     for unit, cur in edited.items():
-        if cur["english"] == units[unit]:
-            continue
-        answered = [notes[n] for n in cur["answers"]]
-        flags = change_flags(units[unit], cur["english"], answered, t)
+        cur["answers"] = [n for ch in cur["applied"] for n in ch["answers"] if n in notes]
+        cur["reasons"] = [ch["reason"] for ch in cur["applied"]]
+        stats["unprompted"] += sum(not ch["answers"] for ch in cur["applied"])
+        flags = change_flags(units[unit], cur["english"])
         rid = new_revision(ctx, unit, cur["english"], {"desk": " ".join(cur["reasons"]), "notes": cur["answers"],
-                                                      "unprompted": not cur["answers"]})
+                                                      "unprompted": not cur["answers"]}, ACTOR)
         for f in flags:
             ctx.emit("desk/code", "check.flagged", {"segment_id": unit[0], "check": f, "revision_id": rid})
         stats["flags"] += len(flags)
@@ -173,28 +190,55 @@ def desk_chapter(ctx, paras, units: dict, stats: dict) -> None:
         for n in dis["notes"]:
             if n in notes:
                 accounted.add(n)
-                ctx.conn.execute("UPDATE query SET status='forked' WHERE id=?", (notes[n]["id"],))
-        ctx.conn.commit()
+                queries.set_status(ctx, notes[n]["id"], "forked", ACTOR, {"note": n, "fork_id": cur.lastrowid})
 
     for n, q in notes.items():
         if n not in accounted and q["status"] == "open":
-            still_open = ctx.conn.execute("SELECT status FROM query WHERE id=?", (q["id"],)).fetchone()["status"] == "open"
-            if still_open:
-                queries.set_status(ctx, q["id"], "unaddressed", "house", {"note": n, "reason": "the desk didn't address it"})
-                ctx.emit("house", "check.flagged", {"segment_id": q["segment_id"], "check": f"note {n} not addressed by the desk"})
-                stats["unaddressed"] += 1
-    ctx.emit(ACTOR, "desk.done", {"ids": [p.id for p in paras], "notes": len(notes), "changed": len(edited)},
-             call_id=res.call_id)
+            queries.set_status(ctx, q["id"], "unaddressed", "house", {"note": n, "reason": "the desk didn't address it"})
+            ctx.emit("house", "check.flagged", {"segment_id": q["segment_id"], "check": f"note {n} not addressed by the desk"})
+            stats["unaddressed"] += 1
+    ctx.emit(ACTOR, "desk.done", {"ids": [p.id for p in paras], "notes": len(notes), "changed": len(edited),
+                                  "recheck": recheck}, call_id=res.call_id)
+
+
+def to_take_back(chapters: list, found: list[dict]) -> list[tuple[int, list[dict]]]:
+    """Which earlier chapters go back to the desk, with which findings: each finding goes to every
+    chapter before the one it was found in."""
+    start = {paras[0].id: i for i, paras in enumerate(chapters)}
+    owner = {}
+    for i, paras in enumerate(chapters):
+        for p in paras:
+            owner[p.id] = i
+    out = []
+    for i in range(len(chapters)):
+        later = [q for q in found if owner.get(q["segment_id"], start.get(q["segment_id"], -1)) > i]
+        if later:
+            out.append((i, later))
+    return out
 
 
 def run(ctx) -> dict:
-    done = {json.loads(r["payload"])["ids"][0] for r in ctx.conn.execute(
-        "SELECT payload FROM event WHERE run_id=? AND type='desk.done'", (ctx.run_id,))}
+    events = [json.loads(r["payload"]) for r in ctx.conn.execute(
+        "SELECT payload FROM event WHERE run_id=? AND type='desk.done'", (ctx.run_id,))]
+    done = {e["ids"][0] for e in events if not e.get("recheck")}
+    rechecked = {e["ids"][0] for e in events if e.get("recheck")}
     stats = {k: 0 for k in ("chapters", "skipped", "changed", "unprompted", "taken", "declined", "disagreements",
-                            "forks", "unaddressed", "refused", "flags")}
-    for paras in context.chapters(ctx.work):
+                            "forks", "unaddressed", "refused", "flags", "findings", "taken_back")}
+    chapters = context.chapters(ctx.work)
+    for paras in chapters:
         stats["chapters"] += 1
         if paras[0].id not in done:
             desk_chapter(ctx, paras, latest_units(ctx), stats)
+    # the lever: earlier chapters go back to the desk, once, with what later chapters taught it
+    found = findings(ctx)  # all of them: on a resume, chapters already taken back have changed their status
+    stats["findings"] = len(findings(ctx))
+    for i, later in to_take_back(chapters, found):
+        paras = chapters[i]
+        if paras[0].id not in rechecked:
+            desk_chapter(ctx, paras, latest_units(ctx), stats, notes={f"S{n + 1}": q for n, q in enumerate(later)})
+            stats["taken_back"] += 1
+    for q in findings(ctx):  # one found in the first chapter has nowhere earlier to go
+        if ctx.conn.execute("SELECT status FROM query WHERE id=?", (q["id"],)).fetchone()["status"] == "open":
+            queries.set_status(ctx, q["id"], "noted", "house", {"reason": "no earlier chapter to take it back to"})
     stats["model"] = model(ctx, "desk_model")
     return stats

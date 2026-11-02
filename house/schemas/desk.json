@@ -13,11 +13,11 @@
           },
           "find": {
             "type": "string",
-            "description": "The exact text to replace, copied from the paragraph's English as given, {t:id} tokens included"
+            "description": "The exact text to replace, copied from the paragraph's English as given"
           },
           "replace": {
             "type": "string",
-            "description": "What goes in its place, with any {t:id} tokens kept"
+            "description": "What goes in its place"
           },
           "answers": {
             "type": "array",
@@ -73,6 +73,23 @@
           "send_up": {
             "type": "boolean",
             "description": "True only where the reading doesn't settle it and being wrong would matter"
+          }
+        }
+      }
+    },
+    "beyond_this_chapter": {
+      "type": "array",
+      "description": "What you learned in this chapter that changes how an earlier chapter should read (a person, a word, what a scene means), for the house to take back to it. When nothing does, the list is empty",
+      "items": {
+        "type": "object",
+        "properties": {
+          "finding": {
+            "type": "string",
+            "description": "What should change, in a sentence"
+          },
+          "why": {
+            "type": "string",
+            "description": "What in this chapter shows it"
           }
         }
       }
