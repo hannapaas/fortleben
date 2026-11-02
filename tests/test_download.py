@@ -2,6 +2,7 @@
 Built from the recorded fixtures/bansan/run.json, loaded into a fresh database."""
 
 import io
+import re
 import json
 import zipfile
 
@@ -44,9 +45,10 @@ def test_download_holds_the_record_and_one_readable_file_per_edition(recorded):
         md = z.read(f"{folder}/bansan-{view}.md").decode("utf-8")
         assert md.startswith(f"# {release['title']}") and release["author"] in md
         assert "Aozora Bunko (青空文庫)" in md and "入力：" in md  # the attribution and the colophon, verbatim
+        text = re.sub(r"\[\^\d+\]", "", md)  # footnote marks sit inside the sentences they annotate
         for p in paras:
             for sentence in filter(None, p["en"].split(". ")):
-                assert sentence[:30] in md
+                assert sentence[:30] in text
             for n in p["notes"]:
                 assert n["body"] in md
         assert md.count("[^") == 2 * sum(len(p["notes"]) for p in paras)  # a mark in the text and a footnote each
