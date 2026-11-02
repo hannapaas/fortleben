@@ -1,6 +1,6 @@
 """What a per-page call sees of the source depends only on the length of the work (STORY-STATE §3)."""
 
-from house import context
+from house import context, works
 from house.parser import Paragraph, ParsedWork
 
 
@@ -28,16 +28,22 @@ def test_a_long_work_without_headings_is_cut_at_scene_breaks():
 
 
 def test_a_long_work_shows_one_chapter_in_full_and_the_rest_in_a_line():
-    paras = [para(1, "第一章", kind="heading")] + [para(i, "あ" * 1000) for i in range(2, 12)]
-    paras += [para(12, "第二章", kind="heading")] + [para(i, "い" * 1000) for i in range(13, 23)]
+    paras = []
+    for c, ch in enumerate("あいう"):  # three chapters of 20,000 characters: long, but each part fits
+        paras += [para(len(paras) + 1, f"第{c + 1}章", kind="heading")] + [para(len(paras) + 2 + i, ch * 2000) for i in range(10)]
     w = work(paras)
+    assert context.is_long(w) and len(context.chapters(w)) == 3
     out = context.source_text(w, around=[w.para("p15")], summaries={"0": "The first chapter: a dinner."})
-    assert "Chapter 2 of 2, in full" in out
-    assert "p15　" + "い" * 1000 in out
-    assert "あ" * 1000 not in out  # the other chapter is a line, not the text
+    assert "Chapter 2 of 3, in full" in out
+    assert "p15　" + "い" * 2000 in out
+    assert "あ" * 2000 not in out  # the other chapters are a line, not the text
     assert "Chapter 1 (p1–p11): The first chapter: a dinner." in out
-    # whole-book reads still get everything
-    assert "あ" * 1000 in context.source_text(w)
+    assert "あ" * 2000 in context.source_text(w)  # whole-book reads still get everything
+
+
+def test_a_chapter_too_big_for_one_reading_is_split():
+    w = work([para(1, "第一章", kind="heading")] + [para(i, "あ" * 5000) for i in range(2, 14)])
+    assert all(sum(len(p.text) for p in c) <= context.MAX_PART_CHARS for c in context.chapters(w))
 
 
 def test_a_group_the_drafter_joined_appears_once():
@@ -51,3 +57,16 @@ def test_a_group_the_drafter_joined_appears_once():
     assert unit_of(units, "p9") is None
     assert unit_of(units, "change to p1: the opening") == ("p1",)
     assert unit_of(units, "Japanese rendering of p2 - p3: ...") == ("p2", "p3")
+
+
+def test_a_planned_split_is_followed_and_a_bad_one_refused():
+    from house.stages.parts import check
+    w = works.parse("shuchu")
+    ids = [p.id for p in w.translatable()]
+    assert check(w, [ids[0], ids[20], ids[40]]) is None
+    w.parts = [ids[0], ids[20], ids[40]]
+    assert [c[0].id for c in context.chapters(w)] == [ids[0], ids[20], ids[40]]
+    assert sum(len(c) for c in context.chapters(w)) == len(ids)
+    assert check(w, [ids[5]])  # doesn't start at the start
+    assert check(w, [ids[0], ids[30], ids[10]])  # out of order
+    assert check(w, [ids[0], "p9999"])  # no such paragraph

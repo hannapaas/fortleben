@@ -4,7 +4,7 @@ A source adapter fetches a work and turns it into an ordered list of paragraphs 
 deterministically, before any model sees the text (docs/STAGES.md, "Units").
 """
 
-from dataclasses import asdict, dataclass, field
+from dataclasses import dataclass, field
 
 
 @dataclass
@@ -33,9 +33,7 @@ class ParsedWork:
     lines: list  # the body, line by line: a paragraph id, or the verbatim text of a non-paragraph line
     colophon: str  # the 底本 block, verbatim
     meta: dict = field(default_factory=dict)
-
-    def to_dict(self) -> dict:
-        return asdict(self)
+    parts: list | None = None  # where each part starts, as the planner proposed (house/stages/parts.py)
 
     def translatable(self) -> list[Paragraph]:
         return [p for p in self.paragraphs if p.translatable]
