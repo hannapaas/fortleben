@@ -238,3 +238,20 @@ def test_runs_cant_start_without_a_key_or_in_replay(db, conn, monkeypatch):
     replay = TestClient(web.create_app(replay=True))
     r = replay.get(f"/desk/{token}")
     assert "start here" in r.text and r.headers["x-robots-tag"] == "noindex"
+
+
+def test_keikaku_invite_prints_a_working_link_and_never_the_hash(db, capsys, monkeypatch):
+    from house import cli
+
+    monkeypatch.setattr("dotenv.load_dotenv", lambda *a, **k: None)  # keep the real .env out of the tests
+    assert cli.main(["--db", str(db), "invite", "Ines Example", "--drops", "2000", "--base-url", "https://x.test/"]) == 0
+    link = capsys.readouterr().out.strip()
+    assert link.startswith("https://x.test/desk/")
+    token = link.rsplit("/", 1)[1]
+    conn = connect(db)
+    assert desk.state(conn, token)["allowance"]["granted"] == 2000
+    assert cli.main(["--db", str(db), "invite", "--list"]) == 0
+    listed = capsys.readouterr().out
+    assert "Ines Example" in listed and "2,000 drops left" in listed and digest(token) not in listed
+    assert cli.main(["--db", str(db), "invite", "--revoke", token]) == 0
+    assert desk.editor(conn, token) is None
