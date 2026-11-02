@@ -8,25 +8,32 @@ import importlib
 import json
 import traceback
 
-from house import events, works
+from house import budget, context, events, works
 from house.db import dumps
 from house.stages import Ctx
+from house.stages.common import DEFAULTS
 
 # The pipeline (docs/STAGES.md). Stages 7 and 8 are the two readers and the desk, per chapter.
 PIPELINE = "readers-desk"  # recorded in each run's options, so a fixture says which pipeline made it
 STAGES = [
     ("parse", "parse"),
+    ("parts", "parts"),
     ("first-read", "first_read"),
     ("crux-check", "crux_check"),
     ("bible", "bible"),
     ("draft", "draft"),
     ("readers", "readers"),
     ("desk", "desk"),
+    ("final-read", "final_read"),
     ("copy-desk", "copy_desk"),
     ("notes", "notes"),
     ("release", "release"),
 ]
 NAMES = [s for s, _ in STAGES]
+
+
+class RunFailed(Exception):
+    """A stage failed: the run is recorded as failed at that stage and can be resumed from it."""
 
 
 def new_run(conn, work_id: str, label: str | None, cap: float | None, options: dict) -> int:
@@ -52,12 +59,24 @@ def run(conn, client, work_id: str, *, to: str | None = None, from_: str | None 
     if run_id is None and (from_ or only):
         run_id = latest_run(conn, work_id)
     if run_id is None:
-        run_id = new_run(conn, work_id, label, client.budget.run_cap, options)
+        options = {**DEFAULTS, **options}  # recorded with the run, so a resumed run keeps its own set-up
+        # A run is priced before it starts and refused if it won't fit: better no translation than
+        # one that stops half-way.
+        chars = sum(len(p.text) for p in work.translatable())
+        est = budget.estimate_run(chars, len(context.chapters(work)), options)
+        cap, room = client.budget.run_cap, client.budget.room()
+        if not client.replay_only and est > room:
+            which = "its cap" if room >= cap else "what's left of today's or the total budget"
+            raise budget.CapExceeded(f"{work_id}: this run is estimated at ${est:.2f}, over {which} (${room:.2f}). "
+                                     f"Nothing was started; raise the cap (--cap) to run it.")
+        run_id = new_run(conn, work_id, label, cap, options)
         events.emit(conn, run_id, "house", "run.started", {"work": work_id, "options": options,
-                                                           "cap_usd": client.budget.run_cap})
+                                                           "cap_usd": cap, "estimate_usd": est})
     else:
-        stored = conn.execute("SELECT options FROM run WHERE id=?", (run_id,)).fetchone()
+        stored = conn.execute("SELECT options, cap_usd FROM run WHERE id=?", (run_id,)).fetchone()
         options = {**json.loads(stored["options"] or "{}"), **options}
+        if not client.budget.cap_given and stored["cap_usd"]:
+            client.budget.run_cap = stored["cap_usd"]  # a resumed run keeps the cap it started with
         conn.execute("UPDATE run SET options=? WHERE id=?", (dumps(options), run_id))
 
     names = NAMES
@@ -69,6 +88,10 @@ def run(conn, client, work_id: str, *, to: str | None = None, from_: str | None 
         names = NAMES[start:end]
 
     ctx = Ctx(conn, client, work, run_id, options)
+    plans = [json.loads(r["body"]) for r in conn.execute(
+        "SELECT body FROM bible WHERE work_id=? AND kind='parts' ORDER BY version DESC", (work_id,))]
+    plan = next((b for b in plans if b.get("run_id") == run_id), None)  # a resumed run keeps its own parts
+    work.parts = plan["starts"] if plan else None
     modules = dict(STAGES)
     for name in names:
         ctx.options["_stage"] = name
@@ -76,12 +99,19 @@ def run(conn, client, work_id: str, *, to: str | None = None, from_: str | None 
         spent_before = client.budget.spent(run_id)
         try:
             summary = importlib.import_module(f"house.stages.{modules[name]}").run(ctx) or {}
+        except budget.CapExceeded as e:  # the money ran out mid-run: stop, release nothing, say where
+            events.emit(conn, run_id, "house", "run.stopped", {"reason": "budget", "stage": name, "detail": str(e)})
+            conn.execute("UPDATE run SET status='stopped: budget' WHERE id=?", (run_id,))
+            conn.commit()
+            raise budget.CapExceeded(f"budget ran out during the {name} stage of run {run_id}. Nothing was released. "
+                                     f"Raise the cap and resume with --run {run_id} --from {name}. ({e})") from e
         except Exception as e:  # a stage that fails records it and the run stops there
             events.emit(conn, run_id, "house", "stage.failed", {"stage": name, "error": f"{type(e).__name__}: {e}",
                                                                 "trace": traceback.format_exc()[-2000:]})
             conn.execute("UPDATE run SET status='failed' WHERE id=?", (run_id,))
             conn.commit()
-            raise
+            raise RunFailed(f"run {run_id} failed during the {name} stage: {type(e).__name__}: {e}. "
+                            f"The House log has the details; resume with --run {run_id} --from {name}.") from e
         spent = client.budget.spent(run_id) - spent_before
         events.emit(conn, run_id, "house", "stage.done", {"stage": name, "spent_usd": round(spent, 5), **summary})
         conn.execute("UPDATE run SET stage=? WHERE id=?", (name, run_id))
