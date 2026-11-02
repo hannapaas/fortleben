@@ -1,0 +1,242 @@
+"""What the site reads: a work's latest release, put together with its record for the reader.
+
+The release body (house/stages/release.py) holds the views. Everything else a paragraph shows,
+its margin, comes from the record anchored to it (docs/ARCHITECTURE.md §2, "The margin"):
+the readers' notes and what the desk did with each, the drafter's notes, the revisions, the notes.
+Live runs and `--replay` read the same tables; replay just loads them from fixtures/ first.
+"""
+
+import html
+import json
+import re
+from pathlib import Path
+
+from house import budget, checks, works
+from house.client import FIXTURES
+
+VIEWS = ("casual", "curious", "student")
+LANGUAGES = {"ja": ("Japanese", "日本語")}
+LABELS = ("draft", "house-checked", "editor-approved", "human-reviewed")
+READERS = {"reader/faithful": "faithful reader", "reader/readable": "readable reader"}
+RUBY = re.compile(r"《[^》]*》|［＃[^］]*］")  # Aozora readings and editorial notes, quoted raw in a reader's evidence
+DECIDED = {"taken": "Changed", "declined": "Kept", "forked": "Left to the editor", "open": "Not decided yet"}
+OUTCOMES = {"taken": "taken", "declined": "declined", "forked": "sent to the editor", "open": "not answered yet"}
+
+# fixture.py writes these tables; loading them back gives replay the same database a live run leaves.
+# Calls go before events, which point at them.
+TABLES = ("segment", "bible", "term", "call", "revision", "query", "fork", "note", "status", "event")
+
+
+def load_fixtures(conn, root: Path = FIXTURES) -> list[str]:
+    """Load every recorded run under fixtures/ into the database, once. Returns the works loaded."""
+    loaded = []
+    for path in sorted(root.glob("*/run.json")):
+        record = json.loads(path.read_text(encoding="utf-8"))
+        work_id = record["work"]["id"]
+        if conn.execute("SELECT 1 FROM run WHERE id=?", (record["run"]["id"],)).fetchone():
+            continue
+        _insert(conn, "work", record["work"], replace=True)
+        _insert(conn, "run", record["run"])
+        for table in TABLES:
+            for row in record.get(table, []):
+                _insert(conn, table, row, replace=table in ("segment", "term", "status", "bible"))
+        if "release" in record:
+            ed = conn.execute("INSERT INTO edition (work_id) VALUES (?)", (work_id,)).lastrowid
+            rel = conn.execute("INSERT INTO release (edition_id, run_id, version, changelog, body, created_at) "
+                               "VALUES (?,?,?,?,?,?)",
+                               (ed, record["run"]["id"], "v0.1", "Recorded house run, replayed.",
+                                json.dumps(record["release"], ensure_ascii=False), record["run"]["created_at"])).lastrowid
+            conn.execute("UPDATE edition SET current_release=? WHERE id=?", (rel, ed))
+        loaded.append(work_id)
+    conn.commit()
+    return loaded
+
+
+def _insert(conn, table: str, row: dict, replace: bool = False) -> None:
+    cols = list(row)
+    vals = [json.dumps(v, ensure_ascii=False) if isinstance(v, (dict, list)) else v for v in row.values()]
+    verb = "INSERT OR REPLACE" if replace else "INSERT OR IGNORE"
+    conn.execute(f"{verb} INTO {table} ({','.join(cols)}) VALUES ({','.join('?' * len(cols))})", vals)
+
+
+def shelf(conn) -> list[dict]:
+    """Every work with a current release, grouped by the language it was written in, newest first."""
+    langs = {}
+    for r in conn.execute("SELECT e.work_id, w.language, r.version, r.created_at, r.body FROM edition e "
+                          "JOIN release r ON r.id = e.current_release JOIN work w ON w.id = e.work_id "
+                          "ORDER BY r.created_at DESC"):
+        body = json.loads(r["body"])
+        paras = body["views"]["casual"]
+        meta = _meta(conn, r["work_id"])
+        work = {**meta, "version": r["version"], "date": _date(r["created_at"]), "paragraphs": len(paras),
+                "label": _overall([p["label"] for p in paras]), "editions": editions(meta, r["created_at"])}
+        name, native = LANGUAGES.get(r["language"], (r["language"], ""))
+        langs.setdefault(r["language"], {"code": r["language"], "name": name, "native": native, "works": []})["works"].append(work)
+    return list(langs.values())
+
+
+def editions(meta: dict, made: str | None) -> list[dict]:
+    """Every English translation of a work we know of: ours, then people's by year. A person's is named
+    and credited but not linked, unless the record says they're happy to be linked (`link`)."""
+    ours = [{"kind": "house", "by": "keikaku", "year": (made or "")[:4], "url": f"/read/{meta['id']}", "here": True}]
+    people = [{"kind": "person", "by": t["by"], "year": str(t.get("year", "")), "here": False,
+               "url": t.get("link")}
+              for t in sorted(meta["rights"].get("existing_translations") or [], key=lambda t: t.get("year", 0))]
+    return ours + people
+
+
+def edition(conn, work_id: str) -> dict | None:
+    rel = conn.execute("SELECT r.* FROM edition e JOIN release r ON r.id = e.current_release WHERE e.work_id=?",
+                       (work_id,)).fetchone()
+    if not rel:
+        return None
+    body = json.loads(rel["body"])
+    run_id = rel["run_id"]
+    terms = {r["id"]: dict(r) for r in conn.execute("SELECT * FROM term WHERE work_id=?", (work_id,))}
+    segs = {r["id"]: dict(r) for r in conn.execute("SELECT * FROM segment WHERE work_id=?", (work_id,))}
+    queries = _rows(conn, "SELECT * FROM query WHERE run_id=? ORDER BY id", run_id, ("evidence", "answer"))
+    revisions = _rows(conn, "SELECT * FROM revision WHERE run_id=? ORDER BY id", run_id, ("segment_ids", "notes"))
+
+    # One English text. The views' renderings of ledger terms are no longer offered: the text is the
+    # plain (casual) rendering, and what a reader sees around it is a reading preset, not an edition.
+    units, by_id = [], {}
+    for i, p in enumerate(body["views"]["casual"]):
+        if p["grouped_with"]:
+            by_id[p["grouped_with"]]["paras"].append(p["id"])
+            continue
+        unit = {"id": p["id"], "n": len(units) + 1, "paras": [p["id"]], "label": p["label"],
+                "scene_break": p["scene_break_before"], "en": p["en"], "notes": _notes(body, i, terms)}
+        units.append(unit)
+        by_id[p["id"]] = unit
+
+    for unit in units:
+        ids = set(unit["paras"])
+        unit["ja"] = [{"id": pid, "html": ruby_html(segs[pid])} for pid in unit["paras"] if pid in segs]
+        unit["queries"] = [_query(q) for q in queries if q["segment_id"] in ids]
+        unit["decisions"] = _decisions(unit["queries"])
+        revs = [r for r in revisions if ids & set(r["segment_ids"])]
+        unit["drafter_notes"] = [n for r in revs[:1] for n in (r["notes"] or [])]
+        unit["history"] = [{"version": r["version"], "en": checks.render(r["english"], terms, "casual"),
+                            "date": _date(r["created_at"])} for r in revs]
+        unit["changed"] = len({h["en"] for h in unit["history"]}) > 1
+        unit["en_html"] = mark_notes(unit["en"], unit["notes"])
+
+    calls = conn.execute("SELECT COUNT(*), COALESCE(SUM(list_cost_usd), 0) FROM call WHERE run_id=?", (run_id,)).fetchone()
+    labels = [u["label"] for u in units]
+    meta = _meta(conn, work_id)
+    chars = sum(len(s["text"]) for s in segs.values())
+    return {
+        **meta, "version": rel["version"], "date": _date(rel["created_at"]), "units": units,
+        "editions": editions(meta, rel["created_at"]),
+        "counts": {label: labels.count(label) for label in LABELS},
+        "label": _overall(labels), "colophon": body.get("colophon") or meta.get("colophon"),
+        "calls": calls[0], "drops": round(budget.drops(calls[1])), "sheets": round(budget.sheets(chars), 1),
+        "queries": {"total": len(queries), "taken": sum(q["status"] == "taken" for q in queries),
+                    "declined": sum(q["status"] == "declined" for q in queries)},
+        "models": sorted({r["model"] for r in conn.execute("SELECT DISTINCT model FROM call WHERE run_id=?", (run_id,))}),
+    }
+
+
+def _notes(body: dict, i: int, terms: dict) -> list[dict]:
+    """A paragraph's notes, once each. Essential notes are the ones the house thought every reader
+    needs (those it put in the casual view); the rest are there for the curious."""
+    out, seen = [], set()
+    for view in VIEWS:
+        for n in body["views"][view][i]["notes"]:
+            key = (n["anchor"], n["body"])
+            if key in seen:
+                continue
+            seen.add(key)
+            out.append({**n, "essential": view == "casual", "span_html": checks.render(n["span"] or "", terms, "casual")})
+    return out
+
+
+def ruby_html(seg: dict) -> str:
+    """The Japanese paragraph with its furigana, from the parser's tokens."""
+    tokens = json.loads(seg["tokens"]) if isinstance(seg["tokens"], str) else seg["tokens"]
+    out, plain = [], ""
+    for t in tokens:
+        if t["t"] in ("note", "layout"):
+            continue  # Aozora's editorial notes on the 底本 aren't the author's text and aren't shown
+        if t["t"] == "ruby":
+            base = "".join(b.get("s", b.get("raw", "")) for b in t["base"])
+            out.append(f"<ruby>{html.escape(base)}<rt>{html.escape(t['reading'])}</rt></ruby>")
+            plain += base
+        elif t["t"] == "odoriji" and t.get("s") == "〳〵" and len(plain) >= 2:
+            out.append(html.escape(plain[-2:]))  # the vertical repeat mark, written out for horizontal text
+            plain += plain[-2:]
+        else:
+            s = t.get("s", t.get("raw", ""))
+            out.append(html.escape(s))
+            plain += s
+    return "".join(out).strip("　 ")
+
+
+def mark_notes(english: str, notes: list[dict]) -> str:
+    """The English, escaped, with each note's span underlined and tappable; a note whose span
+    isn't found is still listed in the margin."""
+    text = html.escape(english)
+    for i, n in enumerate(notes):
+        span = html.escape(n["span_html"])
+        if span and span in text:
+            cls = "t ess" if n["essential"] else "t"
+            text = text.replace(span, f'<span class="{cls}" data-note="{i}" tabindex="0" role="button">{span}</span>', 1)
+    return text
+
+
+def _query(q: dict) -> dict:
+    answer = q["answer"] or {}
+    return {"number": answer.get("note", ""), "who": READERS.get(q["raised_by"], q["raised_by"]),
+            "span": q["span"], "reason": q["reason"], "evidence": [RUBY.sub("", e) for e in q["evidence"] or []],
+            "recommendation": q["recommendation"], "confidence": q["confidence"],
+            "status": q["status"], "outcome": OUTCOMES.get(q["status"], q["status"]),
+            "desk": answer.get("reason", "")}
+
+
+def _decisions(queries: list[dict]) -> list[dict]:
+    """The paragraph's queries grouped by the decision that answered them. One change often answers
+    several notes, and the desk gives its reason once per change, so it's shown once."""
+    groups = {}
+    for q in queries:
+        key = (q["status"], q["desk"]) if q["desk"] else (q["status"], q["number"])
+        groups.setdefault(key, {"status": q["status"], "outcome": DECIDED.get(q["status"], q["status"]),
+                                "reason": q["desk"], "queries": []})["queries"].append(q)
+    return list(groups.values())
+
+
+def _meta(conn, work_id: str) -> dict:
+    row = dict(conn.execute("SELECT * FROM work WHERE id=?", (work_id,)).fetchone())
+    try:
+        reg = works.info(work_id)
+    except KeyError:
+        reg = {}
+    rights = row["rights"]
+    rights = json.loads(rights) if isinstance(rights, str) else (rights or reg.get("rights", {}))
+    return {"id": work_id, "title": row["title"], "title_en": row["title_en"] or reg.get("title_en") or row["title"],
+            "author": row["author"], "author_en": row["author_en"] or reg.get("author_en") or row["author"],
+            "card_url": row["card_url"] or reg.get("card_url"), "colophon": row["colophon"], "rights": rights,
+            "blurb": reg.get("blurb"), "about": reg.get("about")}
+
+
+def _overall(labels: list[str]) -> str:
+    return min(labels, key=LABELS.index) if labels else "draft"
+
+
+def _rows(conn, sql: str, run_id: int, json_cols: tuple) -> list[dict]:
+    out = []
+    for r in conn.execute(sql, (run_id,)):
+        d = dict(r)
+        for k in json_cols:
+            if isinstance(d.get(k), str):
+                d[k] = json.loads(d[k])
+        out.append(d)
+    return out
+
+
+def _date(stamp: str | None) -> str:
+    """'2026-11-01 23:32:25' → '1 Nov 2026'."""
+    m = re.match(r"(\d{4})-(\d{2})-(\d{2})", stamp or "")
+    if not m:
+        return ""
+    months = "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split()
+    return f"{int(m.group(3))} {months[int(m.group(2)) - 1]} {m.group(1)}"

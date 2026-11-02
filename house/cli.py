@@ -66,6 +66,13 @@ def cmd_audit(args) -> int:
     return 0
 
 
+def cmd_serve(args) -> int:
+    from house import web
+
+    web.serve(args.db, replay=args.replay or args.serve_replay, host=args.host, port=args.port)
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="keikaku", description="Run the translation house.")
     parser.add_argument("--db", help="SQLite file (default var/keikaku.db)")
@@ -100,6 +107,12 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--runs", type=int, nargs="*", default=[])
     p.add_argument("--baseline", action="store_true", help="also audit a one-shot Spark translation")
     p.set_defaults(func=cmd_audit)
+
+    p = sub.add_parser("serve", help="serve the site; with --replay, the recorded runs in fixtures/ and no key")
+    p.add_argument("--host", default="127.0.0.1")
+    p.add_argument("--port", type=int, default=8000)
+    p.add_argument("--replay", dest="serve_replay", action="store_true", help="serve fixtures/ only")
+    p.set_defaults(func=cmd_serve)
 
     p = sub.add_parser("calibrate", help="M0: first real calls and reasoning-token costs")
     p.add_argument("work", nargs="?", default="bansan")

@@ -18,7 +18,8 @@ house/            the engine
   parser/         source adapter interface; other languages add house/lang/<code>/
   checks/         deterministic checkers (ledger, callbacks, length ratio, tics)
 prompts/          one Markdown file per prompt (docs/PROMPTS.md), with examples
-site/             FastAPI app, Jinja templates, static CSS/JS (no build step)
+site/             Jinja templates and static CSS/JS (no build step); the FastAPI app is house/web.py,
+                  since a package named `site` would shadow Python's own, and house/edition.py assembles what it shows
 exhibit/          the audit harness, frozen passages, the marked-up results, the exhibit renderer
 fixtures/         recorded runs and sample data; the site and House must run from these alone
 db/schema.sql     the SQLite schema

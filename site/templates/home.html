@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block main %}
+<p class="pitch">Most of the world's books have never been translated, and most never will be. Fortleben translates public-domain literature <em>so anyone can read any text</em>, and shows how each translation was made.</p>
+
+<div class="form two intro">
+  <div class="q">Who translates?</div>
+  <div class="a">keikaku, a set of AI agents that drafts, checks against the original and revises before anything is published. Where a person has checked a paragraph, it says so. Where a person has translated the same work, we say so and name them.</div>
+  <div class="q">Which languages?</div>
+  <div class="a">Japanese into English, from Aozora Bunko's free library of public-domain texts. keikaku is built to work between other languages too; each one needs its own source library and its own reading aids, the way Japanese needs furigana.</div>
+  <div class="q">Why the name?</div>
+  <div class="a"><i>Fortleben</i> is Walter Benjamin's word for the life a work goes on to have in translation. Nothing here is final: every edition keeps changing, and every version is kept.</div>
+</div>
+
+{% for lang in shelf %}
+<section class="lang">
+  <h2 class="sec">From the {{ lang.name }} {% if lang.native %}<span lang="{{ lang.code }}">{{ lang.native }}</span>{% endif %}</h2>
+  <ul class="shelf">
+    {% for w in lang.works %}
+    <li>
+      <span class="ja" lang="{{ lang.code }}">{{ w.title }}</span>
+      <span>
+        <a class="ttl" href="/read/{{ w.id }}">{{ w.title_en }}</a><br>
+        <span class="meta">{{ w.author_en }}{% if w.rights.first_published_year %}, {{ w.rights.first_published_year }}{% endif %} · {{ w.paragraphs }} paragraphs</span><br>
+        {% if w.blurb %}{% if w.about %}<details class="blurb"><summary>{{ w.blurb }}</summary><p>{{ w.about }}</p></details>{% else %}<p class="blurb">{{ w.blurb }}</p>{% endif %}{% endif %}
+        <span class="meta">In English: {% for e in w.editions %}{% if e.here %}<a href="{{ e.url }}">keikaku, {{ e.year }}</a>{% elif e.url %}<a href="{{ e.url }}" rel="noopener">{{ e.by }}, {{ e.year }}</a> ↗{% else %}{{ e.by }}, {{ e.year }}{% endif %}{% if not loop.last %} · {% endif %}{% endfor %}</span>
+      </span>
+      <span class="meta">{% if w.label == 'editor-approved' %}{{ w.label }}{% endif %}</span>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% else %}
+<p class="meta">Nothing on the shelf yet.</p>
+{% endfor %}
+{% endblock %}
