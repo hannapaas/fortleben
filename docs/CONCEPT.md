@@ -14,10 +14,10 @@ It's useful without anyone's sign-off. When a person does check a passage, the p
 
 - **Fortleben:** the platform and the project. German for living on; Walter Benjamin's word, in "The Task of the Translator", for the afterlife a work has in translation. The translations here aren't final texts; they go on changing.
 - **keikaku:** the translation house inside it: the agents, departments, queries and editors' desk. Japanese for plan, from the fansub joke about a translator's note that explains nothing; the test every note here has to pass.
-- **Work:** the original text, with its rights record. You browse by work.
-- **Edition:** one translation of a work, by the house alone or steered by a named editor, versioned (v1, v1.1). A work can have several editions by different editors; for now each has one.
-- **View:** how an edition is shown: **Casual**, **Curious** or **Student**. One base text with controlled tokens, so the views differ by design, not by drift. (Earlier drafts of these docs called the views "editions"; where that wording survives, it means views.)
-- **Run:** one pass of a work through the house, producing or revising an edition. **Release:** a published version of an edition.
+- **Work:** the original text, with its rights record. You browse by work, grouped by the language it was written in.
+- **Edition:** one English translation of a work. Every edition says plainly whose it is: **the keikaku house** (machine-made, labelled paragraph by paragraph), **the house steered by a named editor**, or **a person's own translation**, shown with the translator's name and year. A person's translation is named and credited, and linked only if they're happy to be; it's hosted here only if it's public domain or its translator licenses it to us. Opening a work opens the house edition; the others are listed under the title, one tap away. A work with only the house edition shows no list.
+- **View:** how you read an edition: **Clean** (like a printed novel, essential notes only), **Curious** (every note marked, each paragraph's status, the Japanese a tap away) or **Annotated** (side by side with the original, notes open). Views are presets over the same text; anything in them can be changed by hand. (Earlier drafts called the views Casual, Curious and Student and gave each its own rendering of key terms; that's gone: there's one English text per edition.)
+- **Run:** one pass of a work through the house, producing or revising an edition. Each published version of an edition (v1, v1.1) is a **release**, a word for the record and the changelog rather than for readers.
 
 ## What it makes
 
@@ -36,19 +36,19 @@ It's useful without anyone's sign-off. When a person does check a passage, the p
 | Culturally curious reader | Switches to **Curious**: honorifics kept, ruby over key terms, two-sentence tap-notes. Taps a line to see the debate behind it. |
 | Student | **Student** view: sourced notes, alternatives and decision history (a literal crib later). Parallel Japanese with furigana is a layout any view can switch on. Browses the Catalogue for a text to study. It's an edition, not a tutor. |
 | Translator | Browses the **Catalogue**. Reads the style sheet and queries. Finds something to pitch to a press. |
-| Bilingual reader | Flags "I think this is wrong" with a reason; proposes a fix to a span. A bilingual reader who checks a passage against the Japanese can mark it *human-reviewed*, and their name goes on it. |
+| Bilingual reader | Flags "I think this is wrong" with a reason; proposes a fix to a span. Their comments sit in the margin with everyone else's. |
 | The editor | Reviews the checkpoint before a full run (crux, reading, voice, key bible choices), decides forks, makes standing rules, locks lines, writes notes, signs the edition. Only the checkpoint holds a run, and only when an editor is assigned; everywhere else, until the editor rules, the department head's pick stands and is labelled as such. A text with no editor runs straight through and says so. |
 
 ## The community concept
 
 Built from publishing, fan translation, Wikipedia and web-fiction comments, all of it visible in the UI.
 
-- **Views, not rival translations.** One base text and three views. Switching keeps your place and says what changed ("3 terms differ in this paragraph"), so the switch itself teaches. A second translation of the same work by another editor is a second edition, shown side by side as such.
+- **Views, not rival translations.** One English text per edition and three views of it, from a clean page to a busy annotated one. Switching keeps your place. A second translation of the same work, by another editor or by a person, is a second edition, named as such.
 - **Reactions on two axes.** *How it reads* (beautiful / confusing / sounds off / made me stop) is kept apart from *Is it right* (needs a reason). Readers can react to a paragraph, a note or an alternative in the debate. No counts as rankings, and a reaction never changes the text by itself. The editor sees a heatmap.
 - **Proposals become queries.** Select a span, suggest a replacement, pick a reason. Accuracy goes to Source check, flow to Editorial, notes to Fact-check. The owner answers *accepted / stet / revised*. Rejections stay visible with a reason. No person has to approve a comment or a proposal first; a model screens for abuse and the editor can remove (`SITE.md`).
 - **Talk starts from the record.** Each paragraph has a flat comment thread, screened by a model rather than a person, that opens with the agents' original debate, so readers argue with the record rather than from scratch. Comments don't change the text; proposals can. Page by page, with moderation: `SITE.md`.
-- **Trust ladder.** Reader → contributor → bilingual reviewer → editor. For now, the editor promotes people by hand.
-- **Honest labels.** Every paragraph says in words how far it got: *draft* (one machine pass), *house-checked* (through Source check, Editorial and Fact-check), *editor-approved*, or *human-reviewed* (a bilingual reader checked it against the Japanese). People are round and named; agents are square and named by department, never given personas. A seal marks human sign-off. Credits and a colophon (奥付) are on every edition, with the Aozora Bunko attribution.
+- **Trust ladder.** Reader → contributor → editor. For now, the editor promotes people by hand.
+- **Honest labels.** Only finished house work is published, and each edition says once that it was translated and checked by agents. Paragraphs an editor has signed off say so in words: *editor-approved*. People are round and named; agents are square and named by department, never given personas. A seal marks human sign-off. Credits and a colophon (奥付) are on every edition, with the Aozora Bunko attribution.
 
 ## What gets translated next
 
@@ -57,7 +57,7 @@ Readers help choose. The editor still decides.
 - **"I'd read this"** on every Catalogue entry, one vote per reader. The Catalogue can sort by most wanted, but its default order isn't a leaderboard.
 - **Request any text, from Aozora or beyond.** Search the Aozora index, or give a title, author and link. No uploads and no pasted text.
 - **Rights first.** Aozora works show their status straight from the index. Requests from elsewhere go to Acquisitions: an agent checks the author's dates, first publication and any existing English translation, writes a short reader's report, and marks the request *eligible*, *in copyright* or *can't tell*. The editor confirms before anything is translated.
-- **Existing translations are named, not hidden.** Before any edition is published, a search that includes fan and blog translations. If one exists, the work's page says so, credits the translator and links to it; "untranslated" is never claimed without that search, dated. (「晩餐」 has one: M Skeels, 2020.)
+- **Existing translations are named, not hidden.** Before any edition is published, a search that includes fan and blog translations. If one exists, the work's page says so and credits the translator by name and year (linking only with their agreement); "untranslated" is never claimed without that search, dated. (「晩餐」 has one: M Skeels, 2020.)
 - **In-copyright books stay on the wanted list.** We never translate them, but the list shows what readers want brought into English, which is useful to translators and presses.
 - Reasons attached to requests are screened and flat, like comments. Votes and requests are rate-limited.
 
