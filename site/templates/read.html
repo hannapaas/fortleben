@@ -43,7 +43,7 @@
   {% for u in ed.units %}
   {% if u.number %}<h2 class="secnum" id="{{ u.id }}"><span lang="ja" class="secnum-ja">{{ u.ja[0].html|safe }}</span>{{ u.en }}</h2>{% else %}
   {% if u.scene_break and not loop.first and not loop.previtem.number %}<div class="brk" aria-hidden="true">*</div>{% endif %}
-  <section class="unit st-{{ u.label }}" id="{{ u.id }}" data-unit="{{ u.id }}">
+  <section class="unit st-{{ u.label }}{{ ' only-notes' if u.notes and not u.queries and not u.changed }}" id="{{ u.id }}" data-unit="{{ u.id }}">
     {% set busy = u.queries or u.changed or u.notes %}
     <div class="hang">
       <span class="tools">
@@ -126,7 +126,7 @@
           <button type="button" class="cb" data-val="interleaved"><span class="bx r"></span>Under each paragraph</button>
         </div>
         <div class="row" style="margin-top:4px"><button type="button" class="cb" data-toggle="furigana"><span class="bx"></span>furigana</button></div>
-        <p class="blurb">Dictionary: <a href="https://10ten.life" target="_blank" rel="noopener">10ten Japanese Reader</a> ↗ is a free add-on for your browser, not part of Fortleben. Point at a Japanese word to see its reading and meaning.</p>
+        <p class="blurb">Dictionary: <a href="https://10ten.life" target="_blank" rel="noopener">10ten Japanese Reader</a> ↗ (browser add-on)</p>
       </div>
       <div class="sub"><span class="q">Notes?</span>
         <div class="row" data-group="marks">

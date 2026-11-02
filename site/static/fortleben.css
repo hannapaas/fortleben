@@ -117,6 +117,7 @@ a { color: inherit; text-decoration-color: var(--accent); text-underline-offset:
 .hang .tools button { color: var(--muted); width: 34px; height: 32px; display: inline-flex; align-items: center; justify-content: center; padding: 0; }
 .hang .tools .open { font-size: 24px; font-weight: 600; padding-top: 7px; }
 .hang .tools button:hover { color: var(--ink); }
+.hang .tools button:focus:not(:focus-visible) { outline: none; }
 .hang .tools button[aria-pressed="true"], .hang .tools button[aria-expanded="true"] { color: var(--accent-text); }
 
 /* ---------- Comments in the margin: small monospace, like a previous owner's notes ---------- */
@@ -179,6 +180,9 @@ a { color: inherit; text-decoration-color: var(--accent); text-underline-offset:
 .slip { position: relative; margin: .9rem 0 .4rem; padding-top: .7rem; font-size: 15px; line-height: 1.5; }
 .slip::before { content: ''; position: absolute; top: 0; left: 0; width: 4rem; border-top: 1px solid var(--ink); }
 .slip[hidden] { display: none; }
+/* With notes open under each paragraph, the footnote doesn't repeat them, and * only opens what's left. */
+.inline .slip .nl { display: none; }
+.inline .unit.only-notes .hang .open, .inline .unit.only-notes .slip { display: none; }
 .slip p { margin: 0 0 .4rem; }
 .slip p:last-child { margin-bottom: 0; }
 .dec + .dec { border-top: 1px dotted var(--muted); margin-top: 10px; padding-top: 10px; }
