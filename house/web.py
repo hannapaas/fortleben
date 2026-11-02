@@ -11,7 +11,7 @@ import tempfile
 from pathlib import Path
 
 from dotenv import load_dotenv
-from fastapi import BackgroundTasks, FastAPI, HTTPException, Request
+from fastapi import BackgroundTasks, FastAPI, HTTPException, Query, Request
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -34,7 +34,7 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
                    and os.environ.get("HOUSE_OPEN", "true").lower() != "false")
     closed = ("Runs can't start here: this copy of the site serves recorded runs only." if replay else
               "Runs can't start here: this copy of the site has no model key." if not os.environ.get("MODEL_API_KEY") else
-              "Runs can't start here: the house is closed." if os.environ.get("HOUSE_OPEN", "true").lower() == "false"
+              "Runs can't start here: new translations are switched off on this server." if os.environ.get("HOUSE_OPEN", "true").lower() == "false"
               else None)
     if not replay:
         desk.recover(connect(db))  # runs left going by a process that stopped
@@ -54,9 +54,9 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
         return templates.TemplateResponse(request, "home.html", {"shelf": edition.shelf(conn()), "replay": replay})
 
     @app.get("/read/{work_id}", response_class=HTMLResponse)
-    def read(request: Request, work_id: str):
+    def read(request: Request, work_id: str, edition_id: int | None = Query(None, alias="edition")):
         c = conn()
-        ed = edition.edition(c, work_id)
+        ed = edition.edition(c, work_id, edition_id)
         if not ed:
             raise HTTPException(404, "No edition of that work yet.")
         token = request.cookies.get(COOKIE) or secrets.token_urlsafe(24)

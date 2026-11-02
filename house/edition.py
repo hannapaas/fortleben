@@ -62,32 +62,43 @@ def _insert(conn, table: str, row: dict, replace: bool = False) -> None:
 def shelf(conn) -> list[dict]:
     """Every work with a current release, grouped by the language it was written in, newest first."""
     langs = {}
+    # One row per work: its keikaku edition, or the first commissioned one if keikaku has none.
     for r in conn.execute("SELECT e.work_id, w.language, r.version, r.created_at, r.body FROM edition e "
                           "JOIN release r ON r.id = e.current_release JOIN work w ON w.id = e.work_id "
-                          "ORDER BY r.created_at DESC"):
+                          "WHERE e.id = (SELECT e2.id FROM edition e2 WHERE e2.work_id = e.work_id AND e2.current_release "
+                          "IS NOT NULL ORDER BY e2.editor != 'the house', e2.id LIMIT 1) ORDER BY r.created_at DESC"):
         body = json.loads(r["body"])
         paras = body["views"]["casual"]
         meta = _meta(conn, r["work_id"])
         work = {**meta, "version": r["version"], "date": _date(r["created_at"]), "paragraphs": len(paras),
-                "label": _overall([p["label"] for p in paras]), "editions": editions(meta, r["created_at"])}
+                "label": _overall([p["label"] for p in paras]), "editions": editions(conn, meta)}
         name, native = LANGUAGES.get(r["language"], (r["language"], ""))
         langs.setdefault(r["language"], {"code": r["language"], "name": name, "native": native, "works": []})["works"].append(work)
     return list(langs.values())
 
 
-def editions(meta: dict, made: str | None) -> list[dict]:
-    """Every English translation of a work we know of: ours, then people's by year. A person's is named
-    and credited but not linked, unless the record says they're happy to be linked (`link`)."""
-    ours = [{"kind": "house", "by": "keikaku", "year": (made or "")[:4], "url": f"/read/{meta['id']}", "here": True}]
+def editions(conn, meta: dict, current: int | None = None) -> list[dict]:
+    """Every English translation of a work we know of: keikaku's, then any commissioned by an editor
+    from the desk, then people's by year. A person's is named and credited but not linked, unless the
+    record says they're happy to be linked (`link`)."""
+    ours = []
+    for e in conn.execute("SELECT e.id, e.editor, r.created_at FROM edition e JOIN release r ON r.id = e.current_release "
+                          "WHERE e.work_id=? ORDER BY e.editor != 'the house', e.id", (meta["id"],)):
+        house = e["editor"] == "the house"
+        ours.append({"kind": "house" if house else "commissioned", "by": "keikaku" if house else f"keikaku, commissioned by {e['editor']}",
+                     "year": (e["created_at"] or "")[:4], "here": True, "current": e["id"] == current,
+                     "url": f"/read/{meta['id']}" + ("" if house else f"?edition={e['id']}")})
     people = [{"kind": "person", "by": t["by"], "year": str(t.get("year", "")), "here": False,
                "url": t.get("link")}
               for t in sorted(meta["rights"].get("existing_translations") or [], key=lambda t: t.get("year", 0))]
     return ours + people
 
 
-def edition(conn, work_id: str) -> dict | None:
-    rel = conn.execute("SELECT r.* FROM edition e JOIN release r ON r.id = e.current_release WHERE e.work_id=?",
-                       (work_id,)).fetchone()
+def edition(conn, work_id: str, edition_id: int | None = None) -> dict | None:
+    """The work's keikaku edition, or the one asked for; a work keikaku hasn't released opens its first."""
+    rel = conn.execute("SELECT r.*, e.id AS edition_id, e.editor FROM edition e JOIN release r ON r.id = e.current_release "
+                       "WHERE e.work_id=? AND (? IS NULL OR e.id=?) ORDER BY e.editor != 'the house', e.id LIMIT 1",
+                       (work_id, edition_id, edition_id)).fetchone()
     if not rel:
         return None
     body = json.loads(rel["body"])
@@ -127,7 +138,8 @@ def edition(conn, work_id: str) -> dict | None:
     chars = sum(len(s["text"]) for s in segs.values())
     return {
         **meta, "version": rel["version"], "date": _date(rel["created_at"]), "units": units,
-        "editions": editions(meta, rel["created_at"]),
+        "editions": editions(conn, meta, rel["edition_id"]),
+        "commissioned_by": None if rel["editor"] == "the house" else rel["editor"],
         "counts": {label: labels.count(label) for label in LABELS},
         "label": _overall(labels), "colophon": body.get("colophon") or meta.get("colophon"),
         "calls": calls[0], "drops": round(budget.drops(calls[1])), "sheets": round(budget.sheets(chars), 1),
