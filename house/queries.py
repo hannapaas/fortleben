@@ -5,7 +5,6 @@ import json
 
 from house.db import dumps
 
-MAX_PER_PARAGRAPH = 8
 
 
 def raise_query(ctx, segment_id: str, raised_by: str, q: dict, round_: int = 0, owner: str = "translation") -> int:
@@ -40,9 +39,3 @@ def set_status(ctx, qid: int, status: str, actor: str, answer: dict | None = Non
     ctx.conn.commit()
     ctx.emit(actor, event, {"query_id": qid, "status": status, **(answer or {})})
 
-
-def render_for_owner(q: dict) -> str:
-    ev = "; ".join(json.loads(q["evidence"] or "[]"))
-    return (f"Query {q['id']} (round {q['round']}, from {q['raised_by']}, {q['category']}, confidence {q['confidence']}):\n"
-            f"  span: “{q['span']}”\n  reason: {q['reason']}\n  evidence: {ev or 'none given'}\n"
-            f"  suggested fix: {q['recommendation'] or 'none'}")

@@ -28,7 +28,7 @@ def test_schema_is_valid_and_strict_ready(path):
     assert depth(s) <= 21
 
 
-def test_minimal_pipeline_prompts_have_schemas():
-    for name in ["first-read", "crux-check", "analyst-bible", "translate-draft",
-                 "reader-faithful", "reader-readable", "desk", "notes"]:
+def test_every_pipeline_prompt_has_a_schema():
+    for name in ["parts", "first-read", "crux-check", "head-select", "analyst-bible", "translate-draft",
+                 "reader-faithful", "reader-readable", "desk", "final-read", "notes"]:
         assert (cl.SCHEMAS / f"{name}.json").exists(), name

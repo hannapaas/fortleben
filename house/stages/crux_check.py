@@ -19,12 +19,13 @@ def run(ctx) -> None:
                                                       "Do they name the same thing in different words, or different things?")
     options += context.block("Option 0, from the first read (Wonder)", cruxes(reading["crux"]))
     options += context.block("Option 1, from the crux check (Wonder), which never saw option 0", cruxes(second["crux"]))
-    head = ctx.call("head", Call("head-select", WONDER, "low", context.join(src, options),
+    head = ctx.call("head", Call("head-select", WONDER, "low", options,
                                  load_schema("head-select"), f"{ctx.work_id}:source")).data
     same = head["same_or_different"] == "same"
     eid = ctx.emit("crux-check", "crux.checked", {"same": same, "second": second, "head": head})
     ctx.save("crux-check", {"second": second, "head": head}, eid)
-    if not same:
+    opened = ctx.conn.execute("SELECT 1 FROM fork WHERE run_id=? AND anchor='work'", (ctx.run_id,)).fetchone()
+    if not same and not opened:
         # Each side's case is its own words, verbatim; the head adds only the one-line trade-offs.
         tradeoffs = [o.get("tradeoff", "") for o in head["fork"].get("options", [])] + ["", ""]
         options = [

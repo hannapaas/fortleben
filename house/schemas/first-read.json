@@ -7,22 +7,45 @@
       "items": {
         "type": "object",
         "properties": {
-          "point": {"type": "string"},
-          "why": {"type": "string"},
-          "for_the_english": {"type": "string"}
+          "point": {
+            "type": "string",
+            "minLength": 1
+          },
+          "why": {
+            "type": "string",
+            "minLength": 1
+          },
+          "for_the_english": {
+            "type": "string",
+            "minLength": 1
+          }
         }
       },
-      "minItems": 1, "maxItems": 3
+      "minItems": 1,
+      "maxItems": 3
     },
-    "reading": {"type": "string", "description": "The reading in prose, crux first, about a page, for the translator."},
+    "reading": {
+      "type": "string",
+      "description": "The reading in prose, crux first, about a page, for the translator.",
+      "minLength": 1
+    },
     "open_questions": {
       "type": "array",
       "items": {
         "type": "object",
         "properties": {
-          "question": {"type": "string"},
-          "why_it_matters": {"type": "string"},
-          "anchors": {"type": "array", "items": {"type": "string"}}
+          "question": {
+            "type": "string"
+          },
+          "why_it_matters": {
+            "type": "string"
+          },
+          "anchors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
         }
       }
     },
@@ -30,10 +53,23 @@
       "type": "array",
       "items": {
         "type": "object",
-        "properties": {"label": {"type": "string"}, "line": {"type": "string"}}
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1
+          },
+          "line": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
       },
-      "minItems": 2, "maxItems": 3
+      "minItems": 2,
+      "maxItems": 3
     },
-    "say": {"type": "string"}
+    "say": {
+      "type": "string",
+      "minLength": 1
+    }
   }
 }

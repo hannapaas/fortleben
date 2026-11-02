@@ -12,7 +12,6 @@ paragraph, a dialogue line is a paragraph, blank lines and ※ / ◇ markers are
 import io
 import re
 import zipfile
-from pathlib import Path
 
 import httpx
 
@@ -265,6 +264,3 @@ def fetch(zip_url: str) -> str:
         name = next(n for n in z.namelist() if n.endswith(".txt"))
         return z.read(name).decode("cp932")
 
-
-def load(path: Path) -> str:
-    return path.read_text(encoding="utf-8")

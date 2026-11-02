@@ -1,8 +1,8 @@
 """Export a recorded run to fixtures/<work>/: every model response (so FakeClient can replay the
 run with no key) and the run's record as JSON (so the site and House lanes can build on it).
 
-fixtures/<work>/run.json holds the work, its paragraphs, the reading, crux check, bible and
-referent map, every revision, query, fork and note, the full event log, and the spend ledger
+fixtures/<work>/run.json holds the work, its paragraphs, the latest reading, crux check, bible and
+parts, every revision, query, fork and note, the full event log, and the spend ledger
 (model, effort, tokens, cost, prompt and input hashes) for every call. Nothing is edited by hand.
 """
 
@@ -14,8 +14,7 @@ from house.client import CACHE, FIXTURES
 
 TABLES = {
     "segment": "SELECT * FROM segment WHERE work_id=:work ORDER BY seq",
-    "bible": "SELECT * FROM bible WHERE work_id=:work ORDER BY kind, version",
-    "term": "SELECT * FROM term WHERE work_id=:work ORDER BY id",
+    "bible": "SELECT * FROM bible b WHERE work_id=:work AND version=(SELECT MAX(version) FROM bible WHERE work_id=b.work_id AND kind=b.kind) ORDER BY kind",
     "revision": "SELECT * FROM revision WHERE run_id=:run ORDER BY id",
     "query": "SELECT * FROM query WHERE run_id=:run ORDER BY id",
     "fork": "SELECT * FROM fork WHERE run_id=:run ORDER BY id",

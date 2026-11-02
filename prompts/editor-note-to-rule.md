@@ -16,7 +16,7 @@ Note on a fork about 先生: "B. It's what she calls him and it matters." Ruling
 
 ## What you get
 
-The note; what it was written on (the fork with its options, or the paragraph); the cast and ledger entries involved; existing rules.
+The note; what it was written on (the fork with its options, or the paragraph); the cast entries involved; existing rules.
 
 ## What you return
 

@@ -7,59 +7,104 @@
       "items": {
         "type": "object",
         "properties": {
-          "id": {"type": "string", "description": "c1, c2, ... in order of first appearance"},
-          "handle": {"type": "string", "description": "How the house refers to them: a name, or 'the old man at the rice shop'"},
-          "name_ja": {"type": ["string", "null"]},
-          "reading": {"type": ["string", "null"]},
-          "romanised": {"type": ["string", "null"]},
+          "id": {
+            "type": "string",
+            "description": "c1, c2, ... in order of first appearance"
+          },
+          "handle": {
+            "type": "string",
+            "description": "How the house refers to them: a name, or 'the old man at the rice shop'"
+          },
+          "name_ja": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "reading": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "romanised": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
           "forms": {
             "type": "array",
             "description": "Every form they're referred to or addressed by, and who uses it.",
             "items": {
               "type": "object",
               "properties": {
-                "form": {"type": "string"},
-                "used_by": {"type": "string"},
-                "note": {"type": "string"}
+                "form": {
+                  "type": "string"
+                },
+                "used_by": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                }
               }
             }
           },
-          "gender": {"type": "string", "description": "female / male / not shown / deliberately open"},
-          "gender_evidence": {"type": "string"},
-          "role": {"type": "string"},
-          "relationships": {"type": "array", "items": {"type": "string"}},
-          "first_person": {"type": "string", "description": "Their first-person pronoun(s) and what each says about them, or 'none in the text'"},
-          "register": {"type": "string"},
-          "first_appearance": {"type": "string", "description": "Paragraph ID"}
-        }
-      }
-    },
-    "ledger": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "id": {"type": "string", "description": "A short ascii slug, used in {t:id} tokens"},
-          "source": {"type": "string"},
-          "reading": {"type": ["string", "null"]},
-          "kind": {"type": "string", "enum": ["place", "object", "food", "period", "phrase", "address", "other"]},
-          "casual": {"type": "string"},
-          "curious": {"type": "string"},
-          "student": {"type": "string"},
-          "rationale": {"type": "string"},
-          "occurrences": {"type": "array", "items": {"type": "string"}}
+          "gender": {
+            "type": "string",
+            "description": "female / male / not shown / deliberately open"
+          },
+          "gender_evidence": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "relationships": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "first_person": {
+            "type": "string",
+            "description": "Their first-person pronoun(s) and what each says about them, or 'none in the text'"
+          },
+          "register": {
+            "type": "string"
+          },
+          "first_appearance": {
+            "type": "string",
+            "description": "Paragraph ID"
+          }
         }
       }
     },
     "narration": {
       "type": "object",
       "properties": {
-        "person": {"type": "string"},
-        "narrator": {"type": "string"},
-        "tense_habits": {"type": "string"},
-        "english_tense": {"type": "string"},
-        "frame": {"type": "string"},
-        "timeline": {"type": "array", "items": {"type": "string"}}
+        "person": {
+          "type": "string"
+        },
+        "narrator": {
+          "type": "string"
+        },
+        "tense_habits": {
+          "type": "string"
+        },
+        "english_tense": {
+          "type": "string"
+        },
+        "frame": {
+          "type": "string"
+        },
+        "timeline": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     },
     "motifs": {
@@ -67,28 +112,65 @@
       "items": {
         "type": "object",
         "properties": {
-          "id": {"type": "string"},
-          "motif": {"type": "string"},
-          "source_forms": {"type": "array", "items": {"type": "string"}},
-          "occurrences": {"type": "array", "items": {"type": "string"}},
-          "why": {"type": "string"},
-          "english": {"type": "string", "description": "How the English should carry it"}
+          "id": {
+            "type": "string"
+          },
+          "motif": {
+            "type": "string"
+          },
+          "source_forms": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "occurrences": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "why": {
+            "type": "string"
+          },
+          "english": {
+            "type": "string",
+            "description": "How the English should carry it"
+          }
         }
       }
     },
     "style_sheet": {
       "type": "object",
       "properties": {
-        "register": {"type": "string"},
-        "honorifics_and_names": {"type": "string"},
-        "keep_in_japanese": {"type": "string"},
-        "ruby_and_italics": {"type": "string"},
-        "quotation": {"type": "string"},
-        "author_voice": {"type": "string"},
-        "annotation_density": {"type": "string"},
-        "drafting_grain": {"type": "string", "enum": ["page", "scene"]},
-        "grain_breaks": {"type": "array", "items": {"type": "string"}, "description": "Paragraph IDs where a scene-grain page should start; empty for page grain"},
-        "standing_rules": {"type": "array", "items": {"type": "string"}}
+        "register": {
+          "type": "string"
+        },
+        "honorifics_and_names": {
+          "type": "string"
+        },
+        "keep_in_japanese": {
+          "type": "string"
+        },
+        "ruby_and_italics": {
+          "type": "string"
+        },
+        "quotation": {
+          "type": "string"
+        },
+        "author_voice": {
+          "type": "string"
+        },
+        "annotation_density": {
+          "type": "string"
+        },
+        "standing_rules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Only rules the editor has set, each with its scope; empty until there are some. Your own guidance goes in the other fields, with its reason"
+        }
       }
     },
     "hard_spots": {
@@ -96,12 +178,23 @@
       "items": {
         "type": "object",
         "properties": {
-          "anchors": {"type": "array", "items": {"type": "string"}},
-          "kind": {"type": "string"},
-          "why_hard": {"type": "string"}
+          "anchors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "kind": {
+            "type": "string"
+          },
+          "why_hard": {
+            "type": "string"
+          }
         }
       }
     },
-    "say": {"type": "string"}
+    "say": {
+      "type": "string"
+    }
   }
 }

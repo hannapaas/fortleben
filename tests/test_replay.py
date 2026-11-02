@@ -16,7 +16,7 @@ def test_bansan_replays_end_to_end_without_a_key(tmp_path, monkeypatch):
     recorded = json.loads((FIXTURES / "bansan" / "run.json").read_text(encoding="utf-8"))
     if recorded["run"]["options"].get("pipeline") != orchestrator.PIPELINE:
         pytest.skip("the fixture was recorded by an earlier pipeline; re-record it with keikaku fixture")
-    options = {k: v for k, v in recorded["run"]["options"].items() if k.endswith("_model")}
+    options = {k: v for k, v in recorded["run"]["options"].items() if k != "pipeline"}
     conn = connect(tmp_path / "replay.db")
     client = FakeClient(conn, cache_dirs=[FIXTURES / "bansan" / "responses"], run_cap=0.0)
     t0 = time.monotonic()
