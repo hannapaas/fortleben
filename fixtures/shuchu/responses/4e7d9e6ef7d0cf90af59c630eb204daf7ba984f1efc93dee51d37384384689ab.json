@@ -1,0 +1,178 @@
+{
+ "prompt": "reader-readable",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "notes": [
+   {
+    "japanese": "畑と云ふ畑は、麻でも黍でも、皆、土いきれにぐつたりと頭をさげて",
+    "paragraph": "p2",
+    "problem": "The tautology reads as a mistake in English, not as emphasis; a reader stops to reparse it.",
+    "span": "every field that is a field, whether hemp or millet, has bowed its head limply in the earth-steam",
+    "suggestion": "every field worthy of the name, whether hemp or millet, has bowed its head limply in the earth-steam",
+    "sureness": "Fairly sure this is translationese; the desk's faithful reader can confirm the Japanese is idiomatic emphasis, not wordplay to preserve literally."
+   },
+   {
+    "japanese": "手ごろな素焼の瓶が一つ、この男の枕もとに置いてある",
+    "paragraph": "p3",
+    "problem": "\"Handy\" sounds like a评价 of usefulness, not size, and jars don't stand at pillows in English idiom.",
+    "span": "Then a handy unglazed jar stands at this man's pillow",
+    "suggestion": "Then a right-sized unglazed jar sits at this man's pillow",
+    "sureness": "Pretty sure \"handy\" is a false friend here; would settle by checking whether手ごろ means convenient-sized rather than useful."
+   },
+   {
+    "japanese": "七面鳥のやうな恰好をしながら、勿体らしくしやがんでゐる",
+    "paragraph": "p4",
+    "problem": "\"Posture of a turkey\" plus \"solemnly\" is unintentionally comic and stiff; the contrast is the author's joke but the wording makes it machine-like.",
+    "span": "squats there solemnly, in the posture of a turkey",
+    "suggestion": "squats there with dignity, for all the world like a turkey",
+    "sureness": "Moderately sure; the humour is in the Japanese too, so keep the turkey, just make it sound like a writer wrote it."
+   },
+   {
+    "japanese": "踵が隠れる程長い皁布衫に、結目をだらしなく垂らした茶褐帯と云ふ拵へである",
+    "paragraph": "p5",
+    "problem": "\"Rig\" is modern slang and \"hangs slovenly down\" misuses an adjective as an adverb; the voice slips from Taisho-formal to nautical.",
+    "span": "his rig is a soap-black cloth gown long enough to hide his heels",
+    "suggestion": "his get-up is a soap-black cloth gown long enough to hide his heels, with a tea-brown sash whose knot droops slovenlily",
+    "sureness": "Sure about \"rig\" and \"slovenly\" being wrong in this register; exact term for拵へ can be settled by the desk."
+   },
+   {
+    "japanese": "竹婦人に靠れながら、棋局を闘はせてゐると",
+    "paragraph": "p11",
+    "problem": "An English reader meets a person called a bamboo wife and a board-match described as fighting; both stop belief cold.",
+    "span": "leaning on his bamboo wife and fighting out a match on the board",
+    "suggestion": "leaning on his bamboo wife — a rattan bolster for hot nights — and battling out a game of go",
+    "sureness": "Very sure readers will picture a human wife; whether to gloss in-text or leave to context needs the editor's ruling on retained terms, but as it stands it misleads."
+   },
+   {
+    "japanese": "劉は、病と聞いたので、けげんな顔をして、竹婦人を撫でながら、",
+    "paragraph": "p21",
+    "problem": "The sentence breaks off on \"as\" with no main clause; it reads as a printing error, not authorial suspension.",
+    "span": "stroking his bamboo wife as",
+    "suggestion": null,
+    "sureness": "Certain this is incomplete in English; needs the desk to check if the continuation was lost in drafting — the Japanese runs on to the next speech."
+   },
+   {
+    "japanese": "たとへば、張三の黒内障が、忽、快方に向つたとか、李四の病閹が、即座に平癒したとか、殆、奇蹟に近い噂が盛に行はれてゐる",
+    "paragraph": "p13",
+    "problem": "The \"that... or that...\" apposition never resolves grammatically; the reader has to read twice to find the verb.",
+    "span": "that Chang San's black cataract suddenly took a turn for the better, for instance, or that Li Si's impotence was healed on the spot",
+    "suggestion": "how Chang San's black cataract suddenly took a turn for the better, for instance, or how Li Si's impotence was healed on the spot — rumours all but miraculous are rife",
+    "sureness": "Sure the syntax is broken in English; the fix keeps every fact and only repairs agreement."
+   },
+   {
+    "japanese": "「癒りますかな。」劉は思はず覚束なさうな声を出した。さうして、自分でそれを恥ぢた。",
+    "paragraph": "p28",
+    "problem": "Second sentence has no subject in English, so it reads as a fragment rather than terse narration.",
+    "span": "And was himself ashamed of it.",
+    "suggestion": "And he was himself ashamed of it.",
+    "sureness": "Certain; joining or supplying the pronoun does not smooth any authorial roughness, only a drafting slip."
+   },
+   {
+    "japanese": "内心、こんな横柄な坊主に会つたり何ぞする主人の劉を、莫迦げてゐると思ひ出した。",
+    "paragraph": "p33",
+    "problem": "Calling a person \"absurd\" is unidiomatic and the whole paragraph wobbles between present and past, formal and clumsy.",
+    "span": "he recalled within himself that his host Liu, who would meet such an arrogant monk, was absurd.",
+    "suggestion": "he thought his host Liu a fool for receiving such an arrogant monk.",
+    "sureness": "Pretty sure \"was absurd\" is dictionary English; tense consistency for the paragraph as a whole needs the desk to rule, but this clause is wrong on its own."
+   },
+   {
+    "japanese": "当座の行きがかりで、糟邱の良友たる孫先生が、この不思議な療治に立合ふ事になつたのは云ふまでもない。",
+    "paragraph": "p41",
+    "problem": "Two opaque calques in one sentence: no English reader knows what \"by the turn of the moment\" or a \"good friend on the wine-mound\" is.",
+    "span": "That Sun Sensei, his good friend on the wine-mound, should by the turn of the moment stand witness to this strange cure goes without saying.",
+    "suggestion": "That Sun Sensei, his boon companion of the wine-mound, should as things fell out stand witness to this strange cure goes without saying.",
+    "sureness": "Sure \"by the turn of the moment\" means nothing in English; \"wine-mound\" still needs a light gloss on first use, which is an editor call under the keikaku test."
+   },
+   {
+    "japanese": "普通の人間が、学校の教育などをうけるのも、実は大抵、これと同じやうな事をしてゐるのである。",
+    "paragraph": "p42",
+    "problem": "The sly dig at schooling drowns in nominalization; \"the doing of the same sort of thing\" has a machine's habits, not a writer's.",
+    "span": "is in truth for the most part the doing of the same sort of thing.",
+    "suggestion": "is in truth for the most part doing much the same thing.",
+    "sureness": "Very sure; this keeps the narrator's digression intact and only removes the extra nouns."
+   },
+   {
+    "japanese": "それでどこもかしこも、ぴりぴりする――とでも説明したら、よからうと思ふ痛みである。",
+    "paragraph": "p45",
+    "problem": "\"A smarting everywhere\" forces a verb into noun service; the ordeal passage needs to stay visceral, not grammatical puzzle.",
+    "span": "a pain that might best be described as a smarting everywhere.",
+    "suggestion": "a pain best described as a smarting all over.",
+    "sureness": "Sure the article + adverb fails in English; the oddness to keep is the clinical definition of pain, not the grammar."
+   },
+   {
+    "japanese": "曹孟徳か誰かが、前路に梅林ありと云つて、軍士の渇を医したと云ふ事は知つてゐる。",
+    "paragraph": "p46",
+    "problem": "\"Doctored his soldiers' thirst\" suggests falsifying it; the allusion misfires in English.",
+    "span": "doctored his soldiers' thirst by telling them there was a plum grove ahead.",
+    "suggestion": "cured his soldiers' thirst by telling them there was a plum grove ahead.",
+    "sureness": "Very sure \"doctored\" is wrong here; \"cured\" or \"treated\" preserves the ironic medical echo of医す — faithful reader to confirm nuance."
+   },
+   {
+    "japanese": "瓶の口と、応揚にふくれた胴の半分ばかりが、眼にはいる。",
+    "paragraph": "p46",
+    "problem": "\"Generously swollen\" turns the jar jolly and purple; it ennobles a plain pot.",
+    "span": "perhaps half of its generously swollen belly.",
+    "suggestion": "perhaps half of its broadly swollen belly.",
+    "sureness": "Moderately sure;応揚 is dignified amplitude, not generosity — a plainer adjective keeps the erotic-thirsty gaze without the comedy."
+   },
+   {
+    "japanese": "何故、自分ともあるものが、あんな人間の口車に乗つて、こんな莫迦げた苦しみをするのだらう",
+    "paragraph": "p47",
+    "problem": "\"Ridden on cajolery\" mixes metaphors; no English speaker rides on cajolery into suffering.",
+    "span": "should have ridden on such a fellow's cajolery into this idiotic suffering.",
+    "suggestion": "should have let such a fellow's patter lead him into this idiotic suffering.",
+    "sureness": "Sure this is literal-translation idiom; the self-reproach and register stay, only the vehicle changes."
+   },
+   {
+    "japanese": "すると、その途端である。劉は、何とも知れない塊が、少しづつ胸から喉へ這ひ上つて来るのを感じ出した。",
+    "paragraph": "p48",
+    "problem": "Standing the time-clause as its own fragment reads as an error, and \"breast\" for a fat man's chest confuses.",
+    "span": "But at that very instant.",
+    "suggestion": "But at that very instant, Liu begins to feel an unnameable lump creeping little by little from his chest toward his throat.",
+    "sureness": "Sure the full stop after instant is a drafting chop of a long cumulative sentence the reading says to keep long; joining restores flow without prettifying."
+   },
+   {
+    "japanese": "蛮僧が、急に落ちつけてゐた尻を持ち上げて",
+    "paragraph": "p50",
+    "problem": "\"Haunches he had settled\" is both indelicate and incomprehensible; a reader pictures animal hindquarters.",
+    "span": "lifts the haunches he had settled",
+    "suggestion": "heaves up the haunches he had settled himself upon",
+    "sureness": "Pretty sure the comedy is in the original turkey-squat, but \"haunches\" alone misleads; needs a plainer buttocks or a rephrase the desk approves."
+   },
+   {
+    "japanese": "長さは、三寸ばかりであらう。",
+    "paragraph": "p51",
+    "problem": "\"Three sun\" means nothing to an English reader without help; it stops the climactic peer into the jar.",
+    "span": "It must be about three sun in length.",
+    "suggestion": "It must be about three sun — some four inches — in length.",
+    "sureness": "Certain an unexplained traditional unit fails the English reader; whether in-text gloss or note is an editor call, but it cannot stand bare — this is exactly the keikaku test."
+   }
+  ],
+  "say": "The tableau and ordeal live, but dictionary diction, broken syntax and unexplained terms keep tripping the English reader."
+ },
+ "usage": {
+  "input_tokens": 17525,
+  "cached_tokens": 0,
+  "output_tokens": 8329,
+  "reasoning_tokens": 5588,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0573045,
+ "response_id": "resp_6ae8a1e6598b8cdafcc4488a",
+ "latency_s": 46.55,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 9450
+  }
+ ],
+ "created": "2026-11-02T14:44:54Z"
+}

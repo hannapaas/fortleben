@@ -1,0 +1,60 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "In a dim light, three people, quiet as that light, drew together with their heads together, telling a long story. The story seemed to go on and on between them, too long and without end. And in that story seemed to be told all the good and evil of the world, sorrow and suffering and anger and trouble, joy, everything. But those who told it and those who listened to it only went on quietly and peacefully smiling, and did not move at all. With their heads bent and their eyes lowered, only a quiet nostalgia and forgiveness seemed to wrap them. And a deep, deep peace showed itself in all of them.",
+    "flags": [],
+    "ids": [
+     "p16"
+    ],
+    "notes": []
+   },
+   {
+    "english": "All things in the world, a life, will pass. And only on the day after it has passed will everything, all things, turn to nostalgia and forgiveness. And then they will be forever before a rest like night.",
+    "flags": [],
+    "ids": [
+     "p17"
+    ],
+    "notes": [
+     "Kept p17 without a subject or added frame, as the Japanese widens from her seeing toward a general truth before returning to her sigh in p18."
+    ]
+   },
+   {
+    "english": "The far picture lay dark and quiet in the bottom of her eyes. And through the bottom of her eyes, far into the future, with a lonely peace, that picture could still be seen. Young as she was, alone she gave a lonely, quiet sigh, and glancing at the littered table and at the faces of her husband and child, she said nothing.",
+    "flags": [],
+    "ids": [
+     "p18"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted the vision and return keeping the repeated words and the p17 seam unfused."
+ },
+ "usage": {
+  "input_tokens": 11520,
+  "cached_tokens": 10737,
+  "output_tokens": 2183,
+  "reasoning_tokens": 1804,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.011867049999999999,
+ "response_id": "resp_6ae8d54980728c0914fb4ef1",
+ "latency_s": 7.79,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1550
+  }
+ ],
+ "created": "2026-11-02T18:24:09Z"
+}

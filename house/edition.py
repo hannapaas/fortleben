@@ -11,7 +11,7 @@ import json
 import re
 from pathlib import Path
 
-from house import budget, checks, works
+from house import works
 from house.client import FIXTURES
 
 VIEWS = ("casual", "curious", "student")
@@ -19,7 +19,8 @@ LANGUAGES = {"ja": ("Japanese", "日本語")}
 LABELS = ("draft", "house-checked", "editor-approved", "human-reviewed")
 READERS = {"reader/faithful": "faithful reader", "reader/readable": "readable reader"}
 RUBY = re.compile(r"《[^》]*》|［＃[^］]*］")  # Aozora readings and editorial notes, quoted raw in a reader's evidence
-DECIDED = {"taken": "Changed", "declined": "Kept", "forked": "Left to the editor", "open": "Not decided yet"}
+DECIDED = {"taken": "Changed", "declined": "Kept", "forked": "Left to the editor", "open": "Not decided yet",
+           "unaddressed": "Not decided yet", "noted": "Noted"}
 OUTCOMES = {"taken": "taken", "declined": "declined", "forked": "sent to the editor", "open": "not answered yet"}
 
 # fixture.py writes these tables; loading them back gives replay the same database a live run leaves.
@@ -103,7 +104,6 @@ def edition(conn, work_id: str, edition_id: int | None = None) -> dict | None:
         return None
     body = json.loads(rel["body"])
     run_id = rel["run_id"]
-    terms = {r["id"]: dict(r) for r in conn.execute("SELECT * FROM term WHERE work_id=?", (work_id,))}
     segs = {r["id"]: dict(r) for r in conn.execute("SELECT * FROM segment WHERE work_id=?", (work_id,))}
     queries = _rows(conn, "SELECT * FROM query WHERE run_id=? ORDER BY id", run_id, ("evidence", "answer"))
     revisions = _rows(conn, "SELECT * FROM revision WHERE run_id=? ORDER BY id", run_id, ("segment_ids", "notes"))
@@ -116,7 +116,7 @@ def edition(conn, work_id: str, edition_id: int | None = None) -> dict | None:
             by_id[p["grouped_with"]]["paras"].append(p["id"])
             continue
         unit = {"id": p["id"], "n": len(units) + 1, "paras": [p["id"]], "label": p["label"],
-                "scene_break": p["scene_break_before"], "en": p["en"], "notes": _notes(body, i, terms)}
+                "scene_break": p["scene_break_before"], "en": p["en"], "notes": _notes(body, i)}
         units.append(unit)
         by_id[p["id"]] = unit
 
@@ -127,7 +127,7 @@ def edition(conn, work_id: str, edition_id: int | None = None) -> dict | None:
         unit["decisions"] = _decisions(unit["queries"])
         revs = [r for r in revisions if ids & set(r["segment_ids"])]
         unit["drafter_notes"] = [n for r in revs[:1] for n in (r["notes"] or [])]
-        unit["history"] = [{"version": r["version"], "en": checks.render(r["english"], terms, "casual"),
+        unit["history"] = [{"version": r["version"], "en": r["english"],
                             "date": _date(r["created_at"])} for r in revs]
         unit["changed"] = len({h["en"] for h in unit["history"]}) > 1
         unit["en_html"] = mark_notes(unit["en"], unit["notes"])
@@ -135,21 +135,20 @@ def edition(conn, work_id: str, edition_id: int | None = None) -> dict | None:
     calls = conn.execute("SELECT COUNT(*), COALESCE(SUM(list_cost_usd), 0) FROM call WHERE run_id=?", (run_id,)).fetchone()
     labels = [u["label"] for u in units]
     meta = _meta(conn, work_id)
-    chars = sum(len(s["text"]) for s in segs.values())
     return {
         **meta, "version": rel["version"], "date": _date(rel["created_at"]), "units": units,
         "editions": editions(conn, meta, rel["edition_id"]),
         "commissioned_by": None if rel["editor"] == "the house" else rel["editor"],
         "counts": {label: labels.count(label) for label in LABELS},
         "label": _overall(labels), "colophon": body.get("colophon") or meta.get("colophon"),
-        "calls": calls[0], "drops": round(budget.drops(calls[1])), "sheets": round(budget.sheets(chars), 1),
+        "calls": calls[0], "cost": calls[1],
         "queries": {"total": len(queries), "taken": sum(q["status"] == "taken" for q in queries),
                     "declined": sum(q["status"] == "declined" for q in queries)},
         "models": sorted({r["model"] for r in conn.execute("SELECT DISTINCT model FROM call WHERE run_id=?", (run_id,))}),
     }
 
 
-def _notes(body: dict, i: int, terms: dict) -> list[dict]:
+def _notes(body: dict, i: int) -> list[dict]:
     """A paragraph's notes, once each. Essential notes are the ones the house thought every reader
     needs (those it put in the casual view); the rest are there for the curious."""
     out, seen = [], set()
@@ -159,7 +158,7 @@ def _notes(body: dict, i: int, terms: dict) -> list[dict]:
             if key in seen:
                 continue
             seen.add(key)
-            out.append({**n, "essential": view == "casual", "span_html": checks.render(n["span"] or "", terms, "casual")})
+            out.append({**n, "essential": view == "casual", "span_html": html.escape(n["span"] or "")})
     return out
 
 

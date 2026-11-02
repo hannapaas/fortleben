@@ -16,7 +16,8 @@
           },
           "english": {
             "type": "string",
-            "description": "The English, with {t:id} tokens on ledger terms"
+            "description": "The English",
+            "minLength": 1
           },
           "notes": {
             "type": "array",
@@ -36,7 +37,11 @@
       }
     },
     "say": {
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "One sentence for the House log, if any"
     }
   }
 }

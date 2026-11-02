@@ -16,7 +16,7 @@ Every note that states a fact will go to Fact-check, which verifies it or kills 
 
 ## What you get
 
-The page in Japanese and English with paragraph IDs and spans; the reading; the bible (ledger, hard spots); the translator's notes; the style sheet's annotation density per view; the background brief.
+The chapter in Japanese and English with paragraph IDs and spans; the reading; the bible (hard spots); the translator's notes; the style sheet's annotation density per view; the background brief.
 
 ## What you return
 

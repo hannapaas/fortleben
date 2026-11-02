@@ -1,4 +1,4 @@
-"""Drops of ink, the spend ledger, caps and the kill switch.
+"""The spend ledger, run estimates, caps and the kill switch.
 
 Every call is priced from the API's own usage figures. Before a call, an estimate is
 checked against the run, daily and total caps; a call that would pass a cap is refused.
@@ -12,15 +12,10 @@ from dataclasses import dataclass
 # Dollars per million tokens: (input, cached input, output). Reasoning is billed as output.
 PRICES = {
     "muse-spark-1.3": (1.25, 0.15, 4.25),
-    "muse-spark-1.3-contributor": (0.10, 0.002, 0.20),
     "muse-wonder-1.0": (4.00, 0.20, 20.00),
 }
 WEB_SEARCH_USD = 2.50 / 1000
 
-# One drop of ink in dollars. Calibrated on the first real runs (docs/RUNNING-A-TEXT.md §7).
-DROP_USD = float(os.environ.get("KEIKAKU_DROP_USD", "0.0006"))
-SHEET_CHARS = 400
-DROPS_PER_SHEET = 100
 
 
 class CapExceeded(Exception):
@@ -47,18 +42,36 @@ class Usage:
         ) / 1e6 + self.web_searches * WEB_SEARCH_USD
 
 
-def drops(usd: float) -> float:
-    return usd / DROP_USD
-
-
-def sheets(chars: int) -> float:
-    return chars / SHEET_CHARS
-
 
 def estimate(model: str, input_chars: int, expected_output_tokens: int) -> float:
     """A cautious pre-call estimate: Japanese-heavy input at ~1.5 tokens a character, none of it cached."""
     p_in, _, p_out = PRICES[model]
     return (input_chars * 1.5 * p_in + expected_output_tokens * p_out) / 1e6
+
+
+# Measured dollars per 1,000 source characters, per stage and model, from runs on 晩餐.
+# The chapter-by-chapter stages scale with length, so per-character rates carry over to long texts.
+STAGE_RATES = {
+    "first-read": {"wonder": 0.025}, "crux-check": {"wonder": 0.025}, "bible": {"spark": 0.015},
+    "draft": {"spark": 0.036, "wonder": 0.075}, "readers": {"spark": 0.033, "wonder": 0.065},
+    "desk": {"spark": 0.019, "wonder": 0.047}, "final-read": {"spark": 0.015, "wonder": 0.04},
+    "notes": {"spark": 0.0075},
+}
+RUN_MARGIN = 1.5  # an estimate is meant to be high: a run that starts should not run out mid-way
+
+
+def estimate_run(chars: int, chapters: int, options: dict) -> float:
+    """What a whole run will cost, overestimated: every stage live (no cache), and every earlier
+    chapter taken back to the desk once."""
+    pick = {"draft": "draft_model",
+            "readers": "reader_model", "desk": "desk_model", "final-read": "final_model"}
+    total = 0.0
+    for stage, rates in STAGE_RATES.items():
+        rate = rates.get(options.get(pick.get(stage, ""), "") or "spark") or next(iter(rates.values()))
+        total += rate * chars / 1000
+        if stage == "desk" and chapters > 1:
+            total += rate * chars / 1000 * (chapters - 1) / chapters  # the emergency lever's pass back
+    return round(total * RUN_MARGIN, 2)
 
 
 def _cap(name: str, default: float) -> float:
@@ -70,9 +83,14 @@ class Budget:
 
     def __init__(self, conn: sqlite3.Connection, run_cap: float | None = None):
         self.conn = conn
-        self.run_cap = run_cap if run_cap is not None else _cap("KEIKAKU_CAP_RUN", 0.75)
+        self.cap_given = run_cap is not None  # False: the default, which a resumed run replaces with its own
+        self.run_cap = run_cap if run_cap is not None else _cap("KEIKAKU_CAP_RUN", 3.0)
         self.daily_cap = _cap("KEIKAKU_CAP_DAILY", 10)
         self.total_cap = _cap("KEIKAKU_CAP_TOTAL", 100)
+
+    def room(self) -> float:
+        """The most a new run may spend: its own cap, or less if the day's or the total's is nearer."""
+        return min(self.run_cap, self.daily_cap - self.spent(today=True), self.total_cap - self.spent())
 
     def spent(self, run_id: int | None = None, today: bool = False) -> float:
         sql, args = "SELECT COALESCE(SUM(cost_usd), 0) FROM call WHERE 1=1", []

@@ -21,6 +21,20 @@ from house.comments import LINK, digest
 from house.db import connect, dumps
 from house.edition import _date
 
+# An allowance is counted in drops of ink: one drop is DROP_USD, and a sheet is 400 characters of the original.
+DROP_USD = float(os.environ.get("KEIKAKU_DROP_USD", "0.0006"))
+SHEET_CHARS = 400
+MIN_DROPS_PER_SHEET = 100
+
+
+def drops(usd: float) -> float:
+    return usd / DROP_USD
+
+
+def sheets(chars: int) -> float:
+    return chars / SHEET_CHARS
+
+
 OVERRUN = 1.2  # the house covers up to 20% over the reservation (docs/EDITORS-DESK.md, "Money")
 MAX_CREDIT = 60
 DEFAULT_OPTIONS: dict = {}  # run options every desk run gets; tests set the recorded models here
@@ -114,7 +128,7 @@ def _allowance_row(conn, person_id: int) -> int:
 
 
 def _drops(usd: float) -> int:
-    return math.ceil(round(budget.drops(usd), 6))
+    return math.ceil(round(drops(usd), 6))
 
 
 def _used(conn, run_id: int) -> int:
@@ -130,8 +144,7 @@ def _chars(work_id: str, mtime: float) -> int:
 
 
 # What a run really costs per sheet, before the ledger has finished runs of its own to go on:
-# measured on 「晩餐」, 2 Nov 2026 (1,486 drops for 8.5 sheets). The engine's own pool, DROPS_PER_SHEET,
-# is what it aims to spend; an estimate that reserves less than a run costs leaves runs stuck at the cap.
+# measured on 「晩餐」, 2 Nov 2026 (1,486 drops for 8.5 sheets). An estimate that reserves less than a run costs leaves runs stuck at the cap.
 FALLBACK_DROPS_PER_SHEET = int(os.environ.get("DESK_DROPS_PER_SHEET", 175))
 
 
@@ -144,9 +157,9 @@ def drops_per_sheet(conn=None) -> float:
                               "WHERE r.status='done' GROUP BY r.id ORDER BY r.id DESC LIMIT 5"):
             path = works.source_path(r["work_id"])
             if path.exists() and r["usd"]:
-                rates.append(budget.drops(r["usd"]) / budget.sheets(_chars(r["work_id"], path.stat().st_mtime)))
+                rates.append(drops(r["usd"]) / sheets(_chars(r["work_id"], path.stat().st_mtime)))
     measured = sum(rates) / len(rates) * 1.1 if rates else FALLBACK_DROPS_PER_SHEET
-    return max(budget.DROPS_PER_SHEET, measured)
+    return max(MIN_DROPS_PER_SHEET, measured)
 
 
 def eligible_works(conn=None) -> list[dict]:
@@ -158,11 +171,11 @@ def eligible_works(conn=None) -> list[dict]:
         if not works.eligible(w.get("rights", {})) or not path.exists():
             continue
         chars = _chars(wid, path.stat().st_mtime)
-        sheets = budget.sheets(chars)
+        n = sheets(chars)
         out.append({"id": wid, "title": w["title"], "title_en": w.get("title_en") or w["title"],
                     "author_en": w.get("author_en") or w["author"],
                     "first_published_year": w["rights"].get("first_published_year"), "blurb": w.get("blurb"),
-                    "chars": chars, "sheets": sheets, "estimate": math.ceil(sheets * rate)})
+                    "chars": chars, "sheets": n, "estimate": math.ceil(n * rate)})
     return out
 
 
@@ -191,7 +204,7 @@ def _hold(conn, run_id: int, person_id: int) -> None:
         hold = math.ceil(options["reserved_drops"] / 4)
         options["reserved_drops"] += hold
         spent_usd = conn.execute("SELECT COALESCE(SUM(cost_usd),0) FROM call WHERE run_id=?", (run_id,)).fetchone()[0]
-        conn.execute("UPDATE run SET cap_usd=? WHERE id=?", (spent_usd + hold * budget.DROP_USD * OVERRUN, run_id))
+        conn.execute("UPDATE run SET cap_usd=? WHERE id=?", (spent_usd + hold * DROP_USD * OVERRUN, run_id))
     left = allowance(conn, person_id)["available"]
     if hold > left:
         raise Refused(f"This needs {hold:,} drops and you have {left:,} left.")
@@ -224,7 +237,7 @@ def start(db, token: str, work_id: str, agree: bool, credit: str | None) -> int:
         conn.execute("INSERT OR IGNORE INTO work (id, aozora_id, title, author) VALUES (?,?,?,?)",
                      (work_id, info.get("aozora_id"), info["title"], info["author"]))
         conn.execute("UPDATE person SET credit_as=? WHERE id=?", (credit, person["id"]))
-        cap = estimate * budget.DROP_USD * OVERRUN
+        cap = estimate * DROP_USD * OVERRUN
         options = {"pipeline": orchestrator.PIPELINE, **DEFAULT_OPTIONS, "editor_id": person["id"],
                    "allowance_id": _allowance_row(conn, person["id"]), "reserved_drops": estimate,
                    "credit": credit or "an editor"}

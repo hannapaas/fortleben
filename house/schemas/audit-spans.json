@@ -49,10 +49,12 @@
     },
     "overall": {
       "type": "string",
-      "description": "A line on the version as a whole"
+      "description": "A line on the version as a whole",
+      "minLength": 1
     },
     "say": {
-      "type": "string"
+      "type": "string",
+      "minLength": 1
     }
   }
 }

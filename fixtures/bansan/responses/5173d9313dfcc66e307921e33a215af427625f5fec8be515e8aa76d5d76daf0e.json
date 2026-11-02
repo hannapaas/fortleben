@@ -1,0 +1,90 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "The mother, silent with bowed head by the wall, was serving onto a white plate the beef and onion, carrot and potato simmered in the deep blue pot. About to say something, she put a piece of potato, simmered sweet and soft, into her mouth and looked toward the man's face, but as if she had noticed something, she shut her mouth and stared vacantly at a place far away.",
+    "flags": [],
+    "ids": [
+     "p10"
+    ],
+    "notes": []
+   },
+   {
+    "english": "The potato in her mouth was hard as if frozen, and gritty, and tasted very bad. As if taken by surprise, she chewed it over silently with her front teeth, but her heart had already bowed down in loneliness.",
+    "flags": [],
+    "ids": [
+     "p11"
+    ],
+    "notes": [
+     "ざくざく kept as flat 'gritty': sensation only, without giving a cooking cause."
+    ]
+   },
+   {
+    "english": "She remembered the suffering and sorrow and weariness of her days. And the tasteless, unconnected, cold bad taste of the potato gave her a quiet, lonely, far off heart. She pictured the poor, sorrow filled, real life since her marriage.",
+    "flags": [],
+    "ids": [
+     "p12"
+    ],
+    "notes": [
+     "かゝはりのない rendered as 'unconnected' in the deliberate flat sense: the bad taste has nothing to do with her."
+    ]
+   },
+   {
+    "english": "And it seemed like a life that had gone on far too long. It suddenly seemed to her that she had grown quite old. And with a far off heart she quietly remembered the quiet days filled with tears, and the days spent threatened and afraid over material things, and each day of sorrow and suffering through sickness. But to her as she remembered now, everything was like a dream. Suffering and sorrow were like a nostalgic dream.",
+    "flags": [],
+    "ids": [
+     "p13"
+    ],
+    "notes": [
+     "物質の為めに kept literal as 'over material things', without softening to poverty or money."
+    ]
+   },
+   {
+    "english": "And when she thought of it, it was only barely three years of life since marriage.",
+    "flags": [],
+    "ids": [
+     "p14"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Before she knew it, as if caught by something, she gazed vacantly far into the distance. Her quiet heart was already seeing a picture like a phantom.",
+    "flags": [],
+    "ids": [
+     "p15"
+    ],
+    "notes": [
+     "幻のやうな絵 kept as simile, 'a picture like a phantom', not hardened into dream or vision."
+    ]
+   }
+  ],
+  "say": "Detachment passage drafted with flat potato sensation and repeated quiet, far, long and dream wording kept plain."
+ },
+ "usage": {
+  "input_tokens": 12268,
+  "cached_tokens": 10737,
+  "output_tokens": 3361,
+  "reasoning_tokens": 2783,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01780855,
+ "response_id": "resp_6ae8d541646322326ac442b1",
+ "latency_s": 13.05,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2314
+  }
+ ],
+ "created": "2026-11-02T18:24:01Z"
+}

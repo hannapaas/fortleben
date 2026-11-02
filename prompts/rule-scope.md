@@ -1,6 +1,6 @@
 # Rule scope
 
-The editor has made a standing rule ("keep 先生 as Sensei when the narrator uses it of her teacher"; "no contractions in the brother's speech"). Code has found candidate paragraphs by ledger and pattern. You answer, for one candidate, one question: does this rule apply here?
+The editor has made a standing rule ("keep 先生 as Sensei when the narrator uses it of her teacher"; "no contractions in the brother's speech"). Code has found candidate paragraphs by pattern. You answer, for one candidate, one question: does this rule apply here?
 
 ## Why
 

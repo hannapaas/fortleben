@@ -3,7 +3,7 @@
   "properties": {
     "notes": {
       "type": "array",
-      "maxItems": 8,
+      "maxItems": 20,
       "description": "Margin notes for the desk; none for a clean chapter",
       "items": {
         "type": "object",
@@ -32,7 +32,7 @@
               "string",
               "null"
             ],
-            "description": "A wording, only if one is obvious"
+            "description": "A wording if you can see one, the sentence or passage rewritten where that is what it takes"
           },
           "sureness": {
             "type": "string",

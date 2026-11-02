@@ -1,0 +1,114 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "IV",
+    "flags": [],
+    "ids": [
+     "p52"
+    ],
+    "notes": []
+   },
+   {
+    "english": "The barbarian monk's cure showed its effect on the spot. From that day Liu Dacheng quite suddenly could drink no more. Now, he says, he cannot even bear the smell. Yet strangely, his health from that time began to fail little by little. This year is the third since he spat out the wine worm, and no trace remains of the round and sleek fullness of former years. Skin of a poor lustre hangs greasily over the bones of a gaunt face, and only a little hair, touched with frost, lingers upon his temples; they say there is no telling how many times in a year he takes to his bed.",
+    "flags": [],
+    "ids": [
+     "p53"
+    ],
+    "notes": [
+     "Kept the paired body terms plain: frost-touched hair upon the temples, dull greasy skin over bone, to hold the counter-repetition to his former fatness."
+    ]
+   },
+   {
+    "english": "But it is not his health alone that has declined since then. His fortune too has gone steadily downhill, and now of the suburban fields counted at three hundred mu, most have passed into other hands. Liu himself has willy-nilly taken hoe in unpractised hands, and passes his wretched day-to-day existence.",
+    "flags": [],
+    "ids": [
+     "p54"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Why, since spitting out the wine worm, has Liu's health failed? Why has his fortune declined — once the spitting of the worm and Liu's later ruin are set side by side as cause and effect, these are questions anyone is likely to ask. In fact this question has been repeated by people of every trade living in Chozan, and answered from the mouths of those same people in every kind of way. The three answers given here are in truth no more than the most representative chosen from among them.",
+    "flags": [],
+    "ids": [
+     "p55"
+    ],
+    "notes": []
+   },
+   {
+    "english": "First answer. The wine worm was Liu's fortune, and not Liu's sickness. By chancing upon a benighted barbarian monk, he willingly brought about the loss of this heaven-sent fortune.",
+    "flags": [],
+    "ids": [
+     "p56"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Second answer. The wine worm was Liu's sickness, and not Liu's fortune. For to drain a whole jar at a single drinking is quite beyond what an ordinary man can conceive. Had the worm not been removed, Liu must before long have died, without question. Seen in this light, poverty and sickness coming by turns should rather be called happiness for Liu.",
+    "flags": [],
+    "ids": [
+     "p57"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Third answer. The wine worm was neither Liu's sickness nor Liu's fortune. Liu from of old did nothing but drink. If wine were taken from Liu's life, nothing would remain behind. Thus Liu is the wine worm, the wine worm is Liu. Therefore Liu's parting with the wine worm was the same as killing himself. In short, from the day he could drink no more, Liu was Liu and yet not Liu. If Liu himself had already ceased to be, then it is entirely natural that the health and fortune of the Liu of former days should have been lost.",
+    "flags": [],
+    "ids": [
+     "p58"
+    ],
+    "notes": [
+     "Kept the identity bald — Liu is the wine worm, the wine worm is Liu — and the paradox Liu was Liu and yet not Liu, without softening into metaphor, as the crux requires."
+    ]
+   },
+   {
+    "english": "Which of these answers best hits the mark, I myself do not know. I have merely, in imitation of the Didacticism of the Chinese novelists, set down such moral judgments in a list at the end of this tale.",
+    "flags": [],
+    "ids": [
+     "p59"
+    ],
+    "notes": [
+     "Kept the alien capital D in Didacticism as in the source."
+    ]
+   },
+   {
+    "english": "— April of the Fifth Year —",
+    "flags": [],
+    "ids": [
+     "p60"
+    ],
+    "notes": [
+     "Date left as written; understood as the first-publication date."
+    ]
+   }
+  ],
+  "say": "Drafted the aftermath and three-answer close, keeping cure and ruin complete and the refusal flat."
+ },
+ "usage": {
+  "input_tokens": 15738,
+  "cached_tokens": 14321,
+  "output_tokens": 3150,
+  "reasoning_tokens": 2215,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0173069,
+ "response_id": "resp_6ae8a16371349868629749ae",
+ "latency_s": 20.09,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 3780
+  }
+ ],
+ "created": "2026-11-02T14:42:43Z"
+}

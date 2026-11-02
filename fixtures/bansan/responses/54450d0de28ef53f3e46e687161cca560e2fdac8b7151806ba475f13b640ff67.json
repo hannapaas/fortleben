@@ -1,0 +1,40 @@
+{
+ "prompt": "head-select",
+ "model": "muse-wonder-1.0",
+ "effort": "low",
+ "data": {
+  "decision": "pick",
+  "fork": {
+   "options": [],
+   "question": ""
+  },
+  "pick": 1,
+  "reason": "They name the same crux in different words: a present left materially and psychologically unredeemed, made bearable only from an unmarked, undecidable retrospect in which it is already past. Option 1's second point about the two time-registers and the storm's circular return is Option 0's structural evidence made explicit — the frame that shows only her distance has moved — not a different crux, and Option 1 gives that sameness in more checkable English directives (unmarked slide, unresolved conjectures, repeated words, flat domestic exchanges). Option 0 got the husband-warning right — neither antagonist nor rescuer — but the text that goes forward is Option 1 as written.",
+  "same_or_different": "same",
+  "say": "Pick: Option 1. They name the same crux — consolation only in retrospect, the present untouched — and Option 1's time-and-storm point is Option 0's frame made explicit, not a second crux.\n\nHouse log: Ruled the two crux statements the same and adopted the crux check's wording as written."
+ },
+ "usage": {
+  "input_tokens": 2617,
+  "cached_tokens": 0,
+  "output_tokens": 995,
+  "reasoning_tokens": 729,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.030368,
+ "response_id": "resp_6ae8cb873f3d0788dd8f4b41",
+ "latency_s": 10.53,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1095
+  }
+ ],
+ "created": "2026-11-02T17:42:31Z"
+}

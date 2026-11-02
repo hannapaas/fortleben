@@ -1,100 +1,179 @@
 {
-  "bansan": {
-    "aozora_id": "000223",
-    "author_id": "000012",
-    "title": "晩餐",
-    "title_en": "Supper",
-    "author": "素木しづ",
-    "author_en": "Shiraki Shizu",
-    "card_url": "https://www.aozora.gr.jp/cards/000012/card223.html",
-    "blurb": "A young couple feed their baby at supper while a storm blows outside, and one bad mouthful sends the mother somewhere far away.",
-    "about": "Shiraki Shizu wrote this short sketch in 1917, the year before she died. A narrow room, a laughing child, a cold potato; and in a few lines the mother sees her three years of marriage as a whole long life, and a quiet peace waiting at the end of it.",
-    "zip_url": "https://www.aozora.gr.jp/cards/000012/files/223_ruby_2389.zip",
-    "rights": {
-      "author_died": 1918,
-      "first_published": "「文章倶楽部」1917（大正6）年2月号",
-      "first_published_year": 1917,
-      "basis": "Aozora index 初出; the text's own closing note agrees",
-      "existing_translations": [
-        {"by": "M Skeels", "year": 2020, "where": "skeelstranslations.wordpress.com", "kind": "hobbyist, complete, no licence stated", "checked": "2026-11-01"}
-      ],
-      "verdict": "public domain (author died 1918, published 1917)"
+ "bansan": {
+  "aozora_id": "000223",
+  "author_id": "000012",
+  "title": "晩餐",
+  "title_en": "Supper",
+  "author": "素木しづ",
+  "author_en": "Shiraki Shizu",
+  "card_url": "https://www.aozora.gr.jp/cards/000012/card223.html",
+  "blurb": "A young couple feed their baby at supper while a storm blows outside, and one bad mouthful sends the mother somewhere far away.",
+  "about": "Shiraki Shizu wrote this short sketch in 1917, the year before she died. A narrow room, a laughing child, a cold potato; and in a few lines the mother sees her three years of marriage as a whole long life, and a quiet peace waiting at the end of it.",
+  "zip_url": "https://www.aozora.gr.jp/cards/000012/files/223_ruby_2389.zip",
+  "rights": {
+   "author_died": 1918,
+   "first_published": "「文章倶楽部」1917（大正6）年2月号",
+   "first_published_year": 1917,
+   "basis": "Aozora index 初出; the text's own closing note agrees",
+   "existing_translations": [
+    {
+     "by": "M Skeels",
+     "year": 2020,
+     "where": "skeelstranslations.wordpress.com",
+     "kind": "hobbyist, complete, no licence stated",
+     "checked": "2026-11-01"
     }
-  },
-  "sumiyaki": {
-    "aozora_id": "002545",
-    "author_id": "000118",
-    "title": "炭燒のむすめ",
-    "title_en": "The Charcoal-Burner's Daughter",
-    "author": "長塚節",
-    "author_en": "Nagatsuka Takashi",
-    "card_url": "https://www.aozora.gr.jp/cards/000118/card2545.html",
-    "zip_url": "https://www.aozora.gr.jp/cards/000118/files/2545_ruby_21606.zip",
-    "role": "showcase (provisional, 1 Nov)",
-    "rights": {
-      "author_died": 1915,
-      "first_published": "「馬醉木」1906（明治39）年7月",
-      "first_published_year": 1906,
-      "basis": "Aozora index 初出",
-      "existing_translations": [],
-      "translation_search": "No English translation found (Japan Foundation database, web, 1 Nov). Two leads unresolved: an Open Library record 'Daughter of a charcoal maker' (probably an English parallel title on the Iwanami edition; page blocked) and a Columbia dissertation discussing the story as 'The Girl of the Kiln' (not read).",
-      "verdict": "public domain (author died 1915, published 1906)"
-    }
-  },
-  "sanjusan": {
-    "aozora_id": "000002",
-    "author_id": "000012",
-    "title": "三十三の死",
-    "title_en": "Death at Thirty-Three",
-    "author": "素木しづ",
-    "author_en": "Shiraki Shizu",
-    "card_url": "https://www.aozora.gr.jp/cards/000012/card2.html",
-    "zip_url": "https://www.aozora.gr.jp/cards/000012/files/2_ruby_20958.zip",
-    "rights": {
-      "author_died": 1918,
-      "first_published": "「新小説」1914（大正3）年5月",
-      "first_published_year": 1914,
-      "basis": "dated note at the end of the text",
-      "existing_translations": [],
-      "verdict": "public domain (author died 1918, published 1914)"
-    }
-  },
-  "warogoku": {
-    "aozora_id": "043505",
-    "author_id": "000157",
-    "title": "我牢獄",
-    "title_en": "My Prison",
-    "author": "北村透谷",
-    "author_en": "Kitamura Tōkoku",
-    "card_url": "https://www.aozora.gr.jp/cards/000157/card43505.html",
-    "zip_url": "https://www.aozora.gr.jp/cards/000157/files/43505_ruby_16177.zip",
-    "rights": {
-      "author_died": 1894,
-      "first_published": "「女學雜誌　三二〇號」女學雜誌社、1892（明治25）年6月4日",
-      "first_published_year": 1892,
-      "basis": "Aozora index 初出",
-      "existing_translations": [],
-      "verdict": "public domain (author died 1894, published 1892)"
-    }
-  },
-  "omoide": {
-    "aozora_id": "001119",
-    "author_id": "000224",
-    "title": "思い出の記",
-    "title_en": "Reminiscences",
-    "author": "小泉節子",
-    "author_en": "Koizumi Setsu",
-    "card_url": "https://www.aozora.gr.jp/cards/000224/card1119.html",
-    "zip_url": "https://www.aozora.gr.jp/cards/000224/files/1119_ruby_4794.zip",
-    "rights": {
-      "author_died": 1932,
-      "first_published": "not given by Aozora; the source edition is 「小泉八雲全集　別冊」1927（昭和2）年",
-      "first_published_year": null,
-      "basis": "source edition 1927 (≤1930); the English translation of 1918 shows the text existed by then",
-      "existing_translations": [
-        {"by": "Paul Kiyoshi Hisada and Frederick Johnson", "year": 1918, "where": "Reminiscences of Lafcadio Hearn, Houghton Mifflin", "kind": "published, public domain", "checked": "2026-10-28"}
-      ],
-      "verdict": "public domain in the US (published ≤1930); author died 1932, used with a strong reason: the 1918 translation to compare against"
-    }
+   ],
+   "verdict": "public domain (author died 1918, published 1917)"
   }
+ },
+ "sumiyaki": {
+  "aozora_id": "002545",
+  "author_id": "000118",
+  "title": "炭燒のむすめ",
+  "title_en": "The Charcoal-Burner's Daughter",
+  "author": "長塚節",
+  "author_en": "Nagatsuka Takashi",
+  "card_url": "https://www.aozora.gr.jp/cards/000118/card2545.html",
+  "zip_url": "https://www.aozora.gr.jp/cards/000118/files/2545_ruby_21606.zip",
+  "role": "showcase (provisional, 1 Nov)",
+  "rights": {
+   "author_died": 1915,
+   "first_published": "「馬醉木」1906（明治39）年7月",
+   "first_published_year": 1906,
+   "basis": "Aozora index 初出",
+   "existing_translations": [],
+   "translation_search": "No English translation found (Japan Foundation database, web, 1 Nov). Two leads unresolved: an Open Library record 'Daughter of a charcoal maker' (probably an English parallel title on the Iwanami edition; page blocked) and a Columbia dissertation discussing the story as 'The Girl of the Kiln' (not read).",
+   "verdict": "public domain (author died 1915, published 1906)"
+  }
+ },
+ "sanjusan": {
+  "aozora_id": "000002",
+  "author_id": "000012",
+  "title": "三十三の死",
+  "title_en": "Death at Thirty-Three",
+  "author": "素木しづ",
+  "author_en": "Shiraki Shizu",
+  "card_url": "https://www.aozora.gr.jp/cards/000012/card2.html",
+  "zip_url": "https://www.aozora.gr.jp/cards/000012/files/2_ruby_20958.zip",
+  "rights": {
+   "author_died": 1918,
+   "first_published": "「新小説」1914（大正3）年5月",
+   "first_published_year": 1914,
+   "basis": "dated note at the end of the text",
+   "existing_translations": [],
+   "verdict": "public domain (author died 1918, published 1914)"
+  }
+ },
+ "warogoku": {
+  "aozora_id": "043505",
+  "author_id": "000157",
+  "title": "我牢獄",
+  "title_en": "My Prison",
+  "author": "北村透谷",
+  "author_en": "Kitamura Tōkoku",
+  "card_url": "https://www.aozora.gr.jp/cards/000157/card43505.html",
+  "zip_url": "https://www.aozora.gr.jp/cards/000157/files/43505_ruby_16177.zip",
+  "rights": {
+   "author_died": 1894,
+   "first_published": "「女學雜誌　三二〇號」女學雜誌社、1892（明治25）年6月4日",
+   "first_published_year": 1892,
+   "basis": "Aozora index 初出",
+   "existing_translations": [],
+   "verdict": "public domain (author died 1894, published 1892)"
+  }
+ },
+ "omoide": {
+  "aozora_id": "001119",
+  "author_id": "000224",
+  "title": "思い出の記",
+  "title_en": "Reminiscences",
+  "author": "小泉節子",
+  "author_en": "Koizumi Setsu",
+  "card_url": "https://www.aozora.gr.jp/cards/000224/card1119.html",
+  "zip_url": "https://www.aozora.gr.jp/cards/000224/files/1119_ruby_4794.zip",
+  "rights": {
+   "author_died": 1932,
+   "first_published": "not given by Aozora; the source edition is 「小泉八雲全集　別冊」1927（昭和2）年",
+   "first_published_year": null,
+   "basis": "source edition 1927 (≤1930); the English translation of 1918 shows the text existed by then",
+   "existing_translations": [
+    {
+     "by": "Paul Kiyoshi Hisada and Frederick Johnson",
+     "year": 1918,
+     "where": "Reminiscences of Lafcadio Hearn, Houghton Mifflin",
+     "kind": "published, public domain",
+     "checked": "2026-10-28"
+    }
+   ],
+   "verdict": "public domain in the US (published ≤1930); author died 1932, used with a strong reason: the 1918 translation to compare against"
+  }
+ },
+ "shuchu": {
+  "aozora_id": "000161",
+  "author_id": "000879",
+  "title": "酒虫",
+  "title_en": "The Wine Worm",
+  "author": "芥川龍之介",
+  "author_en": "Akutagawa Ryūnosuke",
+  "card_url": "https://www.aozora.gr.jp/cards/000879/card161.html",
+  "zip_url": "https://www.aozora.gr.jp/cards/000879/files/161_ruby_777.zip",
+  "rights": {
+   "author_died": 1927,
+   "first_published": "「新思潮」1916（大正5）年6月",
+   "first_published_year": 1916,
+   "basis": "Aozora card 161",
+   "existing_translations": [
+    {
+     "by": "Glenn W. Shaw",
+     "year": 1930,
+     "where": "Tales Grotesque and Curious (Hokuseido); Project Gutenberg #78105",
+     "kind": "professional, complete, close to literal; public domain in the US",
+     "checked": "2026-11-02"
+    }
+   ],
+   "verdict": "public domain (author died 1927, published 1916)"
+  }
+ },
+ "kusamakura2": {
+  "aozora_id": "000776",
+  "author_id": "000148",
+  "title": "草枕　二",
+  "title_en": "Kusamakura, chapter II",
+  "author": "夏目漱石",
+  "author_en": "Natsume Sōseki",
+  "card_url": "https://www.aozora.gr.jp/cards/000148/card776.html",
+  "zip_url": "https://www.aozora.gr.jp/cards/000148/files/776_ruby_6020.zip",
+  "chapter": "二",
+  "rights": {
+   "author_died": 1916,
+   "first_published": "「新小説」1906（明治39）年9月",
+   "first_published_year": 1906,
+   "basis": "Aozora card 776",
+   "existing_translations": [
+    {
+     "by": "Kazutomo Takahashi",
+     "year": 1927,
+     "where": "Unhuman Tour (The Japan Times); Project Gutenberg #73131",
+     "kind": "professional, dated, simplifying; public domain in the US",
+     "checked": "2026-11-02"
+    },
+    {
+     "by": "Alan Turney",
+     "year": 1965,
+     "where": "The Three-Cornered World (Peter Owen)",
+     "kind": "professional, in copyright",
+     "checked": "2026-11-02"
+    },
+    {
+     "by": "Meredith McKinney",
+     "year": 2008,
+     "where": "Kusamakura (Penguin Classics)",
+     "kind": "professional, in copyright",
+     "checked": "2026-11-02"
+    }
+   ],
+   "verdict": "public domain (author died 1916, published 1906); a dev text only, since the novel is already translated"
+  }
+ }
 }

@@ -54,7 +54,7 @@ def test_aozora_editorial_notes_are_not_shown(client):
 
 def test_loading_fixtures_twice_adds_nothing(tmp_path):
     conn = connect(tmp_path / "site.db")
-    assert edition.load_fixtures(conn) == ["bansan"]
+    assert sorted(edition.load_fixtures(conn)) == ["bansan", "shuchu"]
     assert edition.load_fixtures(conn) == []
 
 
@@ -65,7 +65,7 @@ def test_unknown_work_is_a_404(client):
 def test_a_work_opens_keikakus_edition_and_links_a_commissioned_one(tmp_path):
     conn = connect(tmp_path / "site.db")
     edition.load_fixtures(conn)
-    rel = conn.execute("SELECT run_id, body, created_at FROM release").fetchone()
+    rel = conn.execute("SELECT run_id, body, created_at FROM release WHERE body LIKE '%\"work\": \"bansan\"%'").fetchone()
     ed = conn.execute("INSERT INTO edition (work_id, editor) VALUES ('bansan', 'Ines Moreau')").lastrowid
     r = conn.execute("INSERT INTO release (edition_id, run_id, version, body, created_at) VALUES (?,?,?,?,?)",
                      (ed, rel["run_id"], "v0.1", rel["body"], rel["created_at"])).lastrowid
@@ -75,4 +75,4 @@ def test_a_work_opens_keikakus_edition_and_links_a_commissioned_one(tmp_path):
     page = site.get("/read/bansan").text
     assert "English by keikaku." in page and f'href="/read/bansan?edition={ed}"' in page
     assert "English by keikaku, commissioned by Ines Moreau." in site.get(f"/read/bansan?edition={ed}").text
-    assert site.get("/").text.count('class="ttl"') == 1
+    assert site.get("/").text.count('class="ttl"') == 2  # one row per work, not per edition

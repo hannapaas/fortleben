@@ -1,0 +1,34 @@
+{
+ "prompt": "crux-check",
+ "model": "muse-wonder-1.0",
+ "effort": "low",
+ "data": {
+  "confidence": "high",
+  "crux": [
+   {
+    "for_the_english": "Keep the slide unmarked and the vision unresolved: do not name it heaven, death, old age, or a flash-forward, do not convert its だらう / ようだ conjectures into certainty, and do not explain the potato as a symbol. Let the same repeated words — quiet, rest/peace, nostalgia/dearness, forgiveness, far, dream — accumulate in long, looping sentences rather than varying or compressing them for elegance.",
+    "point": "The story stands or falls on the mother's unmarked drift from the bad potato into a distant, end-of-life perspective in which the whole of life is already past and transfigured into nostalgia and forgiveness — while it remains undecidable whether that picture is death, extreme old age, or pure reverie.",
+    "why": "The turn is triggered by nothing grander than a grittily cold, tasteless potato (p11–p12), then the narration slips without signal from supper into p16's dim tableau of three motionless figures telling an endless story containing all good, evil, sorrow and joy, and p17's assertion that only on the day life has passed will everything change into 懐しみと許し. The shock of the piece is that this total retrospect is applied to a marriage of barely three years (p13–p14): she feels wholly aged, yet objectively almost nothing has elapsed."
+   },
+   {
+    "for_the_english": "Preserve the durational loop and the circular weather: keep the repetitions and tense drift of the reverie, keep the short domestic exchanges flat and unadorned against it, and let the final 『嵐だな』 land as a return of the opening line rather than new information. Do not tidy the chronology (already three years / only three years / two years past) into a consistent summary.",
+    "point": "Time is experienced in two incompatible registers at once — one noisy evening and three exhausting years that feel like a lifetime, consoled only by projecting the redemptive 'that day' into an indefinite future and then immediately re-entering work and tomorrow.",
+    "why": "The storm opens the story (p1), is forgotten in the child's racket (p8), is first heard again inside the reverie itself (p19), and returns as the closing whisper (p38). Between those brackets the dialogue keeps recalculating the same span — 'only three years', 'already two years gone', 'a little longer' (p22–p35) — and the consolation of p20 resolves into nothing more visionary than nursing the child, clearing the table, and rising early tomorrow (p35–p36)."
+   }
+  ],
+  "say": "The crux (one or two items), each with its reason and what follows for the English; a line on how confident you are and what would change your mind. Keep it under a page.",
+  "what_would_change_my_mind": "Evidence from Shizu's other writing or contemporary context that the p16 picture is a specific, recognisable doctrine or set-piece (e.g. a Buddhist or Christian afterlife scene) with a fixed referent — that would license naming what I would otherwise leave indeterminate."
+ },
+ "usage": {
+  "input_tokens": 4150,
+  "cached_tokens": 0,
+  "output_tokens": 1242,
+  "reasoning_tokens": 560,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.04144,
+ "response_id": "resp_6ae7d381386458531846477e",
+ "latency_s": 13.95,
+ "citations": [],
+ "created": "2026-11-02T00:04:17Z"
+}

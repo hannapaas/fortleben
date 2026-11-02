@@ -85,7 +85,7 @@ def test_unknown_and_revoked_tokens_are_refused(conn, db):
 
 def test_the_estimate_comes_from_the_sheets(conn):
     w = next(w for w in desk.eligible_works() if w["id"] == "bansan")
-    assert w["estimate"] == math.ceil(budget.sheets(w["chars"]) * desk.FALLBACK_DROPS_PER_SHEET)
+    assert w["estimate"] == math.ceil(desk.sheets(w["chars"]) * desk.FALLBACK_DROPS_PER_SHEET)
     assert w["chars"] > 0 and w["first_published_year"] == 1917
 
 
@@ -97,7 +97,7 @@ def test_the_rate_follows_finished_runs_in_the_ledger(conn, db, held):
                  "VALUES (?, 'x', 'm', 1.2, 'p', 'i', 'k')", (run_id,))  # 2,000 drops for 8.5 sheets
     conn.commit()
     rate = desk.drops_per_sheet(conn)
-    assert rate == pytest.approx(budget.drops(1.2) / budget.sheets(desk.eligible_works()[0]["chars"]) * 1.1, rel=0.2)
+    assert rate == pytest.approx(desk.drops(1.2) / desk.sheets(desk.eligible_works()[0]["chars"]) * 1.1, rel=0.2)
     assert rate > desk.FALLBACK_DROPS_PER_SHEET
 
 
@@ -146,12 +146,12 @@ def test_the_estimate_is_reserved_then_settled(conn, db, held, monkeypatch):
     opts = json.loads(conn.execute("SELECT options FROM run WHERE id=?", (run_id,)).fetchone()[0])
     assert opts["editor_id"] and opts["credit"] == "Ines" and opts["reserved_drops"] == est
     assert conn.execute("SELECT label, cap_usd FROM run WHERE id=?", (run_id,)).fetchone()[1] == pytest.approx(
-        est * budget.DROP_USD * 1.2)
+        est * desk.DROP_USD * 1.2)
 
-    usd = 123.4 * budget.DROP_USD  # the run spends a little over 123 drops
+    usd = 123.4 * desk.DROP_USD  # the run spends a little over 123 drops
 
     def fake_run(c, client, work_id, *, run_id, from_):
-        assert client.budget.run_cap == pytest.approx(est * budget.DROP_USD * 1.2)
+        assert client.budget.run_cap == pytest.approx(est * desk.DROP_USD * 1.2)
         spend(c, run_id, usd)
         c.execute("UPDATE run SET status='done', stage='release' WHERE id=?", (run_id,))
         c.commit()
@@ -170,7 +170,7 @@ def test_an_overrun_is_the_houses_and_a_failure_is_recorded(conn, db, held, monk
     est = estimate()
 
     def overrun(c, client, work_id, *, run_id, from_):
-        spend(c, run_id, est * 1.1 * budget.DROP_USD)
+        spend(c, run_id, est * 1.1 * desk.DROP_USD)
         c.commit()
         raise budget.CapExceeded("run cap")
 

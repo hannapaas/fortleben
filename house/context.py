@@ -12,8 +12,12 @@ call stays flat however long the book is.
 
 from house.parser import Paragraph, ParsedWork
 
-WHOLE_TEXT_CHARS = 15_000  # up to here the whole source goes in every call
-CHAPTER_CHARS = 4_000  # with no headings, scene breaks are merged into chapters of at least this
+# Up to here the whole source goes in every per-page call. Kept small on purpose: models use the middle of a
+# long context worst (Liu et al. 2024; NoLiMa, Modarressi et al. 2025), so a long text gets its own part and a
+# short summary of the others instead (docs/REFERENCES.md).
+WHOLE_TEXT_CHARS = 15_000
+MAX_PART_CHARS = 25_000  # the most one reader, desk or final-read call is given to judge at once
+CHAPTER_CHARS = 4_000  # the fallback split: scene breaks merged into chapters of at least this
 
 
 def block(label: str, body: str) -> str:
@@ -42,21 +46,33 @@ def is_long(work: ParsedWork) -> bool:
     return sum(len(p.text) for p in work.translatable()) > WHOLE_TEXT_CHARS
 
 
+def split(work: ParsedWork, starts: list[str]) -> list[list[Paragraph]]:
+    out = []
+    for p in work.translatable():
+        if p.id in starts or not out:
+            out.append([])
+        out[-1].append(p)
+    return out
+
+
 def chapters(work: ParsedWork) -> list[list[Paragraph]]:
-    """Cut the translatable paragraphs into chapters, deterministically: at headings where the text
-    has them, else at scene breaks merged until a chapter is at least CHAPTER_CHARS long."""
+    """The parts the later stages work in: the planner's, where it has run (house/stages/parts.py);
+    otherwise a fallback cut at headings, else at scene breaks merged until a part is CHAPTER_CHARS long."""
     paras = work.translatable()
+    if work.parts:
+        return split(work, work.parts)
     if any(p.kind == "heading" for p in paras):
-        out, cur = [], []
+        out, cur, size = [], [], 0
         for p in paras:
-            if p.kind == "heading" and cur:
+            if cur and (p.kind == "heading" or size + len(p.text) > MAX_PART_CHARS):
                 out.append(cur)
-                cur = []
+                cur, size = [], 0
             cur.append(p)
+            size += len(p.text)
         return out + ([cur] if cur else [])
     out, cur, size = [], [], 0
     for p in paras:
-        if p.scene_break_before and cur and size >= CHAPTER_CHARS:
+        if cur and ((p.scene_break_before and size >= CHAPTER_CHARS) or size + len(p.text) > MAX_PART_CHARS):
             out.append(cur)
             cur, size = [], 0
         cur.append(p)
@@ -106,23 +122,17 @@ def reading(r: dict) -> str:
     return block("The house's reading", body)
 
 
-def cast_and_ledger(b: dict, tokens: bool = True) -> str:
-    cast = []
+def cast(b: dict) -> str:
+    out = []
     for c in b["cast"]:
         forms = "; ".join(f"{f['form']} ({f['used_by']}{': ' + f['note'] if f['note'] else ''})" for f in c["forms"])
         name = " ".join(x for x in (c.get("name_ja"), c.get("romanised")) if x)
-        cast.append(
+        out.append(
             f"- **{c['id']} {c['handle']}**{' — ' + name if name else ''}. {c['role']}. Gender: {c['gender']}"
             f" ({c['gender_evidence']}). Forms: {forms or 'none'}. First person: {c['first_person']}."
             f" Register: {c['register']}. Relationships: {'; '.join(c['relationships']) or 'none'}."
             f" First appears {c['first_appearance']}.")
-    parts = ["### Cast\n" + "\n".join(cast)]
-    if b["ledger"]:
-        head = "### Ledger (the English carries these as {t:id} tokens)" if tokens else "### Ledger (shown in the English as the Casual view renders it)"
-        parts.append(head + "\n" + "\n".join(
-            f"- `{t['id']}` {t['source']}{' (' + t['reading'] + ')' if t.get('reading') else ''}: casual “{t['casual']}”,"
-            f" curious “{t['curious']}”, student “{t['student']}”. {t['rationale']}" for t in b["ledger"]))
-    return "\n\n".join(parts)
+    return "### Cast\n" + "\n".join(out)
 
 
 def bible(b: dict) -> str:
@@ -134,7 +144,7 @@ def bible(b: dict) -> str:
     n = b["narration"]
     parts.append("### Narration\n" + "\n".join(
         f"- **{k.replace('_', ' ')}:** {v if not isinstance(v, list) else '; '.join(v)}" for k, v in n.items()))
-    parts.append(cast_and_ledger(b))
+    parts.append(cast(b))
     if b["motifs"]:
         parts.append("### Motifs and callbacks\n" + "\n".join(
             f"- **{m['motif']}** ({', '.join(m['source_forms'])}) at {', '.join(m['occurrences'])}. {m['why']} {m['english']}"
@@ -145,13 +155,10 @@ def bible(b: dict) -> str:
     return block("The story bible: the house's best understanding before drafting, which can be wrong", "\n\n".join(parts))
 
 
-def sentence_lines(p: Paragraph) -> str:
-    """The paragraph sentence by sentence, with the parser's sentence IDs."""
-    return "\n".join([p.id] + [f"  {s['id']}  {s['text']}" for s in p.sentences])
-
-
 def page(paras: list[Paragraph]) -> str:
-    return block("The page to draft", "\n\n".join(sentence_lines(p) for p in paras))
+    """The page as a translator sees it: whole paragraphs, with paragraph IDs and ruby kept, not split
+    into numbered sentences (which invites a sentence-by-sentence, literal draft)."""
+    return block("The page to draft", "\n\n".join(f"{p.id}　{p.model_text.strip('　 ')}" for p in paras))
 
 
 def chapter_pairs(paras: list[Paragraph], units: dict[tuple, str], first: str) -> str:

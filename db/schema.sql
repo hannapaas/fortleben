@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS run (
   status        TEXT NOT NULL DEFAULT 'running',  -- running / paused / done / failed
   stage         TEXT,                      -- last stage completed
   cap_usd       REAL,                      -- the live-run cap for this run
-  options       TEXT,                      -- JSON: flags, e.g. referents on/off
+  options       TEXT,                      -- JSON: the run's set-up (models, drafting prompt)
   created_at    TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS segment (
 CREATE TABLE IF NOT EXISTS bible (
   work_id       TEXT NOT NULL REFERENCES work(id),
   version       INTEGER NOT NULL,
-  kind          TEXT NOT NULL,             -- 'reading' (first-read.json) / 'bible' (analyst-bible.json) / 'referents'
+  kind          TEXT NOT NULL,             -- 'reading' / 'crux-check' / 'bible' / 'parts'
   body          TEXT NOT NULL,             -- JSON
   event_id      INTEGER,                   -- the event that made this version
   created_at    TEXT NOT NULL DEFAULT (datetime('now')),
@@ -79,17 +79,17 @@ CREATE TABLE IF NOT EXISTS revision (
   work_id       TEXT NOT NULL,
   segment_ids   TEXT NOT NULL,             -- JSON list: ['p12'] or ['p12','p13'] for a group
   version       INTEGER NOT NULL,
-  english       TEXT NOT NULL,             -- with {t:id} tokens
+  english       TEXT NOT NULL,             -- plain English
   spans         TEXT,                      -- JSON: best-effort sentence spans
   notes         TEXT,                      -- JSON: translator notes
   alternatives  TEXT,                      -- JSON: marked alternatives
   flags         TEXT,                      -- JSON
-  variant       TEXT NOT NULL DEFAULT 'lead',  -- lead / voice-a / no-referents / ...
+  variant       TEXT NOT NULL DEFAULT 'lead',  -- 'lead'; other variants are for experiments
   event_id      INTEGER,
   created_at    TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
--- Ledger terms. Base text carries {t:id} tokens; editions render them.
+-- Retired with the ledger; kept only so runs recorded before it went can still be read (house/audit.py).
 CREATE TABLE IF NOT EXISTS term (
   id            TEXT NOT NULL,
   work_id       TEXT NOT NULL REFERENCES work(id),
@@ -124,13 +124,13 @@ CREATE TABLE IF NOT EXISTS query (
   segment_id    TEXT NOT NULL,
   span          TEXT,
   raised_by     TEXT NOT NULL,             -- department/role
-  owner         TEXT NOT NULL,             -- translation / analyst / notes
+  owner         TEXT NOT NULL,             -- desk / editor / desk-recheck / translation (code-raised)
   category      TEXT NOT NULL,
   reason        TEXT NOT NULL,
   evidence      TEXT,                      -- JSON list
   recommendation TEXT,
   confidence    TEXT,
-  status        TEXT NOT NULL DEFAULT 'open',  -- open / answered / accepted / stet / revised / closed / forked / head-pick
+  status        TEXT NOT NULL DEFAULT 'open',  -- open / taken / declined / forked / unaddressed / noted
   round         INTEGER NOT NULL DEFAULT 0,
   answer        TEXT,                      -- JSON: status, reason, revised text
   say           TEXT,
@@ -186,7 +186,7 @@ CREATE TABLE IF NOT EXISTS event (
   id            INTEGER PRIMARY KEY,
   run_id        INTEGER REFERENCES run(id),
   seq           INTEGER NOT NULL,          -- per run, from 1
-  actor         TEXT NOT NULL,             -- 'analyst', 'translation/drafter', 'source-check', 'editor:hanna', 'house'
+  actor         TEXT NOT NULL,             -- 'analyst', 'translation/drafter', 'desk', 'editor', 'house'
   type          TEXT NOT NULL,             -- see house/events.py
   payload       TEXT NOT NULL,             -- JSON
   cost_usd      REAL NOT NULL DEFAULT 0,

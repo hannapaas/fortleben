@@ -1,15 +1,24 @@
 """Stage 6: draft. Translation drafts page by page, in order, each page seeing the previous
 pages' English. Context per docs/STORY-STATE.md §3; no referent map: the drafter works out who
 speaks and acts from the text, the cast and the paragraphs either side. The orchestrator checks
-every paragraph of a page is covered exactly once (retry once, then a failure event).
+every paragraph of a page is covered exactly once; what an answer leaves out is drafted again on its own.
 
-The model is a run option, options['draft_model'] = 'spark' (default) or 'wonder'.
+The model and the prompt are run options (orchestrator.DEFAULTS).
+
+Why the draft leans to English, from our experiments on 晩餐: a lost image or a varied repetition
+is a few words, and the faithful reader can point the desk at it. A sentence built in Japanese
+order needs a new sentence, and after this stage nobody writes whole sentences. A draft that wrote
+English first came out more faithful as well as more readable than one written to be faithful first. It's also
+the order translators describe (Hahn, Catching Fire, 2022), and literalness is the models' trained-in default
+(Li et al. 2025), so the draft is where to push against it (docs/REFERENCES.md).
 """
 
+from types import SimpleNamespace
+
 from house import context, pager
-from house.client import Call, load_schema
+from house.client import PROMPTS, Call, load_schema
 from house.db import dumps
-from house.stages.common import latest_english, model
+from house.stages.common import DEFAULTS, latest_english, model
 
 ACTOR = "translation/drafter"
 
@@ -18,20 +27,35 @@ class CoverageError(Exception):
     pass
 
 
-def voice_take(ctx) -> str:
-    takes = ctx.latest("reading")["voice_takes"]
-    wanted = ctx.options.get("voice")
-    take = next((t for t in takes if t["label"] == wanted), takes[0])
+def voice_block(take: dict) -> str:
     return context.block("The voice for this text", f"{take['label']}: {take['line']}")
 
 
-def coverage(items: list[dict], ids: list[str]) -> list[str]:
-    """Problems with the answer's coverage of the page: missing, doubled, or foreign ids."""
-    seen = [i for it in items for i in it["ids"]]
-    problems = [f"missing {i}" for i in ids if i not in seen]
-    problems += [f"twice {i}" for i in set(seen) if seen.count(i) > 1]
-    problems += [f"not on this page {i}" for i in set(seen) if i not in ids]
-    return problems
+def voice_take(ctx) -> dict:
+    """The voice the drafter writes in: the first the house's reading proposes."""
+    return ctx.latest("reading")["voice_takes"][0]
+
+
+def draft_prompt(ctx) -> str:
+    """The drafting prompt a run uses, options['draft_prompt']: translate-draft-plain (the default, a
+    fluent first draft) or translate-draft (faithful first). Every variant answers to the same schema."""
+    name = ctx.options.get("draft_prompt") or DEFAULTS["draft_prompt"]
+    if not name.startswith("translate-draft") or not (PROMPTS / f"{name}.md").exists():
+        raise ValueError(f"no drafting prompt called {name!r}")
+    return name
+
+
+def repair(items: list[dict], ids: list[str]) -> tuple[list[dict], list[str]]:
+    """Keep what the answer got right: paragraphs not on this page are dropped (the drafter sometimes
+    translates the next paragraph it was shown), a paragraph drafted twice keeps its first draft.
+    Returns the usable items and the paragraphs still missing, in page order."""
+    seen, kept = set(), []
+    for it in items:
+        own = [i for i in it["ids"] if i in ids]
+        if own and not set(own) & seen:
+            kept.append({**it, "ids": own})
+            seen.update(own)
+    return kept, [i for i in ids if i not in seen]
 
 
 def draft_page(ctx, paras, all_paras, stable, voice_ref):
@@ -43,19 +67,21 @@ def draft_page(ctx, paras, all_paras, stable, voice_ref):
     after = all_paras[after_i] if after_i < len(all_paras) else None
     passage = context.join(voice_ref, context.window(before, after), context.page(paras))
     ids = [p.id for p in paras]
-    note = ""
-    for attempt in range(2):
-        call = Call("translate-draft", model(ctx, "draft_model"), "medium", context.join(stable, passage, note),
-                    load_schema("translate-draft"), f"{ctx.cache_key()}:draft", expected_output_tokens=5000)
-        res = ctx.call(ACTOR, call)
-        problems = coverage(res.data["items"], ids)
-        if not problems:
-            return res
-        note = context.block("A note on the previous attempt",
-                             f"The previous answer for this page had: {'; '.join(problems)}. "
-                             f"The page is {', '.join(ids)}; each must be covered exactly once.")
-    ctx.emit(ACTOR, "stage.failed", {"stage": "draft", "page": ids, "problems": problems})
-    raise CoverageError(f"page {ids[0]}–{ids[-1]}: {problems}")
+    res = ctx.call(ACTOR, Call(draft_prompt(ctx), model(ctx, "draft_model"), "medium", context.join(stable, passage),
+                               load_schema("translate-draft"), f"{ctx.cache_key()}:draft", expected_output_tokens=5000))
+    items, missing = repair(res.data["items"], ids)
+    if missing:  # what the answer left out is drafted again on its own, as a page of its own
+        ctx.emit("house", "check.flagged", {"segment_id": missing[0], "check": f"the draft left out {', '.join(missing)}: drafting them again"})
+        again = [p for p in paras if p.id in missing]
+        more = ctx.call(ACTOR, Call(draft_prompt(ctx), model(ctx, "draft_model"), "medium",
+                                    context.join(stable, context.window(before, after), context.page(again)),
+                                    load_schema("translate-draft"), f"{ctx.cache_key()}:draft", expected_output_tokens=5000))
+        extra, missing = repair(more.data["items"], missing)
+        items += extra
+        if missing:
+            raise CoverageError(f"the draft left out {', '.join(missing)} twice")
+    order = {i: n for n, i in enumerate(ids)}
+    return SimpleNamespace(data={"items": sorted(items, key=lambda it: order[it["ids"][0]])}, call_id=res.call_id)
 
 
 def store(ctx, res) -> list[int]:
@@ -85,20 +111,19 @@ def store(ctx, res) -> list[int]:
 def run(ctx) -> dict:
     reading, bible = ctx.latest("reading"), ctx.latest("bible")
     all_paras = ctx.work.translatable()
-    ss = bible["style_sheet"]
-    breaks = (ss.get("grain_breaks") or None) if ss["drafting_grain"] == "scene" else None
-    pages = pager.pages(ctx.work.paragraphs, breaks=breaks)
+    pages = pager.pages(ctx.work.paragraphs)
     ctx.emit("house", "page.cut", {"pages": [[p.id for p in pg] for pg in pages]})
-    stable = context.join(context.reading(reading), voice_take(ctx), context.bible(bible))  # the source is added per page
+    stable = context.join(context.reading(reading), voice_block(voice_take(ctx)), context.bible(bible))  # source added per page
 
     done = set(latest_english(ctx))
     voice_ref = ""
     drafted = 0
     for n, paras in enumerate(pages):
-        if n == 1:  # the voice reference: the house's first page (the voice trial isn't built yet)
+        if n == 1:  # from page 2 on, the drafter matches the voice of the house's first page
             en = latest_english(ctx)
             voice_ref = context.voice_reference([(p.id, en[p.id]) for p in pages[0] if p.id in en])
-        if not all(p.id in done for p in paras):
-            store(ctx, draft_page(ctx, paras, all_paras, stable, voice_ref))
-            drafted += 1
+        if all(p.id in done for p in paras):
+            continue
+        store(ctx, draft_page(ctx, paras, all_paras, stable, voice_ref))
+        drafted += 1
     return {"pages": len(pages), "drafted": drafted, "model": model(ctx, "draft_model")}

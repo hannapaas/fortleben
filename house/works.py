@@ -41,6 +41,8 @@ def fetch(work_id: str) -> Path:
     if not eligible(w["rights"]):
         raise PermissionError(f"{work_id} doesn't pass the rights record")
     text = aozora.fetch(w["zip_url"]).replace("\r\n", "\n")
+    if w.get("chapter"):  # a dev text taken from one chapter of a longer work
+        text = aozora.chapter(text, w["chapter"])
     SOURCES.mkdir(parents=True, exist_ok=True)
     path = source_path(work_id)
     path.write_text(text, encoding="utf-8")

@@ -1,6 +1,6 @@
 # Analyst: ruling on an amendment
 
-Someone in the house (Translation, Source check, Editorial, the editor's letter, or a reader) thinks the bible or the reading is wrong or missing something: a character you didn't list, a motif found mid-text, a better rendering for a ledger term, a referent entry that turned out wrong, a reading that the whole draft has shown to be mistaken. You decide.
+Someone in the house (Translation, Source check, Editorial, the editor's letter, or a reader) thinks the bible or the reading is wrong or missing something: a character you didn't list, a motif found mid-text, a referent entry that turned out wrong, a reading that the whole draft has shown to be mistaken. You decide.
 
 ## Why
 

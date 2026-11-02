@@ -2,7 +2,7 @@
 
 Every call goes to a Meta model on the Meta Model API's Responses API. The instructions are
 always the house brief followed by one department prompt from prompts/; nothing in house/
-contains prompt text. Output is strict JSON against the prompt's schema in house/schemas/.
+contains prompt text. Output is JSON against the prompt's schema in house/schemas/, validated here.
 
 Each call is priced from `usage` into the spend ledger (the `call` table). Responses are kept
 in a cache keyed on (model, effort, prompt hash, input hash, schema hash, tools), so a rerun or
@@ -12,25 +12,47 @@ a replay costs nothing. FakeClient serves the same cache from fixtures/ and neve
 import hashlib
 import json
 import os
+import re
 import sqlite3
 import time
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass, field, replace
 from pathlib import Path
 
 import jsonschema
 
-from house import budget
+from house import budget, events
 from house.budget import Usage
+from house.db import data_dir
 
 ROOT = Path(__file__).resolve().parent.parent
 PROMPTS = ROOT / "prompts"
 SCHEMAS = Path(__file__).resolve().parent / "schemas"
-CACHE = ROOT / "var" / "cache" / "responses"
 FIXTURES = ROOT / "fixtures"
 BASE_URL = "https://api.meta.ai/v1"
 
 SPARK = "muse-spark-1.3"
 WONDER = "muse-wonder-1.0"
+
+
+def cache_dir() -> Path:
+    """The response cache, in the data folder. It only saves money, so it isn't backed up."""
+    return data_dir() / "cache" / "responses"
+
+
+def looks_broken(data, schema: dict | None) -> str | None:
+    """A valid answer can still be junk: Wonder has returned schema-valid answers whose log
+    sentence was "׳" or "safdsdfkjjhjk". Every prompt asks for one sentence for the House log, so an
+    answer whose sentence isn't one is treated as broken, never used and never cached."""
+    if not schema or not isinstance(data, dict) or "say" not in (schema.get("properties") or {}):
+        return None
+    say = data.get("say")
+    if not isinstance(say, str) or not say.strip():
+        return None
+    words = re.findall(r"[A-Za-z]+", say)
+    mashed = [w for w in words if len(w) >= 10 and sum(c in "aeiouyAEIOUY" for c in w) / len(w) < 0.15]
+    if not words or mashed:  # "none" is a fine answer; "׳" or "safdsdfkjjhjk" is not
+        return f"the House-log sentence isn't a sentence: {say[:40]!r}"
+    return None
 
 
 class SchemaError(Exception):
@@ -92,6 +114,16 @@ def strict(schema: dict) -> dict:
     return schema
 
 
+def for_api(schema: dict) -> dict:
+    """The schema as sent: without minLength, which the house checks itself (an empty required field
+    is a failed call, retried once) and strict decoding may not accept."""
+    if isinstance(schema, dict):
+        return {k: for_api(v) for k, v in schema.items() if k != "minLength"}
+    if isinstance(schema, list):
+        return [for_api(v) for v in schema]
+    return schema
+
+
 @dataclass
 class Result:
     data: object  # parsed JSON, or text when the prompt has no schema
@@ -117,9 +149,9 @@ class Call:
     effort: str
     input: str  # the assembled input, stable blocks first, the passage last
     schema: dict | None = None
-    cache_key: str | None = None  # prompt_cache_key: one per work + style-sheet version
+    cache_key: str | None = None  # prompt_cache_key: one per work and bible version
     web_search: bool = False
-    strict: bool = False  # strict decoding; costs the prompt cache, so only for one-off calls
+    strict: bool | None = None  # strict decoding; None means: strict for Wonder, not for Spark (see is_strict)
     expected_output_tokens: int = 4000
     max_output_tokens: int = 32000
     run_id: int | None = None
@@ -127,6 +159,12 @@ class Call:
 
     def instructions(self) -> str:
         return instructions(self.prompt)
+
+    def is_strict(self) -> bool:
+        """Strict decoding costs the prompt cache, and Spark follows a schema well without it. Wonder
+        doesn't: non-strict, it left required fields empty and wrote filler on long outputs. Its
+        calls are few, so Wonder is always strict unless a call says otherwise."""
+        return self.strict if self.strict is not None else self.model == WONDER
 
     def response_key(self) -> str:
         parts = {
@@ -136,7 +174,7 @@ class Call:
             "input": sha(self.input),
             "schema": sha(json.dumps(self.schema, sort_keys=True)) if self.schema else None,
             "web_search": self.web_search,
-            **({"strict": True} if self.strict else {}),
+            **({"strict": True} if self.is_strict() else {}),
         }
         return sha(json.dumps(parts, sort_keys=True))
 
@@ -144,9 +182,11 @@ class Call:
 class BaseClient:
     """Shared by the live client and FakeClient: cache lookup, ledger rows, validation."""
 
+    replay_only = False
+
     def __init__(self, conn: sqlite3.Connection, cache_dirs: list[Path] | None = None, run_cap=None):
         self.conn = conn
-        self.cache_dirs = cache_dirs if cache_dirs is not None else [CACHE, *sorted(FIXTURES.glob("*/responses"))]
+        self.cache_dirs = cache_dirs if cache_dirs is not None else [cache_dir(), *sorted(FIXTURES.glob("*/responses"))]
         self.budget = budget.Budget(conn, run_cap)
 
     def lookup(self, key: str) -> dict | None:
@@ -157,8 +197,11 @@ class BaseClient:
         return None
 
     def store(self, key: str, record: dict) -> None:
-        CACHE.mkdir(parents=True, exist_ok=True)
-        (CACHE / f"{key}.json").write_text(json.dumps(record, ensure_ascii=False, indent=1), encoding="utf-8")
+        cache = cache_dir()
+        cache.mkdir(parents=True, exist_ok=True)
+        tmp = cache / f"{key}.json.tmp"  # written whole, then moved, so a kill mid-write leaves no half file
+        tmp.write_text(json.dumps(record, ensure_ascii=False, indent=1), encoding="utf-8")
+        os.replace(tmp, cache / f"{key}.json")
 
     def ledger(self, call: Call, res: Result, ok=True, error=None) -> int:
         u = res.usage
@@ -189,7 +232,17 @@ class BaseClient:
         if record is not None:
             res = self.from_record(record, key)
         else:
-            res = self.live(call, key)
+            try:
+                res = self.live(call, key)
+            except SchemaError as e:
+                if call.model != WONDER:
+                    raise
+                # Wonder's answer failed twice: the same call once more on Spark, and the log says so
+                if call.run_id is not None:
+                    events.emit(self.conn, call.run_id, "house", "call.downgraded",
+                                {"prompt": call.prompt, "stage": call.stage, "from": WONDER, "to": SPARK, "reason": str(e)})
+                print(f"warning: {call.prompt}: Wonder's answer failed twice; made the call again on Spark ({e})")
+                return self.call(replace(call, model=SPARK, strict=None))
         res.call_id = self.ledger(call, res)
         return res
 
@@ -199,6 +252,8 @@ class BaseClient:
 
 class FakeClient(BaseClient):
     """Serves recorded responses from fixtures/ (and the local cache). Never needs a key."""
+
+    replay_only = True
 
     def live(self, call: Call, key: str) -> Result:
         raise FixtureMissing(f"no recorded response for {call.prompt} ({call.model}, key {key[:12]})")
@@ -231,10 +286,10 @@ class ModelClient(BaseClient):
             req["prompt_cache_key"] = call.cache_key
             req["prompt_cache_retention"] = "24h"
         if call.schema:
-            # strict: False on purpose. With strict: True, Meta's API serves no prompt-cache hits
-            # (measured 1 Nov); non-strict output still follows the schema, and parse() validates it.
+            # With strict: True, Meta's API serves no prompt-cache hits (we measured it), so Spark's
+            # calls go non-strict and parse() validates them; Wonder's go strict (Call.is_strict).
             req["text"] = {"format": {"type": "json_schema", "name": call.prompt.replace("-", "_"),
-                                      "schema": strict(call.schema), "strict": call.strict}}
+                                      "schema": for_api(strict(call.schema)), "strict": call.is_strict()}}
         if call.web_search:
             req["tools"] = [{"type": "web_search"}]
         return req
@@ -257,6 +312,9 @@ class ModelClient(BaseClient):
                 if resp.status != "completed":
                     raise SchemaError(f"response {resp.status}: {resp.incomplete_details}")
                 res.data = self.parse(text, call.schema)
+                broken = looks_broken(res.data, call.schema)
+                if broken:
+                    raise SchemaError(broken)
             except (SchemaError, json.JSONDecodeError, jsonschema.ValidationError) as e:
                 last_error = f"{type(e).__name__}: {str(e)[:500]}"
                 self.ledger(call, res, ok=False, error=last_error)
@@ -265,6 +323,10 @@ class ModelClient(BaseClient):
                 "prompt": call.prompt, "model": call.model, "effort": call.effort,
                 "data": res.data, "usage": asdict(usage), "list_cost_usd": cost,
                 "response_id": resp.id, "latency_s": res.latency_s, "citations": citations,
+                # what came back, item by item, so an odd answer can be diagnosed later (Meta keeps no copy)
+                "items": [{"type": i.type, "phase": getattr(i, "phase", None),
+                           "chars": sum(len(getattr(p, "text", "") or "") for p in (getattr(i, "content", None) or []))}
+                          for i in resp.output],
                 "created": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
             })
             return res
