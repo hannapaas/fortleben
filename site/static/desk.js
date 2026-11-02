@@ -35,7 +35,7 @@
       '<span class="rs" aria-live="polite">' + status(r) + ' <span class="sm">' + n(r.spent) + ' drops spent' +
       (r.reserved ? ', ' + n(r.reserved) + ' still held' : '') + '.</span></span>';
     if (r.status === 'done' && r.edition_url) h += '<a class="read" href="' + esc(r.edition_url) + '">Read it</a>';
-    if (r.status === 'interrupted') h += '<span class="rr"><button type="button" class="btn resume">Resume</button>' +
+    if (r.status === 'interrupted' || r.status === 'failed') h += '<span class="rr"><button type="button" class="btn resume">Resume</button>' +
       '<span class="sm">It carries on from the last finished stage; nothing is paid for twice.</span>' +
       '<span class="err" aria-live="polite" hidden></span></span>';
     li.innerHTML = h;
@@ -86,7 +86,7 @@
     if (form.dataset.started && !again) {
       again = document.createElement('p');
       again.id = 'again'; again.className = 'line';
-      again.innerHTML = '<a href="">Reload the page</a> to start another.';
+      again.innerHTML = '<a href="">Start another translation</a>';
       err.parentNode.appendChild(again);
     }
   }

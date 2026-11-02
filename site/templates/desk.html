@@ -9,7 +9,7 @@
   <span class="rs" aria-live="polite">{% if r.status == 'queued' %}Queued.{% elif r.status == 'running' %}In progress: {{ r.stage_label }}.{% elif r.status == 'done' %}Done: {{ r.stage_label }}.{% elif r.status == 'failed' %}Failed at {{ r.stage_label }}.{% else %}Interrupted at {{ r.stage_label }}.{% endif %}
     <span class="sm">{{ n(r.spent) }} drops spent{% if r.reserved %}, {{ n(r.reserved) }} still held{% endif %}.</span></span>
   {% if r.status == 'done' and r.edition_url %}<a class="read" href="{{ r.edition_url }}">Read it</a>{% endif %}
-  {% if r.status == 'interrupted' %}<span class="rr"><button type="button" class="btn resume"{% if blocked %} disabled{% endif %}>Resume</button>
+  {% if r.status in ('interrupted', 'failed') %}<span class="rr"><button type="button" class="btn resume"{% if blocked %} disabled{% endif %}>Resume</button>
     <span class="sm">It carries on from the last finished stage; nothing is paid for twice.</span>
     <span class="err" aria-live="polite" hidden></span></span>{% endif %}
 </li>
@@ -52,7 +52,7 @@
           <span class="meta">{{ w.author_en }}{% if w.year %}, {{ w.year }}{% endif %} · {{ '%g' % (w.sheets|round(1)) }} sheets · {{ n(w.estimate) }} drops.
             {% if w.covered %}Your allowance covers it.{% else %}That's {{ n(w.estimate - al.available) }} more than you have.{% endif %}</span>
           {% if w.blurb %}<span class="meta blurb">{{ w.blurb }}</span>{% endif %}
-          {% if w.has_edition %}<span class="meta">Already published here. A new translation becomes a new version; the old one is kept.</span>{% endif %}
+          {% if w.has_edition %}<span class="meta">Already on the shelf. Yours would be a separate edition, under your credit.</span>{% endif %}
         </span>
       </label>
       {% endfor %}
