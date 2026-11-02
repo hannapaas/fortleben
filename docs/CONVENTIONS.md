@@ -31,7 +31,7 @@ db/schema.sql     the SQLite schema
 tests/            pytest; every lane adds its own
 ```
 
-Not built yet: `site/` (the FastAPI app, templates, static CSS/JS) and `exhibit/` (the exhibit renderer and frozen passages).
+Not built yet: the House walkthrough (`/house`) and `exhibit/` (the exhibit renderer and frozen passages).
 
 ## The contract
 

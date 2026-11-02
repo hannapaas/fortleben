@@ -23,17 +23,16 @@ Work in progress for the Meta Global AI Developer Hackathon. Everything in this 
 
 ## Running it
 
-The engine runs from the command line. The site, the House walkthrough and the exhibit aren't built yet.
-
-You need Python 3.12 and [`uv`](https://docs.astral.sh/uv/).
+You need Python 3.12 and [`uv`](https://docs.astral.sh/uv/). Nothing below needs a key.
 
 ```sh
 uv sync
-uv run keikaku --replay run bansan      # replay the recorded run of 「晩餐」: no key, no network, no spend
+uv run keikaku serve --replay           # the site at http://127.0.0.1:8000, serving the recorded runs
+uv run keikaku --replay run bansan      # replay the recorded run of 「晩餐」 in the terminal: no key, no network, no spend
 uv run pytest                           # the tests, also keyless
 ```
 
-`--replay` serves every call from the recorded responses in `fixtures/bansan/`. Without a key the house replays anyway; only 「晩餐」 has a recording.
+`--replay` serves every call from the recorded responses in `fixtures/<work>/`: 「晩餐」 and 「酒虫」 have recordings, each the complete record of a live run (every model call's model, tokens, cost and response, the readers' notes, the desk's decisions, the event log). Without a key the house replays anyway.
 
 To run live, copy `.env.example` to `.env` and set `MODEL_API_KEY` (a Meta Model API key). Then:
 
@@ -45,6 +44,8 @@ uv run keikaku run bansan --from desk   # resume the latest run from a stage (--
 uv run keikaku fixture bansan           # export a run to fixtures/<work>/ so it replays without a key
 uv run keikaku audit bansan --runs 1 2 --baseline --readable  # blind audits of runs 1 and 2 beside a one-shot
 ```
+
+`keikaku serve` (without `--replay`) serves the live database, with the recorded runs loaded into it once; `keikaku invite "Name"` makes an invite link to the editors' desk, where an editor can run a whole work ([docs/EDITORS-DESK.md](docs/EDITORS-DESK.md)). The site runs as one service from the `Dockerfile` (Railway, with a volume at `KEIKAKU_DATA_DIR`; `bin/serve.sh` starts it under Litestream when a backup bucket is set).
 
 `keikaku run` takes `--draft-model`, `--reader-model`, `--desk-model` and `--final-model` (`spark` or `wonder`) and `--draft-prompt` (`translate-draft-plain` or `translate-draft`); the defaults are the best set-up the experiments found. A run is estimated before it starts, high on purpose, and refused if the estimate won't fit its cap or what's left of the daily and total caps. The run cap is `--cap`, which goes before the command, or `KEIKAKU_CAP_RUN` (default $3, enough for a short story: 「晩餐」 estimates at about $1, 「炭燒のむすめ」 at about $2.50). `HOUSE_OPEN=false` stops all live calls.
 
