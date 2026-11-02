@@ -2,6 +2,8 @@
 
 With --replay it serves the recorded runs in fixtures/ from a fresh database, so it runs from a
 clean clone with no key and no network; comments need a key, since each is screened by Spark.
+Without --replay it serves the live database, into which the recorded runs are loaded once, so a
+fresh server has the shelf from the start and live runs add to it.
 The editors' desk (/desk/<token>, house/desk.py) starts real runs, so it needs a key and an open house too.
 """
 
@@ -37,7 +39,9 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
               "Runs can't start here: new translations are switched off on this server." if os.environ.get("HOUSE_OPEN", "true").lower() == "false"
               else None)
     if not replay:
-        desk.recover(connect(db))  # runs left going by a process that stopped
+        c = connect(db)
+        edition.load_fixtures(c)  # the recorded runs, once; a live run on the same work adds a release beside them
+        desk.recover(c)  # runs left going by a process that stopped
     app = FastAPI(title="Fortleben", docs_url=None, redoc_url=None, openapi_url=None)
     app.mount("/static", StaticFiles(directory=SITE / "static"), name="static")
 

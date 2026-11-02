@@ -30,12 +30,20 @@ TABLES = ("segment", "bible", "term", "call", "revision", "query", "fork", "note
 
 
 def load_fixtures(conn, root: Path = FIXTURES) -> list[str]:
-    """Load every recorded run under fixtures/ into the database, once. Returns the works loaded."""
+    """Load every recorded run under fixtures/ into the database, once. Returns the works loaded.
+
+    A recorded run keeps its id. If the database already has a run with that id it's skipped: silently
+    when it's the same recording, with a warning when it's a different run (a live database that
+    started before the fixtures were loaded), since nothing can be loaded over it."""
     loaded = []
     for path in sorted(root.glob("*/run.json")):
         record = json.loads(path.read_text(encoding="utf-8"))
         work_id = record["work"]["id"]
-        if conn.execute("SELECT 1 FROM run WHERE id=?", (record["run"]["id"],)).fetchone():
+        run = record["run"]
+        have = conn.execute("SELECT work_id, created_at FROM run WHERE id=?", (run["id"],)).fetchone()
+        if have:
+            if (have["work_id"], have["created_at"]) != (run["work_id"], run["created_at"]):
+                print(f"warning: fixtures/{work_id}: run {run['id']} is already another run in this database; not loaded")
             continue
         _insert(conn, "work", record["work"], replace=True)
         _insert(conn, "run", record["run"])
