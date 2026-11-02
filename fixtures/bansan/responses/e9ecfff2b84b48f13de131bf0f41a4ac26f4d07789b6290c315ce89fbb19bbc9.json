@@ -1,0 +1,146 @@
+{
+ "prompt": "reader-faithful",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "notes": [
+   {
+    "japanese": "子供の瞬間もぢっとしてない、小鳥のやうに愛らしい様子を見つめた",
+    "paragraph": "p8",
+    "problem": "Rationalisation by misattachment: never-still belongs to the child in Japanese, not to her gaze.",
+    "span": "gazed at the child, never still for an instant, lovely as a little bird.",
+    "suggestion": "gazed at the child — never still for an instant, lovely as a little bird.",
+    "sureness": "Sure; the Japanese relative clause modifies the child's state, not her eyes."
+   },
+   {
+    "japanese": "ジャガ芋の無味な、かゝはりのない冷やかな不味さが",
+    "paragraph": "p12",
+    "problem": "Clarification: adds 'with her' where Japanese leaves what it is unrelated to unsaid.",
+    "span": "having no connection with her,",
+    "suggestion": "And the tasteless, unrelated, cold badness of the potato gave her a quiet, lonely, far-removed heart.",
+    "sureness": "Fairly sure; crux says keep its unrelated ordinariness, a check of かかりのない usage would settle it."
+   },
+   {
+    "japanese": "たゞ静かに安らかにぢっと微笑をつゞけてゐるばかりであって",
+    "paragraph": "p16",
+    "problem": "Expansion: invents a fixed gaze where ぢっと steadies the continuing smile.",
+    "span": "with a fixed gaze,",
+    "suggestion": "But teller and listener alike only went on smiling on, quietly and peacefully, steadily, and they did not move at all.",
+    "sureness": "Sure; there is no gaze noun in the sentence."
+   },
+   {
+    "japanese": "さうだ。あの日があるのだ。あのすべてがなつかしみと許しと、安らかさに変る日があるのだった。",
+    "paragraph": "p20",
+    "problem": "Destroyed rhythm of time: present interior certainty turned to past and conditional.",
+    "span": "There was that day. There was the day when all would be changed into nostalgia and forgiveness, and peace.",
+    "suggestion": "Yes. There is that day. There is the day when all changes into nostalgia and forgiveness, and peace.",
+    "sureness": "Sure about present あるのだ; house tense policy for interior present would settle exact wording."
+   },
+   {
+    "japanese": "一日々々の苦しみや悲しみがなんだらう。一日々々の疲れやなやみがなんだらう。",
+    "paragraph": "p20",
+    "problem": "Same tense flattening: dismissive present-future made past.",
+    "span": "What were the suffering and sorrow of day by day? What were the weariness and trouble of day by day?",
+    "suggestion": "What are the suffering and sorrow of day by day? What are the weariness and trouble of day by day?",
+    "sureness": "Fairly sure; なんだらう is present conjecture, not past."
+   },
+   {
+    "japanese": "くり〳〵と肥ってる女の子だった",
+    "paragraph": "p2",
+    "problem": "Expansion: inserts eyes where Japanese has only round plumpness.",
+    "span": "round-eyed, plump little girl,",
+    "suggestion": "round, plump little girl,",
+    "sureness": "Fairly sure there is no eye word; period use of くりくり would confirm."
+   },
+   {
+    "japanese": "『坊や、』と強く云った",
+    "paragraph": "p8",
+    "problem": "Normalisation destroying evidence: neutral Baby hides 坊や used for a 女の子, flagged as open fork.",
+    "span": "she said, \"Baby,\" firmly,",
+    "suggestion": "she said, 'Boy,' firmly, — keep 坊や literally also at p28 and p30, with note, so the editor sees the fork.",
+    "sureness": "Sure about the loss; unsure which side editor wants, needs fork decision not silent smoothing."
+   },
+   {
+    "japanese": "彼女の手に渡した",
+    "paragraph": "p7",
+    "problem": "Expansion: adds little where Japanese says only her hands.",
+    "span": "put it into her little hands.",
+    "suggestion": "put it into her hands.",
+    "sureness": "Sure; nothing for little in the clause."
+   },
+   {
+    "japanese": "遠い心が静かに思出してゐるのだった",
+    "paragraph": "p13",
+    "problem": "Rationalisation: distant heart as remembering subject replaced by she with heart as instrument.",
+    "span": "And with a distant heart she quietly remembered",
+    "suggestion": "And a distant heart quietly remembered the quiet tear-filled days...",
+    "sureness": "Sure on grammar; whether English can bear heart as subject is for the desk."
+   },
+   {
+    "japanese": "總てが、總ての事が懐しみと許しとに変る事だらう",
+    "paragraph": "p17",
+    "problem": "Rationalisation into passive be changed where Japanese intransitive changes by itself.",
+    "span": "be changed into nostalgia and forgiveness.",
+    "suggestion": "would everything, all things, change into nostalgia and forgiveness.",
+    "sureness": "Fairly sure; 変る is intransitive here, no agent implied."
+   },
+   {
+    "japanese": "俺たちはいろ〳〵苦労したなァ",
+    "paragraph": "p25",
+    "problem": "Flattened vernacular and ennoblement: rough masculine俺たち turned to polite you and I.",
+    "span": "But we have been through a good deal, you and I.",
+    "suggestion": "But we've been through a lot, we have.",
+    "sureness": "Medium sure; register judgment, but 俺 and なァ mark plain young husband speech."
+   },
+   {
+    "japanese": "乳をのませ初めた",
+    "paragraph": "p35",
+    "problem": "Ennoblement into archaism where Japanese is plain bodily.",
+    "span": "began to give her suck.",
+    "suggestion": "began to nurse her.",
+    "sureness": "Sure that give suck is period archaism English readers will hear as biblical."
+   },
+   {
+    "japanese": "手持ぶさたのやうにスプーンを持って立ってる子供を見た",
+    "paragraph": "p29",
+    "problem": "Clarification settling an ambiguous attachment as the child's idleness.",
+    "span": "holding the spoon idly.",
+    "suggestion": "looked, as if at a loss himself, at the child standing holding the spoon — leave whose idleness open.",
+    "sureness": "Unsure; Japanese syntax lets it hang on either man or child, needs a second Japanese check."
+   },
+   {
+    "japanese": "何物にか気をとられたやうに",
+    "paragraph": "p15",
+    "problem": "Ennoblement into unnatural heed-taken phrasing for plain distractedness.",
+    "span": "as if her heed had been taken by something,",
+    "suggestion": "as if caught by something,",
+    "sureness": "Sure that current phrasing no good writer would sign; exact shade of 気をとられる needs context."
+   }
+  ],
+  "say": "Supper holds, but vision, potato and day-by-day refrains need tense, repetition and added-word fixes before the desk weighs them."
+ },
+ "usage": {
+  "input_tokens": 12013,
+  "cached_tokens": 0,
+  "output_tokens": 13975,
+  "reasoning_tokens": 12380,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.07441,
+ "response_id": "resp_6ae91f24488f4fa9dc464344",
+ "latency_s": 110.65,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 5533
+  }
+ ],
+ "created": "2026-11-02T23:39:16Z"
+}

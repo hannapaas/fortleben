@@ -1,0 +1,146 @@
+{
+ "prompt": "reader-readable",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "notes": [
+   {
+    "japanese": "男も女も、その顔にはまだ少しの皺もよってなかった。",
+    "paragraph": "p3",
+    "problem": "Wrong preposition and number in English; no writer would put a wrinkle 'in the face'.",
+    "span": "had yet a single wrinkle in the face.",
+    "suggestion": "had yet a single wrinkle on either face / had not yet a wrinkle on their faces",
+    "sureness": "Certain as English; only question is singular vs plural, desk can choose."
+   },
+   {
+    "japanese": "そして女の濃い髪のいろや、細やかな肩のあたりには、なほ打沈んだやうな深い疲れと、まどろむやうな安らかさとが見えてゐた。",
+    "paragraph": "p3",
+    "problem": "Inverted literal syntax forces the sentence to be read twice; weariness does not 'lay about' a colour in English.",
+    "span": "And about the dark colour of her thick hair and her slender shoulders there lay a still deeper, weighed-down weariness, and a drowsy sort of peace.",
+    "suggestion": "And her thick dark hair and her slender shoulders carried a still deeper, weighed-down weariness, and a drowsy sort of peace.",
+    "sureness": "Sure the shape fails in English; faithful reader to confirm 'dark colour' is hair-mass, not something else."
+   },
+   {
+    "japanese": "そして、彼等は黙って微笑しながら、その子供のすべてに瞳を注いだ。",
+    "paragraph": "p4",
+    "problem": "'Bent all their gaze' is not idiomatic English and sounds translated.",
+    "span": "they bent all their gaze upon the child.",
+    "suggestion": "they fixed all their gaze upon the child / they turned all their eyes upon the child",
+    "sureness": "Certain as English; any plain equivalent keeps the sense."
+   },
+   {
+    "japanese": "肥えてまるく鞠のやうに短い両手で",
+    "paragraph": "p5",
+    "problem": "'Short as balls' in English jars and turns comic; a reader stops believing.",
+    "span": "with fat round arms short as balls,",
+    "suggestion": "with fat little arms, short and round as temari balls, / with fat round arms, short as balls",
+    "sureness": "Fairly sure; needs faithful view on whether to keep the ball image explicit or soften it."
+   },
+   {
+    "japanese": "若い父親は、その小さなまるい腕や、敏捷に怜悧にすきもなく動いてる、黒みがちの睫のながい子供の瞳をぢっと見てゐると、どうしたらいゝだらうといふやうに、やがて顔一ぱいな微笑を持って、子供のまるくつき出た頬を指で一寸つまみながら、大きな茶碗をテーブルの下から探すやうにしてとると、彼女の手に渡した。",
+    "paragraph": "p7",
+    "problem": "One overloaded sentence with a dangling 'as if wondering' and piled participles; the reader cannot tell who wonders and who smiles.",
+    "span": "\"You naughty thing.\" The young father gazed at the small round arms, and at the child's long, dark-lashed eyes moving busily and sharply without a pause, as if wondering what was to be done, and then with a smile filling his whole face, pinching the child's round thrust-out cheek lightly with his fingers, he felt under the table for a large bowl and put it into her little hands.",
+    "suggestion": "\"You naughty thing.\" The young father watched the small round arms and the child's long dark-lashed eyes darting busily without pause, as if wondering what to do. Then, his whole face breaking into a smile, he pinched her round thrust-out cheek lightly and felt under the table for a large bowl to put into her little hands.",
+    "sureness": "Sure the shape fails; break is needed where English breath fails, faithful reader to check who the wondering belongs to."
+   },
+   {
+    "japanese": "また彼等は、ごた〳〵した騒がしさの為に、雨風の音を耳にしない。",
+    "paragraph": "p8",
+    "problem": "In English 'for all their noise' means despite the noise, which reverses the cause: it is because of the racket they do not hear.",
+    "span": "And for all their clattering noise they did not hear the sound of the rain and wind.",
+    "suggestion": "And with all their clattering racket they did not hear the sound of the rain and wind. / And for the clatter they did not hear the rain and wind.",
+    "sureness": "Certain; this is a plain English misreading, not authorial strangeness."
+   },
+   {
+    "japanese": "其上に自然に溢れる笑ひと嬉しさ",
+    "paragraph": "p8",
+    "problem": "'Welling up of themselves' is reflexive machine English, not prose a writer would sign.",
+    "span": "with laughter and gladness welling up of themselves.",
+    "suggestion": "with laughter and gladness welling up of their own accord / welling up unbidden",
+    "sureness": "Certain as English."
+   },
+   {
+    "japanese": "『坊や、』と強く云ったけれども、笑が顔からあふれて了って",
+    "paragraph": "p8",
+    "problem": "'Firmly' sounds stern and contradicts the helpless fondness; the reader mishears the mother's tone.",
+    "span": "she said, \"Baby,\" firmly, but the smile overflowed her face,",
+    "suggestion": "she cried out, \"Baby!\" — but with a smile overflowing her face, / she said \"Baby\" with emphasis, but the smile overflowed her face,",
+    "sureness": "Fairly sure about tone; faithful reader to confirm tsuyoku is loud/emphatic, not stern."
+   },
+   {
+    "japanese": "彼女の心は、いつか淋しくうつむいてしまってゐた。",
+    "paragraph": "p11",
+    "problem": "'Bowed itself' adds a reflexive no English heart performs; it reads literal.",
+    "span": "but her heart had already sunk and bowed itself in loneliness.",
+    "suggestion": "but her heart had already sunk, bowed in loneliness.",
+    "sureness": "Certain; dropping the reflexive loses nothing."
+   },
+   {
+    "japanese": "彼女は、いつとなく何物にか気をとられたやうに、ぼんやりと遠くの方を見てゐた。",
+    "paragraph": "p15",
+    "problem": "'Heed had been taken' is dictionary English, not a person's inward drift.",
+    "span": "as if her heed had been taken by something,",
+    "suggestion": "as if her attention had been caught by something,",
+    "sureness": "Very sure; plain idiom, no change of sense."
+   },
+   {
+    "japanese": "そして其時彼等は永久に夜の様な安息の前にあるのであった。",
+    "paragraph": "p17",
+    "problem": "'Before' reads in English as time (before rest comes) rather than standing before/in presence of rest, which confuses the vision's law.",
+    "span": "And then they would be forever before a rest like night.",
+    "suggestion": "And then they would stand forever before a rest like night. / face an endless rest like night.",
+    "sureness": "Fairly sure the preposition misleads; faithful reader to confirm spatial 'mae' rather than temporal."
+   },
+   {
+    "japanese": "若い彼女は一人で淋しいひそかな溜息をついた",
+    "paragraph": "p18",
+    "problem": "'Lonely' and 'alone' in one breath jingle and force a reread; alone as by-herself is lost in lonely as feeling.",
+    "span": "sighed a lonely hidden sigh alone,",
+    "suggestion": "alone by herself, sighed a lonely, hidden sigh, / on her own, sighed a lonely hidden sigh,",
+    "sureness": "Fairly sure as English music; sense of hitori de vs samishii to be confirmed."
+   },
+   {
+    "japanese": "再びその眼が遠く走ってしまった。",
+    "paragraph": "p19",
+    "problem": "Eyes do not 'run' in English stillness; the verb breaks the quiet and suggests speed.",
+    "span": "again her eyes ran far away.",
+    "suggestion": "again her eyes strayed far away. / drifted far away.",
+    "sureness": "Fairly sure; only hesitation is whether swiftness is meant, which faithful reader can settle."
+   },
+   {
+    "japanese": "小さな乳首をだして乳をのませ初めた。",
+    "paragraph": "p35",
+    "problem": "'Small nipple' is clinical and 'give her suck' is archaic pastiche; neither is plain prose a good writer would sign today.",
+    "span": "she put out her small nipple and began to give her suck.",
+    "suggestion": "she bared her small breast and began to nurse her / began to feed her at the breast",
+    "sureness": "Certain as English register; faithful reader to settle breast vs nipple."
+   }
+  ],
+  "say": "The supper lives when noisy but several literalisms make the reader reread, while the vision passages mostly hold if the prepositions are fixed."
+ },
+ "usage": {
+  "input_tokens": 11221,
+  "cached_tokens": 0,
+  "output_tokens": 8331,
+  "reasoning_tokens": 6273,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.049433,
+ "response_id": "resp_6ae91f7123bada9435c74159",
+ "latency_s": 76.92,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 7088
+  }
+ ],
+ "created": "2026-11-02T23:40:33Z"
+}

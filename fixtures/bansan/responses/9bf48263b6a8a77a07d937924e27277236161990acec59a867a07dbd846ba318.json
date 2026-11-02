@@ -1,0 +1,64 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "It was in a faint dim light, and three people, quiet as that light, had drawn close and put their heads together and were telling a long story. The story seemed to go on between them, too long ever to come to an end. And in that story seemed to be told everything, all the good and evil in the world, grief and suffering and anger and trouble, joy, everything. But teller and listener alike only went on smiling, quietly and peacefully, with a fixed gaze, and they did not move at all. With heads inclined and eyes lowered, there only a quiet nostalgia and forgiveness seemed to enfold them. And there too a deep, deep peace showed itself in all of them.",
+    "flags": [],
+    "ids": [
+     "p16"
+    ],
+    "notes": [
+     "Kept the three figures unidentified and the telling almost motionless, holding quiet, smile, nostalgia, forgiveness and peace in the same words used elsewhere. No em dash in source, so none in English."
+    ]
+   },
+   {
+    "english": "All things in the world, life itself, would pass. And only on the day they had passed would everything, all things, be changed into nostalgia and forgiveness. And then they would be forever before a rest like night.",
+    "flags": [],
+    "ids": [
+     "p17"
+    ],
+    "notes": [
+     "Kept the general law in past reported form and in the same triad words as p16, without deciding what that day or that rest is."
+    ]
+   },
+   {
+    "english": "The distant picture lay dark and quiet at the bottom of her eyes. And through the bottom of her eyes, far off in the future, with a lonely peace, that picture was still to be seen. The young woman sighed a lonely hidden sigh alone, and glancing at the littered table and at the faces of her husband and child, she said nothing.",
+    "flags": [],
+    "ids": [
+     "p18"
+    ],
+    "notes": [
+     "Kept distant for every far form and picture for絵, and quiet, lonely, peace and sigh in the same wording as the surrounding pages."
+    ]
+   }
+  ],
+  "say": "Drafted the vision and its return keeping the far picture dim and the nostalgia and forgiveness wording unchanged."
+ },
+ "usage": {
+  "input_tokens": 10585,
+  "cached_tokens": 9841,
+  "output_tokens": 3230,
+  "reasoning_tokens": 2766,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01613365,
+ "response_id": "resp_6ae91e57ee3a71b9f5c04951",
+ "latency_s": 30.67,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1971
+  }
+ ],
+ "created": "2026-11-02T23:35:51Z"
+}

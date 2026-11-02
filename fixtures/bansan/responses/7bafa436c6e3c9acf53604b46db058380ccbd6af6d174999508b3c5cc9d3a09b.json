@@ -1,0 +1,82 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"Why are you silent?\" The man looked at the woman's face with a puzzled look and called to her. Hurrying to say something, she found she could say nothing all at once and fell silent, and again her eyes ran far away. And she saw the phantom picture again. Then for the first time she quietly heard the sound of the storm outside the door. She said nothing.",
+    "flags": [],
+    "ids": [
+     "p19"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Yes. There was that day. There was the day when all would be changed into nostalgia and forgiveness, and peace. After a long life, and after long sorrow again, and after long suffering again, on the day beyond them, there would be that peaceful day of nostalgia and forgiveness. What were the suffering and sorrow of day by day? What were the weariness and trouble of day by day? Before she knew it she was wearing a smile.",
+    "flags": [],
+    "ids": [
+     "p20"
+    ],
+    "notes": [
+     "The circling repetition of long and of day by day, and the fixed wording nostalgia and forgiveness, and peace, mirror the Japanese; the stiffness is the text's own return to the same words."
+    ]
+   },
+   {
+    "english": "\"Why are you silent?\" the man called to her again. She lifted her head as if startled and, smiling with nostalgia, said, \"It has really been only such a short time since we married, hasn't it,\" as if asking him to remember too, to remember all sorts of things, even the happy things from before they married.",
+    "flags": [],
+    "ids": [
+     "p21",
+     "p22",
+     "p23"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Yes,\" the man too lifted his eyes and said, \"It is only three years after all. But we have been through a good deal, you and I.\"",
+    "flags": [],
+    "ids": [
+     "p24",
+     "p25"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Indeed,\" she said, lowering her eyes again as if to look at that picture. But at once, \"But it is only three years since then, after all,\" her eyes shone as if she must tell him of some great hope, some great hope she herself did not understand.",
+    "flags": [],
+    "ids": [
+     "p26",
+     "p27"
+    ],
+    "notes": [
+     "The repeated some great hope keeps the Japanese doubling of the same phrase."
+    ]
+   }
+  ],
+  "say": "Drafted p19 to p27 keeping the far picture and day-by-day language in the same words throughout."
+ },
+ "usage": {
+  "input_tokens": 10750,
+  "cached_tokens": 9841,
+  "output_tokens": 5371,
+  "reasoning_tokens": 4827,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.02543915,
+ "response_id": "resp_6ae91e85de9f8141b4ea4795",
+ "latency_s": 45.8,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2186
+  }
+ ],
+ "created": "2026-11-02T23:36:37Z"
+}
