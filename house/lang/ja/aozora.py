@@ -256,6 +256,17 @@ def render(work: ParsedWork) -> str:
     return "\n".join([work.head, *body, work.colophon])
 
 
+def chapter(text: str, heading: str) -> str:
+    """One chapter of an Aozora file: the head and notation legend, the chapter from its 中見出し heading
+    to the next, and the colophon, so the excerpt still parses and still carries its credits."""
+    lines = text.split("\n")
+    heads = [i for i, ln in enumerate(lines) if "中見出し" in ln]
+    start = next(i for i in heads if NOTE.sub("", lines[i]).strip("　 ") == heading)
+    end = next((i for i in heads if i > start), next(i for i, ln in enumerate(lines) if ln.startswith("底本：")))
+    colophon = next(i for i, ln in enumerate(lines) if ln.startswith("底本："))
+    return "\n".join(lines[:heads[0]] + lines[start:end] + ["", ""] + lines[colophon:])
+
+
 def fetch(zip_url: str) -> str:
     """Download an Aozora ruby zip and return its text, decoded from Shift_JIS."""
     r = httpx.get(zip_url, follow_redirects=True, timeout=60)

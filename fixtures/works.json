@@ -132,5 +132,46 @@
    ],
    "verdict": "public domain (author died 1927, published 1916)"
   }
+ },
+ "kusamakura2": {
+  "aozora_id": "000776",
+  "author_id": "000148",
+  "title": "草枕　二",
+  "title_en": "Kusamakura, chapter II",
+  "author": "夏目漱石",
+  "author_en": "Natsume Sōseki",
+  "card_url": "https://www.aozora.gr.jp/cards/000148/card776.html",
+  "zip_url": "https://www.aozora.gr.jp/cards/000148/files/776_ruby_6020.zip",
+  "chapter": "二",
+  "rights": {
+   "author_died": 1916,
+   "first_published": "「新小説」1906（明治39）年9月",
+   "first_published_year": 1906,
+   "basis": "Aozora card 776",
+   "existing_translations": [
+    {
+     "by": "Kazutomo Takahashi",
+     "year": 1927,
+     "where": "Unhuman Tour (The Japan Times); Project Gutenberg #73131",
+     "kind": "professional, dated, simplifying; public domain in the US",
+     "checked": "2026-11-02"
+    },
+    {
+     "by": "Alan Turney",
+     "year": 1965,
+     "where": "The Three-Cornered World (Peter Owen)",
+     "kind": "professional, in copyright",
+     "checked": "2026-11-02"
+    },
+    {
+     "by": "Meredith McKinney",
+     "year": 2008,
+     "where": "Kusamakura (Penguin Classics)",
+     "kind": "professional, in copyright",
+     "checked": "2026-11-02"
+    }
+   ],
+   "verdict": "public domain (author died 1916, published 1906); a dev text only, since the novel is already translated"
+  }
  }
 }

@@ -66,9 +66,15 @@ def run(conn, client, work_id: str, *, to: str | None = None, from_: str | None 
         est = budget.estimate_run(chars, len(context.chapters(work)), options)
         cap, room = client.budget.run_cap, client.budget.room()
         if not client.replay_only and est > room:
-            which = "its cap" if room >= cap else "what's left of today's or the total budget"
-            raise budget.CapExceeded(f"{work_id}: this run is estimated at ${est:.2f}, over {which} (${room:.2f}). "
-                                     f"Nothing was started; raise the cap (--cap) to run it.")
+            b = client.budget
+            if room >= cap:
+                fix = "raise the run's cap (--cap) to run it"
+            elif b.daily_cap - b.spent(today=True) <= b.total_cap - b.spent():
+                fix = f"today's budget has ${room:.2f} left; raise KEIKAKU_CAP_DAILY or run it tomorrow"
+            else:
+                fix = f"the total budget has ${room:.2f} left; raise KEIKAKU_CAP_TOTAL to run it"
+            raise budget.CapExceeded(f"{work_id}: this run is estimated at ${est:.2f}, more than it can spend. "
+                                     f"Nothing was started; {fix}.")
         run_id = new_run(conn, work_id, label, cap, options)
         events.emit(conn, run_id, "house", "run.started", {"work": work_id, "options": options,
                                                            "cap_usd": cap, "estimate_usd": est})
