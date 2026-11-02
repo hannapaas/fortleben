@@ -13,7 +13,7 @@ Written 1 Nov 2026, simplified the same day. The code isn't open source, so the 
 | Who pays | Nobody; it's read from the record | The editor's allowance, in drops |
 | Where it goes | Nothing new is made | Published on the site under the editor's name when the run is released |
 
-Both exist because we don't know how much time anyone will give this. Someone with thirty seconds gets the House. Someone digging deeper gets an invite link with an allowance already on it, a suggested short story it covers, and can take that story the whole way, with their name on the edition if they want it there. If the desk's "start a text" isn't built by submission (`BUILD-PLAN.md` M7b is the stretch), the page says it's coming and the house editor starts runs by hand.
+Both exist because we don't know how much time anyone will give this. Someone with thirty seconds gets the House. Someone digging deeper gets an invite link with an allowance already on it, a suggested short story it covers, and can take that story the whole way, with their name on the edition if they want it there.
 
 ## Starting a run
 
@@ -42,6 +42,18 @@ Every stage writes its results to the record before the next stage starts (`STAG
 ## States of a run
 
 `queued → brief → checkpoint (waiting for the editor) → drafting → revising → notes and checks → final read → released`, with two side states: *paused* (by the editor, or by the house closing or a cap) and *stopped* (by the editor). Every transition is an event, so the House shows it live and the record explains it afterwards.
+
+## As built (2 Nov 2026)
+
+Where the code (`house/desk.py`, the `/desk/<token>` routes in `house/web.py`) differs from the above, or settles what it left open:
+
+- **Invites.** `keikaku invite "Name" [--drops 4000] [--work sumiyaki] [--base-url …]` makes a person, an allowance and a link, and prints the link once. Only a hash of the token is stored (salted with `KEIKAKU_SECRET`, so changing that secret voids every link). `keikaku invite --list` shows who has what left; `keikaku invite --revoke <token or id>` closes a link.
+- **No checkpoint yet.** A run goes straight through from first read to release without pausing, which the spec allows ("an editor can switch this pause off"). Pause and stop aren't built either.
+- **One run at a time, across the site.** A run is going while its status is `queued` or `running`; nothing else starts until it ends.
+- **Money.** The estimate is `ceil(sheets × DROPS_PER_SHEET)`, reserved at start. The run's cap is the reservation plus 20%. At the end the editor is charged what the ledger says it spent, rounded up to whole drops and never more than the reservation; the rest is released. A failed or interrupted run is settled the same way, and resuming it reserves what's left of its estimate again.
+- **States** on the desk are `queued`, `running`, `done`, `failed` and `interrupted`. A run left going when the site restarts is marked `interrupted` and can be resumed from the stage after the last one it finished. A failed run (a stage error, or the cap) can be resumed too.
+- **Credit.** The edition carries the editor's name, or *an editor*. Each credit gets its own edition of the work beside the house's.
+- **Where it's off.** The desk can't start runs under `--replay`, without `MODEL_API_KEY`, or with `HOUSE_OPEN=false`, and says so. Desk pages send `X-Robots-Tag: noindex`.
 
 ## Allowances
 

@@ -250,6 +250,18 @@ CREATE TABLE IF NOT EXISTS allowance (
   reason        TEXT
 );
 
+-- An invite link to the editors' desk (docs/EDITORS-DESK.md). Only a salted hash of the token is
+-- kept: the link itself is shown once, when it's made, and can't be read back from here.
+CREATE TABLE IF NOT EXISTS invite (
+  id            INTEGER PRIMARY KEY,
+  token_hash    TEXT NOT NULL UNIQUE,
+  person_id     INTEGER NOT NULL REFERENCES person(id),
+  suggested_work TEXT,                     -- a work the allowance covers, suggested on the desk
+  created_at    TEXT NOT NULL DEFAULT (datetime('now')),
+  revoked_at    TEXT,
+  last_used_at  TEXT
+);
+
 CREATE TABLE IF NOT EXISTS reaction (
   id            INTEGER PRIMARY KEY,
   target        TEXT NOT NULL,             -- 'bansan/p12', a note id, an alternative
