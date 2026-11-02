@@ -1,0 +1,90 @@
+{
+ "prompt": "reader-faithful",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "notes": [
+   {
+    "japanese": "けれども話す人も聞く人も、たゞ静かに安らかにぢっと微笑《ほゝゑみ》をつゞけてゐるばかりであって、彼等は少しも動かなかった。",
+    "paragraph": "p16",
+    "problem": "Drops ぢっと, the word that fixes the vision's stillness, leaving only quiet and peaceful.",
+    "span": "only went on quietly and peacefully smiling",
+    "suggestion": "only went on quietly and peacefully, motionlessly keeping their smiles",
+    "sureness": "Quite sure; a dictionary check of ぢっと as motionless/fixedly would settle it, and the crux needs that stillness kept."
+   },
+   {
+    "japanese": "若い彼女は一人で淋しいひそかな溜息をついた",
+    "paragraph": "p18",
+    "problem": "Renders ひそかな as quiet, colliding with the 静か network and losing its secret/private sense.",
+    "span": "alone she gave a lonely, quiet sigh",
+    "suggestion": "young as she was, alone she gave a lonely, secret sigh",
+    "sureness": "Fairly sure; ひそか is secret/hushed/private, not 静か, and keeping them distinct is what the reading asks for."
+   },
+   {
+    "japanese": "遠い絵が暗く静かに、彼女の眼の底に映ってゐた。",
+    "paragraph": "p18",
+    "problem": "Lay replaces 映ってゐた, losing that the picture is reflected/seen in the bottom of her eyes.",
+    "span": "The far picture lay dark and quiet in the bottom of her eyes.",
+    "suggestion": "The far picture was reflected dark and quiet in the bottom of her eyes.",
+    "sureness": "Fairly sure; 映る is to be reflected/projected, and a check of period usage would settle whether lay is too static."
+   },
+   {
+    "japanese": "そして静かに涙にみちた日のことや、物質の為めに脅かされ恐れてすごした日々や、病の為めに悲しみ苦しんだその日その日のことを遠い心が静かに思出してゐるのだった。",
+    "paragraph": "p13",
+    "problem": "Rationalisation: makes she the rememberer with heart as instrument, where the Japanese makes the far-off heart the subject.",
+    "span": "with a far off heart she quietly remembered",
+    "suggestion": "with a far-off heart quietly remembering",
+    "sureness": "Moderately sure; syntax is 遠い心が…思出してゐる, and a second parse by a Japanese reader would settle it."
+   },
+   {
+    "japanese": "まだ本当にわづかしか経ちませんのね、結婚してから。",
+    "paragraph": "p21–p23",
+    "problem": "Drops まだ, breaking the still/only-three-years repetition that returns in p27.",
+    "span": "Really, only a very little time has passed since we married, hasn't it",
+    "suggestion": "Still, really only a very little time has passed since we married, hasn't it",
+    "sureness": "Very sure; まだ is there in both p22 and p27 and the English keeps it only in the second."
+   },
+   {
+    "japanese": "俺たちはいろ〳〵苦労したなァ。",
+    "paragraph": "p24–p25",
+    "problem": "Impoverishment: been through a lot flattens 苦労 into vagueness and breaks the suffering network.",
+    "span": "But we have been through a lot, haven't we.",
+    "suggestion": "But we have known hardships in many ways, haven't we.",
+    "sureness": "Quite sure; 苦労 is hardship/toil/suffering, and keeping suffering/sorrow/weariness together is the point — a check of the story bible's term list would settle the preferred wording."
+   },
+   {
+    "japanese": "さうね、私たちは働きませうね。",
+    "paragraph": "p35",
+    "problem": "Turns volitional invitation let's work into obligation must.",
+    "span": "Yes, we must work, mustn't we.",
+    "suggestion": "Yes, let's work, shall we.",
+    "sureness": "Very sure; ませうね is let's, polite volitional, not duty — grammar alone settles it."
+   }
+  ],
+  "say": "Vision and return largely intact with repeated words kept, but stillness, secret sigh, and plain let's-work need fixing."
+ },
+ "usage": {
+  "input_tokens": 12494,
+  "cached_tokens": 0,
+  "output_tokens": 13475,
+  "reasoning_tokens": 12421,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.07288625,
+ "response_id": "resp_6ae8d5aff05f571932df4596",
+ "latency_s": 59.34,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 3526
+  }
+ ],
+ "created": "2026-11-02T18:25:51Z"
+}

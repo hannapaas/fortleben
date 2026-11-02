@@ -1,0 +1,170 @@
+{
+ "prompt": "reader-readable",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "notes": [
+   {
+    "japanese": "いつか暗くなった戸の外に、激しい雨風の音がする、嵐だ。",
+    "paragraph": "p1",
+    "problem": "As English the modifier dangles: the door itself sounds as if it grew dark.",
+    "span": "Outside the door, grown dark at some point, was the sound of hard rain and wind.",
+    "suggestion": "Outside the door, which had grown dark at some point, was the sound of hard rain and wind. A storm.",
+    "sureness": "Sure; any native copy-editor would flag it, author-reader can confirm the Japanese attaches darkness to outside, not wordplay."
+   },
+   {
+    "japanese": "彼等は黙って微笑しながら、その子供のすべてに瞳を注いだ。",
+    "paragraph": "p4",
+    "problem": "Keeping all their eyes counts eyeballs and reads as machine-literal, not as a couple gazing.",
+    "span": "kept all their eyes upon the child.",
+    "suggestion": "kept their eyes fixed upon the child.",
+    "sureness": "Very sure as English; whether Japanese implies fixed gaze is for the faithful reader."
+   },
+   {
+    "japanese": "肥えてまるく鞠のやうに短い両手",
+    "paragraph": "p5",
+    "problem": "Short as balls is nonsense in English and carries slang the author never intends.",
+    "span": "with fat, round hands short as balls,",
+    "suggestion": "with fat round hands, short like balls,",
+    "sureness": "Sure that current wording cannot stand; exact image for temari-like hands needs faithful reader to settle."
+   },
+   {
+    "japanese": "『きかない奴だな。』若い父親は",
+    "paragraph": "p7",
+    "problem": "Dialogue punctuation is un-English throughout: period inside quotes followed by capitalised tag.",
+    "span": "\"You won't do as you're told, will you.\" The young father stared",
+    "suggestion": "\"You won't do as you're told, will you,\" the young father stared — and apply lower-case tag after comma through p24-p38.",
+    "sureness": "Completely sure on house style; this instance stands for a systemic fix."
+   },
+   {
+    "japanese": "彼女は鍋から熱い炊き立ての、白い湯気が一ぱい立ち上ってる御飯をついで彼に渡した。",
+    "paragraph": "p8",
+    "problem": "Opening She has no antecedent in English after a paragraph about he, so the reader stalls.",
+    "span": "She dished out rice for him, hot and fresh from the pot with the white steam rising thick, and handed it to him.",
+    "suggestion": "The mother dished out rice for him, hot and fresh from the pot with the white steam rising thick, and handed it to him.",
+    "sureness": "Fairly sure; if house wants pronouns preserved, a name reset is still needed for the English reader."
+   },
+   {
+    "japanese": "笑ゑみが顔からあふれて了って",
+    "paragraph": "p8",
+    "problem": "A smile overflowing a face is not idiomatic and turns exhaustion-laughter into abstraction.",
+    "span": "but the smile overflowed her face",
+    "suggestion": "but the smile broke over her face",
+    "sureness": "Sure the collocation is wrong; exact verb is desk's choice with faithful reader."
+   },
+   {
+    "japanese": "その眼は子供によって仕方がなく湧き出た笑ゑみを堪へながら",
+    "paragraph": "p9",
+    "problem": "Eyes cannot hold back a smile, so the body-mix reads as literal translation rather than a man laughing.",
+    "span": "His eyes holding back the smile that welled up helplessly because of the child,",
+    "suggestion": "Holding back the smile that the child forced helplessly out of him,",
+    "sureness": "Sure as English; faithful reader to confirm who is helpless — he or the smile."
+   },
+   {
+    "japanese": "そのすきに彼は、あわたゞしく大きな口を開けた、彼は彼自身の口のなかに御飯を押し込んだ。",
+    "paragraph": "p9",
+    "problem": "In the gaps leaves the reader asking gaps in what, and stuffed rice into it sounds animal-like with clumsy repetition.",
+    "span": "In the gaps, hastily opening his own wide mouth, he stuffed rice into it.",
+    "suggestion": "In between, hastily opening his own wide mouth, he shovelled rice into it.",
+    "sureness": "Sure; what interval is meant would be settled by the Japanese."
+   },
+   {
+    "japanese": "彼女はふと驚いたやうに黙って前歯でかみなほしたが、彼女の心は、いつか淋しくうつむいてしまってゐた。",
+    "paragraph": "p11",
+    "problem": "Chewed it over means pondered, and a heart bowing down is a transferred idiom that does not live in English.",
+    "span": "she chewed it over silently with her front teeth, but her heart had already bowed down in loneliness.",
+    "suggestion": "she chewed silently on with her front teeth, but her heart had already sunk in loneliness.",
+    "sureness": "Very sure on chewed it over; bowed-down heart is clearly literal, desk to check tone."
+   },
+   {
+    "japanese": "ジャガ芋の無味な、かゝはりのない冷やかな不味さが、彼女に静かな淋しい遠くはなれた心を与へた。",
+    "paragraph": "p12",
+    "problem": "Gave her a heart plus unconnected plus cold bad taste piles literal nouns where English wants a feeling.",
+    "span": "gave her a quiet, lonely, far off heart.",
+    "suggestion": "left her with a quiet, lonely, distant feeling.",
+    "sureness": "Fairly sure as English, but distant must stay consistent with the far-off network — needs faithful reader to fix the term across p10-p18."
+   },
+   {
+    "japanese": "より合って頭をあつめてながい物語りをしてゐるのだった。",
+    "paragraph": "p16",
+    "problem": "Together twice in five words stalls the vision's incantation just where it must go still.",
+    "span": "drew together with their heads together, telling a long story.",
+    "suggestion": "drew close with heads together, telling a long story.",
+    "sureness": "Sure; repetition here is translator's, not the author's long/quiet network."
+   },
+   {
+    "japanese": "其時彼等は永久に夜の様な安息の前にあるのであった。",
+    "paragraph": "p17",
+    "problem": "Before a rest misuses the preposition in English: it puts them in front of rest rather than before it in time or within it.",
+    "span": "And then they will be forever before a rest like night.",
+    "suggestion": "And then they will be forever before a night-like rest.",
+    "sureness": "Fairly sure the preposition is the crux wording; keep ambiguous in time, just make it grammatical — faithful reader to confirm."
+   },
+   {
+    "japanese": "遠い絵が暗く静かに、彼女の眼の底に映ってゐた。また瞳の底を通して",
+    "paragraph": "p18",
+    "problem": "Bottom of her eyes is not an English place; it breaks the far picture that must linger.",
+    "span": "lay dark and quiet in the bottom of her eyes.",
+    "suggestion": "lay dark and quiet in the depths of her eyes.",
+    "sureness": "Very sure as English idiom; depths keeps the dim-distance effect."
+   },
+   {
+    "japanese": "一口には何事も云ひかねて黙ってしまふと、再びその眼が遠く走ってしまった。",
+    "paragraph": "p19",
+    "problem": "In a word and eyes ran are both literal and stop the quiet return to the storm.",
+    "span": "unable to say anything in a word she fell silent, and her eyes ran far away again.",
+    "suggestion": "unable to put anything into words she fell silent, and her gaze drifted far away again.",
+    "sureness": "Very sure; gaze for eyes preserves sense without inventing psychology."
+   },
+   {
+    "japanese": "二年はもう過ぎたんだからな。",
+    "paragraph": "p28",
+    "problem": "Are already past is ungrammatical for elapsed time and flattens his practical counter-clock.",
+    "span": "two years are already past.",
+    "suggestion": "two years have already passed.",
+    "sureness": "Completely sure as grammar."
+   },
+   {
+    "japanese": "小さな乳首をだして乳をのませ初めた。",
+    "paragraph": "p35",
+    "problem": "Bared a small nipple is clinical and oddly singular; English hears body, not mothering.",
+    "span": "she bared a small nipple and began to nurse.",
+    "suggestion": "she bared her breast and began to nurse the child.",
+    "sureness": "Fairly sure the current line will pull readers out; exact degree of plainness for period body is for desk and faithful reader."
+   },
+   {
+    "japanese": "さ、あとを片づけよう。そして寝よう、明日は早く起きようぢゃないか。",
+    "paragraph": "p36",
+    "problem": "Let us three times sounds formal/archaic, not a tired young father's plain speech.",
+    "span": "Come, let us clear away. And sleep. Let us get up early tomorrow.",
+    "suggestion": "Come, let's clear away. And sleep. Let's get up early tomorrow.",
+    "sureness": "Sure on register; house to decide contractions policy for this voice."
+   }
+  ],
+  "say": "Meal bustle and vision both read literal rather than lived, with systemic dialogue tagging and a few body idioms breaking belief; otherwise clean."
+ },
+ "usage": {
+  "input_tokens": 11687,
+  "cached_tokens": 0,
+  "output_tokens": 7890,
+  "reasoning_tokens": 5590,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.04814125,
+ "response_id": "resp_6ae8d5cf30312d8bbdf04686",
+ "latency_s": 31.82,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 8358
+  }
+ ],
+ "created": "2026-11-02T18:26:23Z"
+}

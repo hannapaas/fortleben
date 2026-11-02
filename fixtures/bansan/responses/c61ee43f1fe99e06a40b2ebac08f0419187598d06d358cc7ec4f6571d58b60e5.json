@@ -1,0 +1,86 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"Why are you so quiet?\" the man said, looking at the woman's face as if puzzled. She hurried to say something, but unable to say anything in a word she fell silent, and her eyes ran far away again. And she saw the phantom-like picture again. Then for the first time she quietly heard the sound of the storm outside the door. She said nothing.",
+    "flags": [],
+    "ids": [
+     "p19"
+    ],
+    "notes": [
+     "Kept 'quietly heard' and 'said nothing' bare as the barometer of return; 'phantom-like picture' keeps the simile unhardened."
+    ]
+   },
+   {
+    "english": "Yes. That day is there. The day when everything turns to nostalgia and forgiveness, and peace. After a long life, and after long sorrow, and after long suffering, on the day after, there is that day of peaceful nostalgia and forgiveness. What are the suffering and sorrow of each single day. What are the weariness and trouble of each single day. Before she knew it she had a smile on her face.",
+    "flags": [],
+    "ids": [
+     "p20"
+    ],
+    "notes": [
+     "Kept 'long' dull and repeated, and the paired phrase 'nostalgia and forgiveness' word-for-word with p17; no added psychology."
+    ]
+   },
+   {
+    "english": "\"Why are you so quiet?\" the man said again. She raised her head as if startled, smiling as if with nostalgia, \"Really, only a very little time has passed since we married, hasn't it,\" she said, as if asking him too to remember, all sorts of things, even the happy things from before they married.",
+    "flags": [],
+    "ids": [
+     "p21",
+     "p22",
+     "p23"
+    ],
+    "notes": [
+     "Grouped as one English paragraph for the turn; 'smiling as if with nostalgia' keeps the smile network rather than varying to fondly."
+    ]
+   },
+   {
+    "english": "\"That's right,\" the man too looked up and said. \"It comes to only three years. But we have been through a lot, haven't we.\"",
+    "flags": [],
+    "ids": [
+     "p24",
+     "p25"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"It really is,\" she lowered her eyes again, about to try to see that picture. But at once, \"But still only three years have passed, you know,\" her eyes brightened, as if she had to tell him of something large, something she herself did not understand, some large hope.",
+    "flags": [],
+    "ids": [
+     "p26",
+     "p27"
+    ],
+    "notes": [
+     "Kept 'something large' repeated and 'hope' unnamed and untethered; did not tie it to the vision with 'what she had seen'."
+    ]
+   }
+  ],
+  "say": "Drafted the silence and return keeping repetition flat and dialogue empty."
+ },
+ "usage": {
+  "input_tokens": 11696,
+  "cached_tokens": 10737,
+  "output_tokens": 4762,
+  "reasoning_tokens": 4165,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0230478,
+ "response_id": "resp_6ae8d561f03e1dd615774fc7",
+ "latency_s": 23.69,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2366
+  }
+ ],
+ "created": "2026-11-02T18:24:33Z"
+}
