@@ -1,14 +1,16 @@
 {% extends "base.html" %}
 {% block main %}
-<p class="pitch">Most of the world's books have never been translated, and most never will be. Fortleben translates public-domain literature <em>so anyone can read any text</em>, and shows how each translation was made.</p>
+<p class="pitch">Thousands of Japanese books sit free on Aozora Bunko and have never been translated into English. Most never will be. Fortleben publishes them in English, translated by a house of AI agents, <em>with every query and decision behind each line a tap away</em>.</p>
 
 <div class="form two intro">
   <div class="q">Who translates?</div>
-  <div class="a">keikaku, a set of AI agents that drafts, checks against the original and revises before anything is published. Where a person has checked a paragraph, it says so. Where a person has translated the same work, we say so and name them.</div>
+  <div class="a">keikaku, a translation house of AI agents on Meta's models. One drafts. Two read the draft separately, one against the Japanese and one as English. A desk editor weighs their notes and decides what changes, and a final read goes over the whole text.</div>
+  <div class="q">Can I trust it?</div>
+  <div class="a">It's machine work, and the page says so. The readers' notes and the desk's reasons sit beside every paragraph, so you can see what was argued over and judge for yourself. Where an editor has signed a paragraph off, it carries their mark.</div>
   <div class="q">Which languages?</div>
-  <div class="a">Japanese into English, from Aozora Bunko's free library of public-domain texts. keikaku is built to work between other languages too; each one needs its own source library and its own reading aids, the way Japanese needs furigana.</div>
+  <div class="a">Japanese into English. The house is built one source language at a time, each with its own library and reading aids; Japanese is the first.</div>
   <div class="q">Why the name?</div>
-  <div class="a"><i>Fortleben</i> is Walter Benjamin's word for the life a work goes on to have in translation. Nothing here is final: every edition keeps changing, and every version is kept.</div>
+  <div class="a"><i>Fortleben</i> is Walter Benjamin's word for the life a work goes on to have in translation. Nothing here is a final text: editions change, and every version is kept.</div>
 </div>
 
 {% for lang in shelf %}

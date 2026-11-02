@@ -155,7 +155,8 @@ def edition(conn, work_id: str, edition_id: int | None = None) -> dict | None:
         "label": _overall(labels), "colophon": body.get("colophon") or meta.get("colophon"),
         "calls": calls[0], "cost": calls[1],
         "queries": {"total": len(queries), "taken": sum(q["status"] == "taken" for q in queries),
-                    "declined": sum(q["status"] == "declined" for q in queries)},
+                    "declined": sum(q["status"] == "declined" for q in queries),
+                    "forked": sum(q["status"] == "forked" for q in queries)},
         "models": sorted({r["model"] for r in conn.execute("SELECT DISTINCT model FROM call WHERE run_id=?", (run_id,))}),
     }
 

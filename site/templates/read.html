@@ -10,9 +10,9 @@
 {% block main %}
 <div class="form four">
   <div><span class="q">What?</span><span class="a">An English translation of {{ ed.author_en }}'s short story <i>{{ ed.title_en }}</i>{% if ed.rights.first_published_year %}, first published in {{ ed.rights.first_published_year }}{% endif %}.</span></div>
-  <div><span class="q">By whom?</span><span class="a">keikaku, a set of AI agents: one drafts, two more check the draft separately, one against the Japanese and one as English, and another decides what to change.</span></div>
-  <div><span class="q">Checked?</span><span class="a">Every paragraph went through those checks. {% set checked = ed.counts['editor-approved'] %}{% if checked %}{{ checked }} of {{ total }} paragraphs have also been signed off by an editor, and say so.{% else %}No editor has signed it off.{% endif %}</span></div>
-  <div><span class="q">How was it made?</span><span class="a">Tap any paragraph to see what was queried there and what was decided.</span></div>
+  <div><span class="q">By whom?</span><span class="a">keikaku's AI agents: one drafted it, two read the draft separately, one against the Japanese and one as English, and a desk editor decided what to change.</span></div>
+  <div><span class="q">Checked?</span><span class="a">By the house's readers, every paragraph. {% set checked = ed.counts['editor-approved'] %}{% if checked %}{{ checked }} of {{ total }} paragraphs also carry an editor's sign-off.{% else %}No editor has signed it off.{% endif %}</span></div>
+  <div><span class="q">How was it made?</span><span class="a">Tap a paragraph: the margin shows what the readers queried, what the desk changed, and why.</span></div>
 </div>
 
 <section class="poster">
@@ -165,7 +165,7 @@
     <div class="a"><span lang="ja">{{ ed.title }}</span> <i>{{ ed.title_en }}</i>, {{ ed.author_en }} <span lang="ja">{{ ed.author }}</span>{% if ed.rights.author_died %} (died {{ ed.rights.author_died }}){% endif %}. First published in <span lang="ja">{{ ed.rights.first_published }}</span>. Public domain. Japanese text from <a href="{{ ed.card_url or 'https://www.aozora.gr.jp/' }}">Aozora Bunko</a>, typed and proofread by its volunteers.
       {% if ed.colophon %}<details><summary>Aozora's colophon</summary><pre lang="ja">{{ ed.colophon }}</pre></details>{% endif %}</div>
     <div class="q">This English?</div>
-    <div class="a">Drafted, checked and revised by keikaku's AI agents on Meta's models ({{ ed.models|join(', ') }}): {{ ed.calls }} model calls, costing {{ '$%.2f'|format(ed.cost) }}. They raised {{ ed.queries.total }} queries; {{ ed.queries.taken }} led to {{ 'a change' if ed.queries.taken == 1 else 'changes' }} and {{ ed.queries.declined }} {{ 'was' if ed.queries.declined == 1 else 'were' }} kept as drafted.{% if not ed.counts['editor-approved'] %} No person has edited it.{% endif %} Free to share and adapt under CC BY-SA 4.0.</div>
+    <div class="a">Drafted, read and revised by keikaku's AI agents on Meta's models ({{ ed.models|join(', ') }}), in {{ ed.calls }} model calls. The house raised {{ ed.queries.total }} {{ 'query' if ed.queries.total == 1 else 'queries' }}: {{ ed.queries.taken }} changed the text, {{ ed.queries.declined }} {{ 'was' if ed.queries.declined == 1 else 'were' }} declined{% if ed.queries.forked %}, {{ ed.queries.forked }} {{ 'was' if ed.queries.forked == 1 else 'were' }} left to the editor{% endif %}.{% if not ed.counts['editor-approved'] %} No person has edited it.{% endif %} Free to share and adapt under CC BY-SA 4.0.</div>
     {% if others %}
     <div class="q">Other English?</div>
     <div class="a">{% for t in others %}{{ t.by }} translated it in {{ t.year }}{% if t.url %}; it's free on <a href="{{ t.url }}" rel="noopener">{{ t.where or 'the web' }}</a>{% endif %}.{% if not loop.last %}<br>{% endif %}{% endfor %}</div>
