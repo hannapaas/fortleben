@@ -57,6 +57,23 @@ def cmd_fixture(args) -> int:
     return 0
 
 
+def cmd_download(args) -> int:
+    from pathlib import Path
+
+    from house import fixture, orchestrator
+
+    conn = connect(args.db)
+    run_id = args.run or orchestrator.latest_run(conn, args.work)
+    row = conn.execute("SELECT work_id FROM run WHERE id=?", (run_id,)).fetchone() if run_id else None
+    if not row or row["work_id"] != args.work:
+        print(f"Not downloaded: no such run of {args.work} in this database.")
+        return 1
+    out = Path(args.out or f"{args.work}-run{run_id}.zip")
+    out.write_bytes(fixture.download(conn, run_id))
+    print(out)
+    return 0
+
+
 def cmd_audit(args) -> int:
     import json
 
@@ -109,6 +126,12 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("work")
     p.add_argument("--run", type=int)
     p.set_defaults(func=cmd_fixture)
+
+    p = sub.add_parser("download", help="a run as a zip for the editor: the full record and the finished editions")
+    p.add_argument("work")
+    p.add_argument("--run", type=int, help="default: the latest run of this work")
+    p.add_argument("--out", help="the zip to write (default <work>-run<N>.zip here)")
+    p.set_defaults(func=cmd_download)
 
     p = sub.add_parser("audit", help="blind audit of runs' English, beside the one-shot baseline")
     p.add_argument("work")

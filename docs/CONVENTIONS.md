@@ -8,7 +8,7 @@ Written 30 Oct 2026. The rules of the road for anyone (or any agent) working in 
 
 ```
 house/            the engine
-  cli.py          the keikaku command: fetch, run, fixture, audit
+  cli.py          the keikaku command: fetch, run, fixture, download, audit
   client.py       one model client: Responses API, pricing from usage, response cache, FakeClient
   budget.py       spend ledger, run estimates, caps, kill switch
   orchestrator.py stages in order (docs/STAGES.md), stop and resume, the up-front estimate
@@ -19,7 +19,7 @@ house/            the engine
   schemas/        JSON schema per prompt output; the contract
   events.py       event types; the only way state changes are recorded
   audit.py        the blind audits and the one-shot baseline (docs/experiments/)
-  fixture.py      exports a recorded run to fixtures/<work>/
+  fixture.py      exports a recorded run to fixtures/<work>/, and zips a run for its editor (download)
   lang/ja/        everything Japanese-specific: the Aozora source adapter and parser, ruby, gaiji
   parser/         source adapter interface; other languages add house/lang/<code>/
   checks/         deterministic checkers (stray scripts, the omission guard)
