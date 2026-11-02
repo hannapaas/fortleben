@@ -15,7 +15,7 @@ import secrets
 import threading
 from functools import lru_cache
 
-from house import budget, events, orchestrator, works
+from house import events, orchestrator, works
 from house.client import make_client
 from house.comments import LINK, digest
 from house.db import connect, dumps
@@ -41,17 +41,19 @@ DEFAULT_OPTIONS: dict = {}  # run options every desk run gets; tests set the rec
 
 # The stage a run is on, in words a reader understands. A run's `stage` is the last one completed,
 # so the label is for the stage after it.
-STAGE_LABELS = {
+STAGE_LABELS = {  # one per stage in orchestrator.NAMES
     "parse": "preparing the text",
+    "parts": "dividing the text into parts",
     "first-read": "reading the whole story",
     "crux-check": "reading it a second time",
     "bible": "settling names, terms and voice",
     "draft": "drafting",
     "readers": "checking against the Japanese",
     "desk": "deciding what to change",
+    "final-read": "reading the finished English",
     "copy-desk": "checking the English",
-    "notes": "notes",
-    "release": "final read",
+    "notes": "writing the notes",
+    "release": "publishing",
 }
 GOING = ("queued", "running")
 
