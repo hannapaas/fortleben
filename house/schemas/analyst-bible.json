@@ -193,6 +193,23 @@
         }
       }
     },
+    "part_summaries": {
+      "type": "array",
+      "description": "Only when the book is in more than one part: one per part, in order; otherwise empty",
+      "items": {
+        "type": "object",
+        "properties": {
+          "starts": {
+            "type": "string",
+            "description": "The paragraph ID the part starts at"
+          },
+          "summary": {
+            "type": "string",
+            "description": "A few plain sentences: who appears, what happens, what is established or changes"
+          }
+        }
+      }
+    },
     "say": {
       "type": "string"
     }

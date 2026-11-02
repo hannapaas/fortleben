@@ -25,7 +25,10 @@ def parts(work) -> list[list]:
 
 def read(ctx, paras, units: dict, stats: dict) -> None:
     bible = ctx.latest("bible")
+    others = [f"- {p[0].id}–{p[-1].id}: {context.chapter_line(p, bible.get('chapter_summaries'), i)}"
+              for i, p in enumerate(context.chapters(ctx.work)) if p[0].id != paras[0].id]
     inp = context.join(context.reading(ctx.latest("reading")), context.bible(bible),
+                       context.block("The rest of the book, in brief", "\n".join(others)) if others and len(paras) < len(ctx.work.translatable()) else "",
                        context.chapter_pairs(paras, units, "en"))
     res = ctx.call(ACTOR, Call("final-read", model(ctx, "final_model"), "medium", inp,
                                load_schema("final-read"), f"{ctx.cache_key()}:final-read",

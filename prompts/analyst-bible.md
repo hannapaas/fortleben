@@ -18,6 +18,8 @@ Japanese prose drops subjects, leaves speakers unattributed, and shifts tense fr
 
 Write the style sheet as a colleague's guidance, with the reason beside each point: "the narrator only ever calls him 先生, and the whole relationship is in that word, so keep 'Sensei' even where English would reach for a name" rather than "never translate 先生". A translator who knows why can tell when an exception is right; one given a command will follow it into a bad sentence. Standing rules are decisions the editor has made; don't write your own as rules.
 
+**Part summaries**, only when the book is in more than one part: for each, a few plain sentences a translator working on another part needs, namely who appears, what happens, and what's established or changes. Facts, not commentary.
+
 **Hard spots:** poems, wordplay, allusions, dialect passages, classical quotations, anything the drafter will need help with, each with its paragraph IDs and a line on what makes it hard.
 
 ## Judgement, not completeness
@@ -30,4 +32,4 @@ The whole source text with paragraph IDs; the house's reading; the author file i
 
 ## What you return
 
-The bible as structured data in the schema's shape (cast, narration, motifs, style sheet, hard spots). Plain English in every free-text field; a reader will see it.
+The bible as structured data in the schema's shape (cast, narration, motifs, style sheet, part summaries, hard spots). Plain English in every free-text field; a reader will see it.
