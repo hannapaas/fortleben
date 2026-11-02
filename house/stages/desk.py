@@ -23,7 +23,7 @@ The model is a run option, options['desk_model'] (orchestrator.DEFAULTS).
 
 import json
 
-from house import checks, context, queries
+from house import context, queries
 from house.client import Call, load_schema
 from house.db import dumps
 from house.stages.common import apply_edits, change_flags, latest_units, model, new_revision, translator_notes

@@ -29,13 +29,11 @@ TYPES = {
     "call.started": "a model call went out: department, prompt, model, effort",
     "call.done": "a model call came back: tokens, cost, from cache or live",
     "agent.say": "a department's one plain sentence for the House log",
-    "budget.tick": "spend so far in drops and dollars",
     # what the house knows
     "reading.written": "the house's reading (first read), versioned",
     "crux.checked": "the second reader's crux and whether it matches",
     "bible.written": "the story bible, versioned",
     # the English
-    "voice.chosen": "the voice trial: the first page in each voice, and the one the head chose, with why",
     "page.cut": "the pager's pages: paragraph ids per page",
     "draft.paragraph": "a paragraph (or group) of English landed: revision id, variant",
     "revision.created": "the English for a paragraph changed: cause (query, rule, editor)",
