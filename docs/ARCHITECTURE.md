@@ -110,11 +110,11 @@ When a head meets something no department covers (an embedded poem, a dialect li
 The full design is in `STORY-STATE.md`. In short:
 
 - **Pages** of about 1K source tokens, never splitting a paragraph.
-- **The whole source sits in the cached prefix** for any text up to 50,000 characters, which is every work in `fixtures/works.json` (the longest, 「思い出の記」, is about 31k). At $0.15 per million cached tokens, 24k tokens cost about $0.004 a call. So the model can look anywhere in the book, and the bible carries the decisions. Above 50,000 characters a per-page call gets its part in full and the other parts in a line each.
+- **The whole source sits in the cached prefix** for any text up to 15,000 characters (whether it helps or buries the page is still to be tested). At $0.15 per million cached tokens, 24k tokens cost about $0.004 a call. So the model can look anywhere in the book, and the bible carries the decisions. Above 50,000 characters a per-page call gets its part in full and the other parts in a line each.
 - **Look-ahead:** each call also sees the next paragraph of Japanese, read-only, because Japanese often resolves a subject or speaker after the fact.
 - **Prompt order** (stable first, so it caches): house brief and department prompt; reading, voice and bible; the source; voice reference (the house's first page); the previous two paragraphs and the next one; the page.
 - **A new bible version** bumps the cache key (`<work>:bible-v<N>`), so changes to it should be batched, not made mid-stage.
-- **Continuity** is checked in the final read: one Spark call over the whole English and source up to 50,000 characters, part by part above that. The planted test (`BUILD-PLAN.md`, "The one test that's about the engine") would measure what it catches.
+- **Continuity** is checked in the final read: one Spark call over the whole English and source up to 15,000 characters, part by part above that, with a short summary of the other parts. The planted test (`BUILD-PLAN.md`, "The one test that's about the engine") would measure what it catches.
 - Novels use the same pipeline (`STORY-STATE.md` §5); the bible's one-line part summaries aren't built, so the other parts show as their headings or first words.
 
 ## 7. Showing the house at work

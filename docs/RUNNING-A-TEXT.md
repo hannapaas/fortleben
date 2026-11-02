@@ -81,7 +81,7 @@ Most lines don't have a debate behind them, and the page says so plainly: *draft
 
 The stages don't change with length; what a call sees does. This is the part we expect to keep tuning after the hackathon, and the part size and the whole-text threshold are the knobs.
 
-| | Short (up to 50,000 characters: everything we run now) | Long (a novel) |
+| | Short (up to 15,000 characters) | Long (a novel) |
 |---|---|---|
 | First read and crux check | One Wonder call each over the whole text | Still one call each: the 1M window holds a novel, so the reading is of the book, not of chapter one |
 | Bible | One Analyst call over the whole text | One call over the whole text today; built part by part, with a line of summary per part, is the plan |
@@ -90,4 +90,4 @@ The stages don't change with length; what a call sees does. This is the part we 
 | Final read | The whole text in one call | A part at a time, each with the reading and the bible (the editor's letter, not built, would be one call over the whole book) |
 | Budget | Estimated up front from the length | The same: cost grows with the length, not with length squared |
 
-Open questions: whether the whole source in the prefix helps or hurts; where the short/long threshold really sits (50,000 characters is a guess); and, later, whether sampled windows stand in for a sequential run, which is what would let us quote a novel's cost honestly before running one.
+Open questions: whether the whole source in the prefix helps or hurts; where the short/long threshold really sits (15,000 characters is a guess); and, later, whether sampled windows stand in for a sequential run, which is what would let us quote a novel's cost honestly before running one.
