@@ -1,0 +1,46 @@
+{
+ "prompt": "notes",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": {
+  "notes": [
+   {
+    "anchor": "p8",
+    "body": "Bōya usually means 'little boy,' but at the time it could also be used fondly for any small baby. The story first calls the child a girl, then has both parents call her this.",
+    "editions": [
+     "casual",
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "Bōya,"
+   }
+  ],
+  "say": "Kept one Bōya note for Casual and Curious; nothing else passes the keikaku test."
+ },
+ "usage": {
+  "input_tokens": 15357,
+  "cached_tokens": 0,
+  "output_tokens": 1229,
+  "reasoning_tokens": 1103,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0244195,
+ "response_id": "resp_6ae8ccb21592cc72118d44b1",
+ "latency_s": 6.79,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 399
+  }
+ ],
+ "created": "2026-11-02T17:47:30Z"
+}
