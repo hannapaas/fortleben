@@ -28,7 +28,8 @@ from house.comments import digest
 
 MAX_KEY = 200
 SIGNUPS_PER_HOUR = int(os.environ.get("SIGNUPS_PER_HOUR", 5))
-LOGINS_PER_HOUR = 10  # attempts, per address and per email address
+LOGINS_PER_HOUR = 10  # failed sign-ins, per address and per email address
+ACCOUNT_TRIES_PER_HOUR = 10  # wrong current passwords on the desk's account form, per person
 RESETS_PER_HOUR = 5  # reset mails asked for, per address and per email address
 SESSION_DAYS = 90
 RESET_HOURS = 1
@@ -146,19 +147,27 @@ def signup(conn, name: str, email: str, password: str, api_key: str) -> int:
     return person
 
 
-def set_login(conn, person_id: int, email: str, password: str, current: str | None = None) -> None:
+def set_login(conn, person_id: int, email: str, password: str, current: str | None = None) -> bool:
     """Give a person (an invited editor) an email address and password to sign in with, or change
-    them. A person who already has a password must give it, so a stolen session can't take the account."""
+    them. A person who already has a password must give it, so a stolen session can't take the account,
+    and may leave the new password empty to change only the email. True if the password changed."""
     row = conn.execute("SELECT password_hash FROM person WHERE id=?", (person_id,)).fetchone()
-    if row and row["password_hash"] and not check_password(row["password_hash"], current or ""):
+    has = bool(row and row["password_hash"])
+    if has and not check_password(row["password_hash"], current or ""):
         raise Refused(WRONG_CURRENT)
     email = _clean_email(email)
-    password = _clean_password(password)
+    new = bool(password) or not has
+    if new:
+        password = _clean_password(password)
     if _email_taken(conn, email, but=person_id):
         raise Refused(TAKEN)
-    conn.execute("UPDATE person SET email=?, password_hash=? WHERE id=?", (email, hash_password(password), person_id))
+    if new:
+        conn.execute("UPDATE person SET email=?, password_hash=? WHERE id=?", (email, hash_password(password), person_id))
+    else:
+        conn.execute("UPDATE person SET email=? WHERE id=?", (email, person_id))
     conn.execute("UPDATE reset SET used_at=datetime('now') WHERE person_id=? AND used_at IS NULL", (person_id,))
     conn.commit()
+    return new
 
 
 def set_key(conn, person_id: int, api_key: str) -> None:
@@ -298,6 +307,7 @@ def spent_words(conn, run_id: int) -> str:
 _signups: dict[str, deque] = defaultdict(deque)
 _logins: dict[str, deque] = defaultdict(deque)
 _resets: dict[str, deque] = defaultdict(deque)
+_account_tries: dict[str, deque] = defaultdict(deque)
 
 
 def _allow(seen: dict[str, deque], keys: list[str], limit: int, now: float | None, count: bool = True) -> bool:
@@ -321,9 +331,16 @@ def allow_signup(address: str, now: float | None = None, count: bool = True) -> 
     return _allow(_signups, [address or "-"], SIGNUPS_PER_HOUR, now, count)
 
 
-def allow_login(address: str, email: str, now: float | None = None) -> bool:
-    """True, and counted, if neither this address nor this email address has tried LOGINS_PER_HOUR times this hour."""
-    return _allow(_logins, [f"ip:{address or '-'}", f"email:{(email or '').strip().lower()}"], LOGINS_PER_HOUR, now)
+def allow_login(address: str, email: str, now: float | None = None, count: bool = True) -> bool:
+    """True, and counted unless `count` is False, if neither this address nor this email address has
+    failed LOGINS_PER_HOUR times this hour. /login asks without counting and counts only a failure."""
+    return _allow(_logins, [f"ip:{address or '-'}", f"email:{(email or '').strip().lower()}"], LOGINS_PER_HOUR, now, count)
+
+
+def allow_account_change(person_id: int, now: float | None = None, count: bool = True) -> bool:
+    """The desk's account form, per person: True, and counted unless `count` is False, if this person
+    has given a wrong current password fewer than ACCOUNT_TRIES_PER_HOUR times this hour."""
+    return _allow(_account_tries, [f"person:{person_id}"], ACCOUNT_TRIES_PER_HOUR, now, count)
 
 
 def allow_reset(address: str, email: str, now: float | None = None) -> bool:

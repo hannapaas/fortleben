@@ -21,9 +21,11 @@
 
   <div class="q" aria-hidden="true"></div>
   <div class="a">
-    <div class="startrow"><button type="submit" class="btn go">Sign in</button></div>
     {% if error %}<p class="err" role="alert">{{ error }}</p>{% endif %}
+    <div class="startrow"><button type="submit" class="btn go">Sign in</button></div>
     <p class="sm">No account? <a href="/signup">Sign up with your own Meta key</a>. Invited as an editor? Your link still works.</p>
   </div>
 </form>
 {% endblock %}
+{# A form sent back with an error opens on the error, not the top of the page (on a phone it would be out of view). #}
+{% block scripts %}{% if error %}<script>var e = document.querySelector(".err[role=alert]"); if (e) e.scrollIntoView({ block: "center" });</script>{% endif %}{% endblock %}

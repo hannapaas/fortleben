@@ -120,10 +120,10 @@
     <div class="addrow wraps">
       {{ current }}
       <input type="email" class="field" name="email" form="account" maxlength="254" required autocomplete="email" placeholder="Email" aria-label="Email" value="{{ login_email or desk.email }}">
-      <input type="password" class="field" name="password" form="account" minlength="8" maxlength="200" required autocomplete="new-password" placeholder="New password, at least 8 characters" aria-label="New password">
+      <input type="password" class="field" name="password" form="account" minlength="8" maxlength="200"{% if not desk.has_password %} required{% endif %} autocomplete="new-password" placeholder="New password, at least 8 characters" aria-label="New password">
       <button type="submit" class="btn" form="account">Save</button>
     </div>
-    <span class="sm block">A new password signs you out anywhere else you're signed in.</span></details>
+    <span class="sm block">{% if desk.has_password %}Leave the new password empty to change only the email. {% endif %}A new password signs you out anywhere else you're signed in.</span></details>
     {% if login_error %}<p class="err" role="alert">{{ login_error }}</p>{% endif %}</div>
   {% endif %}
 
@@ -161,13 +161,13 @@
     <div class="works" id="works" role="radiogroup" aria-labelledby="work-q"{% if not works %} hidden{% endif %}>
       {% for w in works %}
       <label class="work{% if not w.covered %} short{% endif %}">
-        <input type="radio" name="work" value="{{ w.id }}" data-estimate="{{ w.estimate }}" data-title="{{ w.title_en }}"{% if pick and w.id == pick.id %} checked{% endif %}{% if not w.covered %} disabled{% endif %}>
+        <input type="radio" name="work" value="{{ w.id }}" data-estimate="{{ w.estimate }}" data-title="{{ w.title_en or w.title }}"{% if pick and w.id == pick.id %} checked{% endif %}{% if not w.covered %} disabled{% endif %}>
         <span class="bx r" aria-hidden="true"></span>
         <span class="wb">
           <span class="wj" lang="ja">{{ w.title }}</span>
-          <span class="wt">{{ w.title_en }}</span>{% if w.id == desk.suggested %} <span class="tag">suggested</span>{% endif %}
-          {% if desk.key_tail or desk.keyless %}<span class="meta">{{ w.author_en }}{% if w.year %}, {{ w.year }}{% endif %} · {{ '%g' % (w.sheets|round(1)) }} sheets.{% if not w.covered %} Longer than one run here may spend.{% endif %}</span>{% else %}
-          <span class="meta">{{ w.author_en }}{% if w.year %}, {{ w.year }}{% endif %} · {{ '%g' % (w.sheets|round(1)) }} sheets · {{ n(w.estimate) }} drops.
+          {% if w.title_en %}<span class="wt">{{ w.title_en }}</span>{% endif %}{% if w.id == desk.suggested %} <span class="tag">suggested</span>{% endif %}
+          {% if desk.key_tail or desk.keyless %}<span class="meta">{{ w.author_en or w.author }}{% if w.year %}, {{ w.year }}{% endif %} · {{ '%g' % (w.sheets|round(1)) }} sheets.{% if not w.covered %} Longer than one run here may spend.{% endif %}</span>{% else %}
+          <span class="meta">{{ w.author_en or w.author }}{% if w.year %}, {{ w.year }}{% endif %} · {{ '%g' % (w.sheets|round(1)) }} sheets · {{ n(w.estimate) }} drops.
             {% if w.covered %}Your allowance covers it.{% else %}That's {{ n(w.estimate - al.available) }} more than you have.{% endif %}</span>{% endif %}
           {% if w.blurb %}<span class="meta blurb">{{ w.blurb }}</span>{% endif %}
           {% if w.has_edition %}<span class="meta">Already on the shelf. Yours would be a separate edition, under your credit.</span>{% endif %}

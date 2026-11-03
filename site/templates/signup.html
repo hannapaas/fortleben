@@ -19,11 +19,11 @@
     <span class="sm block">You can have one translation going at a time, and the site takes only a few at once. If it's full, the desk says so; try again a little later.</span></div>
 
   <div class="q">Your key?</div>
-  <div class="a">Make a key for this and nothing else. Put on it only what you are willing to spend; start small, you can add more. Turn off automatic top-up so a run can never spend more than you put on it. A short story costs about as much as a coffee.
+  <div class="a">Make a key for this and nothing else. Put on it only what you are willing to spend; start small, you can add more. Turn off automatic top-up so a run can never spend more than you put on it.
     <span class="sm block">If the key runs out part-way, the translation stops where it is. Top it up and resume it from the desk; nothing is paid for twice.</span></div>
 
   <div class="q">What we do with it?</div>
-  <div class="a">We hold it encrypted on our server and use it only for your translations. It is never shown or logged, and you see it again only as its last four characters. Press <i>Forget this key</i> on your desk and it is gone.</div>
+  <div class="a">We hold it encrypted and use it only for your own translations: your runs spend your key, nobody else's. Only its last four characters are ever shown, to you. Press <i>Forget this key</i> on your desk and it is gone.</div>
 
   <div class="q"><label for="name">Name?</label></div>
   <div class="a"><input type="text" id="name" name="name" maxlength="60" required value="{{ name or '' }}">
@@ -31,7 +31,7 @@
 
   <div class="q"><label for="email">Email?</label></div>
   <div class="a"><input type="email" id="email" name="email" maxlength="254" required autocomplete="email" value="{{ email or '' }}">
-    <span class="sm block">For signing in, and for a reset link if you forget your password. Nothing else is sent to it.</span></div>
+    <span class="sm block">How you sign in.</span></div>
 
   <div class="q"><label for="password">Password?</label></div>
   <div class="a"><input type="password" id="password" name="password" minlength="8" maxlength="200" required autocomplete="new-password">
@@ -43,9 +43,11 @@
 
   <div class="q" aria-hidden="true"></div>
   <div class="a">
-    <div class="startrow"><button type="submit" class="btn go"{% if closed %} disabled{% endif %}>Sign up</button></div>
     {% if error %}<p class="err" role="alert">{{ error }}</p>{% endif %}
+    <div class="startrow"><button type="submit" class="btn go"{% if closed %} disabled{% endif %}>Sign up</button></div>
     <p class="sm">Already have an account? <a href="/login">Sign in</a>.</p>
   </div>
 </form>
 {% endblock %}
+{# A form sent back with an error opens on the error, not the top of the page (on a phone it would be out of view). #}
+{% block scripts %}{% if error %}<script>var e = document.querySelector(".err[role=alert]"); if (e) e.scrollIntoView({ block: "center" });</script>{% endif %}{% endblock %}

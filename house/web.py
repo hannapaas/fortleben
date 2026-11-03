@@ -24,9 +24,10 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.concurrency import run_in_threadpool
 from fastapi.templating import Jinja2Templates
 from fastapi.exceptions import RequestValidationError
+from starlette.background import BackgroundTask
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from house import accounts, comments, desk, edition, wishlist
+from house import accounts, acquire, comments, desk, edition, wishlist
 from house.db import ROOT, connect
 
 SITE = ROOT / "site"
@@ -42,6 +43,65 @@ templates.env.filters["datefmt"] = edition._date
 
 # No other site may frame these pages (the desk's buttons spend), sniff their types, or see their addresses.
 SECURITY_HEADERS = {"X-Frame-Options": "DENY", "X-Content-Type-Options": "nosniff", "Referrer-Policy": "same-origin"}
+
+
+# Pages with a person's own things on them (or a form for their password) are never kept by a cache.
+PRIVATE = re.compile(r"^/(?:desk|login|logout|signup|reset)(?:/|$)")
+BROKEN = (b"<!doctype html><meta charset=utf-8><title>Fortleben</title>"
+          b"<p>Something went wrong on our side. Try again in a little while.</p>")
+
+
+class Guarded:
+    """Puts SECURITY_HEADERS on every response, and Cache-Control: no-store on private pages, at the
+    ASGI level, so they reach responses no route made too: an unhandled error's 500 is sent from here
+    (Starlette's own error page is outside every middleware), and the error is raised on to be logged.
+    A redirect to this same site (Starlette's /desk/ → /desk) loses its scheme and host: built from the
+    connection, it would say http:// behind Railway's https proxy."""
+
+    def __init__(self, app):
+        self.app = app
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] != "http":
+            return await self.app(scope, receive, send)
+        private = bool(PRIVATE.match(scope.get("path", "")))
+        started = False
+
+        async def guarded(message):
+            nonlocal started
+            if message["type"] == "http.response.start":
+                started = True
+                headers = list(message.get("headers") or [])
+                have = {k.lower() for k, _ in headers}
+                extra = dict(SECURITY_HEADERS, **({"Cache-Control": "no-store"} if private else {}))
+                if private:
+                    headers = [(k, v) for k, v in headers if k.lower() != b"cache-control"]
+                    have.discard(b"cache-control")
+                if 300 <= message["status"] < 400:
+                    headers = [(k, _same_site(v, scope)) if k.lower() == b"location" else (k, v) for k, v in headers]
+                headers += [(k.lower().encode(), v.encode()) for k, v in extra.items() if k.lower().encode() not in have]
+                message = {**message, "headers": headers}
+            await send(message)
+
+        try:
+            await self.app(scope, receive, guarded)
+        except Exception:
+            if not started:
+                await guarded({"type": "http.response.start", "status": 500,
+                               "headers": [(b"content-type", b"text/html; charset=utf-8"),
+                                           (b"content-length", str(len(BROKEN)).encode())]})
+                await send({"type": "http.response.body", "body": BROKEN})
+            raise
+
+
+def _same_site(location: bytes, scope) -> bytes:
+    """An absolute address on the host the request came to, as a path: '/desk?x=1'."""
+    host = dict(scope.get("headers") or []).get(b"host", b"")
+    for scheme in (b"http://", b"https://"):
+        start = scheme + host
+        if host and location.startswith(start) and location[len(start):len(start) + 1] in (b"/", b"?", b""):
+            return location[len(start):] or b"/"
+    return location
 
 
 class Capped:
@@ -263,12 +323,12 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
         if fresh and not static and not too_big:
             response.set_cookie(CSRF, csrf, max_age=60 * 60 * 24 * SESSION_DAYS, httponly=True, samesite="lax",
                                 secure=https(request))
-        for k, v in SECURITY_HEADERS.items():
-            response.headers.setdefault(k, v)
         return response
 
     # Every body is measured before `who` and the routes see it, a body sent in chunks included.
     app.add_middleware(Capped)
+    # Outermost of ours: the security headers (and no-store on private pages) on every response, errors too.
+    app.add_middleware(Guarded)
 
     async def form_of(request: Request) -> dict[str, str] | None:
         """The posted form, one value per field, or None if its CSRF token doesn't match the cookie."""
@@ -356,7 +416,14 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
             return plain(closed, 200)
         who = request.path_params.get("token") or person["id"]
         state = desk.state(conn(), who)
-        return page(request, "desk.html", status, desk=state, closed=closed_for(person), **ctx)
+        return retry_cards(page(request, "desk.html", status, desk=state, closed=closed_for(person), **ctx))
+
+    def retry_cards(response):
+        """After a page that lists works, try again in the background for any added work whose English
+        card call failed (house/acquire.py, at most once an hour per work). Only where the site has a key."""
+        if not closed:
+            response.background = BackgroundTask(acquire.describe_missing, db)
+        return response
 
     @app.get("/desk", response_class=HTMLResponse)
     def desk_home(request: Request):
@@ -481,11 +548,13 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
         if form is None:
             return page(request, "login.html", 403, error=EXPIRED)
         email = form.get("email", "")
-        if not accounts.allow_login(address(request), email):
+        # Only a wrong pair counts against the address and the email address; a sign-in that works doesn't.
+        if not accounts.allow_login(address(request), email, count=False):
             return page(request, "login.html", 429, email=email,
                         error="That's a lot of tries in an hour. Try again later.")
         pid = accounts.authenticate(conn(), email, form.get("password", ""))
         if pid is None:
+            accounts.allow_login(address(request), email)
             return page(request, "login.html", 400, email=email, error=accounts.NO_MATCH)
         return sign_in(request, RedirectResponse("/desk", status_code=303, headers=NOINDEX), pid)
 
@@ -593,16 +662,21 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
         form = await form_of(request)
         if form is None:
             return plain(EXPIRED, 403)
-        if person["password_hash"] and not accounts.allow_login(address(request), person["email"] or ""):
+        # Its own counter, per person, of wrong current passwords only: a typo in the new email or a
+        # sign-in elsewhere doesn't use it up.
+        if person["password_hash"] and not accounts.allow_account_change(person["id"], count=False):
             return desk_page(request, person, 429, login_error="That's a lot of tries in an hour. Try again later.",
                              login_email=form.get("email", ""))
         try:
-            accounts.set_login(conn(), person["id"], form.get("email", ""), form.get("password", ""), form.get("current"))
+            changed = accounts.set_login(conn(), person["id"], form.get("email", ""), form.get("password", ""),
+                                         form.get("current"))
         except accounts.Refused as e:
+            if str(e) == accounts.WRONG_CURRENT:
+                accounts.allow_account_change(person["id"])
             return desk_page(request, person, 400, login_error=str(e),
                              login_email=form.get("email", ""))
-        # A new password signs the person out everywhere but here.
-        accounts.end_sessions(conn(), person["id"], keep=request.cookies.get(SESSION))
+        if changed:  # a new password signs the person out everywhere but here; a new email alone doesn't
+            accounts.end_sessions(conn(), person["id"], keep=request.cookies.get(SESSION))
         return RedirectResponse(back_to_desk(request), status_code=303, headers=NOINDEX)
 
     # --- The public wishlist (house/wishlist.py) ---------------------------------------------------
@@ -610,8 +684,8 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
     # so it needs what a run needs: no replay, a key, an open house.
 
     def wishlist_page(request: Request, status: int = 200, **ctx) -> HTMLResponse:
-        return templates.TemplateResponse(request, "wishlist.html", {
-            "replay": replay, "closed": closed, "wishes": wishlist.entries(conn()), **ctx}, status_code=status)
+        return retry_cards(templates.TemplateResponse(request, "wishlist.html", {
+            "replay": replay, "closed": closed, "wishes": wishlist.entries(conn()), **ctx}, status_code=status))
 
     @app.get("/wishlist", response_class=HTMLResponse)
     def wishlist_view(request: Request):

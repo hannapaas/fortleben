@@ -22,7 +22,7 @@ from house import accounts, acquire, budget, events, orchestrator, works
 from house.client import make_client
 from house.comments import LINK, digest
 from house.db import connect, dumps
-from house.edition import _date, plain, plain_all
+from house.edition import _date, cast_names, plain, plain_all
 from house.lang.ja import aozora
 
 # An allowance is counted in drops of ink: one drop is DROP_USD, and a sheet is 400 characters of the original.
@@ -200,8 +200,11 @@ def eligible_works(conn=None) -> list[dict]:
             continue
         chars = _chars(wid, path.stat().st_mtime)
         n = sheets(chars)
-        out.append({"id": wid, "title": w["title"], "title_en": w.get("title_en") or w["title"],
-                    "author_en": w.get("author_en") or w["author"],
+        # No English title is "" (a work card that failed, or an old one that copied the Japanese)
+        title_en = w.get("title_en") if w.get("title_en") != w["title"] else None
+        author_en = w.get("author_en") if w.get("author_en") != w["author"] else None
+        out.append({"id": wid, "title": w["title"], "title_en": title_en or "", "author": w["author"],
+                    "author_en": author_en or "",
                     "first_published_year": w["rights"].get("first_published_year"), "blurb": w.get("blurb"),
                     "chars": chars, "sheets": n, "estimate": math.ceil(n * rate), "added": bool(w.get("added"))})
     return out
@@ -225,7 +228,8 @@ def add_work(db, token: Who, url: str) -> dict:
         _, _, card_url = acquire.aozora_card.card(url)
     except acquire.NotAWork as e:
         raise Refused(str(e)) from None
-    if not acquire.find(conn, card_url) and acquire.adds_today(conn, person["id"]) >= ADDS_PER_DAY:
+    if (not acquire.find(conn, card_url) and not acquire.refused_before(conn, card_url)
+            and acquire.adds_today(conn, person["id"]) >= ADDS_PER_DAY):
         raise Refused(TOO_MANY_ADDS, 429)
     try:
         work_id, _ = acquire.add(conn, url, person["id"])
@@ -467,26 +471,35 @@ def steer(db, token: Who, run_id: int, note: str | None, voice=None) -> None:
         if run_id in _steering:
             raise Refused("keikaku is still reading your last note.", 409)
         if voice is not None:
-            _set_voice(conn, run_id, _voice(conn, row, voice))
+            voice = _voice(conn, row, voice)  # checked now; it's kept only once the note is read
         options = _options(conn, run_id)
         options.pop("steer_error", None)
         conn.execute("UPDATE run SET options=? WHERE id=?", (dumps(options), run_id))
         conn.commit()
         _steering.add(run_id)
-    spawn(read_note, db, run_id, note)
+    spawn(read_note, db, run_id, note, voice)
 
 
-def read_note(db, run_id: int, note: str) -> None:
-    """One round of steering, in its own connection. A failure is kept for the page to show."""
+def read_note(db, run_id: int, note: str, voice: int | None = None) -> None:
+    """One round of steering, in its own connection, in the voice picked with the note (the round
+    redrafts page 1 in it). A failure is kept for the page to show, and leaves the voice as it was."""
     conn = connect(db)
     try:
         row = conn.execute("SELECT * FROM run WHERE id=?", (run_id,)).fetchone()
-        client = make_client(conn, run_cap=row["cap_usd"], **accounts.client_key(conn, row))
+        before = _options(conn, run_id).get("voice")
         try:
+            if voice is not None:
+                _set_voice(conn, run_id, voice)
+                conn.commit()
+            client = make_client(conn, run_cap=row["cap_usd"], **accounts.client_key(conn, row))
             steer_round(conn, client, run_id, note)
         except Exception as e:
             conn.rollback()
             options = _options(conn, run_id)
+            if before is None:
+                options.pop("voice", None)
+            else:
+                options["voice"] = before
             options["steer_error"] = f"{type(e).__name__}: {e}"[:500]
             conn.execute("UPDATE run SET options=? WHERE id=?", (dumps(options), run_id))
             conn.commit()
@@ -644,7 +657,8 @@ def _run_dict(conn, row) -> dict:
     else:
         label = STAGE_LABELS.get(nxt or "release", "")
     try:
-        title_en = works.info(row["work_id"], conn).get("title_en") or row["work_id"]
+        info = works.info(row["work_id"], conn)
+        title_en = info.get("title_en") or info.get("title") or row["work_id"]
     except KeyError:
         title_en = row["work_id"]
     return {"id": row["id"], "work_id": row["work_id"], "title_en": title_en, "status": status,
@@ -694,7 +708,7 @@ def _listed(conn, person) -> list[dict]:
     keyless = not accounts.has_key(person) and _signed_up(conn, person["id"])
     cap = budget.Budget(conn).run_cap if accounts.has_key(person) or keyless else None
     published = {r[0] for r in conn.execute("SELECT DISTINCT work_id FROM edition WHERE current_release IS NOT NULL")}
-    return [{"id": w["id"], "title": w["title"], "title_en": w["title_en"], "author_en": w["author_en"],
+    return [{"id": w["id"], "title": w["title"], "title_en": w["title_en"], "author": w["author"], "author_en": w["author_en"],
              "year": w["first_published_year"], "blurb": w["blurb"], "sheets": round(w["sheets"], 1),
              "estimate": w["estimate"],
              "covered": w["estimate"] * DROP_USD <= cap if cap else w["estimate"] <= left["available"],
@@ -760,12 +774,13 @@ def checkpoint(conn, row) -> dict:
     reading = _doc(conn, row, "reading") or {}
     bible = _doc(conn, row, "bible") or {}
     takes = cp.get("takes") or []
-    rounds = [{"note": r.get("note", ""), "reply": plain(r.get("reply", "")), "changed": plain_all(r.get("changed") or []),
-               "question": plain(r.get("question")), "english": _paras(r.get("english")), "voice": r.get("voice", 0)}
+    cast = cast_names(bible)
+    rounds = [{"note": r.get("note", ""), "reply": plain(r.get("reply", ""), cast), "changed": plain_all(r.get("changed") or [], cast),
+               "question": plain(r.get("question"), cast), "english": _paras(r.get("english")), "voice": r.get("voice", 0)}
               for r in cp.get("rounds") or []]
     voice = options.get("voice", 0)
     voice = voice if isinstance(voice, int) and 0 <= voice < len(takes) else 0
-    voices = [{"label": plain(t.get("label", "")), "line": plain(t.get("line", "")), "english": _paras(t.get("english")),
+    voices = [{"label": plain(t.get("label", ""), cast), "line": plain(t.get("line", ""), cast), "english": _paras(t.get("english")),
                "redrafted": False} for t in takes]
     for r in rounds:  # each voice shows its latest redraft, if a note has redrafted it
         if isinstance(r["voice"], int) and 0 <= r["voice"] < len(voices):
@@ -780,15 +795,15 @@ def checkpoint(conn, row) -> dict:
             "second_crux": [{"point": c.get("point", ""), "for_the_english": c.get("for_the_english", "")}
                             for c in reading.get("second_crux") or []],
             "prose": [p.strip() for p in re.split(r"\n\s*\n", reading.get("reading") or "") if p.strip()],
-            "questions": [q.get("question", "") for q in reading.get("open_questions") or []]}),
+            "questions": [q.get("question", "") for q in reading.get("open_questions") or []]}, cast),
         "bible": plain_all({
             "cast": [{"handle": c.get("handle", ""), "role": c.get("role", ""),
-                      "name": " ".join(x for x in (c.get("name_ja"), c.get("romanised")) if x),
+                      "name": " ".join(x for x in (c.get("name_ja"), c.get("romanised")) if x and x != c.get("handle")),
                       "addressed": "; ".join(f"{f.get('form', '')} ({f.get('used_by', '')})" for f in c.get("forms") or [])}
                      for c in bible.get("cast") or []],
             "style_sheet": _pairs(bible.get("style_sheet")),
             "narration": _pairs(bible.get("narration")),
             "motifs": [{"motif": m.get("motif", ""), "english": m.get("english", "")} for m in bible.get("motifs") or []],
             "hard_spots": [{"where": ", ".join(h.get("anchors") or []), "kind": h.get("kind", ""), "why": h.get("why_hard", "")}
-                           for h in bible.get("hard_spots") or []]}),
+                           for h in bible.get("hard_spots") or []]}, cast),
     }
