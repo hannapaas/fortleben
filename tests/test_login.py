@@ -57,6 +57,7 @@ def mail(monkeypatch):
     sent = []
     monkeypatch.setattr(comments, "send", lambda to, subject, text, **kw: sent.append((to, subject, text)))
     monkeypatch.setenv("RESEND_API_KEY", "re_test")
+    monkeypatch.setenv("KEIKAKU_BASE_URL", "https://fortleben.test")
     return sent
 
 
@@ -292,3 +293,60 @@ def test_nothing_secret_is_rendered_or_stored(site, conn, mail):
         assert not any(secret in p for p in pages)
     for secret in [PASSWORD, KEY, sid, reset]:
         assert secret not in stored
+
+
+def test_reset_mail_needs_the_sites_own_address(site, ines, monkeypatch):
+    sent = []
+    monkeypatch.setattr(comments, "send", lambda to, subject, text, **kw: sent.append((to, text)))
+    monkeypatch.setenv("RESEND_API_KEY", "re_test")
+    monkeypatch.delenv("KEIKAKU_BASE_URL", raising=False)
+    r = site.post("/reset", data={"email": "ines@example.com", "csrf": csrf(site)}, headers={"Host": "evil.example"})
+    # No address of its own: the link goes to the log, never by mail with the asker's Host in it.
+    assert sent and sent[0][0] is None and "set up on this server" in r.text
+
+
+def test_a_revoked_invite_cant_reset_its_way_back(conn):
+    token = desk.invite(conn, "Kenji")
+    pid = desk.editor(conn, token)["id"]
+    accounts.set_login(conn, pid, "kenji@example.com", PASSWORD)
+    early = accounts.new_reset(conn, "kenji@example.com")
+    desk.revoke(conn, token)
+    assert accounts.new_reset(conn, "kenji@example.com") is None
+    assert accounts.reset_person(conn, early) is None
+
+
+def test_a_password_change_cancels_reset_links(conn, ines):
+    link = accounts.new_reset(conn, "ines@example.com")
+    accounts.set_login(conn, ines, "ines@example.com", "another password", PASSWORD)
+    assert accounts.reset_person(conn, link) is None
+
+
+def test_a_chunked_body_is_capped(site):
+    def chunks():
+        for _ in range(web.MAX_BODY // 65536 + 2):
+            yield b"u" * 65536
+    r = site.post("/wishlist", content=chunks(), headers={"content-type": "application/x-www-form-urlencoded"})
+    assert r.status_code == 413
+    assert r.headers["x-frame-options"] == "DENY"
+
+
+def test_a_lone_surrogate_is_refused_not_a_crash(site, ines):
+    sign_in(site)
+    r = site.post("/desk/runs", content=b'{"work": "bansan", "agree": true, "credit": "\\ud800"}',
+                  headers={"content-type": "application/json"})
+    assert r.status_code == 400
+
+
+def test_credits_the_site_uses_are_refused(site, ines):
+    sign_in(site)
+    for credit in ("the house", "Keikaku", {"a": 1}):
+        r = site.post("/desk/runs", json={"work": "bansan", "agree": True, "credit": credit})
+        assert r.status_code == 400, credit
+
+
+def test_a_missing_page_is_a_page_in_a_browser(site):
+    html = {"Accept": "text/html"}
+    for path in ("/read/nope", "/read/bansan?edition=abc", "/nothere"):
+        r = site.get(path, headers=html)
+        assert r.status_code == 404 and "Back to the library" in r.text, path
+    assert site.get("/read/nope").json()["detail"] == "No edition of that work yet."

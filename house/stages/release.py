@@ -48,7 +48,12 @@ def run(ctx) -> dict:
                          "ON CONFLICT(work_id, segment_id) DO UPDATE SET label=excluded.label, who=excluded.who",
                          (ctx.work_id, p.id, label(ctx, p.id), "the house"))
     editor = ctx.options.get("credit") or "the house"  # a run from the editors' desk carries the editor's credit
-    ed = ctx.conn.execute("SELECT id FROM edition WHERE work_id=? AND editor=?", (ctx.work_id, editor)).fetchone()
+    # An edition belongs to whoever ran it: an editor's next run of a work revises their own edition, and
+    # nobody's credit, however they spell it, lands in someone else's (or the house's).
+    ed = ctx.conn.execute("SELECT e.id FROM edition e WHERE e.work_id=? AND e.editor=? AND NOT EXISTS ("
+                          "SELECT 1 FROM release r JOIN run u ON u.id = r.run_id WHERE r.edition_id = e.id "
+                          "AND json_extract(u.options, '$.editor_id') IS NOT ?)",
+                          (ctx.work_id, editor, ctx.options.get("editor_id"))).fetchone()
     ed_id = ed["id"] if ed else ctx.conn.execute("INSERT INTO edition (work_id, editor) VALUES (?,?)",
                                                  (ctx.work_id, editor)).lastrowid
     n = ctx.conn.execute("SELECT COUNT(*) FROM release WHERE edition_id=?", (ed_id,)).fetchone()[0]

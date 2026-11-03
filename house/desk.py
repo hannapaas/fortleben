@@ -65,6 +65,7 @@ STATUSES = ("queued", "running", "waiting", "done", "failed", "interrupted")
 CAPACITY = 3  # runs queued or running across the site at once
 FULL = "Fortleben is full at the moment: three translations are going. Try again in a little while."
 YOURS = "You have a translation going already. Start the next one when it has finished."
+OTHER = "You have another translation going. Carry this one on when that one has finished."
 NOTE_CHARS = 2000
 
 _lock = threading.Lock()
@@ -100,10 +101,12 @@ def revoke(conn, token_or_id: str | int) -> bool:
     key = str(token_or_id)
     col, val = ("id", int(key)) if key.isdigit() else ("token_hash", digest(key))
     cur = conn.execute(f"UPDATE invite SET revoked_at=datetime('now') WHERE {col}=? AND revoked_at IS NULL", (val,))
-    # A revoked link takes the person's way in with it: their sessions and any password they added.
+    # A revoked link takes the person's way in with it: their sessions, any email address and password
+    # they added (so a reset can't let them back in) and any reset link already sent.
     for (pid,) in conn.execute(f"SELECT person_id FROM invite WHERE {col}=?", (val,)).fetchall():
-        conn.execute("UPDATE person SET password_hash=NULL WHERE id=?", (pid,))
+        conn.execute("UPDATE person SET password_hash=NULL, email=NULL WHERE id=?", (pid,))
         conn.execute("DELETE FROM session WHERE person_id=?", (pid,))
+        conn.execute("UPDATE reset SET used_at=datetime('now') WHERE person_id=? AND used_at IS NULL", (pid,))
     conn.commit()
     return cur.rowcount > 0 or bool(conn.execute(f"SELECT 1 FROM invite WHERE {col}=?", (val,)).fetchone())
 
@@ -250,9 +253,12 @@ def _going(conn, person_id: int, but: int | None = None) -> bool:
 
 def _room(conn, person_id: int, but: int | None = None) -> None:
     if _going(conn, person_id, but):
-        raise Refused(YOURS, 409)
+        raise Refused(YOURS if but is None else OTHER, 409)
     if _full(conn, but):
         raise Refused(FULL, 409)
+
+
+RESERVED = {"the house", "house", "keikaku", "fortleben", "an editor"}  # names the site gives its own editions
 
 
 def _credit(credit: str | None) -> str:
@@ -261,6 +267,8 @@ def _credit(credit: str | None) -> str:
         raise Refused(f"Keep the name to {MAX_CREDIT} characters.")
     if LINK.search(credit):
         raise Refused("No links in the name.")
+    if credit.casefold() in RESERVED:
+        raise Refused("That name is the site's own. Use yours.")
     return credit
 
 
@@ -449,8 +457,10 @@ def steer(db, token: Who, run_id: int, note: str | None, voice=None) -> None:
     the round lands in the checkpoint document. `voice`, if given, is the take the person has picked,
     so page 1 comes back in that voice."""
     conn = connect(db)
-    _, row = _mine(conn, token, run_id)
+    person, row = _mine(conn, token, run_id)
     note = _note(note)
+    if _options(conn, run_id).get("own_key") and not accounts.key_for(conn, person["id"]):
+        raise Refused(NO_KEY)  # the note would be read with no key, and fail
     with _lock:
         if row["status"] != "waiting":
             raise Refused("Notes go in while the run is waiting at the checkpoint, before the draft starts. This one isn't.", 409)
@@ -646,8 +656,18 @@ def _run_dict(conn, row) -> dict:
             "resumable": status in ("interrupted", "failed") and resumable(options),
             "rounds": len(_checkpoint_doc(conn, row["id"]).get("rounds") or []) if status == "waiting" else 0,
             "steering": row["id"] in _steering,
-            "steer_error": ("keikaku couldn't read that note. Try sending it again." if options.get("steer_error") else None),
+            "steer_error": _steer_error(options),
             "spent_words": accounts.spent_words(conn, row["id"]) if options.get("own_key") else None}
+
+
+def _steer_error(options: dict) -> str | None:
+    error = options.get("steer_error")
+    if not error:
+        return None
+    if _turned_down(error):
+        whose = "your key" if options.get("own_key") else "the site's model key"
+        return f"keikaku couldn't read that note: {whose} was turned down."
+    return "keikaku couldn't read that note. Try sending it again."
 
 
 def _edition_url(conn, row) -> str:

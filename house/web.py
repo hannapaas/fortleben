@@ -9,6 +9,7 @@ runs, so it needs a key (the site's or the person's own) and an open site too.
 """
 
 import hmac
+import json
 import os
 import re
 import secrets
@@ -22,6 +23,8 @@ from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.concurrency import run_in_threadpool
 from fastapi.templating import Jinja2Templates
+from fastapi.exceptions import RequestValidationError
+from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from house import accounts, comments, desk, edition, wishlist
 from house.db import ROOT, connect
@@ -35,6 +38,45 @@ MAX_ID = 2**63 - 1  # SQLite's largest integer; a bigger id in an address is no 
 MAX_BODY = 256 * 1024  # no form or desk request comes near this
 templates = Jinja2Templates(directory=SITE / "templates")
 templates.env.filters["datefmt"] = edition._date
+
+
+# No other site may frame these pages (the desk's buttons spend), sniff their types, or see their addresses.
+SECURITY_HEADERS = {"X-Frame-Options": "DENY", "X-Content-Type-Options": "nosniff", "Referrer-Policy": "same-origin"}
+
+
+class Capped:
+    """Reads a request's body before the app does and refuses it with a 413 past MAX_BODY, whether or not
+    it said how long it was (a body sent in chunks has no Content-Length). Bodies here are small, so
+    holding one in memory up to the cap is cheap; the app gets it whole afterwards."""
+
+    def __init__(self, app):
+        self.app = app
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] != "http" or scope["method"] in ("GET", "HEAD", "OPTIONS"):
+            return await self.app(scope, receive, send)
+        chunks, size = [], 0
+        while True:
+            message = await receive()
+            if message["type"] == "http.disconnect":
+                return
+            chunks.append(message.get("body", b""))
+            size += len(chunks[-1])
+            if size > MAX_BODY:
+                response = JSONResponse({"error": "That's far more than any form here sends."}, status_code=413,
+                                        headers=SECURITY_HEADERS)
+                return await response(scope, receive, send)
+            if not message.get("more_body"):
+                break
+        body, given = b"".join(chunks), False
+
+        async def replay():
+            nonlocal given
+            if not given:
+                given = True
+                return {"type": "http.request", "body": body, "more_body": False}
+            return await receive()
+        await self.app(scope, replay, send)
 
 
 def create_app(db: str | Path | None = None, replay: bool = False, screen: bool = True) -> FastAPI:
@@ -60,6 +102,14 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
 
     NOINDEX = {"X-Robots-Tag": "noindex"}
 
+    def whole(data) -> bool:
+        """The parsed JSON holds only text that can be stored: no lone surrogates from a \\ud800 escape."""
+        try:
+            json.dumps(data, ensure_ascii=False).encode("utf-8")
+            return True
+        except UnicodeEncodeError:
+            return False
+
     def plain(message: str, status: int) -> HTMLResponse:
         return HTMLResponse(f"<!doctype html><meta charset=utf-8><title>Fortleben</title><p>{message}</p>",
                             status_code=status, headers=NOINDEX)
@@ -74,8 +124,27 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
         peer = request.client.host if request.client else ""
         if os.environ.get("KEIKAKU_TRUST_PROXY", "").lower() not in ("true", "1", "yes"):
             return peer
-        fwd = request.headers.get("x-forwarded-for", "")
+        fwd = ",".join(request.headers.getlist("x-forwarded-for"))  # a header sent twice counts as one list
         return fwd.split(",")[-1].strip() or peer
+
+    # A page that isn't there: a short page for a person in a browser, JSON for desk.js and reader.js.
+    def browser(request: Request) -> bool:
+        return request.method == "GET" and "text/html" in request.headers.get("accept", "")
+
+    @app.exception_handler(StarletteHTTPException)
+    async def http_error(request: Request, exc: StarletteHTTPException):
+        if exc.status_code == 404 and browser(request):
+            message = exc.detail if exc.detail and exc.detail != "Not Found" else "There's no page at this address."
+            return templates.TemplateResponse(request, "missing.html", {"message": message, "replay": replay},
+                                              status_code=404)
+        return JSONResponse({"detail": exc.detail}, status_code=exc.status_code, headers=getattr(exc, "headers", None))
+
+    @app.exception_handler(RequestValidationError)
+    async def bad_address(request: Request, exc: RequestValidationError):
+        if browser(request):  # /read/bansan?edition=abc: no such edition
+            return templates.TemplateResponse(request, "missing.html", {"message": "There's no page at this address.",
+                                                                        "replay": replay}, status_code=404)
+        return JSONResponse({"detail": "That request didn't make sense here."}, status_code=422)
 
     @app.get("/", response_class=HTMLResponse)
     def home(request: Request):
@@ -93,7 +162,7 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
             "comments": comments.visible(c, work_id, token)})
         if COOKIE not in request.cookies:
             page.set_cookie(COOKIE, token, max_age=60 * 60 * 24 * 365, httponly=True, samesite="lax",
-                            secure=request.url.scheme == "https")
+                            secure=https(request))
         return page
 
     @app.get("/read/{work_id}/analysis", response_class=HTMLResponse)
@@ -106,13 +175,15 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
     @app.post("/read/{work_id}/comments")
     async def post_comment(request: Request, work_id: str, background: BackgroundTasks):
         token = request.cookies.get(COOKIE)
-        if not can_comment or not token:
+        if not can_comment:
             raise HTTPException(403, "Comments aren't open here.")
+        if not token:  # the cookie the read page set never came back
+            raise HTTPException(403, "Comments need a cookie from this site. Allow cookies here and reload the page.")
         try:
             data = await request.json()
         except (ValueError, RecursionError):
             data = None
-        if not isinstance(data, dict):
+        if not isinstance(data, dict) or not whole(data):
             return JSONResponse({"error": "That comment didn't arrive whole. Try again."}, status_code=400)
         segment, body, name = (v if isinstance(v, str) else "" for v in (data.get("segment"), data.get("body"), data.get("name")))
         c = conn()
@@ -172,31 +243,32 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
     def https(request: Request) -> bool:
         return request.url.scheme == "https" or request.headers.get("x-forwarded-proto") == "https"
 
+    TOO_BIG = "That's far more than any form here sends."
+
     @app.middleware("http")
     async def who(request: Request, call_next):
         try:
             too_big = int(request.headers.get("content-length") or 0) > MAX_BODY
         except ValueError:
             too_big = True
-        if too_big:
-            return JSONResponse({"error": "That's far more than any form here sends."}, status_code=413)
         sid = request.cookies.get(SESSION)
         static = request.url.path.startswith("/static/")
-        request.state.person = accounts.session_person(conn(), sid) if sid and not static else None
+        request.state.person = accounts.session_person(conn(), sid) if sid and not static and not too_big else None
         csrf = request.cookies.get(CSRF) or ""
         fresh = not (16 <= len(csrf) <= 100)
         if fresh:
             csrf = secrets.token_urlsafe(32)
         request.state.csrf = csrf
-        response = await call_next(request)
-        if fresh and not static:
+        response = (JSONResponse({"error": TOO_BIG}, status_code=413) if too_big else await call_next(request))
+        if fresh and not static and not too_big:
             response.set_cookie(CSRF, csrf, max_age=60 * 60 * 24 * SESSION_DAYS, httponly=True, samesite="lax",
                                 secure=https(request))
-        # No other site may frame these pages (the desk's buttons spend), sniff their types, or see their addresses.
-        response.headers.setdefault("X-Frame-Options", "DENY")
-        response.headers.setdefault("X-Content-Type-Options", "nosniff")
-        response.headers.setdefault("Referrer-Policy", "same-origin")
+        for k, v in SECURITY_HEADERS.items():
+            response.headers.setdefault(k, v)
         return response
+
+    # Every body is measured before `who` and the routes see it, a body sent in chunks included.
+    app.add_middleware(Capped)
 
     async def form_of(request: Request) -> dict[str, str] | None:
         """The posted form, one value per field, or None if its CSRF token doesn't match the cookie."""
@@ -265,6 +337,8 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
                 data = {}
             if not isinstance(data, dict):
                 data = {}
+            if not whole(data):
+                return error("That request didn't arrive whole. Reload the page and try again.", 400)
             run_id = request.path_params.get("run_id")
             if run_id is not None:
                 run_id = int(run_id) if run_id.isascii() and run_id.isdigit() else 0
@@ -307,8 +381,11 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
     async def desk_start(request, pid, data):
         shown = data.get("estimate")  # what the page showed; the run never holds more
         shown = shown if isinstance(shown, int) and not isinstance(shown, bool) and 0 < shown <= MAX_ID else None
+        credit = data.get("credit")
+        if credit is not None and not isinstance(credit, str):
+            raise desk.Refused("Give the name as text.")
         return {"run_id": desk.start(db, pid, str(data.get("work", "")), data.get("agree") is True,
-                                     str(data.get("credit") or ""), checkpoint=data.get("checkpoint") is not False,
+                                     credit or "", checkpoint=data.get("checkpoint") is not False,
                                      shown=shown)}
 
     # A work added from a link to Aozora Bunko (house/acquire.py): its row for the list, or why not.
@@ -379,13 +456,17 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
         if form is None:
             return signup_page(request, 403, error=EXPIRED)
         name, email = form.get("name", ""), form.get("email", "")
-        if not accounts.allow_signup(address(request)):
+        # A form sent back for a typo doesn't count against the address; a sign-up, or a taken address, does.
+        if not accounts.allow_signup(address(request), count=False):
             return signup_page(request, 429, name=name, email=email,
                                error="That's a lot of sign-ups from one place in an hour. Try again later.")
         try:
             pid = accounts.signup(conn(), name, email, form.get("password", ""), form.get("key", ""))
         except accounts.Refused as e:
+            if str(e) == accounts.TAKEN:
+                accounts.allow_signup(address(request))
             return signup_page(request, 400, name=name, email=email, error=str(e))
+        accounts.allow_signup(address(request))
         return sign_in(request, RedirectResponse("/desk", status_code=303, headers=NOINDEX), pid)
 
     @app.get("/login", response_class=HTMLResponse)
@@ -423,8 +504,13 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
     contact = os.environ.get("KEIKAKU_CONTACT", "").strip()
     contact = contact if re.fullmatch(r"[^@\s<>\"']+@[^@\s<>\"']+\.[^@\s<>\"']+", contact) else ""
 
+    def reset_mail() -> bool:
+        """Reset links go by mail only with mail set up and the site's own address to put in them, never one
+        taken from the request's Host header, which the asker chooses."""
+        return comments.can_send() and bool(os.environ.get("KEIKAKU_BASE_URL"))
+
     def reset_page(request: Request, status: int = 200, **ctx) -> HTMLResponse:
-        return page(request, "reset.html", status, can_mail=comments.can_send(), contact=contact, **ctx)
+        return page(request, "reset.html", status, can_mail=reset_mail(), contact=contact, **ctx)
 
     @app.get("/reset", response_class=HTMLResponse)
     def reset_form(request: Request):
@@ -439,17 +525,17 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
         if not accounts.allow_reset(address(request), email):
             return reset_page(request, 429, email=email, error="That's a lot of reset requests in an hour. Try again later.")
         if token := accounts.new_reset(conn(), email):
-            comments.send(email, "Reset your Fortleben password",
+            comments.send(email if reset_mail() else None, "Reset your Fortleben password",
                           f"Someone asked to reset the password for this email address on Fortleben.\n\n"
                           f"To choose a new one, open this link within the hour:\n{base_url(request)}/reset/{token}\n\n"
                           "If it wasn't you, ignore this mail: nothing changes.", private=True)
-        # Without RESEND_API_KEY the link went to the server log, and the page doesn't claim it was mailed.
-        return reset_page(request, sent=comments.can_send())
+        # Without reset mail the link went to the server log, and the page doesn't claim it was mailed.
+        return reset_page(request, sent=reset_mail())
 
     @app.get("/reset/{token}", response_class=HTMLResponse)
     def reset_link(request: Request, token: str):
         if accounts.reset_person(conn(), token) is None:
-            return reset_page(request, 404, error=accounts.RESET_GONE)
+            return reset_page(request, 404, error=accounts.RESET_GONE if reset_mail() else accounts.RESET_DEAD)
         return reset_page(request, token=token)
 
     @app.post("/reset/{token}", response_class=HTMLResponse)
@@ -461,7 +547,8 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
             pid = accounts.use_reset(conn(), token, form.get("password", ""))
         except accounts.Refused as e:
             gone = str(e) == accounts.RESET_GONE
-            return reset_page(request, 404 if gone else 400, token=None if gone else token, error=str(e))
+            return reset_page(request, 404 if gone else 400, token=None if gone else token,
+                              error=accounts.RESET_DEAD if gone and not reset_mail() else str(e))
         return sign_in(request, RedirectResponse("/desk", status_code=303, headers=NOINDEX), pid)
 
     # The desk's own forms: forget the key, add a new one, add an email address and password.
@@ -469,11 +556,16 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
         token = request.path_params.get("token")
         return f"/desk/{token}" if token is not None else "/desk"
 
+    def no_desk(request: Request):
+        if request.path_params.get("token") is not None:
+            return plain("That desk link isn't valid.", 404)
+        return RedirectResponse("/login", status_code=303, headers=NOINDEX)
+
     @desk_route("POST", "/key/forget")
     async def forget_key(request: Request):
         person = person_of(request)
         if not person:
-            return plain("That desk link isn't valid.", 404)
+            return no_desk(request)
         if await form_of(request) is None:
             return plain(EXPIRED, 403)
         accounts.forget_key(conn(), person["id"])
@@ -483,7 +575,7 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
     async def add_key(request: Request):
         person = person_of(request)
         if not person:
-            return plain("That desk link isn't valid.", 404)
+            return no_desk(request)
         form = await form_of(request)
         if form is None:
             return plain(EXPIRED, 403)
@@ -497,7 +589,7 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
     async def add_login(request: Request):
         person = person_of(request)
         if not person:
-            return plain("That desk link isn't valid.", 404)
+            return no_desk(request)
         form = await form_of(request)
         if form is None:
             return plain(EXPIRED, 403)
@@ -547,4 +639,6 @@ def serve(db: str | None, replay: bool, host: str, port: int) -> None:
     app = create_app(db, replay=replay)
     if not replay:
         comments.start_digests(db)  # the editor's daily comments email
-    uvicorn.run(app, host=host, port=port)
+    # The address and scheme come from the connection; X-Forwarded-For is read by `address` only behind a
+    # proxy (KEIKAKU_TRUST_PROXY), so uvicorn mustn't rewrite them from headers a client can send.
+    uvicorn.run(app, host=host, port=port, proxy_headers=False)

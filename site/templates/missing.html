@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{# A page that isn't there, for a person in a browser (house/web.py); requests from scripts get JSON. #}
+{% block title %}Not here · Fortleben{% endblock %}
+{% block main %}
+<section class="wrap" style="max-width: 40rem; padding-top: 2rem">
+  <h1 style="font-weight: 400">Not here</h1>
+  <p>{{ message }}</p>
+  <p><a href="/">Back to the library</a></p>
+</section>
+{% endblock %}

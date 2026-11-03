@@ -228,6 +228,12 @@ def test_a_whole_desk_run_of_bansan_is_published_under_the_editors_name(conn, db
     assert conn.execute("SELECT e.editor FROM edition e JOIN release r ON r.id = e.current_release WHERE r.run_id=?",
                         (second,)).fetchone()[0] == "an editor"
     assert conn.execute("SELECT COUNT(*) FROM edition WHERE work_id='bansan'").fetchone()[0] == 2
+    # Another editor giving the same name gets an edition of their own; Ines's stays hers.
+    namesake = desk.start(db, desk.invite(conn, "Namesake"), "bansan", True, "Ines Example", checkpoint=False)
+    assert conn.execute("SELECT e.id FROM edition e JOIN release r ON r.id = e.current_release WHERE r.run_id=?",
+                        (namesake,)).fetchone()[0] != ed["id"]
+    assert conn.execute("SELECT current_release FROM edition WHERE id=?", (ed["id"],)).fetchone()[0] == \
+        conn.execute("SELECT id FROM release WHERE run_id=?", (run_id,)).fetchone()[0]
 
 
 def test_startup_marks_an_orphaned_run_interrupted_and_it_resumes(conn, db, held):

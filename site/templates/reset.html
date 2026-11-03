@@ -4,7 +4,7 @@
    gives KEIKAKU_CONTACT to write to if the server has one.
    From the link itself (`token`), the page asks for the new password. #}
 {% block title %}Reset your password · Fortleben{% endblock %}
-{% block head %}<link rel="stylesheet" href="{{ url_for('static', path='desk.css') }}">
+{% block head %}<link rel="stylesheet" href="/static/desk.css">
 <style>
 .desk input[type="email"], .desk input[type="password"] { font: inherit; width: 100%; max-width: 28rem; padding: 6px 8px; border: 1.5px solid var(--ink); background: var(--paper); color: var(--ink); }
 .desk input[type="email"]:focus-visible, .desk input[type="password"]:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
