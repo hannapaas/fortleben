@@ -31,24 +31,20 @@ window.FL_PRESETS = {
   <p class="by">by {% if ed.author_en %}{{ ed.author_en }} {% endif %}<span lang="ja">{{ ed.author }}</span>{% if ed.rights.first_published_year %}, {{ ed.rights.first_published_year }}{% endif %}.<br>English by keikaku{% if ed.commissioned_by %}, commissioned by {{ ed.commissioned_by }}{% endif %}.</p>
 </section>
 
-{% set many = ed.editions|length > 1 %}
-<div class="form about{{ ' with-eds' if many }}">
-  <div><span class="q">What?</span><span class="a">An English translation of {{ ed.author_en or ed.author }}'s short story <i{% if not ed.title_en %} lang="ja"{% endif %}>{{ ed.title_en or ed.title }}</i>{% if ed.rights.first_published_year %}, first published in {{ ed.rights.first_published_year }}{% endif %}.</span></div>
-  {% if many %}
-  <div class="eds"><span class="q">In English?</span><ul class="a edl">
+{# Three boxes, kept short: what it is, the languages it can be read in, and the appendix. #}
+<div class="form about">
+  <div><span class="q">The work</span><span class="a">{{ ed.author_en or ed.author }}'s short story <i{% if not ed.title_en %} lang="ja"{% endif %}>{{ ed.title_en or ed.title }}</i>{% if ed.rights.first_published_year %}, first published in {{ ed.rights.first_published_year }}{% endif %}.</span></div>
+  <div class="eds"><span class="q">Languages</span><ul class="a edl">
     {% for e in ed.editions %}
-    {% if e.here and e.current %}
-    <li class="here" aria-current="true"><span class="bx r" aria-hidden="true"></span><span><b>{{ e.by }}</b></span></li>
-    {% elif e.here %}
-    <li><span class="bx r" aria-hidden="true"></span><span><a href="{{ e.url }}">{{ e.by }}</a></span></li>
+    {% if e.here %}
+    {% set rest %}{% if e.editor %}, commissioned by {{ e.editor }}{% endif %} – English{% endset %}
+    <li{% if e.current %} class="here" aria-current="true"{% endif %}><span class="bx r" aria-hidden="true"></span><span><a href="/about">keikaku</a>{% if e.current %}<b>{{ rest }}</b>{% else %}<a href="{{ e.url }}">{{ rest }}</a>{% endif %}</span></li>
     {% else %}
-    <li><span class="bx r" aria-hidden="true"></span><span>{{ e.by }}, {{ e.year }}{% if e.url %} · <a href="{{ e.url }}" rel="noopener">{{ e.where or 'read it' }}</a> ↗{% endif %}</span></li>
+    <li><span class="bx r" aria-hidden="true"></span><span>{{ e.by }}, {{ e.year }} – English{% if e.url %} · <a href="{{ e.url }}" rel="noopener">{{ e.where or 'read it' }}</a> ↗{% endif %}</span></li>
     {% endif %}
     {% endfor %}
   </ul></div>
-  {% endif %}
-  <div><span class="q">By whom?</span><span class="a">keikaku, a translation engine running on Meta's models: one model drafted it, two read the draft separately, one against the Japanese and one as English, and an editing pass decided what to change.</span></div>
-  <div><span class="q">How was it made?</span><span class="a">Open a paragraph: the margin shows what the readers queried, what was changed, and why. Before drafting, keikaku wrote <a href="/read/{{ ed.work_id }}/analysis{% if ed.id %}?edition={{ ed.id }}{% endif %}">an analysis of the book</a> that steered every stage.</span></div>
+  <div><span class="q">Appendix</span><span class="a"><a href="/read/{{ ed.work_id }}/analysis{% if ed.id %}?edition={{ ed.id }}{% endif %}">How keikaku read the book</a>: the analysis it wrote before drafting, which helped steer the translation.</span></div>
 </div>
 
 <div class="page">

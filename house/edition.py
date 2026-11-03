@@ -196,6 +196,7 @@ def editions(conn, meta: dict, current: int | None = None) -> list[dict]:
                           "WHERE e.work_id=? ORDER BY e.editor != 'the house', e.id", (meta["id"],)):
         house = e["editor"] == "the house"
         ours.append({"kind": "house" if house else "commissioned", "by": "keikaku" if house else f"keikaku, commissioned by {e['editor']}",
+                     "editor": None if house else e["editor"],
                      "year": (e["created_at"] or "")[:4], "here": True, "current": e["id"] == current,
                      "url": f"/read/{meta['id']}" + ("" if house else f"?edition={e['id']}")})
     people = [{"kind": "person", "by": t["by"], "year": str(t.get("year", "")), "here": False,
