@@ -91,7 +91,12 @@ a { color: inherit; text-decoration-color: var(--accent); text-underline-offset:
 .unit { display: grid; grid-template-columns: 4rem minmax(0, 36rem) minmax(13rem, 17rem); column-gap: 2.5rem; }
 .layout-parallel .unit { grid-template-columns: 4rem minmax(0, 52rem) minmax(11rem, 14rem); }
 .hang { grid-column: 1; padding: 4px 14px 0 0; text-align: right; font-size: 13px; line-height: 1.35; color: var(--ink-2); }
+.hang { position: relative; }
 .hang .stn { display: block; font-weight: 600; color: var(--ink); }
+/* Paragraph numbers, when asked for: the same numbers the notes use ("paragraph 10"). */
+.hang .pn { display: none; position: absolute; right: 42px; top: 7px; font-size: 12px; line-height: 1; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.numbers .hang .pn { display: block; }
+.no-tools .hang .pn { right: 14px; }
 .st-draft .hang .stn { background: var(--accent-wash); display: inline; padding: 0 3px; }
 .body { grid-column: 2; margin: 0 0 2rem; min-width: 0; }
 .secnum { font-family: var(--serif); font-weight: 400; font-size: 1.5rem; text-align: center; margin: 2.4rem 0 1.6rem 6.5rem; max-width: 36rem; color: var(--ink-2); }
@@ -357,6 +362,8 @@ h2.sec { font-family: var(--serif); font-style: italic; font-weight: 400; font-s
   .hang { padding: 0; margin-left: -6px; }
   .hang .tools { margin: -4px 0 0; }
   .hang .stn { display: block; font-size: 11px; text-align: center; }
+  .hang .pn, .no-tools .hang .pn { position: static; text-align: center; font-size: 12px; margin-bottom: 6px; }
+  .no-tools.numbers .unit { grid-template-columns: 22px minmax(0, 1fr); column-gap: 6px; }
   .layout-parallel .reader .body { display: block; }
   .layout-parallel .ja { margin-top: .6rem; padding-left: 12px; border-left: 3px solid var(--accent); }
   .endq { margin-left: 0; }

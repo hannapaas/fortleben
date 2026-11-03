@@ -9,16 +9,16 @@
 {# The saved view's classes before anything paints, so Clean never flashes the tools; reader.js keeps them in step after. #}
 {% block bodystart %}<script>
 window.FL_PRESETS = {
-  clean:     { layout: 'english',  marks: 'essential', inline: false, status: false, furigana: true, tools: false, comments: false },
-  curious:   { layout: 'english',  marks: 'all',       inline: false, status: true,  furigana: true, tools: true,  comments: true },
-  annotated: { layout: 'parallel', marks: 'all',       inline: true,  status: true,  furigana: true, tools: true,  comments: true }
+  clean:     { layout: 'english',  marks: 'essential', inline: false, status: false, furigana: true, tools: false, comments: false, numbers: false },
+  curious:   { layout: 'english',  marks: 'all',       inline: false, status: true,  furigana: true, tools: true,  comments: true,  numbers: false },
+  annotated: { layout: 'parallel', marks: 'all',       inline: true,  status: true,  furigana: true, tools: true,  comments: true,  numbers: true }
 };
 (function (b) {
   var P = window.FL_PRESETS, s = Object.assign({}, P.clean);
   try { var v = JSON.parse(localStorage.getItem('fl-reader') || '{}'); Object.assign(s, P[v.preset] || {}, v); } catch (e) {}
   location.hash.slice(1).split('/').forEach(function (t) { if (P[t]) Object.assign(s, P[t]); });
   b.className = ['layout-' + s.layout, 'marks-' + s.marks, s.furigana ? '' : 'no-furigana', s.status ? '' : 'hide-status',
-    s.inline ? 'inline' : '', s.tools ? '' : 'no-tools', s.comments ? '' : 'quiet-comments'].join(' ').replace(/\s+/g, ' ').trim();
+    s.inline ? 'inline' : '', s.tools ? '' : 'no-tools', s.comments ? '' : 'quiet-comments', s.numbers ? 'numbers' : ''].join(' ').replace(/\s+/g, ' ').trim();
   if (s.size) document.documentElement.style.setProperty('--size', s.size + 'px');
   document.documentElement.style.setProperty('--leading', s.leading ? '1.85' : '1.6');
 })(document.body);
@@ -58,6 +58,7 @@ window.FL_PRESETS = {
   <section class="unit st-{{ u.label }}{{ ' only-notes' if u.notes and not u.queries and not u.changed }}" id="{{ u.id }}" data-unit="{{ u.id }}">
     {% set busy = u.queries or u.changed or u.notes %}
     <div class="hang">
+      <span class="pn" aria-hidden="true">{{ u.id[1:] if u.id.startswith('p') else '' }}</span>
       <span class="tools">
         <button type="button" class="jabtn" lang="ja" aria-pressed="false" title="Show the original" aria-label="Show the original Japanese">原</button>
         {% if busy %}<button type="button" class="open" aria-expanded="false" title="Notes and changes" aria-label="Notes and changes for this paragraph">*</button>{% endif %}
@@ -153,7 +154,8 @@ window.FL_PRESETS = {
       </div>
       <div class="sub"><span class="q">Show?</span>
         <div class="row"><button type="button" class="cb" data-toggle="status"><span class="bx"></span>which paragraphs a person checked</button>
-          <button type="button" class="cb" data-toggle="tools"><span class="bx"></span>原 and * beside paragraphs</button></div>
+          <button type="button" class="cb" data-toggle="tools"><span class="bx"></span>原 and * beside paragraphs</button>
+          <button type="button" class="cb" data-toggle="numbers"><span class="bx"></span>paragraph numbers</button></div>
       </div>
       <div class="sub"><span class="q">Font?</span>
         <div class="row" data-group="font">
