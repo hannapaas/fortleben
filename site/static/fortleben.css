@@ -348,7 +348,7 @@ a { color: inherit; text-decoration-color: var(--accent); text-underline-offset:
 .pitch { font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.25; max-width: 44rem; margin: 2.5rem 0 2rem; }
 .pitch em { background: linear-gradient(transparent 58%, var(--accent-wash) 58%); }
 /* The site's name in the opening, in the book's colour. */
-.pitch .name { color: var(--accent-text); }
+.pitch .name { color: var(--accent); }
 .shelf { list-style: none; margin: 0 0 4rem; padding: 0; border-top: 1px solid var(--rule); }
 .shelf li { display: grid; grid-template-columns: 5rem 1fr auto; gap: 0 18px; padding: 28px 0 30px; border-bottom: 1px solid var(--rule); align-items: baseline; }
 .shelf .ja { display: block; font-size: 1.6rem; line-height: 1.2; color: var(--accent); mix-blend-mode: var(--blend); }
