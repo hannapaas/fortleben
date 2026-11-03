@@ -136,6 +136,22 @@
   var phone = matchMedia('(max-width: 860px)');
   document.querySelectorAll('.pc').forEach(function (b) { b.insertAdjacentHTML('afterbegin', PENCIL); });
 
+  // A busy margin shows its first two comments and folds the rest behind "+ N more", so it doesn't
+  // push every margin after it away from its paragraph.
+  function fold(list) {
+    var n = list.querySelectorAll('.cm').length, more = list.parentNode.querySelector('.morec');
+    var folded = n > 3 && !list.dataset.open;
+    list.classList.toggle('folded', folded);
+    if (!folded) { if (more) more.remove(); return; }
+    if (!more) {
+      more = document.createElement('button'); more.type = 'button'; more.className = 'morec';
+      more.onclick = function () { list.dataset.open = '1'; fold(list); layout(); };
+      list.after(more);
+    }
+    more.textContent = '+ ' + (n - 2) + ' more';
+  }
+  document.querySelectorAll('.mar .list').forEach(fold);
+
   // Margin notes sit level with their paragraph; a crowded one moves down below the one above it.
   function layout() {
     var floor = -1e9;
@@ -209,7 +225,8 @@
           var c = document.createElement('div'); c.className = 'cm mine';
           var p = document.createElement('p'); p.textContent = text; c.appendChild(p);
           c.appendChild(by(name, 'Only you can see this until it’s checked.'));
-          var mar = f.closest('.mar'); mar.querySelector('.list').appendChild(c); mar.classList.remove('empty');
+          var mar = f.closest('.mar'), list = mar.querySelector('.list');
+          list.appendChild(c); list.dataset.open = '1'; fold(list); mar.classList.remove('empty');
           t.value = ''; mar.classList.remove('writing'); layout();
           watch(c, res.j.id, 0);
         })

@@ -140,6 +140,9 @@ a { color: inherit; text-decoration-color: var(--accent); text-underline-offset:
 .mar .list { border-left: 2px solid var(--accent); padding-left: 12px; }
 .mar .list:empty { display: none; }
 .cm { margin: 0 0 .75rem; }
+.list.folded .cm:nth-child(n+3) { display: none; }
+.morec { display: block; margin: -.4rem 0 .6rem 14px; color: var(--ink-2); font: inherit; text-decoration: underline dotted; text-underline-offset: 3px; }
+.morec:hover { color: var(--ink); }
 .cm p { margin: 0; white-space: pre-line; overflow-wrap: anywhere; }
 .cm .by { color: var(--ink-2); }
 .cm .rp { color: var(--muted); margin-left: .6em; opacity: 0; font: inherit; text-decoration: underline dotted; text-underline-offset: 3px; }
@@ -171,7 +174,7 @@ a { color: inherit; text-decoration-color: var(--accent); text-underline-offset:
 .cmp button:hover { background: var(--accent-wash); }
 .cmp .err { margin: 6px 0 0; color: var(--accent-text); }
 /* Comments turned down: only a pencil and a count where people wrote; tap it to read them. */
-.quiet-comments .mar .list, .quiet-comments .mar .add, .quiet-comments .mar .cmp { display: none; }
+.quiet-comments .mar .list, .quiet-comments .mar .add, .quiet-comments .mar .cmp, .quiet-comments .unit:not(.show) .morec { display: none; }
 .quiet-comments .mar .ph { display: inline-flex; opacity: .6; }
 .quiet-comments .mar .ph[data-n="0"] { display: none; }
 .quiet-comments .unit.show .mar .list { display: block; }
@@ -348,7 +351,7 @@ h2.sec { font-family: var(--serif); font-style: italic; font-weight: 400; font-s
   .mar .in { transform: none !important; padding: 0; }
   .mar .ph, .quiet-comments .mar .ph { display: inline-flex; opacity: 1; }
   .mar .ph[data-n="0"] { display: none; }
-  .unit:not(.show) .mar .list, .unit:not(.show) .mar .add, .unit:not(.show) .mar .cmp { display: none !important; }
+  .unit:not(.show) .mar .list, .unit:not(.show) .mar .add, .unit:not(.show) .mar .cmp, .unit:not(.show) .morec { display: none !important; }
   .unit.show .mar .list { display: block; margin-top: .5rem; }
   .unit.show .mar .ph { display: none; }
   .mar .add { position: static; opacity: 1; margin-top: 2px; }
