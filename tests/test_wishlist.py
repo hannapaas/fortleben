@@ -39,6 +39,7 @@ def site(tmp_path, monkeypatch):
     monkeypatch.setenv("MODEL_API_KEY", "test")
     monkeypatch.setenv("HOUSE_OPEN", "true")
     monkeypatch.setenv("KEIKAKU_SECRET", "test-secret")
+    monkeypatch.setenv("KEIKAKU_TRUST_PROXY", "true")  # the tests stand in for Railway's proxy
     db = tmp_path / "wish.db"
     return db, TestClient(web.create_app(db, screen=False))
 
@@ -143,3 +144,17 @@ def test_the_command_line_puts_a_work_on_and_takes_it_off(tmp_path, fetched, mon
     assert cli.main(["wish", KUMO, "--count", "0"]) == 0
     assert wishlist.entries(conn) == {"wanted": [], "translated": []}
     assert not edition.shelf(conn)
+
+
+def test_the_address_is_the_proxys_right_most_value_and_only_behind_a_trusted_proxy(site, fetched, monkeypatch):
+    _, client = site
+    # A client that makes up a fresh left-hand value each time is still one address: the proxy's own, on the right.
+    for i in range(wishlist.ASKS_PER_HOUR):
+        assert ask(client, "https://example.com/x", ip=f"10.0.0.{i}, 7.7.7.7").status_code == 400
+    assert ask(client, KUMO, ip="10.0.9.9, 7.7.7.7").status_code == 429
+    assert ask(client, KUMO, ip="10.0.9.9, 8.8.8.8").status_code == 200
+    # Reached directly, the header is ignored: every request is the connection's own address.
+    monkeypatch.setenv("KEIKAKU_TRUST_PROXY", "false")
+    for i in range(wishlist.ASKS_PER_HOUR):
+        assert ask(client, "https://example.com/x", ip=f"11.0.0.{i}").status_code == 400
+    assert ask(client, KUMO, ip="12.0.0.1").status_code == 429

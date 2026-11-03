@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {# A forgotten password (house/accounts.py). Asking for a link says the same whether or not the address
-   has an account. With no mail set up on the server, the page says so instead of offering the form.
+   has an account. With no mail set up on the server, the page says so instead of offering the form, and
+   gives KEIKAKU_CONTACT to write to if the server has one.
    From the link itself (`token`), the page asks for the new password. #}
 {% block title %}Reset your password · Fortleben{% endblock %}
 {% block head %}<link rel="stylesheet" href="{{ url_for('static', path='desk.css') }}">
@@ -27,7 +28,11 @@
 <p class="line"><a href="/login">Back to sign in</a></p>
 {% elif not can_mail %}
 {% if error %}<p class="err" role="alert">{{ error }}</p>{% endif %}
+{% if contact %}
+<p class="desk-lead">Password reset mail isn't set up on this server. Email <a href="mailto:{{ contact }}?subject=Fortleben%20password%20reset">{{ contact }}</a> from the address you signed up with, and you'll be sent a link to choose a new password.</p>
+{% else %}
 <p class="desk-lead">Password reset mail isn't set up on this server. Ask the person running it.</p>
+{% endif %}
 {% else %}
 <p class="desk-lead">Give the email address you signed up with and we'll send it a link to choose a new password.</p>
 <form class="form two desk" method="post" action="/reset">

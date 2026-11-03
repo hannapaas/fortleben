@@ -85,6 +85,7 @@ def test_passwords_are_salted_scrypt_hashes():
     ("Ines", "ines@example.com", PASSWORD, "", "Paste your key"),
     ("Ines", "ines@example.com", PASSWORD, "has space", "spaces"),
     ("Ines", "ines@example.com", PASSWORD, "x" * 201, "longer than any"),
+    ("Ines", "ines@example.com", PASSWORD, "abc", "too short to be a Meta key"),
     ("", "ines@example.com", PASSWORD, KEY, "Give a name"),
     ("see www.example.com", "ines@example.com", PASSWORD, KEY, "No links"),
     ("Ines", "", PASSWORD, KEY, "Give an email address"),

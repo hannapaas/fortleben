@@ -164,6 +164,27 @@ def test_an_invited_editor_adds_an_email_and_password(site, conn, app, ines):
     assert site.get(f"/desk/{token}").status_code == 200  # and the link still works
 
 
+def test_changing_email_or_password_needs_the_current_one_and_signs_out_elsewhere(site, ines, conn, app):
+    sign_in(site)
+    elsewhere = TestClient(app)
+    sign_in(elsewhere)
+    page = site.get("/desk").text
+    assert "Change your email or password" in page and 'name="current"' in page
+    for current in (None, "wrong password"):
+        data = {"email": "thief@example.com", "password": "the thief's password", "csrf": csrf(site)}
+        if current:
+            data["current"] = current
+        r = site.post("/desk/account", data=data)
+        assert r.status_code == 400 and "That isn&#39;t your current password." in r.text
+    assert accounts.authenticate(conn, "ines@example.com", PASSWORD) == ines
+    r = site.post("/desk/account", data={"email": "ines@example.com", "current": PASSWORD, "password": "a new password",
+                                         "csrf": csrf(site)}, follow_redirects=False)
+    assert r.status_code == 303
+    assert site.get("/desk").status_code == 200  # still signed in here
+    assert elsewhere.get("/desk", follow_redirects=False).status_code == 303  # and nowhere else
+    assert accounts.authenticate(conn, "ines@example.com", "a new password") == ines
+
+
 def test_revoking_an_invite_ends_its_sessions(site, conn):
     token = desk.invite(conn, "Kenji")
     site.get(f"/desk/{token}")
@@ -241,6 +262,13 @@ def test_without_mail_the_reset_page_says_so_and_the_link_goes_to_the_log(site, 
     r = site.post("/reset", data={"email": "ines@example.com", "csrf": csrf(site)})
     assert "isn't set up on this server" in r.text and "on its way" not in r.text
     assert "/reset/" in capsys.readouterr().out
+
+
+def test_without_mail_the_reset_page_gives_the_contact_address(ines, db, monkeypatch):
+    monkeypatch.setenv("KEIKAKU_CONTACT", "help@example.org")
+    page = TestClient(web.create_app(db, screen=False)).get("/reset").text
+    assert "isn't set up on this server. Email" in page and 'href="mailto:help@example.org' in page
+    assert "Ask the person running it" not in page and 'name="email"' not in page
 
 
 def test_reset_asks_are_limited(site, ines, mail):
