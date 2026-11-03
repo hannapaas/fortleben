@@ -160,9 +160,9 @@ def test_the_house_caps_work_on_a_database_with_no_own_key_runs(conn):
 def test_signup_says_why_it_is_closed_before_anyone_fills_it_in(db, monkeypatch):
     page = TestClient(web.create_app(replay=True, screen=False)).get("/signup").text
     assert "Sign-up is closed here: this copy of the site serves recorded runs only." in page
-    monkeypatch.delenv("KEIKAKU_SECRET")
+    monkeypatch.delenv("KEIKAKU_SECRET")  # sign-up holds no key, so it stays open without one
     page = TestClient(web.create_app(db, screen=False)).get("/signup").text
-    assert "has no secret set" in page
+    assert "Sign-up is closed" not in page
 
 
 def test_the_command_line_refuses_a_negative_voice(capsys, tmp_path, monkeypatch):

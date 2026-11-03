@@ -10,12 +10,12 @@
 </style>{% endblock %}
 {% block main %}
 <h1 class="desk-h">Translate one yourself</h1>
-<p class="desk-lead">Pick a story and keikaku translates the whole of it, steered by you and published under your name.</p>
+<p class="desk-lead">Pick a text in the public domain and keikaku translates the whole of it, steered by you and published under your name.</p>
 {% if closed %}<p class="line">{{ closed }}</p>{% endif %}
 <form class="form two desk" method="post" action="/signup">
   <input type="hidden" name="csrf" value="{{ request.state.csrf }}">
   <div class="q">What happens?</div>
-  <div class="a">You get a desk of your own, which you sign in to with your email address and password. There you add your own Meta key, pick a story, and keikaku translates the whole of it with your key. The result is published on Fortleben under your name.</div>
+  <div class="a">You get a desk of your own, which you sign in to with your email address and password. There you add your own Meta key, pick a text in the public domain, and keikaku translates the whole of it with your key. The result is published on Fortleben under your name.</div>
 
   <div class="q"><label for="name">Name?</label></div>
   <div class="a"><input type="text" id="name" name="name" maxlength="60" required value="{{ name or '' }}">

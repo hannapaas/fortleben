@@ -500,9 +500,8 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
     # Anyone can sign up with a name, an email address and a password, then add their own Meta key on
     # the desk; their runs spend that key. So a site with no key of its own still lets them start, unless it's a replay or shut.
     no_site_key = not replay and not os.environ.get("MODEL_API_KEY") and os.environ.get("HOUSE_OPEN", "true").lower() != "false"
-    signup_closed = (closed.replace("Runs can't start here", "Sign-up is closed here") if closed and not no_site_key else
-                     "Sign-up is closed here: this copy of the site has no secret set, so it can't hold keys."
-                     if not os.environ.get("KEIKAKU_SECRET") else None)
+    # Sign-up holds no key, so it needs no secret; the desk's key form says so if it's missing.
+    signup_closed = closed.replace("Runs can't start here", "Sign-up is closed here") if closed and not no_site_key else None
 
     def closed_for(person) -> str | None:
         """Why runs can't start for this person, or None if they can."""
