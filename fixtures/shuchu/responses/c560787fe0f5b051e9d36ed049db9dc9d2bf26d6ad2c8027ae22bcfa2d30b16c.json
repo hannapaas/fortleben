@@ -1,0 +1,98 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "To note it in passing, Liu was not at all a man who delighted in visitors. But when he already had one visitor with him, and a new visitor came, he would generally receive him gladly. He had a childish vanity of the sort that might be described as showing off the fact of having a visitor before a visitor. Besides, today's barbarian monk was at this time the talk everywhere. He was by no means a visitor one would be ashamed to meet. — Liu's motives in saying he would meet him lay roughly here.",
+    "ids": [
+     "p14"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"What business can he have?\"",
+    "ids": [
+     "p15"
+    ],
+    "notes": [
+     "The text gives no speaker for p15-p16; left unattributed as in the source. Read as talk between Liu and Sun Sensei."
+    ]
+   },
+   {
+    "english": "\"Alms-seeking, most likely. He will be asking for some charity, I suppose.\"",
+    "ids": [
+     "p16"
+    ],
+    "notes": [
+     "The text gives no speaker for p15-p16; left unattributed as in the source."
+    ]
+   },
+   {
+    "english": "While the two were talking such things over between them, presently there entered, guided in by the yahuan, a monk of strange aspect, tall and with eyes like cut violet quartz. He wore a yellow robe, his grown-out curling hair hanging tiresomely over his shoulders. Still holding his red-handled shubi, he planted himself heavily in the middle of the room. He offered no greeting, nor did he speak.",
+    "ids": [
+     "p17"
+    ],
+    "notes": [
+     "Kept yahuan for the young maidservant and shubi for the fly-whisk, as standing terms; sense is given by context."
+    ]
+   },
+   {
+    "english": "Liu hesitated for a while, but as that somehow grew unsettling to him, he ventured, \"Have you some business with me?\"",
+    "ids": [
+     "p18"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Whereupon the barbarian monk said, \"You are the one, I take it, who is fond of wine.\"",
+    "ids": [
+     "p19"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"I am.\" The question was so abrupt that Liu, as he gave his vague answer, looked toward Sun Sensei as if seeking rescue. Sun Sensei, with a composed air, went on laying stones on the board by himself. He showed no disposition to take any part.",
+    "ids": [
+     "p20"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"You are afflicted with a rare disease. Are you aware of it?\" the barbarian monk said, as if to make sure. Liu, hearing of a disease, made a dubious face, and, stroking his bamboo wife,",
+    "ids": [
+     "p21"
+    ],
+    "notes": [
+     "Bamboo wife is a hollow bamboo bolster embraced in summer; the sentence runs on into p22."
+    ]
+   }
+  ],
+  "say": "Drafted p14 to p21 in past-tense deadpan, keeping dialogue flat and terms of office unexplained."
+ },
+ "usage": {
+  "input_tokens": 14287,
+  "cached_tokens": 13041,
+  "output_tokens": 3601,
+  "reasoning_tokens": 2944,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.018817900000000002,
+ "response_id": "resp_6ae9ce1be2db776ccbf840e3",
+ "latency_s": 38.04,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2524
+  }
+ ],
+ "created": "2026-11-03T12:05:47Z"
+}

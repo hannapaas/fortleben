@@ -1,5 +1,6 @@
 """Stage 3: crux check. A second Wonder call reads the text without the first reading; a head compares the two cruxes.
-"Different" opens the first fork; until the editor rules, Wonder's reading stands."""
+"Different" opens the first fork and adds the second crux to the reading, marked as a second reader's, so every later
+call sees both; until the editor rules, the first reading stands."""
 
 from house import context
 from house.client import WONDER, Call, load_schema
@@ -24,15 +25,22 @@ def run(ctx) -> None:
     same = head["same_or_different"] == "same"
     eid = ctx.emit("crux-check", "crux.checked", {"same": same, "second": second, "head": head})
     ctx.save("crux-check", {"second": second, "head": head}, eid)
+    if not same and not reading.get("second_crux"):
+        # The reading every later call carries gets the second crux too, marked as a second reader's,
+        # so a crux the first reader missed isn't lost while the editor decides.
+        eid = ctx.emit("crux-check", "reading.written", {"version": ctx.version("reading") + 1, "crux": reading["crux"],
+                                                        "second_crux": second["crux"]})
+        ctx.save("reading", {**reading, "second_crux": second["crux"], "head_on_cruxes": head["reason"]}, eid)
     opened = ctx.conn.execute("SELECT 1 FROM fork WHERE run_id=? AND anchor='work'", (ctx.run_id,)).fetchone()
     if not same and not opened:
         # Each side's case is its own words, verbatim; the head adds only the one-line trade-offs.
-        tradeoffs = [o.get("tradeoff", "") for o in head["fork"].get("options", [])] + ["", ""]
+        fork = head["fork"] if head["decision"] == "fork" else {}
+        tradeoffs = [o.get("tradeoff", "") for o in fork.get("options", [])] + ["", ""]
         options = [
             {"author": "first-read (Wonder)", "tradeoff": tradeoffs[0], "case": cruxes(reading["crux"])},
             {"author": "crux-check (Wonder)", "tradeoff": tradeoffs[1], "case": cruxes(second["crux"])},
         ]
-        question = head["fork"].get("question") or "What does a translation of this text stand or fall on?"
+        question = fork.get("question") or "What does a translation of this text stand or fall on?"
         pick = 0  # Wonder's reading stands until the editor rules (docs/STORY-STATE.md §0)
         cur = ctx.conn.execute(
             "INSERT INTO fork (run_id, work_id, anchor, question, options, head_pick, head_reason, status) VALUES (?,?,?,?,?,?,?,?)",

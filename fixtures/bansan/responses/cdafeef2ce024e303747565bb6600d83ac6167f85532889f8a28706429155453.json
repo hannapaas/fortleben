@@ -1,0 +1,465 @@
+{
+ "prompt": "analyst-bible",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "cast": [
+   {
+    "first_appearance": "p2",
+    "first_person": "俺 in 俺たち (p25); rough masculine first-person plural, warm and colloquial",
+    "forms": [
+     {
+      "form": "父",
+      "note": "narrator's kinship label in opening family tableau",
+      "used_by": "narrator"
+     },
+     {
+      "form": "男",
+      "note": "narrator's default adult-male marker; paired against 女 for his wife",
+      "used_by": "narrator"
+     },
+     {
+      "form": "若い父親",
+      "note": "narrator's fuller label in baby-handling scenes",
+      "used_by": "narrator"
+     },
+     {
+      "form": "父親",
+      "note": "variant in p32 when he feeds the child hurriedly",
+      "used_by": "narrator"
+     },
+     {
+      "form": "夫",
+      "note": "narrator's label from wife's viewpoint in p18",
+      "used_by": "narrator"
+     },
+     {
+      "form": "彼",
+      "note": "narrator's pronoun for him, sometimes ambiguous with generic he; 彼等 for the couple together",
+      "used_by": "narrator"
+     },
+     {
+      "form": "俺たち",
+      "note": "his own speech for himself and his wife; rough-edged, warm, working-class masculine",
+      "used_by": "himself in direct speech"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "父, 若い父親, 夫, masculine speech 俺たち, きかない奴だな, さうだなァ; paired with 女/母 wife and 女の子 daughter",
+    "handle": "the young father / husband",
+    "id": "c1",
+    "name_ja": null,
+    "reading": null,
+    "register": "Rough-edged warm colloquial masculine Taisho speech in dialogue: きかない奴だな (p7), さうだなァ (p24), 俺たちはいろいろ苦労したなァ (p25), もう少しの間だ (p34), 嵐だな (p38). Not dialect costume, not keigo.",
+    "relationships": [
+     "husband of c2 the young mother / wife",
+     "father of c3 the baby daughter",
+     "shares weariness and child-centred supper with c2; answers her silence only partway"
+    ],
+    "role": "young husband and father, co-worker in poor household; tired too, feeds child and himself in snatches, asks twice why his wife is quiet, offers his own version of hope that it is only a little while longer",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p2",
+    "first_person": "私 implied by 私たちは (p35) and feminine polite speech ませんのね (p22), さうね / ませうね (p35); soft period feminine",
+    "forms": [
+     {
+      "form": "母",
+      "note": "narrator's kinship label in opening",
+      "used_by": "narrator"
+     },
+     {
+      "form": "女",
+      "note": "narrator's pairing against 男; marks young couple, not generic woman",
+      "used_by": "narrator"
+     },
+     {
+      "form": "彼女",
+      "note": "narrator's default pronoun for her through meditation; in p7 彼女の手 may refer to the child and is ambiguous, otherwise consistently the mother",
+      "used_by": "narrator"
+     },
+     {
+      "form": "母親",
+      "note": "narrator's label when serving stew and when called by baby's cry; stresses maternal function",
+      "used_by": "narrator"
+     },
+     {
+      "form": "坊や as vocative to child",
+      "note": "she calls the girl 坊や (p8, p30) like her husband does; period/familial usage, not indication of sex",
+      "used_by": "herself to c3"
+     }
+    ],
+    "gender": "female",
+    "gender_evidence": "母, 母親, 母親らしい嬉しさ, 女の子's mother, feminine polite speech ませんのね, nursing 乳をのませ初めた (p35)",
+    "handle": "the young mother / wife",
+    "id": "c2",
+    "name_ja": null,
+    "reading": null,
+    "register": "Soft feminine period polite speech in dialogue: まだ本当にわづかしか経ちませんのね (p22), 本当にね (p26), まだ三年しか経たないんですものね (p27), さうね、私たちは働きませうね (p35). Narrator stays close to her drifting attention after p10 without marking thought as thought.",
+    "relationships": [
+     "wife of c1 the young father / husband",
+     "mother of c3 the baby daughter",
+     "central consciousness after the badly cooked potato; vision is never reported to c1"
+    ],
+    "role": "central consciousness; young, already drowsy-weary, detached from table by tasteless potato into memory of three married years and unlocated vision of distant remembrance and forgiveness, returning to work and early rising with something she half-says she does not understand",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p2",
+    "first_person": "none in the text; pre-verbal, utters only うまうまうまうま (p31) while banging spoon",
+    "forms": [
+     {
+      "form": "子供",
+      "note": "narrator's default; plump, just able to stand holding table",
+      "used_by": "narrator"
+     },
+     {
+      "form": "女の子",
+      "note": "explicit sex statement once: plumpくりくりと肥ってる女の子 able to stand; fixes female sex despite 坊や",
+      "used_by": "narrator"
+     },
+     {
+      "form": "坊や",
+      "note": "used by both father and mother to and of her (p8, p28, p30); period/familial generic endearment or boyish pet name applied to a girl; do not read as male child",
+      "used_by": "c1 and c2 in direct speech; narrator never uses 坊や"
+     },
+     {
+      "form": "彼女 in p7",
+      "note": "possibly the child as recipient of bowl (彼女の手に渡した); ambiguous with mother; record as open in that line only",
+      "used_by": "narrator (ambiguous single use)"
+     }
+    ],
+    "gender": "female",
+    "gender_evidence": "stated plainly 女の子 in p2; small red mouth, round arms, put to breast 乳房 / 乳首 in p35-37; 坊や does not override this",
+    "handle": "the baby daughter",
+    "id": "c3",
+    "name_ja": null,
+    "reading": null,
+    "register": "No speech; noisy joyful cries, spoon banged on table, babble うまうまうまうま. Physical tenderness around her, not verbal.",
+    "relationships": [
+     "daughter of c1 and c2",
+     "occasion and interruption of supper; falls asleep at breast ending the scene"
+    ],
+    "role": "plump infant just able to stand holding table; snatches at table so wares are moved underneath, fed in gaps; anchors domestic physicality against vision",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p16",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "物静かな三人の人たち",
+      "note": "mother's dim picture: three quiet people with heads together over endless story; narrator reports her seeing without fixing identity",
+      "used_by": "narrator reporting c2's vision"
+     },
+     {
+      "form": "話す人も聞く人も / 彼等",
+      "note": "teller and listener alike, smiling quietly, wrapped in remembrance and forgiveness; pronoun leaves figures suspended",
+      "used_by": "narrator within vision passage"
+     }
+    ],
+    "gender": "deliberately open",
+    "gender_evidence": "only 人たち, 人, 彼等; no gendered marking, no names, no kin terms. English must not resolve to the family grown old or to mankind in general; leave suspended as Japanese does.",
+    "handle": "the three people in the dim picture",
+    "id": "c4",
+    "name_ja": null,
+    "reading": null,
+    "register": "Described in same plain abstract diction as rest, not elevated: 静かに安らかにぢっと微笑をつづける, 少しも動かなかった; slow listing syntax.",
+    "relationships": [
+     "seen only by c2 in vision; possibly the family transposed, possibly all humankind, possibly generic; text leaves open"
+    ],
+    "role": "visionary figures heads together in dim light telling/hearing an endless story containing all good and evil, grief, suffering, anger, trouble, joy, while smiling unmoving; embodiment of future remembrance, forgiveness and rest",
+    "romanised": null
+   }
+  ],
+  "hard_spots": [
+   {
+    "anchors": [
+     "p8",
+     "p28",
+     "p30"
+    ],
+    "kind": "address / gender",
+    "why_hard": "坊や is used repeatedly to and of a child stated to be a girl (p2 女の子). Literal 'boy / sonny' would mislead English readers about sex; neutralising to 'baby' loses period usage. Needs consistent policy plus margin note, not silent resolution."
+   },
+   {
+    "anchors": [
+     "p11",
+     "p12"
+    ],
+    "kind": "sensory trigger",
+    "why_hard": "Potato is hard, gritty ざくざく, tasteless, as if frozen 凍ったかのやうに. Must stay literal and faintly unpleasant before it is anything; English will want to explain it as symbol of poverty or psychology. The detachment (心が淋しくうつむく) happens inside the mouthful without commentary."
+   },
+   {
+    "anchors": [
+     "p16",
+     "p17"
+    ],
+    "kind": "vision / abstraction",
+    "why_hard": "Long looping sentences of abstract nouns:善や悪や、かなしみや苦しみ怒りもなやみも、よろこびも; なつかしみと許し; 安らかさ / 安息. Who the three are, when this day is (old age, death, time itself), and whether 安息 is religious must not be clarified. English pressure to vary synonyms, ennoble, or call it heaven/premonition/daydream must be resisted; keep plain repetition."
+   },
+   {
+    "anchors": [
+     "p31"
+    ],
+    "kind": "baby vocalisation",
+    "why_hard": "うまうまうまうま with spoon banged down while looking at mother. Onomatopoeic yummy-yummy babble, not lexical sentence. Transcribe effect without making child articulate; keep physical simultaneity with mother's 坊や call."
+   },
+   {
+    "anchors": [
+     "p2",
+     "p7",
+     "p8"
+    ],
+    "kind": "ruby / historical kana",
+    "why_hard": "Author glosses: 卓テーブル, 怜悧れいり, 微笑ほほゑみ, 茫然ぼんやり, 希のぞみ etc. in historical kanaづかひ. Readings fix sense (テーブル as table, ほほゑみ as smile). English cannot show ruby; do not italicise into exoticism. 卓 vs テーブル shift and food vessels (茶碗, 土瓶, アルミ鍋, 藍色の深い鍋) carry poor-household period texture to keep concrete."
+   },
+   {
+    "anchors": [
+     "p35",
+     "p36",
+     "p37",
+     "p38"
+    ],
+    "kind": "ending refusal",
+    "why_hard": "Ending refuses arc:箸をおいた, resolve to work and rise early, child put to breast falls asleep mid-feed, room goes still, man stands still and whispers 嵐だな. No moral, no consolation gloss. Must allow eternal and next morning to sit side by side; last line only weather, echoing p1 and p19 without symbolism."
+   }
+  ],
+  "motifs": [
+   {
+    "english": "Keep one plain English set throughout and repeat, not vary: quiet / quietly for 静か, restful / restfulness for 安らかさ, rest/repose for 安息. Same vocabulary for evening, mother's manner, and vision so table and eternity share language. Do not lift into lyricism or religious peace.",
+    "id": "m1",
+    "motif": "quiet and rest",
+    "occurrences": [
+     "p3",
+     "p4",
+     "p12",
+     "p15",
+     "p16",
+     "p17",
+     "p18",
+     "p19",
+     "p35",
+     "p37"
+    ],
+    "source_forms": [
+     "静か",
+     "安らかさ",
+     "安息",
+     "物静か",
+     "静まりかへった"
+    ],
+    "why": "Connective tissue binding supper, memory and vision; fluent English will vary into calm/peaceful/serene/still and destroy network."
+   },
+   {
+    "english": "Keep far / distant / far-off for 遠い, not remote/removed/estranged. Preserve spatialising of time: future seen through bottom of eyes as distant picture.",
+    "id": "m2",
+    "motif": "farness / distance",
+    "occurrences": [
+     "p10",
+     "p13",
+     "p15",
+     "p18",
+     "p19"
+    ],
+    "source_forms": [
+     "遠い所",
+     "遠い心",
+     "遠くの方",
+     "遠い絵",
+     "遠く未来",
+     "遠く走って"
+    ],
+    "why": "Marks mother's detachment: gaze, heart and future all go far. Ordinary usage made deliberate by recurrence; unifies potato moment and vision."
+   },
+   {
+    "english": "Keep silently / without speaking for 黙って, not wordlessly/tacitly in variation. Her silence is plot: husband asks twice why she is quiet.",
+    "id": "m3",
+    "motif": "silence",
+    "occurrences": [
+     "p4",
+     "p10",
+     "p18",
+     "p19",
+     "p21"
+    ],
+    "source_forms": [
+     "黙って",
+     "黙ってうつむき",
+     "黙って前歯",
+     "黙ってゐた"
+    ],
+    "why": "From shared smiling silence at table to trance silence to unreported vision; must track as same word."
+   },
+   {
+    "english": "Keep smile / smiling for 微笑, 笑ひ, ゑみ, ほほゑみ as one field; allow smile overflowed / held back as text has it. Same smiles on parents and on vision figures.",
+    "id": "m4",
+    "motif": "smiles that overflow and continue",
+    "occurrences": [
+     "p4",
+     "p7",
+     "p8",
+     "p9",
+     "p16",
+     "p20",
+     "p21"
+    ],
+    "source_forms": [
+     "微笑",
+     "微笑み",
+     "笑ひ",
+     "ゑみ",
+     "ほほゑみ"
+    ],
+    "why": "Tenderness and vision share lexis: parents' helpless overflowing smiles and the three figures' continuous quiet smiles. Varying into grin/beam delights would break link."
+   },
+   {
+    "english": "Keep weariness, sadness, suffering (and trouble/anguish なやみ where present) as fixed equivalents and keep lists long with and…and. Do not compress lists or substitute hardship/pain synonyms.",
+    "id": "m5",
+    "motif": "weariness, sadness, suffering in lists",
+    "occurrences": [
+     "p3",
+     "p4",
+     "p12",
+     "p13",
+     "p16",
+     "p20",
+     "p28"
+    ],
+    "source_forms": [
+     "疲れ",
+     "悲しみ",
+     "苦しみ",
+     "なやみ",
+     "怒り",
+     "善や悪"
+    ],
+    "why": "Recurrence across body, memory and vision is the argument: same burdens at table, in past three years, and inside endless story. Text power is accumulation, not striking phrase."
+   },
+   {
+    "english": "Keep fond remembrance (or nostalgic fondness if chosen) for なつかしみ and forgiveness for 許し as paired fixed nouns wherever they occur; never paraphrase into nostalgia/pardon/reconciliation variants.",
+    "id": "m6",
+    "motif": "fond remembrance and forgiveness",
+    "occurrences": [
+     "p13",
+     "p16",
+     "p17",
+     "p20",
+     "p21"
+    ],
+    "source_forms": [
+     "なつかしみ",
+     "なつかしい",
+     "許し"
+    ],
+    "why": "Paired nouns on which whole vision turns; past suffering remembered as なつかしい夢, future all turned into なつかしみと許し. Destroying repetition destroys crux."
+   },
+   {
+    "english": "Keep storm for 嵐 and sound of rain-wind for 雨風の音 as sound heard, forgotten, heard again. Do not turn into symbolism or pathetic fallacy; weather simply goes on outside.",
+    "id": "m7",
+    "motif": "storm outside, hearing arc",
+    "occurrences": [
+     "p1",
+     "p8",
+     "p19",
+     "p38"
+    ],
+    "source_forms": [
+     "嵐",
+     "雨風の音"
+    ],
+    "why": "Frame: p1 heard, p8 unheard through bustle, p19 quietly heard in silence, p38 whispered when still. Must remain arc of sound."
+   },
+   {
+    "english": "Keep drifting markers as at some point / before she knew it / suddenly for いつか, いつとなく, ふと without firming into she realised / she imagined. Preserve soft transitions where present, memory and future soak into one another.",
+    "id": "m8",
+    "motif": "inadvertent drift markers",
+    "occurrences": [
+     "p1",
+     "p11",
+     "p13",
+     "p15",
+     "p18",
+     "p19"
+    ],
+    "source_forms": [
+     "いつか",
+     "いつとなく",
+     "ふと"
+    ],
+    "why": "Medium of story: she slides rather than decides; she feels as if grown old over three years. Signposting would rationalise consciousness that experiences time as unbroken telling."
+   },
+   {
+    "english": "Keep three years / only three years / only a little while as literal arithmetic shock, repeated plainly. Do not inflate into years of hardship moral.",
+    "id": "m9",
+    "motif": "only three years",
+    "occurrences": [
+     "p14",
+     "p22",
+     "p25",
+     "p27",
+     "p28"
+    ],
+    "source_forms": [
+     "三年",
+     "わづかしか",
+     "たった三年",
+     "まだ三年"
+    ],
+    "why": "Felt lifetime versus counted three years is pivot from vision back to resolve to work; repetition carries hope that is not improvement but distant holding."
+   }
+  ],
+  "narration": {
+   "english_tense": "Past as default for supper and memory, allowing the vision's gnomic present-future (p17 過去るであらう…変る事だらう) to stay timeless without shifting whole text into present. Do not use historical present to enliven domestic opening or to signal meditation as important.",
+   "frame": "Single evening: outside the door a storm; inside a narrow room under a dim lamp hanging by the wall, young parents and plump baby at table for supper. Narration begins jointly on couple watching child, narrows almost imperceptibly via potato into mother, stays mostly inside her drifting attention, returns to shared dialogue and closing tableau of clearing, nursing, stillness, weather.",
+   "narrator": "Third-person literary narrator, close and gentle, starting omniscient-joint then settling near the mother without explicit interior marking; often leaves who-sees and when soft. Vision never reported to husband; husband's questions and plain answers stay outside it.",
+   "person": "third person, sliding focus from couple to mother",
+   "tense_habits": "Japanese mixes てゐた progressive-past and た completion with nonpast/gnomic だらう in reflection; stative weariness and continuing smiles rendered as ongoing states. Historical kana and ruby aid reading but do not change tense. English should allow long looping and… and… sentences and slow lists to pool, not shorten into crisp modern periods.",
+   "timeline": [
+    "p1: outside door, already dark, violent rain-wind, storm",
+    "p2-p9: supper begins; baby gripping table snatches so bowls/pots moved underneath leaving spoon and small plate; noisy happy feeding in snatches; storm forgotten",
+    "p10-p13: mother serves beef/onion/carrot/potato from dark-blue pot, tastes gritty tasteless potato as if frozen; heart turns lonely, recalls poor sad three married years as dreamlike",
+    "p14-p18: arithmetic (only about three years) versus feeling grown old; drifting into dim picture of three quiet people heads together over endless story, smiling unmoving, wrapped in remembrance/forgiveness/rest",
+    "p19-p20: husband asks why silent (first time); she starts, cannot say it, hears storm quietly, holds thought that day of remembrance/forgiveness/rest after long life/sadness/suffering exists",
+    "p21-p32: husband asks again; she answers only banal startling fact of short marriage and vague great hope; he answers it won't be much longer, child will walk; baby cries うまうま, fed; chopsticks laid down",
+    "p33-p38: resolve to work, rise early tomorrow; child put to breast falls asleep cheek to breast; room still; man stands still and whispers storm"
+   ]
+  },
+  "part_summaries": [],
+  "say": "Hold vision unlocated and diction plain; let eternal and next morning sit side by side. Repeat abstract nouns, do not explain potato or husband, do not end on moral.",
+  "style_sheet": {
+   "annotation_density": "Sparse. Annotate only what sentence cannot give: 坊や usage for a girl, aluminium pot / dark-blue pot period poverty without picturesque gloss, historical kana/ruby where sense depends on gloss, baby babble. Never annotate what context supplies; never use note to resolve vision's three figures or day into heaven/old age/death.",
+   "author_voice": "Taisho literary prose, gentle slightly formal but plain in its own terms; power in accumulation and recurrence, not striking phrases. Allow long looping sentences and slow lists of everything life contains. Tenderness rendered physically (cheek pinched, rice pushed into two mouths, cheek to breast) not named grandly. Do not ennoble food or poverty, do not coarsen husband's warmth, do not lift vision into lyric consolation.",
+   "honorifics_and_names": "No surnames or given names in text; do not invent. Keep kin labels as common nouns (father/mother/husband/wife) where narrator uses them. For 坊や do not use Boy/Sonny; use baby / little one with margin note on period generic, pending editor decision, and keep consistent. No Sensei or honorifics to preserve. Name order not applicable.",
+   "keep_in_japanese": "Nothing kept in Japanese in reading view except defended need: transcribe baby うまうまうまうま as uma-uma with note rather than translating yummy, if editor allows; otherwise plain yummy-yummy babble. Food 御飯 as rice, 茶碗/土瓶/鍋 as bowls/pots in English; do not leave Japanese vessels untranslated.",
+   "quotation": "Japanese uses 『』 for direct speech (きかない奴だな, どうして黙ってるの, 坊や, うまうま, etc.) and embedded thought/独言. Render direct speech in English double quotes, baby babble likewise, with plain dialogue tags. Do not add said-softeners or resolve unattributed speakers where text leaves soft.",
+   "register": "Narrator: plain gentle literary slightly formal, past-default, long periodic where Japanese loops. Husband speech rough-edged warm masculine colloquial (なァ, 俺たち, 奴, 独言-like strength) without dialect costume or archaism. Wife speech soft feminine period polite (ませんのね, んですものね, ませうね) audible as feminine-polite, not coy. Baby: noise, not lexis.",
+   "ruby_and_italics": "Ruby gives reading/nuance: 卓テーブル, 怜悧れいり, 微笑ほほゑみ, 茫然ぼんやり, 希のぞみ. Follow gloss sense (table, perspicacious, smile, blankly, hope) in English body; do not italicise or footnote ruby itself unless sense genuinely ambiguous. Italics reserved for emphasis present in sense, not for foreignism.",
+   "standing_rules": []
+  }
+ },
+ "usage": {
+  "input_tokens": 7645,
+  "cached_tokens": 0,
+  "output_tokens": 8130,
+  "reasoning_tokens": 2930,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.04410875,
+ "response_id": "resp_6ae9cb23673e31d397014c94",
+ "latency_s": 70.36,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 18411
+  }
+ ],
+ "created": "2026-11-03T11:53:07Z"
+}

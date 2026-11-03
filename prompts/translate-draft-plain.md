@@ -15,8 +15,8 @@ The reading, which says what this book stands or falls on; the bible, which is t
 
 ## Notes
 
-A note is for a reader who would otherwise misjudge a line: something you couldn't settle, or a place where the English looks wrong or stiff and yet is faithful or meaningful. Most pages need only a few, and some none.
+A note is for a reader who would otherwise misjudge a line: a place where the English looks wrong or stiff and yet is faithful or meaningful; or something you couldn't settle and had to decide anyway, such as a number that doesn't match an earlier page, a speaker the text doesn't name, or a word for the child that doesn't fit the cast. Say what you chose and what the doubt is; the desk reads these. Most pages need only a few, and some none.
 
 ## What you return
 
-For each paragraph, or for a group of paragraphs when the English genuinely wants two short ones as one (say which IDs): the paragraph ID(s), the English, translator's notes if any, and flags for anything beyond you.
+For each paragraph, or for a group of paragraphs when the English genuinely wants two short ones as one (say which IDs): the paragraph ID(s), the English, and translator's notes if any.

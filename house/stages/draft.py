@@ -32,8 +32,17 @@ def voice_block(take: dict) -> str:
 
 
 def voice_take(ctx) -> dict:
-    """The voice the drafter writes in: the first the house's reading proposes."""
-    return ctx.latest("reading")["voice_takes"][0]
+    """The voice the drafter writes in: the first the house's reading proposes, unless the run's
+    options name another by its position (options['voice'], from 0: the editor's pick)."""
+    takes = ctx.latest("reading")["voice_takes"]
+    return takes[min(int(ctx.options.get("voice") or 0), len(takes) - 1)]
+
+
+def stable_for(ctx, take: dict) -> str:
+    """What every drafting call carries before its page: the reading, the voice, the bible. The source
+    is added per page. The checkpoint drafts page 1 under each voice take with the same prefix, so the
+    take the editor approves is the draft stage's own first page, served from the cache."""
+    return context.join(context.reading(ctx.latest("reading")), voice_block(take), context.bible(ctx.latest("bible")))
 
 
 def draft_prompt(ctx) -> str:
@@ -91,11 +100,11 @@ def store(ctx, res) -> list[int]:
             "SELECT COALESCE(MAX(version), 0) + 1 FROM revision WHERE run_id=? AND segment_ids=? AND variant='lead'",
             (ctx.run_id, dumps(it["ids"]))).fetchone()[0]
         cur = ctx.conn.execute(
-            "INSERT INTO revision (run_id, work_id, segment_ids, version, english, notes, flags) VALUES (?,?,?,?,?,?,?)",
-            (ctx.run_id, ctx.work_id, dumps(it["ids"]), v, it["english"], dumps(it["notes"]), dumps(it["flags"])))
+            "INSERT INTO revision (run_id, work_id, segment_ids, version, english, notes) VALUES (?,?,?,?,?,?)",
+            (ctx.run_id, ctx.work_id, dumps(it["ids"]), v, it["english"], dumps(it["notes"])))
         rid = cur.lastrowid
         eid = ctx.emit(ACTOR, "draft.paragraph", {"ids": it["ids"], "revision_id": rid, "variant": "lead",
-                                                  "english": it["english"], "notes": it["notes"], "flags": it["flags"]},
+                                                  "english": it["english"], "notes": it["notes"]},
                        call_id=res.call_id)
         ctx.conn.execute("UPDATE revision SET event_id=? WHERE id=?", (eid, rid))
         for sid in it["ids"]:
@@ -109,11 +118,10 @@ def store(ctx, res) -> list[int]:
 
 
 def run(ctx) -> dict:
-    reading, bible = ctx.latest("reading"), ctx.latest("bible")
     all_paras = ctx.work.translatable()
     pages = pager.pages(ctx.work.paragraphs)
     ctx.emit("house", "page.cut", {"pages": [[p.id for p in pg] for pg in pages]})
-    stable = context.join(context.reading(reading), voice_block(voice_take(ctx)), context.bible(bible))  # source added per page
+    stable = stable_for(ctx, voice_take(ctx))  # source added per page
 
     done = set(latest_english(ctx))
     voice_ref = ""

@@ -1,0 +1,504 @@
+{
+ "prompt": "analyst-bible",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "cast": [
+   {
+    "first_appearance": "p2",
+    "first_person": "none in the text; gives orders and asks questions without a self-word",
+    "forms": [
+     {
+      "form": "裸の男 / 豚のやうに肥つた男 / この打麦場の主人",
+      "note": "tableau description before name is given; establishes him as owner and body to be cured",
+      "used_by": "narrator to reader"
+     },
+     {
+      "form": "劉大成",
+      "note": "full name at introduction in Part II and again when cure takes effect",
+      "used_by": "narrator to reader"
+     },
+     {
+      "form": "劉",
+      "note": "usual short form thereafter",
+      "used_by": "narrator to reader"
+     },
+     {
+      "form": "御主人",
+      "note": "reported speech asking to see him",
+      "used_by": "the maid servant to refer to Liu"
+     },
+     {
+      "form": "あなた",
+      "note": "blunt second-person address in diagnosis",
+      "used_by": "the barbarian monk to Liu"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "called 男, described as fat-bellied man; later 双髩, takes male social role as landowner and host",
+    "handle": "Liu Dacheng",
+    "id": "c1",
+    "name_ja": "劉大成",
+    "reading": "りゅうたいせい",
+    "register": "colloquial master-of-house speech; short imperatives and blunt questions, no keigo toward monk or Sun",
+    "relationships": [
+     "owner of the threshing-floor where all wait",
+     "drinking companion of Sun Sensei",
+     "patient and unwilling host of the barbarian monk",
+     "master of the maid servant",
+     "owner of the 300 mu lost after the cure"
+    ],
+    "role": "rich landowner of Changshan whose boast is to drink a whole jar at a sitting without ever getting drunk; bound naked in noon heat for the cure, then ruined in health and estate in three years.",
+    "romanised": "Liu Dacheng"
+   },
+   {
+    "first_appearance": "p2",
+    "first_person": "貧道 in p27: humble clerical self-reference, I, your monk",
+    "forms": [
+     {
+      "form": "蛮僧",
+      "note": "standing label; rude, foreign, outside Confucian-Buddhist respect",
+      "used_by": "narrator to reader"
+     },
+     {
+      "form": "坊さん",
+      "note": "reported polite word for monk in maid's message",
+      "used_by": "the maid servant to refer to him"
+     },
+     {
+      "form": "坊主",
+      "note": "familiar, slightly dismissive word",
+      "used_by": "Liu to Sun, and narrator in gossip passage"
+     },
+     {
+      "form": "沙門 / 異形な沙門",
+      "note": "descriptive learned term stressing strange aspect, dark skin, curled hair and beard, bronze earring",
+      "used_by": "narrator to reader"
+     },
+     {
+      "form": "貧道",
+      "note": "monk's only self-word; claims authority while remaining unexplained",
+      "used_by": "the monk for himself"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "called 坊主, 沙門, described with 鬚, masculine monk role; no female marking",
+    "handle": "the barbarian monk from the west",
+    "id": "c2",
+    "name_ja": null,
+    "reading": null,
+    "register": "flat, abrupt, ungracious; no greeting, short denials: drug is not needed, needle is not used, spell is not used. States diagnosis as fact.",
+    "relationships": [
+     "uninvited visitor to Liu's house from Hodoji temple, said to come from west of the Congling",
+     "diagnoser and binder of Liu; disliked by Sun Sensei"
+    ],
+    "role": "westerner credited with medical and sexual arts; cures by tying Liu naked in sun with wine-jar at pillow and releasing the worm. Rude from first to last; neither sage nor exposed fraud in text.",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p2",
+    "first_person": "none in the text; speaks once to ask about method",
+    "forms": [
+     {
+      "form": "孫先生",
+      "note": "full form with ruby そんせんせい; drinking companion and witness",
+      "used_by": "narrator to reader"
+     },
+     {
+      "form": "儒者か何か / 白羽扇を持つてゐた儒者",
+      "note": "first identification by feather fan and long gown; conjecture, not a title he claims",
+      "used_by": "narrator to reader"
+     },
+     {
+      "form": "糟邱の良友",
+      "note": "literary-ironic label: good friend of the wine-mound; marks him as fellow drinker",
+      "used_by": "narrator to reader"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "called 先生, 儒者, described with chin-beard 鼠の尻尾のやうな髯; male literati role",
+    "handle": "Sun Sensei",
+    "id": "c3",
+    "name_ja": "孫先生",
+    "reading": "そんせんせい",
+    "register": "literati reserve; one clipped question about drugs, then silence; inward contempt for monk and for Liu for receiving him, reported by narrator",
+    "relationships": [
+     "drinking companion of Liu Dacheng, present at chess game and at cure",
+     "contemptuous of Daoists and Buddhists; briefly fears a worm in his own belly"
+    ],
+    "role": "Confucian onlooker with white-feather fan; second witness at threshing-floor, joins Liu and monk to peer into jar.",
+    "romanised": "Sun Sensei"
+   },
+   {
+    "first_appearance": "p11",
+    "first_person": "none in the text; only reported request to admit visitor",
+    "forms": [
+     {
+      "form": "召使ひの丫鬟",
+      "note": "young maidservant; brings news of monk",
+      "used_by": "narrator to reader"
+     }
+    ],
+    "gender": "female",
+    "gender_evidence": "丫鬟 denotes a young female servant; no other marking",
+    "handle": "the maid servant",
+    "id": "c4",
+    "name_ja": "丫鬟",
+    "reading": "あくわん",
+    "register": "polite servant message, reported indirectly",
+    "relationships": [
+     "servant in Liu's house"
+    ],
+    "role": "announces the monk from Hodoji temple; guides him in.",
+    "romanised": "yahuan"
+   },
+   {
+    "first_appearance": "p13",
+    "first_person": "none in the text; mentioned only",
+    "forms": [
+     {
+      "form": "張三",
+      "note": "stock name in gossip about black cataract suddenly cured",
+      "used_by": "narrator reporting local rumour"
+     }
+    ],
+    "gender": "not shown",
+    "gender_evidence": "conventionally male-coded stock name, but text gives no gender marking; do not resolve",
+    "handle": "Zhang San",
+    "id": "c5",
+    "name_ja": "張三",
+    "reading": "ちょうさん",
+    "register": "none in the text",
+    "relationships": [],
+    "role": "rumour-case only, evidence for monk's fame.",
+    "romanised": "Zhang San"
+   },
+   {
+    "first_appearance": "p13",
+    "first_person": "none in the text; mentioned only",
+    "forms": [
+     {
+      "form": "李四",
+      "note": "stock name paired with Zhang San; eunuch-like illness instantly healed",
+      "used_by": "narrator reporting local rumour"
+     }
+    ],
+    "gender": "not shown",
+    "gender_evidence": "name conventionally male and illness suggests male, but text does not state it; leave open",
+    "handle": "Li Si",
+    "id": "c6",
+    "name_ja": "李四",
+    "reading": "りし",
+    "register": "none in the text",
+    "relationships": [],
+    "role": "rumour-case only, evidence for monk's fame.",
+    "romanised": "Li Si"
+   },
+   {
+    "first_appearance": "p46",
+    "first_person": "none in the text; allusion only",
+    "forms": [
+     {
+      "form": "曹孟徳",
+      "note": "invoked for the story of quenching thirst by imagining plum grove ahead",
+      "used_by": "narrator as learned analogy for Liu's thirst"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "historical male figure Cao Cao, style Mengde",
+    "handle": "Cao Mengde",
+    "id": "c7",
+    "name_ja": "曹孟徳",
+    "reading": "そうもうとく",
+    "register": "none in the text",
+    "relationships": [],
+    "role": "classical allusion to contrast with Liu, for whom imagining plums does nothing.",
+    "romanised": "Cao Mengde"
+   },
+   {
+    "first_appearance": "p42",
+    "first_person": "自分 in p59: plain first-person self-word, I / myself, used twice to confess ignorance and imitation",
+    "forms": [
+     {
+      "form": "自分",
+      "note": "appears only at close to decline adjudication among three answers",
+      "used_by": "the narrator for himself"
+     }
+    ],
+    "gender": "not shown",
+    "gender_evidence": "no marking in text; leave open",
+    "handle": "the narrator as 'jibun'",
+    "id": "c8",
+    "name_ja": null,
+    "reading": "じぶん",
+    "register": "faux-scholarly intermediary: learned Sino-Japanese exposition, quoted set phrases, self-cross-reference, dry asides, dated sign-off",
+    "relationships": [],
+    "role": "reteller of a Chinese anecdote; withholds reasons, cites sources he mimics, compares Liu to schooled people, lists three morals without choosing.",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p55",
+    "first_person": "none in the text; collective only",
+    "forms": [
+     {
+      "form": "長山に住んでゐる、あらゆる職業の人人 / それらの人人の口",
+      "note": "all trades of Changshan who repeat the question and supply answers",
+      "used_by": "narrator to reader"
+     }
+    ],
+    "gender": "not shown",
+    "gender_evidence": "mixed collective; no gender shown",
+    "handle": "the people of Changshan",
+    "id": "c9",
+    "name_ja": null,
+    "reading": null,
+    "register": "none in the text",
+    "relationships": [],
+    "role": "chorus that keeps asking why health and estate failed after the worm left, source of the three answers.",
+    "romanised": null
+   }
+  ],
+  "hard_spots": [
+   {
+    "anchors": [
+     "p10",
+     "p54"
+    ],
+    "kind": "set Chinese quotation and measure",
+    "why_hard": "「独酌する毎に輒、一甕を尽す」 and 「負郭の田三百畝、半は黍を種う」 are quoted as proof-texts for prodigious drinking and wealth. Need to keep as quotations, not naturalise, and keep mu as mu with note; rendering jar/cask must match the jar at the pillow."
+   },
+   {
+    "anchors": [
+     "p42"
+    ],
+    "kind": "ironic digression",
+    "why_hard": "comparison of Liu's ignorant submission to schooling is cool authorial irony, not compassion; ennobling it into satire on education or softening it misplaces tone."
+   },
+   {
+    "anchors": [
+     "p46"
+    ],
+    "kind": "classical allusion",
+    "why_hard": "Cao Mengde's plum grove to cure thirst; Liu tries the trick and it fails. Needs minimal note only; context already gives sense."
+   },
+   {
+    "anchors": [
+     "p48",
+     "p51"
+    ],
+    "kind": "bodily horror and invented animal",
+    "why_hard": "expulsion similes shift earthworm / gecko / loach, then jar animal: flesh-red like red clay, like small salamander, three sun long, with mouth and eyes, apparently drinking as it swims. Must not reduce to bug or parasite and must keep shifting likeness, not fix one animal."
+   },
+   {
+    "anchors": [
+     "p56",
+     "p57",
+     "p58"
+    ],
+    "kind": "parallel moral paradoxes",
+    "why_hard": "three answers must stay evenly weighted and aphoristic, especially third: Liu is the worm, the worm is Liu. Buddhist colour and plain identity at once; must not sound like quoted Zen wisdom nor like explanation."
+   },
+   {
+    "anchors": [
+     "p59",
+     "p60"
+    ],
+    "kind": "frame-pose and loanword",
+    "why_hard": "narrator confesses ignorance and says he imitates the Didacticism of Chinese novelists, capital D in source, then signs 五年四月. Keep capitalised foreign word and dry sign-off; do not turn into wise closure. Date is ambiguous year-month; annotate, do not resolve."
+   }
+  ],
+  "motifs": [
+   {
+    "english": "always wine worm as two-word creature, never bug, parasite, or worm alone where source says wine worm",
+    "id": "m1",
+    "motif": "the wine worm",
+    "occurrences": [
+     "p2",
+     "p27",
+     "p33",
+     "p42",
+     "p50",
+     "p53",
+     "p55",
+     "p56",
+     "p57",
+     "p58"
+    ],
+    "source_forms": [
+     "酒虫",
+     "酒虫《しゆちう》"
+    ],
+    "why": "title and diagnosis; varying it breaks the case-history link from gossip to jar to moral debate."
+   },
+   {
+    "english": "keep wine, to drink, to be drunk, drinking as one family; do not vary to liquor, booze, tipple",
+    "id": "m2",
+    "motif": "wine and drinking",
+    "occurrences": [
+     "p10",
+     "p19",
+     "p25",
+     "p26",
+     "p41",
+     "p46",
+     "p51",
+     "p53",
+     "p58"
+    ],
+    "source_forms": [
+     "酒",
+     "飲む",
+     "酔ふ",
+     "飲仲間",
+     "酒香"
+    ],
+    "why": "prodigious drinking without drunkenness is the symptom; loss even of smell is the cure's mark; variation would hide identity claim in third answer."
+   },
+   {
+    "english": "keep heat vocabulary linked: heat, blazing sun, noon, dry spell, haze; same dry glare from tableau to torture",
+    "id": "m3",
+    "motif": "killing heat",
+    "occurrences": [
+     "p2",
+     "p7",
+     "p40",
+     "p41",
+     "p44",
+     "p45",
+     "p46"
+    ],
+    "source_forms": [
+     "暑さ",
+     "炎天",
+     "陽気",
+     "亭午",
+     "旱",
+     "炎靄",
+     "温気"
+    ],
+    "why": "weather of Part I becomes bodily torment of Part III; thinning it breaks deliberate return."
+   },
+   {
+    "english": "keep silence and stillness flat: shut mouths, barely move, do not stir, quiet; statues comparison once",
+    "id": "m4",
+    "motif": "held silence and immobility",
+    "occurrences": [
+     "p6",
+     "p7",
+     "p20",
+     "p26",
+     "p33",
+     "p39",
+     "p41"
+    ],
+    "source_forms": [
+     "口を噤む",
+     "身動き",
+     "静まる",
+     "沈黙",
+     "息をひそめる"
+    ],
+    "why": "tableau is defined by withheld speech and movement, mirrored in required stillness of cure; explanatory connectives would rationalise it away."
+   },
+   {
+    "english": "always unglazed earthen jar; introduce as unexplained object, identify contents only when narrator does",
+    "id": "m5",
+    "motif": "the unglazed jar at the pillow",
+    "occurrences": [
+     "p3",
+     "p4",
+     "p41",
+     "p46",
+     "p49",
+     "p51"
+    ],
+    "source_forms": [
+     "素焼の瓶"
+    ],
+    "why": "planted as mystery in Part I, explained as lure in Part II, heard then seen in Part III; naming contents early destroys structure."
+   },
+   {
+    "english": "keep smell growing minute by minute; fragrance assailing nose without break",
+    "id": "m6",
+    "motif": "smell of wine",
+    "occurrences": [
+     "p46",
+     "p53"
+    ],
+    "source_forms": [
+     "酒香",
+     "芬々たる酒香",
+     "匂を嗅ぐ"
+    ],
+    "why": "thirst-torture turns on smell, and loss even of smelling marks cure; keep verbal link, not varied perfume/aroma."
+   }
+  ],
+  "narration": {
+   "english_tense": "past as default for reported action; keep present where Japanese uses non-past for tableau and bodily sensation (p2 heat tableau, p44-p46 sweat, thirst, prickling), so weather and torture stay immediate and linked. Do not backshift those presents into past.",
+   "frame": "faux-scholarly retelling of a Chinese anecdote: unexplained noon tableau, break to locate as Changshan China not Japan, slow flashback with deferrals and self-cross-reference, single-body present-tense cure, three-year jump, enumerated morals declined, dated sign-off.",
+   "narrator": "first-person only at close as 自分; otherwise third-person intermediary who cites, quotes, digresses and poses as imitator of Chinese novelists. Learned and sensuous, coolly ironic, never on reader's side.",
+   "person": "third person with first-person close",
+   "tense_habits": "Japanese mixes である / ている tableaux and commentary with た action and present-tense sensation (暑い, 流れる, 感じる). Shifts mark the four movements, not errors.",
+   "timeline": [
+    "one summer noon: tableau on Liu threshing-floor (Part I)",
+    "same day earlier: chess, visit, consent, binding (Part II flashback)",
+    "same noon continued: sweating, thirst, expulsion into jar (Part III)",
+    "three years later: Liu sick, poor, unrecognisable; debate in Changshan; narrator lists three answers, confesses ignorance (Part IV)",
+    "sign-off: 五年四月"
+   ]
+  },
+  "part_summaries": [
+   {
+    "starts": "p1",
+    "summary": "Part I. Blazing heat over tiled roofs, fields, cloud-peaks. Three men on Liu threshing-floor at noon: one naked, bound hand and foot, with unglazed jar at pillow; one dark-skinned western monk in yellow robe with fly-whisk; one long-gowned man with white-feather fan under eaves. All silent, barely moving, like clay statues in a Guandi temple. Narrator adds: not Japan but Changshan, China."
+   },
+   {
+    "starts": "p9",
+    "summary": "Part II. The naked man is owner Liu Dacheng, rich in 300 mu, who drinks a jar at a sitting and never gets drunk. Playing chess with drinking friend Sun Sensei, he admits the famed western monk from Hodoji temple. Monk without greeting diagnoses a wine worm in belly as cause of never drunkenness and offers cure by lying naked still in sun. Sun asks once about drugs, is rebuffed, falls silent. Liu consents from ease, curiosity and vanity; is bound with cord, jar of wine set at pillow, Sun stays to watch."
+   },
+   {
+    "starts": "p43",
+    "summary": "Part III. Liu alone in heat: sweat into eyes he cannot wipe, dizziness, skin prickling as if pulled all ways, raging thirst sharpened by unbroken smell of wine from jar, headache. As he opens mouth to stop cure, a soft mass crawls up gullet like earthworm, like gecko, slips out like loach with a plop into jar. Monk unties him: worm is out. All three peer in: flesh-red like red clay, like small salamander about three sun long, with mouth and eyes, seemingly drinking as it swims. Liu feels sick."
+   },
+   {
+    "starts": "p52",
+    "summary": "Part IV. Cure works at once: Liu cannot drink, cannot bear smell. In three years health fails, former fat figure gone, often bedridden; 300 mu mostly lost, he ploughs himself. Narrator poses why health and estate failed and lists three representative answers from Changshan people: worm was fortune lost through folly; worm was disease and poverty is better than death; worm was neither because Liu was the worm. Declares he does not know which is right, has only listed them in imitation of Chinese novelists' Didacticism. Signs Fifth year, fourth month."
+   }
+  ],
+  "say": "Cure works and ruins; text refuses to choose among fortune, disease, or identity readings. Keep tableau unexplained, monk rude and unexplained, dialogue flat against elaborate heat-writing, worm concrete with mouth and eyes, three answers parallel and declined, sign-off dry.",
+  "style_sheet": {
+   "annotation_density": "sparse; note only what sentence cannot give: mu, sun, Baodong/Hodoji temple name form, Cao Mengde plum-grove trick, Guandi temple statues, Didacticism capitalisation. Never gloss worm, method, or morals.",
+   "author_voice": "learned and sensuous at once: dense Sino-Japanese heat similes and bodily accumulation in plain sequence, short flat dialogue, dry ironic asides and self-references. English should squirm in Part III, not shudder in gothic; should enumerate in Part IV, not elegise.",
+   "honorifics_and_names": "Chinese pinyin for Chinese places and persons to keep not-Japan frame explicit: Liu Dacheng, Changshan, Zhang San, Li Si, Cao Mengde; temple as Hodoji (Baodong) with note on Japanese reading versus Chinese Baochuang. Keep Sun Sensei with Sensei, not Master Sun or Mr Sun, because text prints 孫先生 with Japanese ruby and Japanese mediation is part of pose; narrator's 自分 as I with no honorific inflation.",
+   "keep_in_japanese": "keep Didacticism exactly capitalised as in source; keep mu for 田 measure and sun for worm length with note; keep shubi, yahuan, Guandi on first use with gloss if needed, then plain English; do not keep ordinary words in Japanese.",
+   "quotation": "Japanese 「」 and 『』 to English double quotes; keep quoted set Chinese phrases as quotations to show pose of citation.",
+   "register": "slightly formal, faintly archaic learned English for narration; plain contemporary for dialogue, especially monk's bluntness. No picturesque exoticism, no modern slang, no moralising adjectives that favour one answer.",
+   "ruby_and_italics": "no ruby in English; do not reproduce glosses like つばめ except in notes if needed. Italics only for romanised terms kept in Japanese and for the printed English word Didacticism, matching source emphasis.",
+   "standing_rules": []
+  }
+ },
+ "usage": {
+  "input_tokens": 10598,
+  "cached_tokens": 0,
+  "output_tokens": 8644,
+  "reasoning_tokens": 3774,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0499845,
+ "response_id": "resp_6ae9cd8513ce8bb6d8754eee",
+ "latency_s": 77.92,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 17703
+  }
+ ],
+ "created": "2026-11-03T12:03:17Z"
+}

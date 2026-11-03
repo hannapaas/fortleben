@@ -1,0 +1,52 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "Which of these answers comes nearest to the mark, I myself do not know. I have merely listed such moral judgments at the end of this tale, in imitation of the *Didacticism* of Chinese novelists.",
+    "ids": [
+     "p59"
+    ],
+    "notes": [
+     "Kept Didacticism capitalised and in roman as printed, with italics to match the source emphasis; rendered both instances of 自分 as plain 'I / myself' with no inflation."
+    ]
+   },
+   {
+    "english": "— Fourth Month of the Fifth Year —",
+    "ids": [
+     "p60"
+    ],
+    "notes": [
+     "Left the date literal and unresolved; the year is not determinable from the passage alone, so did not render as April 1916. Em dashes kept because the Japanese has them."
+    ]
+   }
+  ],
+  "say": null
+ },
+ "usage": {
+  "input_tokens": 13743,
+  "cached_tokens": 13041,
+  "output_tokens": 2223,
+  "reasoning_tokens": 2043,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0122814,
+ "response_id": "resp_6ae9cf146b2ffd67c83d4104",
+ "latency_s": 24.19,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 684
+  }
+ ],
+ "created": "2026-11-03T12:09:56Z"
+}

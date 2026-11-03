@@ -1,0 +1,36 @@
+{
+ "prompt": "parts",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": {
+  "say": "The book is kept as a single part beginning at p1.",
+  "starts": [
+   "p1"
+  ],
+  "why": "The 38-paragraph story totals only about 3,400 characters with no chapters or scene breaks, so the whole supper scene holds in one reading as a single part."
+ },
+ "usage": {
+  "input_tokens": 2519,
+  "cached_tokens": 0,
+  "output_tokens": 1130,
+  "reasoning_tokens": 1056,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.00795125,
+ "response_id": "resp_6ae9ca89971361f0787443b8",
+ "latency_s": 8.1,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 246
+  }
+ ],
+ "created": "2026-11-03T11:50:33Z"
+}

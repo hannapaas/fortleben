@@ -1,0 +1,109 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"That's right. Day by day all sorts of things tire us and trouble us and make us suffer, and still two years are already past. In a little while the baby will be walking.\"",
+    "ids": [
+     "p28"
+    ],
+    "notes": [
+     "Kept 'two years' as written, though the wife has twice said three years. I take it to mean two years since the child's birth rather than a slip, but leave the arithmetic to stand. Used 'baby' for 坊や throughout, for a stated girl, pending editor decision."
+    ]
+   },
+   {
+    "english": "The man looked, as if at a loss, at the child standing holding the spoon. She at once cried gladly in a loud voice, \"Baby.\" At the same moment the child gave a loud cry, looking at her mother's face, and banged the spoon down upon the table: \"Uma, uma, uma, uma.\"",
+    "ids": [
+     "p29",
+     "p30",
+     "p31"
+    ],
+    "notes": [
+     "Grouped p29-p31 as one English paragraph: p29 breaks off mid-sentence into the call in p30, and p31 completes the child's answer. Transcribed the babble as 'Uma, uma' rather than 'yummy-yummy' so the child does not sound articulate; unsure and happy to change."
+    ]
+   },
+   {
+    "english": "The father hurriedly put rice into the child's mouth.",
+    "ids": [
+     "p32"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Presently they laid down their chopsticks.",
+    "ids": [
+     "p33"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Only a little while longer.\" The man said it strongly, as if to himself.",
+    "ids": [
+     "p34"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Yes, let us work.\" She said it calmly and restfully. And holding the child upon her lap, she bared her small nipple and began to nurse her.",
+    "ids": [
+     "p35"
+    ],
+    "notes": [
+     "Kept 'restfully' for 安らかに to hold the quiet-rest network, and kept breast-nursing physical and plain."
+    ]
+   },
+   {
+    "english": "\"Come, let us clear what is left. And let us sleep; let us get up early tomorrow, shall we?\"",
+    "ids": [
+     "p36"
+    ],
+    "notes": [
+     "Left without a speech tag as in the Japanese, which does not name the speaker."
+    ]
+   },
+   {
+    "english": "After a while the man stood up. And when he was about to begin to clear the table, the child had already closed her eyes with her cheek against the breast. All about had fallen quiet.",
+    "ids": [
+     "p37"
+    ],
+    "notes": [
+     "Kept 'quiet' for 静まりかへった to hold the network with the evening, the vision, and the mother's speech."
+    ]
+   },
+   {
+    "english": "\"It is a storm.\" The man stood still and whispered.",
+    "ids": [
+     "p38"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted the closing supper from the husband's answer through to the final whisper about the storm."
+ },
+ "usage": {
+  "input_tokens": 11891,
+  "cached_tokens": 11249,
+  "output_tokens": 3938,
+  "reasoning_tokens": 3286,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01922635,
+ "response_id": "resp_6ae9e481380cd4b9de1e41b5",
+ "latency_s": 49.25,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2432
+  }
+ ],
+ "created": "2026-11-03T13:41:21Z"
+}

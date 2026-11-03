@@ -1,0 +1,55 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "III",
+    "ids": [
+     "p43"
+    ],
+    "notes": []
+   },
+   {
+    "english": "It is hot. Sweat comes welling up with a prickle across the brow, and when it seems to have beaded it comes trickling, lukewarm, toward the eyes. As ill luck will have it, he is bound with thin cord, so of course there is no putting out a hand to wipe it. He tries moving his neck to turn the course of the sweat aside, but at that instant a violent dizziness seems ready to come on, so to his disappointment he gave up this plan too. All the while the sweat without ceremony wets the eyelids and, passing from the side of the nose round the mouth, runs on down beneath the chin. It is disagreeable beyond measure.",
+    "ids": [
+     "p44"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Until then he had lain with eyes open, staring hard at the sky seared white and the hemp-field with its drooping leaves, but once the sweat began to pour without restraint even that had to be given up. It was then that Liu learned for the first time that sweat stings when it gets into the eyes. And so, with the face of a sheep in the slaughterhouse, meekly shutting his eyes and lying still while the sun beats down upon him, now in turn the skin of the upper parts, face or body alike, began gradually to feel a certain pain. Over the whole surface of the skin a force is at work tending to move in every direction, while the skin itself has not the least elasticity against it. A pain that might best be described as a tingling everywhere — this is not the misery of prickly heat. Liu began to find it hateful that he had taken the barbarian monk's cure.",
+    "ids": [
+     "p45"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted the Part III opening sweat and skin-pain passage in present-tense sequence."
+ },
+ "usage": {
+  "input_tokens": 14586,
+  "cached_tokens": 13041,
+  "output_tokens": 2627,
+  "reasoning_tokens": 2201,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01505215,
+ "response_id": "resp_6ae9ce7ded9a43dfcda14172",
+ "latency_s": 24.32,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1723
+  }
+ ],
+ "created": "2026-11-03T12:07:25Z"
+}

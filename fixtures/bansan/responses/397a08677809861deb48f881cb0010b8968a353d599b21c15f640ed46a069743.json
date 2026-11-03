@@ -1,0 +1,85 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"Why are you so quiet?\" the man said, looking at the woman's face with a sudden puzzled air. She hurried to say something, but unable to say it in one breath she fell silent, and again her eyes ran far away. And she saw the phantom picture again. It was then for the first time that she quietly heard the sound of the storm outside the door. She said nothing.",
+    "ids": [
+     "p19"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Yes. That day is there. There is the day when everything will change into fond remembrance and forgiveness, and restfulness. After a long life, and after long sadness, and after long suffering, on the day after that, there is that restful day of fond remembrance and forgiveness. What are the suffering and sadness of each single day? What are the weariness and trouble of each single day? She was smiling before she knew it.",
+    "ids": [
+     "p20"
+    ],
+    "notes": [
+     "Kept fond remembrance and forgiveness, restfulness, and the lists of sadness, suffering, weariness and trouble in the same plain wording as pp16-17, without varying or lifting them."
+    ]
+   },
+   {
+    "english": "\"Why are you so quiet?\" the man said again. She raised her head as if startled, smiling as if with fond remembrance, \"It really has been only a little while since we married, hasn't it,\" she said, as if asking him too to remember, to remember all kinds of things, even the happy things from before their marriage.",
+    "ids": [
+     "p21",
+     "p22",
+     "p23"
+    ],
+    "notes": [
+     "Joined pp21-23 as one English paragraph because p21 ends mid-sentence on a comma leading into the p22 speech and the p23 verb that closes it. Rendered natsukashisou ni as as if with fond remembrance to keep the vision's key noun in the same field."
+    ]
+   },
+   {
+    "english": "\"That's so,\" the man said, looking up too.",
+    "ids": [
+     "p24"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"It comes to only three years. But we have been through much hardship, you and I.\"",
+    "ids": [
+     "p25"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Truly,\" she said. She lowered her eyes again as if to look at that picture. But at once, \"But it is still only three years, isn't it,\" she said, her eyes shining as if she must tell him of something great, something great she herself did not understand, some great hope.",
+    "ids": [
+     "p26",
+     "p27"
+    ],
+    "notes": [
+     "Joined pp26-27 as one English paragraph because p26 ends mid-sentence leading into the p27 speech. Kept the repetition of great and left hope as hope for nozomi, without explaining what she does not understand."
+    ]
+   }
+  ],
+  "say": null
+ },
+ "usage": {
+  "input_tokens": 12075,
+  "cached_tokens": 11121,
+  "output_tokens": 3708,
+  "reasoning_tokens": 3092,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01861965,
+ "response_id": "resp_6ae9cb9ea0b3b70819634d6f",
+ "latency_s": 30.04,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2471
+  }
+ ],
+ "created": "2026-11-03T11:55:11Z"
+}

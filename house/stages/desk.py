@@ -31,7 +31,7 @@ from house.stages.common import apply_edits, change_flags, latest_units, model, 
 ACTOR = "desk"
 MAX_FORKS = 5
 MAX_FINDINGS = 5  # findings taken back to earlier chapters, per run
-LABELS = {"F": "the faithful reader", "R": "the readable reader", "S": "the desk, from a later chapter"}
+LABELS = {"F": "the faithful reader", "R": "the readable reader", "S": "the desk, from a later part"}
 
 
 def chapter_notes(ctx, paras) -> dict[str, dict]:
@@ -98,20 +98,20 @@ def findings(ctx) -> list[dict]:
 def findings_block(found: list[dict]) -> str:
     if not found:
         return ""
-    return context.block("What the desk learned in earlier chapters",
+    return context.block("What the desk learned in earlier parts",
                          "\n".join(f"- {q['reason']} Why: {'; '.join(json.loads(q['evidence'] or '[]'))} (found at {q['segment_id']})"
                                    for q in found))
 
 
 def record_findings(ctx, paras, d: dict, recheck: bool) -> None:
-    for f in d["beyond_this_chapter"]:
+    for f in d["beyond_this_part"]:
         if recheck:
             ctx.emit("house", "check.flagged", {"segment_id": paras[0].id,
                                                 "check": f"finding on the way back, not taken back again: {f['finding']}"})
         elif len(findings(ctx)) >= MAX_FINDINGS:
             ctx.emit("house", "check.flagged", {"segment_id": paras[0].id, "check": f"findings cap reached, not taken back: {f['finding']}"})
         else:
-            queries.raise_query(ctx, paras[0].id, ACTOR, {"category": "beyond-chapter", "reason": f["finding"],
+            queries.raise_query(ctx, paras[0].id, ACTOR, {"category": "beyond-part", "reason": f["finding"],
                                                           "evidence_ja": f["why"], "say": f["finding"]}, owner="desk-recheck")
 
 
@@ -123,7 +123,7 @@ def desk_chapter(ctx, paras, units: dict, stats: dict, notes: dict | None = None
         stats["skipped"] += 1
         return
     inp = context.join(context.reading(ctx.latest("reading")),
-                       context.block("The cast", context.cast(ctx.latest("bible"))),
+                       context.bible(ctx.latest("bible")),
                        standing(ctx), context.chapter_pairs(paras, units, "ja"), drafter_notes(ctx, paras),
                        "" if recheck else findings_block(findings(ctx)), render_notes(notes))
     for attempt in range(2):  # an answer that decides none of the notes is asked for once more

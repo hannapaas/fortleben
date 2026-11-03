@@ -24,14 +24,7 @@
             "items": {
               "type": "string"
             },
-            "description": "Translator notes, if any"
-          },
-          "flags": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Anything beyond you"
+            "description": "Translator's notes, if any: what a line was meant to do, or what you couldn't settle (a number that changes, a speaker the text doesn't name, a name against the cast). Most paragraphs need none"
           }
         }
       }

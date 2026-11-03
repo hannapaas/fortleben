@@ -1,0 +1,86 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "The mother, silent and with her head bowed beside the wall, was serving onto a white plate the beef and onions, the carrots and potatoes, stewed in the deep dark-blue pot. And as if to say something, she put into her mouth a potato simmered sweet and soft, and looked at the man's face; but as if she had noticed something, she suddenly closed her mouth and gazed blankly at a far-off place.",
+    "ids": [
+     "p10"
+    ],
+    "notes": [
+     "Wall phrase is spare in the Japanese; I keep it as place rather than posture, to avoid adding a lean the text does not state."
+    ]
+   },
+   {
+    "english": "The potato in her mouth was hard and gritty, as if it had frozen, and very tasteless. As if taken by surprise, she silently chewed it over again with her front teeth, but at some point her heart had already sunk down, lonely.",
+    "ids": [
+     "p11"
+    ],
+    "notes": [
+     "ざくざく kept as gritty rather than mealy or undercooked, to stay literal and faintly unpleasant before it is anything else."
+    ]
+   },
+   {
+    "english": "She remembered the suffering and sadness and weariness of each day. And the flavourless, detached, cold tastelessness of the potato gave her a quiet, lonely, far-removed heart. She pictured to herself the poor, sadness-filled real life since their marriage.",
+    "ids": [
+     "p12"
+    ],
+    "notes": [
+     "かかりのない kept as detached, not explained into indifference or poverty-symbolism; the detachment happens without commentary."
+    ]
+   },
+   {
+    "english": "And it seemed like a life dragged on far too long. She suddenly felt as if she herself had quite grown old. And with a distant heart she was quietly remembering the quiet tear-filled days, and the days spent threatened and afraid for material things, and each and every day grieved and suffered through illness. But to her as she remembered now, everything was like a dream. Suffering and sadness too were like a fond dream.",
+    "ids": [
+     "p13"
+    ],
+    "notes": [
+     "なつかしい rendered as fond to hold the link to なつかしみ and forgiveness later; material want left plain, without glossing into money."
+    ]
+   },
+   {
+    "english": "And when she came to think of it, it was only about three years of life since their marriage.",
+    "ids": [
+     "p14"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Without knowing when, as if her attention had been caught by something, she gazed blankly toward the distance. At some point her quiet heart had been looking at a picture like a vision.",
+    "ids": [
+     "p15"
+    ],
+    "notes": [
+     "Drift markers kept soft as without knowing when and at some point, without turning them into she realized or she imagined."
+    ]
+   }
+  ],
+  "say": null
+ },
+ "usage": {
+  "input_tokens": 12646,
+  "cached_tokens": 11121,
+  "output_tokens": 2685,
+  "reasoning_tokens": 2088,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01498565,
+ "response_id": "resp_6ae9cb6e49f0668992f44b5f",
+ "latency_s": 21.87,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2499
+  }
+ ],
+ "created": "2026-11-03T11:54:22Z"
+}

@@ -1,0 +1,130 @@
+{
+ "prompt": "reader-faithful",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "notes": [
+   {
+    "japanese": "その子供のすべてに瞳を注いだ。",
+    "paragraph": "p4",
+    "problem": "Rationalisation shifts 'all' from the child to the parents' eyes, losing the pouring of gaze into everything about the child.",
+    "span": "they bent all their eyes upon the child.",
+    "suggestion": "And smiling silently, they poured their gaze into everything about the child.",
+    "sureness": "Fairly sure; a check of 注ぐ with すべてにかかる scope would settle whether 'everything about the child' is right."
+   },
+   {
+    "japanese": "『きかない奴だな。』",
+    "paragraph": "p7",
+    "problem": "Flattened vernacular: rough, warm masculine 奴 is neutralised into polite English and the husband's voice is lost.",
+    "span": "\"You won't listen, will you.\"",
+    "suggestion": "\"You never listen, you rascal.\"",
+    "sureness": "Sure something rough-warm is lost; unsure of best unworn English, a Taisho colloquial check on 奴 fondness would settle it."
+   },
+   {
+    "japanese": "そのすきに彼は、あわたゞしく大きな口を開けた、彼は彼自身の口のなかに御飯を押し込んだ。",
+    "paragraph": "p9",
+    "problem": "Destroyed rhythm: the repeated 彼は…彼は is compressed into one smoother clause.",
+    "span": "In the gaps, hastily opening his own large mouth, he pushed rice into it.",
+    "suggestion": "In the gaps, he hastily opened his large mouth, he pushed rice into his own mouth.",
+    "sureness": "Quite sure the repetition is deliberate; whether English can bear it without stiffness could be tested by reading aloud."
+   },
+   {
+    "japanese": "静かな淋しい遠くはなれた心を与へた。",
+    "paragraph": "p12",
+    "problem": "Destroyed network of repetition: 遠くはなれた becomes 'far-removed' instead of the plain far/distant kept elsewhere.",
+    "span": "far-removed heart",
+    "suggestion": "And the tasteless, unconcerned, cold badness of the potato gave her a quiet, lonely, far-off heart.",
+    "sureness": "Very sure on 'far-off' for the network; 'unconcerned' is also doubtful but a separate question."
+   },
+   {
+    "japanese": "静かに涙にみちた日のことや、物質の為めに脅かされ恐れてすごした日々や、病の為めに悲しみ苦しんだその日その日のことを遠い心が静かに思出してゐるのだった。",
+    "paragraph": "p13",
+    "problem": "Expansion: 'quiet' is added to the days, where Japanese has 静かに only as the manner of remembering.",
+    "span": "quiet days filled with tears",
+    "suggestion": "And with a distant heart she quietly remembered the days filled with tears, and the days spent threatened and afraid for material things, and each of the days grieved and suffered through illness.",
+    "sureness": "Very sure; the Japanese plainly attaches 静かに to 思出してゐる, not to 日."
+   },
+   {
+    "japanese": "遠い絵が暗く静かに、彼女の眼の底に映ってゐた。",
+    "paragraph": "p18",
+    "problem": "Impoverishment: 映ってゐた, was reflected, becomes lay, losing the picture as something seen within her.",
+    "span": "The distant picture lay dark and quiet in the bottom of her eyes.",
+    "suggestion": "The distant picture was reflected dark and quiet in the bottom of her eyes.",
+    "sureness": "Quite sure; only question is whether 'reflected' sounds too optical in English, which reading the sentence in place would settle."
+   },
+   {
+    "japanese": "『どうして黙ってるの。』",
+    "paragraph": "p19",
+    "problem": "Destroyed network: 黙って, not speaking, is rendered as 'so quiet', collapsing silence into the quiet 静か field.",
+    "span": "\"Why are you so quiet?\"",
+    "suggestion": "\"Why are you silent?\" the man said, looking at the woman's face with a sudden wonder.",
+    "sureness": "Very sure; the bible fixes silently / without speaking for 黙って, and the husband asks twice about her not speaking."
+   },
+   {
+    "japanese": "一日々々の苦しみや悲しみがなんだらう。一日々々の疲れやなやみがなんだらう。",
+    "paragraph": "p20",
+    "problem": "Rationalisation of punctuation: rhetorical wonder なんだらう is closed with periods, turning questions into flat statements.",
+    "span": "What is the suffering and sadness of each day. What is the weariness and trouble of each day.",
+    "suggestion": "What are the suffering and sadness of each day? What are the weariness and trouble of each day?",
+    "sureness": "Quite sure they should stay questions of wonder; whether singular or plural 'is/are' best fits the lists needs a second ear."
+   },
+   {
+    "japanese": "『なぜ黙ってるの。』",
+    "paragraph": "p21–p23",
+    "problem": "Same destroyed silence network as p19: 黙って rendered as 'so quiet' instead of silent / not speaking.",
+    "span": "\"Why are you so quiet?\" the man said again.",
+    "suggestion": "\"Why are you silent?\" the man said again. She raised her head as if startled, smiling as if with fond remembrance,",
+    "sureness": "Very sure for consistency with p19; keeping both the same is what matters."
+   },
+   {
+    "japanese": "『うま〳〵〳〵〳〵。』とスプーンをテーブルにたゝきつけた。",
+    "paragraph": "p29–p31",
+    "problem": "Destroyed simultaneity: と plus banging means crying while banging, not banging then quoted speech after a colon.",
+    "span": "and banged the spoon down upon the table: \"Uma, uma, uma, uma.\"",
+    "suggestion": "and banged the spoon down upon the table, crying \"uma, uma, uma, uma.\"",
+    "sureness": "Quite sure on simultaneity and lower case; transcription style uma-uma versus uma, uma is for the editor."
+   },
+   {
+    "japanese": "さ、あとを片づけよう。そして寝よう、明日は早く起きようぢゃないか。",
+    "paragraph": "p36",
+    "problem": "Clarification: Japanese gives no 『』 here, leaving utterance versus narration soft, which English quotation firms into direct speech.",
+    "span": "\"Come, let us clear what is left. And let us sleep; let us get up early tomorrow, shall we?\"",
+    "suggestion": "Remove the quotation marks to leave the sentence as the Japanese leaves it, unattributed and soft about who speaks.",
+    "sureness": "Fairly sure something is added by the quotes; unsure who if anyone speaks, which a check of the first edition lineation would settle."
+   },
+   {
+    "japanese": "『嵐だな。』",
+    "paragraph": "p38",
+    "problem": "Expansion and ennoblement: terse whisper with な becomes a full 'It is' sentence, breaking the storm-heard echo with p1.",
+    "span": "\"It is a storm.\"",
+    "suggestion": "\"Storm.\" The man stood still and whispered.",
+    "sureness": "Very sure the ending must stay as bare as p1; whether to keep な as \", isn't it\" is a desk choice about terseness versus agreement."
+   }
+  ],
+  "say": "Vision diction is mostly kept plain and repeated, but the silence, far, and storm networks and the ending's refusal to resolve need repair; House log: part not clean."
+ },
+ "usage": {
+  "input_tokens": 15684,
+  "cached_tokens": 0,
+  "output_tokens": 13766,
+  "reasoning_tokens": 12053,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0781105,
+ "response_id": "resp_6ae9e50a014db5e409044ca7",
+ "latency_s": 137.36,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 6006
+  }
+ ],
+ "created": "2026-11-03T13:43:39Z"
+}

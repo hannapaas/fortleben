@@ -1,0 +1,54 @@
+{
+ "prompt": "final-read",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "fixes": [
+   {
+    "find": "gazed at the child, never still for an instant, lovely like a little bird.",
+    "paragraph": "p8",
+    "reason": "Japanese gives never-still and bird-like loveliness to the child, not to the mother's eyes.",
+    "replace": "gazed at the child, who was never still for an instant, lovely like a little bird."
+   },
+   {
+    "find": "she was quietly remembering the quiet tear-filled days,",
+    "paragraph": "p13",
+    "reason": "Japanese has one quietly for the remembering, with no quiet on the days themselves.",
+    "replace": "she was quietly remembering the tear-filled days,"
+   },
+   {
+    "find": "\"A storm,\" the man whispered, standing still.",
+    "paragraph": "p38",
+    "reason": "Japanese ends with na, a quiet assent that closes the storm heard forgotten heard arc.",
+    "replace": "\"A storm, isn't it,\" the man whispered, standing still."
+   }
+  ],
+  "notes": [],
+  "say": "Final read leaves supper and vision intact and proposes three local wording fixes.",
+  "verdict": "Ready after the fixes below: voice and crux hold throughout, with only local wording to correct."
+ },
+ "usage": {
+  "input_tokens": 14876,
+  "cached_tokens": 0,
+  "output_tokens": 12662,
+  "reasoning_tokens": 12408,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0724085,
+ "response_id": "resp_6ae9ccc91c02971ad74943a9",
+ "latency_s": 82.4,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1040
+  }
+ ],
+ "created": "2026-11-03T12:00:09Z"
+}

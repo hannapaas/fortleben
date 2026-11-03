@@ -12,7 +12,7 @@ Every text has one or two things a translation of it stands or falls on. Name th
 
 Beyond the crux, cover whatever this text needs: its sound and register, its shape, where it is deliberately ambiguous, which words or images it leans on, where a fluent English draft is most likely to go wrong. Those are the things readings usually contain, not headings to fill. Don't write a plot summary. Don't write an introduction for a reader; write for the translator who's about to start.
 
-Say what you can't settle. Open questions of interpretation go in a list at the end; they'll become forks for the editor. Also offer two or three *voice takes* the reading allows, one line each (drier or warmer, plainer or more formal, closer or freer), because the first page will be drafted each way and one chosen.
+Say what you can't settle. Open questions of interpretation go in a list at the end; they'll become forks for the editor. Also offer two or three *voice takes* the reading allows, one line each (drier or warmer, plainer or more formal, closer or freer). Put the one you'd choose first: the house drafts in the first take unless the editor picks another, so the order is a recommendation.
 
 ## Two examples, deliberately different
 

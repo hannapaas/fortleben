@@ -1,0 +1,46 @@
+{
+ "prompt": "crux-check",
+ "model": "muse-wonder-1.0",
+ "effort": "low",
+ "data": {
+  "confidence": "high",
+  "crux": [
+   {
+    "for_the_english": "Keep all three explanations syntactically parallel, equally weighted and in the same dry register, and keep the narrator's refusal to judge — and his borrowed word 'Didacticism' — flat and ironic. Do not let vocabulary tilt the scale: the monk must not become a charlatan or a fool in the telling, Liu not a drunkard reformed or a victim, the worm not 'parasite' (clinical), 'demon' (supernatural) or 'gift' (allegorical) by default. Where a word must lean, the margin should say so.",
+    "point": "The story stands or falls on the cure being indistinguishable from the ruin — the worm must remain literally a worm and undecidably disease, fortune, and Liu himself, to the last line.",
+    "why": "Expelling the creature works exactly as promised: from that day Liu cannot drink, cannot even bear the smell (p53). Yet health and the three hundred mu of fields go with the drinking (p53–54), and the narrator closes not with a moral but with three incompatible answers — worm as heaven-given fortune lost through a benighted monk; worm as disease whose removal, even into poverty and sickness, is still happiness; worm as neither, because 'Liu is the wine worm, the wine worm is Liu,' so removing it was a kind of self-killing (p56–58) — followed by an explicit refusal to choose: 'which of these answers is most apt, I myself do not know' (p59). Earlier details are planted to serve all three readings at once: the drinking that never makes him drunk (p26–27), the wealth that makes the drinking costless (p10), a whole life with nothing in it but wine (p58)."
+   },
+   {
+    "for_the_english": "Hold a slightly formal, old-tale surface — kept terms, quoted sayings, unhurried periodic sentences — without fake archaism or orientalist quaintness, and do not smooth the gear-change into section three: let the detached chronicle give way to present, physical, almost clinical suffering and then back again. Foreign terms should stay strange where the Japanese keeps them strange, glossed in the margin rather than domesticated in the line.",
+    "point": "The voice is a pastiche — a modern author performing a Chinese strange tale — and its dry, learned detachment against one prolonged passage of bodily torment is the story's engine, not decoration.",
+    "why": "The narration wears its borrowed costume openly: a Chinese setting announced as an afterthought ('Of course, this is not a story of Japan,' p8), Sino-learned diction and set phrases ('at every solitary drinking he would finish a whole jar,' p10), storyteller's asides to the reader (p42, comparing Liu's ignorance to anyone who receives an education), statuesque tableaux in the opening heat (p2–7), and a closing bow to 'the Didacticism of Chinese novelists' (p59). Against that cool frame, section three drops into Liu's skin — sweat stinging his eyes, skin prickling without elasticity, thirst fixed on the smell from the jar at his pillow, the thing crawling up his gullet like earthworm, gecko, loach (p44–48) — rendered slowly and without euphemism. Flatten either side and the tale becomes either a quaint anecdote or a horror vignette; the irony lives in the distance between them."
+   }
+  ],
+  "say": "The crux (one or two items), each with its reason and what follows for the English; a line on how confident you are and what would change your mind. Keep it under a page.",
+  "what_would_change_my_mind": "Evidence that Akutagawa is translating or closely adapting a specific Chinese source whose own wording settles the worm's status or dictates the register — then fidelity to that source's choices, rather than to the ambiguity, would govern."
+ },
+ "usage": {
+  "input_tokens": 7605,
+  "cached_tokens": 0,
+  "output_tokens": 1300,
+  "reasoning_tokens": 456,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.05642,
+ "response_id": "resp_6ae9cd2e15bf816651ef474e",
+ "latency_s": 20.41,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 3638
+  }
+ ],
+ "created": "2026-11-03T12:01:50Z"
+}

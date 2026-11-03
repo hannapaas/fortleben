@@ -1,0 +1,334 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": {
+  "beyond_this_part": [],
+  "changes": [
+   {
+    "answers": [
+     "R2"
+    ],
+    "find": "there showed a drowsy colour of weariness.",
+    "paragraph": "p3",
+    "reason": "色 is the look showing in the eyes, and “look” keeps the plain diction without the dictionary stiffness of “colour.”",
+    "replace": "there was a drowsy look of weariness."
+   },
+   {
+    "answers": [
+     "F1"
+    ],
+    "find": "And smiling silently, they bent all their eyes upon the child.",
+    "paragraph": "p4",
+    "reason": "すべてにかかる is “everything about the child,” not “all their eyes”; the gaze is poured into everything about her.",
+    "replace": "And smiling silently, they poured their gaze into everything about the child."
+   },
+   {
+    "answers": [
+     "F2"
+    ],
+    "find": "“You won't listen, will you.”",
+    "paragraph": "p7",
+    "reason": "きかない奴だな is rough-edged and warm, and “rascal” restores that fond roughness without dialect costume.",
+    "replace": "“You never listen, you rascal.”"
+   },
+   {
+    "answers": [
+     "R4"
+    ],
+    "find": "watched the child, never still for an instant, lovely as a small bird.",
+    "paragraph": "p8",
+    "reason": "The “and” reattaches “lovely as a small bird” to the child she is watching, as 様子 requires.",
+    "replace": "watched the child, never still for an instant and lovely as a small bird."
+   },
+   {
+    "answers": [
+     "R5"
+    ],
+    "find": "And holding back the smile the child helplessly brought welling up, he steadied the child",
+    "paragraph": "p9",
+    "reason": "“made well up in him” makes the English construe while keeping the smile, the child as its cause, and the physical steadying unchanged.",
+    "replace": "And holding back the smile the child helplessly made well up in him, he steadied the child"
+   },
+   {
+    "answers": [
+     "F3"
+    ],
+    "find": "In the gaps, hastily opening his own large mouth, he pushed rice into it.",
+    "paragraph": "p9",
+    "reason": "The Japanese repeats 彼は…彼は around his snatched mouthful, and restoring the repetition restores the rhythm of feeding himself in the gaps.",
+    "replace": "In the gaps, he hastily opened his large mouth, he pushed rice into his own mouth."
+   },
+   {
+    "answers": [
+     "F4"
+    ],
+    "find": "far-removed heart",
+    "paragraph": "p12",
+    "reason": "遠くはなれた belongs to the text’s repeated far / far-off network, which “far-removed” breaks.",
+    "replace": "far-off heart"
+   },
+   {
+    "answers": [
+     "F5"
+    ],
+    "find": "she quietly remembered the quiet days filled with tears",
+    "paragraph": "p13",
+    "reason": "静かに is the manner of her remembering, not a quality of the days; the added second “quiet” expands the Japanese.",
+    "replace": "she quietly remembered the days filled with tears"
+   },
+   {
+    "answers": [
+     "R8"
+    ],
+    "find": "and each of the days grieved and suffered through illness.",
+    "paragraph": "p13",
+    "reason": "In English the days cannot grieve; “days of grieving and suffering” keeps the same list without a grammar slip.",
+    "replace": "and each of the days of grieving and suffering through illness."
+   },
+   {
+    "answers": [
+     "R9"
+    ],
+    "find": "It was in a pale dim light, and three people, quiet like the light itself, drawn close with their heads together, telling a long story.",
+    "paragraph": "p16",
+    "reason": "The Japanese has a complete clause of three people telling a story; this only gives the English the main verb it needs, keeping the figures indefinite.",
+    "replace": "In a pale dim light, three people, quiet like the light itself, drawn close with heads together, were telling a long story."
+   },
+   {
+    "answers": [
+     "R10"
+    ],
+    "find": "With heads bent and eyes lowered, and there only a quiet fond remembrance and forgiveness seemed to wrap them.",
+    "paragraph": "p16",
+    "reason": "The draft leaves a fragment; the replacement finishes the clause while keeping the fixed pair “fond remembrance and forgiveness” exact.",
+    "replace": "With heads bent and eyes lowered, they seemed wrapped only in a quiet fond remembrance and forgiveness."
+   },
+   {
+    "answers": [
+     "F6"
+    ],
+    "find": "The distant picture lay dark and quiet in the bottom of her eyes.",
+    "paragraph": "p18",
+    "reason": "映ってゐた is “was reflected,” the picture seen within her; “lay” loses that seeing.",
+    "replace": "The distant picture was reflected dark and quiet in the bottom of her eyes."
+   },
+   {
+    "answers": [
+     "F7"
+    ],
+    "find": "“Why are you so quiet?”",
+    "paragraph": "p19",
+    "reason": "He asks about 黙ってる, her not speaking, not about 静か; using “silent” keeps the silence network distinct from the quiet network.",
+    "replace": "“Why are you silent?”"
+   },
+   {
+    "answers": [
+     "F8",
+     "R14"
+    ],
+    "find": "What is the suffering and sadness of each day. What is the weariness and trouble of each day.",
+    "paragraph": "p20",
+    "reason": "なんだらう is wondering question, not flat statement; the question marks keep that wonder open.",
+    "replace": "What are the suffering and sadness of each day? What are the weariness and trouble of each day?"
+   },
+   {
+    "answers": [
+     "R14"
+    ],
+    "find": "Before she knew it she held a smile.",
+    "paragraph": "p20",
+    "reason": "微笑を浮べてゐた is a state of smiling that has come on her before she knew it; “was smiling” keeps the drift without the unidiomatic “held.”",
+    "replace": "Before she knew it she was smiling."
+   },
+   {
+    "answers": [
+     "F9"
+    ],
+    "find": "“Why are you so quiet?” the man said again.",
+    "paragraph": "p21",
+    "reason": "The second asking repeats the first question about her not speaking, and both must stay the same English.",
+    "replace": "“Why are you silent?” the man said again."
+   },
+   {
+    "answers": [
+     "R15"
+    ],
+    "find": "“Truly,” she lowered her eyes again and tried to look at that picture.",
+    "paragraph": "p26",
+    "reason": "Lowering her eyes cannot tag speech in English; a full stop keeps her words and the return to the picture separate, as the Japanese full stop does.",
+    "replace": "“Truly.” She lowered her eyes again and tried to look at that picture."
+   },
+   {
+    "answers": [
+     "R16"
+    ],
+    "find": "She at once cried gladly in a loud voice, “Baby.”",
+    "paragraph": "p29",
+    "reason": "After the sentence about the man, “The mother” prevents a needless reread; 彼女 here is unambiguously the mother answering with the call.",
+    "replace": "The mother at once cried gladly in a loud voice, “Baby.”"
+   },
+   {
+    "answers": [
+     "F10"
+    ],
+    "find": "and banged the spoon down upon the table: “Uma, uma, uma, uma.”",
+    "paragraph": "p29",
+    "reason": "『うま…』と…たゝきつけた is crying while banging, not speech after a bang; the comma and “crying” restore the simultaneity.",
+    "replace": "and banged the spoon down upon the table, crying “uma, uma, uma, uma.”"
+   },
+   {
+    "answers": [
+     "R19"
+    ],
+    "find": "All about had fallen quiet.",
+    "paragraph": "p37",
+    "reason": "“All around” is the modern plain equivalent for あたり here and keeps “quiet” in the evening’s quiet network.",
+    "replace": "All around had fallen quiet."
+   },
+   {
+    "answers": [
+     "F12"
+    ],
+    "find": "“It is a storm.”",
+    "paragraph": "p38",
+    "reason": "嵐だな is a bare weather-whisper echoing p1; the full “It is” sentence expands and lifts the last line, which must be allowed to be only a storm, isn’t it.",
+    "replace": "“A storm, isn’t it.”"
+   }
+  ],
+  "declined": [
+   {
+    "note": "R1",
+    "reason": "“fixed all their eyes upon” keeps the draft’s wrong scope; the Japanese pours the gaze into everything about the child, so F1’s correction is taken instead."
+   },
+   {
+    "note": "R3",
+    "reason": "The long p7 sentence has one clear subject, the young father, throughout; splitting it would rationalise a Japanese sentence-shape that the reading allows to run long."
+   },
+   {
+    "note": "R6",
+    "reason": "うつむいて keeps the heart doing what her bowed head does at the table; “sank” tidies a deliberate bodily strangeness into a familiar feeling-word."
+   },
+   {
+    "note": "R7",
+    "reason": "“indifferent, cold nastiness” still personifies the potato and strengthens 不味さ into nastiness; かゝはりのない is the potato’s cold unrelatedness, which “unconcerned” at least does not improve on, so the wording stands pending no better plain equivalent."
+   },
+   {
+    "note": "R11",
+    "reason": "No replacement is offered and any clearer one would locate the vision; 前にある is kept literally because the reading forbids explaining where that rest is."
+   },
+   {
+    "note": "R12",
+    "reason": "“deep in her eyes” smooths away 眼の底 and the reflected picture F6 restores; the slight strangeness of “bottom of her eyes” is the text’s spatialising of the far future."
+   },
+   {
+    "note": "R13",
+    "reason": "一口には is precisely “in one breath / at one go,” the thing she cannot manage, and その眼が遠く走って belongs to the far network; “gaze drifted” would soften both into signposted drift."
+   },
+   {
+    "note": "R17",
+    "reason": "小さな乳首 is physically exact and the reading keeps the nursing as physical as the feeding; “bared her breast” euphemises what the Japanese names plainly."
+   },
+   {
+    "note": "R18",
+    "reason": "The Japanese gives the words in 『』 but names no speaker; adding a tag would settle who speaks the resolve, which the text leaves soft."
+   },
+   {
+    "note": "F11",
+    "reason": "The Japanese as set here does give the p36 words in 『』, so the quotation marks add nothing; what it withholds is only the speaker, and that softness is preserved by keeping the quotes and no tag."
+   }
+  ],
+  "disagreements": [
+   {
+    "choice": "F1: the English is taken; R1 declined.",
+    "faithful_side": "F1: “all” belongs to everything about the child into which their gaze is poured, not to the parents’ eyes.",
+    "notes": [
+     "F1",
+     "R1"
+    ],
+    "paragraph": "p4",
+    "readable_side": "R1: “bent all their eyes upon” is unidiomatic and should be “fixed all their eyes upon.”",
+    "send_up": false
+   },
+   {
+    "choice": "F3 for the repeated “he… he” and “In the gaps”; R5 only for the smile clause, its “In between” not taken.",
+    "faithful_side": "F3: restore the repeated 彼は…彼は and the snatched rhythm of his own mouthful.",
+    "notes": [
+     "F3",
+     "R5"
+    ],
+    "paragraph": "p9",
+    "readable_side": "R5: the smile clause is tangled and “In the gaps” should become “In between.”",
+    "send_up": false
+   },
+   {
+    "choice": "The draft’s “unconcerned” and “badness” stand; only F4’s “far-off” is changed.",
+    "faithful_side": "F4: only the far network is certainly broken here; “unconcerned” is doubtful but a separate question.",
+    "notes": [
+     "F4",
+     "R7"
+    ],
+    "paragraph": "p12",
+    "readable_side": "R7: “unconcerned, cold badness” is not usable English; use “indifferent, cold nastiness.”",
+    "send_up": false
+   },
+   {
+    "choice": "F6: “was reflected … in the bottom of her eyes” is taken; R12 declined.",
+    "faithful_side": "F6: 映ってゐた is the picture reflected and seen within her, in the bottom of her eyes.",
+    "notes": [
+     "F6",
+     "R12"
+    ],
+    "paragraph": "p18",
+    "readable_side": "R12: “bottom of her eyes” is not natural English; use “deep in her eyes.”",
+    "send_up": false
+   },
+   {
+    "choice": "F10’s simultaneity and lower-case crying are taken; whether the babble should be “uma” at all, rather than an English yummy-noise, goes up.",
+    "faithful_side": "F10: the child cries the babble while banging the spoon; transcription style is for the editor.",
+    "notes": [
+     "F10"
+    ],
+    "paragraph": "p29",
+    "readable_side": "The style sheet leaves uma-uma transcription versus plain yummy-yummy babble to an editor decision, and the translator is unsure.",
+    "send_up": true
+   },
+   {
+    "choice": "Neither: the quotation marks stay and no speaker tag is added.",
+    "faithful_side": "F11: quotation marks firm an unattributed Japanese utterance into direct speech and should be removed.",
+    "notes": [
+     "F11",
+     "R18"
+    ],
+    "paragraph": "p36",
+    "readable_side": "R18: with no tag the English reader cannot tell who speaks the resolve.",
+    "send_up": false
+   }
+  ],
+  "say": "House log: The desk restored the silence, far, smile and fond-remembrance/forgiveness repetitions against smoothing, accepted only grammar-level repairs elsewhere, and sent up just the baby-babble transcription."
+ },
+ "usage": {
+  "input_tokens": 20943,
+  "cached_tokens": 0,
+  "output_tokens": 6078,
+  "reasoning_tokens": 3082,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.205332,
+ "response_id": "resp_6ae9e5819e9a026aea6f44f8",
+ "latency_s": 52.95,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 11242
+  }
+ ],
+ "created": "2026-11-03T13:45:37Z"
+}

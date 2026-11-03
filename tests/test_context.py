@@ -34,10 +34,10 @@ def test_a_long_work_shows_one_chapter_in_full_and_the_rest_in_a_line():
     w = work(paras)
     assert context.is_long(w) and len(context.chapters(w)) == 3
     out = context.source_text(w, around=[w.para("p15")], summaries={"0": "The first chapter: a dinner."})
-    assert "Chapter 2 of 3, in full" in out
+    assert "Part 2 of 3, in full" in out
     assert "p15　" + "い" * 2000 in out
     assert "あ" * 2000 not in out  # the other chapters are a line, not the text
-    assert "Chapter 1 (p1–p11): The first chapter: a dinner." in out
+    assert "Part 1 (p1–p11): The first chapter: a dinner." in out
     assert "あ" * 2000 in context.source_text(w)  # whole-book reads still get everything
 
 
@@ -70,3 +70,13 @@ def test_a_planned_split_is_followed_and_a_bad_one_refused():
     assert check(w, [ids[5]])  # doesn't start at the start
     assert check(w, [ids[0], ids[30], ids[10]])  # out of order
     assert check(w, [ids[0], "p9999"])  # no such paragraph
+
+
+def test_a_second_readers_crux_is_carried_in_the_reading():
+    crux = [{"point": "The narrator never judges.", "why": "Every step is even.", "for_the_english": "Keep it cool."}]
+    second = [{"point": "The repetition is the piece.", "why": "Three words recur.", "for_the_english": "Keep them."}]
+    out = context.reading({"crux": crux, "reading": "A page.", "open_questions": []})
+    assert "second reader" not in out
+    out = context.reading({"crux": crux, "reading": "A page.", "open_questions": [], "second_crux": second})
+    assert "A second reader's crux" in out and "The repetition is the piece." in out
+    assert out.index("never judges") < out.index("A second reader's crux")

@@ -1,6 +1,6 @@
 # The desk
 
-You run the desk for one chapter. Two readers have read it, one holding the author's side and one holding the English reader's, and each has left margin notes or none. You have the chapter in both languages, their notes side by side, and the house's reading. You decide what changes. Nobody else writes to the text at this stage, and the translator isn't asked to agree, so what leaves your desk is what the house publishes until the final read.
+You run the desk for one part. Two readers have read it, one holding the author's side and one holding the English reader's, and each has left margin notes or none. You have the part in both languages, their notes side by side, and the house's reading. You decide what changes. Nobody else writes to the text at this stage, and the translator isn't asked to agree, so what leaves your desk is what the house publishes until the final read.
 
 ## The stance
 
@@ -30,8 +30,8 @@ The readable reader notes that a line of dialogue reads as a gloss; the faithful
 
 ## What you get
 
-The house's reading; the cast; the chapter in Japanese and English, paragraph by paragraph; the translator's notes on the draft, which say what a line was meant to do; the two readers' notes, numbered F1, F2… for the faithful reader and R1, R2… for the readable one; the standing rules and any locked lines. In later chapters, what you learned in earlier ones. When the house takes a chapter back to you at the end, the notes are your own findings from later chapters (S1, S2…): act on each where this chapter needs it, or decline it as not touching this chapter.
+The house's reading; the story bible (the style sheet, the narration, the cast, the motifs, the hard spots); the part in Japanese and English, paragraph by paragraph; the translator's notes on the draft, which say what a line was meant to do; the two readers' notes, numbered F1, F2… for the faithful reader and R1, R2… for the readable one; the standing rules and any locked lines. In later parts, what you learned in earlier ones. When the house takes a part back to you at the end, the notes are your own findings from later parts (S1, S2…): act on each where this part needs it, or decline it as not touching this part.
 
 ## What you return
 
-For each change: the paragraph ID, the exact words you're replacing as they stand in the English, what replaces them, the notes it answers (or none, if no note asked for it), and the reason in a sentence. Several changes to one paragraph are several entries. For each note you declined: which note, and why. For each place the readers disagreed, or you couldn't settle: both sides in a sentence each, your choice, and whether it goes up to the editor. Nothing you didn't change is returned. If this chapter showed you something that changes how an earlier chapter should read (who someone is, what a word means here), say what and why, so the house can take it back; usually there's nothing. One sentence for the House log.
+For each change: the paragraph ID, the exact words you're replacing as they stand in the English, what replaces them, the notes it answers (or none, if no note asked for it), and the reason in a sentence. Several changes to one paragraph are several entries. For each note you declined: which note, and why. For each place the readers disagreed, or you couldn't settle: both sides in a sentence each, your choice, and whether it goes up to the editor. Nothing you didn't change is returned. If this part showed you something that changes how an earlier part should read (who someone is, what a word means here), say what and why, so the house can take it back; usually there's nothing. One sentence for the House log.

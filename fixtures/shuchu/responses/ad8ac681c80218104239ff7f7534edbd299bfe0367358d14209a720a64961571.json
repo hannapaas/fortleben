@@ -1,0 +1,194 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": {
+  "beyond_this_part": [],
+  "changes": [
+   {
+    "answers": [
+     "R1"
+    ],
+    "find": "float in knobs.",
+    "paragraph": "p2",
+    "reason": "つぶつぶと describes small lumps or clumps of cloud, and “clumps” preserves that shape in English.",
+    "replace": "float in clumps."
+   },
+   {
+    "answers": [
+     "R2"
+    ],
+    "find": "every field that is a field, hemp or millet, hangs its head limply in the rising heat from the earth",
+    "paragraph": "p2",
+    "reason": "“Every field” already carries the totalising force of 畑と云ふ畑 without requiring the English reader to parse the repetition literally.",
+    "replace": "every field, hemp or millet, hangs its head limply in the heat rising from the earth"
+   },
+   {
+    "answers": [
+     "R3"
+    ],
+    "find": "Then a handy unglazed earthen jar is set at this man's pillow,",
+    "paragraph": "p3",
+    "reason": "手ごろな means conveniently sized, and “handy-sized” makes that sense clear.",
+    "replace": "Then a handy-sized unglazed earthen jar is set at this man's pillow,"
+   },
+   {
+    "answers": [
+     "F2",
+     "R4"
+    ],
+    "find": "squats there portentously, in the attitude of a turkey.",
+    "paragraph": "p4",
+    "reason": "勿体らしく denotes self-importance rather than menace, so this keeps the monk pompous and comic without making him ominous.",
+    "replace": "squats there with an air of importance, in the attitude of a turkey."
+   },
+   {
+    "answers": [
+     "R5"
+    ],
+    "find": "grows only a perfunctory beard like a rat's tail on the tip of his chin,",
+    "paragraph": "p5",
+    "reason": "申訳だけに means that the beard is only token, and “token beard” conveys that slightness naturally.",
+    "replace": "sports only a token beard, like a rat's tail, on the tip of his chin,"
+   },
+   {
+    "answers": [
+     "R6"
+    ],
+    "find": "he preciously plies a fan made of white birds' feathers,",
+    "paragraph": "p5",
+    "reason": "大事さうに describes the care with which Sun handles the fan, and the replacement states that directly.",
+    "replace": "he handles a fan made of white birds' feathers with great care,"
+   },
+   {
+    "answers": [
+     "R7"
+    ],
+    "find": "leaning against a bamboo wife and fighting out a game on the board,",
+    "paragraph": "p11",
+    "reason": "“Bamboo-wife bolster” identifies the object just enough for the action and setting to be understood without a longer explanation.",
+    "replace": "leaning against a bamboo-wife bolster and playing out a game on the board,"
+   },
+   {
+    "answers": [
+     "F1"
+    ],
+    "find": "I have come to cure your disease.",
+    "paragraph": "p27",
+    "reason": "貧道 is the monk’s marked clerical self-reference, and “This poor monk” retains its claim to authority while keeping his speech abrupt.",
+    "replace": "This poor monk has come to cure your disease."
+   },
+   {
+    "answers": [
+     "F4"
+    ],
+    "find": "he had an unglazed earthen jar filled with wine brought to Liu's pillow.",
+    "paragraph": "p41",
+    "reason": "酒を入れた says that wine was put in the jar, not that it was filled, and avoiding “filled” also preserves the later imagined brimming from being anticipated.",
+    "replace": "he had an unglazed earthen jar with wine in it brought to Liu's pillow."
+   },
+   {
+    "answers": [
+     "R10"
+    ],
+    "find": "Over the whole surface of the skin a force is at work tending to move in every direction, while the skin itself has not the least elasticity against it.",
+    "paragraph": "p45",
+    "reason": "The Japanese describes a bodily pull in every direction met by skin with no elasticity, and “tugs” with “no give” keeps that sensation immediate.",
+    "replace": "Across every inch of skin something tugs in every direction at once, and the skin has no give in it at all."
+   },
+   {
+    "answers": [
+     "F3"
+    ],
+    "find": "From the mouth of the jar the heavy smell of wine comes without break to assail his nose.",
+    "paragraph": "p46",
+    "reason": "芬々たる酒香 is richly fragrant, and its pleasantness is part of what makes the wine torment Liu while retaining the repeated word “smell.”",
+    "replace": "From the mouth of the jar the rich fragrant smell of wine comes without break to assail his nose."
+   },
+   {
+    "answers": [
+     "R11"
+    ],
+    "find": "suddenly raised the haunches he had settled",
+    "paragraph": "p50",
+    "reason": "The Japanese has the monk raise himself from his settled squat, and the replacement gives that movement without the distracting anatomical phrase.",
+    "replace": "suddenly heaved himself up from where he had settled"
+   },
+   {
+    "answers": [
+     "R12"
+    ],
+    "find": "frost-touched hair at the temples lingers only faintly above the temples,",
+    "paragraph": "p53",
+    "reason": "双髩 and 顳顬 distinguish the side hair from the temples, but English can carry both with one reference here without repeating the same word.",
+    "replace": "frost-touched hair at the temples survives only faintly,"
+   },
+   {
+    "answers": [
+     "R13"
+    ],
+    "find": "if the spitting out of the wine worm and Liu's later destitution are set side by side in a relation of cause and effect, this is a question apt to occur to anyone.",
+    "paragraph": "p55",
+    "reason": "The replacement preserves the causal juxtaposition and the dry questioning while removing the nominalised construction that obscured them.",
+    "replace": "once you set the spitting-out of the wine worm side by side with Liu's later ruin as cause and effect, it is a question anyone would ask."
+   },
+   {
+    "answers": [
+     "F5"
+    ],
+    "find": "that the health and estate of the Liu of former days should have been lost is entirely natural, and a matter of course.",
+    "paragraph": "p58",
+    "reason": "至極、当然な話 is a single closing formula, and the single English predicate keeps the third answer from outweighing the other two.",
+    "replace": "that the health and estate of the Liu of former days should have been lost would be only natural."
+   }
+  ],
+  "declined": [
+   {
+    "note": "R8",
+    "reason": "うるささうに presents the hair as hanging in a way that seems to trouble its wearer, whereas “straggling unkempt” changes that suggestion into a judgement on its appearance."
+   },
+   {
+    "note": "R9",
+    "reason": "The proposed wording retains the same fronted construction while “ended up” adds a casualness not present in 当座の行きがかりで, so it does not materially improve the sentence."
+   }
+  ],
+  "disagreements": [
+   {
+    "choice": "“squats there with an air of importance, in the attitude of a turkey.”",
+    "faithful_side": "F2 objects that “portentously” makes 勿体らしく ominous and proposes “with an air of importance.”",
+    "notes": [
+     "F2",
+     "R4"
+    ],
+    "paragraph": "p4",
+    "readable_side": "R4 also objects that “portentously” conflicts with the comic simile and proposes “with ponderous self-importance.”",
+    "send_up": false
+   }
+  ],
+  "say": "The desk retained the tale’s undecided moral balance by removing wording that made the monk ominous, expanded the third answer, or softened the pleasurable smell that torments Liu."
+ },
+ "usage": {
+  "input_tokens": 26790,
+  "cached_tokens": 0,
+  "output_tokens": 4423,
+  "reasoning_tokens": 2557,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.19562,
+ "response_id": "resp_6ae9cfd4a7f3846b70f84a98",
+ "latency_s": 37.32,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 7388
+  }
+ ],
+ "created": "2026-11-03T12:13:08Z"
+}

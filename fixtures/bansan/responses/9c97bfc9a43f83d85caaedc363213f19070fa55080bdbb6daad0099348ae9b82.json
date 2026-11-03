@@ -1,0 +1,78 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "Outside the door it had grown dark. The sound of hard rain and wind. A storm.",
+    "ids": [
+     "p1"
+    ],
+    "notes": []
+   },
+   {
+    "english": "The parents and child had gathered at the table under the dim electric light hung by the wall of the narrow room, about to eat supper. Father and mother were both still really young. And the child was a plump little girl with big round eyes, just able to stand holding on to the table.",
+    "ids": [
+     "p2"
+    ],
+    "notes": [
+     "くりくり with voicing mark read as round, bright-eyed plumpness rather than curly hair; chose big round eyes to keep the physical tenderness plain."
+    ]
+   },
+   {
+    "english": "Neither the man nor the woman had a single wrinkle yet in the face. But in the man's sunken, gentle eyes under his dark brows there was a dull weariness to be seen. And in the woman's dark hair and about her slight shoulders there was a deeper, sunken weariness, and a drowsy restfulness.",
+    "ids": [
+     "p3"
+    ],
+    "notes": []
+   },
+   {
+    "english": "The day was over. The sadness and suffering of the day were starting to flow into the restfulness of the night. And silently smiling, they fixed all their gaze on the child.",
+    "ids": [
+     "p4"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Standing unsteadily, the child kept reaching for things on the table with fat, short arms round as balls, without a pause and too fast. So, smiling, they put all the bowls and the teapot and the aluminium pan under the table. Only the small spoon the child held and one small plate were left on top.",
+    "ids": [
+     "p5"
+    ],
+    "notes": []
+   },
+   {
+    "english": "But the child gave a noisy cry full of small joy and banged the spoon and the plate down on the table.",
+    "ids": [
+     "p6"
+    ],
+    "notes": []
+   }
+  ],
+  "say": null
+ },
+ "usage": {
+  "input_tokens": 11469,
+  "cached_tokens": 0,
+  "output_tokens": 2663,
+  "reasoning_tokens": 2239,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.025654,
+ "response_id": "resp_6ae9de10132d33f633c24bbe",
+ "latency_s": 22.74,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1663
+  }
+ ],
+ "created": "2026-11-03T13:13:53Z"
+}
