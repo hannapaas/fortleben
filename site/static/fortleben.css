@@ -81,6 +81,18 @@ a { color: inherit; text-decoration-color: var(--accent); text-underline-offset:
 .edl .here .bx { background: var(--accent-wash); }
 .edl b { font-weight: 600; }
 .intro { margin: 0 0 1rem; max-width: 52rem; }
+/* The front page: three short answers under the opening, the rest after the books, and the name as an epigraph. */
+.form.three { grid-template-columns: repeat(3, 1fr); margin: 0 0 1rem; }
+.form.three .a { font-size: 16px; }
+.more-q { margin: 0 0 3rem; }
+.epigraph { font-family: var(--serif); font-style: italic; font-size: 1.15rem; line-height: 1.4; color: var(--muted); max-width: 30rem; margin: 0 0 4rem; }
+.epigraph i { font-style: normal; color: var(--ink-2); }
+.aboutp { margin: 1rem 0 3rem; }
+.aboutp .q { font-size: 1.15rem; }
+.aboutp .a { font-size: 16.5px; line-height: 1.55; }
+.aboutp .a p, .aboutp .a ul { margin: 0 0 .6rem; max-width: 46rem; }
+.aboutp .a > :last-child { margin-bottom: 0; }
+.aboutp .a ul { padding-left: 1.2rem; }
 .lang { margin-top: 2.5rem; }
 .shelf .blurb { margin: 6px 0 2px; font-size: 16px; line-height: 1.45; max-width: 38rem; }
 .shelf .blurb summary { cursor: pointer; list-style: none; }
@@ -345,7 +357,8 @@ h2.sec { font-family: var(--serif); font-style: italic; font-weight: 400; font-s
   .poster h1 .sub, .poster .by { margin-left: 0; }
   .poster h1 .sub { font-size: 1.05rem; margin-top: 1.2rem; }
   .poster .by { font-size: 15px; }
-  .form.about, .form.about.with-eds { grid-template-columns: 1fr; }
+  .form.about, .form.about.with-eds, .form.three { grid-template-columns: 1fr; }
+  .form.three > div + div { border-top: 1px solid var(--rule); }
   .form.about > div { display: grid; grid-template-columns: 6.6rem 1fr; gap: 8px; padding: 6px 10px; }
   .form.about > div + div { border-top: 1px solid var(--rule); }
   .form.about .q { margin: 0; font-size: 1rem; }

@@ -179,3 +179,24 @@ def test_the_shelf_counts_paragraphs_as_the_reader_shows_them(client):
     for work in ("bansan", "shuchu"):
         units = client.get(f"/read/{work}").text.count('class="unit ')
         assert f"· {units} paragraphs" in home, work
+
+
+def test_house_editions_take_the_colours_in_turn_and_an_editor_can_pick(tmp_path):
+    conn = connect(tmp_path / "site.db")
+    edition.load_fixtures(conn)
+    order = [r[0] for r in conn.execute("SELECT id FROM work WHERE id IN ('bansan', 'shuchu') ORDER BY rowid")]
+    assert [edition.accent(conn, w) for w in order] == list(edition.ACCENTS[:2])
+    assert edition.accent(conn, order[0], "peach") == "peach" and edition.accent(conn, "nowhere") == "pink"
+    conn.execute("UPDATE edition SET accent='lavender' WHERE work_id=?", (order[1],))
+    assert edition.edition(conn, order[1])["accent"] == "lavender"
+
+
+def test_the_reader_wears_its_editions_colour(client):
+    pages = {w: client.get(f"/read/{w}").text for w in ("bansan", "shuchu")}
+    assert sum('class="accent-lime"' in p for p in pages.values()) == 1
+
+
+def test_the_about_page_is_linked_from_every_page(client):
+    assert 'href="/about"' in client.get("/").text
+    r = client.get("/about")
+    assert r.status_code == 200 and "How keikaku translates" in r.text

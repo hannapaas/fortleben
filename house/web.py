@@ -210,6 +210,10 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
     def home(request: Request):
         return templates.TemplateResponse(request, "home.html", {"shelf": edition.shelf(conn()), "replay": replay})
 
+    @app.get("/about", response_class=HTMLResponse)
+    def about(request: Request):
+        return templates.TemplateResponse(request, "about.html", {"replay": replay})
+
     @app.get("/read/{work_id}", response_class=HTMLResponse)
     def read(request: Request, work_id: str, edition_id: int | None = Query(None, alias="edition")):
         c = conn()

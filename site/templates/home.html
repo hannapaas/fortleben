@@ -1,20 +1,11 @@
 {% extends "base.html" %}
 {% block main %}
-<p class="pitch">Most of the world's books have never been translated, and most never will be. Fortleben publishes public-domain literature in languages people can read, translated by keikaku, a translation engine built on large language models, and shows how each translation was made.</p>
+<p class="pitch">Most of the world's books have never been translated, and most never will be. Fortleben publishes public-domain literature as living translations. keikaku, an AI translation engine, writes the first draft. Readers can steer it, leave notes in the margin and ask for another reading.</p>
 
-<div class="form two intro">
-  <div class="q">Who translates?</div>
-  <div class="a">keikaku, running on Meta's models. Before a line is drafted it writes an analysis of the book, its people and its tone, and that analysis steers every stage: one model drafts, two read the draft separately, one against the original and one as English, an editing pass weighs their notes and decides what changes, and a final read goes over the whole. Where a person has checked a paragraph, it says so. Where a person has translated the same work, we say so and name them.</div>
-  <div class="q">Can I trust it?</div>
-  <div class="a">It's machine work, and the page says so. The readers' notes and the reason for every change sit beside each paragraph, so you can see what was argued over and judge for yourself. Where an editor has signed a paragraph off, it carries their mark.</div>
-  <div class="q">Can I steer one?</div>
-  <div class="a">Yes. <a href="/signup">Sign up with your own Meta key</a>, pick a story, read keikaku's analysis before it drafts, and tell it in your own words what to hold differently. The edition is published under your name.</div>
-  <div class="q">What should keikaku translate next?</div>
-  <div class="a"><a href="/wishlist">Ask on the wishlist</a>: paste a link to any work on Aozora Bunko, and keikaku's editors pick from the list.</div>
-  <div class="q">Which languages?</div>
-  <div class="a">Japanese into English first, from Aozora Bunko's free library of public-domain texts. keikaku is built to work between other languages too; each needs its own source library and its own reading aids, the way Japanese needs furigana.</div>
-  <div class="q">Why the name?</div>
-  <div class="a"><i>Fortleben</i> is Walter Benjamin's word for the life a work goes on to have in translation. Nothing here is final: every edition keeps changing, and every version is kept.</div>
+<div class="form three">
+  <div><span class="q">Who translates?</span><span class="a">keikaku, running on Meta's models. It is organised like a translation house: a translator drafts, readers comment, an editor decides. The method comes from literary translation practice and how publishing houses work. <a href="/about">More on the About page</a>.</span></div>
+  <div><span class="q">How do I read it?</span><span class="a">Choose your reading view, from a clean text like a printed novel to the Japanese alongside. Open any paragraph to see the reasoning behind it, and the notes other readers have left in the margin.</span></div>
+  <div><span class="q">Can I produce my own edition?</span><span class="a">Yes. <a href="/signup">Sign up</a>, pick a book, plug in your own Meta key and steer the translation. The edition is published under your name.</span></div>
 </div>
 
 {% for lang in shelf %}
@@ -22,7 +13,7 @@
   <h2 class="sec">From the {{ lang.name }} {% if lang.native %}<span lang="{{ lang.code }}">{{ lang.native }}</span>{% endif %}</h2>
   <ul class="shelf">
     {% for w in lang.works %}
-    <li>
+    <li{% if w.accent != 'pink' %} class="accent-{{ w.accent }}"{% endif %}>
       <span class="ja" lang="{{ lang.code }}">{% if w.title_en %}{{ w.title }}{% endif %}</span>
       <span>
         {% if w.title_en %}<a class="ttl" href="/read/{{ w.id }}">{{ w.title_en }}</a>{% else %}<a class="ttl" href="/read/{{ w.id }}" lang="{{ lang.code }}">{{ w.title }}</a>{% endif %}<br>
@@ -38,4 +29,13 @@
 {% else %}
 <p class="meta">Nothing on the shelf yet.</p>
 {% endfor %}
+
+<div class="form two more-q">
+  <div class="q">When will you translate more?</div>
+  <div class="a">Editors add books from the wishlist as they are ready. <a href="/wishlist">Paste a link to any work on Aozora Bunko</a> to put it forward.</div>
+  <div class="q">Which languages are available?</div>
+  <div class="a">Japanese into English, from Aozora Bunko's free library. More languages are coming.</div>
+</div>
+
+<p class="epigraph"><i>Fortleben</i> is German for “living on”. Walter Benjamin used it for the life a work goes on to have in translation.</p>
 {% endblock %}
