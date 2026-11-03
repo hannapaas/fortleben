@@ -279,13 +279,15 @@ a { color: inherit; text-decoration-color: var(--accent); text-underline-offset:
 .howread .form { margin-top: .4rem; }
 .howread .a p { margin: 0 0 .6rem; }
 .howread .a p:last-child { margin-bottom: 0; }
-.howread .a.prose { max-width: 42rem; }
+.howread .a { font-size: 16.5px; line-height: 1.55; }
+.howread .a .why { font-size: inherit; }
+.howread .a.prose > p { max-width: 46rem; }
 .howread .crux { margin: 0; padding-left: 1.2rem; }
 .howread .crux li + li, .howread .cast li + li { margin-top: .8rem; }
 .howread .why, .howread .fe, .howread .sm, .howread .lead { color: var(--ink-2); }
 .howread .cast { list-style: none; margin: 0; padding: 0; }
 .howread .cast b { font-weight: 600; }
-.howread .sm { margin: .2rem 0 0 !important; font-size: 14px; }
+.howread .sm { margin: .2rem 0 0 !important; font-size: 15px; }
 .howread .nm { color: var(--ink-2); }
 .howread .kv { margin: 0; display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; }
 .howread .kv dt { font-family: var(--serif); font-style: italic; }
