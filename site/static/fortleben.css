@@ -40,11 +40,13 @@ a { color: inherit; text-decoration-color: var(--accent); text-underline-offset:
 .wrap { max-width: 80rem; margin: 0 auto; padding: 0 28px; }
 .top { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0 10px; margin-bottom: 1.25rem; font-size: 14px; }
 .top .mark { font-family: var(--serif); font-size: 1.5rem; text-decoration: none; letter-spacing: -.01em; }
-/* Pointing at the name sends a pink glint across it, once, like light catching foil. */
-.top .mark { background: linear-gradient(105deg, var(--ink) 42%, var(--accent) 50%, var(--ink) 58%) 100% 0 / 300% 100% no-repeat;
-  -webkit-background-clip: text; background-clip: text; }
-.top .mark:hover, .top .mark:focus-visible { color: transparent; animation: glint .9s ease-out forwards; }
-@keyframes glint { from { background-position: 100% 0; } to { background-position: 0 0; } }
+/* Pointing at the name lets the book's colour shine out of it: a soft ring that opens from just off
+   centre and passes, leaving the ink as it was. */
+@property --glint { syntax: '<percentage>'; inherits: false; initial-value: -30%; }
+.top .mark { --glint: -30%; background: radial-gradient(circle at 42% 45%, var(--ink) calc(var(--glint) - 45%), var(--accent) calc(var(--glint) - 18%),
+  var(--accent) var(--glint), var(--ink) calc(var(--glint) + 28%)); -webkit-background-clip: text; background-clip: text; }
+.top .mark:hover, .top .mark:focus-visible { color: transparent; animation: glint 1.8s cubic-bezier(.3, .1, .3, 1) forwards; }
+@keyframes glint { from { --glint: -30%; } to { --glint: 170%; } }
 .top nav { display: flex; gap: 20px; align-items: baseline; }
 .top nav a, .top nav button { text-decoration: none; }
 .top nav .paper { display: flex; gap: 10px; color: var(--ink-2); }
