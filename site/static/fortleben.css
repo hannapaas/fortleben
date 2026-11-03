@@ -49,11 +49,19 @@ body > .wrap > .push { flex: 1 0 3rem; }
 .top .mark:hover, .top .mark:focus-visible { background-size: 100% .5em; }
 .top nav { display: flex; gap: 20px; align-items: baseline; }
 .top nav a, .top nav button { text-decoration: none; }
-.top nav .paper { display: flex; gap: 10px; color: var(--ink-2); }
+/* Paper: one circle filled with the paper in use, opening a column of the three; the chosen one ringed in the accent. */
+.top nav .paper { position: relative; align-self: center; display: inline-flex; }
+.dot { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--ink); flex: none; }
+.dot.p-light { background: #fcfcfa; } .dot.p-cream { background: #f8f1d9; } .dot.p-dark { background: #121214; }
+.top nav .paper .list { position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); z-index: 7; display: flex; flex-direction: column; gap: 10px; padding: 10px; background: var(--paper); border: 1px solid color-mix(in srgb, var(--rule) 30%, transparent); }
+.top nav .paper .list[hidden] { display: none; }
+.top nav .paper .list .dot { width: 22px; height: 22px; }
+.top nav .paper .list .dot[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--accent); }
+.top nav .paper .dot:hover { text-decoration: none; transform: scale(1.1); }
+.top nav .paper .dot:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 .top nav .who { white-space: nowrap; }
 .top nav form.out { display: inline; margin: 0; }
 .top nav form.out button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
-.top nav .paper button[aria-pressed="true"] { color: var(--ink); text-decoration: underline 2px var(--accent); text-underline-offset: 4px; }
 .top nav a:hover, .top nav button:hover { text-decoration: underline 2px var(--accent); text-underline-offset: 4px; }
 /* The wishlist is a heart that wiggles when you point at it. */
 .top nav .heart { align-self: center; display: inline-flex; color: var(--ink); }

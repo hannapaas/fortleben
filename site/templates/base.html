@@ -18,7 +18,7 @@
   <header class="top">
     <a class="mark" href="/">Fortleben</a>
     {% set me = request.state.person if request and request.state.person is defined else none %}
-    <nav><a class="wide" href="/">Library</a><a class="heart" href="/wishlist" aria-label="Wishlist" title="Wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0112 7.6a4.3 4.3 0 017.5 2.7c0 5.6-7.5 10.2-7.5 10.2z"/></svg></a><a href="/about">About</a>{% if me %}<span class="who"><a href="/desk">Your desk</a> · <form class="out" method="post" action="/logout"><input type="hidden" name="csrf" value="{{ request.state.csrf }}"><button type="submit">Sign out</button></form></span>{% elif request and not replay %}<a href="/login">Sign in</a>{% endif %}<span class="paper" role="group" aria-label="Paper"><button type="button" data-paper="light">White</button><button type="button" data-paper="cream">Cream</button><button type="button" data-paper="dark">Dark</button></span></nav>
+    <nav><a class="wide" href="/">Library</a><a class="heart" href="/wishlist" aria-label="Wishlist" title="Wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0112 7.6a4.3 4.3 0 017.5 2.7c0 5.6-7.5 10.2-7.5 10.2z"/></svg></a><a href="/about">About</a>{% if me %}<span class="who"><a href="/desk">Your desk</a> · <form class="out" method="post" action="/logout"><input type="hidden" name="csrf" value="{{ request.state.csrf }}"><button type="submit">Sign out</button></form></span>{% elif request and not replay %}<a href="/login">Sign in</a>{% endif %}<span class="paper"><button type="button" class="dot now" id="paperNow" aria-haspopup="true" aria-expanded="false" aria-controls="paperList" aria-label="Paper colour" title="Paper colour"></button><span class="list" id="paperList" role="group" aria-label="Paper colour" hidden><button type="button" class="dot p-light" data-paper="light" aria-label="White" title="White"></button><button type="button" class="dot p-cream" data-paper="cream" aria-label="Cream" title="Cream"></button><button type="button" class="dot p-dark" data-paper="dark" aria-label="Dark" title="Dark"></button></span></span></nav>
   </header>
   {% block main %}{% endblock %}
   <div class="push" aria-hidden="true"></div>
@@ -32,12 +32,24 @@
 <script>
 (function () {
   // Paper: white, cream or dark. Until a reader picks one, it follows the system's light or dark.
+  // One circle shows the paper in use; it opens the three to choose from.
   var root = document.documentElement, btns = document.querySelectorAll('[data-paper]');
+  var now = document.getElementById('paperNow'), list = document.getElementById('paperList');
   function current() { return root.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }
-  function sync() { btns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.paper === current()); }); }
+  function sync() {
+    btns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.paper === current()); });
+    now.className = 'dot now p-' + current();
+  }
+  function show(on) { list.hidden = !on; now.setAttribute('aria-expanded', on); }
+  now.onclick = function () { show(list.hidden); if (!list.hidden) list.querySelector('[aria-pressed="true"]').focus(); };
   btns.forEach(function (b) {
-    b.onclick = function () { root.dataset.theme = b.dataset.paper; try { localStorage.setItem('fl-theme', b.dataset.paper); } catch (e) {} sync(); };
+    b.onclick = function () {
+      root.dataset.theme = b.dataset.paper; try { localStorage.setItem('fl-theme', b.dataset.paper); } catch (e) {}
+      sync(); show(false); now.focus();
+    };
   });
+  document.addEventListener('click', function (e) { if (!list.hidden && !e.target.closest('.paper')) show(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !list.hidden) { show(false); now.focus(); } });
   sync();
 })();
 </script>
