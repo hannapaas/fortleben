@@ -119,7 +119,7 @@ def test_a_key_holder_who_forgot_their_key_is_told_plainly(conn, db, held, monke
     site.get("/login")
     site.post("/login", data={"email": "ines@example.com", "password": "a long password", "csrf": site.cookies["fl_csrf"]})
     html = site.get("/desk").text
-    assert "signed up with your own key" in html and "this desk's key is forgotten" in html and "Add a key" in html
+    assert "signed up." in html and "Your Meta key?" in html and "Add a key" in html
     assert "drops of ink" not in html
 
 

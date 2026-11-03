@@ -492,8 +492,8 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
         return {"ok": True}
 
     # --- Sign-up, sign-in and keys (house/accounts.py) -----------------------------------------------
-    # Anyone can sign up with a name, an email address, a password and their own Meta key; their runs
-    # spend that key. So a site with no key of its own still lets them start, unless it's a replay or shut.
+    # Anyone can sign up with a name, an email address and a password, then add their own Meta key on
+    # the desk; their runs spend that key. So a site with no key of its own still lets them start, unless it's a replay or shut.
     no_site_key = not replay and not os.environ.get("MODEL_API_KEY") and os.environ.get("HOUSE_OPEN", "true").lower() != "false"
     signup_closed = (closed.replace("Runs can't start here", "Sign-up is closed here") if closed and not no_site_key else
                      "Sign-up is closed here: this copy of the site has no secret set, so it can't hold keys."
@@ -528,7 +528,7 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
             return signup_page(request, 429, name=name, email=email,
                                error="That's a lot of sign-ups from one place in an hour. Try again later.")
         try:
-            pid = accounts.signup(conn(), name, email, form.get("password", ""), form.get("key", ""))
+            pid = accounts.signup(conn(), name, email, form.get("password", ""))
         except accounts.Refused as e:
             if str(e) == accounts.TAKEN:
                 accounts.allow_signup(address(request))

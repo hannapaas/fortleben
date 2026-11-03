@@ -100,7 +100,7 @@
 
 <form class="form two desk" id="desk" data-base="{{ desk.base }}"{% if unstartable %} data-unstartable="1"{% endif %}{% if desk.key_tail or desk.keyless %} data-own="1"{% endif %} data-granted="{{ al.granted }}" data-spent="{{ al.spent }}" data-reserved="{{ al.reserved }}" data-available="{{ al.available }}" novalidate>
   <div class="q">Who?</div>
-  <div class="a">{{ desk.editor.name }}, {% if desk.key_tail or desk.keyless %}signed up with your own key.{% else %}invited as an editor.{% endif %}
+  <div class="a">{{ desk.editor.name }}, {% if desk.key_tail %}signed up with your own key.{% elif desk.keyless %}signed up.{% else %}invited as an editor.{% endif %}
     {% if desk.email %}<span class="sm block">You sign in as {{ desk.email }}.</span>{% endif %}</div>
 
   {% set current %}{% if desk.has_password %}<input type="password" class="field" name="current" form="account" maxlength="200" required autocomplete="current-password" placeholder="Current password" aria-label="Current password">{% endif %}{% endset %}
@@ -132,13 +132,15 @@
   <div class="a">Runs spend your own key, ending ····{{ desk.key_tail }}.
     <button type="submit" class="btn forget" form="forget">Forget this key</button></div>
   {% elif desk.keyless %}
-  <div class="q">Paid by?</div>
-  <div class="a">Nobody: this desk's key is forgotten. To translate again, add a new one.
+  <div class="q"><label for="newkey">Your Meta key?</label></div>
+  <div class="a">Your translations run on your own key from the Meta Model API's dashboard. Add one to start.
     <div class="addrow">
       <input type="password" id="newkey" class="field" name="key" form="addkey" minlength="12" maxlength="200" required spellcheck="false" autocomplete="off" placeholder="Meta key" aria-label="Meta key">
       <button type="submit" class="btn" form="addkey">Add a key</button>
     </div>
-    {% if key_error %}<p class="err" role="alert">{{ key_error }}</p>{% endif %}</div>
+    {% if key_error %}<p class="err" role="alert">{{ key_error }}</p>{% endif %}
+    <span class="sm block">Make a key for this and nothing else. Put on it only what you are willing to spend; start small, you can add more. Turn off automatic top-up so a run can never spend more than you put on it. If the key runs out part-way, the translation stops where it is: top it up and resume it here, and nothing is paid for twice.</span>
+    <span class="sm block">We hold it encrypted and use it only for your own translations. Only its last four characters are ever shown, to you. Press <i>Forget this key</i> and it is gone.</span></div>
   {% else %}
   <div class="q">Allowance?</div>
   <div class="a"><b class="big" id="avail">{{ n(al.available) }}</b> drops of ink to spend.

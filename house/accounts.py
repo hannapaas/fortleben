@@ -123,8 +123,9 @@ def _email_taken(conn, email: str, but: int | None = None) -> bool:
     return bool(conn.execute("SELECT 1 FROM person WHERE email=? AND id IS NOT ?", (email, but)).fetchone())
 
 
-def signup(conn, name: str, email: str, password: str, api_key: str) -> int:
-    """A new person with their own key and a way to sign in. Returns their id."""
+def signup(conn, name: str, email: str, password: str, api_key: str | None = None) -> int:
+    """A new person with a way to sign in, and their own key if given (the sign-up page doesn't ask:
+    the desk does, once they're in). Returns their id."""
     from house import desk  # desk imports this module
 
     try:
@@ -135,14 +136,15 @@ def signup(conn, name: str, email: str, password: str, api_key: str) -> int:
         raise Refused("Give a name: it goes on what you translate.")
     email = _clean_email(email)
     password = _clean_password(password)
-    key = _clean_key(api_key)
-    if not _secret():
+    key = _clean_key(api_key) if api_key is not None else None
+    if key and not _secret():
         raise Refused("This copy of the site can't hold keys: it has no secret set.")
     if _email_taken(conn, email):
         raise Refused(TAKEN)
     person = conn.execute("INSERT INTO person (name, trust, api_key, key_tail, email, password_hash) "
                           "VALUES (?, 'editor', ?, ?, ?, ?)",
-                          (name, encrypt(_secret(), key), key[-4:], email, hash_password(password))).lastrowid
+                          (name, encrypt(_secret(), key) if key else None, key[-4:] if key else None,
+                           email, hash_password(password))).lastrowid
     conn.commit()
     return person
 

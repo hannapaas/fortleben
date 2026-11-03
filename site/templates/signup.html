@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{# Sign-up with your own key (house/accounts.py, docs/STEERING.md "Paying: bring your own key").
-   A person gives a name, an email address, a password and their own Meta key, and is signed in to
-   their desk. #}
+{# Sign-up (house/accounts.py, docs/STEERING.md "Paying: bring your own key"). A person gives a name,
+   an email address and a password, and is signed in to their desk, which asks for their own Meta key
+   and explains it there. #}
 {% block title %}Translate one yourself · Fortleben{% endblock %}
 {% block head %}<link rel="stylesheet" href="/static/desk.css">
 <style>
@@ -10,20 +10,12 @@
 </style>{% endblock %}
 {% block main %}
 <h1 class="desk-h">Translate one yourself</h1>
-<p class="desk-lead">Bring your own Meta key and keikaku translates a whole story with it, under your name.</p>
+<p class="desk-lead">Pick a story and keikaku translates the whole of it, steered by you and published under your name.</p>
 {% if closed %}<p class="line">{{ closed }}</p>{% endif %}
 <form class="form two desk" method="post" action="/signup">
   <input type="hidden" name="csrf" value="{{ request.state.csrf }}">
   <div class="q">What happens?</div>
-  <div class="a">You get a desk of your own, which you sign in to with your email address and password. There you pick a story, and keikaku translates the whole of it with your key. The result is published on Fortleben under your name.
-    <span class="sm block">You can have one translation going at a time, and the site takes only a few at once. If it's full, the desk says so; try again a little later.</span></div>
-
-  <div class="q">Your key?</div>
-  <div class="a">Make a key for this and nothing else. Put on it only what you are willing to spend; start small, you can add more. Turn off automatic top-up so a run can never spend more than you put on it.
-    <span class="sm block">If the key runs out part-way, the translation stops where it is. Top it up and resume it from the desk; nothing is paid for twice.</span></div>
-
-  <div class="q">What we do with it?</div>
-  <div class="a">We hold it encrypted and use it only for your own translations: your runs spend your key, nobody else's. Only its last four characters are ever shown, to you. Press <i>Forget this key</i> on your desk and it is gone.</div>
+  <div class="a">You get a desk of your own, which you sign in to with your email address and password. There you add your own Meta key, pick a story, and keikaku translates the whole of it with your key. The result is published on Fortleben under your name.</div>
 
   <div class="q"><label for="name">Name?</label></div>
   <div class="a"><input type="text" id="name" name="name" maxlength="60" required value="{{ name or '' }}">
@@ -36,10 +28,6 @@
   <div class="q"><label for="password">Password?</label></div>
   <div class="a"><input type="password" id="password" name="password" minlength="8" maxlength="200" required autocomplete="new-password">
     <span class="sm block">At least 8 characters.</span></div>
-
-  <div class="q"><label for="key">Meta key?</label></div>
-  <div class="a"><input type="password" id="key" name="key" minlength="12" maxlength="200" required spellcheck="false" autocomplete="off">
-    <span class="sm block">From the Meta Model API's dashboard.</span></div>
 
   <div class="q" aria-hidden="true"></div>
   <div class="a">

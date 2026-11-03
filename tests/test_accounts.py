@@ -179,17 +179,22 @@ def csrf(client) -> str:
     return client.cookies["fl_csrf"]
 
 
-def sign_up(client, name="Ines Example", email="ines@example.com", password=PASSWORD, key=KEY, **kw):
-    return client.post("/signup", data={"name": name, "email": email, "password": password, "key": key,
+def sign_up(client, name="Ines Example", email="ines@example.com", password=PASSWORD, **kw):
+    return client.post("/signup", data={"name": name, "email": email, "password": password,
                                         "csrf": csrf(client)}, **kw)
 
 
 def test_signup_signs_you_in_to_your_desk(site, conn, held):
     r = site.get("/signup")
     assert r.status_code == 200 and r.headers["x-robots-tag"] == "noindex"
-    assert 'type="password"' in r.text and 'type="email"' in r.text and "Turn off automatic top-up" in r.text
+    assert 'type="password"' in r.text and 'type="email"' in r.text and 'name="key"' not in r.text
     r = sign_up(site, follow_redirects=False)
     assert r.status_code == 303 and r.headers["location"] == "/desk" and "fl_session" in r.cookies
+
+    # The desk asks for the key, and explains it, once they're in.
+    page = site.get("/desk")
+    assert "Your Meta key?" in page.text and "Turn off automatic top-up" in page.text and "Add a key" in page.text
+    assert site.post("/desk/key", data={"key": KEY, "csrf": site.cookies["fl_csrf"]}, follow_redirects=False).status_code == 303
 
     # The site has no key of its own, but this person brings one, so their desk is open.
     page = site.get("/desk")
@@ -219,8 +224,8 @@ def test_signup_signs_you_in_to_your_desk(site, conn, held):
 
 
 def test_signup_refusals_and_the_limit(site, conn):
-    r = sign_up(site, name="Ines", key="two words")
-    assert r.status_code == 400 and "spaces" in r.text and 'value="Ines"' in r.text and 'value="ines@example.com"' in r.text
+    r = sign_up(site, name="Ines", password="short")
+    assert r.status_code == 400 and 'value="Ines"' in r.text and 'value="ines@example.com"' in r.text
     assert PASSWORD not in r.text
     assert sign_up(site, follow_redirects=False).status_code == 303
     r = sign_up(TestClient(site.app), name="Ines again")
