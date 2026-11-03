@@ -164,7 +164,7 @@ a { color: inherit; text-decoration-color: var(--accent); text-underline-offset:
 .quiet-comments .mar .ph { display: inline-flex; opacity: .6; }
 .quiet-comments .mar .ph[data-n="0"] { display: none; }
 .quiet-comments .unit.show .mar .list { display: block; }
-.quiet-comments .unit.show .mar .add { display: inline-flex; }
+.quiet-comments .unit.show .mar:not(.writing) .add { display: inline-flex; }
 .quiet-comments .unit.show .mar.writing .cmp { display: block; }
 .quiet-comments .unit.show .mar .ph { display: none; }
 

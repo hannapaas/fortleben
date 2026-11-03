@@ -225,7 +225,9 @@ def test_signup_refusals_and_the_limit(site, conn):
     assert sign_up(site, follow_redirects=False).status_code == 303
     r = sign_up(TestClient(site.app), name="Ines again")
     assert r.status_code == 400 and "There&#39;s already an account with that email address. Sign in instead." in r.text
-    for i in range(accounts.SIGNUPS_PER_HOUR - 3):
+    for _ in range(accounts.SIGNUPS_PER_HOUR):  # a typo sent back doesn't count against the address
+        assert sign_up(TestClient(site.app), email="typo@", follow_redirects=False).status_code == 400
+    for i in range(accounts.SIGNUPS_PER_HOUR - 2):  # the sign-up and the taken address did
         assert sign_up(TestClient(site.app), email=f"ines{i}@example.com", follow_redirects=False).status_code == 303
     r = sign_up(site, email="last@example.com")
     assert r.status_code == 429 and "Try again later" in r.text

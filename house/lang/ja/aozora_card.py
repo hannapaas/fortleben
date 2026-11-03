@@ -15,10 +15,11 @@ import unicodedata
 from urllib.parse import urljoin, urlsplit
 
 HOSTS = ("www.aozora.gr.jp", "aozora.gr.jp")
-CARD = re.compile(r"^/cards/(\d{6})/card(\d+)\.html$")
-FILE = re.compile(r"^/cards/(\d{6})/files/(\d+)[_.][^/]*$")
-RUBY_ZIP = re.compile(r"^/cards/\d{6}/files/\d+_ruby_\d+\.zip$")
-PERSON = re.compile(r"^/index_pages/person(\d+)\.html$")
+# ASCII digits only (\d would take fullwidth ones into a work's id), and no more than a card number has.
+CARD = re.compile(r"^/cards/([0-9]{6})/card([0-9]{1,8})\.html$")
+FILE = re.compile(r"^/cards/([0-9]{6})/files/([0-9]{1,8})[_.][^/]*$")
+RUBY_ZIP = re.compile(r"^/cards/[0-9]{6}/files/[0-9]+_ruby_[0-9]+\.zip$")
+PERSON = re.compile(r"^/index_pages/person([0-9]+)\.html$")
 
 
 class NotAWork(ValueError):

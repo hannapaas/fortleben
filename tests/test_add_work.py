@@ -326,3 +326,11 @@ def test_the_edition_page_reads_an_added_works_card_and_colophon(conn, fetched):
     assert meta["title_en"] == "The Spider's Thread" and meta["author_en"] == "Akutagawa Ryūnosuke"
     assert meta["rights"]["author_died"] == 1927 and meta["rights"]["first_published"].startswith("「赤い鳥」")
     assert meta["blurb"].startswith("Walking beside")
+
+
+def test_a_card_number_is_ascii_digits_and_not_endless():
+    from house.lang.ja import aozora_card
+    for url in ("https://www.aozora.gr.jp/cards/\uff10\uff10\uff10\uff18\uff17\uff19/card92.html",
+                "https://www.aozora.gr.jp/cards/000879/card" + "9" * 5000 + ".html"):
+        with pytest.raises(aozora_card.NotAWork):
+            aozora_card.card(url)

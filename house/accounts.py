@@ -35,7 +35,8 @@ RESET_HOURS = 1
 MIN_PASSWORD, MAX_PASSWORD = 8, 200
 TAKEN = "There's already an account with that email address. Sign in instead."
 NO_MATCH = "That email and password don't match."
-RESET_GONE = "That reset link has expired or has been used. Ask for a new one."
+RESET_DEAD = "That reset link has expired or has been used."
+RESET_GONE = RESET_DEAD + " Ask for a new one."
 WRONG_CURRENT = "That isn't your current password."
 MIN_KEY = 12  # no Meta key is shorter; a shorter one is a slip, and its four-character tail would be most of it
 
@@ -89,6 +90,8 @@ def _clean_password(password: str) -> str:
     password = password or ""
     if len(password) < MIN_PASSWORD:
         raise Refused(f"Use a password of at least {MIN_PASSWORD} characters.")
+    if not password.strip():
+        raise Refused("A password of only spaces is too easy to guess. Use another.")
     if len(password) > MAX_PASSWORD:
         raise Refused(f"That password is longer than {MAX_PASSWORD} characters. Use a shorter one.")
     return password
@@ -154,6 +157,7 @@ def set_login(conn, person_id: int, email: str, password: str, current: str | No
     if _email_taken(conn, email, but=person_id):
         raise Refused(TAKEN)
     conn.execute("UPDATE person SET email=?, password_hash=? WHERE id=?", (email, hash_password(password), person_id))
+    conn.execute("UPDATE reset SET used_at=datetime('now') WHERE person_id=? AND used_at IS NULL", (person_id,))
     conn.commit()
 
 
@@ -296,8 +300,9 @@ _logins: dict[str, deque] = defaultdict(deque)
 _resets: dict[str, deque] = defaultdict(deque)
 
 
-def _allow(seen: dict[str, deque], keys: list[str], limit: int, now: float | None) -> bool:
-    """True, and counted against every key, if each key has been seen fewer than `limit` times in the last hour."""
+def _allow(seen: dict[str, deque], keys: list[str], limit: int, now: float | None, count: bool = True) -> bool:
+    """True, and counted against every key (unless `count` is False), if each key has been seen fewer
+    than `limit` times in the last hour."""
     now = time.time() if now is None else now
     queues = [seen[digest(k)] for k in keys if k]
     for q in queues:
@@ -305,14 +310,15 @@ def _allow(seen: dict[str, deque], keys: list[str], limit: int, now: float | Non
             q.popleft()
     if any(len(q) >= limit for q in queues):
         return False
-    for q in queues:
+    for q in queues if count else ():
         q.append(now)
     return True
 
 
-def allow_signup(address: str, now: float | None = None) -> bool:
-    """True, and counted, if this address has signed up fewer than SIGNUPS_PER_HOUR times in the last hour."""
-    return _allow(_signups, [address or "-"], SIGNUPS_PER_HOUR, now)
+def allow_signup(address: str, now: float | None = None, count: bool = True) -> bool:
+    """True, and counted unless `count` is False, if this address has signed up fewer than SIGNUPS_PER_HOUR
+    times in the last hour."""
+    return _allow(_signups, [address or "-"], SIGNUPS_PER_HOUR, now, count)
 
 
 def allow_login(address: str, email: str, now: float | None = None) -> bool:

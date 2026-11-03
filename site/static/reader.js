@@ -58,7 +58,7 @@
     document.head.appendChild(l);
   }
 
-  function custom() { s.preset = 'custom'; history.replaceState(null, '', location.pathname); }
+  function custom() { s.preset = 'custom'; history.replaceState(null, '', location.pathname + location.search); }
   document.querySelectorAll('[data-group] [data-val]').forEach(function (b) {
     b.onclick = function () {
       var g = b.closest('[data-group]').dataset.group;
@@ -106,11 +106,13 @@
       var t = e.target.closest('.t');
       toggleSlip(unit, t ? true : undefined, t ? t.dataset.note : undefined);
       // On a phone the margin sits under the paragraph, folded away; it opens and closes with the notes,
-      // so a paragraph nobody has commented on can be commented on. Clean keeps comments out of the way.
-      if (phone.matches && s.preset !== 'clean') margin(unit, !unit.querySelector('.slip').hidden);
+      // so a paragraph nobody has commented on can be commented on. With comments off (as in Clean) it stays shut.
+      if (phone.matches && s.comments) margin(unit, !unit.querySelector('.slip').hidden);
     }
     en.addEventListener('click', activate);
-    en.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(e); } });
+    en.addEventListener('keydown', function (e) {
+      if ((e.key === 'Enter' || e.key === ' ') && !e.target.closest('a')) { e.preventDefault(); activate(e); }
+    });
     var open = unit.querySelector('.open');
     if (open) open.onclick = function () { toggleSlip(unit); };
     unit.querySelector('.jabtn').onclick = function (e) {

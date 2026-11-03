@@ -324,8 +324,14 @@ def mark_notes(english: str, notes: list[dict]) -> str:
     return text
 
 
+# Reasons the engine records in its own shorthand (house/stages/desk.py), as a reader should see them.
+ENGINE_REASONS = {"the desk's edit didn't match the English":
+                  "The edit made for it didn't fit the English as drafted, so it wasn't applied."}
+
+
 def _query(q: dict) -> dict:
     answer = q["answer"] or {}
+    answer = {**answer, "reason": ENGINE_REASONS.get(answer.get("reason", ""), answer.get("reason", ""))}
     return {"number": answer.get("note", ""), "who": READERS.get(q["raised_by"], q["raised_by"]),
             "span": q["span"], "reason": plain(q["reason"]), "evidence": [RUBY.sub("", e) for e in q["evidence"] or []],
             "recommendation": q["recommendation"], "confidence": plain(q["confidence"]),
