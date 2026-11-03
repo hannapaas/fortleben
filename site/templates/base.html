@@ -37,15 +37,20 @@
   var now = document.getElementById('paperNow'), list = document.getElementById('paperList');
   function current() { return root.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }
   function sync() {
-    btns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.paper === current()); });
+    btns.forEach(function (b) {
+      var on = b.dataset.paper === current();
+      b.setAttribute('aria-pressed', on);
+      if (on) list.prepend(b);  // the paper in use sits where the circle was
+    });
     now.className = 'dot now p-' + current();
   }
   function show(on) { list.hidden = !on; now.setAttribute('aria-expanded', on); }
-  now.onclick = function () { show(list.hidden); if (!list.hidden) list.querySelector('[aria-pressed="true"]').focus(); };
+  // Focus moves only for the keyboard (a click reports detail > 0), so a mouse never leaves a focus ring.
+  now.onclick = function (e) { show(list.hidden); if (!list.hidden && !e.detail) list.firstChild.focus(); };
   btns.forEach(function (b) {
-    b.onclick = function () {
+    b.onclick = function (e) {
       root.dataset.theme = b.dataset.paper; try { localStorage.setItem('fl-theme', b.dataset.paper); } catch (e) {}
-      sync(); show(false); now.focus();
+      sync(); show(false); if (!e.detail) now.focus();
     };
   });
   document.addEventListener('click', function (e) { if (!list.hidden && !e.target.closest('.paper')) show(false); });
