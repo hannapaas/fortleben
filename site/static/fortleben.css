@@ -32,7 +32,7 @@ a { color: inherit; text-decoration-color: var(--accent); text-underline-offset:
 ::selection { background: var(--accent-wash); }
 
 .wrap { max-width: 80rem; margin: 0 auto; padding: 0 28px; }
-.top { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0 10px; font-size: 14px; }
+.top { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0 10px; margin-bottom: 1.25rem; font-size: 14px; }
 .top .mark { font-family: var(--serif); font-size: 1.5rem; text-decoration: none; letter-spacing: -.01em; }
 .top nav { display: flex; gap: 20px; align-items: baseline; }
 .top nav a, .top nav button { text-decoration: none; }
@@ -55,20 +55,20 @@ a { color: inherit; text-decoration-color: var(--accent); text-underline-offset:
 .form > div { border-right: 1px solid var(--rule); padding: 6px 12px 10px; min-width: 0; }
 .form .q { display: block; font-size: 1.05rem; line-height: 1.3; margin-bottom: 2px; color: var(--ink-2); }
 .form .a { font-size: 15px; line-height: 1.45; }
-.form.four { grid-template-columns: 1.1fr 1.5fr 1.2fr 1.2fr; }
+.form.about { grid-template-columns: 1fr 1.5fr 1.3fr; margin: 0 0 3rem; }
+.form.about.with-eds { grid-template-columns: 1fr 1.1fr 1.5fr 1.3fr; }
 .form.two { grid-template-columns: 9rem 1fr; }
 .form.two > div { border-top: 1px solid var(--rule); }
 .form.two > div:nth-child(-n+2) { border-top: 0; }
 
 /* ---------- Poster ---------- */
-.poster { position: relative; padding: 34px 0 30px; min-height: 24rem; display: flex; flex-direction: column; justify-content: flex-end; }
-.poster .plate { position: absolute; right: 2%; top: 18px; writing-mode: vertical-rl; font-family: var(--jp); font-weight: 700; font-size: clamp(6rem, 10.5vw, 8.6rem); line-height: 1; color: var(--accent); mix-blend-mode: var(--blend); letter-spacing: -.02em; user-select: none; opacity: .9; white-space: nowrap; }
+.poster { position: relative; padding: 3.5rem 0 30px; min-height: 24rem; display: flex; flex-direction: column; justify-content: flex-end; }
+.poster .plate { position: absolute; right: 2%; top: 2.5rem; writing-mode: vertical-rl; font-family: var(--jp); font-weight: 700; font-size: clamp(6rem, 10.5vw, 8.6rem); line-height: 1; color: var(--accent); mix-blend-mode: var(--blend); letter-spacing: -.02em; user-select: none; opacity: .9; white-space: nowrap; }
 .poster h1 { position: relative; margin: 0; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(4.5rem, 12vw, 11rem); line-height: .8; letter-spacing: -.035em; max-width: 80%; }
 .poster h1 .sub { display: block; font-size: max(.17em, 1rem); letter-spacing: 0; line-height: 1.2; margin: 1.6rem 0 0 32%; }
 .poster .by { position: relative; margin: 1.8rem 0 0 32%; font-size: 16px; line-height: 1.45; max-width: 26rem; }
 
 /* Every English translation of the work: ours, and people's by name and year. */
-.eds { margin: 0 0 3rem; }
 .edl { list-style: none; margin: 0; padding: 0; }
 .edl li { display: flex; gap: 10px; align-items: baseline; padding: 3px 0; }
 .edl .bx { width: 13px; height: 13px; border: 1.5px solid var(--ink); border-radius: 50%; flex: none; transform: translateY(1px); }
@@ -312,8 +312,8 @@ a { color: inherit; text-decoration-color: var(--accent); text-underline-offset:
 h2.sec { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.4rem; color: var(--ink-2); margin: 2rem 0 .4rem; }
 
 @media (max-width: 1100px) {
-  .form.four { grid-template-columns: 1fr 1fr; }
-  .form.four > div:nth-child(n+3) { border-top: 1px solid var(--rule); }
+  .form.about.with-eds { grid-template-columns: 1fr 1fr; }
+  .form.about.with-eds > div:nth-child(n+3) { border-top: 1px solid var(--rule); }
   .unit, .layout-parallel .unit { grid-template-columns: 2.5rem minmax(0, 1fr) 12rem; column-gap: 1.75rem; }
   .brk, .secnum { margin-left: 4.25rem; }
   .endq { margin-left: 6.5rem; }
@@ -331,10 +331,10 @@ h2.sec { font-family: var(--serif); font-style: italic; font-weight: 400; font-s
   .poster h1 .sub, .poster .by { margin-left: 0; }
   .poster h1 .sub { font-size: 1.05rem; margin-top: 1.2rem; }
   .poster .by { font-size: 15px; }
-  .form.four { grid-template-columns: 1fr; }
-  .form.four > div { display: grid; grid-template-columns: 6.6rem 1fr; gap: 8px; padding: 6px 10px; }
-  .form.four > div + div { border-top: 1px solid var(--rule); }
-  .form.four .q { margin: 0; font-size: 1rem; }
+  .form.about, .form.about.with-eds { grid-template-columns: 1fr; }
+  .form.about > div { display: grid; grid-template-columns: 6.6rem 1fr; gap: 8px; padding: 6px 10px; }
+  .form.about > div + div { border-top: 1px solid var(--rule); }
+  .form.about .q { margin: 0; font-size: 1rem; }
   .form.two, .slip .form { grid-template-columns: 1fr; }
   .form.two > .q, .slip .form > .q { padding-bottom: 0; border-top: 1px solid var(--rule); }
   .form.two > .q:first-child, .slip .form > .q:first-child { border-top: 0; }

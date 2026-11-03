@@ -3,7 +3,6 @@
    top. A paragraph carries a mark only when a person has done something to it. #}
 {% set PEOPLE = {'editor-approved': 'An editor has read it and signed it off.'} %}
 {% macro seal(label) -%}<span class="seal" title="{{ PEOPLE[label] }}" aria-hidden="true"></span>{%- endmacro %}
-{% set total = ed.units|rejectattr('number')|list|length %}
 {% set others = ed.editions|selectattr('kind', 'equalto', 'person')|list %}
 {% block title %}{{ ed.title_en or ed.title }} · Fortleben{% endblock %}
 {% block bodyclass %}layout-english marks-essential hide-status no-tools quiet-comments{% endblock %}
@@ -25,23 +24,17 @@ window.FL_PRESETS = {
 })(document.body);
 </script>{% endblock %}
 {% block main %}
-<div class="form four">
-  <div><span class="q">What?</span><span class="a">An English translation of {{ ed.author_en or ed.author }}'s short story <i{% if not ed.title_en %} lang="ja"{% endif %}>{{ ed.title_en or ed.title }}</i>{% if ed.rights.first_published_year %}, first published in {{ ed.rights.first_published_year }}{% endif %}.</span></div>
-  <div><span class="q">By whom?</span><span class="a">keikaku, a translation engine running on Meta's models: one model drafted it, two read the draft separately, one against the Japanese and one as English, and an editing pass decided what to change.</span></div>
-  <div><span class="q">Checked?</span><span class="a">By keikaku's readers, every paragraph. {% set checked = ed.counts['editor-approved'] %}{% if checked %}{{ checked }} of {{ total }} paragraphs also carry an editor's sign-off.{% else %}No editor has signed it off.{% endif %}</span></div>
-  <div><span class="q">How was it made?</span><span class="a">Open a paragraph: the margin shows what the readers queried, what was changed, and why. Before drafting, keikaku wrote <a href="/read/{{ ed.work_id }}/analysis{% if ed.id %}?edition={{ ed.id }}{% endif %}">an analysis of the book</a> that steered every stage.</span></div>
-</div>
-
 <section class="poster">
   <div class="plate" lang="ja" aria-hidden="true">{{ ed.title }}</div>
   <h1{% if not ed.title_en %} lang="ja"{% endif %}>{{ ed.title_en or ed.title }}<span class="sub" lang="en">(translated from the Japanese)</span></h1>
   <p class="by">by {% if ed.author_en %}{{ ed.author_en }} {% endif %}<span lang="ja">{{ ed.author }}</span>{% if ed.rights.first_published_year %}, {{ ed.rights.first_published_year }}{% endif %}.<br>English by keikaku{% if ed.commissioned_by %}, commissioned by {{ ed.commissioned_by }}{% endif %}.</p>
 </section>
 
-{% if ed.editions|length > 1 %}
-<div class="form two eds">
-  <div class="q">In English?</div>
-  <div class="a"><ul class="edl">
+{% set many = ed.editions|length > 1 %}
+<div class="form about{{ ' with-eds' if many }}">
+  <div><span class="q">What?</span><span class="a">An English translation of {{ ed.author_en or ed.author }}'s short story <i{% if not ed.title_en %} lang="ja"{% endif %}>{{ ed.title_en or ed.title }}</i>{% if ed.rights.first_published_year %}, first published in {{ ed.rights.first_published_year }}{% endif %}.</span></div>
+  {% if many %}
+  <div class="eds"><span class="q">In English?</span><ul class="a edl">
     {% for e in ed.editions %}
     {% if e.here and e.current %}
     <li class="here" aria-current="true"><span class="bx r" aria-hidden="true"></span><span><b>{{ e.by }}</b></span></li>
@@ -52,9 +45,11 @@ window.FL_PRESETS = {
     {% endif %}
     {% endfor %}
   </ul></div>
+  {% endif %}
+  <div><span class="q">By whom?</span><span class="a">keikaku, a translation engine running on Meta's models: one model drafted it, two read the draft separately, one against the Japanese and one as English, and an editing pass decided what to change.</span></div>
+  <div><span class="q">How was it made?</span><span class="a">Open a paragraph: the margin shows what the readers queried, what was changed, and why. Before drafting, keikaku wrote <a href="/read/{{ ed.work_id }}/analysis{% if ed.id %}?edition={{ ed.id }}{% endif %}">an analysis of the book</a> that steered every stage.</span></div>
 </div>
 
-{% endif %}
 <div class="page">
 <main class="reader" id="reader">
   {% for u in ed.units %}
