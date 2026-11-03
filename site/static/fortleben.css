@@ -120,7 +120,7 @@ body > .wrap > .push { flex: 1 0 3rem; }
 .shelf .blurb summary::-webkit-details-marker { display: none; }
 .shelf .blurb summary::after { content: ' more'; font-size: 13px; color: var(--muted); text-decoration: underline 1px var(--muted); text-underline-offset: 3px; }
 .shelf .blurb[open] summary::after { content: ' less'; }
-.shelf .blurb p { margin: 12px 0 0; color: var(--ink-2); }
+.shelf .blurb p { margin: 12px 0 0; color: var(--ink-2); font-style: italic; }
 
 /* ---------- Reader: hang | text; settings live behind the Aa button ---------- */
 .page { max-width: 74rem; }
