@@ -13,10 +13,12 @@
 </style>{% endblock %}
 {% macro row(w) -%}
 <li>
-  <span class="ja" lang="ja">{{ w.title }}</span>
+  {# The Japanese title alone when there's no English one yet #}
+  <span class="ja" lang="ja">{% if w.title_en %}{{ w.title }}{% endif %}</span>
   <span>
-    {% if w.edition_url %}<a class="ttl" href="{{ w.edition_url }}">{{ w.title_en }}</a>{% else %}<span class="ttl">{{ w.title_en }}</span>{% endif %}<br>
-    <span class="meta">{{ w.author_en }}{% if w.year %}, {{ w.year }}{% endif %} · {{ '%g' % w.sheets }} sheets{% if w.card_url %} · <a href="{{ w.card_url }}" hreflang="ja">the Japanese on Aozora</a>{% endif %}</span>
+    {% set ttl = w.title_en or w.title %}{% set lang = '' if w.title_en else ' lang="ja"' %}
+    {% if w.edition_url %}<a class="ttl" href="{{ w.edition_url }}"{{ lang|safe }}>{{ ttl }}</a>{% else %}<span class="ttl"{{ lang|safe }}>{{ ttl }}</span>{% endif %}<br>
+    <span class="meta">{{ w.author_en or w.author }}{% if w.year %}, {{ w.year }}{% endif %} · {{ '%g' % w.sheets }} sheets{% if w.card_url %} · <a href="{{ w.card_url }}" hreflang="ja">the Japanese on Aozora</a>{% endif %}</span>
     {% if w.blurb %}<p class="blurb">{{ w.blurb }}</p>{% endif %}
     {% if w.edition_url %}<span class="meta">Translated: <a href="{{ w.edition_url }}">read it here</a>.</span>{% endif %}
   </span>

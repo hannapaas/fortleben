@@ -138,11 +138,27 @@ def test_a_work_split_across_cards(subtitle, split):
 # --- the rights rule -------------------------------------------------------------------------------
 
 def test_an_author_who_died_after_1931_is_refused(conn, fetched):
-    with pytest.raises(acquire.Refused, match="太宰治 died in 1948. keikaku only translates works by people who died in 1931"):
+    said = r"Dazai Osamu \(太宰治\) died in 1948. keikaku only translates works by people who died in 1931"
+    with pytest.raises(acquire.Refused, match=said):
         acquire.add(conn, f"{BASE}/cards/000035/card1567.html")
     assert f"{BASE}/cards/000035/files/1567_ruby_4948.zip" not in fetched  # nothing is fetched past the card
     assert conn.execute("SELECT COUNT(*) FROM work").fetchone()[0] == 0
     assert conn.execute("SELECT type FROM event").fetchone()[0] == "work.refused"
+    # the same card again is refused from memory: nothing fetched, nothing counted
+    fetched.clear()
+    with pytest.raises(acquire.Refused, match=said):
+        acquire.add(conn, f"{BASE}/cards/000035/card1567.html", person_id=7)
+    assert fetched == [] and acquire.adds_today(conn, 7) == 0
+
+
+def test_a_link_that_never_reaches_a_card_isnt_a_read(conn, fetched):
+    with pytest.raises(acquire.Refused, match="no work at that address"):
+        acquire.add(conn, f"{BASE}/cards/000035/card99999.html", person_id=7)
+    assert acquire.adds_today(conn, 7) == 0
+    assert acquire.refused_before(conn, f"{BASE}/cards/000035/card99999.html") is None  # it may be there tomorrow
+    with pytest.raises(acquire.Refused):
+        acquire.add(conn, f"{BASE}/cards/000035/card1567.html", person_id=7)
+    assert acquire.adds_today(conn, 7) == 1  # a refusal on rights is still a read
 
 
 def test_a_card_with_no_first_publication_is_refused(conn, fetched):
@@ -231,7 +247,33 @@ def test_the_add_keeps_the_work_when_the_model_call_fails(conn, fetched, monkeyp
     monkeypatch.setattr(acquire, "make_client", lambda conn: FakeClient(conn, cache_dirs=[]))
     work_id, _ = acquire.add(conn, KUMO)
     w = works.info(work_id, conn)
-    assert (w["title_en"], w["author_en"], w["blurb"]) == ("蜘蛛の糸", "芥川竜之介", None)
+    assert (w["title_en"], w["author_en"], w["blurb"]) == (None, None, None)  # never the Japanese in English fields
+    row = next(x for x in desk.eligible_works(conn) if x["id"] == work_id)
+    assert (row["title"], row["title_en"], row["author"], row["author_en"]) == ("蜘蛛の糸", "", "芥川竜之介", "")
+
+
+def test_a_work_with_no_english_card_shows_the_japanese_once_and_is_described_again(site, fetched, monkeypatch):
+    db, client = site
+    conn = connect(db)
+    monkeypatch.setattr(acquire, "_tried", {})
+    monkeypatch.setattr(acquire, "make_client", lambda conn: FakeClient(conn, cache_dirs=[]))  # the card call fails
+    token = desk.invite(conn, "Ines Example", drops=4000)
+    row = client.post(f"/desk/{token}/works", json={"url": KUMO}).json()
+    assert row["title_en"] == "" and row["author"] == "芥川竜之介"
+    assert acquire.undescribed(conn) == [row["id"]]
+
+    card = {"title_en": "The Spider's Thread", "author_en": "Akutagawa Ryūnosuke", "blurb": "Walking beside the lotus pond."}
+    monkeypatch.setattr(acquire, "describe", lambda conn, title, author, romaji, first, text: card)  # it works now
+    page = client.get(f"/desk/{token}").text  # the page as drawn: the Japanese alone; then the retry runs
+    assert page.count(">蜘蛛の糸<") == 1 and "芥川竜之介" in page
+    assert works.info(row["id"], conn)["title_en"] == "The Spider's Thread"
+    assert works.info(row["id"], conn)["author_en"] == "Akutagawa Ryūnosuke" and acquire.undescribed(conn) == []
+
+    # at most once an hour per work
+    conn.execute("UPDATE work SET title_en=NULL WHERE id=?", (row["id"],))
+    conn.commit()
+    assert acquire.describe_missing(db) == []
+    assert acquire.describe_missing(db, now=__import__("time").time() + 3601) == [row["id"]]
 
 
 def test_an_added_work_parses_and_runs_from_the_command_line(conn, fetched, tmp_path, capsys, monkeypatch):
@@ -285,8 +327,13 @@ def test_adds_are_limited_to_ten_a_day_per_person(site, fetched):
     db, client = site
     conn = connect(db)
     a, b = desk.invite(conn, "A"), desk.invite(conn, "B")
-    for _ in range(desk.ADDS_PER_DAY):  # refused links count: each one was read from Aozora
-        assert client.post(f"/desk/{a}/works", json={"url": f"{BASE}/cards/000035/card1567.html"}).status_code == 400
+    dazai = (PAGES / "card1567.html").read_bytes()
+    for i in range(desk.ADDS_PER_DAY):  # refused cards count: each one was read from Aozora
+        fetched.site[f"{BASE}/cards/000035/card{9000 + i}.html"] = dazai
+        assert client.post(f"/desk/{a}/works", json={"url": f"{BASE}/cards/000035/card{9000 + i}.html"}).status_code == 400
+    # one refused before costs nothing, so it's answered past the limit
+    r = client.post(f"/desk/{a}/works", json={"url": f"{BASE}/cards/000035/card9000.html"})
+    assert r.status_code == 400 and "died in 1948" in r.json()["error"]
     r = client.post(f"/desk/{a}/works", json={"url": KUMO})
     assert r.status_code == 429 and r.json()["error"] == "You've added ten works from Aozora today. Add more tomorrow."
     assert client.post(f"/desk/{b}/works", json={"url": KUMO}).status_code == 200  # someone else's day is their own

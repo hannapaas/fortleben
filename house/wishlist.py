@@ -4,15 +4,16 @@ Anyone can paste a link, with no name and no sign-in. A new link goes through th
 desk's (house/acquire.py: a work on Aozora, the rights rule by code, a ruby text file, one small
 model call for the English card), so a wished work is a `work` row like any other and the desk can
 start it. A link already on the list counts one more person, once per address. Free checks come
-first: five links an hour from one address, and ten new links read from Aozora a day across the
-whole list, refused ones included, so nobody mirrors Aozora through the form.
+first: five links an hour from one address, and ten new cards read from Aozora a day across the
+whole list, refused ones included (a link that never reached a card isn't counted, and a card refused
+before is refused again with nothing read), so nobody mirrors Aozora through the form.
 """
 
 from house import acquire, works
 from house.comments import digest
 
 ASKS_PER_HOUR = 5  # links one address may paste in an hour, counted or refused
-READS_PER_DAY = 10  # new links the wishlist may have read from Aozora in a day, added or refused
+READS_PER_DAY = 10  # new cards the wishlist may have read from Aozora in a day, added or refused
 
 EMPTY = "Paste a link first."
 TOO_MANY = "That's a lot of links from one place in an hour. Try again later."
@@ -51,7 +52,7 @@ def entries(conn) -> dict:
         card = reg.get(r["work_id"], {}).get("card_url")
         done = r["work_id"] in published
         out["translated" if done else "wanted"].append({
-            "id": w["id"], "title": w["title"], "title_en": w["title_en"], "author_en": w["author_en"],
+            "id": w["id"], "title": w["title"], "title_en": w["title_en"], "author": w["author"], "author_en": w["author_en"],
             "year": w["first_published_year"], "sheets": round(w["sheets"], 1), "blurb": w["blurb"],
             "card_url": card, "count": r["count"], "asked": people(r["count"]),
             "edition_url": f"/read/{w['id']}" if done else None})
@@ -69,8 +70,8 @@ def set_count(conn, work_id: str, count: int) -> None:
 
 
 def reads_today(conn) -> int:
-    """New links the wishlist has had read from Aozora in the last day, added or refused."""
-    return conn.execute("SELECT COUNT(*) FROM event WHERE type IN ('work.added', 'work.refused') "
+    """New cards the wishlist has had read from Aozora in the last day, added or refused."""
+    return conn.execute(f"SELECT COUNT(*) FROM event WHERE {acquire.READ} "
                         "AND json_extract(payload, '$.via') = 'wishlist' AND created_at >= datetime('now', '-1 day')"
                         ).fetchone()[0]
 
@@ -91,7 +92,8 @@ def ask(conn, url: str, address: str) -> dict:
         _, _, card_url = acquire.aozora_card.card(url)
     except acquire.NotAWork as e:
         raise Refused(str(e)) from None
-    if not acquire.find(conn, card_url) and reads_today(conn) >= READS_PER_DAY:
+    if (not acquire.find(conn, card_url) and not acquire.refused_before(conn, card_url)
+            and reads_today(conn) >= READS_PER_DAY):
         raise Refused(FULL_TODAY, 429)
     try:
         work_id, _ = acquire.add(conn, url, via="wishlist")
