@@ -3,11 +3,7 @@
    and the preset in the hash so a link opens the same view. Every change keeps your place. */
 (function () {
   var body = document.body;
-  var PRESETS = {
-    clean:     { layout: 'english',  marks: 'essential', inline: false, status: false, furigana: true, tools: false, comments: false },
-    curious:   { layout: 'english',  marks: 'all',       inline: false, status: true,  furigana: true, tools: true,  comments: true },
-    annotated: { layout: 'parallel', marks: 'all',       inline: true,  status: true,  furigana: true, tools: true,  comments: true }
-  };
+  var PRESETS = window.FL_PRESETS;  // set in read.html, so the saved view applies before the page paints
   var s = Object.assign({ preset: 'clean', size: 18, leading: false, font: 'standard' }, PRESETS.clean);
   try {
     var saved = JSON.parse(localStorage.getItem('fl-reader') || '{}');

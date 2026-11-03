@@ -137,8 +137,45 @@ def test_model_text_says_analysis_not_bible():
         "I keep 'Baby', per the analysis, and the analysis's policy."
     assert plain("The Story Bible and a bible; THE BIBLE; two bibles; cast c1, c3 and c4 too") == \
         "The Analysis and an analysis; THE ANALYSIS; two analyses; cast too"
-    assert plain("Bibliography, cast c, c2") == "Bibliography, cast c, c2"
+    assert plain("Bibliography, cast c, c2") == "Bibliography, cast c"  # a bare cast id goes; "c" alone isn't one
     assert plain("He read the Bible every night. Bible, cast c2: shorter.") == "He read the Bible every night. Analysis, cast: shorter."
     assert plain(None) is None and plain("") == ""
     out = plain_all({"handle": "bible c2", "why": ["per the bible"], "anchors": [{"id": "p1", "href": "p1"}]})
     assert out == {"handle": "bible c2", "why": ["per the analysis"], "anchors": [{"id": "p1", "href": "p1"}]}
+
+
+def test_model_text_says_paragraph_numbers_and_names_not_ids():
+    from house.edition import plain, plain_all
+    assert plain("Narrator stays close after p10.") == "Narrator stays close after paragraph 10."
+    assert plain("Timeline: p2–p9") == "Timeline: paragraphs 2 to 9"
+    assert plain("p10-p13: mother serves; p44-46 sweat") == "Paragraphs 10 to 13: mother serves; paragraphs 44 to 46 sweat"
+    assert plain("坊や (c1 and c2 in direct speech)") == "坊や (in direct speech)"
+    assert plain("(narrator reporting c2's vision)") == "(narrator reporting vision)"
+    assert plain("(c3)") == "" and plain("cast c2 stays") == "cast stays"
+    cast = {"c1": "Liu Dacheng", "c2": "Sun"}
+    assert plain("(narrator reporting c2's vision; c1 and c2)", cast) == "(narrator reporting Sun's vision; Liu Dacheng and Sun)"
+    assert plain("up10, pp, p.5 and Bp3 stay") == "up10, pp, p.5 and Bp3 stay"
+    # ids and links stay as they are, for linking
+    out = plain_all({"anchors": [{"id": "p30", "href": "p29", "label": "paragraph 30"}], "why": "see p30"})
+    assert out == {"anchors": [{"id": "p30", "href": "p29", "label": "paragraph 30"}], "why": "see paragraph 30"}
+
+
+def test_analysis_pages_show_no_ids_and_link_hard_spots_to_their_unit(client):
+    import re
+    for work in ("bansan", "shuchu"):
+        for path in (f"/read/{work}/analysis", f"/read/{work}"):
+            text = re.sub(r"<[^>]+>", " ", re.sub(r"<script.*?</script>", "", client.get(path).text, flags=re.S))
+            assert not re.search(r"\b[pc]\d+\b", text), path
+    page = client.get("/read/bansan/analysis").text
+    # 「晩餐」's p31 is shown merged into the unit that starts at p29: the link goes there, labelled p31
+    assert '#p29">paragraph 31</a>' in page
+    # a cast entry names the person once, then the Japanese
+    shuchu = client.get("/read/shuchu/analysis").text
+    assert "<b>Liu Dacheng</b> <span class=\"nm\">劉大成</span>" in shuchu and "Liu Dacheng Liu Dacheng" not in shuchu
+
+
+def test_the_shelf_counts_paragraphs_as_the_reader_shows_them(client):
+    home = client.get("/").text
+    for work in ("bansan", "shuchu"):
+        units = client.get(f"/read/{work}").text.count('class="unit ')
+        assert f"· {units} paragraphs" in home, work

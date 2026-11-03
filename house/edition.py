@@ -28,12 +28,45 @@ DECIDED = {"taken": "Changed", "declined": "Kept", "forked": "Left to the editor
 _BIBLE = re.compile(r"\b(?:(an?)(\s+))?(story\s+)?(bible)(s?)\b", re.I)
 _CAST_IDS = re.compile(r"\b(cast)\s+c\d+(?:\s*(?:,|/|&|and)\s*c\d+)*\b", re.I)
 _NOT_PROSE = frozenset({"handle", "id", "href"})
+# Paragraph ids (p10) and ranges (p2–p9, p10-13, p4 to p6), and cast ids (c3, c1 and c2, c2's).
+_PARA_RANGE = re.compile(r"\bp(\d+)\s*(?:[-–—]|to)\s*p?(\d+)\b")
+_PARA = re.compile(r"\bp(\d+)\b")
+_CAST_ONE = r"c\d+(?:['’]s)?"
+_CAST_LIST = re.compile(rf"\b{_CAST_ONE}(?:\s*(?:,|/|&|and)\s*{_CAST_ONE})*\b")
+_CAST_ID = re.compile(r"\bc(\d+)\b")
 
 
-def plain(text):
+def _paragraphs(text: str) -> str:
+    """'p10' → 'paragraph 10', 'p2–p9' → 'paragraphs 2 to 9'; capitalised at the start of the text."""
+    def cap(m, word):
+        return word.capitalize() if m.start() == 0 else word
+    text = _PARA_RANGE.sub(lambda m: f"{cap(m, 'paragraphs')} {m.group(1)} to {m.group(2)}", text)
+    return _PARA.sub(lambda m: f"{cap(m, 'paragraph')} {m.group(1)}", text)
+
+
+def _cast(text: str, cast: dict[str, str] | None) -> str:
+    """Cast ids as the people they name, where the bible's cast is known; otherwise dropped, with the
+    brackets and commas they leave tidied."""
+    if cast:
+        text = _CAST_ID.sub(lambda m: cast.get(m.group(0), m.group(0)), text)
+    if not _CAST_LIST.search(text):
+        return text
+    text = _CAST_LIST.sub("", text)
+    text = re.sub(r"\(\s*\)", "", text)
+    text = re.sub(r"\(\s+", "(", text)
+    text = re.sub(r"\s+\)", ")", text)
+    text = re.sub(r"\s+([,.;:])", r"\1", text)
+    text = re.sub(r"([(,;:])\s*,", r"\1", text)
+    text = re.sub(r"[,;]\s*$", "", text)
+    return re.sub(r"[ \t]{2,}", " ", text).strip()
+
+
+def plain(text, cast: dict[str, str] | None = None):
     """Model text as a visitor or editor sees it: "story bible" and "bible" become "analysis" in the
-    same case, and "cast c2" becomes "cast". A capital "Bible" inside a sentence is left alone: a story
-    may name the book. Anything that isn't a string comes back as it was."""
+    same case, "cast c2" becomes "cast", a paragraph id becomes "paragraph 10" (a range "paragraphs 2
+    to 9"), and a cast id becomes the person's name from `cast` (id → handle) or is dropped. A capital
+    "Bible" inside a sentence is left alone: a story may name the book. Anything that isn't a string
+    comes back as it was. Never for ids or links: only for text a person reads."""
     if not isinstance(text, str) or not text:
         return text
 
@@ -49,16 +82,28 @@ def plain(text):
             return article + space + word
         return word
 
-    return _CAST_IDS.sub(lambda m: m.group(1), _BIBLE.sub(analysis, text))
+    text = _CAST_IDS.sub(lambda m: m.group(1), _BIBLE.sub(analysis, text))
+    return _paragraphs(_cast(text, cast))
 
 
-def plain_all(value):
+def plain_all(value, cast: dict[str, str] | None = None):
     """`plain` on every string in a dict or list of model output, leaving ids and links alone."""
     if isinstance(value, dict):
-        return {k: v if k in _NOT_PROSE else plain_all(v) for k, v in value.items()}
+        return {k: v if k in _NOT_PROSE else plain_all(v, cast) for k, v in value.items()}
     if isinstance(value, list):
-        return [plain_all(v) for v in value]
-    return plain(value)
+        return [plain_all(v, cast) for v in value]
+    return plain(value, cast)
+
+
+def cast_names(bible: dict | None) -> dict[str, str]:
+    """The bible's cast ids and the names a reader knows them by: {'c1': 'Liu Dacheng'}."""
+    return {c["id"]: c["handle"] for c in (bible or {}).get("cast") or [] if c.get("id") and c.get("handle")}
+
+
+def paragraph_label(pid: str) -> str:
+    """'p30' → 'paragraph 30', for a link's text; anything else as it was."""
+    m = re.fullmatch(r"p(\d+)", pid or "")
+    return f"paragraph {m.group(1)}" if m else pid
 
 
 RECOMMENDED = re.compile(r"^\([a-z]\)\s*|\s*\(Recommended\.?\)", re.I)
@@ -120,7 +165,9 @@ def shelf(conn) -> list[dict]:
         body = json.loads(r["body"])
         paras = body["views"]["casual"]
         meta = _meta(conn, r["work_id"])
-        work = {**meta, "version": r["version"], "date": _date(r["created_at"]), "paragraphs": len(paras),
+        # Paragraphs as the reader shows them: merged ones once, section numbers not at all
+        shown = sum(1 for p in paras if not p["grouped_with"] and not NUMBER.fullmatch(p["ja"].strip("\u3000 ")))
+        work = {**meta, "version": r["version"], "date": _date(r["created_at"]), "paragraphs": shown,
                 "label": _overall([p["label"] for p in paras]), "editions": editions(conn, meta)}
         name, native = LANGUAGES.get(r["language"], (r["language"], ""))
         langs.setdefault(r["language"], {"code": r["language"], "name": name, "native": native, "works": []})["works"].append(work)
@@ -160,13 +207,14 @@ def edition(conn, work_id: str, edition_id: int | None = None) -> dict | None:
 
     # One English text. The views' renderings of ledger terms are no longer offered: the text is the
     # plain (casual) rendering, and what a reader sees around it is a reading preset, not an edition.
+    cast = cast_names(_document(conn, work_id, run_id, "bible"))
     units, by_id = [], {}
     for i, p in enumerate(body["views"]["casual"]):
         if p["grouped_with"]:
             by_id[p["grouped_with"]]["paras"].append(p["id"])
             continue
         unit = {"id": p["id"], "n": len(units) + 1, "paras": [p["id"]], "label": p["label"],
-                "scene_break": p["scene_break_before"], "en": p["en"], "notes": _notes(body, i)}
+                "scene_break": p["scene_break_before"], "en": p["en"], "notes": _notes(body, i, cast)}
         # A paragraph that is only a section number (一, 二) is a heading, whatever the parser called it
         unit["number"] = bool(NUMBER.fullmatch(p["ja"].strip("\u3000 ")))
         units.append(unit)
@@ -175,7 +223,7 @@ def edition(conn, work_id: str, edition_id: int | None = None) -> dict | None:
     for unit in units:
         ids = set(unit["paras"])
         unit["ja"] = [{"id": pid, "html": ruby_html(segs[pid])} for pid in unit["paras"] if pid in segs]
-        unit["queries"] = [_query(q) for q in queries if q["segment_id"] in ids]
+        unit["queries"] = [_query(q, cast) for q in queries if q["segment_id"] in ids]
         unit["decisions"] = _decisions(unit["queries"])
         revs = [r for r in revisions if ids & set(r["segment_ids"])]
         unit["drafter_notes"] = [n for r in revs[:1] for n in (r["notes"] or [])]
@@ -231,8 +279,9 @@ def analysis(conn, work_id: str, run_id: int, where: dict[str, str] | None = Non
     if not bible:
         return plain_all(out)
     for c in bible.get("cast") or []:
-        name = " ".join(x for x in (c.get("romanised"), c.get("name_ja")) if x)
-        out["cast"].append({"handle": c["handle"], "name": name if name and name != c["handle"] else "",
+        # the handle once, then the Japanese (and a romanisation only if it isn't the handle)
+        name = " ".join(x for x in (c.get("romanised"), c.get("name_ja")) if x and x != c["handle"])
+        out["cast"].append({"handle": c["handle"], "name": name,
                             "role": _sentence(c.get("role", "")), "register": c.get("register", ""),
                             "forms": [{"form": f["form"], "used_by": f.get("used_by", ""), "note": f.get("note") or ""}
                                       for f in c.get("forms") or []]})
@@ -240,9 +289,11 @@ def analysis(conn, work_id: str, run_id: int, where: dict[str, str] | None = Non
     out["narration"] = _pairs(bible.get("narration") or {})
     out["motifs"] = [{"motif": m["motif"], "forms": m.get("source_forms") or [], "why": _sentence(m.get("why", "")),
                       "english": m.get("english", "")} for m in bible.get("motifs") or []]
-    out["hard_spots"] = [{"anchors": [{"id": a, "href": where.get(a)} for a in h.get("anchors") or []],
+    # A hard spot links to the paragraph on the page that shows it (the reader merges some), and says
+    # which paragraph in words.
+    out["hard_spots"] = [{"anchors": [{"id": a, "href": where.get(a), "label": paragraph_label(a)} for a in h.get("anchors") or []],
                           "kind": h.get("kind", ""), "why": h.get("why_hard", "")} for h in bible.get("hard_spots") or []]
-    return plain_all(out)
+    return plain_all(out, cast_names(bible))
 
 
 def _sentence(text: str) -> str:
@@ -267,7 +318,7 @@ def _pairs(d: dict) -> list[dict]:
     return out
 
 
-def _notes(body: dict, i: int) -> list[dict]:
+def _notes(body: dict, i: int, cast: dict[str, str] | None = None) -> list[dict]:
     """A paragraph's notes, once each. Essential notes are the ones the house thought every reader
     needs (those it put in the casual view); the rest are there for the curious."""
     out, seen = [], set()
@@ -277,7 +328,7 @@ def _notes(body: dict, i: int) -> list[dict]:
             if key in seen:
                 continue
             seen.add(key)
-            out.append({**n, "body": plain(n["body"]), "essential": view == "casual", "span_html": n["span"] or ""})
+            out.append({**n, "body": plain(n["body"], cast), "essential": view == "casual", "span_html": n["span"] or ""})
     return out
 
 
@@ -329,14 +380,14 @@ ENGINE_REASONS = {"the desk's edit didn't match the English":
                   "The edit made for it didn't fit the English as drafted, so it wasn't applied."}
 
 
-def _query(q: dict) -> dict:
+def _query(q: dict, cast: dict[str, str] | None = None) -> dict:
     answer = q["answer"] or {}
     answer = {**answer, "reason": ENGINE_REASONS.get(answer.get("reason", ""), answer.get("reason", ""))}
     return {"number": answer.get("note", ""), "who": READERS.get(q["raised_by"], q["raised_by"]),
-            "span": q["span"], "reason": plain(q["reason"]), "evidence": [RUBY.sub("", e) for e in q["evidence"] or []],
-            "recommendation": q["recommendation"], "confidence": plain(q["confidence"]),
+            "span": q["span"], "reason": plain(q["reason"], cast), "evidence": [RUBY.sub("", e) for e in q["evidence"] or []],
+            "recommendation": plain(q["recommendation"], cast), "confidence": plain(q["confidence"], cast),
             "status": q["status"], "outcome": OUTCOMES.get(q["status"], q["status"]),
-            "desk": plain(answer.get("reason", ""))}
+            "desk": plain(answer.get("reason", ""), cast)}
 
 
 def _decisions(queries: list[dict]) -> list[dict]:
@@ -360,8 +411,11 @@ def _meta(conn, work_id: str) -> dict:
     # (for a work added from a link, both are the record read from its card)
     rights = row["rights"]
     rights = reg.get("rights") or (json.loads(rights) if isinstance(rights, str) else rights or {})
-    return {"id": work_id, "title": row["title"], "title_en": row["title_en"] or reg.get("title_en") or row["title"],
-            "author": row["author"], "author_en": row["author_en"] or reg.get("author_en") or row["author"],
+    # No English title or author is "": templates show the Japanese alone (a work whose card call failed)
+    title_en = row["title_en"] or reg.get("title_en") or ""
+    author_en = row["author_en"] or reg.get("author_en") or ""
+    return {"id": work_id, "title": row["title"], "title_en": "" if title_en == row["title"] else title_en,
+            "author": row["author"], "author_en": "" if author_en == row["author"] else author_en,
             "card_url": row["card_url"] or reg.get("card_url"), "colophon": row["colophon"], "rights": rights,
             "blurb": reg.get("blurb"), "about": reg.get("about")}
 

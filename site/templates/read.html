@@ -3,13 +3,30 @@
    top. A paragraph carries a mark only when a person has done something to it. #}
 {% set PEOPLE = {'editor-approved': 'An editor has read it and signed it off.'} %}
 {% macro seal(label) -%}<span class="seal" title="{{ PEOPLE[label] }}" aria-hidden="true"></span>{%- endmacro %}
-{% set total = ed.units|length %}
+{% set total = ed.units|rejectattr('number')|list|length %}
 {% set others = ed.editions|selectattr('kind', 'equalto', 'person')|list %}
-{% block title %}{{ ed.title_en }} · Fortleben{% endblock %}
-{% block bodyclass %}layout-english marks-essential hide-status{% endblock %}
+{% block title %}{{ ed.title_en or ed.title }} · Fortleben{% endblock %}
+{% block bodyclass %}layout-english marks-essential hide-status no-tools quiet-comments{% endblock %}
+{# The saved view's classes before anything paints, so Clean never flashes the tools; reader.js keeps them in step after. #}
+{% block bodystart %}<script>
+window.FL_PRESETS = {
+  clean:     { layout: 'english',  marks: 'essential', inline: false, status: false, furigana: true, tools: false, comments: false },
+  curious:   { layout: 'english',  marks: 'all',       inline: false, status: true,  furigana: true, tools: true,  comments: true },
+  annotated: { layout: 'parallel', marks: 'all',       inline: true,  status: true,  furigana: true, tools: true,  comments: true }
+};
+(function (b) {
+  var P = window.FL_PRESETS, s = Object.assign({}, P.clean);
+  try { var v = JSON.parse(localStorage.getItem('fl-reader') || '{}'); Object.assign(s, P[v.preset] || {}, v); } catch (e) {}
+  location.hash.slice(1).split('/').forEach(function (t) { if (P[t]) Object.assign(s, P[t]); });
+  b.className = ['layout-' + s.layout, 'marks-' + s.marks, s.furigana ? '' : 'no-furigana', s.status ? '' : 'hide-status',
+    s.inline ? 'inline' : '', s.tools ? '' : 'no-tools', s.comments ? '' : 'quiet-comments'].join(' ').replace(/\s+/g, ' ').trim();
+  if (s.size) document.documentElement.style.setProperty('--size', s.size + 'px');
+  document.documentElement.style.setProperty('--leading', s.leading ? '1.85' : '1.6');
+})(document.body);
+</script>{% endblock %}
 {% block main %}
 <div class="form four">
-  <div><span class="q">What?</span><span class="a">An English translation of {{ ed.author_en }}'s short story <i>{{ ed.title_en }}</i>{% if ed.rights.first_published_year %}, first published in {{ ed.rights.first_published_year }}{% endif %}.</span></div>
+  <div><span class="q">What?</span><span class="a">An English translation of {{ ed.author_en or ed.author }}'s short story <i{% if not ed.title_en %} lang="ja"{% endif %}>{{ ed.title_en or ed.title }}</i>{% if ed.rights.first_published_year %}, first published in {{ ed.rights.first_published_year }}{% endif %}.</span></div>
   <div><span class="q">By whom?</span><span class="a">keikaku, a translation engine running on Meta's models: one model drafted it, two read the draft separately, one against the Japanese and one as English, and an editing pass decided what to change.</span></div>
   <div><span class="q">Checked?</span><span class="a">By keikaku's readers, every paragraph. {% set checked = ed.counts['editor-approved'] %}{% if checked %}{{ checked }} of {{ total }} paragraphs also carry an editor's sign-off.{% else %}No editor has signed it off.{% endif %}</span></div>
   <div><span class="q">How was it made?</span><span class="a">Open a paragraph: the margin shows what the readers queried, what was changed, and why. Before drafting, keikaku wrote <a href="/read/{{ ed.work_id }}/analysis{% if ed.id %}?edition={{ ed.id }}{% endif %}">an analysis of the book</a> that steered every stage.</span></div>
@@ -17,8 +34,8 @@
 
 <section class="poster">
   <div class="plate" lang="ja" aria-hidden="true">{{ ed.title }}</div>
-  <h1>{{ ed.title_en }}<span class="sub">(translated from the Japanese)</span></h1>
-  <p class="by">by {{ ed.author_en }} <span lang="ja">{{ ed.author }}</span>{% if ed.rights.first_published_year %}, {{ ed.rights.first_published_year }}{% endif %}.<br>English by keikaku{% if ed.commissioned_by %}, commissioned by {{ ed.commissioned_by }}{% endif %}.</p>
+  <h1{% if not ed.title_en %} lang="ja"{% endif %}>{{ ed.title_en or ed.title }}<span class="sub" lang="en">(translated from the Japanese)</span></h1>
+  <p class="by">by {% if ed.author_en %}{{ ed.author_en }} {% endif %}<span lang="ja">{{ ed.author }}</span>{% if ed.rights.first_published_year %}, {{ ed.rights.first_published_year }}{% endif %}.<br>English by keikaku{% if ed.commissioned_by %}, commissioned by {{ ed.commissioned_by }}{% endif %}.</p>
 </section>
 
 {% if ed.editions|length > 1 %}
@@ -52,7 +69,7 @@
       </span>
       {% if u.label in PEOPLE %}{{ seal(u.label) }}<span class="stn">{{ u.label }}</span>{% elif u.label == 'draft' %}<span class="stn">unchecked draft</span>{% endif %}</div>
     <div class="body">
-      <p class="en" tabindex="0" role="button" aria-label="Open the notes for this paragraph">{{ u.en_html|safe }}</p>
+      <p class="en" tabindex="0">{{ u.en_html|safe }}</p>
       <div class="ja" lang="ja">{% for j in u.ja %}<p>{{ j.html|safe }}</p>{% endfor %}</div>
       {% if u.notes %}<ul class="inotes">{% for n in u.notes %}<li class="{{ 'ess' if n.essential }}"><b>{{ n.span_html }}</b>: {{ n.body }}</li>{% endfor %}</ul>{% endif %}
       <div class="slip" hidden>
@@ -162,7 +179,7 @@
 <section class="tail">
   <div class="form two">
     <div class="q">Original?</div>
-    <div class="a"><span lang="ja">{{ ed.title }}</span> <i>{{ ed.title_en }}</i>, {{ ed.author_en }} <span lang="ja">{{ ed.author }}</span>{% if ed.rights.author_died %} (died {{ ed.rights.author_died }}){% endif %}. First published in <span lang="ja">{{ ed.rights.first_published }}</span>. Public domain. Japanese text from <a href="{{ ed.card_url or 'https://www.aozora.gr.jp/' }}">Aozora Bunko</a>, typed and proofread by its volunteers.
+    <div class="a"><span lang="ja">{{ ed.title }}</span>{% if ed.title_en %} <i>{{ ed.title_en }}</i>{% endif %}, {% if ed.author_en %}{{ ed.author_en }} {% endif %}<span lang="ja">{{ ed.author }}</span>{% if ed.rights.author_died %} (died {{ ed.rights.author_died }}){% endif %}. First published in <span lang="ja">{{ ed.rights.first_published }}</span>. Public domain. Japanese text from <a href="{{ ed.card_url or 'https://www.aozora.gr.jp/' }}">Aozora Bunko</a>, typed and proofread by its volunteers.
       {% if ed.colophon %}<details><summary>Aozora's colophon</summary><pre lang="ja">{{ ed.colophon }}</pre></details>{% endif %}</div>
     <div class="q">This English?</div>
     <div class="a">Drafted, read and revised by keikaku on Meta's models ({{ ed.models|join(', ') }}), in {{ ed.calls }} model calls. keikaku raised {{ ed.queries.total }} {{ 'query' if ed.queries.total == 1 else 'queries' }}: {{ ed.queries.taken }} changed the text, {{ ed.queries.declined }} {{ 'was' if ed.queries.declined == 1 else 'were' }} declined{% if ed.queries.forked %}, {{ ed.queries.forked }} {{ 'was' if ed.queries.forked == 1 else 'were' }} left to the editor{% endif %}.{% if not ed.counts['editor-approved'] %} No person has edited it.{% endif %} Free to share and adapt under CC BY-SA 4.0.</div>

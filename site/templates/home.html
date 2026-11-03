@@ -23,10 +23,10 @@
   <ul class="shelf">
     {% for w in lang.works %}
     <li>
-      <span class="ja" lang="{{ lang.code }}">{{ w.title }}</span>
+      <span class="ja" lang="{{ lang.code }}">{% if w.title_en %}{{ w.title }}{% endif %}</span>
       <span>
-        <a class="ttl" href="/read/{{ w.id }}">{{ w.title_en }}</a><br>
-        <span class="meta">{{ w.author_en }}{% if w.rights.first_published_year %}, {{ w.rights.first_published_year }}{% endif %} · {{ w.paragraphs }} paragraphs</span><br>
+        {% if w.title_en %}<a class="ttl" href="/read/{{ w.id }}">{{ w.title_en }}</a>{% else %}<a class="ttl" href="/read/{{ w.id }}" lang="{{ lang.code }}">{{ w.title }}</a>{% endif %}<br>
+        <span class="meta">{{ w.author_en or w.author }}{% if w.rights.first_published_year %}, {{ w.rights.first_published_year }}{% endif %} · {{ w.paragraphs }} paragraphs</span><br>
         {% if w.blurb %}{% if w.about %}<details class="blurb"><summary>{{ w.blurb }}</summary><p>{{ w.about }}</p></details>{% else %}<p class="blurb">{{ w.blurb }}</p>{% endif %}{% endif %}
         <span class="meta">In English: {% for e in w.editions %}{% if e.here %}<a href="{{ e.url }}">{{ e.by }}</a>{% else %}{{ e.by }}, {{ e.year }}{% endif %}{% if not loop.last %} · {% endif %}{% endfor %}</span>
       </span>
