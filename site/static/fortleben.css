@@ -125,6 +125,7 @@ body > .wrap > .push { flex: 1 0 3rem; }
 .aboutp p, .aboutp ul { margin: 0 0 .8rem; }
 .aboutp ul { padding-left: 1.2rem; }
 .aboutp li + li { margin-top: .3rem; }
+.aboutp .signoff { margin: 4rem 0 0; font-family: var(--serif); font-style: italic; font-size: 1.25rem; color: var(--ink-2); }
 .lang { margin-top: 4.5rem; }
 .shelf .blurb { margin: 12px 0 10px; font-size: 16px; line-height: 1.55; max-width: 38rem; }
 .shelf .blurb summary { cursor: pointer; list-style: none; border-radius: 2px; }
