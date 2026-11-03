@@ -38,6 +38,10 @@ a { color: inherit; text-decoration-color: var(--accent); text-underline-offset:
 ::selection { background: var(--accent-wash); }
 
 .wrap { max-width: 80rem; margin: 0 auto; padding: 0 28px; }
+/* The page fills the window, so the footer sits at the bottom of a short page rather than half way up. */
+body > .wrap { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; }
+body > .wrap > * { flex: none; }
+body > .wrap > .push { flex: 1 0 3rem; }
 .top { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0 10px; margin-bottom: 1.25rem; font-size: 14px; }
 .top .mark { font-family: var(--serif); font-size: 1.5rem; text-decoration: none; letter-spacing: -.01em; }
 /* Pointing at the name draws a highlight under it, left to right, in the book's colour. */
@@ -58,8 +62,7 @@ a { color: inherit; text-decoration-color: var(--accent); text-underline-offset:
 .top nav .heart:hover svg, .top nav .heart:focus-visible svg { color: var(--accent-text); fill: var(--accent-wash); animation: wiggle .6s ease-in-out; }
 @keyframes wiggle { 0%, 100% { transform: rotate(0); } 20% { transform: rotate(-14deg); } 45% { transform: rotate(11deg); } 70% { transform: rotate(-6deg); } 88% { transform: rotate(3deg); } }
 /* The foot of every page: the licences, where the texts come from, and who made it. */
-.foot { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 3rem 0 0; padding: 18px 0 28px; border-top: 1px solid var(--rule); font-size: 13px; line-height: 1.5; color: var(--ink-2); }
-.foot .me { margin-left: auto; }
+.foot { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 0; padding: 18px 0 28px; border-top: 1px solid var(--rule); font-size: 13px; line-height: 1.5; color: var(--ink-2); }
 .wrap:has(.aa) .foot { padding-bottom: 92px; }
 .replay { font-size: 12px; padding: 6px 28px; color: var(--ink-2); border-bottom: 1px solid var(--rule); }
 
