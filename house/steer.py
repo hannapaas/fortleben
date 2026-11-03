@@ -191,5 +191,5 @@ def markdown(conn, run_id: int) -> dict[str, str]:
     v += ["## Page 1 in Japanese", "", "\n\n".join(ja.get(pid.split("–")[0], "") for pid, _ in first), ""]
     v += [f"The draft will be written in voice {voice} unless you approve another."]
 
-    b = [f"# The story bible: {title}", "", context.bible(bible).split("\n", 2)[2].strip()]
+    b = [f"# The analysis: {title}", "", context.bible(bible).split("\n", 2)[2].strip()]
     return {"reading.md": "\n".join(r) + "\n", "bible.md": "\n".join(b) + "\n", "voices.md": "\n".join(v) + "\n"}
