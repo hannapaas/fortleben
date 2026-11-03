@@ -42,7 +42,7 @@ a { color: inherit; text-decoration-color: var(--accent); text-underline-offset:
 body > .wrap { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; }
 body > .wrap > * { flex: none; }
 body > .wrap > .push { flex: 1 0 3rem; }
-.top { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0 10px; margin-bottom: 1.25rem; font-size: 14px; }
+.top { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0 12px; margin-bottom: 1.25rem; font-size: 14px; border-bottom: 1px solid color-mix(in srgb, var(--rule) 30%, transparent); }
 .top .mark { font-family: var(--serif); font-size: 1.5rem; text-decoration: none; letter-spacing: -.01em; }
 /* Pointing at the name draws a highlight under it, left to right, in the book's colour. */
 .top .mark { background: linear-gradient(var(--accent-wash), var(--accent-wash)) no-repeat 0 70% / 0 .5em; transition: background-size .5s ease-out; }
