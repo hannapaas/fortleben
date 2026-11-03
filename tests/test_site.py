@@ -128,3 +128,17 @@ def test_a_second_readers_crux_is_labelled_and_the_chosen_voice_shown(tmp_path):
 
 def _body(b):
     return json.loads(b) if isinstance(b, str) else b
+
+
+def test_model_text_says_analysis_not_bible():
+    from house.edition import plain, plain_all
+    assert plain("Bible, cast c2: Kayo is now 'Mother'.") == "Analysis, cast: Kayo is now 'Mother'."
+    assert plain("I keep 'Baby', per the bible, and the story bible's policy.") == \
+        "I keep 'Baby', per the analysis, and the analysis's policy."
+    assert plain("The Story Bible and a bible; THE BIBLE; two bibles; cast c1, c3 and c4 too") == \
+        "The Analysis and an analysis; THE ANALYSIS; two analyses; cast too"
+    assert plain("Bibliography, cast c, c2") == "Bibliography, cast c, c2"
+    assert plain("He read the Bible every night. Bible, cast c2: shorter.") == "He read the Bible every night. Analysis, cast: shorter."
+    assert plain(None) is None and plain("") == ""
+    out = plain_all({"handle": "bible c2", "why": ["per the bible"], "anchors": [{"id": "p1", "href": "p1"}]})
+    assert out == {"handle": "bible c2", "why": ["per the analysis"], "anchors": [{"id": "p1", "href": "p1"}]}

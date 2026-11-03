@@ -22,7 +22,7 @@ from house import accounts, acquire, budget, events, orchestrator, works
 from house.client import make_client
 from house.comments import LINK, digest
 from house.db import connect, dumps
-from house.edition import _date
+from house.edition import _date, plain, plain_all
 from house.lang.ja import aozora
 
 # An allowance is counted in drops of ink: one drop is DROP_USD, and a sheet is 400 characters of the original.
@@ -316,9 +316,17 @@ def _hold(conn, run_id: int, person_id: int) -> None:
     conn.execute("UPDATE run SET status='queued', options=? WHERE id=?", (dumps(options), run_id))
 
 
-def start(db, token: Who, work_id: str, agree: bool, credit: str | None, checkpoint: bool = True) -> int:
+# The estimate is worked out afresh at start from the latest finished runs, so it can move after the
+# page was drawn. Starting never holds more than the page showed; if the page showed far less, it's out of date.
+STALE_ESTIMATE = 0.75
+ESTIMATE_CHANGED = "The estimate for this work has changed since the page loaded. Reload the page to see the new one."
+
+
+def start(db, token: Who, work_id: str, agree: bool, credit: str | None, checkpoint: bool = True,
+          shown: int | None = None) -> int:
     """Start a whole run for the editor this token names. Returns the run id; refusals raise Refused.
-    The run pauses at the checkpoint unless `checkpoint` is False."""
+    The run pauses at the checkpoint unless `checkpoint` is False. `shown` is the estimate the desk
+    page showed: the run holds the smaller of it and the fresh one, or is refused if it's well below."""
     conn = connect(db)
     person = editor(conn, token)
     if not person:
@@ -333,6 +341,10 @@ def start(db, token: Who, work_id: str, agree: bool, credit: str | None, checkpo
         _room(conn, person["id"])
         estimate = work["estimate"]
         own = accounts.has_key(person)
+        if shown is not None and not own:
+            if shown < estimate * STALE_ESTIMATE:
+                raise Refused(ESTIMATE_CHANGED, 409)
+            estimate = min(shown, estimate)
         if not own and _signed_up(conn, person["id"]):
             raise Refused(NO_KEY)
         if own and estimate * DROP_USD > budget.Budget(conn).run_cap:
@@ -685,6 +697,7 @@ def state(conn, who: Who) -> dict | None:
         covered = sorted((w for w in listed if w["covered"]), key=lambda w: (w["added"], w["estimate"]))
         suggested = covered[0]["id"] if covered else None
     return {"base": f"/desk/{who}" if isinstance(who, str) else "/desk", "email": person["email"],
+            "has_password": bool(person["password_hash"]),
             "editor": {"name": person["name"], "credit_as": person["credit_as"]},
             "allowance": left, "suggested": suggested, "busy": _full(conn), "going": _going(conn, person["id"]),
             "works": listed, "runs": runs(conn, person["id"]), "key_tail": person["key_tail"], "keyless": keyless,
@@ -727,12 +740,12 @@ def checkpoint(conn, row) -> dict:
     reading = _doc(conn, row, "reading") or {}
     bible = _doc(conn, row, "bible") or {}
     takes = cp.get("takes") or []
-    rounds = [{"note": r.get("note", ""), "reply": r.get("reply", ""), "changed": r.get("changed") or [],
-               "question": r.get("question"), "english": _paras(r.get("english")), "voice": r.get("voice", 0)}
+    rounds = [{"note": r.get("note", ""), "reply": plain(r.get("reply", "")), "changed": plain_all(r.get("changed") or []),
+               "question": plain(r.get("question")), "english": _paras(r.get("english")), "voice": r.get("voice", 0)}
               for r in cp.get("rounds") or []]
     voice = options.get("voice", 0)
     voice = voice if isinstance(voice, int) and 0 <= voice < len(takes) else 0
-    voices = [{"label": t.get("label", ""), "line": t.get("line", ""), "english": _paras(t.get("english")),
+    voices = [{"label": plain(t.get("label", "")), "line": plain(t.get("line", "")), "english": _paras(t.get("english")),
                "redrafted": False} for t in takes]
     for r in rounds:  # each voice shows its latest redraft, if a note has redrafted it
         if isinstance(r["voice"], int) and 0 <= r["voice"] < len(voices):
@@ -741,14 +754,14 @@ def checkpoint(conn, row) -> dict:
     return {
         "run_id": row["id"], "title_en": run["title_en"], "voice": voice, "voices": voices, "rounds": rounds,
         "steering": run["steering"], "steer_error": run["steer_error"],
-        "reading": {
+        "reading": plain_all({
             "crux": [{"point": c.get("point", ""), "for_the_english": c.get("for_the_english", "")}
                      for c in reading.get("crux") or []],
             "second_crux": [{"point": c.get("point", ""), "for_the_english": c.get("for_the_english", "")}
                             for c in reading.get("second_crux") or []],
             "prose": [p.strip() for p in re.split(r"\n\s*\n", reading.get("reading") or "") if p.strip()],
-            "questions": [q.get("question", "") for q in reading.get("open_questions") or []]},
-        "bible": {
+            "questions": [q.get("question", "") for q in reading.get("open_questions") or []]}),
+        "bible": plain_all({
             "cast": [{"handle": c.get("handle", ""), "role": c.get("role", ""),
                       "name": " ".join(x for x in (c.get("name_ja"), c.get("romanised")) if x),
                       "addressed": "; ".join(f"{f.get('form', '')} ({f.get('used_by', '')})" for f in c.get("forms") or [])}
@@ -757,5 +770,5 @@ def checkpoint(conn, row) -> dict:
             "narration": _pairs(bible.get("narration")),
             "motifs": [{"motif": m.get("motif", ""), "english": m.get("english", "")} for m in bible.get("motifs") or []],
             "hard_spots": [{"where": ", ".join(h.get("anchors") or []), "kind": h.get("kind", ""), "why": h.get("why_hard", "")}
-                           for h in bible.get("hard_spots") or []]},
+                           for h in bible.get("hard_spots") or []]}),
     }

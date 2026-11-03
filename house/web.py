@@ -10,6 +10,7 @@ runs, so it needs a key (the site's or the person's own) and an open site too.
 
 import hmac
 import os
+import re
 import secrets
 import tempfile
 from urllib.parse import parse_qs
@@ -67,9 +68,14 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
         return i is not None and 0 < i <= MAX_ID
 
     def address(request: Request) -> str:
-        # Railway puts the visitor's address first in X-Forwarded-For.
+        """The visitor's address, for the rate limits. Behind a proxy (KEIKAKU_TRUST_PROXY=true, as on
+        Railway) it's the right-most X-Forwarded-For value, the one the proxy appended itself; anything
+        to its left came from the client and could be made up. Otherwise the header is ignored."""
+        peer = request.client.host if request.client else ""
+        if os.environ.get("KEIKAKU_TRUST_PROXY", "").lower() not in ("true", "1", "yes"):
+            return peer
         fwd = request.headers.get("x-forwarded-for", "")
-        return fwd.split(",")[0].strip() or (request.client.host if request.client else "")
+        return fwd.split(",")[-1].strip() or peer
 
     @app.get("/", response_class=HTMLResponse)
     def home(request: Request):
@@ -299,8 +305,11 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
     @desk_route("POST", "/runs")
     @json_post
     async def desk_start(request, pid, data):
+        shown = data.get("estimate")  # what the page showed; the run never holds more
+        shown = shown if isinstance(shown, int) and not isinstance(shown, bool) and 0 < shown <= MAX_ID else None
         return {"run_id": desk.start(db, pid, str(data.get("work", "")), data.get("agree") is True,
-                                     str(data.get("credit") or ""), checkpoint=data.get("checkpoint") is not False)}
+                                     str(data.get("credit") or ""), checkpoint=data.get("checkpoint") is not False,
+                                     shown=shown)}
 
     # A work added from a link to Aozora Bunko (house/acquire.py): its row for the list, or why not.
     @desk_route("POST", "/works")
@@ -410,44 +419,49 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
 
     # A forgotten password: a link by mail, through the same Resend path as the comments email.
     # The page says the same whether or not the address has an account.
+    # Without reset mail, the page gives KEIKAKU_CONTACT, an address to write to, if the server has one.
+    contact = os.environ.get("KEIKAKU_CONTACT", "").strip()
+    contact = contact if re.fullmatch(r"[^@\s<>\"']+@[^@\s<>\"']+\.[^@\s<>\"']+", contact) else ""
+
+    def reset_page(request: Request, status: int = 200, **ctx) -> HTMLResponse:
+        return page(request, "reset.html", status, can_mail=comments.can_send(), contact=contact, **ctx)
+
     @app.get("/reset", response_class=HTMLResponse)
     def reset_form(request: Request):
-        return page(request, "reset.html", can_mail=comments.can_send())
+        return reset_page(request)
 
     @app.post("/reset", response_class=HTMLResponse)
     async def reset_ask(request: Request):
         form = await form_of(request)
         if form is None:
-            return page(request, "reset.html", 403, can_mail=comments.can_send(), error=EXPIRED)
+            return reset_page(request, 403, error=EXPIRED)
         email = form.get("email", "").strip().lower()
         if not accounts.allow_reset(address(request), email):
-            return page(request, "reset.html", 429, can_mail=comments.can_send(), email=email,
-                        error="That's a lot of reset requests in an hour. Try again later.")
+            return reset_page(request, 429, email=email, error="That's a lot of reset requests in an hour. Try again later.")
         if token := accounts.new_reset(conn(), email):
             comments.send(email, "Reset your Fortleben password",
                           f"Someone asked to reset the password for this email address on Fortleben.\n\n"
                           f"To choose a new one, open this link within the hour:\n{base_url(request)}/reset/{token}\n\n"
                           "If it wasn't you, ignore this mail: nothing changes.", private=True)
         # Without RESEND_API_KEY the link went to the server log, and the page doesn't claim it was mailed.
-        return page(request, "reset.html", can_mail=comments.can_send(), sent=comments.can_send())
+        return reset_page(request, sent=comments.can_send())
 
     @app.get("/reset/{token}", response_class=HTMLResponse)
     def reset_link(request: Request, token: str):
         if accounts.reset_person(conn(), token) is None:
-            return page(request, "reset.html", 404, can_mail=comments.can_send(), error=accounts.RESET_GONE)
-        return page(request, "reset.html", token=token)
+            return reset_page(request, 404, error=accounts.RESET_GONE)
+        return reset_page(request, token=token)
 
     @app.post("/reset/{token}", response_class=HTMLResponse)
     async def reset_set(request: Request, token: str):
         form = await form_of(request)
         if form is None:
-            return page(request, "reset.html", 403, token=token, error=EXPIRED)
+            return reset_page(request, 403, token=token, error=EXPIRED)
         try:
             pid = accounts.use_reset(conn(), token, form.get("password", ""))
         except accounts.Refused as e:
             gone = str(e) == accounts.RESET_GONE
-            return page(request, "reset.html", 404 if gone else 400, can_mail=comments.can_send(),
-                        token=None if gone else token, error=str(e))
+            return reset_page(request, 404 if gone else 400, token=None if gone else token, error=str(e))
         return sign_in(request, RedirectResponse("/desk", status_code=303, headers=NOINDEX), pid)
 
     # The desk's own forms: forget the key, add a new one, add an email address and password.
@@ -487,11 +501,16 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
         form = await form_of(request)
         if form is None:
             return plain(EXPIRED, 403)
+        if person["password_hash"] and not accounts.allow_login(address(request), person["email"] or ""):
+            return desk_page(request, person, 429, login_error="That's a lot of tries in an hour. Try again later.",
+                             login_email=form.get("email", ""))
         try:
-            accounts.set_login(conn(), person["id"], form.get("email", ""), form.get("password", ""))
+            accounts.set_login(conn(), person["id"], form.get("email", ""), form.get("password", ""), form.get("current"))
         except accounts.Refused as e:
             return desk_page(request, person, 400, login_error=str(e),
                              login_email=form.get("email", ""))
+        # A new password signs the person out everywhere but here.
+        accounts.end_sessions(conn(), person["id"], keep=request.cookies.get(SESSION))
         return RedirectResponse(back_to_desk(request), status_code=303, headers=NOINDEX)
 
     # --- The public wishlist (house/wishlist.py) ---------------------------------------------------

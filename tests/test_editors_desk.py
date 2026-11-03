@@ -168,6 +168,24 @@ def test_the_estimate_is_reserved_then_settled(conn, db, held, monkeypatch):
     assert s["runs"][0]["spent"] == 124 and s["runs"][0]["status"] == "done" and not s["busy"] and not s["going"]
 
 
+def test_a_start_holds_no_more_than_the_page_showed(conn, db, held):
+    est = estimate()
+    # The figure moved up a little since the page was drawn: the page's figure is held.
+    token = desk.invite(conn, "Ines", drops=4000)
+    run_id = desk.start(db, token, "bansan", True, "Ines", shown=est - est // 10)
+    assert json.loads(conn.execute("SELECT options FROM run WHERE id=?", (run_id,)).fetchone()[0])["reserved_drops"] == est - est // 10
+    assert desk.state(conn, token)["allowance"]["reserved"] == est - est // 10
+    # It went down: the fresh, smaller one is held.
+    other = desk.invite(conn, "Kenji", drops=4000)
+    run_id = desk.start(db, other, "bansan", True, "Kenji", shown=est + 50)
+    assert json.loads(conn.execute("SELECT options FROM run WHERE id=?", (run_id,)).fetchone()[0])["reserved_drops"] == est
+    # The page is far out of date: refused, nothing held.
+    third = desk.invite(conn, "Aiko", drops=4000)
+    with pytest.raises(desk.Refused, match="changed since the page loaded") as e:
+        desk.start(db, third, "bansan", True, "Aiko", shown=est // 2)
+    assert e.value.code == 409 and desk.state(conn, third)["allowance"]["reserved"] == 0
+
+
 def test_an_overrun_is_the_houses_and_a_failure_is_recorded(conn, db, held, monkeypatch):
     token = desk.invite(conn, "Ines")
     run_id = desk.start(db, token, "bansan", True, "")

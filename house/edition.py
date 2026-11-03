@@ -23,6 +23,44 @@ RUBY = re.compile(r"《[^》]*》|［＃[^］]*］")  # Aozora readings and edit
 DECIDED = {"taken": "Changed", "declined": "Kept", "forked": "Left to the editor", "open": "Not decided yet",
            "unaddressed": "Not decided yet", "noted": "Noted"}
 # The first read labels its takes and marks its pick; on the page the voice is just the voice.
+# Inside the engine the reading's companion document is "the bible", and its cast have ids (c1, c2).
+# The model's own words sometimes carry both; what a person reads says "analysis" and drops the ids.
+_BIBLE = re.compile(r"\b(?:(an?)(\s+))?(story\s+)?(bible)(s?)\b", re.I)
+_CAST_IDS = re.compile(r"\b(cast)\s+c\d+(?:\s*(?:,|/|&|and)\s*c\d+)*\b", re.I)
+_NOT_PROSE = frozenset({"handle", "id", "href"})
+
+
+def plain(text):
+    """Model text as a visitor or editor sees it: "story bible" and "bible" become "analysis" in the
+    same case, and "cast c2" becomes "cast". A capital "Bible" inside a sentence is left alone: a story
+    may name the book. Anything that isn't a string comes back as it was."""
+    if not isinstance(text, str) or not text:
+        return text
+
+    def analysis(m):
+        article, space, story, bible, plural = m.groups()
+        if bible == "Bible" and not story and not article and text[:m.start()].rstrip()[-1:] not in ("", *".!?:;\"'(«「"):
+            return m.group(0)  # a capital Bible inside a sentence is the book, not the engine's document
+        first = (story or bible).strip()
+        word = "analyses" if plural else "analysis"
+        word = word.upper() if first.isupper() and len(first) > 1 else word.capitalize() if first[0].isupper() else word
+        if article:
+            article = "AN" if article.isupper() and len(article) > 1 else "An" if article[0].isupper() else "an"
+            return article + space + word
+        return word
+
+    return _CAST_IDS.sub(lambda m: m.group(1), _BIBLE.sub(analysis, text))
+
+
+def plain_all(value):
+    """`plain` on every string in a dict or list of model output, leaving ids and links alone."""
+    if isinstance(value, dict):
+        return {k: v if k in _NOT_PROSE else plain_all(v) for k, v in value.items()}
+    if isinstance(value, list):
+        return [plain_all(v) for v in value]
+    return plain(value)
+
+
 RECOMMENDED = re.compile(r"^\([a-z]\)\s*|\s*\(Recommended\.?\)", re.I)
 OUTCOMES = {"taken": "taken", "declined": "declined", "forked": "sent to the editor", "open": "not answered yet"}
 
@@ -191,7 +229,7 @@ def analysis(conn, work_id: str, run_id: int, where: dict[str, str] | None = Non
         "voice": RECOMMENDED.sub("", voice["line"]).strip() if voice else None,
         "cast": [], "style": [], "narration": [], "motifs": [], "hard_spots": []}
     if not bible:
-        return out
+        return plain_all(out)
     for c in bible.get("cast") or []:
         name = " ".join(x for x in (c.get("romanised"), c.get("name_ja")) if x)
         out["cast"].append({"handle": c["handle"], "name": name if name and name != c["handle"] else "",
@@ -204,7 +242,7 @@ def analysis(conn, work_id: str, run_id: int, where: dict[str, str] | None = Non
                       "english": m.get("english", "")} for m in bible.get("motifs") or []]
     out["hard_spots"] = [{"anchors": [{"id": a, "href": where.get(a)} for a in h.get("anchors") or []],
                           "kind": h.get("kind", ""), "why": h.get("why_hard", "")} for h in bible.get("hard_spots") or []]
-    return out
+    return plain_all(out)
 
 
 def _sentence(text: str) -> str:
@@ -239,7 +277,7 @@ def _notes(body: dict, i: int) -> list[dict]:
             if key in seen:
                 continue
             seen.add(key)
-            out.append({**n, "essential": view == "casual", "span_html": n["span"] or ""})
+            out.append({**n, "body": plain(n["body"]), "essential": view == "casual", "span_html": n["span"] or ""})
     return out
 
 
@@ -289,10 +327,10 @@ def mark_notes(english: str, notes: list[dict]) -> str:
 def _query(q: dict) -> dict:
     answer = q["answer"] or {}
     return {"number": answer.get("note", ""), "who": READERS.get(q["raised_by"], q["raised_by"]),
-            "span": q["span"], "reason": q["reason"], "evidence": [RUBY.sub("", e) for e in q["evidence"] or []],
-            "recommendation": q["recommendation"], "confidence": q["confidence"],
+            "span": q["span"], "reason": plain(q["reason"]), "evidence": [RUBY.sub("", e) for e in q["evidence"] or []],
+            "recommendation": q["recommendation"], "confidence": plain(q["confidence"]),
             "status": q["status"], "outcome": OUTCOMES.get(q["status"], q["status"]),
-            "desk": answer.get("reason", "")}
+            "desk": plain(answer.get("reason", ""))}
 
 
 def _decisions(queries: list[dict]) -> list[dict]:

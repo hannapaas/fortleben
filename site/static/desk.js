@@ -187,7 +187,7 @@
     say(err, '');
     lock(true);
     start.textContent = 'Starting…';
-    json('POST', base + '/runs', { work: w.value, agree: true, credit: credit ? credit.value : '' }).then(function (d) {
+    json('POST', base + '/runs', { work: w.value, agree: true, credit: credit ? credit.value : '', estimate: Number(w.dataset.estimate) }).then(function (d) {
       if (!d.run_id) {
         lock(false);
         start.textContent = 'Start';

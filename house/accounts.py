@@ -36,6 +36,8 @@ MIN_PASSWORD, MAX_PASSWORD = 8, 200
 TAKEN = "There's already an account with that email address. Sign in instead."
 NO_MATCH = "That email and password don't match."
 RESET_GONE = "That reset link has expired or has been used. Ask for a new one."
+WRONG_CURRENT = "That isn't your current password."
+MIN_KEY = 12  # no Meta key is shorter; a shorter one is a slip, and its four-character tail would be most of it
 
 
 class Refused(Exception):
@@ -69,6 +71,8 @@ def _clean_key(api_key: str) -> str:
         raise Refused("That's longer than any Meta key. Check what you pasted.")
     if not key.isprintable() or any(c.isspace() for c in key):
         raise Refused("That doesn't look like a key: it has spaces or odd characters in it.")
+    if len(key) < MIN_KEY:
+        raise Refused("That's too short to be a Meta key. Check you pasted all of it.")
     return key
 
 
@@ -139,8 +143,12 @@ def signup(conn, name: str, email: str, password: str, api_key: str) -> int:
     return person
 
 
-def set_login(conn, person_id: int, email: str, password: str) -> None:
-    """Give a person (an invited editor) an email address and password to sign in with."""
+def set_login(conn, person_id: int, email: str, password: str, current: str | None = None) -> None:
+    """Give a person (an invited editor) an email address and password to sign in with, or change
+    them. A person who already has a password must give it, so a stolen session can't take the account."""
+    row = conn.execute("SELECT password_hash FROM person WHERE id=?", (person_id,)).fetchone()
+    if row and row["password_hash"] and not check_password(row["password_hash"], current or ""):
+        raise Refused(WRONG_CURRENT)
     email = _clean_email(email)
     password = _clean_password(password)
     if _email_taken(conn, email, but=person_id):
@@ -195,8 +203,10 @@ def end_session(conn, sid: str | None) -> None:
         conn.commit()
 
 
-def end_sessions(conn, person_id: int) -> None:
-    conn.execute("DELETE FROM session WHERE person_id=?", (person_id,))
+def end_sessions(conn, person_id: int, keep: str | None = None) -> None:
+    """End every session of this person, except the one whose id is `keep` (the one in use)."""
+    conn.execute("DELETE FROM session WHERE person_id=? AND id_hash IS NOT ?",
+                 (person_id, _hash(keep) if keep else None))
     conn.commit()
 
 

@@ -108,6 +108,7 @@ def test_comments_are_closed_without_a_key(db, monkeypatch):
 
 
 def test_reports_from_two_addresses_hide_a_comment_and_email_nobody(site, db, monkeypatch):
+    monkeypatch.setenv("KEIKAKU_TRUST_PROXY", "true")  # the second address comes through the proxy
     cid = post(site).json()["id"]
     fake_screen(monkeypatch, "pass")
     comments.screen(db, cid)

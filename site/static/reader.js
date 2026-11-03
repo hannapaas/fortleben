@@ -101,9 +101,13 @@
   document.querySelectorAll('.unit').forEach(function (unit) {
     var en = unit.querySelector('.en');
     function activate(e) {
-      if (window.getSelection && String(window.getSelection()).length) return;
+      if (e.target.closest('a')) return;  // a link goes where it goes
+      if (window.getSelection && String(window.getSelection()).length) return;  // the end of a selection drag
       var t = e.target.closest('.t');
       toggleSlip(unit, t ? true : undefined, t ? t.dataset.note : undefined);
+      // On a phone the margin sits under the paragraph, folded away; it opens and closes with the notes,
+      // so a paragraph nobody has commented on can be commented on. Clean keeps comments out of the way.
+      if (phone.matches && s.preset !== 'clean') margin(unit, !unit.querySelector('.slip').hidden);
     }
     en.addEventListener('click', activate);
     en.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(e); } });
@@ -143,7 +147,18 @@
   addEventListener('resize', layout);
   if (document.fonts) document.fonts.ready.then(layout);
 
-  function openComposer(mar) { mar.classList.add('writing'); layout(); mar.querySelector('textarea').focus(); }
+  function openComposer(mar, quiet) {
+    mar.classList.add('writing'); layout();
+    if (!quiet) mar.querySelector('textarea').focus();
+  }
+  // A phone's margin, opened from the paragraph: the composer shows, but the keyboard waits for a tap in it.
+  function margin(unit, open) {
+    var mar = unit.querySelector('.mar'), box = mar.querySelector('textarea');
+    unit.classList.toggle('show', open);
+    if (open && box) openComposer(mar, true);
+    else if (!open && box && !box.value) mar.classList.remove('writing');
+    layout();
+  }
   document.querySelectorAll('.unit').forEach(function (unit) {
     var mar = unit.querySelector('.mar');
     var ph = mar.querySelector('.ph'), add = mar.querySelector('.add');
