@@ -13,6 +13,7 @@ Work in progress for the Meta Global AI Developer Hackathon. Everything in this 
 - [Running a text](docs/RUNNING-A-TEXT.md): the passes a text goes through, the checkpoint, and the budget.
 - [The site](docs/SITE.md): every page, what a reader can do there, how it grows.
 - [The editors' desk](docs/EDITORS-DESK.md): how a run works for the person steering it: estimates, the checkpoint, what's committed and published when, running out, samples.
+- [Steering](docs/STEERING.md): who runs the house and how they steer it: the checkpoint, notes in plain words, bringing your own key.
 - [Stages](docs/STAGES.md): the exact order the orchestrator runs, and the limits code enforces.
 - [Conventions](docs/CONVENTIONS.md): repo layout, the contract between lanes, tests, git.
 - [From translators](docs/FROM-TRANSLATORS.md): what we took from how literary translators and editors work, and where it lives in the design.
@@ -32,6 +33,8 @@ uv run keikaku --replay run bansan      # replay the recorded run of 「晩餐�
 uv run pytest                           # the tests, also keyless
 ```
 
+Two pages are the proof of the project. **The house** (`/house`) walks through one real run: the text's route through the stages, drawn as stations, with one or two picked moments from the record at each (a reader's note and what the desk did with it, a fork and both sides' case, a line before and after revision) and every station's full output a click away: the reading, the whole story bible, the query log, the notes. **The exhibit** sets passages of the house's English beside a one-shot translation from the same model and, where one exists, a published human translation, with the margin notes anchored to the lines they're about, so the difference the house makes can be read rather than claimed.
+
 `--replay` serves every call from the recorded responses in `fixtures/<work>/`: 「晩餐」 and 「酒虫」 have recordings, each the complete record of a live run (every model call's model, tokens, cost and response, the readers' notes, the desk's decisions, the event log). Without a key the house replays anyway.
 
 To run live, copy `.env.example` to `.env` and set `MODEL_API_KEY` (a Meta Model API key). Then:
@@ -45,7 +48,7 @@ uv run keikaku fixture bansan           # export a run to fixtures/<work>/ so it
 uv run keikaku audit bansan --runs 1 2 --baseline --readable  # blind audits of runs 1 and 2 beside a one-shot
 ```
 
-`keikaku serve` (without `--replay`) serves the live database, with the recorded runs loaded into it once; `keikaku invite "Name"` makes an invite link to the editors' desk, where an editor can run a whole work ([docs/EDITORS-DESK.md](docs/EDITORS-DESK.md)). The site runs as one service from the `Dockerfile` (Railway, with a volume at `KEIKAKU_DATA_DIR`; `bin/serve.sh` starts it under Litestream when a backup bucket is set).
+`keikaku add <aozora url>` adds any work on Aozora Bunko that passes the rights rule; `keikaku wish <url>` puts one on the public wishlist (`bin/seed-wishlist.sh` seeds a new database with a few). `keikaku serve` (without `--replay`) serves the live database, with the recorded runs loaded into it once; `keikaku invite "Name"` makes an invite link to the editors' desk, where an editor can run a whole work ([docs/EDITORS-DESK.md](docs/EDITORS-DESK.md)). The site runs as one service from the `Dockerfile` (Railway, with a volume at `KEIKAKU_DATA_DIR`; `bin/serve.sh` starts it under Litestream when a backup bucket is set).
 
 `keikaku run` takes `--draft-model`, `--reader-model`, `--desk-model` and `--final-model` (`spark` or `wonder`) and `--draft-prompt` (`translate-draft-plain` or `translate-draft`); the defaults are the best set-up the experiments found. A run is estimated before it starts, high on purpose, and refused if the estimate won't fit its cap or what's left of the daily and total caps. The run cap is `--cap`, which goes before the command, or `KEIKAKU_CAP_RUN` (default $3, enough for a short story: 「晩餐」 estimates at about $1, 「炭燒のむすめ」 at about $2.50). `HOUSE_OPEN=false` stops all live calls.
 
@@ -53,4 +56,4 @@ Which Meta model does what: `muse-spark-1.3` plans the parts, writes the story b
 
 ## Licence
 
-The code is published to be read and run for evaluation; it isn't open source at this stage, and may become so later. Other people run the house on the site, signed in as editors. The English the house produces is CC BY-SA 4.0. See `LICENSE`.
+The code, prompts and docs are Apache-2.0. The English keikaku produces, and the recorded runs in `fixtures/`, are CC BY-SA 4.0. See `LICENSE`.
