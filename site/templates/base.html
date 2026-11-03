@@ -12,6 +12,7 @@
 <script>try { var t = localStorage.getItem('fl-theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
 </head>
 <body class="{% block bodyclass %}{% endblock %}">
+{% block bodystart %}{% endblock %}
 {% if replay %}<div class="replay">Replay: you're looking at recorded runs from the repo. Nothing here calls a model.</div>{% endif %}
 <div class="wrap">
   <header class="top">

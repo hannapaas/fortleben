@@ -19,8 +19,8 @@
     <span class="sm block">At least 8 characters. Saving it signs you in, and signs out anywhere else you were signed in.</span></div>
   <div class="q" aria-hidden="true"></div>
   <div class="a">
-    <div class="startrow"><button type="submit" class="btn go">Save and sign in</button></div>
     {% if error %}<p class="err" role="alert">{{ error }}</p>{% endif %}
+    <div class="startrow"><button type="submit" class="btn go">Save and sign in</button></div>
   </div>
 </form>
 {% elif sent %}
@@ -41,9 +41,11 @@
   <div class="a"><input type="email" id="email" name="email" maxlength="254" required autocomplete="email" value="{{ email or '' }}"></div>
   <div class="q" aria-hidden="true"></div>
   <div class="a">
-    <div class="startrow"><button type="submit" class="btn go">Send the link</button></div>
     {% if error %}<p class="err" role="alert">{{ error }}</p>{% endif %}
+    <div class="startrow"><button type="submit" class="btn go">Send the link</button></div>
   </div>
 </form>
 {% endif %}
 {% endblock %}
+{# A form sent back with an error opens on the error, not the top of the page (on a phone it would be out of view). #}
+{% block scripts %}{% if error %}<script>var e = document.querySelector(".err[role=alert]"); if (e) e.scrollIntoView({ block: "center" });</script>{% endif %}{% endblock %}

@@ -22,7 +22,7 @@ def env(monkeypatch):
     monkeypatch.setattr("dotenv.load_dotenv", lambda *a, **k: None)
     monkeypatch.setattr(desk, "_live", set())
     monkeypatch.setattr(desk, "spawn", lambda fn, *args: None)
-    for limit in ("_signups", "_logins", "_resets"):
+    for limit in ("_signups", "_logins", "_resets", "_account_tries"):
         monkeypatch.setattr(accounts, limit, type(accounts._signups)(accounts._signups.default_factory))
 
 
@@ -184,6 +184,45 @@ def test_changing_email_or_password_needs_the_current_one_and_signs_out_elsewher
     assert site.get("/desk").status_code == 200  # still signed in here
     assert elsewhere.get("/desk", follow_redirects=False).status_code == 303  # and nowhere else
     assert accounts.authenticate(conn, "ines@example.com", "a new password") == ines
+
+
+def test_successful_sign_ins_dont_count_against_the_limit(site, ines):
+    for _ in range(accounts.LOGINS_PER_HOUR + 2):
+        assert sign_in(site, follow_redirects=False).status_code == 303
+
+
+def test_the_account_form_counts_only_wrong_current_passwords_per_person(site, ines, conn, app):
+    sign_in(site)
+    # Wrong sign-ins elsewhere for the same email don't lock the desk's form
+    elsewhere = TestClient(app, headers={"X-Forwarded-For": "8.8.8.8"})
+    for _ in range(accounts.LOGINS_PER_HOUR):
+        sign_in(elsewhere, password="wrong password")
+    # nor do forms sent back for a bad email address
+    for _ in range(accounts.ACCOUNT_TRIES_PER_HOUR + 1):
+        r = site.post("/desk/account", data={"email": "not an email", "current": PASSWORD, "csrf": csrf(site)})
+        assert r.status_code == 400 and "doesn&#39;t look like an email address" in r.text
+    for _ in range(accounts.ACCOUNT_TRIES_PER_HOUR):
+        r = site.post("/desk/account", data={"email": "ines@example.com", "current": "wrong", "csrf": csrf(site)})
+        assert r.status_code == 400
+    r = site.post("/desk/account", data={"email": "ines@example.com", "current": PASSWORD, "csrf": csrf(site)})
+    assert r.status_code == 429 and "Try again later" in r.text
+
+
+def test_changing_only_the_email_keeps_the_password_and_every_session(site, ines, conn, app):
+    sign_in(site)
+    elsewhere = TestClient(app)
+    sign_in(elsewhere)
+    assert "Leave the new password empty to change only the email." in site.get("/desk").text
+    r = site.post("/desk/account", data={"email": "ines@example.org", "current": PASSWORD, "password": "",
+                                         "csrf": csrf(site)}, follow_redirects=False)
+    assert r.status_code == 303
+    assert accounts.authenticate(conn, "ines@example.org", PASSWORD) == ines
+    assert elsewhere.get("/desk", follow_redirects=False).status_code == 200  # nobody signed out
+    # An invited editor adding a sign-in for the first time still has to choose a password
+    token = desk.invite(conn, "Kenji")
+    r = TestClient(app, cookies={"fl_csrf": "x" * 20}).post(
+        f"/desk/{token}/account", data={"email": "kenji@example.com", "password": "", "csrf": "x" * 20})
+    assert r.status_code == 400 and "at least 8 characters" in r.text
 
 
 def test_revoking_an_invite_ends_its_sessions(site, conn):
@@ -350,3 +389,35 @@ def test_a_missing_page_is_a_page_in_a_browser(site):
         r = site.get(path, headers=html)
         assert r.status_code == 404 and "Back to the library" in r.text, path
     assert site.get("/read/nope").json()["detail"] == "No edition of that work yet."
+
+
+def test_private_pages_are_never_cached_and_every_response_has_the_security_headers(site, ines, app):
+    for path in ("/login", "/signup", "/reset", "/reset/nope"):
+        r = site.get(path)
+        assert r.headers["cache-control"] == "no-store" and r.headers["x-frame-options"] == "DENY", path
+    sign_in(site)
+    for path in ("/desk", "/desk/runs/1"):
+        assert site.get(path).headers["cache-control"] == "no-store", path
+    r = site.post("/desk/account", data={"email": "x", "current": "wrong", "csrf": csrf(site)})
+    assert r.headers["cache-control"] == "no-store"
+    home = site.get("/")
+    assert "no-store" not in home.headers.get("cache-control", "") and home.headers["x-content-type-options"] == "nosniff"
+
+
+def test_an_unhandled_error_still_gets_the_security_headers(app):
+    def boom():
+        raise RuntimeError("broken on purpose")
+
+    app.add_api_route("/reset/x/boom", boom)
+    r = TestClient(app, raise_server_exceptions=False).get("/reset/x/boom")
+    assert r.status_code == 500 and "Something went wrong on our side." in r.text and "broken on purpose" not in r.text
+    for k, v in web.SECURITY_HEADERS.items():
+        assert r.headers[k] == v
+    assert r.headers["cache-control"] == "no-store"
+
+
+def test_a_trailing_slash_redirect_keeps_the_scheme_behind_the_proxy(app):
+    r = TestClient(app, base_url="http://fortleben.test").get("/wishlist/", headers={"x-forwarded-proto": "https"},
+                                                             follow_redirects=False)
+    assert r.status_code in (307, 308) and r.headers["location"] == "/wishlist"
+    assert web._same_site(b"https://elsewhere.test/x", {"headers": [(b"host", b"fortleben.test")]}) == b"https://elsewhere.test/x"

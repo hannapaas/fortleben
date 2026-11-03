@@ -23,7 +23,7 @@ def env(monkeypatch):
     monkeypatch.setattr("house.web.load_dotenv", lambda *a, **k: None)
     monkeypatch.setattr("dotenv.load_dotenv", lambda *a, **k: None)
     monkeypatch.setattr(desk, "_live", set())
-    for limit in ("_signups", "_logins", "_resets"):
+    for limit in ("_signups", "_logins", "_resets", "_account_tries"):
         monkeypatch.setattr(accounts, limit, type(accounts._signups)(accounts._signups.default_factory))
 
 

@@ -121,13 +121,13 @@
     var own = !!form.dataset.own, avail = Number(form.dataset.available);
     var label = document.createElement('label');
     label.className = 'work' + (w.covered ? '' : ' short');
-    var meta = esc(w.author_en) + (w.year ? ', ' + esc(w.year) : '') + ' · ' + esc(w.sheets) + ' sheets';
+    var meta = esc(w.author_en || w.author) + (w.year ? ', ' + esc(w.year) : '') + ' · ' + esc(w.sheets) + ' sheets';
     meta += own ? '.' + (w.covered ? '' : ' Longer than one run here may spend.')
       : ' · ' + n(w.estimate) + ' drops. ' + (w.covered ? 'Your allowance covers it.' : 'That\'s ' + n(w.estimate - avail) + ' more than you have.');
     label.innerHTML = '<input type="radio" name="work" value="' + esc(w.id) + '" data-estimate="' + esc(w.estimate) +
-      '" data-title="' + esc(w.title_en) + '"' + (w.covered ? '' : ' disabled') + '>' +
+      '" data-title="' + esc(w.title_en || w.title) + '"' + (w.covered ? '' : ' disabled') + '>' +
       '<span class="bx r" aria-hidden="true"></span><span class="wb">' +
-      '<span class="wj" lang="ja">' + esc(w.title) + '</span> <span class="wt">' + esc(w.title_en) + '</span>' +
+      '<span class="wj" lang="ja">' + esc(w.title) + '</span>' + (w.title_en ? ' <span class="wt">' + esc(w.title_en) + '</span>' : '') +
       '<span class="meta">' + meta + '</span>' +
       (w.blurb ? '<span class="meta blurb">' + esc(w.blurb) + '</span>' : '') +
       (w.has_edition ? '<span class="meta">Already on the shelf. Yours would be a separate edition, under your credit.</span>' : '') +

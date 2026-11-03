@@ -468,12 +468,13 @@ def test_a_note_is_read_and_its_round_appears(conn, db, waiting, monkeypatch):
     spawned = []
     monkeypatch.setattr(desk, "spawn", lambda fn, *args: spawned.append((fn, args)))
     desk.steer(db, token, run_id, "This sounds too modern; I want the period to show more.", voice=1)
-    assert desk._options(conn, run_id)["voice"] == 1
+    assert "voice" not in desk._options(conn, run_id)  # kept only once the note is read
     assert desk.run_state(conn, token, run_id)["steering"]  # the page says "Reading your note"
     with pytest.raises(desk.Refused, match="still reading your last note"):
         desk.steer(db, token, run_id, "And another.")
     fn, args = spawned.pop()
     fn(*args)
+    assert desk._options(conn, run_id)["voice"] == 1
 
     r = desk.run_state(conn, token, run_id)
     assert r["status"] == "waiting" and r["rounds"] == 1 and not r["steering"] and r["steer_error"] is None
@@ -496,9 +497,10 @@ def test_a_note_is_read_and_its_round_appears(conn, db, waiting, monkeypatch):
         raise RuntimeError("the model said no")
 
     monkeypatch.setattr(desk, "steer_round", broken)
-    assert site.post(f"/desk/{token}/runs/{run_id}/steer", json={"note": "Colder mother."}).json() == {"ok": True}
+    assert site.post(f"/desk/{token}/runs/{run_id}/steer", json={"note": "Colder mother.", "voice": 2}).json() == {"ok": True}
     r = site.get(f"/desk/{token}/runs/{run_id}").json()
     assert r["rounds"] == 1 and r["steer_error"] and "the model said no" not in r["steer_error"]
+    assert desk._options(conn, run_id)["voice"] == 1  # a note that failed leaves the voice as it was
 
 
 def test_approve_queues_the_run_and_carries_on_from_the_draft(conn, db, waiting, held, monkeypatch, site):

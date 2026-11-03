@@ -77,17 +77,24 @@ def test_a_link_adds_the_work_and_a_wish_then_counts_up(site, fetched):
     assert conn.execute("SELECT count FROM wish").fetchone()[0] == 2
 
 
-def test_a_refused_link_says_why_and_counts_against_the_days_reads(site, fetched):
+def test_a_refused_link_says_why_and_counts_against_the_days_reads(site, fetched, monkeypatch):
     db, client = site
     r = ask(client, DAZAI)
     assert r.status_code == 400 and "died in 1948" in r.text
     r = ask(client, "https://example.com/x")
     assert r.status_code == 400 and "That isn&#39;t an Aozora Bunko link." in r.text
+    r = ask(client, f"{BASE}/cards/000035/card99999.html")
+    assert r.status_code == 400 and "no work at that address" in r.text
     conn = connect(db)
-    assert wishlist.reads_today(conn) == 1  # the Aozora read counts; a link that isn't Aozora's costs nothing
+    assert wishlist.reads_today(conn) == 1  # the card read counts; a link that isn't Aozora's or isn't there doesn't
     assert conn.execute("SELECT COUNT(*) FROM wish").fetchone()[0] == 0
+    fetched.clear()
+    assert "Dazai Osamu (太宰治) died in 1948" in ask(client, DAZAI, ip="10.0.2.1").text
+    assert fetched == [] and wishlist.reads_today(conn) == 1  # refused before: nothing read again
     for i in range(wishlist.READS_PER_DAY - 1):
-        ask(client, DAZAI, ip=f"10.0.0.{i}")
+        monkeypatch.setitem(SITE, f"{BASE}/cards/000035/card{9000 + i}.html", "card1567.html")
+        ask(client, f"{BASE}/cards/000035/card{9000 + i}.html", ip=f"10.0.0.{i}")
+    assert wishlist.reads_today(conn) == wishlist.READS_PER_DAY
     r = ask(client, KUMO, ip="10.0.1.1")
     assert r.status_code == 429 and "ten new links from Aozora today" in r.text
     assert conn.execute("SELECT COUNT(*) FROM work WHERE id LIKE 'aozora-%'").fetchone()[0] == 0

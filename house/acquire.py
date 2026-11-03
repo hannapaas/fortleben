@@ -5,10 +5,18 @@ credited and their 没年, the 初出 and the ruby zip. The rule is works.eligib
 code: a year that can't be read is a refusal, never a guess. The text is kept in the data folder
 (sources/<work id>.txt) and the record in the `work` table; the fetched pages aren't kept. One
 small model call gives the English title, the romanised author and a one-line blurb; if it fails
-the work is added with the Japanese ones.
+the work is added without them (the pages show the Japanese alone) and describe_missing() tries
+again, at most once an hour per work, when the work is next shown.
+
+A card read from Aozora counts against the daily limits whether it's added or refused; a link that
+never reached a card (a 404, Aozora not answering) doesn't. A refusal on what the card says is
+remembered, so the same link again is refused with nothing fetched and nothing counted.
 """
 
 import io
+import json
+import threading
+import time
 import zipfile
 from datetime import date
 from urllib.parse import urljoin, urlsplit
@@ -17,7 +25,7 @@ import httpx
 
 from house import events, works
 from house.client import SPARK, Call, load_schema, make_client
-from house.db import dumps
+from house.db import connect, dumps
 from house.lang.ja import aozora, aozora_card
 from house.lang.ja.aozora_card import NotAWork
 
@@ -98,7 +106,7 @@ def rights(info: dict, read_on: str, person_page: bool = False) -> dict:
     last = max(people, key=lambda p: p["died"])
     if last["died"] > 1931:
         who = "" if last["role"] in ("著者", "") else " (the translator)" if last["role"] == "翻訳者" else f" ({last['role']})"
-        raise Refused(f"{last['name']}{who} died in {last['died']}. keikaku only translates works by people "
+        raise Refused(f"{_name(last)}{who} died in {last['died']}. keikaku only translates works by people "
                       f"who died in 1931 or earlier.")
     ys = aozora_card.years(info["first_published"] or "")
     if not ys:
@@ -117,6 +125,17 @@ def rights(info: dict, read_on: str, person_page: bool = False) -> dict:
     if not works.eligible(record):  # the rule itself, so this can never drift from it
         raise Refused(UNKNOWN)
     return record
+
+
+def _name(person: dict) -> str:
+    """A person as English copy names them: the card's romanisation ('Dazai, Osamu' → 'Dazai Osamu'),
+    with the Japanese in brackets; the Japanese alone if the card has no romanisation."""
+    romaji = " ".join(x.strip() for x in (person.get("romaji") or "").split(",") if x.strip())
+    return f"{romaji} ({person['name']})" if romaji else person["name"]
+
+
+def _english(card_text: dict, key: str) -> str | None:
+    return (card_text.get(key) or "").strip() or None
 
 
 def describe(conn, title: str, author: str, romaji: str | None, first_published: str, text: str) -> dict:
@@ -153,10 +172,15 @@ def add(conn, url: str, person_id: int | None = None, today: str | None = None,
     known = find(conn, card_url)
     if known:
         return known, False
+    if why := refused_before(conn, card_url):
+        raise Refused(why)  # nothing fetched, nothing counted
     work_id = f"{works.ADDED}{author_id}-{n}"
     actor = "editor" if person_id else "house"
+    read = False  # whether a card came back from Aozora: only then does the link count as a read
     try:
-        info = aozora_card.parse_card(aozora_card.decode(get(card_url)), card_url)
+        page = get(card_url)
+        read = True
+        info = aozora_card.parse_card(aozora_card.decode(page), card_url)
         if not info["title"] or not info["author"]:
             raise Refused("keikaku couldn't read that card.")
         if aozora_card.is_split(info):
@@ -178,7 +202,10 @@ def add(conn, url: str, person_id: int | None = None, today: str | None = None,
         if not parsed.translatable():
             raise Refused(UNREADABLE)
     except Refused as e:
+        # A refusal on what Aozora holds is kept; one because Aozora didn't answer isn't
+        keep = read and str(e) not in (UNREACHABLE, NOT_FOUND)
         events.emit(conn, None, actor, "work.refused", {"url": card_url, "why": str(e), "person": person_id,
+                                                        "read": read, "remember": keep,
                                                         **({"via": via} if via else {})})
         raise
     title = info["title"] + (f"　{info['subtitle']}" if info["subtitle"] else "")
@@ -195,18 +222,77 @@ def add(conn, url: str, person_id: int | None = None, today: str | None = None,
            ON CONFLICT(id) DO UPDATE SET title=excluded.title, title_en=excluded.title_en, author=excluded.author,
            author_en=excluded.author_en, source_url=excluded.source_url, card_url=excluded.card_url,
            colophon=excluded.colophon, rights=excluded.rights, status='parsed', blurb=excluded.blurb""",
-        (work_id, n.zfill(6), "ja", title, (card_text.get("title_en") or "").strip() or title, info["author"],
-         (card_text.get("author_en") or "").strip() or info["author"], author_id, info["zip_url"], card_url,
-         parsed.colophon, dumps(record), (card_text.get("blurb") or "").strip() or None, person_id))
+        (work_id, n.zfill(6), "ja", title, _english(card_text, "title_en"), info["author"],
+         _english(card_text, "author_en"), author_id, info["zip_url"], card_url,
+         parsed.colophon, dumps(record), _english(card_text, "blurb"), person_id))
     events.emit(conn, None, actor, "work.added", {"work": work_id, "url": card_url, "person": person_id,
                                                   "rights": record, **({"via": via} if via else {})}, commit=False)
     conn.commit()
     return work_id, True
 
 
+# A read is an add, or a refusal that got a card back from Aozora (events from before `read` was
+# recorded count as reads).
+READ = "(type = 'work.added' OR (type = 'work.refused' AND COALESCE(json_extract(payload, '$.read'), 1)))"
+REMEMBER_DAYS = 30
+
+
 def adds_today(conn, person_id: int) -> int:
-    """Links this person has had read from Aozora in the last day, added or refused."""
-    return conn.execute("SELECT COUNT(*) FROM event WHERE type IN ('work.added', 'work.refused') "
+    """Cards this person has had read from Aozora in the last day, added or refused."""
+    return conn.execute(f"SELECT COUNT(*) FROM event WHERE {READ} "
                         "AND json_extract(payload, '$.person') = ? AND created_at >= datetime('now', '-1 day')",
                         (person_id,)).fetchone()[0]
+
+
+def refused_before(conn, card_url: str) -> str | None:
+    """Why this card was refused on what it says, if it was in the last REMEMBER_DAYS days."""
+    row = conn.execute("SELECT json_extract(payload, '$.why') FROM event WHERE type = 'work.refused' "
+                       "AND json_extract(payload, '$.url') = ? AND json_extract(payload, '$.remember') "
+                       f"AND created_at >= datetime('now', '-{REMEMBER_DAYS} days') ORDER BY id DESC LIMIT 1",
+                       (card_url,)).fetchone()
+    return row[0] if row else None
+
+
+# --- trying the English card again ---------------------------------------------------------------
+
+RETRY_SECONDS = 3600  # one try an hour per work
+RETRIES_PER_PASS = 3  # works described in one pass, so a page view never sets off many calls
+_tried: dict[str, float] = {}
+_tried_lock = threading.Lock()
+
+
+def undescribed(conn) -> list[str]:
+    """Works added from a link that have no English title: their card call failed (an older add
+    copied the Japanese title in instead)."""
+    return [r[0] for r in conn.execute("SELECT id FROM work WHERE id LIKE ? AND status = 'parsed' "
+                                       "AND (title_en IS NULL OR title_en = '' OR title_en = title) ORDER BY id",
+                                       (works.ADDED + "%",))]
+
+
+def describe_missing(db, now: float | None = None) -> list[str]:
+    """Try the English card again for works that have none, at most once an hour per work and a few
+    per pass; the site calls it in the background when the wishlist or the desk is shown. Returns
+    the works it described."""
+    conn = connect(db)
+    now = time.time() if now is None else now
+    with _tried_lock:
+        due = [w for w in undescribed(conn) if now - _tried.get(w, float("-inf")) >= RETRY_SECONDS][:RETRIES_PER_PASS]
+        _tried.update((w, now) for w in due)
+    done = []
+    for wid in due:
+        row = conn.execute("SELECT * FROM work WHERE id=?", (wid,)).fetchone()
+        path = works.source_path(wid)
+        if not path.exists():
+            continue
+        rights = json.loads(row["rights"] or "{}")
+        card = describe(conn, row["title"], row["author"], None, rights.get("first_published") or "",
+                        path.read_text(encoding="utf-8"))
+        if not _english(card, "title_en"):
+            continue
+        conn.execute("UPDATE work SET title_en=?, author_en=COALESCE(?, NULLIF(author_en, author)), "
+                     "blurb=COALESCE(?, blurb) WHERE id=?",
+                     (_english(card, "title_en"), _english(card, "author_en"), _english(card, "blurb"), wid))
+        conn.commit()
+        done.append(wid)
+    return done
 

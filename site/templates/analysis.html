@@ -2,7 +2,7 @@
 {# The analysis keikaku wrote before drafting (the reading and the bible in the engine), on its own
    page, like an appendix: for the reader who wants to know how the book was read, and the one who
    would read it differently. #}
-{% block title %}How keikaku read {{ ed.title_en }} · Fortleben{% endblock %}
+{% block title %}How keikaku read {{ ed.title_en or ed.title }} · Fortleben{% endblock %}
 {% block main %}
 {% set hr = analysis %}
 {% macro crux_list(items) -%}
@@ -12,7 +12,7 @@
 <dl class="kv">{% for p in items %}<dt>{{ p.label }}</dt><dd>{% if p.value is string %}{{ p.value }}{% else %}<ul>{% for v in p.value %}<li>{{ v }}</li>{% endfor %}</ul>{% endif %}</dd>{% endfor %}</dl>
 {%- endmacro %}
 <section class="howread analysis">
-<h1 class="desk-h">How keikaku read <i>{{ ed.title_en }}</i></h1>
+<h1 class="desk-h">How keikaku read <i{% if not ed.title_en %} lang="ja"{% endif %}>{{ ed.title_en or ed.title }}</i></h1>
 <p class="desk-lead">This English was drafted by keikaku, a translation engine running on Meta's models. Before a line was drafted, it wrote an analysis of the book, its people and its tone, and that analysis steered every stage: the draft, the two readings against the Japanese, and the editing. It is published here in full, with the voice the draft was written in.</p>
 <p class="steer">If you'd read this story differently, <a href="/signup">start your own edition and steer it</a>. Or go back to <a href="/read/{{ ed.work_id }}{% if ed.id %}?edition={{ ed.id }}{% endif %}">the translation</a>.</p>
 <div class="form two">
@@ -50,7 +50,7 @@
   {% endif %}
   {% if hr.hard_spots %}
   <div class="q">The hard spots?</div>
-  <div class="a"><ul class="cast">{% for h in hr.hard_spots %}<li><b>{{ h.kind|capitalize }}</b>{% if h.anchors %} ({% for a in h.anchors %}{% if a.href %}<a href="/read/{{ ed.work_id }}{% if ed.id %}?edition={{ ed.id }}{% endif %}#{{ a.href }}">{{ a.id }}</a>{% else %}{{ a.id }}{% endif %}{{ ', ' if not loop.last }}{% endfor %}){% endif %}. {{ h.why }}</li>{% endfor %}</ul></div>
+  <div class="a"><ul class="cast">{% for h in hr.hard_spots %}<li><b>{{ h.kind|capitalize }}</b>{% if h.anchors %} ({% for a in h.anchors %}{% if a.href %}<a href="/read/{{ ed.work_id }}{% if ed.id %}?edition={{ ed.id }}{% endif %}#{{ a.href }}">{{ a.label }}</a>{% else %}{{ a.label }}{% endif %}{{ ', ' if not loop.last }}{% endfor %}){% endif %}. {{ h.why }}</li>{% endfor %}</ul></div>
   {% endif %}
 </div>
 </section>
