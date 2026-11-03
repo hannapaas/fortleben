@@ -110,13 +110,23 @@ body > .wrap > .push { flex: 1 0 3rem; }
 .form.three.more-q { grid-template-columns: repeat(2, 1fr); margin: 0 0 4rem; }
 .epigraph { font-family: var(--serif); font-style: italic; font-size: 1.15rem; line-height: 1.4; color: var(--muted); max-width: 30rem; margin: 0 0 4rem; }
 .epigraph i { font-style: normal; color: var(--ink-2); }
-/* The name beside the opening, set off by a rule. */
 /* The opening: the headline and a quieter line under it on the left, the name's meaning on the right,
    and open paper between them. */
 .opening { display: grid; grid-template-columns: minmax(0, 40rem) minmax(2rem, 1fr) minmax(0, 18rem); align-items: end; margin: 3.5rem 0 5.5rem; }
 .opening > :last-child { grid-column: 3; }
-.opening .pitch { margin: 0; }
-.pitch-more { margin: 1.4rem 0 0; max-width: 34rem; font-size: 18px; line-height: 1.55; color: var(--ink-2); }
+/* The riso word printed under the page, not beside it: low and right of centre, running behind the
+   quote and into the boxes below; every text and rule stays on top. */
+.opening { position: relative; }
+.opening > :not(.riso) { position: relative; z-index: 1; }
+.opening > .riso { position: absolute; z-index: 0; left: 44%; bottom: -17rem; width: min(40rem, 54%); pointer-events: none; }
+.opening + .form.three { position: relative; z-index: 1; }
+.riso svg { display: block; width: 100%; height: auto; overflow: visible; }
+.riso text { font-family: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif; font-weight: 900; font-size: 340px; }
+.riso .flat { fill: color-mix(in srgb, var(--accent) 45%, var(--paper)); }
+.riso .dots { fill: color-mix(in srgb, var(--accent) 80%, var(--paper)); }
+.riso .layer { mix-blend-mode: var(--blend); }
+.opening .pitch { margin: 0; text-wrap: pretty; }
+.pitch-more { margin: 1.4rem 0 0; max-width: 34rem; font-size: 18px; line-height: 1.55; color: var(--ink-2); text-wrap: pretty; }
 .epigraph.side { margin: 0; font-size: 1.35rem; line-height: 1.3; border-left: 1px solid var(--rule); padding-left: 18px; }
 /* The About page: plain sections, set like the prose of a book's front matter. */
 .aboutp { max-width: 44rem; margin: 1.5rem 0 4rem; font-size: 17px; line-height: 1.6; }
@@ -406,10 +416,16 @@ h2.sec { font-family: var(--serif); font-style: italic; font-weight: 400; font-s
   .shelf li { grid-template-columns: 3.2rem minmax(0, 1fr); gap: 0 12px; padding: 22px 0 24px; }
   .shelf .ja { font-size: 1.3rem; }
   .form.three > div + div { border-top: 1px solid var(--rule); }
-  .opening { grid-template-columns: 1fr; gap: 1.6rem; margin: 2rem 0 3.5rem; }
+  /* On a phone the three texts step down and to the right, like a title page: the headline full width,
+     the keikaku line set in from a short rule, the name's meaning further in with its own rule; the
+     riso word runs off the left edge, under the quote and the first box. */
+  .opening { grid-template-columns: 1fr; gap: 0; margin: 2rem 0 4.5rem; }
   .opening > :last-child { grid-column: auto; }
-  .pitch-more { font-size: 16.5px; }
-  .epigraph.side { font-size: 1.1rem; border: 0; padding: 0; }
+  .opening .pitch { font-size: 1.75rem; line-height: 1.2; }
+  .pitch-more { position: relative; margin: 2.2rem 0 0 18%; padding-top: 1rem; font-size: 16px; }
+  .pitch-more::before { content: ''; position: absolute; top: 0; left: 0; width: 2.5rem; border-top: 1px solid var(--rule); }
+  .epigraph.side { margin: 2.2rem 0 0 36%; font-size: 1.05rem; line-height: 1.35; padding-left: 14px; }
+  .opening > .riso { left: -2.5rem; right: auto; bottom: -9.5rem; width: min(92%, 24rem); }
   .form.about > div { display: grid; grid-template-columns: 6.6rem 1fr; gap: 8px; padding: 6px 10px; }
   .form.about > div + div { border-top: 1px solid var(--rule); }
   .form.about .q { margin: 0; font-size: 1rem; }
