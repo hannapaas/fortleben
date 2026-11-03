@@ -13,6 +13,62 @@ def cmd_fetch(args) -> int:
     return 0
 
 
+def cmd_add(args) -> int:
+    from dotenv import load_dotenv
+
+    from house import acquire, desk
+    from house.db import ROOT
+
+    load_dotenv(ROOT / ".env")  # the English title and blurb come from one small call on the site's key
+    conn = connect(args.db)
+    try:
+        work_id, new = acquire.add(conn, args.url)
+    except acquire.Refused as e:
+        print(f"Not added: {e}")
+        return 1
+    w = next((w for w in desk.eligible_works(conn) if w["id"] == work_id), None)
+    if not w:
+        print(f"{work_id}: known, but its text isn't stored here; `keikaku fetch {work_id}` fetches it.")
+        return 1
+    print(f"{work_id}" + ("" if new else " (already here)") + f": {w['title']} ({w['title_en']}), {w['author_en']}, "
+          f"first published {w['first_published_year']}. {w['chars']:,} characters, {w['sheets']:.1f} sheets, "
+          f"about {w['estimate']:,} drops. Run it with `keikaku run {work_id}`.")
+    return 0
+
+
+def cmd_wish(args) -> int:
+    """Put a work on the public wishlist (adding it from Aozora first, as `add` does), set how many asked
+    for it, give it a summary, or take it off with --count 0. With no link, print the list."""
+    from dotenv import load_dotenv
+
+    from house import acquire, wishlist
+    from house.db import ROOT
+
+    load_dotenv(ROOT / ".env")
+    conn = connect(args.db)
+    if not args.url:
+        lists = wishlist.entries(conn)
+        for w in lists["wanted"] + lists["translated"]:
+            print(f"{w['count']:>3}  {w['id']}: {w['title']} ({w['title_en']}), {w['author_en']}, {w['year']}, "
+                  f"{w['sheets']:g} sheets{', translated' if w['edition_url'] else ''}\n     {w['blurb'] or ''}")
+        return 0
+    try:
+        work_id, _ = acquire.add(conn, args.url)
+    except acquire.Refused as e:
+        print(f"Not added: {e}")
+        return 1
+    if args.summary is not None:
+        conn.execute("UPDATE work SET blurb=? WHERE id=?", (args.summary.strip() or None, work_id))
+    if args.title:
+        conn.execute("UPDATE work SET title_en=? WHERE id=?", (args.title.strip(), work_id))
+    conn.commit()
+    have = conn.execute("SELECT count FROM wish WHERE work_id=?", (work_id,)).fetchone()
+    count = args.count if args.count is not None else (have["count"] if have else 1)
+    wishlist.set_count(conn, work_id, count)
+    print(f"{work_id}: " + (f"on the wishlist, asked for by {wishlist.people(count)}." if count > 0 else "off the wishlist."))
+    return 0
+
+
 def cmd_run(args) -> int:
     from house import orchestrator
     from house.client import make_client
@@ -23,6 +79,20 @@ def cmd_run(args) -> int:
                                  ("desk_model", args.desk_model), ("final_model", args.final_model)) if v}
     if args.draft_prompt:
         options["draft_prompt"] = args.draft_prompt
+    if args.voice is not None:
+        if args.voice < 0:
+            print("Not run: voices are numbered from 0.")
+            return 1
+        options["voice"] = args.voice
+    if args.checkpoint:
+        options["checkpoint"] = True
+    if args.from_ or args.only:  # a run waiting at the checkpoint goes on only once it's approved
+        rid = args.run or orchestrator.latest_run(conn, args.work)
+        row = conn.execute("SELECT status FROM run WHERE id=?", (rid,)).fetchone() if rid else None
+        if row and row["status"] == "waiting":
+            print(f"Not run: run {rid} is waiting at the checkpoint. Approve a voice first with "
+                  f"`keikaku approve {args.work} --voice N`, then run it from the draft.")
+            return 1
     from house.budget import CapExceeded, HouseClosed
     from house.client import FixtureMissing
 
@@ -35,7 +105,8 @@ def cmd_run(args) -> int:
     except orchestrator.RunFailed as e:
         if isinstance(e.__cause__, FixtureMissing):
             print(f"Stopped: {args.work} has no recorded run to replay at this point. Without a key, only the "
-                  f"recorded works in fixtures/ can be run; with MODEL_API_KEY set, any work in fixtures/works.json can. ({e.__cause__})")
+                  f"recorded works in fixtures/ can be run; with MODEL_API_KEY set, any work in fixtures/works.json "
+                  f"or added with `keikaku add` can. ({e.__cause__})")
         else:
             print(f"Stopped: {e}")
         return 1
@@ -43,8 +114,113 @@ def cmd_run(args) -> int:
         print(f"Not run: {e.args[0] if e.args else e}")
         return 1
     spent = client.budget.spent(run_id)
-    print(f"run {run_id}: stopped after {conn.execute('SELECT stage FROM run WHERE id=?', (run_id,)).fetchone()[0]}; "
-          f"spent ${spent:.4f} live")
+    if conn.execute("SELECT status FROM run WHERE id=?", (run_id,)).fetchone()[0] == "waiting":
+        print(f"run {run_id}: waiting at the checkpoint, page 1 drafted in each voice; spent ${spent:.4f} live. "
+              f"Read it with `keikaku checkpoint {args.work}`, send a note with `keikaku steer {args.work} \"your note\"`, "
+              f"approve with `keikaku approve {args.work} --voice N`, then carry on with `keikaku run {args.work} --from draft`.")
+        return 0
+    status, stage = conn.execute("SELECT status, stage FROM run WHERE id=?", (run_id,)).fetchone()
+    print(f"run {run_id}: " + ("done and released" if status == "done" else f"stopped after {stage}")
+          + f"; spent ${spent:.4f} live")
+    return 0
+
+
+def _run_of(conn, args) -> int | None:
+    """The run a checkpoint command acts on: --run, else the latest run of the work."""
+    from house import orchestrator
+
+    run_id = args.run or orchestrator.latest_run(conn, args.work)
+    row = conn.execute("SELECT work_id FROM run WHERE id=?", (run_id,)).fetchone() if run_id else None
+    if not row or row["work_id"] != args.work:
+        print(f"Not done: there is no run of {args.work} in this database.")
+        return None
+    return run_id
+
+
+def write_checkpoint(conn, work: str, run_id: int) -> list:
+    from house import steer
+    from house.db import data_dir
+
+    out = data_dir() / "checkpoints" / work
+    out.mkdir(parents=True, exist_ok=True)
+    paths = []
+    for name, text in steer.markdown(conn, run_id).items():
+        (out / name).write_text(text, encoding="utf-8")
+        paths.append(out / name)
+    return paths
+
+
+def cmd_checkpoint(args) -> int:
+    from house import steer
+
+    conn = connect(args.db)
+    run_id = _run_of(conn, args)
+    if run_id is None:
+        return 1
+    try:
+        paths = write_checkpoint(conn, args.work, run_id)
+    except steer.NotWaiting as e:
+        print(f"Not done: {e}.")
+        return 1
+    status = conn.execute("SELECT status FROM run WHERE id=?", (run_id,)).fetchone()[0]
+    for p in paths:
+        print(p)
+    if status != "waiting":
+        print(f"run {run_id} is no longer waiting ({status}): these are what it was approved from.")
+    return 0
+
+
+def cmd_steer(args) -> int:
+    from house import steer
+    from house.budget import CapExceeded, HouseClosed
+    from house.client import FixtureMissing, make_client
+
+    conn = connect(args.db)
+    run_id = _run_of(conn, args)
+    if run_id is None:
+        return 1
+    client = make_client(conn, replay=args.replay, run_cap=args.cap)
+    try:
+        rnd = steer.steer(conn, client, run_id, args.note)
+    except (steer.NotWaiting, ValueError) as e:
+        print(f"Not sent: {e}.")
+        return 1
+    except FixtureMissing:
+        print("Not sent: a note needs a live call, and there is no MODEL_API_KEY (or --replay was given).")
+        return 1
+    except (CapExceeded, HouseClosed) as e:
+        print(f"Stopped: {e}")
+        return 1
+    print(rnd["reply"])
+    if rnd["changed"]:
+        print("\nChanged:")
+        for c in rnd["changed"]:
+            print(f"- {c}")
+    else:
+        print("\nNothing in the reading or the bible changed.")
+    if rnd["question"]:
+        print(f"\nThe house asks: {rnd['question']}")
+    print(f"\nPage 1 was drafted again in voice {rnd['voice']} ({rnd['take']['label']}). The files are updated:")
+    for p in write_checkpoint(conn, args.work, run_id):
+        print(p)
+    print(f"spent ${client.budget.spent(run_id):.4f} live on this run so far")
+    return 0
+
+
+def cmd_approve(args) -> int:
+    from house import steer
+
+    conn = connect(args.db)
+    run_id = _run_of(conn, args)
+    if run_id is None:
+        return 1
+    try:
+        steer.approve(conn, run_id, args.voice)
+    except (steer.NotWaiting, ValueError) as e:
+        print(f"Not approved: {e}.")
+        return 1
+    print(f"run {run_id}: approved in voice {args.voice}. Carry on with `keikaku run {args.work} --from draft"
+          + (f" --run {run_id}`." if args.run else "`."))
     return 0
 
 
@@ -82,7 +258,7 @@ def cmd_audit(args) -> int:
 
     conn = connect(args.db)
     client = make_client(conn, replay=args.replay, run_cap=args.cap)
-    work = works.parse(args.work)
+    work = works.parse(args.work, conn)
     versions = [(f"run-{r}", audit.run_english(conn, r)) for r in args.runs]
     if args.baseline:
         versions.append(("one-shot", audit.baseline(client, work)))
@@ -173,6 +349,17 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("works", nargs="*")
     p.set_defaults(func=cmd_fetch)
 
+    p = sub.add_parser("add", help="add a work from a link to its page on Aozora Bunko, if it passes the rights rule")
+    p.add_argument("url", help="the work's card, https://www.aozora.gr.jp/cards/<author>/card<n>.html, or a file on it")
+    p.set_defaults(func=cmd_add)
+
+    p = sub.add_parser("wish", help="put a work from Aozora on the public wishlist, set its count, or list the wishlist")
+    p.add_argument("url", nargs="?", help="the work's card on Aozora Bunko; leave out to print the list")
+    p.add_argument("--count", type=int, help="how many people asked for it (default 1 for a new one; 0 takes it off)")
+    p.add_argument("--summary", help="one or two sentences about the work, shown on the wishlist and the desk")
+    p.add_argument("--title", help="the English title, in place of the one the work card gave it")
+    p.set_defaults(func=cmd_wish)
+
     from house.orchestrator import DEFAULTS, NAMES
 
     p = sub.add_parser("run", help="run a work through the house, or part of it")
@@ -185,7 +372,27 @@ def main(argv: list[str] | None = None) -> int:
     for stage in ("draft", "reader", "desk", "final"):
         p.add_argument(f"--{stage}-model", choices=["spark", "wonder"], help=f"model for the {stage} calls (default {DEFAULTS[stage + '_model']})")
     p.add_argument("--draft-prompt", help=f"drafting prompt: translate-draft-plain or translate-draft (default {DEFAULTS['draft_prompt']})")
+    p.add_argument("--voice", type=int, help="which of the reading's voice takes to draft in, from 0 (default the first)")
+    p.add_argument("--checkpoint", action="store_true",
+                   help="stop after the bible with page 1 drafted in each voice, to be steered and approved")
     p.set_defaults(func=cmd_run)
+
+    p = sub.add_parser("checkpoint", help="write a waiting run's reading, bible and voices as Markdown in the data folder")
+    p.add_argument("work")
+    p.add_argument("--run", type=int, help="default: the latest run of this work")
+    p.set_defaults(func=cmd_checkpoint)
+
+    p = sub.add_parser("steer", help="send a note on a waiting run: the house amends the reading and bible and redrafts page 1")
+    p.add_argument("work")
+    p.add_argument("note", help="the note, in your own words")
+    p.add_argument("--run", type=int, help="default: the latest run of this work")
+    p.set_defaults(func=cmd_steer)
+
+    p = sub.add_parser("approve", help="approve a waiting run in a voice, so it can carry on from the draft")
+    p.add_argument("work")
+    p.add_argument("--voice", type=int, required=True, help="the voice to draft in, from 0, as voices.md numbers them")
+    p.add_argument("--run", type=int, help="default: the latest run of this work")
+    p.set_defaults(func=cmd_approve)
 
     p = sub.add_parser("fixture", help="export a recorded run to fixtures/<work>/ for replay and the site")
     p.add_argument("work")

@@ -264,6 +264,7 @@ class ModelClient(BaseClient):
 
     def __init__(self, conn, cache_dirs=None, run_cap=None, api_key=None, base_url=None):
         super().__init__(conn, cache_dirs, run_cap)
+        self.budget.own_key = bool(api_key)  # an editor's own key isn't held to the house's daily and total caps
         from openai import OpenAI
 
         self.api = OpenAI(
@@ -368,11 +369,12 @@ class ModelClient(BaseClient):
         return final, citations
 
 
-def make_client(conn, replay: bool = False, run_cap=None) -> BaseClient:
-    """The live client when there's a key and replay isn't asked for; FakeClient otherwise."""
+def make_client(conn, replay: bool = False, run_cap=None, api_key: str | None = None) -> BaseClient:
+    """The live client when there's a key and replay isn't asked for; FakeClient otherwise.
+    `api_key` is an editor's own key (house/accounts.py): their runs spend it, not the site's."""
     from dotenv import load_dotenv
 
     load_dotenv(ROOT / ".env")
-    if replay or not os.environ.get("MODEL_API_KEY"):
+    if replay or not (api_key or os.environ.get("MODEL_API_KEY")):
         return FakeClient(conn, run_cap=run_cap)
-    return ModelClient(conn, run_cap=run_cap)
+    return ModelClient(conn, run_cap=run_cap, api_key=api_key)

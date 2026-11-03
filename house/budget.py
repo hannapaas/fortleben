@@ -53,21 +53,26 @@ def estimate(model: str, input_chars: int, expected_output_tokens: int) -> float
 # The chapter-by-chapter stages scale with length, so per-character rates carry over to long texts.
 STAGE_RATES = {
     "first-read": {"wonder": 0.025}, "crux-check": {"wonder": 0.025}, "bible": {"spark": 0.015},
+    "checkpoint": {"spark": 0.036, "wonder": 0.075},  # page 1 once per voice take: priced as CHECKPOINT_CHARS of draft
     "draft": {"spark": 0.036, "wonder": 0.075}, "readers": {"spark": 0.033, "wonder": 0.065},
     "desk": {"spark": 0.019, "wonder": 0.047}, "final-read": {"spark": 0.015, "wonder": 0.04},
     "notes": {"spark": 0.0075},
 }
+CHECKPOINT_CHARS = 3 * 650  # three voice takes of one page (pager.TARGET), whatever the length of the work
 RUN_MARGIN = 1.5  # an estimate is meant to be high: a run that starts should not run out mid-way
 
 
 def estimate_run(chars: int, chapters: int, options: dict) -> float:
     """What a whole run will cost, overestimated: every stage live (no cache), and every earlier
     chapter taken back to the desk once."""
-    pick = {"draft": "draft_model",
+    pick = {"draft": "draft_model", "checkpoint": "draft_model",
             "readers": "reader_model", "desk": "desk_model", "final-read": "final_model"}
     total = 0.0
     for stage, rates in STAGE_RATES.items():
         rate = rates.get(options.get(pick.get(stage, ""), "") or "spark") or next(iter(rates.values()))
+        if stage == "checkpoint":
+            total += rate * min(chars, CHECKPOINT_CHARS) / 1000 if options.get("checkpoint") else 0
+            continue
         total += rate * chars / 1000
         if stage == "desk" and chapters > 1:
             total += rate * chars / 1000 * (chapters - 1) / chapters  # the emergency lever's pass back
@@ -81,8 +86,9 @@ def _cap(name: str, default: float) -> float:
 class Budget:
     """Caps for one process. The run cap is per run; daily and total are read from the ledger."""
 
-    def __init__(self, conn: sqlite3.Connection, run_cap: float | None = None):
+    def __init__(self, conn: sqlite3.Connection, run_cap: float | None = None, own_key: bool = False):
         self.conn = conn
+        self.own_key = own_key  # a client on an editor's own key: their run cap applies, the house's day and total don't
         self.cap_given = run_cap is not None  # False: the default, which a resumed run replaces with its own
         self.run_cap = run_cap if run_cap is not None else _cap("KEIKAKU_CAP_RUN", 3.0)
         self.daily_cap = _cap("KEIKAKU_CAP_DAILY", 10)
@@ -93,10 +99,16 @@ class Budget:
         return min(self.run_cap, self.daily_cap - self.spent(today=True), self.total_cap - self.spent())
 
     def spent(self, run_id: int | None = None, today: bool = False) -> float:
+        """What one run spent, or, with no run, what the house's own key spent: a run on an editor's
+        own key (options.own_key) counts against its run cap only, never the house's daily or total."""
         sql, args = "SELECT COALESCE(SUM(cost_usd), 0) FROM call WHERE 1=1", []
         if run_id is not None:
             sql += " AND run_id = ?"
             args.append(run_id)
+        else:
+            # run_id IS NULL first: a call outside any run (a comment screened, an audit) is the house's,
+            # and NULL NOT IN (...) would leave it out
+            sql += " AND (run_id IS NULL OR run_id NOT IN (SELECT id FROM run WHERE json_extract(options, '$.own_key') = 1))"
         if today:
             sql += " AND date(created_at) = date('now')"
         return self.conn.execute(sql, args).fetchone()[0]
@@ -104,7 +116,8 @@ class Budget:
     def check(self, est_usd: float, run_id: int | None) -> None:
         if os.environ.get("HOUSE_OPEN", "true").lower() == "false":
             raise HouseClosed("HOUSE_OPEN=false: the house is closed to live calls")
-        checks = [("total", self.spent(), self.total_cap), ("daily", self.spent(today=True), self.daily_cap)]
+        checks = [] if self.own_key else [("total", self.spent(), self.total_cap),
+                                          ("daily", self.spent(today=True), self.daily_cap)]
         if run_id is not None:
             checks.append(("run", self.spent(run_id), self.run_cap))
         for name, spent, cap in checks:
