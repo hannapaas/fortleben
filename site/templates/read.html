@@ -27,7 +27,7 @@ window.FL_PRESETS = {
 {% block main %}
 <section class="poster">
   <div class="plate" lang="ja" aria-hidden="true">{{ ed.title }}</div>
-  <h1{% if not ed.title_en %} lang="ja"{% endif %}>{{ ed.title_en or ed.title }}<span class="sub" lang="en">(translated from the Japanese)</span></h1>
+  <h1{% if not ed.title_en %} lang="ja"{% endif %}>{{ ed.title_en or ed.title }}<span class="sub" lang="en">translated from the Japanese</span></h1>
   <p class="by">by {% if ed.author_en %}{{ ed.author_en }} {% endif %}<span lang="ja">{{ ed.author }}</span>{% if ed.rights.first_published_year %}, {{ ed.rights.first_published_year }}{% endif %}.<br>English by keikaku{% if ed.commissioned_by %}, commissioned by {{ ed.commissioned_by }}{% endif %}.</p>
 </section>
 
