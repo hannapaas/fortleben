@@ -35,7 +35,8 @@ def connect(path: str | Path | None = None) -> sqlite3.Connection:
 ADDED = {"person": {"api_key": "TEXT", "key_tail": "TEXT", "email": "TEXT", "password_hash": "TEXT",
                     "created_at": "TEXT"},
          "work": {"language": "TEXT NOT NULL DEFAULT 'ja'", "title_en": "TEXT", "author_en": "TEXT",
-                  "blurb": "TEXT", "added_by": "INTEGER"}}
+                  "blurb": "TEXT", "added_by": "INTEGER"},
+         "edition": {"accent": "TEXT"}}
 
 
 def _migrate(conn: sqlite3.Connection) -> None:

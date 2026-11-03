@@ -416,7 +416,8 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
             return plain(closed, 200)
         who = request.path_params.get("token") or person["id"]
         state = desk.state(conn(), who)
-        return retry_cards(page(request, "desk.html", status, desk=state, closed=closed_for(person), **ctx))
+        return retry_cards(page(request, "desk.html", status, desk=state, closed=closed_for(person),
+                                accents=edition.ACCENTS, **ctx))
 
     def retry_cards(response):
         """After a page that lists works, try again in the background for any added work whose English
@@ -453,7 +454,7 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
             raise desk.Refused("Give the name as text.")
         return {"run_id": desk.start(db, pid, str(data.get("work", "")), data.get("agree") is True,
                                      credit or "", checkpoint=data.get("checkpoint") is not False,
-                                     shown=shown)}
+                                     shown=shown, accent=data.get("accent") or None)}
 
     # A work added from a link to Aozora Bunko (house/acquire.py): its row for the list, or why not.
     @desk_route("POST", "/works")

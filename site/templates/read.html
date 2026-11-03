@@ -4,6 +4,7 @@
 {% set PEOPLE = {'editor-approved': 'An editor has read it and signed it off.'} %}
 {% macro seal(label) -%}<span class="seal" title="{{ PEOPLE[label] }}" aria-hidden="true"></span>{%- endmacro %}
 {% set others = ed.editions|selectattr('kind', 'equalto', 'person')|list %}
+{% block htmlattrs %}{% if ed.accent != 'pink' %} class="accent-{{ ed.accent }}"{% endif %}{% endblock %}
 {% block title %}{{ ed.title_en or ed.title }} · Fortleben{% endblock %}
 {% block bodyclass %}layout-english marks-essential hide-status no-tools quiet-comments{% endblock %}
 {# The saved view's classes before anything paints, so Clean never flashes the tools; reader.js keeps them in step after. #}

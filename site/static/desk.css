@@ -21,6 +21,9 @@
 .desk input:focus-visible + .bx { outline: 2px solid var(--ink); outline-offset: 2px; }
 .desk .opt:hover, .desk .work:hover .wt { text-decoration: underline 2px var(--accent); text-underline-offset: 4px; }
 .desk input:disabled + .bx { border-style: dotted; }
+/* The colour choices: each box filled with its colour, crossed when picked. */
+.desk .swatch { width: 18px; height: 18px; background: var(--accent); }
+.desk input:checked + .swatch { background: var(--accent); }
 
 /* The works, one per line, suggested first. */
 .works { display: grid; }

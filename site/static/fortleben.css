@@ -22,6 +22,12 @@
   --paper: #121214; --ink: #ece6d4; --ink-2: #c2c0c8; --muted: #8b8a96; --rule: #7f8fd6;
   --accent: #ff5fb0; --accent-text: #ff8cc6; --blend: screen; color-scheme: dark;
 }
+/* An edition's own colour, picked from these by its editor (house/edition.py ACCENTS); pink is the
+   site's and needs no class. The pale ones carry a darker shade for text on light paper. */
+.accent-lime { --accent: #bfe65a; --accent-text: light-dark(#4d7a00, #cdee7a); }
+.accent-lavender { --accent: #cdbdfb; --accent-text: light-dark(#6a4bd1, #d9cdfc); }
+.accent-peach { --accent: #ffc78f; --accent-text: light-dark(#ad5800, #ffd2a3); }
+.accent-lime, .accent-lavender, .accent-peach { --accent-wash: color-mix(in srgb, var(--accent) 60%, transparent); }
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; }

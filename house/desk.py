@@ -22,7 +22,7 @@ from house import accounts, acquire, budget, events, orchestrator, works
 from house.client import make_client
 from house.comments import LINK, digest
 from house.db import connect, dumps
-from house.edition import _date, cast_names, plain, plain_all
+from house.edition import ACCENTS, _date, cast_names, plain, plain_all
 from house.lang.ja import aozora
 
 # An allowance is counted in drops of ink: one drop is DROP_USD, and a sheet is 400 characters of the original.
@@ -335,7 +335,7 @@ ESTIMATE_CHANGED = "The estimate for this work has changed since the page loaded
 
 
 def start(db, token: Who, work_id: str, agree: bool, credit: str | None, checkpoint: bool = True,
-          shown: int | None = None) -> int:
+          shown: int | None = None, accent: str | None = None) -> int:
     """Start a whole run for the editor this token names. Returns the run id; refusals raise Refused.
     The run pauses at the checkpoint unless `checkpoint` is False. `shown` is the estimate the desk
     page showed: the run holds the smaller of it and the fresh one, or is refused if it's well below."""
@@ -349,6 +349,8 @@ def start(db, token: Who, work_id: str, agree: bool, credit: str | None, checkpo
     if not work:
         raise Refused("That work isn't one a run can start on.")
     credit = _credit(credit)
+    if accent is not None and accent not in ACCENTS:
+        raise Refused("Pick one of the colours shown.")
     with _lock:
         _room(conn, person["id"])
         estimate = work["estimate"]
@@ -372,7 +374,8 @@ def start(db, token: Who, work_id: str, agree: bool, credit: str | None, checkpo
         options = {"pipeline": orchestrator.PIPELINE, **DEFAULT_OPTIONS, "editor_id": person["id"],
                    **({"own_key": True} if own else
                       {"allowance_id": _allowance_row(conn, person["id"]), "reserved_drops": estimate}),
-                   "credit": credit or "an editor", "checkpoint": bool(checkpoint)}
+                   "credit": credit or "an editor", "checkpoint": bool(checkpoint),
+                   **({"accent": accent} if accent else {})}
         run_id = orchestrator.new_run(conn, work_id, f"desk:{person['id']}", cap, options)
         _hold(conn, run_id, person["id"])
         conn.commit()

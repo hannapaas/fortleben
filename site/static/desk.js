@@ -184,10 +184,11 @@
     var w = chosen();
     if (!w) { say(err, 'Pick a work first.'); return; }
     var credit = form.querySelector('input[name="credit"]:checked');
+    var accent = form.querySelector('input[name="accent"]:checked');
     say(err, '');
     lock(true);
     start.textContent = 'Starting…';
-    json('POST', base + '/runs', { work: w.value, agree: true, credit: credit ? credit.value : '', estimate: Number(w.dataset.estimate) }).then(function (d) {
+    json('POST', base + '/runs', { work: w.value, agree: true, credit: credit ? credit.value : '', accent: accent ? accent.value : '', estimate: Number(w.dataset.estimate) }).then(function (d) {
       if (!d.run_id) {
         lock(false);
         start.textContent = 'Start';

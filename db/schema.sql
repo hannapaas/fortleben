@@ -354,7 +354,8 @@ CREATE TABLE IF NOT EXISTS edition (
   id            INTEGER PRIMARY KEY,
   work_id       TEXT NOT NULL REFERENCES work(id),
   editor        TEXT NOT NULL DEFAULT 'the house',
-  current_release INTEGER
+  current_release INTEGER,
+  accent        TEXT                       -- one of edition.ACCENTS, chosen by the editor; NULL takes the work's turn
 );
 
 CREATE TABLE IF NOT EXISTS release (

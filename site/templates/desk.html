@@ -191,6 +191,14 @@
     <span class="sm block">How the edition names you.</span>
   </div>
 
+  <div class="q" id="accent-q">Colour?</div>
+  <div class="a">
+    <div class="row" role="radiogroup" aria-labelledby="accent-q">
+      {% for a in accents %}<label class="opt accent-{{ a }}"><input type="radio" name="accent" value="{{ a }}"{% if loop.first %} checked{% endif %}><span class="bx r swatch" aria-hidden="true"></span>{{ a }}</label>{% endfor %}
+    </div>
+    <span class="sm block">The edition's own colour, for its title and its marks.</span>
+  </div>
+
   <div class="q">Published?</div>
   <div class="a">Yes, always. Everything translated here is published on Fortleben, labelled as keikaku's work, with your credit on it. There are no private translations.</div>
 

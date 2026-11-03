@@ -18,6 +18,9 @@ VIEWS = ("casual", "curious", "student")
 NUMBER = re.compile(r"[一二三四五六七八九十〇]+")
 LANGUAGES = {"ja": ("Japanese", "日本語")}
 LABELS = ("draft", "house-checked", "editor-approved", "human-reviewed")
+# The colours an edition can wear: the site's pink, then the ones an editor can pick instead. A house
+# edition takes them in turn by when its work arrived, so the first work is pink and the next differ.
+ACCENTS = ("pink", "lime", "lavender", "peach")
 READERS = {"reader/faithful": "faithful reader", "reader/readable": "readable reader"}
 RUBY = re.compile(r"《[^》]*》|［＃[^］]*］")  # Aozora readings and editorial notes, quoted raw in a reader's evidence
 DECIDED = {"taken": "Changed", "declined": "Kept", "forked": "Left to the editor", "open": "Not decided yet",
@@ -158,7 +161,7 @@ def shelf(conn) -> list[dict]:
     """Every work with a current release, grouped by the language it was written in, newest first."""
     langs = {}
     # One row per work: its keikaku edition, or the first commissioned one if keikaku has none.
-    for r in conn.execute("SELECT e.work_id, w.language, r.version, r.created_at, r.body FROM edition e "
+    for r in conn.execute("SELECT e.work_id, e.accent, w.language, r.version, r.created_at, r.body FROM edition e "
                           "JOIN release r ON r.id = e.current_release JOIN work w ON w.id = e.work_id "
                           "WHERE e.id = (SELECT e2.id FROM edition e2 WHERE e2.work_id = e.work_id AND e2.current_release "
                           "IS NOT NULL ORDER BY e2.editor != 'the house', e2.id LIMIT 1) ORDER BY r.created_at DESC"):
@@ -168,10 +171,20 @@ def shelf(conn) -> list[dict]:
         # Paragraphs as the reader shows them: merged ones once, section numbers not at all
         shown = sum(1 for p in paras if not p["grouped_with"] and not NUMBER.fullmatch(p["ja"].strip("\u3000 ")))
         work = {**meta, "version": r["version"], "date": _date(r["created_at"]), "paragraphs": shown,
-                "label": _overall([p["label"] for p in paras]), "editions": editions(conn, meta)}
+                "label": _overall([p["label"] for p in paras]), "editions": editions(conn, meta),
+                "accent": accent(conn, r["work_id"], r["accent"])}
         name, native = LANGUAGES.get(r["language"], (r["language"], ""))
         langs.setdefault(r["language"], {"code": r["language"], "name": name, "native": native, "works": []})["works"].append(work)
     return list(langs.values())
+
+
+def accent(conn, work_id: str, chosen: str | None = None) -> str:
+    """An edition's colour: the editor's pick, or else its work's turn through ACCENTS."""
+    if chosen in ACCENTS:
+        return chosen
+    order = [r[0] for r in conn.execute("SELECT DISTINCT w.id, w.rowid FROM work w JOIN edition e ON e.work_id = w.id "
+                                        "WHERE e.editor = 'the house' AND e.current_release IS NOT NULL ORDER BY w.rowid")]
+    return ACCENTS[order.index(work_id) % len(ACCENTS)] if work_id in order else ACCENTS[0]
 
 
 def editions(conn, meta: dict, current: int | None = None) -> list[dict]:
@@ -194,7 +207,7 @@ def editions(conn, meta: dict, current: int | None = None) -> list[dict]:
 
 def edition(conn, work_id: str, edition_id: int | None = None) -> dict | None:
     """The work's keikaku edition, or the one asked for; a work keikaku hasn't released opens its first."""
-    rel = conn.execute("SELECT r.*, e.id AS edition_id, e.editor FROM edition e JOIN release r ON r.id = e.current_release "
+    rel = conn.execute("SELECT r.*, e.id AS edition_id, e.editor, e.accent FROM edition e JOIN release r ON r.id = e.current_release "
                        "WHERE e.work_id=? AND (? IS NULL OR e.id=?) ORDER BY e.editor != 'the house', e.id LIMIT 1",
                        (work_id, edition_id, edition_id)).fetchone()
     if not rel:
@@ -239,6 +252,7 @@ def edition(conn, work_id: str, edition_id: int | None = None) -> dict | None:
         **meta, "id": rel["edition_id"], "work_id": work_id, "version": rel["version"], "date": _date(rel["created_at"]), "units": units,
         "editions": editions(conn, meta, rel["edition_id"]),
         "commissioned_by": None if rel["editor"] == "the house" else rel["editor"],
+        "accent": accent(conn, work_id, rel["accent"]),
         "counts": {label: labels.count(label) for label in LABELS},
         "label": _overall(labels), "colophon": body.get("colophon") or meta.get("colophon"),
         "calls": calls[0], "cost": calls[1],

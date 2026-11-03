@@ -56,6 +56,8 @@ def run(ctx) -> dict:
                           (ctx.work_id, editor, ctx.options.get("editor_id"))).fetchone()
     ed_id = ed["id"] if ed else ctx.conn.execute("INSERT INTO edition (work_id, editor) VALUES (?,?)",
                                                  (ctx.work_id, editor)).lastrowid
+    if ctx.options.get("accent"):  # the colour the editor picked on the desk
+        ctx.conn.execute("UPDATE edition SET accent=? WHERE id=?", (ctx.options["accent"], ed_id))
     n = ctx.conn.execute("SELECT COUNT(*) FROM release WHERE edition_id=?", (ed_id,)).fetchone()[0]
     version = f"v0.{n + 1}"
     body = {"work": ctx.work_id, "title": ctx.work.title, "author": ctx.work.author, "colophon": ctx.work.colophon,

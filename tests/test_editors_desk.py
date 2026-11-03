@@ -575,3 +575,11 @@ def test_a_failed_run_says_what_happened_in_plain_words(conn, db, held, error, s
     assert run["failure"].startswith(said) and "Everything it finished is kept;" in run["failure"]
     assert run["failure"].endswith("resume it and it carries on from there.")
     assert "$" not in run["failure"]
+
+
+def test_an_editor_picks_the_editions_colour(conn, db, held):
+    token = desk.invite(conn, "A")
+    with pytest.raises(desk.Refused, match="colours shown"):
+        desk.start(db, token, "bansan", True, "", accent="mauve")
+    run_id = desk.start(db, token, "bansan", True, "", accent="lime")
+    assert json.loads(conn.execute("SELECT options FROM run WHERE id=?", (run_id,)).fetchone()[0])["accent"] == "lime"

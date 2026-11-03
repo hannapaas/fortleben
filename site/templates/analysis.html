@@ -2,6 +2,7 @@
 {# The analysis keikaku wrote before drafting (the reading and the bible in the engine), on its own
    page, like an appendix: for the reader who wants to know how the book was read, and the one who
    would read it differently. #}
+{% block htmlattrs %}{% if ed.accent and ed.accent != 'pink' %} class="accent-{{ ed.accent }}"{% endif %}{% endblock %}
 {% block title %}How keikaku read {{ ed.title_en or ed.title }} · Fortleben{% endblock %}
 {% block main %}
 {% set hr = analysis %}
