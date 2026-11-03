@@ -41,7 +41,12 @@ LINK = re.compile(r"https?://|www\.", re.I)
 
 
 class Refused(Exception):
-    """A comment that didn't pass the free checks; the message is for the writer."""
+    """A comment that didn't pass the free checks; the message is for the writer. `limited` if it was
+    a limit on how many, not what was written."""
+
+    def __init__(self, message: str, limited: bool = False):
+        super().__init__(message)
+        self.limited = limited
 
 
 def digest(value: str) -> str:
@@ -64,9 +69,9 @@ def check(conn, body: str, name: str, author: str, ip: str) -> None:
             "SELECT SUM(author=?), SUM(ip=?) FROM comment WHERE created_at > datetime('now', ?)",
             (author, ip, since)).fetchone()
         if (n_author or 0) >= mine or (n_ip or 0) >= theirs:
-            raise Refused("That's a lot of comments in a short time. Try again later.")
+            raise Refused("That's a lot of comments in a short time. Try again later.", limited=True)
     if conn.execute("SELECT COUNT(*) FROM comment WHERE created_at > datetime('now', '-1 day')").fetchone()[0] >= SITE_DAILY:
-        raise Refused("The margins are full for today. Try again tomorrow.")
+        raise Refused("The margins are full for today. Try again tomorrow.", limited=True)
 
 
 def post(conn, work_id: str, segment_id: str, body: str, name: str, token: str, ip: str) -> int:
@@ -185,7 +190,7 @@ def sign(action: str, comment_id: int) -> str:
 
 def signed(action: str, comment_id: int, sig: str) -> bool:
     """A link is good only if the site has a secret and the signature is the one it made."""
-    return bool(os.environ.get("KEIKAKU_SECRET")) and action in ACTIONS and hmac.compare_digest(sign(action, comment_id), sig)
+    return bool(os.environ.get("KEIKAKU_SECRET")) and action in ACTIONS and hmac.compare_digest(sign(action, comment_id).encode(), sig.encode())
 
 
 def link(action: str, comment_id: int) -> str:

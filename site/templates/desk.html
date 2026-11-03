@@ -12,7 +12,7 @@
     <span class="sm">{% if r.spent_words %}{{ r.spent_words }}{% else %}{{ n(r.spent) }} drops spent{% if r.held %}, {{ n(r.held) }} still held{% endif %}.{% endif %}</span></span>
   {% if r.status == 'done' and r.edition_url %}<a class="read" href="{{ r.edition_url }}">Read it</a>{% endif %}
   {% if r.status == 'waiting' %}<a class="read" href="#checkpoint-{{ r.id }}">Read the analysis</a>{% endif %}
-  {% if r.status in ('interrupted', 'failed') %}<span class="rr"><button type="button" class="btn resume"{% if blocked %} disabled{% endif %}>Resume</button>
+  {% if r.status in ('interrupted', 'failed') %}<span class="rr">{% if r.get('resumable', True) %}<button type="button" class="btn resume"{% if blocked %} disabled{% endif %}>Resume</button>{% endif %}
     <span class="sm">{% if r.status == 'failed' and r.failure %}{{ r.failure }}{% else %}It carries on from the last finished stage; nothing is paid for twice.{% endif %}</span>
     <span class="err" aria-live="polite" hidden></span></span>{% endif %}
 </li>
@@ -186,7 +186,7 @@
       {% if desk.key_tail or desk.keyless %}<span class="sm" id="hold"{% if desk.keyless %} hidden{% endif %}>It spends your own key as it goes, and stops at the run's cap.</span>{% else %}
       <span class="sm" id="hold"{% if not pick %} hidden{% endif %}>Holds <span id="holdn">{{ n(pick.estimate if pick else 0) }}</span> drops from your allowance; whatever isn't used comes back at the end.</span>{% endif %}
     </div>
-    {% if closed %}<p class="line" id="busy">{{ closed }}</p>{% elif desk.going %}<p class="line" id="busy">You have a translation going already. Start the next one when it has finished.</p>{% elif desk.busy %}<p class="line" id="busy">Fortleben is full at the moment: three translations are going. Try again in a little while.</p>{% endif %}
+    {% if closed %}<p class="line" id="busy">{{ closed }}</p>{% elif desk.going %}<p class="line" id="busy" data-going="1">You have a translation going already. Start the next one when it has finished.</p>{% elif desk.busy %}<p class="line" id="busy">Fortleben is full at the moment: three translations are going. Try again in a little while.</p>{% endif %}
     <p class="err" id="err" aria-live="polite" hidden></p>
   </div>
 

@@ -315,6 +315,8 @@ h2.sec { font-family: var(--serif); font-style: italic; font-weight: 400; font-s
   .wrap { padding: 0 16px; }
   .replay { padding: 6px 16px; }
   .top nav .wide { display: none; }
+  .top { flex-wrap: wrap; gap: 4px 16px; }
+  .top nav { flex-wrap: wrap; gap: 4px 14px; }
   .poster { min-height: 0; padding: 22px 0; }
   .poster .plate { writing-mode: horizontal-tb; font-size: 5rem; right: -2px; top: 2px; letter-spacing: -.04em; opacity: .8; }
   .poster h1 { margin-top: 4.5rem; font-size: 3.8rem; max-width: none; }

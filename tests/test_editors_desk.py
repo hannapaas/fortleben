@@ -261,6 +261,42 @@ def test_the_desk_page_and_its_routes(site, conn, held, monkeypatch):
     assert site.post(f"/desk/{token}/runs/{run_id}/resume").json() == {"ok": True}
 
 
+def test_bad_run_ids_and_bodies_are_refused_in_the_desks_words(site, conn, held):
+    token = desk.invite(conn, "Ines")
+    for rid in ("abc", "0", "99999999999999999999999", "-1"):
+        r = site.get(f"/desk/{token}/runs/{rid}")
+        assert r.status_code == 404 and r.json()["error"] == "There's no such run on this desk.", rid
+        for action in ("resume", "steer", "approve"):
+            r = site.post(f"/desk/{token}/runs/{rid}/{action}", json={"note": "x", "voice": 0})
+            assert r.status_code == 404 and "no such run" in r.json()["error"], (rid, action)
+    r = site.post(f"/desk/{token}/runs", content="[" * 200000, headers={"Content-Type": "application/json"})
+    assert r.status_code == 400
+    r = site.post(f"/desk/{token}/runs", content="x" * (web.MAX_BODY + 1))
+    assert r.status_code == 413
+
+
+def test_a_note_that_isnt_text_is_no_note(site, conn, held):
+    token = desk.invite(conn, "Ines")
+    run_id = site.post(f"/desk/{token}/runs", json={"work": "bansan", "agree": True, "credit": ""}).json()["run_id"]
+    conn.execute("UPDATE run SET status='waiting', stage='checkpoint' WHERE id=?", (run_id,))
+    conn.commit()
+    r = site.post(f"/desk/{token}/runs/{run_id}/steer", json={"note": 5, "voice": 0})
+    assert r.status_code == 400 and r.json()["error"] == "Write a note first."
+
+
+def test_a_run_whose_own_key_was_turned_down_offers_no_resume(conn, db, held):
+    token = desk.invite(conn, "Ines")
+    run_id = desk.start(db, token, "bansan", True, "")
+    o = desk._options(conn, run_id)
+    o.update(own_key=True, error="RunFailed: AuthenticationError: Error code: 401")
+    conn.execute("UPDATE run SET status='failed', stage='bible', options=? WHERE id=?", (json.dumps(o), run_id))
+    conn.commit()
+    desk._live.clear()
+    assert desk.run_state(conn, token, run_id)["resumable"] is False
+    with pytest.raises(desk.Refused, match="can't go on"):
+        desk.resume(db, token, run_id)
+
+
 def test_runs_cant_start_without_a_key_or_in_replay(db, conn, monkeypatch):
     monkeypatch.delenv("MODEL_API_KEY", raising=False)
     monkeypatch.setattr("house.web.load_dotenv", lambda *a, **k: None)
@@ -499,7 +535,7 @@ def test_one_run_per_person_and_three_across_the_site(conn, db, held, monkeypatc
      "It stopped when its budget ran out. Everything it finished is kept; resume it and it carries on from there."),
     ("RunFailed: run 401 failed during the draft stage: RateLimitError: Error code: 429 - insufficient_quota",
      "It stopped when the key ran out of credit."),
-    ("RunFailed: run 4 failed during the draft stage: AuthenticationError: Error code: 401", "It stopped because the model key was turned down."),
+    ("RunFailed: run 4 failed during the draft stage: AuthenticationError: Error code: 401", "It stopped because the site's model key was turned down."),
     ("RunFailed: run 401 failed during the draft stage: SchemaError: output failed twice", "It stopped on an error."),
 ])
 def test_a_failed_run_says_what_happened_in_plain_words(conn, db, held, error, said):

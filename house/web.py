@@ -30,6 +30,8 @@ COOKIE = "fl_id"  # a reader's comments
 SESSION = "fl_session"  # a signed-in person (house/accounts.py)
 CSRF = "fl_csrf"  # the token every HTML form that changes something must carry
 SESSION_DAYS = 90
+MAX_ID = 2**63 - 1  # SQLite's largest integer; a bigger id in an address is no row, not an error
+MAX_BODY = 256 * 1024  # no form or desk request comes near this
 templates = Jinja2Templates(directory=SITE / "templates")
 templates.env.filters["datefmt"] = edition._date
 
@@ -61,6 +63,9 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
         return HTMLResponse(f"<!doctype html><meta charset=utf-8><title>Fortleben</title><p>{message}</p>",
                             status_code=status, headers=NOINDEX)
 
+    def known(i: int | None) -> bool:
+        return i is not None and 0 < i <= MAX_ID
+
     def address(request: Request) -> str:
         # Railway puts the visitor's address first in X-Forwarded-For.
         fwd = request.headers.get("x-forwarded-for", "")
@@ -73,7 +78,7 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
     @app.get("/read/{work_id}", response_class=HTMLResponse)
     def read(request: Request, work_id: str, edition_id: int | None = Query(None, alias="edition")):
         c = conn()
-        ed = edition.edition(c, work_id, edition_id)
+        ed = edition.edition(c, work_id, edition_id) if edition_id is None or known(edition_id) else None
         if not ed:
             raise HTTPException(404, "No edition of that work yet.")
         token = request.cookies.get(COOKIE) or secrets.token_urlsafe(24)
@@ -87,7 +92,7 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
 
     @app.get("/read/{work_id}/analysis", response_class=HTMLResponse)
     def analysis(request: Request, work_id: str, edition_id: int | None = Query(None, alias="edition")):
-        ed = edition.edition(conn(), work_id, edition_id)
+        ed = edition.edition(conn(), work_id, edition_id) if edition_id is None or known(edition_id) else None
         if not ed or not ed["analysis"]:
             raise HTTPException(404, "No analysis of that work here.")
         return templates.TemplateResponse(request, "analysis.html", {"ed": ed, "analysis": ed["analysis"], "replay": replay})
@@ -97,29 +102,34 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
         token = request.cookies.get(COOKIE)
         if not can_comment or not token:
             raise HTTPException(403, "Comments aren't open here.")
-        data = await request.json()
+        try:
+            data = await request.json()
+        except (ValueError, RecursionError):
+            data = None
+        if not isinstance(data, dict):
+            return JSONResponse({"error": "That comment didn't arrive whole. Try again."}, status_code=400)
+        segment, body, name = (v if isinstance(v, str) else "" for v in (data.get("segment"), data.get("body"), data.get("name")))
         c = conn()
-        if not c.execute("SELECT 1 FROM segment WHERE work_id=? AND id=?", (work_id, data.get("segment", ""))).fetchone():
+        if not c.execute("SELECT 1 FROM segment WHERE work_id=? AND id=?", (work_id, segment)).fetchone():
             raise HTTPException(404, "No such paragraph.")
         try:
-            cid = comments.post(c, work_id, data["segment"], str(data.get("body", "")), str(data.get("name", "")),
-                                token, address(request))
+            cid = comments.post(c, work_id, segment, body, name, token, address(request))
         except comments.Refused as e:
-            return JSONResponse({"error": str(e)}, status_code=429)
+            return JSONResponse({"error": str(e)}, status_code=429 if e.limited else 400)
         if screen:
             background.add_task(comments.screen, db, cid)
         return {"id": cid, "status": "pending"}
 
     @app.get("/comments/{comment_id}")
     def comment_status(request: Request, comment_id: int):
-        s = comments.status(conn(), comment_id, request.cookies.get(COOKIE, ""))
+        s = known(comment_id) and comments.status(conn(), comment_id, request.cookies.get(COOKIE, ""))
         if not s:
             raise HTTPException(404)
         return s
 
     @app.post("/comments/{comment_id}/report")
     def report(request: Request, comment_id: int, background: BackgroundTasks):
-        result = comments.report(conn(), comment_id, address(request))
+        result = comments.report(conn(), comment_id, address(request)) if known(comment_id) else "unknown"
         if result == "unknown":
             raise HTTPException(404)
         if result == "limited":
@@ -130,7 +140,7 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
     # scanner that follows links changes nothing.
     @app.get("/moderate/{action}/{comment_id}", response_class=HTMLResponse)
     def moderate_ask(request: Request, action: str, comment_id: int, sig: str = ""):
-        if not comments.signed(action, comment_id, sig):
+        if not known(comment_id) or not comments.signed(action, comment_id, sig):
             return plain("That link isn't valid.", 404)
         c = conn().execute("SELECT * FROM comment WHERE id=?", (comment_id,)).fetchone()
         if not c:
@@ -141,7 +151,7 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
 
     @app.post("/moderate/{action}/{comment_id}", response_class=HTMLResponse)
     def moderate(action: str, comment_id: int, sig: str = ""):
-        if not comments.signed(action, comment_id, sig):
+        if not known(comment_id) or not comments.signed(action, comment_id, sig):
             return plain("That link isn't valid.", 404)
         done = (comments.hide(conn(), comment_id, "hidden by the editor") if action == "hide"
                 else comments.restore(conn(), comment_id))
@@ -158,6 +168,12 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
 
     @app.middleware("http")
     async def who(request: Request, call_next):
+        try:
+            too_big = int(request.headers.get("content-length") or 0) > MAX_BODY
+        except ValueError:
+            too_big = True
+        if too_big:
+            return JSONResponse({"error": "That's far more than any form here sends."}, status_code=413)
         sid = request.cookies.get(SESSION)
         static = request.url.path.startswith("/static/")
         request.state.person = accounts.session_person(conn(), sid) if sid and not static else None
@@ -170,6 +186,10 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
         if fresh and not static:
             response.set_cookie(CSRF, csrf, max_age=60 * 60 * 24 * SESSION_DAYS, httponly=True, samesite="lax",
                                 secure=https(request))
+        # No other site may frame these pages (the desk's buttons spend), sniff their types, or see their addresses.
+        response.headers.setdefault("X-Frame-Options", "DENY")
+        response.headers.setdefault("X-Content-Type-Options", "nosniff")
+        response.headers.setdefault("Referrer-Policy", "same-origin")
         return response
 
     async def form_of(request: Request) -> dict[str, str] | None:
@@ -235,10 +255,16 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
                 return error(why, 403)
             try:
                 data = await request.json()
-            except ValueError:
+            except (ValueError, RecursionError):
                 data = {}
             if not isinstance(data, dict):
                 data = {}
+            run_id = request.path_params.get("run_id")
+            if run_id is not None:
+                run_id = int(run_id) if run_id.isascii() and run_id.isdigit() else 0
+                if not known(run_id):
+                    return error("There's no such run on this desk.", 404)
+                request.state.run_id = run_id
             try:
                 return JSONResponse(await fn(request, person["id"], data), headers=NOINDEX)
             except desk.Refused as e:
@@ -284,30 +310,32 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
         return await run_in_threadpool(desk.add_work, db, pid, str(url or ""))
 
     @desk_route("GET", "/runs/{run_id}")
-    def desk_run(request: Request, run_id: int):
+    def desk_run(request: Request, run_id: str):
         person = person_of(request)
-        run = desk.run_state(conn(), person["id"], run_id) if person else None
+        rid = int(run_id) if run_id.isascii() and run_id.isdigit() else 0
+        run = desk.run_state(conn(), person["id"], rid) if person and known(rid) else None
         if not run:
-            raise HTTPException(404, "No such run on this desk.", headers=NOINDEX)
+            return error("There's no such run on this desk.", 404)
         return JSONResponse(run, headers=NOINDEX)
 
     @desk_route("POST", "/runs/{run_id}/resume")
     @json_post
     async def desk_resume(request, pid, data):
-        desk.resume(db, pid, int(request.path_params["run_id"]))
+        desk.resume(db, pid, request.state.run_id)
         return {"ok": True}
 
     # The checkpoint: a note to keikaku, read in the background, or approval in a voice.
     @desk_route("POST", "/runs/{run_id}/steer")
     @json_post
     async def desk_steer(request, pid, data):
-        desk.steer(db, pid, int(request.path_params["run_id"]), str(data.get("note") or ""), data.get("voice"))
+        note = data.get("note")
+        desk.steer(db, pid, request.state.run_id, note if isinstance(note, str) else "", data.get("voice"))
         return {"ok": True}
 
     @desk_route("POST", "/runs/{run_id}/approve")
     @json_post
     async def desk_approve(request, pid, data):
-        desk.approve(db, pid, int(request.path_params["run_id"]), data.get("voice"))
+        desk.approve(db, pid, request.state.run_id, data.get("voice"))
         return {"ok": True}
 
     # --- Sign-up, sign-in and keys (house/accounts.py) -----------------------------------------------

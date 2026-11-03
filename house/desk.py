@@ -378,6 +378,8 @@ def resume(db, token: Who, run_id: int) -> None:
         raise Refused("That run has finished.")
     if row["status"] == "waiting":
         raise Refused("That run is waiting for you: pick a voice and approve it to carry on.", 409)
+    if not resumable(json.loads(row["options"] or "{}")):
+        raise Refused("Your key was turned down, so this run can't go on. Start it afresh with a key that works.", 409)
     with _lock:
         # Queued but with no thread is a run approved at the checkpoint whose attempt never began.
         approved = row["status"] == "queued" and row["stage"] == "checkpoint"
@@ -572,6 +574,17 @@ def _next(stage: str | None) -> str | None:
 
 # --- what the page shows -----------------------------------------------------------------------
 
+def _turned_down(error: str | None) -> bool:
+    e = (error or "").lower()
+    return any(k in e for k in ("authenticationerror", "permissiondeniederror", "invalid api key",
+                                "error code: 401", "error code: 403"))
+
+
+def resumable(options: dict) -> bool:
+    """A run on someone's own key that the key turned down can't go on: the key can't change part-way."""
+    return not (options.get("own_key") and _turned_down(options.get("error")))
+
+
 def failure(error: str | None, own_key: bool = False) -> str:
     """What stopped a run, in plain words, from the error the desk kept. Never an amount. A run on
     someone's own key can't take a different key, so a key turned down means signing up again."""
@@ -582,12 +595,11 @@ def failure(error: str | None, own_key: bool = False) -> str:
     elif any(k in e for k in ("insufficient_quota", "insufficient funds", "insufficient credit", "billing",
                               "error code: 402")):
         why, then = "It stopped when the key ran out of credit.", "top the key up, then " + then
-    elif any(k in e for k in ("authenticationerror", "permissiondeniederror", "invalid api key",
-                              "error code: 401", "error code: 403")):
+    elif _turned_down(error):
         if own_key:
             return ("It stopped because your key was turned down. A translation can't change keys part-way, "
                     "so sign up again with a key that works and start it afresh.")
-        why, then = "It stopped because the model key was turned down.", "check the key, then " + then
+        why, then = "It stopped because the site's model key was turned down.", "once the key works again, " + then
     elif "houseclosed" in e:
         why = "It stopped because new work was switched off on the site."
     else:
@@ -619,6 +631,7 @@ def _run_dict(conn, row) -> dict:
             "spent": min(_used(conn, row["id"]), options.get("reserved_drops", 0)),
             "started": _date(row["created_at"]), "edition_url": _edition_url(conn, row) if status == "done" else None,
             "failure": failure(options.get("error"), bool(options.get("own_key"))) if status == "failed" else None,
+            "resumable": status in ("interrupted", "failed") and resumable(options),
             "rounds": len(_checkpoint_doc(conn, row["id"]).get("rounds") or []) if status == "waiting" else 0,
             "steering": row["id"] in _steering,
             "steer_error": ("keikaku couldn't read that note. Try sending it again." if options.get("steer_error") else None),

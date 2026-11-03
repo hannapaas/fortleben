@@ -59,10 +59,32 @@ def test_a_failed_comment_tells_its_writer_why(site, db, monkeypatch):
 
 
 def test_free_checks_refuse_before_any_model_call(site):
-    assert post(site, body="").status_code == 429
-    assert post(site, body="x" * (comments.MAX_BODY + 1)).status_code == 429
-    assert post(site, body="see https://a.example and https://b.example").status_code == 429
-    assert post(site, name="www.spam.example").status_code == 429
+    assert post(site, body="").status_code == 400
+    assert post(site, body="x" * (comments.MAX_BODY + 1)).status_code == 400
+    assert post(site, body="see https://a.example and https://b.example").status_code == 400
+    assert post(site, name="www.spam.example").status_code == 400
+
+
+def test_a_malformed_comment_is_refused_not_an_error(site):
+    site.get("/read/bansan")
+    for raw in ("nope", "[1]", '"text"', '{"segment": ["p11"], "body": "x"}'):
+        r = site.post("/read/bansan/comments", content=raw, headers={"Content-Type": "application/json"})
+        assert r.status_code in (400, 404), raw
+    r = site.post("/read/bansan/comments", json={"segment": "p11", "body": None})
+    assert r.status_code == 400 and r.json()["error"] == "Write something first."
+
+
+def test_ids_past_sqlites_range_are_not_found(site):
+    big = "99999999999999999999"
+    assert site.get(f"/read/bansan?edition={big}").status_code == 404
+    assert site.get(f"/comments/{big}").status_code == 404
+    assert site.post(f"/comments/{big}/report").status_code == 404
+
+
+def test_a_moderation_link_with_a_strange_signature_is_just_invalid(site, monkeypatch):
+    monkeypatch.setenv("KEIKAKU_SECRET", "s")
+    assert site.get("/moderate/hide/1?sig=%C3%A9").status_code == 404
+    assert site.post("/moderate/hide/1?sig=%C3%A9").status_code == 404
 
 
 def test_rate_limit_per_writer(site):

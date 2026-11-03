@@ -126,7 +126,7 @@ def test_a_key_holder_who_forgot_their_key_is_told_plainly(conn, db, held, monke
 def test_a_key_turned_down_on_someones_own_key_says_what_to_do():
     said = desk.failure("RunFailed: AuthenticationError: Error code: 401", own_key=True)
     assert "your key was turned down" in said and "resume" not in said
-    assert "check the key" in desk.failure("RunFailed: AuthenticationError: Error code: 401")
+    assert "once the key works again" in desk.failure("RunFailed: AuthenticationError: Error code: 401")
 
 
 def test_own_key_spend_is_left_out_of_the_house_caps_but_calls_outside_runs_are_not(conn, db, held, monkeypatch):
