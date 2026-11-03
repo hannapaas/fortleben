@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "properties": {
+    "author_en": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The author's name romanised with macrons, surname first: 'Akutagawa Ryūnosuke'"
+    },
+    "title_en": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The title in English, as a translation would carry it"
+    },
+    "blurb": {
+      "type": "string",
+      "minLength": 1,
+      "description": "One sentence for someone choosing what to translate: who, where, what is at stake"
+    },
+    "say": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}
