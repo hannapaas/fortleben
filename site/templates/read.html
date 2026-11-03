@@ -106,9 +106,9 @@ window.FL_PRESETS = {
         {% if shown or can_comment %}<button type="button" class="pc ph" data-n="{{ shown|length }}" aria-label="Comments in the margin">{% if shown %}<span>{{ shown|length }}</span>{% endif %}</button>{% endif %}
         <div class="list">{% for c in cs %}<div class="cm{% if c.mine %} mine{% endif %}{% if c.status == 'failed' %} failed{% endif %}" data-id="{{ c.id }}" data-status="{{ c.status }}"><p>{{ c.body }}</p><span class="by">— {{ c.name or '' }}{% if c.name %}, {% endif %}{{ c.date[:10] | datefmt }}{% if c.status == 'pending' %}. <b>Only you can see this until it's checked.</b>{% elif c.status == 'failed' %}. <b>Not posted: {{ c.reason }}</b>{% endif %}</span>{% if c.status == 'published' and not c.mine %}<button type="button" class="rp">report</button>{% endif %}</div>{% endfor %}</div>
         {% if can_comment %}
-        <button type="button" class="pc add"><span>Comment in the margin…</span></button>
-        <form class="cmp"><textarea rows="3" maxlength="1200" placeholder="Comment in the margin…" aria-label="Your comment"></textarea>
-          <div class="cr"><input maxlength="40" placeholder="name, if you like" aria-label="Name (optional)"><button type="submit">post</button></div>
+        <button type="button" class="pc add"><span>Scribble in the margin…</span></button>
+        <form class="cmp"><textarea rows="3" maxlength="1200" placeholder="Scribble in the margin…" aria-label="Your comment"></textarea>
+          <div class="cr"><input maxlength="40" placeholder="Name (optional)" aria-label="Name (optional)"><button type="submit">post</button></div>
           <p class="err" hidden></p></form>
         {% endif %}
       </div>
