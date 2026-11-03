@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block main %}
+<div class="open">
 <p class="pitch">Most of the world's books have never been translated, and most never will be. Fortleben publishes public-domain literature as living translations. keikaku, an AI translation engine, writes the first draft. Readers can steer it, leave notes in the margin and ask for another reading.</p>
+<p class="epigraph side"><i>Fortleben</i> is German for “living on”. Walter Benjamin used it for the life a work goes on to have in translation.</p>
+</div>
 
 <div class="form three">
   <div><span class="q">Who translates?</span><span class="a">keikaku, running on Meta's models. It is organised like a translation house: a translator drafts, readers comment, an editor decides. The method comes from literary translation practice and how publishing houses work. <a href="/about">More on the About page</a>.</span></div>
@@ -36,6 +39,4 @@
   <div class="q">Which languages are available?</div>
   <div class="a">Japanese into English, from Aozora Bunko's free library. More languages are coming.</div>
 </div>
-
-<p class="epigraph"><i>Fortleben</i> is German for “living on”. Walter Benjamin used it for the life a work goes on to have in translation.</p>
 {% endblock %}
