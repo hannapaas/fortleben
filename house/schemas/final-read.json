@@ -9,7 +9,7 @@
         "properties": {
           "paragraph": {
             "type": "string",
-            "description": "Paragraph ID, e.g. p12"
+            "description": "The paragraph ID alone, exactly as labelled in the English given: p12, or p21–p23 for a group the translator joined"
           },
           "find": {
             "type": "string",
@@ -33,7 +33,8 @@
         "type": "object",
         "properties": {
           "paragraph": {
-            "type": "string"
+            "type": "string",
+            "description": "The paragraph ID alone, exactly as labelled in the English given: p12, or p21–p23 for a group the translator joined"
           },
           "span": {
             "type": [

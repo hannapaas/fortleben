@@ -1,0 +1,78 @@
+{
+ "prompt": "notes",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": {
+  "notes": [
+   {
+    "anchor": "p8",
+    "body": "In Japanese she says bōya, a familiar call most often used for a small boy. The story has already said the child is a girl, and both parents keep using it.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "Baby,"
+   },
+   {
+    "anchor": "p5",
+    "body": "Bowls, a teapot, an aluminium pan and a deep blue stew-pot, moved under the table out of the baby's reach, mark a poor young household of the period.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "aluminium pan"
+   },
+   {
+    "anchor": "p31",
+    "body": "The child's cry in Japanese is uma-uma, baby talk for food being tasty. It is noise banged out with the spoon while looking at her mother, not a sentence.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "Uma, uma, uma, uma."
+   },
+   {
+    "anchor": "p28",
+    "body": "The Japanese here says two years are already past, though she has just said three years since the marriage. It may count the time since the child's birth.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "two years are already past"
+   }
+  ],
+  "say": "Prepared sparse curious-only notes on boya, household vessels, baby babble and the two-years arithmetic, leaving the vision unresolved."
+ },
+ "usage": {
+  "input_tokens": 19062,
+  "cached_tokens": 0,
+  "output_tokens": 1787,
+  "reasoning_tokens": 1459,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.03142225,
+ "response_id": "resp_6ae9e5f2f484ea4d5f01460d",
+ "latency_s": 23.58,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1211
+  }
+ ],
+ "created": "2026-11-03T13:47:30Z"
+}

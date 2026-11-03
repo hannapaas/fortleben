@@ -4,7 +4,8 @@
 
 PRAGMA foreign_keys = ON;
 
--- One text. Aozora card, full colophon, rights record, status.
+-- One text. Aozora card, full colophon, rights record, status. Works added from an Aozora link
+-- (ids 'aozora-<author id>-<card>') are listed from here; the others from fixtures/works.json.
 CREATE TABLE IF NOT EXISTS work (
   id            TEXT PRIMARY KEY,          -- slug, e.g. 'bansan'
   aozora_id     TEXT,                      -- '000223'
@@ -19,7 +20,9 @@ CREATE TABLE IF NOT EXISTS work (
   colophon      TEXT,                      -- the 底本 block, verbatim
   rights        TEXT,                      -- JSON: death year, 初出, translation search + date
   status        TEXT NOT NULL DEFAULT 'parsed',
-  created_at    TEXT NOT NULL DEFAULT (datetime('now'))
+  created_at    TEXT NOT NULL DEFAULT (datetime('now')),
+  blurb         TEXT,                      -- one sentence for the desk's list (works added from a link)
+  added_by      INTEGER                    -- the person who added it from an Aozora link (house/acquire.py); NULL otherwise
 );
 
 -- One pass of a work through the house.
@@ -27,7 +30,7 @@ CREATE TABLE IF NOT EXISTS run (
   id            INTEGER PRIMARY KEY,
   work_id       TEXT NOT NULL REFERENCES work(id),
   label         TEXT,                      -- 'dev-1', 'showcase'
-  status        TEXT NOT NULL DEFAULT 'running',  -- running / paused / done / failed
+  status        TEXT NOT NULL DEFAULT 'running',  -- queued / running / waiting (at the checkpoint) / paused / done / failed / interrupted / stopped: budget
   stage         TEXT,                      -- last stage completed
   cap_usd       REAL,                      -- the live-run cap for this run
   options       TEXT,                      -- JSON: the run's set-up (models, drafting prompt)
@@ -238,7 +241,12 @@ CREATE TABLE IF NOT EXISTS person (
   id            INTEGER PRIMARY KEY,
   name          TEXT NOT NULL,
   trust         TEXT NOT NULL DEFAULT 'reader',
-  credit_as     TEXT
+  credit_as     TEXT,
+  api_key       TEXT,                      -- their own Meta key, encrypted with KEIKAKU_SECRET (house/accounts.py)
+  key_tail      TEXT,                      -- its last four characters, the only part ever shown
+  email         TEXT,                      -- lower-cased, unique (index in house/db.py); NULL for an invited editor who hasn't added one
+  password_hash TEXT,                      -- scrypt$n$r$p$salt$hash (house/accounts.py)
+  created_at    TEXT DEFAULT (datetime('now'))
 );
 
 CREATE TABLE IF NOT EXISTS allowance (
@@ -250,6 +258,37 @@ CREATE TABLE IF NOT EXISTS allowance (
   reason        TEXT
 );
 
+-- An invite link to the editors' desk (docs/EDITORS-DESK.md). Only a salted hash of the token is
+-- kept: the link itself is shown once, when it's made, and can't be read back from here.
+CREATE TABLE IF NOT EXISTS invite (
+  id            INTEGER PRIMARY KEY,
+  token_hash    TEXT NOT NULL UNIQUE,
+  person_id     INTEGER NOT NULL REFERENCES person(id),
+  suggested_work TEXT,                     -- a work the allowance covers, suggested on the desk
+  created_at    TEXT NOT NULL DEFAULT (datetime('now')),
+  revoked_at    TEXT,
+  last_used_at  TEXT
+);
+
+-- A signed-in browser (house/accounts.py). The cookie holds a random id; only its hash is kept.
+CREATE TABLE IF NOT EXISTS session (
+  id            INTEGER PRIMARY KEY,
+  id_hash       TEXT NOT NULL UNIQUE,
+  person_id     INTEGER NOT NULL REFERENCES person(id),
+  created_at    TEXT NOT NULL DEFAULT (datetime('now')),
+  expires_at    TEXT NOT NULL
+);
+
+-- A password reset link, good for an hour and once. Only the token's hash is kept.
+CREATE TABLE IF NOT EXISTS reset (
+  id            INTEGER PRIMARY KEY,
+  token_hash    TEXT NOT NULL UNIQUE,
+  person_id     INTEGER NOT NULL REFERENCES person(id),
+  created_at    TEXT NOT NULL DEFAULT (datetime('now')),
+  expires_at    TEXT NOT NULL,
+  used_at       TEXT
+);
+
 CREATE TABLE IF NOT EXISTS reaction (
   id            INTEGER PRIMARY KEY,
   target        TEXT NOT NULL,             -- 'bansan/p12', a note id, an alternative
@@ -257,6 +296,36 @@ CREATE TABLE IF NOT EXISTS reaction (
   value         INTEGER NOT NULL,
   voter         TEXT NOT NULL,
   created_at    TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+-- Comments in the margin: anyone, no account. Shown to everyone once the screen passes them;
+-- until then only to their writer (matched by a cookie token, stored hashed). Removed ones are deleted.
+CREATE TABLE IF NOT EXISTS comment (
+  id            INTEGER PRIMARY KEY,
+  work_id       TEXT NOT NULL,
+  segment_id    TEXT NOT NULL,
+  body          TEXT NOT NULL,
+  name          TEXT,                      -- optional, screened like the body
+  status        TEXT NOT NULL DEFAULT 'pending',  -- pending / published / failed / hidden; nothing is deleted
+  reason        TEXT,                      -- why it failed the screen (shown to its writer) or was hidden
+  author        TEXT NOT NULL,             -- hash of the writer's cookie token
+  ip            TEXT NOT NULL,             -- hash of the address, for rate limits
+  created_at    TEXT NOT NULL DEFAULT (datetime('now')),
+  screened_at   TEXT
+);
+CREATE INDEX IF NOT EXISTS comment_work ON comment(work_id, status);
+
+CREATE TABLE IF NOT EXISTS comment_report (
+  comment_id    INTEGER NOT NULL REFERENCES comment(id) ON DELETE CASCADE,
+  ip            TEXT NOT NULL,
+  created_at    TEXT NOT NULL DEFAULT (datetime('now')),
+  PRIMARY KEY (comment_id, ip)
+);
+
+-- When the editor's daily comments email went (house/comments.py, send_digest); one row a day at most.
+CREATE TABLE IF NOT EXISTS comment_digest (
+  id            INTEGER PRIMARY KEY,
+  sent_at       TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
 CREATE TABLE IF NOT EXISTS proposal (
@@ -317,3 +386,22 @@ CREATE TABLE IF NOT EXISTS request (
   status        TEXT NOT NULL DEFAULT 'new',
   created_at    TEXT NOT NULL DEFAULT (datetime('now'))
 );
+
+-- The public wishlist (/wishlist, house/wishlist.py): works on Aozora that people would like in
+-- English. A wished work is a `work` row like any added work, so the desk can start it.
+CREATE TABLE IF NOT EXISTS wish (
+  work_id       TEXT PRIMARY KEY REFERENCES work(id),
+  count         INTEGER NOT NULL DEFAULT 1,  -- how many people asked for it
+  created_at    TEXT NOT NULL DEFAULT (datetime('now')),
+  last_asked_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+-- Every link pasted into the wishlist form, by a salted hash of the address it came from: the
+-- hourly limit per address, and one ask per address per work. work_id is NULL for a refused link.
+CREATE TABLE IF NOT EXISTS wish_ask (
+  id            INTEGER PRIMARY KEY,
+  work_id       TEXT,
+  ip            TEXT NOT NULL,
+  created_at    TEXT NOT NULL DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS wish_ask_ip ON wish_ask(ip, created_at);

@@ -4,13 +4,13 @@
     "notes": {
       "type": "array",
       "maxItems": 20,
-      "description": "Margin notes for the desk; none for a clean chapter",
+      "description": "Margin notes for the desk; none for a clean part",
       "items": {
         "type": "object",
         "properties": {
           "paragraph": {
             "type": "string",
-            "description": "Paragraph ID, e.g. p12"
+            "description": "The paragraph ID alone, exactly as labelled in the English given: p12, or p21–p23 for a group the translator joined"
           },
           "span": {
             "type": "string",

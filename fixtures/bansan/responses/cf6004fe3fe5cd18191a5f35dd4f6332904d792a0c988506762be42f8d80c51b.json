@@ -1,0 +1,40 @@
+{
+ "prompt": "head-select",
+ "model": "muse-wonder-1.0",
+ "effort": "low",
+ "data": {
+  "decision": "pick",
+  "fork": {
+   "options": [],
+   "question": ""
+  },
+  "pick": 0,
+  "reason": "Both name the same crux: an unexplained temporal reversal, triggered by the potato, in which three years feel like an aged lifetime yet appear dear and forgiven from an immense distance, continuously interrupted by the ordinary supper. Option 1's emphasis on repeated words and drifting syntax describes how that reversal is enacted, not a different crux, while Option 0's fuller account also preserves the unresolved ending and the husband's partial response.",
+  "same_or_different": "same",
+  "say": "Same crux - Option 0 and Option 1 name the same thing; my pick is Option 0. Both readers identify the unexplained temporal reversal triggered by the potato, in which three years feel like a whole aged life yet look dear and forgiven from an immense distance, held inside and interrupted by the ordinary supper. Option 1's repetition and drifting syntax are how that reversal works in the language, not a different crux; Option 0 states the whole movement more completely, including the unresolved return to work and the husband meeting it only partway. House log: The two crux statements converge, so Option 0 goes forward without a fork."
+ },
+ "usage": {
+  "input_tokens": 2738,
+  "cached_tokens": 0,
+  "output_tokens": 1225,
+  "reasoning_tokens": 948,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.035452,
+ "response_id": "resp_6ae9cadcd08e0c9b7e98458b",
+ "latency_s": 17.54,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1224
+  }
+ ],
+ "created": "2026-11-03T11:51:56Z"
+}

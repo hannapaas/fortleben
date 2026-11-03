@@ -1,22 +1,20 @@
 """Queries: the house's letters. One row each, a fixed shape, statuses changed only here,
-with an event for every change (docs/STAGES.md, "How a debate actually runs")."""
+with an event for every change (docs/STAGES.md, "How the readers and the desk work")."""
 
-import json
 
 from house.db import dumps
 
 
 
-def raise_query(ctx, segment_id: str, raised_by: str, q: dict, round_: int = 0, owner: str = "translation") -> int:
+def raise_query(ctx, segment_id: str, raised_by: str, q: dict, owner: str = "translation") -> int:
     cur = ctx.conn.execute(
         """INSERT INTO query (run_id, work_id, segment_id, span, raised_by, owner, category, reason, evidence,
-           recommendation, confidence, status, round, say) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+           recommendation, confidence, status, say) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)""",
         (ctx.run_id, ctx.work_id, segment_id, q.get("span"), raised_by, owner, q["category"], q["reason"],
          dumps([q["evidence_ja"]] if q.get("evidence_ja") else []), q.get("suggested_fix"), q.get("confidence"),
-         "open", round_, q.get("say")))
+         "open", q.get("say")))
     qid = cur.lastrowid
-    eid = ctx.emit(raised_by, "query.raised", {"query_id": qid, "segment_id": segment_id, "round": round_,
-                                               "sentence": q.get("sentence"), **{k: q.get(k) for k in (
+    eid = ctx.emit(raised_by, "query.raised", {"query_id": qid, "segment_id": segment_id, **{k: q.get(k) for k in (
                                                    "span", "category", "reason", "evidence_ja", "confidence",
                                                    "suggested_fix", "say")}})
     ctx.conn.execute("UPDATE query SET event_id=? WHERE id=?", (eid, qid))

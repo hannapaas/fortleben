@@ -23,11 +23,13 @@ Everything shares one **house brief** (below), which sits first in every cached 
 
 | Prompt | Model | Job | Returns |
 |---|---|---|---|
+| **work-card** | Spark low | When someone adds a work from an Aozora link: from the title, the author and the opening, the romanised author (surname first), an English title and one sentence for the desk's list | Author, title, blurb |
 | **background-brief** | Spark low + web search | Read around the text: author's life, period, reception, allusions. Not called yet | A page of notes with sources |
 | **parts** | Spark low | See the book's shape (each paragraph's ID, length, kind, first words) and divide it into parts the readers, the desk and the final read can each judge whole | Where each part starts; why |
 | **first-read** | Wonder medium | Read the whole text and write the house's reading, starting from the crux | Prose reading; open questions; up to three voice takes the reading allows |
 | **crux-check** | Wonder low | Read the whole text independently, without the first reading, and say what a translation of it stands or falls on | A short answer with reasons. A `head-select` call then says whether the two cruxes are the same; if not, it's the first fork |
 | **analyst-bible** | Spark medium | Build the story bible from the text and the reading: cast, narration, motifs, style sheet, hard spots | Bible JSON |
+| **steer** | Wonder medium, strict | At the checkpoint, carry a person's note into the reading and the bible as what the text does in English, never as a request; change only what the note touches; reply in a few plain sentences, and ask only when the note can't be acted on without an answer | What changed, a line each; the reading and the bible, amended or unchanged; a reply; a question or none |
 | **analyst-amend** | Spark | Rule on a proposed bible amendment (a missed echo, a better rendering). Not called yet | Accept / reject with reason; the patch |
 
 ## Translation
@@ -80,7 +82,7 @@ Called by `keikaku audit` (`house/audit.py`). Each version of a text goes to the
 
 ## What runs today
 
-Thirteen prompts run a text end to end: house-brief, parts, first-read, crux-check, head-select, analyst-bible, translate-draft-plain (or translate-draft), reader-faithful, reader-readable, desk, final-read, notes. The experiments add baseline-oneshot, audit-spans and audit-readable. The rest wait for the stages and the site that need them (`STAGES.md`, "Not built").
+Thirteen prompts run a text end to end: house-brief, parts, first-read, crux-check, head-select, analyst-bible, translate-draft-plain (or translate-draft), reader-faithful, reader-readable, desk, final-read, notes. Adding a work from an Aozora link uses work-card. The experiments add baseline-oneshot, audit-spans and audit-readable. The rest wait for the stages and the site that need them (`STAGES.md`, "Not built").
 
 ## Examples the prompts need
 

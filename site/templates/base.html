@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Fortleben{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&family=Schibsted+Grotesk:ital,wght@0,400..700;1,400..700&family=Zen+Old+Mincho:wght@400;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', path='fortleben.css') }}">
+{% block head %}{% endblock %}
+<script>try { var t = localStorage.getItem('fl-theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+</head>
+<body class="{% block bodyclass %}{% endblock %}">
+{% if replay %}<div class="replay">Replay: you're looking at recorded runs from the repo. Nothing here calls a model.</div>{% endif %}
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="/">Fortleben</a>
+    {% set me = request.state.person if request and request.state.person is defined else none %}
+    <nav><a class="wide" href="/">Library</a><a href="/wishlist">Wishlist</a>{% if me %}<span class="who"><a href="/desk">Your desk</a> · <form class="out" method="post" action="/logout"><input type="hidden" name="csrf" value="{{ request.state.csrf }}"><button type="submit">Sign out</button></form></span>{% elif request and not replay %}<a href="/login">Sign in</a>{% endif %}<span class="paper" role="group" aria-label="Paper"><button type="button" data-paper="light">White</button><button type="button" data-paper="cream">Cream</button><button type="button" data-paper="dark">Dark</button></span></nav>
+  </header>
+  {% block main %}{% endblock %}
+</div>
+<script>
+(function () {
+  // Paper: white, cream or dark. Until a reader picks one, it follows the system's light or dark.
+  var root = document.documentElement, btns = document.querySelectorAll('[data-paper]');
+  function current() { return root.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }
+  function sync() { btns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.paper === current()); }); }
+  btns.forEach(function (b) {
+    b.onclick = function () { root.dataset.theme = b.dataset.paper; try { localStorage.setItem('fl-theme', b.dataset.paper); } catch (e) {} sync(); };
+  });
+  sync();
+})();
+</script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

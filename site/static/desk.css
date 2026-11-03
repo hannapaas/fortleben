@@ -1,0 +1,114 @@
+/* The editors' desk: the pamphlet's ruled form, with real inputs drawn as the reader's boxes. */
+.desk-h { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(2.6rem, 6vw, 4.2rem); line-height: 1; letter-spacing: -.02em; margin: 1.6rem 0 .6rem; }
+.desk-lead { font-family: var(--serif); font-size: clamp(1.15rem, 2.2vw, 1.4rem); line-height: 1.3; max-width: 40rem; margin: 0 0 1.6rem; }
+.desk { margin-bottom: 4rem; max-width: 60rem; }
+.desk .a { font-size: 16px; }
+.desk .sm { font-size: 13px; line-height: 1.4; color: var(--ink-2); }
+.desk .block { display: block; margin-top: 2px; }
+.desk .big { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.7rem; line-height: 1; }
+.desk .meta { display: block; font-size: 14px; line-height: 1.4; color: var(--ink-2); }
+.desk .row { display: flex; flex-wrap: wrap; gap: 4px 22px; }
+.desk p { margin: 4px 0 0; }
+
+/* Native inputs, hidden but focusable, with the reader's square or round box beside them. */
+.desk input[type="radio"], .desk input[type="checkbox"] { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
+.desk .opt, .desk .work { position: relative; cursor: pointer; }
+.desk .opt { display: inline-flex; align-items: center; gap: 8px; }
+.desk .bx { width: 15px; height: 15px; border: 1.5px solid var(--ink); display: inline-grid; place-items: center; font-size: 13px; line-height: 1; flex: none; }
+.desk .bx.r { border-radius: 50%; }
+.desk input:checked + .bx { background: var(--accent-wash); }
+.desk input:checked + .bx::before { content: '×'; font-weight: 700; transform: translateY(-1px); }
+.desk input:focus-visible + .bx { outline: 2px solid var(--ink); outline-offset: 2px; }
+.desk .opt:hover, .desk .work:hover .wt { text-decoration: underline 2px var(--accent); text-underline-offset: 4px; }
+.desk input:disabled + .bx { border-style: dotted; }
+
+/* The works, one per line, suggested first. */
+.works { display: grid; }
+.work { display: grid; grid-template-columns: 15px minmax(0, 1fr); gap: 0 12px; padding: 8px 0; align-items: start; }
+.work + .work { border-top: 1px dotted var(--muted); }
+.work .bx { margin-top: 7px; }
+.work .wj { font-size: 1.15rem; color: var(--accent-text); margin-right: 6px; }
+.work .wt { font-family: var(--serif); font-style: italic; font-size: 1.35rem; line-height: 1.15; }
+.work .tag, .voice .tag { color: var(--accent-text); font-size: 13px; margin-left: 6px; }
+.work .blurb { margin-top: 2px; color: var(--ink); }
+.work.short { cursor: default; }
+.work.short .wb { opacity: .6; }
+.work.short:hover .wt { text-decoration: none; }
+
+/* Start, the reader's Aa button grown into a word. */
+.btn { border: 1.5px solid var(--ink); background: var(--paper); }
+.btn:hover:not(:disabled) { background: var(--accent-wash); }
+.btn:focus-visible, .desk .read:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.btn:disabled { cursor: not-allowed; opacity: .45; box-shadow: none; }
+.startrow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 6px 0 2px; }
+.go { font-family: var(--serif); font-style: italic; font-size: 1.5rem; line-height: 1; padding: 8px 26px 10px; box-shadow: 3px 3px 0 var(--accent); }
+.desk .line { font-size: 15px; }
+.desk .err { font-size: 15px; color: var(--accent-text); }
+.desk .err[hidden], .desk [hidden] { display: none; }
+
+/* A work added from a link to Aozora Bunko. */
+.addwork { margin: 0 0 14px; }
+.addrow { display: flex; gap: 8px; align-items: stretch; max-width: 40rem; }
+.url-box { flex: 1; min-width: 0; box-sizing: border-box; font: 15px 'DM Mono', ui-monospace, Menlo, monospace; padding: 6px 8px; border: 1.5px solid var(--ink); background: var(--paper); color: var(--ink); }
+.url-box::placeholder { color: var(--muted); opacity: 1; }
+.url-box:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.addrow .btn { padding: 4px 16px; font: inherit; }
+.addrow.wraps { flex-wrap: wrap; }
+/* An email, a password or a new key, typed on the desk. */
+.field { flex: 1 1 12rem; min-width: 0; box-sizing: border-box; font: inherit; padding: 6px 8px; border: 1.5px solid var(--ink); background: var(--paper); color: var(--ink); }
+.field::placeholder { color: var(--muted); opacity: 1; }
+.field:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+/* Your translations. */
+.runs { list-style: none; margin: 0; padding: 0; }
+.run { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 14px; padding: 8px 0; }
+.run + .run { border-top: 1px dotted var(--muted); }
+.run .rt { flex: 1 1 100%; }
+.run .rt i { font-family: var(--serif); font-size: 1.2rem; }
+.run .rs { flex: 0 1 auto; }
+.st-running .rs, .st-queued .rs { background: linear-gradient(transparent 60%, var(--accent-wash) 60%); }
+.run .rr { flex: 1 1 100%; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+.run .resume { font-size: 14px; padding: 1px 12px; }
+.run .read { font-weight: 600; margin-left: auto; }
+
+/* The checkpoint: the house's reading, the voices side by side, the bible, the notes. */
+.checkpoint { border-top: 1.5px solid var(--ink); padding-top: 1.2rem; }
+.checkpoint .cp-h { font-family: var(--serif); font-weight: 400; font-size: clamp(1.7rem, 3.6vw, 2.4rem); line-height: 1.1; margin: 0 0 .6rem; }
+.checkpoint h3 { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.35rem; margin: 2rem 0 .4rem; }
+.checkpoint .prose p, .checkpoint .page p { font-family: var(--serif); font-size: 1.05rem; line-height: 1.5; margin: 0 0 .7em; max-width: 40rem; }
+.checkpoint ul, .checkpoint ol { margin: 4px 0 0; padding-left: 1.2rem; }
+.checkpoint li { margin: 0 0 6px; max-width: 44rem; }
+.checkpoint .crux li { font-family: var(--serif); font-size: 1.05rem; line-height: 1.45; }
+.voices { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 0 24px; margin-top: 8px; }
+.voice { border-top: 1px dotted var(--muted); padding-top: 8px; min-width: 0; }
+.voice .opt { font-size: 1.05rem; }
+.voice .tag { display: inline-block; margin: 4px 0 4px 0; }
+.voice .page { display: block; margin-top: 10px; }
+.voice .page p { font-size: 1rem; }
+.checkpoint details { border-top: 1px dotted var(--muted); padding: 6px 0; }
+.checkpoint summary { cursor: pointer; font-weight: 600; }
+.checkpoint .pairs { display: grid; grid-template-columns: minmax(8rem, 12rem) minmax(0, 1fr); gap: 4px 16px; margin: 8px 0 4px; }
+.checkpoint .pairs dt { font-weight: 600; }
+.checkpoint .pairs dd { margin: 0; max-width: 40rem; }
+.cast { border-collapse: collapse; width: 100%; margin: 8px 0 4px; font-size: 15px; }
+.cast th, .cast td { text-align: left; vertical-align: top; padding: 4px 12px 4px 0; border-bottom: 1px dotted var(--muted); }
+.rounds .round { padding: 8px 0; }
+.rounds .round + .round { border-top: 1px dotted var(--muted); }
+.rounds .note { font-style: italic; }
+.rounds .changed { font-size: 15px; }
+.note-box { display: block; width: 100%; max-width: 40rem; box-sizing: border-box; font: inherit; padding: 8px; border: 1.5px solid var(--ink); background: var(--paper); color: var(--ink); }
+.note-box:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.checkpoint .send { font-size: 1rem; padding: 6px 18px; }
+.checkpoint .reading-note { background: linear-gradient(transparent 60%, var(--accent-wash) 60%); display: inline-block; }
+
+@media (max-width: 860px) {
+  .checkpoint .pairs { grid-template-columns: minmax(0, 1fr); }
+  .checkpoint .pairs dd { margin-bottom: 6px; }
+  .cast thead { display: none; }
+  .cast tr, .cast td { display: block; padding-right: 0; }
+  .cast td { border-bottom: 0; }
+  .cast tr { border-bottom: 1px dotted var(--muted); padding: 4px 0; }
+  .desk-h { margin-top: 1rem; }
+  .desk .a { font-size: 15.5px; }
+  .work .wt { font-size: 1.2rem; }
+}

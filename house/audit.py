@@ -9,7 +9,7 @@ import json
 import re
 from types import SimpleNamespace
 
-from house import checks, context
+from house import context
 from house.client import SPARK, WONDER, Call, load_schema
 from house.stages import Ctx
 from house.db import data_dir

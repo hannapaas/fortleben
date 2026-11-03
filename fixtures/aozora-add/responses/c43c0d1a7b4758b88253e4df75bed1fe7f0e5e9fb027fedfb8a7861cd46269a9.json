@@ -1,0 +1,35 @@
+{
+ "prompt": "work-card",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": {
+  "author_en": "Akutagawa Ryūnosuke",
+  "blurb": "Walking beside the lotus pond in Paradise one morning, the Buddha looks down into the depths of Hell and notices Kandata, a murderer and robber who once did a single good deed.",
+  "say": "Card written from the opening passage only, with the title rendered in its standard English form.",
+  "title_en": "The Spider's Thread"
+ },
+ "usage": {
+  "input_tokens": 1916,
+  "cached_tokens": 0,
+  "output_tokens": 649,
+  "reasoning_tokens": 551,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.00515325,
+ "response_id": "resp_6ae9f8d869ec2f34f4944356",
+ "latency_s": 6.31,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 368
+  }
+ ],
+ "created": "2026-11-03T15:08:09Z"
+}

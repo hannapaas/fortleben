@@ -26,7 +26,8 @@
             }
           },
           "body": {
-            "type": "string"
+            "type": "string",
+            "description": "The note as a reader meets it: about the text and its English, never about how the translation was made, never in the author's voice"
           },
           "sources": {
             "type": "array",

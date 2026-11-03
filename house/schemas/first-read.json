@@ -65,7 +65,8 @@
         }
       },
       "minItems": 2,
-      "maxItems": 3
+      "maxItems": 3,
+      "description": "Two or three voices the reading allows, the one you'd choose first: the house drafts in the first unless the editor picks another"
     },
     "say": {
       "type": "string",

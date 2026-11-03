@@ -28,7 +28,7 @@ def read_chapter(ctx, reader: str, paras, units: dict) -> int:
     bible = ctx.latest("bible")
     inp = context.join(
         context.reading(ctx.latest("reading")),
-        context.block("The cast", context.cast(bible)),
+        context.bible(bible),
         context.chapter_pairs(paras, units, spec["first"]),
     )
     res = ctx.call(actor(reader), Call(spec["prompt"], model(ctx, "reader_model"), "medium", inp,

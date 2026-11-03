@@ -1,0 +1,66 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "It must be just noon. Whether because even the dogs are taking their midday nap, not a single bark is heard. The hemp and millet that enclose the threshing-floor shine their green leaves in the sun and rest hushed and utterly still. And the sky seen beyond them, stifling with heat over its whole face, trails heat-haze, so that even the piled clouds seem to be panting in this dry spell. Look where one will, the only things that seem to breathe are these three men. And those three keep silence like the clay images enshrined in a Guandi temple....",
+    "ids": [
+     "p7"
+    ],
+    "notes": [
+     "Guandi temple kept without gloss: the simile is to the life-size clay figures set in such a temple, hence stock-still silence. Left for the margin rather than explained in line."
+    ]
+   },
+   {
+    "english": "Of course, this is no tale of Japan. — It is what happened one summer on the threshing-floor of a Liu at a place called Changshan in China.",
+    "ids": [
+     "p8"
+    ],
+    "notes": []
+   },
+   {
+    "english": "II",
+    "ids": [
+     "p9"
+    ],
+    "notes": []
+   },
+   {
+    "english": "The man lying naked in the blazing sun is the master of this threshing-floor, surnamed Liu, named Dacheng, one of the leading rich men of Changshan. This man's sole diversion is the drinking of wine, and from morning he has scarcely ever been known to part from the cup. And that, as the phrase has it, \"Each time he drinks alone, he empties a whole jar\" — a measure of wine beyond the common run of men. Though, as said before, \"Fields by the walls, three hundred mu, half sown with millet,\" so there is not the least fear that his drinking should encumber his estate.",
+    "ids": [
+     "p10"
+    ],
+    "notes": [
+     "Kept both set phrases as quotations and kept mu unconverted; jar renders the same vessel as the unglazed earthen jar at the pillow, to hold the link. \"As said before\" follows the source though the phrase has not occurred before in the text."
+    ]
+   }
+  ],
+  "say": null
+ },
+ "usage": {
+  "input_tokens": 14278,
+  "cached_tokens": 13041,
+  "output_tokens": 3290,
+  "reasoning_tokens": 2815,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0174849,
+ "response_id": "resp_6ae9cdd0af08ab132f7a48eb",
+ "latency_s": 33.66,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1892
+  }
+ ],
+ "created": "2026-11-03T12:04:33Z"
+}

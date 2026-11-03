@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+{# Every published paragraph has been through keikaku's checks, so that's said once, at the
+   top. A paragraph carries a mark only when a person has done something to it. #}
+{% set PEOPLE = {'editor-approved': 'An editor has read it and signed it off.'} %}
+{% macro seal(label) -%}<span class="seal" title="{{ PEOPLE[label] }}" aria-hidden="true"></span>{%- endmacro %}
+{% set total = ed.units|length %}
+{% set others = ed.editions|selectattr('kind', 'equalto', 'person')|list %}
+{% block title %}{{ ed.title_en }} · Fortleben{% endblock %}
+{% block bodyclass %}layout-english marks-essential hide-status{% endblock %}
+{% block main %}
+<div class="form four">
+  <div><span class="q">What?</span><span class="a">An English translation of {{ ed.author_en }}'s short story <i>{{ ed.title_en }}</i>{% if ed.rights.first_published_year %}, first published in {{ ed.rights.first_published_year }}{% endif %}.</span></div>
+  <div><span class="q">By whom?</span><span class="a">keikaku, a translation engine running on Meta's models: one model drafted it, two read the draft separately, one against the Japanese and one as English, and an editing pass decided what to change.</span></div>
+  <div><span class="q">Checked?</span><span class="a">By keikaku's readers, every paragraph. {% set checked = ed.counts['editor-approved'] %}{% if checked %}{{ checked }} of {{ total }} paragraphs also carry an editor's sign-off.{% else %}No editor has signed it off.{% endif %}</span></div>
+  <div><span class="q">How was it made?</span><span class="a">Open a paragraph: the margin shows what the readers queried, what was changed, and why. Before drafting, keikaku wrote <a href="/read/{{ ed.work_id }}/analysis{% if ed.id %}?edition={{ ed.id }}{% endif %}">an analysis of the book</a> that steered every stage.</span></div>
+</div>
+
+<section class="poster">
+  <div class="plate" lang="ja" aria-hidden="true">{{ ed.title }}</div>
+  <h1>{{ ed.title_en }}<span class="sub">(translated from the Japanese)</span></h1>
+  <p class="by">by {{ ed.author_en }} <span lang="ja">{{ ed.author }}</span>{% if ed.rights.first_published_year %}, {{ ed.rights.first_published_year }}{% endif %}.<br>English by keikaku{% if ed.commissioned_by %}, commissioned by {{ ed.commissioned_by }}{% endif %}.</p>
+</section>
+
+{% if ed.editions|length > 1 %}
+<div class="form two eds">
+  <div class="q">In English?</div>
+  <div class="a"><ul class="edl">
+    {% for e in ed.editions %}
+    {% if e.here and e.current %}
+    <li class="here" aria-current="true"><span class="bx r" aria-hidden="true"></span><span><b>{{ e.by }}</b></span></li>
+    {% elif e.here %}
+    <li><span class="bx r" aria-hidden="true"></span><span><a href="{{ e.url }}">{{ e.by }}</a></span></li>
+    {% else %}
+    <li><span class="bx r" aria-hidden="true"></span><span>{{ e.by }}, {{ e.year }}{% if e.url %} · <a href="{{ e.url }}" rel="noopener">{{ e.where or 'read it' }}</a> ↗{% endif %}</span></li>
+    {% endif %}
+    {% endfor %}
+  </ul></div>
+</div>
+
+{% endif %}
+<div class="page">
+<main class="reader" id="reader">
+  {% for u in ed.units %}
+  {% if u.number %}<h2 class="secnum" id="{{ u.id }}"><span lang="ja" class="secnum-ja">{{ u.ja[0].html|safe }}</span>{{ u.en }}</h2>{% else %}
+  {% if u.scene_break and not loop.first and not loop.previtem.number %}<div class="brk" aria-hidden="true">*</div>{% endif %}
+  <section class="unit st-{{ u.label }}{{ ' only-notes' if u.notes and not u.queries and not u.changed }}" id="{{ u.id }}" data-unit="{{ u.id }}">
+    {% set busy = u.queries or u.changed or u.notes %}
+    <div class="hang">
+      <span class="tools">
+        <button type="button" class="jabtn" lang="ja" aria-pressed="false" title="Show the original" aria-label="Show the original Japanese">原</button>
+        {% if busy %}<button type="button" class="open" aria-expanded="false" title="Notes and changes" aria-label="Notes and changes for this paragraph">*</button>{% endif %}
+      </span>
+      {% if u.label in PEOPLE %}{{ seal(u.label) }}<span class="stn">{{ u.label }}</span>{% elif u.label == 'draft' %}<span class="stn">unchecked draft</span>{% endif %}</div>
+    <div class="body">
+      <p class="en" tabindex="0" role="button" aria-label="Open the notes for this paragraph">{{ u.en_html|safe }}</p>
+      <div class="ja" lang="ja">{% for j in u.ja %}<p>{{ j.html|safe }}</p>{% endfor %}</div>
+      {% if u.notes %}<ul class="inotes">{% for n in u.notes %}<li class="{{ 'ess' if n.essential }}"><b>{{ n.span_html }}</b>: {{ n.body }}</li>{% endfor %}</ul>{% endif %}
+      <div class="slip" hidden>
+        {% if u.decisions %}
+        <p class="key">F: read against the Japanese. R: read as English, without it.</p>
+        {% for d in u.decisions %}
+        <div class="dec">
+          {% for q in d.queries %}
+          <div class="qy">
+            <span class="qn" title="{{ 'F: read against the Japanese' if q.number.startswith('F') else 'R: read as English' }}">{{ q.number }}</span>
+            <div>
+              {% if q.recommendation %}
+              <p class="alt"><span class="was">{{ q.span }}</span><span class="arrow" aria-hidden="true">→</span><span class="now">{{ q.recommendation }}</span></p>
+              <p class="why">{{ q.reason }}</p>
+              {% else %}
+              <p class="why">{% if q.span %}<span class="was">{{ q.span }}</span>: {% endif %}{{ q.reason }}</p>
+              {% endif %}
+              {% if q.evidence %}<p class="ev" lang="ja">{{ q.evidence|join(' · ') }}</p>{% endif %}
+            </div>
+          </div>
+          {% endfor %}
+          <p class="out"><em>{{ d.outcome }}.</em> {{ d.reason }}</p>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% if u.changed and not u.decisions %}
+        <ul class="hist">{% for h in u.history %}<li>{% if not loop.last %}<em>First draft</em> <span class="old">{{ h.en }}</span>{% else %}{{ h.en }}{% endif %}</li>{% endfor %}</ul>
+        {% endif %}
+        {% if u.notes %}
+        <ul class="nl">{% for n in u.notes %}<li data-note="{{ loop.index0 }}"><b>{{ n.span_html }}</b>: {{ n.body }}</li>{% endfor %}</ul>
+        {% endif %}
+      </div>
+    </div>
+    {% set cs = comments.get(u.id, []) %}
+    {% set shown = cs|selectattr('status', 'equalto', 'published')|list %}
+    <aside class="mar{% if not cs %} empty{% endif %}" aria-label="Comments in the margin">
+      <div class="in">
+        {% if shown or can_comment %}<button type="button" class="pc ph" data-n="{{ shown|length }}" aria-label="Comments in the margin">{% if shown %}<span>{{ shown|length }}</span>{% endif %}</button>{% endif %}
+        <div class="list">{% for c in cs %}<div class="cm{% if c.mine %} mine{% endif %}{% if c.status == 'failed' %} failed{% endif %}" data-id="{{ c.id }}" data-status="{{ c.status }}"><p>{{ c.body }}</p><span class="by">— {{ c.name or '' }}{% if c.name %}, {% endif %}{{ c.date[:10] | datefmt }}{% if c.status == 'pending' %}. <b>Only you can see this until it's checked.</b>{% elif c.status == 'failed' %}. <b>Not posted: {{ c.reason }}</b>{% endif %}</span>{% if c.status == 'published' and not c.mine %}<button type="button" class="rp">report</button>{% endif %}</div>{% endfor %}</div>
+        {% if can_comment %}
+        <button type="button" class="pc add"><span>Comment in the margin…</span></button>
+        <form class="cmp"><textarea rows="3" maxlength="1200" placeholder="Comment in the margin…" aria-label="Your comment"></textarea>
+          <div class="cr"><input maxlength="40" placeholder="name, if you like" aria-label="Name (optional)"><button type="submit">post</button></div>
+          <p class="err" hidden></p></form>
+        {% endif %}
+      </div>
+    </aside>
+  </section>
+  {% endif %}
+  {% endfor %}
+</main>
+
+<aside class="settings" id="settings" aria-label="Reading settings">
+  <div class="sheethead"><span class="q">How do you want to read?</span><button type="button" class="x" id="closeSettings">close ×</button></div>
+  <p class="intro">Changing anything keeps your place.</p>
+  <div class="form">
+    <div>
+      <div class="presets" data-group="preset">
+        <button type="button" class="cb" data-val="clean"><span class="bx r"></span><span><b>Clean</b><br><span class="blurb">Like a printed novel: just the text and the few notes you need. Open a paragraph for the rest.</span></span></button>
+        <button type="button" class="cb" data-val="curious"><span class="bx r"></span><span><b>Curious</b><br><span class="blurb">Every note marked, who checked what, the Japanese under each paragraph when you want it.</span></span></button>
+        <button type="button" class="cb" data-val="annotated"><span class="bx r"></span><span><b>Annotated</b><br><span class="blurb">Side by side with the Japanese, notes open under each paragraph.</span></span></button>
+      </div>
+      <p class="blurb" id="custom" hidden>You've made your own mix below.</p>
+    </div>
+    <details class="more">
+      <summary class="q">More settings</summary>
+      <div class="sub"><span class="q">Japanese?</span>
+        <div class="row" data-group="layout">
+          <button type="button" class="cb" data-val="english"><span class="bx r"></span>English only</button>
+          <button type="button" class="cb" data-val="parallel"><span class="bx r"></span>Side by side</button>
+          <button type="button" class="cb" data-val="interleaved"><span class="bx r"></span>Under each paragraph</button>
+        </div>
+        <div class="row" style="margin-top:4px"><button type="button" class="cb" data-toggle="furigana"><span class="bx"></span>furigana</button></div>
+        <p class="blurb">Dictionary: <a href="https://10ten.life" target="_blank" rel="noopener">10ten Japanese Reader</a> ↗ (browser add-on)</p>
+      </div>
+      <div class="sub"><span class="q">Notes?</span>
+        <div class="row" data-group="marks">
+          <button type="button" class="cb" data-val="none"><span class="bx r"></span>none</button>
+          <button type="button" class="cb" data-val="essential"><span class="bx r"></span>essential</button>
+          <button type="button" class="cb" data-val="all"><span class="bx r"></span>all</button>
+        </div>
+        <div class="row" style="margin-top:4px"><button type="button" class="cb" data-toggle="inline"><span class="bx"></span>open under each paragraph</button></div>
+      </div>
+      <div class="sub"><span class="q">Comments?</span>
+        <div class="row"><button type="button" class="cb" data-toggle="comments"><span class="bx"></span>show them in the margin</button></div>
+      </div>
+      <div class="sub"><span class="q">Show?</span>
+        <div class="row"><button type="button" class="cb" data-toggle="status"><span class="bx"></span>which paragraphs a person checked</button>
+          <button type="button" class="cb" data-toggle="tools"><span class="bx"></span>原 and * beside paragraphs</button></div>
+      </div>
+      <div class="sub"><span class="q">Font?</span>
+        <div class="row" data-group="font">
+          <button type="button" class="cb" data-val="standard"><span class="bx r"></span>standard</button>
+          <button type="button" class="cb" data-val="dyslexic"><span class="bx r"></span>OpenDyslexic</button>
+        </div>
+        <p class="blurb">A typeface made to be easier to read with dyslexia. It changes the English; the Japanese keeps its own.</p>
+      </div>
+      <div class="sub"><span class="q">Size?</span>
+        <div class="row"><button type="button" class="cb" data-size="-1">A−</button><button type="button" class="cb" data-size="1">A+</button><button type="button" class="cb" data-leading>line spacing</button></div>
+      </div>
+    </details>
+  </div>
+</aside>
+</div>
+<button type="button" class="aa" id="aa" aria-controls="settings" aria-expanded="false" aria-label="Reading settings" title="Reading settings">Aa</button>
+
+<section class="tail">
+  <div class="form two">
+    <div class="q">Original?</div>
+    <div class="a"><span lang="ja">{{ ed.title }}</span> <i>{{ ed.title_en }}</i>, {{ ed.author_en }} <span lang="ja">{{ ed.author }}</span>{% if ed.rights.author_died %} (died {{ ed.rights.author_died }}){% endif %}. First published in <span lang="ja">{{ ed.rights.first_published }}</span>. Public domain. Japanese text from <a href="{{ ed.card_url or 'https://www.aozora.gr.jp/' }}">Aozora Bunko</a>, typed and proofread by its volunteers.
+      {% if ed.colophon %}<details><summary>Aozora's colophon</summary><pre lang="ja">{{ ed.colophon }}</pre></details>{% endif %}</div>
+    <div class="q">This English?</div>
+    <div class="a">Drafted, read and revised by keikaku on Meta's models ({{ ed.models|join(', ') }}), in {{ ed.calls }} model calls. keikaku raised {{ ed.queries.total }} {{ 'query' if ed.queries.total == 1 else 'queries' }}: {{ ed.queries.taken }} changed the text, {{ ed.queries.declined }} {{ 'was' if ed.queries.declined == 1 else 'were' }} declined{% if ed.queries.forked %}, {{ ed.queries.forked }} {{ 'was' if ed.queries.forked == 1 else 'were' }} left to the editor{% endif %}.{% if not ed.counts['editor-approved'] %} No person has edited it.{% endif %} Free to share and adapt under CC BY-SA 4.0.</div>
+    {% if others %}
+    <div class="q">Other English?</div>
+    <div class="a">{% for t in others %}{{ t.by }} translated it in {{ t.year }}{% if t.url %}; it's free on <a href="{{ t.url }}" rel="noopener">{{ t.where or 'the web' }}</a>{% endif %}.{% if not loop.last %}<br>{% endif %}{% endfor %}</div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', path='reader.js') }}"></script>{% endblock %}

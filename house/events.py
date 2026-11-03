@@ -14,6 +14,9 @@ import sqlite3
 from house.db import dumps
 
 TYPES = {
+    # the works
+    "work.added": "a work was added from an Aozora link: its id, the card, who added it, its rights record",
+    "work.refused": "an Aozora link was read and refused: the card, why, who pasted it",
     # the run
     "run.started": "a run began: work, options, caps",
     "run.paused": "the run stopped after a stage (development stops, or the checkpoint)",
@@ -29,13 +32,15 @@ TYPES = {
     "call.started": "a model call went out: department, prompt, model, effort",
     "call.done": "a model call came back: tokens, cost, from cache or live",
     "agent.say": "a department's one plain sentence for the House log",
-    "budget.tick": "spend so far in drops and dollars",
     # what the house knows
     "reading.written": "the house's reading (first read), versioned",
     "crux.checked": "the second reader's crux and whether it matches",
     "bible.written": "the story bible, versioned",
+    # the checkpoint: the editor steers before the draft (docs/STEERING.md)
+    "checkpoint.waiting": "the run waits for the editor: page 1 drafted in each voice take",
+    "checkpoint.steered": "the house answered an editor's note: its reply, what changed, page 1 drafted again",
+    "checkpoint.approved": "the editor approved the checkpoint and chose the voice the draft is written in",
     # the English
-    "voice.chosen": "the voice trial: the first page in each voice, and the one the head chose, with why",
     "page.cut": "the pager's pages: paragraph ids per page",
     "draft.paragraph": "a paragraph (or group) of English landed: revision id, variant",
     "revision.created": "the English for a paragraph changed: cause (query, rule, editor)",

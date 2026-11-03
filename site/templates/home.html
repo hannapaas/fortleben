@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block main %}
+<p class="pitch">Most of the world's books have never been translated, and most never will be. Fortleben publishes public-domain literature in languages people can read, translated by keikaku, a translation engine built on large language models, and shows how each translation was made.</p>
+
+<div class="form two intro">
+  <div class="q">Who translates?</div>
+  <div class="a">keikaku, running on Meta's models. Before a line is drafted it writes an analysis of the book, its people and its tone, and that analysis steers every stage: one model drafts, two read the draft separately, one against the original and one as English, an editing pass weighs their notes and decides what changes, and a final read goes over the whole. Where a person has checked a paragraph, it says so. Where a person has translated the same work, we say so and name them.</div>
+  <div class="q">Can I trust it?</div>
+  <div class="a">It's machine work, and the page says so. The readers' notes and the reason for every change sit beside each paragraph, so you can see what was argued over and judge for yourself. Where an editor has signed a paragraph off, it carries their mark.</div>
+  <div class="q">Can I steer one?</div>
+  <div class="a">Yes. <a href="/signup">Sign up with your own Meta key</a>, pick a story, read keikaku's analysis before it drafts, and tell it in your own words what to hold differently. The edition is published under your name.</div>
+  <div class="q">What should keikaku translate next?</div>
+  <div class="a"><a href="/wishlist">Ask on the wishlist</a>: paste a link to any work on Aozora Bunko, and keikaku's editors pick from the list.</div>
+  <div class="q">Which languages?</div>
+  <div class="a">Japanese into English first, from Aozora Bunko's free library of public-domain texts. keikaku is built to work between other languages too; each needs its own source library and its own reading aids, the way Japanese needs furigana.</div>
+  <div class="q">Why the name?</div>
+  <div class="a"><i>Fortleben</i> is Walter Benjamin's word for the life a work goes on to have in translation. Nothing here is final: every edition keeps changing, and every version is kept.</div>
+</div>
+
+{% for lang in shelf %}
+<section class="lang">
+  <h2 class="sec">From the {{ lang.name }} {% if lang.native %}<span lang="{{ lang.code }}">{{ lang.native }}</span>{% endif %}</h2>
+  <ul class="shelf">
+    {% for w in lang.works %}
+    <li>
+      <span class="ja" lang="{{ lang.code }}">{{ w.title }}</span>
+      <span>
+        <a class="ttl" href="/read/{{ w.id }}">{{ w.title_en }}</a><br>
+        <span class="meta">{{ w.author_en }}{% if w.rights.first_published_year %}, {{ w.rights.first_published_year }}{% endif %} · {{ w.paragraphs }} paragraphs</span><br>
+        {% if w.blurb %}{% if w.about %}<details class="blurb"><summary>{{ w.blurb }}</summary><p>{{ w.about }}</p></details>{% else %}<p class="blurb">{{ w.blurb }}</p>{% endif %}{% endif %}
+        <span class="meta">In English: {% for e in w.editions %}{% if e.here %}<a href="{{ e.url }}">{{ e.by }}</a>{% else %}{{ e.by }}, {{ e.year }}{% endif %}{% if not loop.last %} · {% endif %}{% endfor %}</span>
+      </span>
+      <span class="meta">{% if w.label == 'editor-approved' %}{{ w.label }}{% endif %}</span>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% else %}
+<p class="meta">Nothing on the shelf yet.</p>
+{% endfor %}
+{% endblock %}

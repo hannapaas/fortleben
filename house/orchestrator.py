@@ -21,6 +21,7 @@ STAGES = [
     ("first-read", "first_read"),
     ("crux-check", "crux_check"),
     ("bible", "bible"),
+    ("checkpoint", "checkpoint"),  # waits for the editor when the run's options ask for it (docs/STEERING.md)
     ("draft", "draft"),
     ("readers", "readers"),
     ("desk", "desk"),
@@ -48,11 +49,27 @@ def latest_run(conn, work_id: str) -> int | None:
     return row["id"] if row else None
 
 
+def load_parts(conn, work, run_id: int) -> None:
+    """A resumed run keeps its own parts: the planner's plan recorded for this run, if any."""
+    plans = [json.loads(r["body"]) for r in conn.execute(
+        "SELECT body FROM bible WHERE work_id=? AND kind='parts' ORDER BY version DESC", (work.meta["work_id"],))]
+    plan = next((b for b in plans if b.get("run_id") == run_id), None)
+    work.parts = plan["starts"] if plan else None
+
+
+def context_for(conn, client, run_id: int) -> Ctx:
+    """A stage context for an existing run, outside the stage loop: what steering a waiting run works with."""
+    row = conn.execute("SELECT work_id, options FROM run WHERE id=?", (run_id,)).fetchone()
+    work = works.parse(row["work_id"], conn)
+    load_parts(conn, work, run_id)
+    return Ctx(conn, client, work, run_id, json.loads(row["options"] or "{}"))
+
+
 def run(conn, client, work_id: str, *, to: str | None = None, from_: str | None = None,
         only: str | None = None, run_id: int | None = None, label: str | None = None,
         options: dict | None = None) -> int:
     options = {"pipeline": PIPELINE, **(options or {})}
-    work = works.parse(work_id)
+    work = works.parse(work_id, conn)
     # make sure the work row exists before a run points at it
     conn.execute("INSERT OR IGNORE INTO work (id, aozora_id, title, author) VALUES (?,?,?,?)",
                  (work_id, work.meta["aozora_id"], work.title, work.author))
@@ -94,10 +111,7 @@ def run(conn, client, work_id: str, *, to: str | None = None, from_: str | None 
         names = NAMES[start:end]
 
     ctx = Ctx(conn, client, work, run_id, options)
-    plans = [json.loads(r["body"]) for r in conn.execute(
-        "SELECT body FROM bible WHERE work_id=? AND kind='parts' ORDER BY version DESC", (work_id,))]
-    plan = next((b for b in plans if b.get("run_id") == run_id), None)  # a resumed run keeps its own parts
-    work.parts = plan["starts"] if plan else None
+    load_parts(conn, work, run_id)
     modules = dict(STAGES)
     for name in names:
         ctx.options["_stage"] = name
@@ -122,6 +136,10 @@ def run(conn, client, work_id: str, *, to: str | None = None, from_: str | None 
         events.emit(conn, run_id, "house", "stage.done", {"stage": name, "spent_usd": round(spent, 5), **summary})
         conn.execute("UPDATE run SET stage=? WHERE id=?", (name, run_id))
         conn.commit()
+        if summary.get("waiting"):  # the checkpoint: the run waits for the editor, status 'waiting'
+            events.emit(conn, run_id, "house", "run.paused", {"after": name, "waiting": True,
+                                                              "spent_usd": round(client.budget.spent(run_id), 5)})
+            return run_id
 
     final = names[-1] == NAMES[-1]
     conn.execute("UPDATE run SET status=? WHERE id=?", ("done" if final else "paused", run_id))

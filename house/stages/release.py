@@ -47,8 +47,10 @@ def run(ctx) -> dict:
         ctx.conn.execute("INSERT INTO status (work_id, segment_id, label, who) VALUES (?,?,?,?) "
                          "ON CONFLICT(work_id, segment_id) DO UPDATE SET label=excluded.label, who=excluded.who",
                          (ctx.work_id, p.id, label(ctx, p.id), "the house"))
-    ed = ctx.conn.execute("SELECT id FROM edition WHERE work_id=? AND editor='the house'", (ctx.work_id,)).fetchone()
-    ed_id = ed["id"] if ed else ctx.conn.execute("INSERT INTO edition (work_id) VALUES (?)", (ctx.work_id,)).lastrowid
+    editor = ctx.options.get("credit") or "the house"  # a run from the editors' desk carries the editor's credit
+    ed = ctx.conn.execute("SELECT id FROM edition WHERE work_id=? AND editor=?", (ctx.work_id, editor)).fetchone()
+    ed_id = ed["id"] if ed else ctx.conn.execute("INSERT INTO edition (work_id, editor) VALUES (?,?)",
+                                                 (ctx.work_id, editor)).lastrowid
     n = ctx.conn.execute("SELECT COUNT(*) FROM release WHERE edition_id=?", (ed_id,)).fetchone()[0]
     version = f"v0.{n + 1}"
     body = {"work": ctx.work_id, "title": ctx.work.title, "author": ctx.work.author, "colophon": ctx.work.colophon,

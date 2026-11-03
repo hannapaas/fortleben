@@ -9,7 +9,7 @@
         "properties": {
           "paragraph": {
             "type": "string",
-            "description": "Paragraph ID as given, e.g. p12, or p21–p23 for a group"
+            "description": "The paragraph ID alone, exactly as labelled in the English given: p12, or p21–p23 for a group the translator joined"
           },
           "find": {
             "type": "string",
@@ -59,7 +59,8 @@
             }
           },
           "paragraph": {
-            "type": "string"
+            "type": "string",
+            "description": "The paragraph ID alone, exactly as labelled in the English given: p12, or p21–p23 for a group the translator joined"
           },
           "faithful_side": {
             "type": "string"
@@ -77,9 +78,9 @@
         }
       }
     },
-    "beyond_this_chapter": {
+    "beyond_this_part": {
       "type": "array",
-      "description": "What you learned in this chapter that changes how an earlier chapter should read (a person, a word, what a scene means), for the house to take back to it. When nothing does, the list is empty",
+      "description": "What you learned in this part that changes how an earlier part should read (a person, a word, what a scene means), for the house to take back to it. When nothing does, the list is empty",
       "items": {
         "type": "object",
         "properties": {
@@ -89,7 +90,7 @@
           },
           "why": {
             "type": "string",
-            "description": "What in this chapter shows it"
+            "description": "What in this part shows it"
           }
         }
       }

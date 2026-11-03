@@ -1,0 +1,107 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"That's so. Though day by day we are wearied and troubled and made to suffer by one thing and another, two years are past already. In a little while the baby will be walking.\"",
+    "ids": [
+     "p28"
+    ],
+    "notes": [
+     "I kept \"two years\" as written, though p14, p22, p25 and p27 count three years. I did not correct it to three."
+    ]
+   },
+   {
+    "english": "The man looked at the child standing with the spoon in hand as if at a loss. At once she called out joyfully, \"Baby.\" At the same moment the child gave a loud cry, looking at her mother's face, and banged the spoon down on the table, \"uma-uma-uma-uma.\"",
+    "ids": [
+     "p29",
+     "p30",
+     "p31"
+    ],
+    "notes": [
+     "For vocative 坊や to a girl I use Baby throughout, per the bible, to avoid misreading her sex in English. For the babble I transcribe as uma-uma rather than translating it as yummy, to keep it noise rather than speech."
+    ]
+   },
+   {
+    "english": "The father hurriedly put rice into the child's mouth.",
+    "ids": [
+     "p32"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Presently they laid down their chopsticks.",
+    "ids": [
+     "p33"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"It is only a little while longer,\" the man said firmly, as if to himself.",
+    "ids": [
+     "p34"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Yes, we must work, mustn't we,\" she said, calmly and restfully. Holding the child on her lap, she bared her small nipple and began to nurse.",
+    "ids": [
+     "p35"
+    ],
+    "notes": [
+     "I keep restfully for 安らかに to hold the repeated quiet and rest wording, and nipple literal for 乳首."
+    ]
+   },
+   {
+    "english": "\"Come, let us clear away and go to bed. Let us get up early tomorrow, shall we.\"",
+    "ids": [
+     "p36"
+    ],
+    "notes": [
+     "The Japanese gives no speaker or tag here, so I add none and leave who speaks soft as the text does."
+    ]
+   },
+   {
+    "english": "Presently the man stood up. When he was about to begin clearing the table, the child had already closed her eyes with her cheek against the breast. All around had fallen quiet.",
+    "ids": [
+     "p37"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"A storm,\" the man whispered, standing still.",
+    "ids": [
+     "p38"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted the closing supper to the final whisper, keeping the diction plain and the speaker of the clearing proposal untagged."
+ },
+ "usage": {
+  "input_tokens": 11836,
+  "cached_tokens": 11121,
+  "output_tokens": 3479,
+  "reasoning_tokens": 2873,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.017347650000000003,
+ "response_id": "resp_6ae9cbbcfac9378ad7f942af",
+ "latency_s": 29.64,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2199
+  }
+ ],
+ "created": "2026-11-03T11:55:40Z"
+}

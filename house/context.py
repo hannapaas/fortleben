@@ -108,15 +108,19 @@ def source_text(work: ParsedWork, around: list[Paragraph] | None = None, summari
     out = []
     for i, ch in enumerate(chs):
         if i == here:
-            out.append(f"### Chapter {i + 1} of {len(chs)}, in full ({ch[0].id}–{ch[-1].id})\n\n{_lines(ch)}")
+            out.append(f"### Part {i + 1} of {len(chs)}, in full ({ch[0].id}–{ch[-1].id})\n\n{_lines(ch)}")
         else:
-            out.append(f"- Chapter {i + 1} ({ch[0].id}–{ch[-1].id}): {chapter_line(ch, summaries, i)}")
-    return block("The source text: this chapter in full, the others in one line each", "\n".join(out))
+            out.append(f"- Part {i + 1} ({ch[0].id}–{ch[-1].id}): {chapter_line(ch, summaries, i)}")
+    return block("The source text: this part in full, the others in one line each", "\n".join(out))
 
 
 def reading(r: dict) -> str:
     crux = "\n".join(f"- **{c['point']}** {c['why']} *For the English:* {c['for_the_english']}" for c in r["crux"])
     body = f"**The crux**\n\n{crux}\n\n{r['reading']}"
+    if r.get("second_crux"):  # a second reader, reading independently, put the crux differently (stage 3)
+        second = "\n".join(f"- **{c['point']}** {c['why']} *For the English:* {c['for_the_english']}" for c in r["second_crux"])
+        body += ("\n\n**A second reader's crux**\n\nA second reader, who never saw the reading above, put the crux this way. "
+                 "The editor decides between them; until then hold both.\n\n" + second)
     if r.get("open_questions"):
         body += "\n\n**Open questions**\n\n" + "\n".join(f"- {q['question']}" for q in r["open_questions"])
     return block("The house's reading", body)
@@ -175,10 +179,10 @@ def chapter_pairs(paras: list[Paragraph], units: dict[tuple, str], first: str) -
     label = lambda ids: ids[0] if len(ids) == 1 else f"{ids[0]}–{ids[-1]}"  # noqa: E731
     ja = lambda ps: "\n".join(f"{p.id}　{p.model_text.strip('　 ')}" for p in ps)  # noqa: E731
     if first == "ja":
-        whole = block("The chapter in Japanese", "\n".join(ja([p]) for p in paras))
+        whole = block("The part in Japanese", "\n".join(ja([p]) for p in paras))
         pairs = "\n\n".join(f"{ja(ps)}\n{label(ids)}　{en}" for ids, ps, en in rows)
         return whole + block("Paragraph by paragraph: the Japanese, then the house's English", pairs)
-    whole = block("The chapter in the house's English", "\n\n".join(f"{label(ids)}　{en}" for ids, _, en in rows))
+    whole = block("The part in the house's English", "\n\n".join(f"{label(ids)}　{en}" for ids, _, en in rows))
     pairs = "\n\n".join(f"{label(ids)}　{en}\n{ja(ps)}" for ids, ps, en in rows)
     return whole + block("Paragraph by paragraph: the house's English, then the Japanese", pairs)
 

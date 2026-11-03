@@ -1,0 +1,61 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "Why it is that he lies naked in the blazing sun has a history behind it, and it is this. — That day Liu was together with Sun Sensei, his companion in drinking (this is the scholar who held the white-feather fan), in a well-aired room, leaning against a bamboo wife and fighting out a game on the board, when the maidservant, a yahuan, came and said, \"A monk who says he is staying at the Hodoji temple or somewhere has just come, and says he must by all means see the master. What shall I do?\"",
+    "ids": [
+     "p11"
+    ],
+    "notes": [
+     "I keep Sun Sensei as printed with ruby, and yahuan on this first appearance with the gloss maidservant, then plain English after. Bamboo wife renders chikufujin, the hollow bamboo bolster leaned on in summer. Hodoji follows the Japanese ruby for the temple name; the maid's vagueness is kept as or somewhere."
+    ]
+   },
+   {
+    "english": "\"What, the Hodoji?\" So saying, Liu blinked his small eyes as if dazzled, then, raising his fat body that looked hot in itself, ordered, \"Then show him in here.\" Then, with a glance at Sun Sensei's face, he added, \"It will be that monk, I suppose.\"",
+    "ids": [
+     "p12"
+    ],
+    "notes": [
+     "Liu says bozu here, not banso: I keep it as plain that monk against the narrator's standing barbarian monk, to hold the dismissive familiarity."
+    ]
+   },
+   {
+    "english": "The monk at the Hodoji temple is a barbarian monk come from the Western Regions. Since he both lends a hand at healing and practises the arts of the bedchamber, his fame stands high in these parts. Rumours all but miraculous are rife — that Zhang San's black cataract suddenly turned toward recovery, that Li Si's eunuch illness was healed on the spot, and the like. — Both men had heard these rumours. What business could have brought that barbarian monk now, taking the trouble to come all the way to Liu's? Liu, for his part, had no recollection whatever of having sent to fetch him.",
+    "ids": [
+     "p13"
+    ],
+    "notes": [
+     "Zhang San and Li Si are stock rumour-names, left as pronounced. Black cataract renders kuro-naisho and eunuch illness renders byoen literally; I am unsure of the exact medical force in either case and have not smoothed them. Western Regions renders Seiiki."
+    ]
+   }
+  ],
+  "say": "Drafted the summons and gossip passage without tipping the cure or the morals."
+ },
+ "usage": {
+  "input_tokens": 14208,
+  "cached_tokens": 13041,
+  "output_tokens": 3611,
+  "reasoning_tokens": 3034,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01876165,
+ "response_id": "resp_6ae9cdf57b95693eef5146e0",
+ "latency_s": 36.54,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2286
+  }
+ ],
+ "created": "2026-11-03T12:05:09Z"
+}

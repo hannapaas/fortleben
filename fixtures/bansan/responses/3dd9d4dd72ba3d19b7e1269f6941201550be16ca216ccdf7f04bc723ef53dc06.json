@@ -1,0 +1,114 @@
+{
+ "prompt": "reader-faithful",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "notes": [
+   {
+    "japanese": "『きかない奴だな。』",
+    "paragraph": "p7",
+    "problem": "Flattened vernacular: rough, warm masculine scold with 奴だな is rendered as flat polite English.",
+    "span": "You won't listen, will you.",
+    "suggestion": "\"Won't listen, eh?\" to keep the rough-edged warmth without dialect costume.",
+    "sureness": "Fairly sure; a native check on Taisho working-class masculine nuance of 奴だな would settle degree."
+   },
+   {
+    "japanese": "敏捷に怜悧《れいり》にすきもなく動いてる",
+    "paragraph": "p7",
+    "problem": "Impoverishment: 怜悧 (perspicacious, shrewd-bright) is reduced to generic brightly.",
+    "span": "moving quickly and brightly without a moment's pause,",
+    "suggestion": "\"moving quickly and sharply, shrewdly, without a moment's pause\" or \"quick and knowing\" to keep the clever look.",
+    "sureness": "Moderately sure; ruby fixes the reading as reiri, a check on period sense of infant keenness would settle it."
+   },
+   {
+    "japanese": "彼女の心は、いつか淋しくうつむいてしまってゐた。",
+    "paragraph": "p11",
+    "problem": "Destroyed network: うつむく bowed head in p10 becomes sunk down here, losing the body-to-heart link.",
+    "span": "but at some point her heart had already sunk down, lonely.",
+    "suggestion": "\"but at some point her heart had already bowed down, lonely.\" to keep bowed / downcast as one verb.",
+    "sureness": "Quite sure; the repetition of うつむき / うつむいて across p10-p11 is visible on the page."
+   },
+   {
+    "japanese": "遠い絵が暗く静かに、彼女の眼の底に映ってゐた。",
+    "paragraph": "p18",
+    "problem": "Impoverishment: 映ってゐた was reflected is stilled into lay, losing seeing as reflection.",
+    "span": "lay darkly and quietly at the bottom of her eyes.",
+    "suggestion": "\"The distant picture was reflected darkly and quietly at the bottom of her eyes.\"",
+    "sureness": "Moderately sure;映る can mean lie/reflected, but reflection keeps the vision as seen image and would need editor weighing."
+   },
+   {
+    "japanese": "『どうして黙ってるの。』",
+    "paragraph": "p19",
+    "problem": "Destroyed network: 黙ってる silently is merged into quiet, conflating silence with 静か.",
+    "span": "Why are you so quiet?",
+    "suggestion": "\"Why are you so silent?\" throughout for 黙ってる to keep silence distinct from quiet.",
+    "sureness": "Very sure; motif list fixes 黙って as silently and 静か as quietly, no further check needed."
+   },
+   {
+    "japanese": "また幻の絵を見たのだった。",
+    "paragraph": "p19",
+    "problem": "Destroyed network: same 幻の絵 rendered picture like a vision in p15 becomes phantom picture here.",
+    "span": "phantom picture",
+    "suggestion": "Use one plain term in both places, e.g. \"And she saw the vision-like picture again.\"",
+    "sureness": "Very sure on inconsistency; which fixed term to use needs editor decision."
+   },
+   {
+    "japanese": "一日々々の苦しみや悲しみがなんだらう。一日々々の疲れやなやみがなんだらう。",
+    "paragraph": "p20",
+    "problem": "Clarification: dismissive rhetorical なんだらう what of them is turned into definitional What are they.",
+    "span": "What are the suffering and sadness of each single day? What are the weariness and trouble of each single day?",
+    "suggestion": "\"What of the suffering and sadness of each single day? What of the weariness and trouble of each single day?\"",
+    "sureness": "Quite sure;拡辞典 check on なんだらう as belittling would confirm, but context of that day makes dismissal clear."
+   },
+   {
+    "japanese": "『なぜ黙ってるの。』",
+    "paragraph": "p21–p23",
+    "problem": "Destroyed network as in p19: second 黙ってる also rendered as quiet instead of silent.",
+    "span": "Why are you so quiet?",
+    "suggestion": "\"Why are you so silent?\" to match p19 and keep the silence plot intact.",
+    "sureness": "Very sure for same reason as p19; consistency check across both husband questions settles it."
+   },
+   {
+    "japanese": "『たった三年にしかならないんだな。けれども、俺たちはいろ〳〵苦労したなァ。』",
+    "paragraph": "p25",
+    "problem": "Ennoblement plus flattened vernacular: 苦労した laboured is lifted to much hardship and rough 俺たち・なァ warmth is lost.",
+    "span": "we have been through much hardship, you and I",
+    "suggestion": "\"But we've laboured through a lot, you and I.\" said with the same rough warmth, e.g. keeping trailing \"...haven't we.\"",
+    "sureness": "Fairly sure on both halves; a check on period 苦労する as toil/labour versus abstract hardship would settle wording."
+   },
+   {
+    "japanese": "『さうね、私たちは働きませうね。』",
+    "paragraph": "p35",
+    "problem": "Rationalisation into duty: hortative ませう let's is turned into obligational must.",
+    "span": "Yes, we must work, mustn't we,",
+    "suggestion": "\"Yes, let's work, shall we,\" she said, calmly and restfully.",
+    "sureness": "Very sure; the crux states the return is to 'let us work', and ませう is volitional not obligational."
+   }
+  ],
+  "say": "Part is largely faithful in domestic detail and vision diction, with real losses mainly in silence/quiet merger, husband's vernacular, and let's versus must."
+ },
+ "usage": {
+  "input_tokens": 15656,
+  "cached_tokens": 0,
+  "output_tokens": 11104,
+  "reasoning_tokens": 9758,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.066762,
+ "response_id": "resp_6ae9cc00e95c51d9c7eb4b84",
+ "latency_s": 67.41,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 4597
+  }
+ ],
+ "created": "2026-11-03T11:56:48Z"
+}

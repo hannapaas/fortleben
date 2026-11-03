@@ -1,0 +1,40 @@
+{
+ "prompt": "head-select",
+ "model": "muse-wonder-1.0",
+ "effort": "low",
+ "data": {
+  "decision": "pick",
+  "fork": {
+   "options": [],
+   "question": "Whether two readers have named the same crux or different cruxes"
+  },
+  "pick": 1,
+  "reason": "Both options name the same crux in different words: a cure that must remain undecidably ruinous, held in three equally weighted closing answers, and a faux-scholarly, detached Chinese-tale voice whose distance makes the one passage of bodily torment work. Option 1 states that twin crux most cleanly, with its evidence tied to the text and without turning either reader's useful directing details into a second, competing crux.",
+  "same_or_different": "same",
+  "say": "House log: The two independent readings were judged to name the same crux, and Option 1 was picked as the wording to go forward."
+ },
+ "usage": {
+  "input_tokens": 2841,
+  "cached_tokens": 0,
+  "output_tokens": 735,
+  "reasoning_tokens": 553,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.026064,
+ "response_id": "resp_6ae9cd37bc0cc960be3747ce",
+ "latency_s": 8.71,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 745
+  }
+ ],
+ "created": "2026-11-03T12:01:59Z"
+}

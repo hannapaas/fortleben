@@ -43,10 +43,7 @@ class Ctx:
 
     # the versioned knowledge of a work: reading, crux check, bible
     def latest(self, kind: str) -> dict | None:
-        row = self.conn.execute(
-            "SELECT body FROM bible WHERE work_id=? AND kind=? ORDER BY version DESC LIMIT 1",
-            (self.work_id, kind)).fetchone()
-        return json.loads(row["body"]) if row else None
+        return latest_document(self.conn, self.work_id, kind, self.run_id)
 
     def version(self, kind: str) -> int:
         return self.conn.execute("SELECT COALESCE(MAX(version), 0) FROM bible WHERE work_id=? AND kind=?",
@@ -62,3 +59,19 @@ class Ctx:
     def cache_key(self) -> str:
         """One prompt_cache_key per work and bible version: a bible change starts a new cached prefix."""
         return f"{self.work_id}:bible-v{self.version('bible')}"
+
+
+def latest_document(conn, work_id: str, kind: str, run_id: int | None = None) -> dict | None:
+    """The latest version of one of a work's documents (reading, bible, ...). With a run, the latest
+    version that run saved, if it saved one: two runs of the same work each keep their own reading and
+    bible, so one editor's notes never reach another's run. Otherwise the work's latest."""
+    row = None
+    if run_id is not None:
+        row = conn.execute("SELECT b.body FROM bible b JOIN event e ON e.id = b.event_id "
+                           "WHERE b.work_id=? AND b.kind=? AND e.run_id=? ORDER BY b.version DESC LIMIT 1",
+                           (work_id, kind, run_id)).fetchone()
+    row = row or conn.execute("SELECT body FROM bible WHERE work_id=? AND kind=? ORDER BY version DESC LIMIT 1",
+                              (work_id, kind)).fetchone()
+    if not row:
+        return None
+    return json.loads(row["body"]) if isinstance(row["body"], str) else row["body"]

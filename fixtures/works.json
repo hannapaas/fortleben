@@ -7,6 +7,8 @@
   "author": "素木しづ",
   "author_en": "Shiraki Shizu",
   "card_url": "https://www.aozora.gr.jp/cards/000012/card223.html",
+  "blurb": "A young couple feed their baby at supper while a storm blows outside, and one bad mouthful sends the mother somewhere far away.",
+  "about": "Shiraki Shizu wrote this short sketch in 1917, the year before she died. A narrow room, a laughing child, a cold potato; and in a few lines the mother sees her three years of marriage as a whole long life, and a quiet peace waiting at the end of it.",
   "zip_url": "https://www.aozora.gr.jp/cards/000012/files/223_ruby_2389.zip",
   "rights": {
    "author_died": 1918,
@@ -19,7 +21,9 @@
      "year": 2020,
      "where": "skeelstranslations.wordpress.com",
      "kind": "hobbyist, complete, no licence stated",
-     "checked": "2026-11-01"
+     "checked": "2026-11-01",
+     "shown": false,
+     "not_shown": "a hobbyist's translation on a personal blog; not named on the site without the translator's agreement"
     }
    ],
    "verdict": "public domain (author died 1918, published 1917)"
@@ -115,6 +119,8 @@
   "author": "芥川龍之介",
   "author_en": "Akutagawa Ryūnosuke",
   "card_url": "https://www.aozora.gr.jp/cards/000879/card161.html",
+  "blurb": "A rich man who can drink all day and never get drunk lets a foreign monk tie him up in the summer sun, to draw out the worm in his belly that is doing the drinking.",
+  "about": "Akutagawa Ryūnosuke wrote this in 1916, retelling a tale from Pu Songling's Chinese collection Strange Tales from a Chinese Studio. He tells it with a straight face and a mock-scholarly air, and ends by offering three different answers to what the worm really was.",
   "zip_url": "https://www.aozora.gr.jp/cards/000879/files/161_ruby_777.zip",
   "rights": {
    "author_died": 1927,
@@ -127,7 +133,9 @@
      "year": 1930,
      "where": "Tales Grotesque and Curious (Hokuseido); Project Gutenberg #78105",
      "kind": "professional, complete, close to literal; public domain in the US",
-     "checked": "2026-11-02"
+     "checked": "2026-11-02",
+     "link": "https://www.gutenberg.org/ebooks/78105",
+     "link_label": "Project Gutenberg"
     }
    ],
    "verdict": "public domain (author died 1927, published 1916)"
@@ -154,7 +162,9 @@
      "year": 1927,
      "where": "Unhuman Tour (The Japan Times); Project Gutenberg #73131",
      "kind": "professional, dated, simplifying; public domain in the US",
-     "checked": "2026-11-02"
+     "checked": "2026-11-02",
+     "link": "https://www.gutenberg.org/ebooks/73131",
+     "link_label": "Project Gutenberg"
     },
     {
      "by": "Alan Turney",

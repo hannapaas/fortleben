@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["verdict", "reason", "say"],
+  "properties": {
+    "verdict": {"type": "string", "enum": ["pass", "fail"]},
+    "reason": {"type": "string", "description": "One line the writer can read and act on. Empty when it passes."},
+    "say": {"type": "string", "description": "One plain sentence for the record: what you decided and why."}
+  }
+}

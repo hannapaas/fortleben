@@ -1,0 +1,80 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "Outside the door, grown dark at some point, the sound of violent rain and wind could be heard, a storm.",
+    "ids": [
+     "p1"
+    ],
+    "notes": []
+   },
+   {
+    "english": "The parents and child had gathered about the table under the dim electric light hanging against the wall of the narrow room, about to take their supper. Father and mother were both still truly young. And the child was a plump, round little girl, just able to stand holding on to the table.",
+    "ids": [
+     "p2"
+    ],
+    "notes": [
+     "Text states plainly the child is a girl; kept literal for the later boya passages where both parents address her as such."
+    ]
+   },
+   {
+    "english": "Neither the man nor the woman had yet a wrinkle in the face. But in the man's sunken, gentle-looking eyes in the shadow of his thick eyebrows a dull colour of weariness could be seen. And in the colour of the woman's thick hair and about her slight shoulders a still more sunken deep weariness and a drowsy restfulness could be seen.",
+    "ids": [
+     "p3"
+    ],
+    "notes": []
+   },
+   {
+    "english": "The day had ended. The sadness and the suffering of that day were about to flow into the restfulness of the night. And silently smiling, they turned all their eyes upon the child.",
+    "ids": [
+     "p4"
+    ],
+    "notes": []
+   },
+   {
+    "english": "The child, standing unsteadily, with fat, round, short hands like balls, was about to stir up the things on the table, leaving not a moment's gap, and far too quickly. So, smiling, they set all the bowls and the teapot and the aluminium pan and the rest under the table. On the table there was left only the small spoon the child held, and a single small plate.",
+    "ids": [
+     "p5"
+    ],
+    "notes": [
+     "Vessels kept literal for poor-household texture; cleared under the table, not away."
+    ]
+   },
+   {
+    "english": "But the child gave a noisy cry full of small joy and banged the spoon and the plate down on the table.",
+    "ids": [
+     "p6"
+    ],
+    "notes": []
+   }
+  ],
+  "say": null
+ },
+ "usage": {
+  "input_tokens": 11473,
+  "cached_tokens": 0,
+  "output_tokens": 3012,
+  "reasoning_tokens": 2545,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.02714225,
+ "response_id": "resp_6ae9cb3a3d8fd90d50304a92",
+ "latency_s": 23.13,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1869
+  }
+ ],
+ "created": "2026-11-03T11:53:30Z"
+}

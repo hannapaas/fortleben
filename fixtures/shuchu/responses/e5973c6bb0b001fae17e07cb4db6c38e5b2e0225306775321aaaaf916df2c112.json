@@ -1,0 +1,36 @@
+{
+ "prompt": "parts",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": {
+  "say": "This short story is kept as a single part from p1, so the voice, cure scene, and three answers can be judged whole.",
+  "starts": [
+   "p1"
+  ],
+  "why": "The book's four brief numbered sections make one continuous short story well under the length limit, so joining them preserves the voice and arc for a single reading."
+ },
+ "usage": {
+  "input_tokens": 3092,
+  "cached_tokens": 0,
+  "output_tokens": 905,
+  "reasoning_tokens": 821,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.00771125,
+ "response_id": "resp_6ae9ccf4464ce0d489f54cff",
+ "latency_s": 8.73,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 321
+  }
+ ],
+ "created": "2026-11-03T12:00:52Z"
+}

@@ -48,8 +48,11 @@ def rows(conn, table: str, sql: str, args: dict) -> list[dict]:
 def run_record(conn, work_id: str, run_id: int) -> dict:
     """A run's full record: what export writes to run.json, and download puts in the zip."""
     args = {"work": work_id, "run": run_id}
-    record = {"work": rows(conn, "work", "SELECT * FROM work WHERE id=:work", args)[0],
-              "run": rows(conn, "run", "SELECT * FROM run WHERE id=:run", args)[0]}
+    work = rows(conn, "work", "SELECT * FROM work WHERE id=:work", args)[0]
+    work.pop("added_by", None)  # who added a work from a link stays in the database
+    if work.get("blurb") is None:
+        work.pop("blurb", None)
+    record = {"work": work, "run": rows(conn, "run", "SELECT * FROM run WHERE id=:run", args)[0]}
     record.update({name: rows(conn, name, sql, args) for name, sql in TABLES.items()})
     release = conn.execute("SELECT body FROM release WHERE run_id=? ORDER BY id DESC LIMIT 1", (run_id,)).fetchone()
     if release:

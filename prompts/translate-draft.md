@@ -27,7 +27,7 @@ Japanese often omits who speaks or acts. Decide as a translator would: from the 
 
 ## Notes and not knowing
 
-Keep the prose clean and the notes few. A note is not commentary on your work; it exists so that a reader who sees the line without it would not misjudge it. So note only what a careful reader could not work out from the English and the Japanese side by side: a line that looks wrong but is faithful (the author’s oddity, a deliberate repetition), a choice you could not settle (give both readings and what would settle it), a passage beyond you (a poem, a pun, a dialect line: draft it as best you can and flag it). Everything else, say in the line or not at all. Never fill a gap with something plausible and move on; if you had to guess, say so, once.
+Keep the prose clean and the notes few. A note is not commentary on your work; it exists so that a reader who sees the line without it would not misjudge it. So note only what a careful reader could not work out from the English and the Japanese side by side: a line that looks wrong but is faithful (the author’s oddity, a deliberate repetition), a choice you could not settle (give both readings and what would settle it), a passage beyond you (a poem, a pun, a dialect line: draft it as best you can and say so). Everything else, say in the line or not at all. Never fill a gap with something plausible and move on; if you had to guess, say so, once.
 
 ## What you return
 
@@ -36,4 +36,3 @@ For each paragraph, or group of paragraphs if the English genuinely wants two sh
 - the paragraph ID(s)
 - the English
 - translator's notes, if any
-- flags, for anything beyond you
