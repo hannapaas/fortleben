@@ -16,7 +16,8 @@
 <div class="wrap">
   <header class="top">
     <a class="mark" href="/">Fortleben</a>
-    <nav><a class="wide" href="/">Library</a><span class="paper" role="group" aria-label="Paper"><button type="button" data-paper="light">White</button><button type="button" data-paper="cream">Cream</button><button type="button" data-paper="dark">Dark</button></span></nav>
+    {% set me = request.state.person if request and request.state.person is defined else none %}
+    <nav><a class="wide" href="/">Library</a><a href="/wishlist">Wishlist</a>{% if me %}<span class="who"><a href="/desk">Your desk</a> · <form class="out" method="post" action="/logout"><input type="hidden" name="csrf" value="{{ request.state.csrf }}"><button type="submit">Sign out</button></form></span>{% elif request and not replay %}<a href="/login">Sign in</a>{% endif %}<span class="paper" role="group" aria-label="Paper"><button type="button" data-paper="light">White</button><button type="button" data-paper="cream">Cream</button><button type="button" data-paper="dark">Dark</button></span></nav>
   </header>
   {% block main %}{% endblock %}
 </div>

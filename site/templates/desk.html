@@ -1,22 +1,90 @@
 {% extends "base.html" %}
 {# The editors' desk (docs/EDITORS-DESK.md): an invited editor picks a work their allowance covers,
-   agrees to publication and starts a run; desk.js starts it, watches it and resumes it.
+   agrees to publication and starts a run; desk.js starts it, watches it and resumes it. A run that
+   pauses at the checkpoint (docs/STEERING.md) is shown below the form, rendered here from the record;
+   desk.js sends notes and the approval and reloads the page when keikaku has answered.
    A run's row is drawn here and again by desk.js when it changes, so keep the wording in step. #}
 {% macro n(x) %}{{ "{:,}".format(x or 0) }}{% endmacro %}
 {% macro run_row(r, blocked) -%}
 <li class="run st-{{ r.status }}" data-run="{{ r.id }}" data-status="{{ r.status }}">
   <span class="rt"><i>{{ r.title_en }}</i> <span class="sm">started {{ r.started }}</span></span>
-  <span class="rs" aria-live="polite">{% if r.status == 'queued' %}Queued.{% elif r.status == 'running' %}In progress: {{ r.stage_label }}.{% elif r.status == 'done' %}Done: {{ r.stage_label }}.{% elif r.status == 'failed' %}Failed at {{ r.stage_label }}.{% else %}Interrupted at {{ r.stage_label }}.{% endif %}
-    <span class="sm">{{ n(r.spent) }} drops spent{% if r.reserved %}, {{ n(r.reserved) }} still held{% endif %}.</span></span>
+  <span class="rs" aria-live="polite">{% if r.status == 'queued' %}Queued.{% elif r.status == 'running' %}In progress: {{ r.stage_label }}.{% elif r.status == 'waiting' %}Waiting for you.{% elif r.status == 'done' %}Done: {{ r.stage_label }}.{% elif r.status == 'failed' %}Failed at {{ r.stage_label }}.{% else %}Interrupted at {{ r.stage_label }}.{% endif %}
+    <span class="sm">{% if r.spent_words %}{{ r.spent_words }}{% else %}{{ n(r.spent) }} drops spent{% if r.held %}, {{ n(r.held) }} still held{% endif %}.{% endif %}</span></span>
   {% if r.status == 'done' and r.edition_url %}<a class="read" href="{{ r.edition_url }}">Read it</a>{% endif %}
+  {% if r.status == 'waiting' %}<a class="read" href="#checkpoint-{{ r.id }}">Read the analysis</a>{% endif %}
   {% if r.status in ('interrupted', 'failed') %}<span class="rr"><button type="button" class="btn resume"{% if blocked %} disabled{% endif %}>Resume</button>
-    <span class="sm">It carries on from the last finished stage; nothing is paid for twice.</span>
+    <span class="sm">{% if r.status == 'failed' and r.failure %}{{ r.failure }}{% else %}It carries on from the last finished stage; nothing is paid for twice.{% endif %}</span>
     <span class="err" aria-live="polite" hidden></span></span>{% endif %}
 </li>
+{%- endmacro %}
+{% macro paras(english) %}{% for e in english %}<p>{{ e }}</p>{% endfor %}{% endmacro %}
+{% macro pairs(rows) %}<dl class="pairs">{% for r in rows %}<dt>{{ r.label }}</dt><dd>{{ r.value }}</dd>{% endfor %}</dl>{% endmacro %}
+{% macro checkpoint(cp, full, closed) -%}
+<section class="desk checkpoint" id="checkpoint-{{ cp.run_id }}" data-run="{{ cp.run_id }}" data-rounds="{{ cp.rounds|length }}"{% if cp.steering %} data-steering="1"{% endif %}{% if full or closed %} data-full="1"{% endif %} aria-labelledby="cph-{{ cp.run_id }}">
+  <h2 class="cp-h" id="cph-{{ cp.run_id }}"><i>{{ cp.title_en }}</i>: before the draft</h2>
+  <p class="desk-lead">keikaku has read the story and is ready to draft. Read its analysis, pick a voice, and say in your own words anything it should hold differently before it starts.</p>
+
+  <h3>The reading</h3>
+  {% if cp.reading.crux %}<p class="sm">What the story turns on:</p>
+  <ul class="crux">{% for c in cp.reading.crux %}<li>{{ c.point }}{% if c.for_the_english %} <span class="sm block">For the English: {{ c.for_the_english }}</span>{% endif %}</li>{% endfor %}</ul>{% endif %}
+  {% if cp.reading.second_crux %}<p class="sm">A second reader, who never saw the reading, put it this way:</p>
+  <ul class="crux">{% for c in cp.reading.second_crux %}<li>{{ c.point }}</li>{% endfor %}</ul>{% endif %}
+  <div class="prose">{{ paras(cp.reading.prose) }}</div>
+  {% if cp.reading.questions %}<p class="sm">What it hasn't settled:</p>
+  <ul class="questions">{% for q in cp.reading.questions %}<li>{{ q }}</li>{% endfor %}</ul>{% endif %}
+
+  <h3 id="voice-q-{{ cp.run_id }}">The voices</h3>
+  <p class="sm">The first page, drafted in each voice the reading allows. Pick the one keikaku should write the whole story in.</p>
+  <div class="voices" role="radiogroup" aria-labelledby="voice-q-{{ cp.run_id }}">
+    {% for v in cp.voices %}
+    <div class="voice">
+      <label class="opt"><input type="radio" name="voice-{{ cp.run_id }}" value="{{ loop.index0 }}"{% if loop.index0 == cp.voice %} checked{% endif %}><span class="bx r" aria-hidden="true"></span><b>Voice {{ v.label }}</b></label>
+      <span class="sm block">{{ v.line }}</span>
+      {% if v.redrafted %}<span class="tag">redrafted after your note</span>{% endif %}
+      <div class="page">{{ paras(v.english) }}</div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <h3>The analysis</h3>
+  <p class="sm">Who everyone is and how the English handles them, as keikaku understands it before drafting.</p>
+  <details class="bible" open><summary>Style sheet</summary>{{ pairs(cp.bible.style_sheet) }}</details>
+  {% if cp.bible.cast %}<details class="bible"><summary>Cast</summary>
+    <table class="cast"><thead><tr><th scope="col">Who</th><th scope="col">What they are</th><th scope="col">How they're addressed</th></tr></thead><tbody>
+    {% for c in cp.bible.cast %}<tr><td>{{ c.handle }}{% if c.name %} <span class="sm" lang="ja">{{ c.name }}</span>{% endif %}</td><td>{{ c.role }}</td><td>{{ c.addressed }}</td></tr>{% endfor %}
+    </tbody></table></details>{% endif %}
+  {% if cp.bible.narration %}<details class="bible"><summary>Narration</summary>{{ pairs(cp.bible.narration) }}</details>{% endif %}
+  {% if cp.bible.motifs %}<details class="bible"><summary>Motifs</summary><dl class="pairs">{% for m in cp.bible.motifs %}<dt>{{ m.motif }}</dt><dd>{{ m.english }}</dd>{% endfor %}</dl></details>{% endif %}
+  {% if cp.bible.hard_spots %}<details class="bible"><summary>Hard spots</summary><dl class="pairs">{% for h in cp.bible.hard_spots %}<dt>{{ h.where }}{% if h.kind %} <span class="sm">({{ h.kind }})</span>{% endif %}</dt><dd>{{ h.why }}</dd>{% endfor %}</dl></details>{% endif %}
+
+  {% if cp.rounds %}<h3>Your notes so far</h3>
+  <ol class="rounds">{% for r in cp.rounds %}
+    <li class="round">
+      <p class="note"><span class="sm block">You wrote</span>{{ r.note }}</p>
+      <p class="reply"><span class="sm block">keikaku</span>{{ r.reply }}</p>
+      {% if r.changed %}<ul class="changed">{% for c in r.changed %}<li>{{ c }}</li>{% endfor %}</ul>{% endif %}
+      {% if r.question %}<p class="question"><span class="sm block">It asks</span>{{ r.question }}</p>{% endif %}
+      {% if r.english %}<details class="page-again"><summary>Page 1 after this note</summary><div class="page">{{ paras(r.english) }}</div></details>{% endif %}
+    </li>{% endfor %}
+  </ol>{% endif %}
+
+  <h3><label for="note-{{ cp.run_id }}">A note to keikaku</label></h3>
+  <p class="sm">Anything from “the daughter is older than this reads” to “less formal”.</p>
+  <textarea id="note-{{ cp.run_id }}" class="note-box" rows="4" maxlength="2000"></textarea>
+  <div class="startrow">
+    <button type="button" class="btn send"{% if closed or cp.steering %} disabled{% endif %}>Send note</button>
+    <button type="button" class="btn go approve"{% if full or closed or cp.steering %} disabled{% endif %}>Approve and draft</button>
+  </div>
+  <p class="sm">A note changes the analysis, never the Japanese, and keikaku drafts page 1 again so you can see the difference. Send as many as you like; nothing else is drafted until you approve.</p>
+  <p class="line reading-note" aria-live="polite"{% if not cp.steering %} hidden{% endif %}>Reading your note…</p>
+  {% if full and not closed %}<p class="line">Fortleben is full at the moment: three translations are going. Try again in a little while.</p>{% endif %}
+  <p class="err" aria-live="polite"{% if not cp.steer_error %} hidden{% endif %}>{{ cp.steer_error or '' }}</p>
+</section>
 {%- endmacro %}
 {% block title %}Editors' desk · Fortleben{% endblock %}
 {% block head %}<link rel="stylesheet" href="{{ url_for('static', path='desk.css') }}">{% endblock %}
 {% block main %}
+{% set csrf = request.state.csrf if request else '' %}
 <h1 class="desk-h">The editors' desk</h1>
 {% if not desk %}
 <p class="desk-lead">Translations can't be started from this copy of Fortleben.</p>
@@ -27,40 +95,76 @@
 {% set pick = open[0] if open else none %}
 {% set name = desk.editor.credit_as or desk.editor.name %}
 {% set blocked = closed or desk.busy %}
+{% set unstartable = blocked or desk.going or desk.keyless %}
 <p class="desk-lead">Pick a work and keikaku translates the whole of it, checks it and publishes it here. You can close this page while it runs.</p>
 
-<form class="form two desk" id="desk" data-token="{{ desk.token }}" data-granted="{{ al.granted }}" data-spent="{{ al.spent }}" data-reserved="{{ al.reserved }}" data-available="{{ al.available }}" novalidate>
+<form class="form two desk" id="desk" data-base="{{ desk.base }}"{% if unstartable %} data-unstartable="1"{% endif %}{% if desk.key_tail or desk.keyless %} data-own="1"{% endif %} data-granted="{{ al.granted }}" data-spent="{{ al.spent }}" data-reserved="{{ al.reserved }}" data-available="{{ al.available }}" novalidate>
   <div class="q">Who?</div>
-  <div class="a">{{ desk.editor.name }}, invited as an editor.</div>
+  <div class="a">{{ desk.editor.name }}, {% if desk.key_tail or desk.keyless %}signed up with your own key.{% else %}invited as an editor.{% endif %}
+    {% if desk.email %}<span class="sm block">You sign in as {{ desk.email }}.</span>{% endif %}</div>
 
+  {% if not desk.email or login_error %}
+  <div class="q"><label for="login-email">Sign in?</label></div>
+  <div class="a">Add an email and password so you can sign in without the link.
+    <div class="addrow wraps">
+      <input type="email" id="login-email" class="field" name="email" form="account" maxlength="254" required autocomplete="email" placeholder="Email" aria-label="Email" value="{{ login_email or '' }}">
+      <input type="password" class="field" name="password" form="account" minlength="8" maxlength="200" required autocomplete="new-password" placeholder="Password, at least 8 characters" aria-label="Password">
+      <button type="submit" class="btn" form="account">Save</button>
+    </div>
+    {% if login_error %}<p class="err" role="alert">{{ login_error }}</p>{% endif %}</div>
+  {% endif %}
+
+  {% if desk.key_tail %}
+  <div class="q">Paid by?</div>
+  <div class="a">Runs spend your own key, ending ····{{ desk.key_tail }}.
+    <button type="submit" class="btn forget" form="forget">Forget this key</button></div>
+  {% elif desk.keyless %}
+  <div class="q">Paid by?</div>
+  <div class="a">Nobody: this desk's key is forgotten. To translate again, add a new one.
+    <div class="addrow">
+      <input type="password" id="newkey" class="field" name="key" form="addkey" maxlength="200" required spellcheck="false" autocomplete="off" placeholder="Meta key" aria-label="Meta key">
+      <button type="submit" class="btn" form="addkey">Add a key</button>
+    </div>
+    {% if key_error %}<p class="err" role="alert">{{ key_error }}</p>{% endif %}</div>
+  {% else %}
   <div class="q">Allowance?</div>
   <div class="a"><b class="big" id="avail">{{ n(al.available) }}</b> drops of ink to spend.
     <span class="sm" id="altail">{{ n(al.granted) }} granted, {{ n(al.spent) }} spent{% if al.reserved %}, {{ n(al.reserved) }} held for a translation in progress{% endif %}.</span>
     <span class="sm block">A sheet is 400 characters of the original Japanese.</span></div>
+  {% endif %}
 
   <div class="q" id="work-q">Translate a work?</div>
   <div class="a">
-    {% if works %}
-    <div class="works" role="radiogroup" aria-labelledby="work-q">
+    {% if not closed %}
+    <div class="addwork">
+      <label for="aozora-url" class="sm block">Or paste a link to any work on Aozora Bunko</label>
+      <div class="addrow">
+        <input type="url" id="aozora-url" class="url-box" form="addwork" name="url" inputmode="url" autocomplete="off" spellcheck="false" placeholder="https://www.aozora.gr.jp/cards/…">
+        <button type="submit" class="btn" form="addwork" id="add">Add</button>
+      </div>
+      <p class="err" id="adderr" aria-live="polite" hidden></p>
+    </div>
+    {% endif %}
+    <div class="works" id="works" role="radiogroup" aria-labelledby="work-q"{% if not works %} hidden{% endif %}>
       {% for w in works %}
       <label class="work{% if not w.covered %} short{% endif %}">
         <input type="radio" name="work" value="{{ w.id }}" data-estimate="{{ w.estimate }}" data-title="{{ w.title_en }}"{% if pick and w.id == pick.id %} checked{% endif %}{% if not w.covered %} disabled{% endif %}>
         <span class="bx r" aria-hidden="true"></span>
         <span class="wb">
           <span class="wj" lang="ja">{{ w.title }}</span>
-          <span class="wt">{{ w.title_en }}</span>{% if w.id == desk.suggested %} <span class="stamp">suggested</span>{% endif %}
+          <span class="wt">{{ w.title_en }}</span>{% if w.id == desk.suggested %} <span class="tag">suggested</span>{% endif %}
+          {% if desk.key_tail or desk.keyless %}<span class="meta">{{ w.author_en }}{% if w.year %}, {{ w.year }}{% endif %} · {{ '%g' % (w.sheets|round(1)) }} sheets.{% if not w.covered %} Longer than one run here may spend.{% endif %}</span>{% else %}
           <span class="meta">{{ w.author_en }}{% if w.year %}, {{ w.year }}{% endif %} · {{ '%g' % (w.sheets|round(1)) }} sheets · {{ n(w.estimate) }} drops.
-            {% if w.covered %}Your allowance covers it.{% else %}That's {{ n(w.estimate - al.available) }} more than you have.{% endif %}</span>
+            {% if w.covered %}Your allowance covers it.{% else %}That's {{ n(w.estimate - al.available) }} more than you have.{% endif %}</span>{% endif %}
           {% if w.blurb %}<span class="meta blurb">{{ w.blurb }}</span>{% endif %}
           {% if w.has_edition %}<span class="meta">Already on the shelf. Yours would be a separate edition, under your credit.</span>{% endif %}
+          {% if w.added %}<span class="meta added">Added from Aozora</span>{% endif %}
         </span>
       </label>
       {% endfor %}
     </div>
-    {% if not open %}<p class="sm">Your allowance doesn't cover any of these.</p>{% endif %}
-    {% else %}
-    <p>No works are open to translate.</p>
-    {% endif %}
+    {% if works and not open %}<p class="sm" id="noneopen">{% if desk.key_tail or desk.keyless %}Each of these is longer than one run here may spend.{% else %}Your allowance doesn't cover any of these.{% endif %}</p>{% endif %}
+    {% if not works %}<p id="noworks">No works are open to translate.</p>{% endif %}
   </div>
 
   <div class="q" id="credit-q">Credit?</div>
@@ -73,29 +177,32 @@
   </div>
 
   <div class="q">Published?</div>
-  <div class="a">
-    <label class="opt"><input type="checkbox" name="agree" id="agree" required><span class="bx" aria-hidden="true"></span>Publish the result on Fortleben under these labels</label>
-    <span class="sm block">Everything translated here is published here, labelled as keikaku's work, with your credit on it. There are no private translations.</span>
-  </div>
+  <div class="a">Yes, always. Everything translated here is published on Fortleben, labelled as keikaku's work, with your credit on it. There are no private translations.</div>
 
   <div class="q" aria-hidden="true"></div>
   <div class="a">
     <div class="startrow">
-      <button type="submit" class="btn go" id="start"{% if blocked or not pick %} disabled{% endif %}>Start</button>
-      <span class="sm" id="hold"{% if not pick %} hidden{% endif %}>Holds <span id="holdn">{{ n(pick.estimate if pick else 0) }}</span> drops from your allowance; whatever isn't used comes back at the end.</span>
+      <button type="submit" class="btn go" id="start"{% if unstartable or not pick %} disabled{% endif %}>Start</button>
+      {% if desk.key_tail or desk.keyless %}<span class="sm" id="hold"{% if desk.keyless %} hidden{% endif %}>It spends your own key as it goes, and stops at the run's cap.</span>{% else %}
+      <span class="sm" id="hold"{% if not pick %} hidden{% endif %}>Holds <span id="holdn">{{ n(pick.estimate if pick else 0) }}</span> drops from your allowance; whatever isn't used comes back at the end.</span>{% endif %}
     </div>
-    {% if closed %}<p class="line" id="busy">{{ closed }}</p>{% elif desk.busy %}<p class="line" id="busy">Another translation is running on the site. Try again when it's finished.</p>{% endif %}
+    {% if closed %}<p class="line" id="busy">{{ closed }}</p>{% elif desk.going %}<p class="line" id="busy">You have a translation going already. Start the next one when it has finished.</p>{% elif desk.busy %}<p class="line" id="busy">Fortleben is full at the moment: three translations are going. Try again in a little while.</p>{% endif %}
     <p class="err" id="err" aria-live="polite" hidden></p>
   </div>
 
   <div class="q">Your translations?</div>
   <div class="a">
     <ul class="runs" id="runs">
-      {% for r in desk.runs %}{{ run_row(r, blocked) }}{% endfor %}
+      {% for r in desk.runs %}{{ run_row(r, blocked or desk.keyless) }}{% endfor %}
     </ul>
     <p class="sm" id="noruns"{% if desk.runs %} hidden{% endif %}>None started.</p>
   </div>
 </form>
+{% for cp in desk.checkpoints or [] %}{{ checkpoint(cp, desk.busy, closed) }}{% endfor %}
+{% if desk.key_tail %}<form id="forget" method="post" action="{{ desk.base }}/key/forget" hidden><input type="hidden" name="csrf" value="{{ csrf }}"></form>{% endif %}
+{% if desk.keyless %}<form id="addkey" method="post" action="{{ desk.base }}/key" hidden><input type="hidden" name="csrf" value="{{ csrf }}"></form>{% endif %}
+{% if not desk.email or login_error %}<form id="account" method="post" action="{{ desk.base }}/account" hidden><input type="hidden" name="csrf" value="{{ csrf }}"></form>{% endif %}
+{% if not closed %}<form id="addwork" hidden></form>{% endif %}
 {% endif %}
 {% endblock %}
 {% block scripts %}{% if desk %}<script src="{{ url_for('static', path='desk.js') }}"></script>{% endif %}{% endblock %}

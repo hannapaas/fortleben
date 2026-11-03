@@ -256,8 +256,20 @@ def start_digests(db, every: int = 900) -> None:
 
 
 def email(subject: str, text: str) -> None:
-    """Send to REPORT_EMAIL_TO through Resend's API. Without a key it goes to the log instead."""
-    key, to = os.environ.get("RESEND_API_KEY"), os.environ.get("REPORT_EMAIL_TO")
+    """Send to REPORT_EMAIL_TO, the editor's address. Without a key it goes to the log instead."""
+    send(os.environ.get("REPORT_EMAIL_TO"), subject, text)
+
+
+def can_send() -> bool:
+    """Mail actually leaves this server: RESEND_API_KEY is set."""
+    return bool(os.environ.get("RESEND_API_KEY"))
+
+
+def send(to: str | None, subject: str, text: str, *, private: bool = False) -> None:
+    """Send a plain-text mail through Resend's API, the site's only mail path. Without a key (or an
+    address) it goes to the server log instead, so whoever runs the server can read it. A `private`
+    mail (a reset link) never has its text logged when sending fails, only that it failed."""
+    key = os.environ.get("RESEND_API_KEY")
     if not (key and to):
         print(f"[email not configured] {subject}\n{text}")
         return
@@ -267,4 +279,4 @@ def email(subject: str, text: str) -> None:
                        json={"from": sender, "to": [to], "subject": subject, "text": text})
         r.raise_for_status()
     except Exception as e:
-        print(f"[email failed: {e}] {subject}\n{text}")
+        print(f"[email failed: {type(e).__name__}] {subject}" if private else f"[email failed: {e}] {subject}\n{text}")

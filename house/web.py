@@ -4,25 +4,32 @@ With --replay it serves the recorded runs in fixtures/ from a fresh database, so
 clean clone with no key and no network; comments need a key, since each is screened by Spark.
 Without --replay it serves the live database, into which the recorded runs are loaded once, so a
 fresh server has the shelf from the start and live runs add to it.
-The editors' desk (/desk/<token>, house/desk.py) starts real runs, so it needs a key and an open house too.
+The editors' desk (/desk when signed in, /desk/<token> from an invite link; house/desk.py) starts real
+runs, so it needs a key (the site's or the person's own) and an open site too.
 """
 
+import hmac
 import os
 import secrets
 import tempfile
+from urllib.parse import parse_qs
 from pathlib import Path
 
 from dotenv import load_dotenv
 from fastapi import BackgroundTasks, FastAPI, HTTPException, Query, Request
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
+from fastapi.concurrency import run_in_threadpool
 from fastapi.templating import Jinja2Templates
 
-from house import comments, desk, edition
+from house import accounts, comments, desk, edition, wishlist
 from house.db import ROOT, connect
 
 SITE = ROOT / "site"
-COOKIE = "fl_id"
+COOKIE = "fl_id"  # a reader's comments
+SESSION = "fl_session"  # a signed-in person (house/accounts.py)
+CSRF = "fl_csrf"  # the token every HTML form that changes something must carry
+SESSION_DAYS = 90
 templates = Jinja2Templates(directory=SITE / "templates")
 templates.env.filters["datefmt"] = edition._date
 
@@ -77,6 +84,13 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
             page.set_cookie(COOKIE, token, max_age=60 * 60 * 24 * 365, httponly=True, samesite="lax",
                             secure=request.url.scheme == "https")
         return page
+
+    @app.get("/read/{work_id}/analysis", response_class=HTMLResponse)
+    def analysis(request: Request, work_id: str, edition_id: int | None = Query(None, alias="edition")):
+        ed = edition.edition(conn(), work_id, edition_id)
+        if not ed or not ed["analysis"]:
+            raise HTTPException(404, "No analysis of that work here.")
+        return templates.TemplateResponse(request, "analysis.html", {"ed": ed, "analysis": ed["analysis"], "replay": replay})
 
     @app.post("/read/{work_id}/comments")
     async def post_comment(request: Request, work_id: str, background: BackgroundTasks):
@@ -134,50 +148,348 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
         return plain(f"Comment {comment_id} is {'hidden' if action == 'hide' else 'published'}." if done
                      else f"Comment {comment_id} was already {'hidden' if action == 'hide' else 'published'}.", 200)
 
-    # The editors' desk. An invite link is the only way in; desk pages are never indexed.
+    # --- Who's asking: the session cookie and the forms' CSRF token (house/accounts.py) -------------
+    # Every request is resolved to a signed-in person or none. HTML forms that change anything carry
+    # a token that must match the fl_csrf cookie, which another site can't read; the desk's JSON
+    # requests carry an X-Requested-With header, which a form on another site can't set.
+
+    def https(request: Request) -> bool:
+        return request.url.scheme == "https" or request.headers.get("x-forwarded-proto") == "https"
+
+    @app.middleware("http")
+    async def who(request: Request, call_next):
+        sid = request.cookies.get(SESSION)
+        static = request.url.path.startswith("/static/")
+        request.state.person = accounts.session_person(conn(), sid) if sid and not static else None
+        csrf = request.cookies.get(CSRF) or ""
+        fresh = not (16 <= len(csrf) <= 100)
+        if fresh:
+            csrf = secrets.token_urlsafe(32)
+        request.state.csrf = csrf
+        response = await call_next(request)
+        if fresh and not static:
+            response.set_cookie(CSRF, csrf, max_age=60 * 60 * 24 * SESSION_DAYS, httponly=True, samesite="lax",
+                                secure=https(request))
+        return response
+
+    async def form_of(request: Request) -> dict[str, str] | None:
+        """The posted form, one value per field, or None if its CSRF token doesn't match the cookie."""
+        form = {k: v[0] for k, v in parse_qs((await request.body()).decode("utf-8", "replace")).items()}
+        cookie = request.cookies.get(CSRF) or ""
+        if not cookie or not hmac.compare_digest(cookie.encode(), form.get("csrf", "").encode()):
+            return None
+        return form
+
+    EXPIRED = "That form was out of date. Go back, reload the page and try again."
+
+    def from_desk(request: Request) -> bool:
+        return request.headers.get("x-requested-with") == "fetch"
+
+    def sign_in(request: Request, response, person_id: int):
+        accounts.end_session(conn(), request.cookies.get(SESSION))
+        response.set_cookie(SESSION, accounts.new_session(conn(), person_id), max_age=60 * 60 * 24 * SESSION_DAYS,
+                            httponly=True, samesite="lax", secure=https(request))
+        return response
+
+    def page(request: Request, template: str, status: int = 200, **ctx) -> HTMLResponse:
+        r = templates.TemplateResponse(request, template, {"replay": replay, **ctx}, status_code=status)
+        r.headers.update(NOINDEX)
+        return r
+
+    # --- The editors' desk. An invite link or a signed-in session gets you in; desk pages are never indexed.
+    # Every desk route answers at /desk/... for a signed-in person and at /desk/<token>/... for an invite
+    # link; `person_of` turns either into the person, and the desk's functions take their id from there.
 
     def refused(e: desk.Refused) -> JSONResponse:
         return JSONResponse({"error": str(e)}, status_code=e.code, headers=NOINDEX)
 
-    @app.get("/desk/{token}", response_class=HTMLResponse)
-    def desk_page(request: Request, token: str):
+    def error(message: str, status: int) -> JSONResponse:
+        return JSONResponse({"error": message}, status_code=status, headers=NOINDEX)
+
+    def person_of(request: Request):
+        token = request.path_params.get("token")
+        return desk.editor(conn(), token) if token is not None else request.state.person
+
+    def nobody(request: Request) -> JSONResponse:
+        if request.path_params.get("token") is not None:
+            return error("That invite link isn't valid.", 404)
+        return error("Sign in first.", 401)
+
+    def desk_route(method: str, path: str):
+        """Register a desk route at /desk<path> and /desk/{token}<path>."""
+        def register(fn):
+            for prefix in ("/desk", "/desk/{token}"):
+                app.add_api_route(prefix + path, fn, methods=[method], include_in_schema=False)
+            return fn
+        return register
+
+    def json_post(fn):
+        """A desk JSON POST: from desk.js only, for a known person, and only while runs can start for them."""
+        async def route(request: Request):
+            if not from_desk(request):
+                return error("That request didn't come from the desk page.", 403)
+            person = person_of(request)
+            if not person:
+                return nobody(request)
+            if why := closed_for(person):
+                return error(why, 403)
+            try:
+                data = await request.json()
+            except ValueError:
+                data = {}
+            if not isinstance(data, dict):
+                data = {}
+            try:
+                return JSONResponse(await fn(request, person["id"], data), headers=NOINDEX)
+            except desk.Refused as e:
+                return refused(e)
+        return route
+
+    def desk_page(request: Request, person, status: int = 200, **ctx) -> HTMLResponse:
         if replay:
             return plain(closed, 200)
-        state = desk.state(conn(), token)
-        if not state:
+        who = request.path_params.get("token") or person["id"]
+        state = desk.state(conn(), who)
+        return page(request, "desk.html", status, desk=state, closed=closed_for(person), **ctx)
+
+    @app.get("/desk", response_class=HTMLResponse)
+    def desk_home(request: Request):
+        person = request.state.person
+        if not person:
+            return RedirectResponse("/login", status_code=303, headers=NOINDEX)
+        return desk_page(request, person)
+
+    @app.get("/desk/{token}", response_class=HTMLResponse)
+    def desk_link(request: Request, token: str):
+        if replay:
+            return plain(closed, 200)
+        person = desk.editor(conn(), token)
+        if not person:
             return plain("That invite link isn't valid. Ask whoever sent it for a new one.", 404)
-        page = templates.TemplateResponse(request, "desk.html", {"desk": state, "replay": replay, "closed": closed})
-        page.headers.update(NOINDEX)
-        return page
+        response = desk_page(request, person)
+        me = request.state.person
+        return response if me and me["id"] == person["id"] else sign_in(request, response, person["id"])
 
-    @app.post("/desk/{token}/runs")
-    async def desk_start(token: str, request: Request):
-        if closed:
-            return JSONResponse({"error": closed}, status_code=403, headers=NOINDEX)
-        data = await request.json()
-        try:
-            run_id = desk.start(db, token, str(data.get("work", "")), data.get("agree") is True,
-                                str(data.get("credit") or ""))
-        except desk.Refused as e:
-            return refused(e)
-        return JSONResponse({"run_id": run_id}, headers=NOINDEX)
+    @desk_route("POST", "/runs")
+    @json_post
+    async def desk_start(request, pid, data):
+        return {"run_id": desk.start(db, pid, str(data.get("work", "")), data.get("agree") is True,
+                                     str(data.get("credit") or ""), checkpoint=data.get("checkpoint") is not False)}
 
-    @app.get("/desk/{token}/runs/{run_id}")
-    def desk_run(token: str, run_id: int):
-        run = desk.run_state(conn(), token, run_id)
+    # A work added from a link to Aozora Bunko (house/acquire.py): its row for the list, or why not.
+    @desk_route("POST", "/works")
+    @json_post
+    async def desk_add(request, pid, data):
+        url = data.get("url")
+        return await run_in_threadpool(desk.add_work, db, pid, str(url or ""))
+
+    @desk_route("GET", "/runs/{run_id}")
+    def desk_run(request: Request, run_id: int):
+        person = person_of(request)
+        run = desk.run_state(conn(), person["id"], run_id) if person else None
         if not run:
             raise HTTPException(404, "No such run on this desk.", headers=NOINDEX)
         return JSONResponse(run, headers=NOINDEX)
 
-    @app.post("/desk/{token}/runs/{run_id}/resume")
-    def desk_resume(token: str, run_id: int):
-        if closed:
-            return JSONResponse({"error": closed}, status_code=403, headers=NOINDEX)
+    @desk_route("POST", "/runs/{run_id}/resume")
+    @json_post
+    async def desk_resume(request, pid, data):
+        desk.resume(db, pid, int(request.path_params["run_id"]))
+        return {"ok": True}
+
+    # The checkpoint: a note to keikaku, read in the background, or approval in a voice.
+    @desk_route("POST", "/runs/{run_id}/steer")
+    @json_post
+    async def desk_steer(request, pid, data):
+        desk.steer(db, pid, int(request.path_params["run_id"]), str(data.get("note") or ""), data.get("voice"))
+        return {"ok": True}
+
+    @desk_route("POST", "/runs/{run_id}/approve")
+    @json_post
+    async def desk_approve(request, pid, data):
+        desk.approve(db, pid, int(request.path_params["run_id"]), data.get("voice"))
+        return {"ok": True}
+
+    # --- Sign-up, sign-in and keys (house/accounts.py) -----------------------------------------------
+    # Anyone can sign up with a name, an email address, a password and their own Meta key; their runs
+    # spend that key. So a site with no key of its own still lets them start, unless it's a replay or shut.
+    no_site_key = not replay and not os.environ.get("MODEL_API_KEY") and os.environ.get("HOUSE_OPEN", "true").lower() != "false"
+    signup_closed = (closed.replace("Runs can't start here", "Sign-up is closed here") if closed and not no_site_key else
+                     "Sign-up is closed here: this copy of the site has no secret set, so it can't hold keys."
+                     if not os.environ.get("KEIKAKU_SECRET") else None)
+
+    def closed_for(person) -> str | None:
+        """Why runs can't start for this person, or None if they can."""
+        if closed and no_site_key and accounts.has_key(person):
+            return None
+        return closed
+
+    def base_url(request: Request) -> str:
+        return (os.environ.get("KEIKAKU_BASE_URL") or str(request.base_url)).rstrip("/")
+
+    def signup_page(request: Request, status: int = 200, **ctx) -> HTMLResponse:
+        return page(request, "signup.html", status, closed=signup_closed, **ctx)
+
+    @app.get("/signup", response_class=HTMLResponse)
+    def signup_form(request: Request):
+        return signup_page(request)
+
+    @app.post("/signup", response_class=HTMLResponse)
+    async def signup(request: Request):
+        if signup_closed:
+            return signup_page(request, 403)
+        form = await form_of(request)
+        if form is None:
+            return signup_page(request, 403, error=EXPIRED)
+        name, email = form.get("name", ""), form.get("email", "")
+        if not accounts.allow_signup(address(request)):
+            return signup_page(request, 429, name=name, email=email,
+                               error="That's a lot of sign-ups from one place in an hour. Try again later.")
         try:
-            desk.resume(db, token, run_id)
-        except desk.Refused as e:
-            return refused(e)
-        return JSONResponse({"ok": True}, headers=NOINDEX)
+            pid = accounts.signup(conn(), name, email, form.get("password", ""), form.get("key", ""))
+        except accounts.Refused as e:
+            return signup_page(request, 400, name=name, email=email, error=str(e))
+        return sign_in(request, RedirectResponse("/desk", status_code=303, headers=NOINDEX), pid)
+
+    @app.get("/login", response_class=HTMLResponse)
+    def login_form(request: Request):
+        if request.state.person:
+            return RedirectResponse("/desk", status_code=303, headers=NOINDEX)
+        return page(request, "login.html")
+
+    @app.post("/login", response_class=HTMLResponse)
+    async def login(request: Request):
+        form = await form_of(request)
+        if form is None:
+            return page(request, "login.html", 403, error=EXPIRED)
+        email = form.get("email", "")
+        if not accounts.allow_login(address(request), email):
+            return page(request, "login.html", 429, email=email,
+                        error="That's a lot of tries in an hour. Try again later.")
+        pid = accounts.authenticate(conn(), email, form.get("password", ""))
+        if pid is None:
+            return page(request, "login.html", 400, email=email, error=accounts.NO_MATCH)
+        return sign_in(request, RedirectResponse("/desk", status_code=303, headers=NOINDEX), pid)
+
+    @app.post("/logout")
+    async def logout(request: Request):
+        if await form_of(request) is None:
+            return plain(EXPIRED, 403)
+        accounts.end_session(conn(), request.cookies.get(SESSION))
+        response = RedirectResponse("/", status_code=303, headers=NOINDEX)
+        response.delete_cookie(SESSION, httponly=True, samesite="lax", secure=https(request))
+        return response
+
+    # A forgotten password: a link by mail, through the same Resend path as the comments email.
+    # The page says the same whether or not the address has an account.
+    @app.get("/reset", response_class=HTMLResponse)
+    def reset_form(request: Request):
+        return page(request, "reset.html", can_mail=comments.can_send())
+
+    @app.post("/reset", response_class=HTMLResponse)
+    async def reset_ask(request: Request):
+        form = await form_of(request)
+        if form is None:
+            return page(request, "reset.html", 403, can_mail=comments.can_send(), error=EXPIRED)
+        email = form.get("email", "").strip().lower()
+        if not accounts.allow_reset(address(request), email):
+            return page(request, "reset.html", 429, can_mail=comments.can_send(), email=email,
+                        error="That's a lot of reset requests in an hour. Try again later.")
+        if token := accounts.new_reset(conn(), email):
+            comments.send(email, "Reset your Fortleben password",
+                          f"Someone asked to reset the password for this email address on Fortleben.\n\n"
+                          f"To choose a new one, open this link within the hour:\n{base_url(request)}/reset/{token}\n\n"
+                          "If it wasn't you, ignore this mail: nothing changes.", private=True)
+        # Without RESEND_API_KEY the link went to the server log, and the page doesn't claim it was mailed.
+        return page(request, "reset.html", can_mail=comments.can_send(), sent=comments.can_send())
+
+    @app.get("/reset/{token}", response_class=HTMLResponse)
+    def reset_link(request: Request, token: str):
+        if accounts.reset_person(conn(), token) is None:
+            return page(request, "reset.html", 404, can_mail=comments.can_send(), error=accounts.RESET_GONE)
+        return page(request, "reset.html", token=token)
+
+    @app.post("/reset/{token}", response_class=HTMLResponse)
+    async def reset_set(request: Request, token: str):
+        form = await form_of(request)
+        if form is None:
+            return page(request, "reset.html", 403, token=token, error=EXPIRED)
+        try:
+            pid = accounts.use_reset(conn(), token, form.get("password", ""))
+        except accounts.Refused as e:
+            gone = str(e) == accounts.RESET_GONE
+            return page(request, "reset.html", 404 if gone else 400, can_mail=comments.can_send(),
+                        token=None if gone else token, error=str(e))
+        return sign_in(request, RedirectResponse("/desk", status_code=303, headers=NOINDEX), pid)
+
+    # The desk's own forms: forget the key, add a new one, add an email address and password.
+    def back_to_desk(request: Request) -> str:
+        token = request.path_params.get("token")
+        return f"/desk/{token}" if token is not None else "/desk"
+
+    @desk_route("POST", "/key/forget")
+    async def forget_key(request: Request):
+        person = person_of(request)
+        if not person:
+            return plain("That desk link isn't valid.", 404)
+        if await form_of(request) is None:
+            return plain(EXPIRED, 403)
+        accounts.forget_key(conn(), person["id"])
+        return RedirectResponse(back_to_desk(request), status_code=303, headers=NOINDEX)
+
+    @desk_route("POST", "/key")
+    async def add_key(request: Request):
+        person = person_of(request)
+        if not person:
+            return plain("That desk link isn't valid.", 404)
+        form = await form_of(request)
+        if form is None:
+            return plain(EXPIRED, 403)
+        try:
+            accounts.set_key(conn(), person["id"], form.get("key", ""))
+        except accounts.Refused as e:
+            return desk_page(request, person, 400, key_error=str(e))
+        return RedirectResponse(back_to_desk(request), status_code=303, headers=NOINDEX)
+
+    @desk_route("POST", "/account")
+    async def add_login(request: Request):
+        person = person_of(request)
+        if not person:
+            return plain("That desk link isn't valid.", 404)
+        form = await form_of(request)
+        if form is None:
+            return plain(EXPIRED, 403)
+        try:
+            accounts.set_login(conn(), person["id"], form.get("email", ""), form.get("password", ""))
+        except accounts.Refused as e:
+            return desk_page(request, person, 400, login_error=str(e),
+                             login_email=form.get("email", ""))
+        return RedirectResponse(back_to_desk(request), status_code=303, headers=NOINDEX)
+
+    # --- The public wishlist (house/wishlist.py) ---------------------------------------------------
+    # Anyone can paste an Aozora link, with no sign-in; it goes through the desk's add (house/acquire.py),
+    # so it needs what a run needs: no replay, a key, an open house.
+
+    def wishlist_page(request: Request, status: int = 200, **ctx) -> HTMLResponse:
+        return templates.TemplateResponse(request, "wishlist.html", {
+            "replay": replay, "closed": closed, "wishes": wishlist.entries(conn()), **ctx}, status_code=status)
+
+    @app.get("/wishlist", response_class=HTMLResponse)
+    def wishlist_view(request: Request):
+        return wishlist_page(request)
+
+    @app.post("/wishlist", response_class=HTMLResponse)
+    async def wishlist_ask(request: Request):
+        if closed:
+            return wishlist_page(request, 403)
+        form = parse_qs((await request.body()).decode("utf-8", "replace"))
+        url = (form.get("url") or [""])[0][:500]
+        try:
+            ip = address(request)
+            said = await run_in_threadpool(lambda: wishlist.ask(conn(), url, ip))  # its own connection, in the worker thread
+        except wishlist.Refused as e:
+            return wishlist_page(request, e.code, url=url, error=str(e))
+        return wishlist_page(request, said=said)
 
     return app
 
