@@ -116,9 +116,13 @@
     };
   });
 
-  // Settings behind the round "Aa" button: a card on wide screens, a sheet on phones.
+  // Settings behind the round "Aa" button: a card on wide screens, a sheet on phones. It starts open
+  // so nobody misses it, until the reader has closed it once.
   var sheet = document.getElementById('settings'), aa = document.getElementById('aa');
-  function showSettings(on) { sheet.classList.toggle('open', on); aa.setAttribute('aria-expanded', on); }
+  function showSettings(on) {
+    sheet.classList.toggle('open', on); aa.setAttribute('aria-expanded', on);
+    if (!on) try { localStorage.setItem('fl-aa-seen', '1'); } catch (e) {}
+  }
   aa.onclick = function () { showSettings(!sheet.classList.contains('open')); };
   document.getElementById('closeSettings').onclick = function () { showSettings(false); };
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') showSettings(false); });
@@ -227,6 +231,9 @@
   });
 
   apply(false);
-  var m = location.hash.match(/#(p\d+)$/);
+  var seen = false;
+  try { seen = !!localStorage.getItem('fl-aa-seen'); } catch (e) {}
+  if (!seen) showSettings(true);
+  var m =location.hash.match(/#(p\d+)$/);
   if (m && document.getElementById(m[1])) document.getElementById(m[1]).scrollIntoView();
 })();
