@@ -54,6 +54,10 @@ a { color: inherit; text-decoration-color: var(--accent); text-underline-offset:
 .top nav .heart:hover { text-decoration: none; }
 .top nav .heart:hover svg, .top nav .heart:focus-visible svg { color: var(--accent-text); fill: var(--accent-wash); animation: wiggle .6s ease-in-out; }
 @keyframes wiggle { 0%, 100% { transform: rotate(0); } 20% { transform: rotate(-14deg); } 45% { transform: rotate(11deg); } 70% { transform: rotate(-6deg); } 88% { transform: rotate(3deg); } }
+/* The foot of every page: the licences, where the texts come from, and who made it. */
+.foot { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 3rem 0 0; padding: 18px 0 28px; border-top: 1px solid var(--rule); font-size: 13px; line-height: 1.5; color: var(--ink-2); }
+.foot .me { margin-left: auto; }
+.wrap:has(.aa) .foot { padding-bottom: 92px; }
 .replay { font-size: 12px; padding: 6px 28px; color: var(--ink-2); border-bottom: 1px solid var(--rule); }
 
 /* The form rows: italic question, plain answer. */

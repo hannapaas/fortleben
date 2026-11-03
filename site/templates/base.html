@@ -21,6 +21,13 @@
     <nav><a class="wide" href="/">Library</a><a class="heart" href="/wishlist" aria-label="Wishlist" title="Wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0112 7.6a4.3 4.3 0 017.5 2.7c0 5.6-7.5 10.2-7.5 10.2z"/></svg></a><a href="/about">About</a>{% if me %}<span class="who"><a href="/desk">Your desk</a> · <form class="out" method="post" action="/logout"><input type="hidden" name="csrf" value="{{ request.state.csrf }}"><button type="submit">Sign out</button></form></span>{% elif request and not replay %}<a href="/login">Sign in</a>{% endif %}<span class="paper" role="group" aria-label="Paper"><button type="button" data-paper="light">White</button><button type="button" data-paper="cream">Cream</button><button type="button" data-paper="dark">Dark</button></span></nav>
   </header>
   {% block main %}{% endblock %}
+  <footer class="foot">
+    <span>Translations free to share and adapt under <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license noopener">CC BY-SA 4.0</a></span>
+    <span>Code under <a href="https://www.apache.org/licenses/LICENSE-2.0" rel="noopener">Apache 2.0</a></span>
+    <span>Japanese texts from <a href="https://www.aozora.gr.jp/" rel="noopener">Aozora Bunko</a></span>
+    <span><a href="/about">About</a></span>
+    <span class="me">Made by <a href="https://hanna.fyi" rel="noopener">hanna.fyi</a></span>
+  </footer>
 </div>
 <script>
 (function () {
