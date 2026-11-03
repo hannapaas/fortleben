@@ -93,7 +93,6 @@
 {% set works = (desk.works|selectattr('id', 'equalto', desk.suggested)|list) + (desk.works|rejectattr('id', 'equalto', desk.suggested)|list) %}
 {% set open = works|selectattr('covered')|list %}
 {% set pick = open[0] if open else none %}
-{% set name = desk.editor.credit_as or desk.editor.name %}
 {% set blocked = closed or desk.busy %}
 {% set unstartable = blocked or desk.going or desk.keyless %}
 <p class="desk-lead">Pick a work and keikaku translates the whole of it, checks it and publishes it here. You can close this page while it runs.</p>
@@ -140,7 +139,7 @@
     </div>
     {% if key_error %}<p class="err" role="alert">{{ key_error }}</p>{% endif %}
     <span class="sm block">Make a key for this and nothing else. Put on it only what you are willing to spend; start small, you can add more. Turn off automatic top-up so a run can never spend more than you put on it. If the key runs out part-way, the translation stops where it is: top it up and resume it here, and nothing is paid for twice.</span>
-    <span class="sm block">We hold it encrypted and use it only for your own translations. Only its last four characters are ever shown, to you. Press <i>Forget this key</i> and it is gone.</span></div>
+    <span class="sm block">We hold it encrypted and use it only for your own translations. Only its last four characters are ever shown, to you. Press <i>Forget this key</i> and it is deleted.</span></div>
   {% else %}
   <div class="q">Allowance?</div>
   <div class="a"><b class="big" id="avail">{{ n(al.available) }}</b> drops of ink to spend.
@@ -182,13 +181,10 @@
     {% if not works %}<p id="noworks">No works are open to translate.</p>{% endif %}
   </div>
 
-  <div class="q" id="credit-q">Credit?</div>
+  <div class="q"><label for="credit">Credit?</label></div>
   <div class="a">
-    <div class="row" role="radiogroup" aria-labelledby="credit-q">
-      <label class="opt"><input type="radio" name="credit" value="{{ name }}"{% if desk.editor.credit_as != '' %} checked{% endif %}><span class="bx r" aria-hidden="true"></span>{{ name }}</label>
-      <label class="opt"><input type="radio" name="credit" value=""{% if desk.editor.credit_as == '' %} checked{% endif %}><span class="bx r" aria-hidden="true"></span>an editor</label>
-    </div>
-    <span class="sm block">How the edition names you.</span>
+    <input type="text" id="credit" class="field" name="credit" maxlength="60" value="{{ desk.editor.credit_as or '' }}" placeholder="an editor" autocomplete="off">
+    <span class="sm block">How the edition names you. Leave it empty to be credited as an editor.</span>
   </div>
 
   <div class="q" id="accent-q">Colour?</div>
