@@ -22,6 +22,8 @@ READERS = {"reader/faithful": "faithful reader", "reader/readable": "readable re
 RUBY = re.compile(r"《[^》]*》|［＃[^］]*］")  # Aozora readings and editorial notes, quoted raw in a reader's evidence
 DECIDED = {"taken": "Changed", "declined": "Kept", "forked": "Left to the editor", "open": "Not decided yet",
            "unaddressed": "Not decided yet", "noted": "Noted"}
+# The first read labels its takes and marks its pick; on the page the voice is just the voice.
+RECOMMENDED = re.compile(r"^\([a-z]\)\s*|\s*\(Recommended\.?\)", re.I)
 OUTCOMES = {"taken": "taken", "declined": "declined", "forked": "sent to the editor", "open": "not answered yet"}
 
 # fixture.py writes these tables; loading them back gives replay the same database a live run leaves.
@@ -148,7 +150,7 @@ def edition(conn, work_id: str, edition_id: int | None = None) -> dict | None:
     labels = [u["label"] for u in units]
     meta = _meta(conn, work_id)
     return {
-        **meta, "version": rel["version"], "date": _date(rel["created_at"]), "units": units,
+        **meta, "id": rel["edition_id"], "work_id": work_id, "version": rel["version"], "date": _date(rel["created_at"]), "units": units,
         "editions": editions(conn, meta, rel["edition_id"]),
         "commissioned_by": None if rel["editor"] == "the house" else rel["editor"],
         "counts": {label: labels.count(label) for label in LABELS},
@@ -158,7 +160,73 @@ def edition(conn, work_id: str, edition_id: int | None = None) -> dict | None:
                     "declined": sum(q["status"] == "declined" for q in queries),
                     "forked": sum(q["status"] == "forked" for q in queries)},
         "models": sorted({r["model"] for r in conn.execute("SELECT DISTINCT model FROM call WHERE run_id=?", (run_id,))}),
+        "analysis": analysis(conn, work_id, run_id, {pid: u["id"] for u in units for pid in u["paras"]}),
     }
+
+
+def _document(conn, work_id: str, run_id: int, kind: str) -> dict | None:
+    """The latest version of a reading or bible document that the edition's run made (a steered run
+    saves a new version per note), else the work's latest."""
+    from house.stages import latest_document
+    return latest_document(conn, work_id, kind, run_id)
+
+
+def analysis(conn, work_id: str, run_id: int, where: dict[str, str] | None = None) -> dict | None:
+    """The reading and the bible the edition was drafted under, put for a reader rather than a model:
+    the crux (and a second reader's, if the two read it differently), the reading, the voice the run
+    drafted in, who everyone is, the style sheet, the narration, the motifs and the hard spots.
+    `where` maps a paragraph ID to the paragraph on the page that shows it, so a hard spot can link there."""
+    where = where or {}
+    reading, bible = _document(conn, work_id, run_id, "reading"), _document(conn, work_id, run_id, "bible")
+    if not reading:
+        return None
+    row = conn.execute("SELECT options FROM run WHERE id=?", (run_id,)).fetchone()
+    opts = (row and row["options"]) or {}
+    opts = json.loads(opts) if isinstance(opts, str) else opts
+    takes = reading.get("voice_takes") or []
+    voice = takes[min(int(opts.get("voice") or 0), len(takes) - 1)] if takes else None
+    out = {
+        "crux": reading.get("crux") or [], "second_crux": reading.get("second_crux") or [],
+        "reading": [p.strip() for p in re.split(r"\n\s*\n", reading.get("reading") or "") if p.strip()],
+        "voice": RECOMMENDED.sub("", voice["line"]).strip() if voice else None,
+        "cast": [], "style": [], "narration": [], "motifs": [], "hard_spots": []}
+    if not bible:
+        return out
+    for c in bible.get("cast") or []:
+        name = " ".join(x for x in (c.get("romanised"), c.get("name_ja")) if x)
+        out["cast"].append({"handle": c["handle"], "name": name if name and name != c["handle"] else "",
+                            "role": _sentence(c.get("role", "")), "register": c.get("register", ""),
+                            "forms": [{"form": f["form"], "used_by": f.get("used_by", ""), "note": f.get("note") or ""}
+                                      for f in c.get("forms") or []]})
+    out["style"] = _pairs(bible.get("style_sheet") or {})
+    out["narration"] = _pairs(bible.get("narration") or {})
+    out["motifs"] = [{"motif": m["motif"], "forms": m.get("source_forms") or [], "why": _sentence(m.get("why", "")),
+                      "english": m.get("english", "")} for m in bible.get("motifs") or []]
+    out["hard_spots"] = [{"anchors": [{"id": a, "href": where.get(a)} for a in h.get("anchors") or []],
+                          "kind": h.get("kind", ""), "why": h.get("why_hard", "")} for h in bible.get("hard_spots") or []]
+    return out
+
+
+def _sentence(text: str) -> str:
+    """The bible's notes are written terse, often lower case and unstopped; on the page, a sentence."""
+    text = (text or "").strip()
+    if not text:
+        return ""
+    return text[0].upper() + text[1:] + ("" if text[-1] in ".!?)”’\"'" else ".")
+
+
+def _pairs(d: dict) -> list[dict]:
+    """A style sheet or narration as label and value, the empty ones left out."""
+    out = []
+    for k, v in d.items():
+        if isinstance(v, list):
+            v = [str(x) for x in v if x]
+            if not v:
+                continue
+        elif not v:
+            continue
+        out.append({"label": k.replace("_", " ").capitalize().replace("japanese", "Japanese"), "value": v})
+    return out
 
 
 def _notes(body: dict, i: int) -> list[dict]:
@@ -241,10 +309,11 @@ def _decisions(queries: list[dict]) -> list[dict]:
 def _meta(conn, work_id: str) -> dict:
     row = dict(conn.execute("SELECT * FROM work WHERE id=?", (work_id,)).fetchone())
     try:
-        reg = works.info(work_id)
+        reg = works.info(work_id, conn)
     except KeyError:
         reg = {}
     # works.json is the rights record as it stands now; the copy taken when the work was fetched may be older
+    # (for a work added from a link, both are the record read from its card)
     rights = row["rights"]
     rights = reg.get("rights") or (json.loads(rights) if isinstance(rights, str) else rights or {})
     return {"id": work_id, "title": row["title"], "title_en": row["title_en"] or reg.get("title_en") or row["title"],
