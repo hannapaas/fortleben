@@ -38,7 +38,8 @@
       (r.held ? ', ' + n(r.held) + ' still held' : '') + '.') + '</span></span>';
     if (r.status === 'done' && r.edition_url) h += '<a class="read" href="' + esc(r.edition_url) + '">Read it</a>';
     if (r.status === 'waiting') h += '<a class="read" href="#checkpoint-' + esc(r.id) + '">Read the analysis</a>';
-    if (r.status === 'interrupted' || r.status === 'failed') h += '<span class="rr"><button type="button" class="btn resume">Resume</button>' +
+    if (r.status === 'interrupted' || r.status === 'failed') h += '<span class="rr">' +
+      (r.resumable === false ? '' : '<button type="button" class="btn resume">Resume</button>') +
       '<span class="sm">' + (r.status === 'failed' && r.failure ? esc(r.failure) :
         'It carries on from the last finished stage; nothing is paid for twice.') + '</span>' +
       '<span class="err" aria-live="polite" hidden></span></span>';
@@ -87,6 +88,8 @@
   // Once nothing of yours is running, another translation can be started, with a fresh allowance.
   function finished() {
     if (Object.keys(watching).some(function (k) { return watching[k]; })) return;
+    // Opened while a run was going: the page says so and Start is off, so draw it afresh.
+    if (!form.dataset.started && document.querySelector('#busy[data-going]')) { location.reload(); return; }
     if (form.dataset.started) say(err, '');
     var again = document.getElementById('again');
     if (form.dataset.started && !again) {
