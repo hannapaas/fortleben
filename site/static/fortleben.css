@@ -40,6 +40,11 @@ a { color: inherit; text-decoration-color: var(--accent); text-underline-offset:
 .wrap { max-width: 80rem; margin: 0 auto; padding: 0 28px; }
 .top { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0 10px; margin-bottom: 1.25rem; font-size: 14px; }
 .top .mark { font-family: var(--serif); font-size: 1.5rem; text-decoration: none; letter-spacing: -.01em; }
+/* Pointing at the name sends a pink glint across it, once, like light catching foil. */
+.top .mark { background: linear-gradient(105deg, var(--ink) 42%, var(--accent) 50%, var(--ink) 58%) 100% 0 / 300% 100% no-repeat;
+  -webkit-background-clip: text; background-clip: text; }
+.top .mark:hover, .top .mark:focus-visible { color: transparent; animation: glint .9s ease-out forwards; }
+@keyframes glint { from { background-position: 100% 0; } to { background-position: 0 0; } }
 .top nav { display: flex; gap: 20px; align-items: baseline; }
 .top nav a, .top nav button { text-decoration: none; }
 .top nav .paper { display: flex; gap: 10px; color: var(--ink-2); }
@@ -421,4 +426,4 @@ h2.sec { font-family: var(--serif); font-style: italic; font-weight: 400; font-s
   .settings { left: 0; right: 0; bottom: 0; width: auto; max-height: 78vh; border-width: 2px 0 0; box-shadow: none; padding: 12px 16px 24px; transform: translateY(105%); opacity: 1; transition: transform .2s ease; }
   .settings.open { transform: none; }
 }
-@media (prefers-reduced-motion: reduce) { .settings { transition: none; } .top nav .heart svg { animation: none !important; } }
+@media (prefers-reduced-motion: reduce) { .settings { transition: none; } .top nav .heart svg, .top .mark { animation: none !important; } .top .mark:hover { color: var(--accent-text); } }
