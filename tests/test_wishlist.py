@@ -55,7 +55,7 @@ def test_the_page_renders_with_the_form_and_is_linked(site):
     assert 'action="/wishlist#ask"' in page and "Nobody has asked for anything." in page
     assert 'name="name"' not in page and 'name="email"' not in page
     home = client.get("/").text
-    assert 'href="/wishlist">Wishlist</a>' in home and "What should keikaku translate next?" in home
+    assert 'href="/wishlist" aria-label="Wishlist"' in home and "What should keikaku translate next?" in home
 
 
 def test_a_link_adds_the_work_and_a_wish_then_counts_up(site, fetched):

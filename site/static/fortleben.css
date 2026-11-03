@@ -42,6 +42,12 @@ a { color: inherit; text-decoration-color: var(--accent); text-underline-offset:
 .top nav form.out button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
 .top nav .paper button[aria-pressed="true"] { color: var(--ink); text-decoration: underline 2px var(--accent); text-underline-offset: 4px; }
 .top nav a:hover, .top nav button:hover { text-decoration: underline 2px var(--accent); text-underline-offset: 4px; }
+/* The wishlist is a heart that wiggles when you point at it. */
+.top nav .heart { align-self: center; display: inline-flex; color: var(--ink); }
+.top nav .heart svg { width: 19px; height: 19px; transform-origin: 50% 60%; }
+.top nav .heart:hover { text-decoration: none; }
+.top nav .heart:hover svg, .top nav .heart:focus-visible svg { color: var(--accent-text); fill: var(--accent-wash); animation: wiggle .6s ease-in-out; }
+@keyframes wiggle { 0%, 100% { transform: rotate(0); } 20% { transform: rotate(-14deg); } 45% { transform: rotate(11deg); } 70% { transform: rotate(-6deg); } 88% { transform: rotate(3deg); } }
 .replay { font-size: 12px; padding: 6px 28px; color: var(--ink-2); border-bottom: 1px solid var(--rule); }
 
 /* The form rows: italic question, plain answer. */
@@ -359,4 +365,4 @@ h2.sec { font-family: var(--serif); font-style: italic; font-weight: 400; font-s
   .settings { left: 0; right: 0; bottom: 0; width: auto; max-height: 78vh; border-width: 2px 0 0; box-shadow: none; padding: 12px 16px 24px; transform: translateY(105%); opacity: 1; transition: transform .2s ease; }
   .settings.open { transform: none; }
 }
-@media (prefers-reduced-motion: reduce) { .settings { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .settings { transition: none; } .top nav .heart svg { animation: none !important; } }
