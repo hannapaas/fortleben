@@ -97,6 +97,7 @@
   document.querySelectorAll('.unit').forEach(function (unit) {
     var en = unit.querySelector('.en');
     function activate(e) {
+      if (editing) { openEditor(unit); return; }  // the edition's editor, editing: a click opens the English
       if (e.target.closest('a')) return;  // a link goes where it goes
       if (window.getSelection && String(window.getSelection()).length) return;  // the end of a selection drag
       var t = e.target.closest('.t');
@@ -115,6 +116,63 @@
       e.currentTarget.setAttribute('aria-pressed', unit.classList.toggle('ja-on'));
     };
   });
+
+  // ---------- The edition's own editor changes its English (signed in, with ?edit=1) ----------
+  // The paragraph's English turns into a box; Save sends it, and the page comes back at the paragraph,
+  // with the change under its *. Escape cancels, Ctrl or Cmd with Enter saves.
+  var reader = document.getElementById('reader'), editing = reader.classList.contains('editing');
+  var leaving = false;  // set when the page reloads itself after a save, so it doesn't ask
+  addEventListener('beforeunload', function (e) {
+    if (leaving) return;
+    var t = document.querySelector('.edbox textarea');
+    if (t && t.value !== t.closest('.unit').dataset.en) { e.preventDefault(); e.returnValue = ''; }
+  });
+  function openEditor(unit) {
+    var open = document.querySelector('.edbox');  // one paragraph at a time, so a save never reloads away another's draft
+    if (open) {
+      var other = open.closest('.unit');
+      if (other === unit || open.querySelector('textarea').value !== other.dataset.en) { open.querySelector('textarea').focus(); return; }
+      open.querySelector('.cn').click();
+    }
+    var en = unit.querySelector('.en');
+    var box = document.createElement('div');
+    box.className = 'edbox';
+    box.innerHTML = '<textarea aria-label="The English of this paragraph" spellcheck="true"></textarea>' +
+      '<div class="cr"><button type="button" class="sv">Save</button><button type="button" class="cn">Cancel</button></div>' +
+      '<p class="err" aria-live="polite" hidden></p>';
+    var t = box.querySelector('textarea'), sv = box.querySelector('.sv'), err = box.querySelector('.err');
+    t.value = unit.dataset.en;
+    en.hidden = true;
+    en.after(box);
+    function fit() { t.style.height = 'auto'; t.style.height = (t.scrollHeight + t.offsetHeight - t.clientHeight) + 'px'; layout(); }
+    function close() { box.remove(); en.hidden = false; en.focus(); layout(); }
+    function fail(text) { sv.disabled = false; sv.textContent = 'Save'; err.textContent = text; err.hidden = false; layout(); }
+    function save() {
+      if (sv.disabled) return;
+      sv.disabled = true; sv.textContent = 'Saving…'; err.hidden = true;
+      fetch(location.pathname.replace(/\/$/, '') + '/edit', { method: 'POST', credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'fetch' },
+        body: JSON.stringify({ edition: Number(reader.dataset.edition), segment: unit.id, english: t.value }) })
+        .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (res) {
+          if (!res.ok) return fail(res.j.error || 'That didn’t save. Try again.');
+          if (!res.j.changed) return close();
+          leaving = true;
+          location.hash = unit.id;
+          location.reload();
+        })
+        .catch(function () { fail('That didn’t save. Check your connection and try again.'); });
+    }
+    t.addEventListener('input', fit);
+    t.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { e.stopPropagation(); close(); }
+      if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); save(); }
+    });
+    sv.onclick = save;
+    box.querySelector('.cn').onclick = close;
+    fit();
+    t.focus();
+  }
 
   // Settings behind the round "Aa" button: a card on wide screens, a sheet on phones. It opens with
   // the book, so nobody misses it.
@@ -245,7 +303,7 @@
   });
 
   apply(false);
-  showSettings(true);
+  if (!editing) showSettings(true);
   var m =location.hash.match(/#(p\d+)$/);
   if (m && document.getElementById(m[1])) document.getElementById(m[1]).scrollIntoView();
 })();

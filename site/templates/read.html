@@ -44,28 +44,37 @@ window.FL_PRESETS = {
     {% endif %}
     {% endfor %}
   </ul></div>
-  <div><span class="q">Appendix</span><span class="a"><a href="/read/{{ ed.work_id }}/analysis{% if ed.id %}?edition={{ ed.id }}{% endif %}">How keikaku read the book</a>: the analysis it wrote before drafting, which helped steer the translation.</span></div>
+  <div><span class="q">Appendix</span><span class="a"><a href="/read/{{ ed.work_id }}/analysis{% if ed.id %}?edition={{ ed.id }}{% endif %}">How keikaku read the book</a>: the analysis it wrote before drafting, which helped steer the translation{% if ed.file_edits %}, and what {{ ed.commissioned_by or 'the editor' }} changed in it by hand{% endif %}.</span></div>
+  {% if mine %}
+  <div class="yours"><span class="q">Yours?</span><span class="a">{% if editing %}You're editing the English. Click a paragraph to change it. Each change is published under the paragraph's *, with your name and the date. <a href="?edition={{ ed.id }}">Done</a>{% else %}This is your edition. <a href="?edition={{ ed.id }}&amp;edit=1">Edit the English</a>{% endif %}</span></div>
+  {% endif %}
 </div>
 
 <div class="page">
-<main class="reader" id="reader">
+<main class="reader{% if editing %} editing{% endif %}" id="reader"{% if editing %} data-edition="{{ ed.id }}"{% endif %}>
   {% for u in ed.units %}
   {% if u.number %}<h2 class="secnum" id="{{ u.id }}"><span lang="ja" class="secnum-ja">{{ u.ja[0].html|safe }}</span>{{ u.en }}</h2>{% else %}
   {% if u.scene_break and not loop.first and not loop.previtem.number %}<div class="brk" aria-hidden="true">*</div>{% endif %}
-  <section class="unit st-{{ u.label }}{{ ' only-notes' if u.notes and not u.queries and not u.changed }}" id="{{ u.id }}" data-unit="{{ u.id }}">
-    {% set busy = u.queries or u.changed or u.notes %}
+  <section class="unit st-{{ u.label }}{{ ' only-notes' if u.notes and not u.queries and not u.changed and not u.edits }}" id="{{ u.id }}" data-unit="{{ u.id }}"{% if editing %} data-en="{{ u.en }}"{% endif %}>
+    {% set busy = u.queries or u.changed or u.notes or u.edits %}
     <div class="hang">
       <span class="pn" aria-hidden="true">{{ u.id[1:] if u.id.startswith('p') else '' }}</span>
       <span class="tools">
         <button type="button" class="jabtn" lang="ja" aria-pressed="false" title="Show the original" aria-label="Show the original Japanese">原</button>
         {% if busy %}<button type="button" class="open" aria-expanded="false" title="Notes and changes" aria-label="Notes and changes for this paragraph">*</button>{% endif %}
       </span>
-      {% if u.label in PEOPLE %}{{ seal(u.label) }}<span class="stn">{{ u.label }}</span>{% elif u.label == 'draft' %}<span class="stn">unchecked draft</span>{% endif %}</div>
+      {% if u.label in PEOPLE %}{{ seal(u.label) }}<span class="stn">{{ u.label }}</span>{% elif u.label == 'draft' %}<span class="stn">unchecked draft</span>{% endif %}
+      {% if u.edits %}<span class="seal ed" title="Edited by {{ u.edits[0].by }}, {{ u.edits[0].date }}" aria-hidden="true"></span>{% endif %}</div>
     <div class="body">
       <p class="en" tabindex="0">{{ u.en_html|safe }}</p>
       <div class="ja" lang="ja">{% for j in u.ja %}<p>{{ j.html|safe }}</p>{% endfor %}</div>
       {% if u.notes %}<ul class="inotes">{% for n in u.notes %}<li class="{{ 'ess' if n.essential }}"><b>{{ n.span_html }}</b>: {{ n.body }}</li>{% endfor %}</ul>{% endif %}
       <div class="slip" hidden>
+        {% if u.edits %}
+        {# A person's change, so it's marked as people are here (round), and set apart from keikaku's own work below. #}
+        <div class="hand">{% for e in u.edits %}<p><span class="seal" aria-hidden="true"></span><b>Edited by {{ e.by }}</b>, {{ e.date }}<span class="df">{{ e.diff|safe }}</span></p>{% endfor %}</div>
+        {% if u.decisions or u.changed or u.notes %}<p class="key">Below, keikaku's own work on it, before {{ 'these edits' if u.edits|length > 1 else 'this edit' }}.</p>{% endif %}
+        {% endif %}
         {% if u.decisions %}
         <p class="key">F: read against the Japanese. R: read as English, without it.</p>
         {% for d in u.decisions %}
@@ -174,7 +183,7 @@ window.FL_PRESETS = {
     <div class="a"><span lang="ja">{{ ed.title }}</span>{% if ed.title_en %} <i>{{ ed.title_en }}</i>{% endif %}, {% if ed.author_en %}{{ ed.author_en }} {% endif %}<span lang="ja">{{ ed.author }}</span>{% if ed.rights.author_died %} (died {{ ed.rights.author_died }}){% endif %}. First published in <span lang="ja">{{ ed.rights.first_published }}</span>. Public domain. Japanese text from <a href="{{ ed.card_url or 'https://www.aozora.gr.jp/' }}">Aozora Bunko</a>, typed and proofread by its volunteers.
       {% if ed.colophon %}<details><summary>Aozora's colophon</summary><pre lang="ja">{{ ed.colophon }}</pre></details>{% endif %}</div>
     <div class="q">This English?</div>
-    <div class="a">Drafted, read and revised by keikaku on Meta's models ({{ ed.models|join(', ') }}), in {{ ed.calls }} model calls. keikaku raised {{ ed.queries.total }} {{ 'query' if ed.queries.total == 1 else 'queries' }}: {{ ed.queries.taken }} changed the text, {{ ed.queries.declined }} {{ 'was' if ed.queries.declined == 1 else 'were' }} declined{% if ed.queries.forked %}, {{ ed.queries.forked }} {{ 'was' if ed.queries.forked == 1 else 'were' }} left to the editor{% endif %}.{% if not ed.counts['editor-approved'] %} No person has edited it.{% endif %} Free to share and adapt under CC BY-SA 4.0.</div>
+    <div class="a">Drafted, read and revised by keikaku on Meta's models ({{ ed.models|join(', ') }}), in {{ ed.calls }} model calls. keikaku raised {{ ed.queries.total }} {{ 'query' if ed.queries.total == 1 else 'queries' }}: {{ ed.queries.taken }} changed the text, {{ ed.queries.declined }} {{ 'was' if ed.queries.declined == 1 else 'were' }} declined{% if ed.queries.forked %}, {{ ed.queries.forked }} {{ 'was' if ed.queries.forked == 1 else 'were' }} left to the editor{% endif %}.{% if ed.edited %} {{ ed.commissioned_by or 'The editor' }} then changed {{ ed.edited }} {{ 'paragraph' if ed.edited == 1 else 'paragraphs' }} by hand; each change is shown, with its date, under the paragraph's *.{% elif not ed.counts['editor-approved'] %} No person has edited it.{% endif %} Free to share and adapt under CC BY-SA 4.0.</div>
     {% if others %}
     <div class="q">Other English?</div>
     <div class="a">{% for t in others %}{{ t.by }} translated it in {{ t.year }}{% if t.url %}; it's free on <a href="{{ t.url }}" rel="noopener">{{ t.where or 'the web' }}</a>{% endif %}.{% if not loop.last %}<br>{% endif %}{% endfor %}</div>

@@ -41,10 +41,11 @@ TYPES = {
     "checkpoint.waiting": "the run waits for the editor: page 1 drafted in each voice take",
     "checkpoint.steered": "the house answered an editor's note: its reply, what changed, page 1 drafted again",
     "checkpoint.approved": "the editor approved the checkpoint and chose the voice the draft is written in",
+    "document.edited": "the editor rewrote the reading, the voices or the bible by hand at the checkpoint: before, after, who",
     # the English
     "page.cut": "the pager's pages: paragraph ids per page",
     "draft.paragraph": "a paragraph (or group) of English landed: revision id, variant",
-    "revision.created": "the English for a paragraph changed: cause (query, rule, editor)",
+    "revision.created": "the English for a paragraph changed: cause (query, rule, editor); an editor's own edit of a published edition keeps before, after and who",
     "check.flagged": "a code check flagged a paragraph: which check, why",
     "chapter.read": "a reader finished a chapter: which reader, paragraph ids, notes left",
     "desk.done": "the desk finished a chapter: notes in, paragraphs changed; or skipped, with no notes",

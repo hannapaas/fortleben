@@ -115,6 +115,14 @@ def source_text(work: ParsedWork, around: list[Paragraph] | None = None, summari
 
 
 def reading(r: dict) -> str:
+    return block("The house's reading", reading_text(r))
+
+
+def reading_text(r: dict) -> str:
+    """The reading as every call reads it: the editor's own version where they edited it by hand
+    (house/steer.py, `edit`), else the stored one, written out."""
+    if r.get("edited_text"):
+        return r["edited_text"]
     crux = "\n".join(f"- **{c['point']}** {c['why']} *For the English:* {c['for_the_english']}" for c in r["crux"])
     body = f"**The crux**\n\n{crux}\n\n{r['reading']}"
     if r.get("second_crux"):  # a second reader, reading independently, put the crux differently (stage 3)
@@ -123,7 +131,7 @@ def reading(r: dict) -> str:
                  "The editor decides between them; until then hold both.\n\n" + second)
     if r.get("open_questions"):
         body += "\n\n**Open questions**\n\n" + "\n".join(f"- {q['question']}" for q in r["open_questions"])
-    return block("The house's reading", body)
+    return body
 
 
 def cast(b: dict) -> str:
@@ -140,6 +148,13 @@ def cast(b: dict) -> str:
 
 
 def bible(b: dict) -> str:
+    return block("The story bible: the house's best understanding before drafting, which can be wrong", bible_text(b))
+
+
+def bible_text(b: dict) -> str:
+    """The bible as every call reads it: the editor's own version where they edited it by hand, else the stored one."""
+    if b.get("edited_text"):
+        return b["edited_text"]
     parts = []
     ss = b["style_sheet"]
     parts.append("### Style sheet\n" + "\n".join(
@@ -156,7 +171,7 @@ def bible(b: dict) -> str:
     if b["hard_spots"]:
         parts.append("### Hard spots\n" + "\n".join(
             f"- {', '.join(h['anchors'])} ({h['kind']}): {h['why_hard']}" for h in b["hard_spots"]))
-    return block("The story bible: the house's best understanding before drafting, which can be wrong", "\n\n".join(parts))
+    return "\n\n".join(parts)
 
 
 def page(paras: list[Paragraph]) -> str:

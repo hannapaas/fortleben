@@ -84,6 +84,7 @@ body > .wrap > .push { flex: 1 0 3rem; }
 .form.about > div { padding: 12px 20px 16px; }
 .form.about .q { margin-bottom: 6px; }
 .form.about .a { font-size: 16px; line-height: 1.55; }
+.form.about > .yours { grid-column: 1 / -1; border-top: 1px solid var(--rule); }
 .form.two { grid-template-columns: 9rem 1fr; }
 .form.two > div { border-top: 1px solid var(--rule); }
 .form.two > div:nth-child(-n+2) { border-top: 0; }
@@ -291,6 +292,25 @@ body > .wrap > .push { flex: 1 0 3rem; }
 .at { text-decoration: underline 3px var(--accent); text-underline-offset: 3px; text-decoration-skip-ink: none; white-space: nowrap; font-weight: 600; }
 .stamp { display: inline-block; border: 2px solid var(--accent); color: var(--accent-text); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; padding: 0 6px; transform: rotate(-2deg); margin-right: 8px; }
 .stamp.ink { border-color: var(--ink); color: var(--ink); }
+/* The edition's editor's own changes: a person's, so round-marked, and set apart from keikaku's work under them. */
+.hand p { margin: 0 0 .6rem; }
+.hand .seal { margin: 0 6px 1px 0; vertical-align: middle; }
+.hand .df { display: block; margin-top: 2px; font-size: 16px; }
+.hand del { color: var(--muted); text-decoration: line-through 1px var(--muted); }
+.hand ins { text-decoration: underline 2px var(--accent); text-underline-offset: 3px; }
+.hand del + ins { margin-left: .3em; }
+.difflines { list-style: none; margin: 0 0 1rem; padding: 0 0 0 12px; border-left: 2px solid var(--accent); font-size: 15px; overflow-wrap: anywhere; }
+.difflines li { padding: 2px 0; }
+.hand + .key { border-top: 1px dotted var(--muted); padding-top: 8px; }
+.hang .seal + .seal { margin-left: 3px; }
+.reader.editing .unit .en { cursor: text; border-radius: 2px; }
+.reader.editing .unit .en:hover { outline: 1px dashed var(--muted); outline-offset: 4px; }
+.edbox textarea { display: block; width: 100%; box-sizing: border-box; resize: vertical; font: inherit; font-size: var(--size); line-height: var(--leading);
+  color: var(--ink); background: transparent; border: 1px solid var(--ink); padding: 6px 8px; caret-color: var(--accent-text); }
+.edbox .cr { display: flex; gap: 10px; margin-top: 8px; }
+.edbox button { font: 500 13px 'DM Mono', ui-monospace, Menlo, monospace; border: 1.5px solid var(--ink); padding: 2px 12px; min-height: 32px; }
+.edbox button:hover { background: var(--accent-wash); }
+.edbox .err { margin: 6px 0 0; font-size: 14px; color: var(--accent-text); }
 .hist { list-style: none; margin: 0; padding: 0; }
 .hist li { padding: 5px 0; }
 .hist em { font-family: var(--serif); color: var(--ink); margin-right: 3px; }
