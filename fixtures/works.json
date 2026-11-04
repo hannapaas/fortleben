@@ -183,5 +183,89 @@
    ],
    "verdict": "public domain (author died 1916, published 1906); a dev text only, since the novel is already translated"
   }
+ },
+ "shokikan": {
+  "aozora_id": "046648",
+  "author_id": "000507",
+  "title": "書記官",
+  "title_en": "The Secretary",
+  "author": "川上眉山",
+  "author_en": "Kawakami Bizan",
+  "card_url": "https://www.aozora.gr.jp/cards/000507/card46648.html",
+  "blurb": "At an autumn hot-spring inn, a rising young ministry secretary courts an old-fashioned man's daughter, and wins the father with a leaked draft of a cabinet order.",
+  "about": "Kawakami Bizan wrote this in 1895, one of the stories built around a social idea that made his name that year. He died in 1908.",
+  "zip_url": "https://www.aozora.gr.jp/cards/000507/files/46648_ruby_26374.zip",
+  "rights": {
+   "author_died": 1908,
+   "first_published": "「太陽」1895（明治28）年2月",
+   "first_published_year": 1895,
+   "basis": "Aozora card 46648",
+   "existing_translations": [],
+   "translation_search": "No human English translation found (web, Meiji anthologies, English scholarship on Bizan's conceptual novels, 4 Nov 2026). The Japan Foundation database could not be reached that day.",
+   "verdict": "public domain (author died 1908, published 1895)"
+  }
+ },
+ "yukigeshiki": {
+  "aozora_id": "045402",
+  "author_id": "000183",
+  "title": "雪景色",
+  "title_en": "Snowscape",
+  "author": "牧野信一",
+  "author_en": "Makino Shin'ichi",
+  "card_url": "https://www.aozora.gr.jp/cards/000183/card45402.html",
+  "blurb": "A writer who lives apart from his wife meets her at the family house, which is about to be pulled down, and she talks rings round him while two workmen fail to catch the carp in the pond.",
+  "about": "Makino Shin'ichi published this in 1927. He was admired by the writers who came after him, Sakaguchi Ango among them, and died in 1936.",
+  "zip_url": "https://www.aozora.gr.jp/cards/000183/files/45402_ruby_39785.zip",
+  "rights": {
+   "author_died": 1936,
+   "first_published": "「文藝春秋」第五巻第九号、1927（昭和2）年9月1日",
+   "first_published_year": 1927,
+   "basis": "Aozora card 45402 (底本: 牧野信一全集第三巻, 筑摩書房, 2002)",
+   "existing_translations": [],
+   "translation_search": "No human English translation found (web, anthologies, scholarship, 4 Nov 2026). The Japan Foundation database could not be reached that day.",
+   "verdict": "public domain in Japan (author died 1936, term expired 1986) and in the US (published 1927); a later death taken for a strong reason: a writer with no human English translation of this period's stories, and a story told mostly in dialogue"
+  }
+ },
+ "shiken": {
+  "aozora_id": "046449",
+  "author_id": "000448",
+  "title": "死剣と生縄",
+  "title_en": "Dead Sword, Living Rope",
+  "author": "江見水蔭",
+  "author_en": "Emi Suiin",
+  "card_url": "https://www.aozora.gr.jp/cards/000448/card46449.html",
+  "blurb": "A wandering swordsman kept as the 'guest' of a woman gang boss slips away to see his dying master, and falls in with a runaway acrobat girl and a brawling ex-monk.",
+  "about": "Emi Suiin, a prolific writer of adventure and period stories, published this in a popular magazine in 1925. He died in 1934.",
+  "zip_url": "https://www.aozora.gr.jp/cards/000448/files/46449_ruby_24267.zip",
+  "rights": {
+   "author_died": 1934,
+   "first_published": "「講談倶楽部」1925（大正14）年11月",
+   "first_published_year": 1925,
+   "basis": "Aozora card 46449 (底本: 春陽文庫『怪奇・伝奇時代小説選集1 水鬼 他9編』, 1999)",
+   "existing_translations": [],
+   "translation_search": "No human English translation found (web, in English and Japanese, 4 Nov 2026); NICT's machine translation set aside. The Japan Foundation database could not be reached that day.",
+   "verdict": "public domain in Japan (author died 1934, term expired 1984) and in the US (published 1925); a later death taken for a strong reason: a popular period adventure, a genre the house hasn't tried, with no human English translation"
+  }
+ },
+ "nekohachi": {
+  "aozora_id": "050133",
+  "author_id": "000137",
+  "title": "猫八",
+  "title_en": "Nekohachi",
+  "author": "岩野泡鳴",
+  "author_en": "Iwano Hōmei",
+  "card_url": "https://www.aozora.gr.jp/cards/000137/card50133.html",
+  "blurb": "Edoya Nekohachi, the comic famous for his animal cries, comes among a circle of writers, and the narrator sees what a lifetime of making people laugh has cost him.",
+  "about": "Iwano Hōmei serialised this in the Osaka Mainichi newspaper in 1918, two years before he died. Its comic was a real performer, the first Edoya Nekohachi.",
+  "zip_url": "https://www.aozora.gr.jp/cards/000137/files/50133_ruby_56453.zip",
+  "rights": {
+   "author_died": 1920,
+   "first_published": "「大阪毎日新聞」1918（大正7）年9月～10月",
+   "first_published_year": 1918,
+   "basis": "Aozora card 50133 (底本: 日本文学全集13 岩野泡鳴集, 集英社, 1969)",
+   "existing_translations": [],
+   "translation_search": "No human English translation found (web, in English and Japanese, anthologies, scholarship on Iwano, 4 Nov 2026). The Japan Foundation database could not be reached that day.",
+   "verdict": "public domain (author died 1920, published 1918)"
+  }
  }
 }
