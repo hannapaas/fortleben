@@ -95,7 +95,7 @@
 </section>
 {%- endmacro %}
 {% block title %}Editors' desk · Fortleben{% endblock %}
-{% block head %}<link rel="stylesheet" href="/static/desk.css">{% endblock %}
+{% block head %}<link rel="stylesheet" href="/static/desk.css?v={{ v }}">{% endblock %}
 {% block main %}
 {% set csrf = request.state.csrf if request else '' %}
 <h1 class="desk-h">The editors' desk</h1>
@@ -237,4 +237,4 @@
 {% if not closed %}<form id="addwork" hidden></form>{% endif %}
 {% endif %}
 {% endblock %}
-{% block scripts %}{% if desk %}<script src="/static/desk.js"></script>{% endif %}{% endblock %}
+{% block scripts %}{% if desk %}<script src="/static/desk.js?v={{ v }}"></script>{% endif %}{% endblock %}

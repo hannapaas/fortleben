@@ -3,7 +3,7 @@
    an email address and a password, and is signed in to their desk, which asks for their own Meta key
    and explains it there. #}
 {% block title %}Translate one yourself · Fortleben{% endblock %}
-{% block head %}<link rel="stylesheet" href="/static/desk.css">
+{% block head %}<link rel="stylesheet" href="/static/desk.css?v={{ v }}">
 <style>
 .desk input[type="text"], .desk input[type="email"], .desk input[type="password"] { font: inherit; width: 100%; max-width: 28rem; padding: 6px 8px; border: 1.5px solid var(--ink); background: var(--paper); color: var(--ink); }
 .desk input[type="text"]:focus-visible, .desk input[type="email"]:focus-visible, .desk input[type="password"]:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }

@@ -2,7 +2,7 @@
 {# The page a link in the editor's daily comments email opens (house/comments.py). It only asks:
    the button does the work, so a mail scanner that follows the link changes nothing. #}
 {% block title %}{{ 'Hide' if action == 'hide' else 'Publish' }} comment {{ c.id }} · Fortleben{% endblock %}
-{% block head %}<meta name="robots" content="noindex"><link rel="stylesheet" href="/static/desk.css">{% endblock %}
+{% block head %}<meta name="robots" content="noindex"><link rel="stylesheet" href="/static/desk.css?v={{ v }}">{% endblock %}
 {% block main %}
 <section class="wrap" style="max-width: 40rem; padding-top: 2rem">
   <h1 style="font-weight: 400">{{ 'Hide' if action == 'hide' else 'Publish' }} this comment?</h1>
