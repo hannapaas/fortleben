@@ -27,7 +27,7 @@
 {%- endmacro %}
 {% block main %}
 <h1 class="desk-h">Wishlist</h1>
-<p class="desk-lead">Works on Aozora Bunko that people would like to read in English. Paste a link to add one; keikaku's editors pick from here.</p>
+<p class="desk-lead">Works on Aozora Bunko that people would like to read in English. Anyone can paste a link to add one. Editors pick from here to translate, and anyone can <a href="/signup">sign up</a> to be one.</p>
 
 {% if wishes.wanted %}
 <ul class="shelf wish">{% for w in wishes.wanted %}{{ row(w) }}{% endfor %}</ul>
