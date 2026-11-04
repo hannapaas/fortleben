@@ -1,0 +1,98 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "Though with one hand, he pulled with all his strength. The evil priest gave a hard pull. The two pulled too, desperately, with all their might. For a while it became a tug-of-war contest of strength. The empty boat hung hesitating midway, but the moment the priest braced himself and strained, the stern rope snapped with a twang and the party of two lost. The boat was drawn clean to the far bank by the priest's hand. There was now no way to draw the empty boat back to this side.",
+    "ids": [
+     "p131"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Serves you right. Now go the long way round. There is no ferry near here. That has eased my spleen. I feel fine now. Well, well, I must scratch up a few more eels or I shall not get my drink money.\"",
+    "ids": [
+     "p132"
+    ],
+    "notes": [
+     "Monk's music-hall vulgarity kept blunt; no softening of the gloating."
+    ]
+   },
+   {
+    "english": "The evil priest picked up his bucket again and vanished abruptly into the reeds. What a merciless priest. He was a man who had left the world to save men, yet he plied his eel-rake and broke the precept against killing, which was lawless enough, and then he took away the boat of salvation that carries men to the other shore. Of what temple, what priest could he be. Hateful as the fellow was, Ryujiro ground his teeth with vexation. But with the channel of the Shin-Tone between them, there was nothing to be done.",
+    "ids": [
+     "p133"
+    ],
+    "notes": [
+     "Kept the ferry / salvation pun in 'boat of salvation that carries men to the other shore' rather than resolving it to one sense."
+    ]
+   },
+   {
+    "english": "\"Nothing for it now but to go roundabout to where there is another ferry. Tch, damnable priest,\" Ryujiro fumed.",
+    "ids": [
+     "p134"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Danna-sama, do not worry. I will go and fetch the boat. Getting to the far bank is nothing to me,\" said Kotora, as if it were nothing.",
+    "ids": [
+     "p135"
+    ],
+    "notes": [
+     "Kept Danna-sama per bible; speaker is Kotora, address to Ryujiro."
+    ]
+   },
+   {
+    "english": "\"What! Go to the far bank to fetch the boat?\"",
+    "ids": [
+     "p136"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"I am a woman acrobat, and luckily this creeper-rope is stretched from over there to over here, so if I go along it, it will be nothing at all.\"",
+    "ids": [
+     "p137"
+    ],
+    "notes": [
+     "Fujizuru kept as creeper-rope to hold the rope web literal."
+    ]
+   },
+   {
+    "english": "\"I see.\"",
+    "ids": [
+     "p138"
+    ],
+    "notes": []
+   }
+  ],
+  "say": null
+ },
+ "usage": {
+  "input_tokens": 26689,
+  "cached_tokens": 25713,
+  "output_tokens": 2874,
+  "reasoning_tokens": 2238,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01729145,
+ "response_id": "resp_6aeb7c9a07f1c8e3a3df4e4f",
+ "latency_s": 34.04,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2381
+  }
+ ],
+ "created": "2026-11-04T18:42:35Z"
+}

@@ -1,0 +1,42 @@
+{
+ "prompt": "copy-desk",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": null,
+ "usage": {
+  "input_tokens": 23475,
+  "cached_tokens": 23281,
+  "output_tokens": 1034,
+  "reasoning_tokens": 890,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.00812915,
+ "response_id": "resp_6aeb8207f85984e3385a4733",
+ "latency_s": 11.11,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_4c2e394b-f484-4ef4-b2b7-66a372aa1563",
+   "name": "edit",
+   "arguments": "{\"new\":\"to do that situation in a place like that!\",\"old\":\"to do that *situation* in a place like that!\",\"reason\":\"Italics on first loanword use only; subsequent uses roman per style sheet\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": "commentary",
+   "chars": 49
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T19:05:43Z"
+}

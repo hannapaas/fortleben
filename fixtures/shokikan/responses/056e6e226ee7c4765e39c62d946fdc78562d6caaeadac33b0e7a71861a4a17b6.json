@@ -1,0 +1,82 @@
+{
+ "prompt": "copy-desk",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": null,
+ "usage": {
+  "input_tokens": 20976,
+  "cached_tokens": 20849,
+  "output_tokens": 694,
+  "reasoning_tokens": 440,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0062356,
+ "response_id": "resp_6aeb86856f47ae78110345b7",
+ "latency_s": 5.85,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_68ef6906-8416-4c76-993d-1090d79a16c1",
+   "name": "find",
+   "arguments": "{\"words\":\"maids\"}"
+  },
+  {
+   "call_id": "call_05460e4c-8636-4a77-8073-9573f90fc918",
+   "name": "find",
+   "arguments": "{\"words\":\"secretary\"}"
+  },
+  {
+   "call_id": "call_1080d840-071e-4042-b398-90cefbdcd3ac",
+   "name": "find",
+   "arguments": "{\"words\":\"truly\"}"
+  },
+  {
+   "call_id": "call_38b18728-f49c-4e4f-ac02-fca9ac30bfed",
+   "name": "find",
+   "arguments": "{\"words\":\"heart\"}"
+  },
+  {
+   "call_id": "call_eeff1964-6157-4005-96c2-ddb5df43fd7b",
+   "name": "find",
+   "arguments": "{\"words\":\"other\"}"
+  }
+ ],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": "commentary",
+   "chars": 83
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T19:24:53Z"
+}

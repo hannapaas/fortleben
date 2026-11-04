@@ -1,0 +1,62 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"It's because the way you live is clean different, you know.\"",
+    "ids": [
+     "p156"
+    ],
+    "notes": [
+     "Speaker unattributed in the source; taken as one of the gentlemen answering Nekohachi, left unattributed as in the Japanese."
+    ]
+   },
+   {
+    "english": "\"That would be it, eh.\" He thought these learned gents were different after all. What he had run up against himself in the flesh and still could not explain, they had made clear for him in a single word. Truly the life of the upper folk and the life of the likes of us is clean different. The way we live is as far apart as the moon and a soft-shell turtle.",
+    "ids": [
+     "p157"
+    ],
+    "notes": [
+     "Moon and soft-shell turtle renders the set phrase for things incomparable; kept literal rather than smoothing to worlds apart."
+    ]
+   },
+   {
+    "english": "Thinking so, he had the back row-houses in mind. First the blacksmith, slow to get going, always getting shouted at by his mountain-goddess. Next the woman hairdresser, no telling how many men she has gone through. Next to her our own place, and next to that the tram conductor, clattering about while folk are still sound asleep and off out to his bell-ringing trade. And right at the dead end the blear-eyed lame clam-seller. In summer they are a near stark-naked society, but of the lot only our place is anything like human. The field work is only my spare-time work, but even so there is an ease there those gaunt craze-driven lot know nothing of. And the daikon and leaf greens I give away free to them at times. For all that we are rattling Edokko who keep no overnight money, I born from a geisha's belly in a famous Asakusa restaurant, my wife first-bathed in Kanda upper water. And with that he wanted to show off a bit of what he knew before them all.",
+    "ids": [
+     "p158"
+    ],
+    "notes": [
+     "Mountain-goddess is his joking word for the blacksmith's wife, kept literal.",
+     "I am unsure who the gaunt craze-driven lot are meant to be in this slide, the great-house folk just spoken of or the hungry upper world at large; left vague as in the source rather than naming them."
+    ]
+   }
+  ],
+  "say": "Drafted p156 to p158 keeping the row-house inventory and Edokko boast as one dogged list."
+ },
+ "usage": {
+  "input_tokens": 29249,
+  "cached_tokens": 27377,
+  "output_tokens": 3048,
+  "reasoning_tokens": 2515,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01940055,
+ "response_id": "resp_6aeb7ec74a87c84aa8074df4",
+ "latency_s": 36.21,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2170
+  }
+ ],
+ "created": "2026-11-04T18:51:51Z"
+}

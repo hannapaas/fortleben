@@ -1,0 +1,138 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "When he hurried she hurried, when he rested she rested. She followed him like a shadow. When he looked back, she only smiled back at him. Ryujiro began to feel an unease.",
+    "ids": [
+     "p82"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"You are bound for Edo, samurai sir, are you not?\"",
+    "ids": [
+     "p83"
+    ],
+    "notes": [
+     "御武家様 is a polite performer's address to a samurai gentleman; rendered to keep her formal sweetness."
+    ]
+   },
+   {
+    "english": "Out among the narrow paths of the rice fields, near where the stream runs in, she at last called out to him from behind.",
+    "ids": [
+     "p84"
+    ],
+    "notes": [
+     "流れ灌頂の有る辺: meaning uncertain; taken as an irrigation inlet where water runs into the paddies. Left as a plain landscape mark."
+    ]
+   },
+   {
+    "english": "\"Yes,\" was all Ryujiro answered, and said nothing more.",
+    "ids": [
+     "p85"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"I too am bound for Edo,\" the girl said, unasked.",
+    "ids": [
+     "p86"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Is that so,\" Ryujiro answered, curt as before.",
+    "ids": [
+     "p87"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Will you lodge tonight at Fussa, or will you push on as far as Abiko?\"",
+    "ids": [
+     "p88"
+    ],
+    "notes": []
+   },
+   {
+    "english": "If he named a lodging she looked ready to ask to share it. Ryujiro could not help being on his guard. Even without his promise to O-Tetsu, he had no wish to grow close to this girl. Beautiful as she was, she was a woman of doubtful origin. There was no telling what trouble might come of it.",
+    "ids": [
+     "p89"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"No, I travel by night. It is to visit one gravely ill. I may take a fast palanquin, as need requires. In any case I go to Edo through the night,\" he answered. That, he thought, would silence her.",
+    "ids": [
+     "p90"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Oh, is that so. I too have one gravely ill, and so I had thought to go through the night.\"",
+    "ids": [
+     "p91"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"You mean to travel the night road, and you a woman?\"",
+    "ids": [
+     "p92"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Yes, there is no help for it... If Danna-sama travels by night, nothing could give me more courage. I will follow behind you, so as not to be a burden.\"",
+    "ids": [
+     "p93"
+    ],
+    "notes": [
+     "Kept Danna-sama per bible as Kotora's polite address to Ryujiro."
+    ]
+   },
+   {
+    "english": "\"As you please.\"",
+    "ids": [
+     "p94"
+    ],
+    "notes": []
+   },
+   {
+    "english": "She said she would only follow behind him, and there was no way to stop her. Troublesome as he found it, it could not be helped. And those words, to visit one gravely ill, struck a note somewhere in Ryujiro's heart.",
+    "ids": [
+     "p95"
+    ],
+    "notes": []
+   }
+  ],
+  "say": null
+ },
+ "usage": {
+  "input_tokens": 26586,
+  "cached_tokens": 25713,
+  "output_tokens": 2917,
+  "reasoning_tokens": 2195,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.017345450000000002,
+ "response_id": "resp_6aeb7bfcf7d7379ae3754292",
+ "latency_s": 32.13,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2558
+  }
+ ],
+ "created": "2026-11-04T18:39:57Z"
+}

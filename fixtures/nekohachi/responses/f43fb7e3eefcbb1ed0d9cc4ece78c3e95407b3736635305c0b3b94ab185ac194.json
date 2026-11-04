@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 67117,
+  "cached_tokens": 66676,
+  "output_tokens": 158,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0182592,
+ "response_id": "resp_6aeb812b9c298ffecc544674",
+ "latency_s": 1.91,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_2121a99e-542c-4f37-8448-41d7e9793173",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"R8\"],\"new\":\"effect — if this were the yose, with the gate money already settled, it would be easier to give it up.\",\"old\":\"effect — if this were the yose, with the wooden gate charge already settled, it would be easier to give it up.\",\"reason\":\"Placeholder to be replaced; see next edit for exact wording.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T19:02:04Z"
+}

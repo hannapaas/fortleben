@@ -1,0 +1,108 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"Well, General Oyama!\" He just had to tease again, so he teased as he always did. He turned sideways toward her and pulled himself up stiff and solemn to a stop, but she went off laughing, so he let her go out of his sight and chased her with words alone, \"I've one more party to do yet, eh.\"",
+    "ids": [
+     "p24"
+    ],
+    "notes": [
+     "Oyama Taisho: kept as General Oyama for the teasing hail that turns her bulk into a big title."
+    ]
+   },
+   {
+    "english": "\"That's it,\" came the answer from behind. \"You really are an earner!\"",
+    "ids": [
+     "p25"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"...\" Why, whether it would turn into money or not he didn't know, but with her carrying that body along as if to boast of it, he just wanted to boast of something himself, so he had called the place he was off to now a party.",
+    "ids": [
+     "p26"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"A stout-built woman, eh,\" Takami-san said.",
+    "ids": [
+     "p27"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"How so — for all that, her husband dotes on her, so there's no standing against her, you know!\"",
+    "ids": [
+     "p28"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Oh —?\"",
+    "ids": [
+     "p29"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Takami-san was listening in earnest, but he himself knew nothing of the sort in fact. So long as it was a joke that was all he wanted. Thinking this man too was no great talker after all, he changed the subject.",
+    "ids": [
+     "p30"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"It's quite hot, isn't it, eh? At this rate will this rainy season be a dry rainy season, eh? That's trouble, eh.\"",
+    "ids": [
+     "p31"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Why, if it rains the feet coming to the yose will thin out, eh.\"",
+    "ids": [
+     "p32"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"As for customers' feet, I'm seasoned to rubbing little sticks, you know. I've borrowed a bit of another man's ground and I'm growing vegetables. The trouble is that, if the rain doesn't come when it should, they won't do right, eh.\"",
+    "ids": [
+     "p33"
+    ],
+    "notes": [
+     "Suri-kogi: I am unsure of the worn-pestle phrase for getting by with few customers, so I have kept it literal and clumsy rather than smoothing it into small audiences."
+    ]
+   }
+  ],
+  "say": null
+ },
+ "usage": {
+  "input_tokens": 28180,
+  "cached_tokens": 27377,
+  "output_tokens": 4894,
+  "reasoning_tokens": 4308,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0259098,
+ "response_id": "resp_6aeb7bb4c85b7b60605e4e83",
+ "latency_s": 50.11,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2137
+  }
+ ],
+ "created": "2026-11-04T18:38:44Z"
+}

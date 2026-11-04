@@ -1,0 +1,84 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "The man who looked to be the master of the house was someone he had often bathed with in the bathhouse two or three years ago and still met on the road now and then, and he said to Takami-san, \"We are just now on 'Tiger.'\"",
+    "ids": [
+     "p42",
+     "p43"
+    ],
+    "notes": [
+     "Combined p42-p43 as one English paragraph because p42 ends on a hanging clause leading straight into the quoted speech in p43."
+    ]
+   },
+   {
+    "english": "\"Whose?\"",
+    "ids": [
+     "p44"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"'Tiger' by Kume. It came out in the May Bunsho Sekai.\"",
+    "ids": [
+     "p45"
+    ],
+    "notes": [
+     "Bunsho Sekai kept as roman title as in house style; Kume is the absent author Kume discussed throughout."
+    ]
+   },
+   {
+    "english": "\"I haven't read it,\" Takami-san answered.",
+    "ids": [
+     "p46"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Few here have read it either — and as the man who went out of his way to put it forward for the June meeting isn't here tonight, I was thinking of letting it pass without a word.\"",
+    "ids": [
+     "p47"
+    ],
+    "notes": []
+   },
+   {
+    "english": "To the question, \"What sort of story is it?\" the host answered, \"I only glanced through it because he asked me by postcard to bring it up — thin if you call it thin, but neatly put together at its low level. The author can hardly have demanded much of himself, so for that author it will do well enough, I suppose — 'Tiger' is the part the hero, a comic actor, has been cast to play. To quote the original, this actor 'had a child already eight years old. And the child had trodden his first stage last year and had before him a future as a shinpa actor like him, no, more proper than him. He thought he would never make the child a comic.'\"",
+    "ids": [
+     "p48",
+     "p49"
+    ],
+    "notes": [
+     "Combined p48-p49 as one English paragraph because p48 is a hanging lead into the host's long answer. Kept the summary flat and long-winded as reported talk; kept shinpa unglossed as context supplies a stage child."
+    ]
+   }
+  ],
+  "say": "Drafted p42-p49 keeping the host's Tiger précis flat and reported."
+ },
+ "usage": {
+  "input_tokens": 28247,
+  "cached_tokens": 27377,
+  "output_tokens": 4370,
+  "reasoning_tokens": 3834,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.02376655,
+ "response_id": "resp_6aeb7bf47f7555f7a41746b8",
+ "latency_s": 39.83,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2003
+  }
+ ],
+ "created": "2026-11-04T18:39:48Z"
+}

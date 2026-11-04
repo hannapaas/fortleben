@@ -1,0 +1,42 @@
+{
+ "prompt": "copy-desk",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": null,
+ "usage": {
+  "input_tokens": 21658,
+  "cached_tokens": 21489,
+  "output_tokens": 2007,
+  "reasoning_tokens": 1934,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01196435,
+ "response_id": "resp_6aeb8fb21b0cbca5e8f54fdc",
+ "latency_s": 17.43,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_8e2c782b-c303-44cb-8a4a-612e0c7e46b9",
+   "name": "find",
+   "arguments": "{\"words\":\"Sasagawa\"}"
+  }
+ ],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": "commentary",
+   "chars": 78
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T20:04:02Z"
+}

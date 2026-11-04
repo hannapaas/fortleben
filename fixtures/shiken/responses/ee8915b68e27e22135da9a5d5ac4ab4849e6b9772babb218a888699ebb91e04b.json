@@ -1,0 +1,66 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"As I told you with all my heart the other night, when Fujita Sensei of Mito was still living I heard this from him: before long the world will turn clean upside down and change till you are startled. So samurai, and hatamoto men above all, must think hard about their course, and for the most part they should set aside swordsmanship and spearmanship and that sort of thing and do better to study gunnery. And for that, he said, it is best to go once to the land of the red-haired foreigners... To tell the truth, I am of a mind to have you cross over to America, or to Holland. Forgive me for speaking of money, but we have laid by since my grandfather's day, and two or three thousand in gold I can make ready at any time.\"",
+    "ids": [
+     "p61"
+    ],
+    "notes": [
+     "'Two or three thousand in gold' keeps the original's bare 金, which names no coin; the sum is O-Tetsu's hoarded house money from her grandfather. 'Red-haired foreigners' renders 毛唐人 at its period level."
+    ]
+   },
+   {
+    "english": "\"As to going abroad, there is the national ban, and there is Yoshida Shoin's failure, but by and by going will become possible, and I would by all means cross to a foreign land once, broaden my seeing and hearing, and receive instruction in gunnery and the like. As I must borrow your strength for it, I will surely return here.\"",
+    "ids": [
+     "p62"
+    ],
+    "notes": [
+     "Ryujiro concedes the ban and the Shoin precedent, then turns them into a reason he must come back to O-Tetsu for her money."
+    ]
+   },
+   {
+    "english": "\"And one thing more I will press upon you. Though you go back to Edo after so long, woman or no woman, whatever woman she may be — if you grow close with any, I shall not abide it.\"",
+    "ids": [
+     "p63"
+    ],
+    "notes": []
+   },
+   {
+    "english": "She stored a fierce jealousy through the whole of that corpulent body — that was Living-Rope O-Tetsu.",
+    "ids": [
+     "p64"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted the Mito-prophecy bargain and jealous warning at full length without softening either side."
+ },
+ "usage": {
+  "input_tokens": 26317,
+  "cached_tokens": 25713,
+  "output_tokens": 1861,
+  "reasoning_tokens": 1358,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.012521200000000001,
+ "response_id": "resp_6aeb7b9b0c5347c6d7f841c8",
+ "latency_s": 25.12,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1976
+  }
+ ],
+ "created": "2026-11-04T18:38:20Z"
+}

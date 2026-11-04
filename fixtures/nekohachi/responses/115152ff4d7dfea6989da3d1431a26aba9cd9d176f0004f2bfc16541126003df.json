@@ -1,0 +1,75 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"That's the old stale smell about performers today!\"",
+    "ids": [
+     "p167"
+    ],
+    "notes": [
+     "Speaker unattributed in the source; carried as the host's cut-in from p163-p165."
+    ]
+   },
+   {
+    "english": "\"Performers today can't do any new tricks anyway, eh. If they don't come out to fetch you proper, why, I mostly turn them right down flat, eh. One time there I was, naked, lugging a hoe out in my plot, when a messenger from Viscount ___ came all the way to the field, and it got settled for such a day, from such an hour, but when he asks me how much will it take, I broke it off outright. A performer lives on spirit, eh, but then, if the fancy takes me, I'll go for nothing.\"",
+    "ids": [
+     "p168"
+    ],
+    "notes": [
+     "Kept the blank as Viscount ___ per bible; naked with a hoe kept flat as inventory, not euphemised."
+    ]
+   },
+   {
+    "english": "\"That may not be a bad thing either, but then, what has become of this pig-farming Takami-kun means to start,\" so saying, the host turned the talk aside. And as if he knew quite well about things wholly apart from novels, talk that way went on a while among them all.",
+    "ids": [
+     "p169"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Just because I am here, no need to talk of nothing but animals, eh,\" he got the joke said, but he was already pretty well worn out. Likely because he had still not taken the supper he should take, and hunger was coming on.",
+    "ids": [
+     "p170"
+    ],
+    "notes": []
+   },
+   {
+    "english": "The other guests were trading easy talk like how the trams had stopped anyway, but he wished they would all go home soon. And as his spirits sank, what strangely kept on his mind was the fee for tonight, if none comes then none will do, but whether it would come from Takami-san, or from the master here, or whether it would end just like this. Plenty here to chatter along with a professional like himself, but none that looked likely to have sense as listeners.",
+    "ids": [
+     "p171"
+    ],
+    "notes": [
+     "Fee kept blunt for谢礼; dashes in the source rendered by commas to keep the fretting run-on without adding em dashes."
+    ]
+   }
+  ],
+  "say": "Drafted the fee-talk and pig-farming turn, keeping the blank patron and Nekohachi's patter unpolished."
+ },
+ "usage": {
+  "input_tokens": 28308,
+  "cached_tokens": 27377,
+  "output_tokens": 2763,
+  "reasoning_tokens": 2218,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01701305,
+ "response_id": "resp_6aeb7f2bdca5367e6bac415d",
+ "latency_s": 30.2,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2148
+  }
+ ],
+ "created": "2026-11-04T18:53:31Z"
+}

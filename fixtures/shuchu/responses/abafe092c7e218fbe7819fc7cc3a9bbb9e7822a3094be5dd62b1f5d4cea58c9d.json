@@ -1,0 +1,74 @@
+{
+ "prompt": "reader-faithful",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "notes": [
+   {
+    "japanese": "頤《あご》の先に、鼠の尻尾のやうな髯《ひげ》を、申訳だけに生やして",
+    "paragraph": "p5",
+    "problem": "申訳だけに means a merely token beard, not a beard grown by way of apology.",
+    "span": "by way of apology, a beard like a rat's tail",
+    "suggestion": "growing on the tip of his chin, as a mere token, a beard like a rat's tail",
+    "sureness": "Fairly sure; a check of Taisho use of 申訳だけ would settle whether any apologetic sense remains."
+   },
+   {
+    "japanese": "踵が隠れる程長い皁布衫《さうふさん》に",
+    "paragraph": "p5",
+    "problem": "皁 marks the gown as black/dark cloth, which hemp robe drops, impoverishing the scholar's uniform.",
+    "span": "a hemp robe long enough to hide his heels",
+    "suggestion": "a long black-cloth gown hiding his heels",
+    "sureness": "Sure that 皁 means black/dark; what would settle the exact garment is a period Chinese dress reference, but the colour loss is clear."
+   },
+   {
+    "japanese": "七面鳥のやうな恰好をしながら、勿体《もつたい》らしくしやがんでゐる。",
+    "paragraph": "p4",
+    "problem": "Ceremoniously ennobles the ironic 勿体らしく, turning a pompous, faintly unflattering squat into dignity.",
+    "span": "squatted there ceremoniously, in the attitude of a turkey",
+    "suggestion": "squatted there with pompous self-importance, like a turkey",
+    "sureness": "Fairly sure from the turkey simile and the tale's flat unflattering comparisons; a second look at 勿体らしい irony would settle it."
+   },
+   {
+    "japanese": "瓶の口からは、芬々《ふんぷん》たる酒香が、間断なく、劉の鼻を襲つて来る。",
+    "paragraph": "p46",
+    "problem": "芬々たる酒香 is richly fragrant, while thick reek makes it foul and decides a tone the text leaves split between fragrance and assault.",
+    "span": "a thick reek of wine assailed Liu's nose without pause",
+    "suggestion": "a rich fragrant smell of wine assailed Liu's nose without pause",
+    "sureness": "Sure that 芬々 is fragrant/luxuriant; whether English reek can be neutral would be settled by the house dictionary, but fragrant should stay."
+   },
+   {
+    "japanese": "劉の家産も亦とんとん拍子に傾いて",
+    "paragraph": "p54",
+    "problem": "With gathering speed adds acceleration to とんとん拍子に, which reports a smooth steady failure in the flat decline register.",
+    "span": "has declined with gathering speed",
+    "suggestion": "Liu's fortune too declined steadily",
+    "sureness": "Moderately sure; a check of period とんとん拍子 as smoothly without hitch versus accelerating would settle it."
+   }
+  ],
+  "say": "Checked the whole part line by line for sense and manner; five real losses noted and the rest reads faithful to the two weathers and the refusal to choose."
+ },
+ "usage": {
+  "input_tokens": 25346,
+  "cached_tokens": 0,
+  "output_tokens": 13203,
+  "reasoning_tokens": 12489,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.08779525,
+ "response_id": "resp_6aeba626742f9ae9554e4346",
+ "latency_s": 92.31,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2404
+  }
+ ],
+ "created": "2026-11-04T21:39:51Z"
+}

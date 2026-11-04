@@ -1,0 +1,194 @@
+{
+ "prompt": "reader-readable",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "notes": [
+   {
+    "japanese": "膳の通い茶の通いに、久しく馴れ睦みたる婢どもは、さすがに後影を見送りてしばし佇立めり。",
+    "paragraph": "p2",
+    "problem": "Nominal pile-up and doubled verbs make the maids' farewell unreadable as English; 'coming and going of trays and of tea' sounds like a dictionary gloss.",
+    "span": "The maids, grown long familiar and fond through the coming and going of trays and of tea, watched the receding figures go and stood a while lingering.",
+    "suggestion": "The maids, grown fond and familiar after so many trays carried in and teas poured, watched them go and lingered a while.",
+    "sureness": "Sure this is translation stiffness, not author strangeness; any fluent rewrite that keeps trays/tea would settle it."
+   },
+   {
+    "japanese": "一里先なる停車場を指して走りぬ。",
+    "paragraph": "p2",
+    "problem": "Unexplained period measure stops an English reader; 'a ri away' has no meaning without help.",
+    "span": "Rickshaw after rickshaw, most of them laden with travelling bags and travellers, sped toward the station a ri away.",
+    "suggestion": "Rickshaw after rickshaw, most piled with bags and travellers, sped toward the station, a ri — over two miles — away.",
+    "sureness": "Sure readers won't know ri; house rule on measures / glossing would settle it."
+   },
+   {
+    "japanese": "北は見渡す限り目も藐に、鹿垣きびしく鳴子は遠く連なりて、山田の秋も忙がしげなり。",
+    "paragraph": "p3",
+    "problem": "Tautology — 'as far as the eye can reach the gaze is far' — plus three run-on clauses; has to be read twice.",
+    "span": "To the north, as far as the eye can reach the gaze is far, the deer-fences stand stark and the clappers run far in a line, and the autumn of the mountain paddies looks busy.",
+    "suggestion": "To the north, as far as sight reached, deer-fences stood stark and clappers ran in a far line, and the mountain paddies looked busy with autumn.",
+    "sureness": "Sure this is tangled English; the Japanese is periodic but not redundant in this way."
+   },
+   {
+    "japanese": "障子は隔ての関を据えて、松は心なく光琳風の影を宿せり。",
+    "paragraph": "p5",
+    "problem": "'set its barrier between' is left hanging between what, and 'in the Kōrin manner' means nothing to an English reader as written.",
+    "span": "The shoji set its barrier between, and the pines, heedless, lodged shadows in the Kōrin manner.",
+    "suggestion": "The shoji stood barred between them, and the pines, heedless, cast Kōrin-style shadows — bold, decorative pine silhouettes — across it.",
+    "sureness": "Fairly sure; need house decision on whether to gloss Kōrin once and then leave it bare."
+   },
+   {
+    "japanese": "定めて朋輩の誰彼に、それと噂の種なるべし。",
+    "paragraph": "p6",
+    "problem": "Bare fragment starting 'No doubt' reads as a dropped verb, not as deliberate style.",
+    "span": "No doubt to make a tale of it with one or another of her fellows.",
+    "suggestion": "No doubt to make a tale of it with one or another of her fellows in the maids' room.",
+    "sureness": "Sure this is a slip; adding the implied predicate fixes it without clarifying anything the author left unsaid."
+   },
+   {
+    "japanese": "過分の茶代に度を失いたる亭主は、急ぎ衣裳を改めて御挨拶に罷り出でしが、書記官様と聞くよりなお一層敬い奉りぬ。",
+    "paragraph": "p7",
+    "problem": "'lost his bearings before so lavish a tea money' and 'when he heard Secretary-sama' are not English; tip and title are left unworked.",
+    "span": "The master, who had lost his bearings before so lavish a tea money, hastily changed his dress and came out to pay his respects, and when he heard Secretary-sama he revered him only the more.",
+    "suggestion": "Dazzled by so lavish a tip, the master hastily changed his clothes to pay his respects, and when he heard 'the Secretary' he was more reverent still.",
+    "sureness": "Sure; only question is house style for -sama and for tea-money, which needs one gloss."
+   },
+   {
+    "japanese": "話しかくる一言の末に身を反らせて打ち笑いぬ。",
+    "paragraph": "p8",
+    "problem": "'at the tail of some word' is a word-for-word calque; no English reader hears it as 'at the end of what was said to him'.",
+    "span": "and at the tail of some word addressed to him bent his body back and laughed aloud.",
+    "suggestion": "and at the end of some remark addressed to him threw his body back and roared with laughter.",
+    "sureness": "Sure this is literalism; faithful reader can confirm the Japanese means no more than this."
+   },
+   {
+    "japanese": "その下萌えの片笑靨のわずかに見えたる、情を含む眼のさりとも知らず動きたる、たおやかなる風采のさらに見過ごしがてなる、ああ、辰弥はしばし動き得ず。",
+    "paragraph": "p12",
+    "problem": "List of fragments plus intrusive 'and ah' leaves the sentence with no shape; reader stalls before reaching Tatsuya.",
+    "span": "A single dimple faintly breaking, eyes full of feeling stirring they knew not how, a gentle bearing not to be passed over, and ah, Tatsuya stood a while unable to move.",
+    "suggestion": "A faint half-dimple, eyes stirring with feeling she knew not how, a gentle bearing not to be passed over — Tatsuya stood a while unable to move.",
+    "sureness": "Sure the shape is the problem; lush catalogue should stay lush but needs one main clause."
+   },
+   {
+    "japanese": "親子、国色、東京のもの、と辰弥は胸に繰り返しつつ浴場へと行きぬ。",
+    "paragraph": "p14",
+    "problem": "'repeated in his breast' is not idiomatic English for thinking to oneself.",
+    "span": "\"Father and daughter, first beauties of the land, Tokyo people,\" Tatsuya repeated in his breast as he went on to the bath.",
+    "suggestion": "\"Father and daughter, first beauties of the land, Tokyo people,\" Tatsuya repeated to himself as he went on to the bath.",
+    "sureness": "Sure; idiom fix only."
+   },
+   {
+    "japanese": "何省書記官正何位という幾字は、昔気たぎの耳に立ち優れてよく響き渡り",
+    "paragraph": "p19",
+    "problem": "'The few characters that read...' is incomprehensible as English and buries Zenpei's snobbery about rank.",
+    "span": "The few characters that read secretary of such a ministry, of such senior rank rang surpassingly well in old-fashioned ears",
+    "suggestion": "The very title — secretary in such a ministry, of such senior rank — rang splendidly in old-fashioned ears",
+    "sureness": "Sure this puzzles English readers; faithful reader can confirm no character-magic needs keeping."
+   },
+   {
+    "japanese": "ははははと独り悦に入る。",
+    "paragraph": "p21",
+    "problem": "'a hahaha' transliterates laughter instead of writing prose; it reads as a machine habit.",
+    "span": "and fell into a hahaha of solitary delight.",
+    "suggestion": "and dissolved into delighted laughter all by himself.",
+    "sureness": "Sure; house keeps Zenpei's laugh as 'laugh' elsewhere, which settles it."
+   },
+   {
+    "japanese": "お前は真実に怒ったから、おれは嘘に、嘘に、嘘に笑おうか。",
+    "paragraph": "p28",
+    "problem": "'shall I laugh lies' mismatches verb and object; English cannot laugh a lie in this sense.",
+    "span": "Since you are angry truly, shall I laugh lies, lies, lies?",
+    "suggestion": "Since you're angry truly, truly, truly, shall I laugh falsely, falsely, falsely?",
+    "sureness": "Fairly sure the echo must stay but the verb needs 'laugh' to govern how, not what; check against faithful note on 真実に/嘘に wordplay."
+   },
+   {
+    "japanese": "見込んだものを人に取らして、指をくわえているおれではない。",
+    "paragraph": "p48",
+    "problem": "'suck my thumb' in English means childish self-comfort, not standing by while another takes your prize.",
+    "span": "I am not the man to suck my thumb while another walks off with what I have marked.",
+    "suggestion": "I'm not the man to stand sucking my fingers while another walks off with what I've marked.",
+    "sureness": "Fairly sure; the literal image is the author's, but English needs a gloss to avoid the nursery meaning — faithful reader to confirm."
+   },
+   {
+    "japanese": "わが物顔のその面を蹂み躙るのは朝飯前だ。",
+    "paragraph": "p48",
+    "problem": "'as easy as breakfast' is a calque of asa-meshi-mae and unidiomatic, plus missing hyphen in 'self satisfied'.",
+    "span": "To trample that self satisfied face underfoot will be as easy as breakfast.",
+    "suggestion": "To trample that self-satisfied face underfoot will be child's play — as easy as breakfast before morning rice.",
+    "sureness": "Sure 'as easy as breakfast' alone won't pass; need house line on whether to keep the Japanese idiom visibly or use plain English ease."
+   },
+   {
+    "japanese": "光代は高がひいひいたもれ。ただ一撃ちに羽翼締めだ。",
+    "paragraph": "p49",
+    "problem": "'peeping chick' is obscure and 'pinion her' is technical; together they hide the menace in oddity.",
+    "span": "Mitsuyo is only a peeping chick, after all. One blow to pinion her.",
+    "suggestion": "Mitsuyo is only a newly-hatched chick, after all. One blow to clip her wings.",
+    "sureness": "Fairly sure the sense is newly-fledged helplessness plus one-stroke capture; Japanese bird sense to be confirmed."
+   },
+   {
+    "japanese": "毎年の採掘高は幾十万円、利益配当の多いことはまず炭山にはほとんどまれで、その炭質の良いことは遠く三池の石炭にも増して、内外諸方へ軍艦用として売り込むものでも毎年およそ何十万噸",
+    "paragraph": "p86",
+    "problem": "Single breathless 100-word business catalogue with vague 'some hundreds of thousands' repeated; English loses the thread and the greed.",
+    "span": "the yearly output some hundreds of thousands, dividends so large as to be almost rare among coal mines, and the quality of the coal far surpassing even the coal of Miike, with sales for naval use at home and abroad of some hundreds of thousands of tons a year;",
+    "suggestion": "yearly output in the hundreds of thousands, dividends almost unheard of for a coal mine, coal far better even than Miike, with hundreds of thousands of tons a year sold for naval use at home and abroad —",
+    "sureness": "Sure the sentence must be broken into readable units; figures can stay vague as in source, no need to invent precision."
+   },
+   {
+    "japanese": "客より先に主人の満足は、顔に横撫での煤を付けながら、独り妙と隈なく八方を見廻しぬ。",
+    "paragraph": "p97",
+    "problem": "'crying superb' reads as weeping in modern English, turning self-satisfaction into tears.",
+    "span": "and, more pleased than any guest to come, his face streaked sideways with soot, the master alone looked round on every side, crying superb.",
+    "suggestion": "and, more pleased than any guest to come, his face streaked sideways with soot, the master alone looked round on every side, crying, 'Splendid!'",
+    "sureness": "Sure; 'cry' as shout is dead in current prose."
+   },
+   {
+    "japanese": "豊は碁石の清拭きせよ。利介はそれそれ手水鉢、糸目の椀は土蔵にある。南京染付け蛤皿、それもよしかこれもよしか、光代、光代はどこにいる。光代光代",
+    "paragraph": "p98",
+    "problem": "Orders run together without breaks or address; reader cannot tell who is told what or where direct speech ends.",
+    "span": "\"Toyo, wipe the go stones clean. Risuke, now, the hand basin, the thread patterned bowls are in the storehouse. The Nankin blue and white clam dishes, shall it be these or shall it be those, Mitsuyo, where is Mitsuyo, Mitsuyo, Mitsuyo.\"",
+    "suggestion": "\"Toyo — wipe the go stones clean. Risuke — the basin now; the thread-pattern bowls are in the storehouse. The Nankin blue-and-white clam dishes — shall it be these or those? Mitsuyo! Where is Mitsuyo? Mitsuyo! Mitsuyo!\"",
+    "sureness": "Sure punctuation and dashes would make bustle readable without adding words."
+   },
+   {
+    "japanese": "なに、御同僚そのほかあなたと事をともにした今日の方々にも、幾分かの割賦金とおっしゃいますのか。",
+    "paragraph": "p101",
+    "problem": "Garbed indirect question — 'What, you say that... is also due?' — leaves who asks what and of whom unclear at the key bribe turn.",
+    "span": "What, you say that to your colleagues and the others who have acted with you, the gentlemen here today, some share of allotment money is also due?",
+    "suggestion": "\"What — you say some share of allotment money is due to your colleagues and the others who have acted with you, the gentlemen here today?\"",
+    "sureness": "Fairly sure; shape of negotiation needs untangling, terms themselves to be left airless as written."
+   },
+   {
+    "japanese": "荻の上風、桐は枝ばかりになりぬ。明日は誰が身の。",
+    "paragraph": "p132",
+    "problem": "Closing fragments read as dropped words rather than deliberate withholding; 'upon whom shall it fall' has no antecedent in English.",
+    "span": "Wind above the reeds, the paulownia left with branches only. Tomorrow, upon whom shall it fall.",
+    "suggestion": "Wind over the reeds; the paulownia left with branches only. Tomorrow — upon whom will it fall?",
+    "sureness": "Fairly sure fragments should stay fragments but need rhythm to signal intent; what 'it' is must stay as unstated as the Japanese."
+   }
+  ],
+  "say": "The English carries the lush-to-brisk movement but keeps tripping on literal calques, unglossed period terms and run-on catalogues that an English reader cannot parse without help."
+ },
+ "usage": {
+  "input_tokens": 50772,
+  "cached_tokens": 0,
+  "output_tokens": 11536,
+  "reasoning_tokens": 7944,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.112493,
+ "response_id": "resp_6aeb7ed38c9f96eca2144559",
+ "latency_s": 107.48,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 12865
+  }
+ ],
+ "created": "2026-11-04T18:52:03Z"
+}

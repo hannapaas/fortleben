@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 60678,
+  "cached_tokens": 60404,
+  "output_tokens": 157,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0163168,
+ "response_id": "resp_6aeb7e77e648ae5503f7478f",
+ "latency_s": 3.7,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_7211043e-89f8-4847-b127-5ef4c9382acf",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"R3\"],\"new\":\"she anticipated his every want and showed him every indulgence.\",\"old\":\"she left no itch unscratched and showed him every indulgence.\",\"reason\":\"痒い処へ手の届かずという事なく is the common idiom for anticipating every want; the literal itch reads as a sexual joke in English.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:50:31Z"
+}

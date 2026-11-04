@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 67830,
+  "cached_tokens": 67444,
+  "output_tokens": 138,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.017792800000000004,
+ "response_id": "resp_6aeb8134a513d93cfe3443fd",
+ "latency_s": 1.95,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_4ae3be2e-67d5-4101-a92a-7915a11243eb",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"R2\"],\"new\":\"from the *Kōdan Club* he had been buried in\",\"old\":\"from the Koudan Club he had been buried in\",\"reason\":\"House romanisation uses macrons, and magazine titles are italicised on first use.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T19:02:12Z"
+}

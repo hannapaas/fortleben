@@ -1,0 +1,32 @@
+{
+ "prompt": "final-read",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 52234,
+  "cached_tokens": 51444,
+  "output_tokens": 187,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.017188800000000004,
+ "response_id": "resp_6aeb8193e9c81de3c00845d6",
+ "latency_s": 2.44,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_cdf7a561-ad4f-4798-bc0c-a7534f22624c",
+   "name": "edit",
+   "arguments": "{\"new\":\"his wife, an Edokko herself, gave in to a woman's weak heart and now and then tried to save up overnight money, and he knocked her about till she spent it all\",\"old\":\"his wife, an Edokko herself, gave in to a woman's weak heart and now and then tried to keep overnight money, and he knocked her about till she spent it all\",\"reason\":\"Japanese has her trying to leave/save overnight money (宵越しの金を残そう), which 'keep overnight money' obscures against the Edokko custom.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T19:03:47Z"
+}

@@ -1,0 +1,93 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "1",
+    "ids": [
+     "p1"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Hey, boss,\" he was hailed, and Nekohachi turned his eyes from the Kodan Club he had been buried in toward the voice. He knew by the voice right away who it was, so he felt at ease,",
+    "ids": [
+     "p2"
+    ],
+    "notes": [
+     "Kept Sensei and kōza in roman as in bible; Kodan Club is Kodan Kurabu, the storytelling magazine he is reading."
+    ]
+   },
+   {
+    "english": "\"Well, Sensei!\" he said, putting on a vacant face on purpose, \"we do keep meeting on this tram, now. So a fine nest has turned up for you out this way, eh?\"",
+    "ids": [
+     "p3"
+    ],
+    "notes": [
+     "'nest' is su, the pun carried into the answer in p4. Rendered na and degesu forms here and after as run-on tags like now and eh rather than dialect."
+    ]
+   },
+   {
+    "english": "\"What, the nest at Sugamo, that's all!\"",
+    "ids": [
+     "p4"
+    ],
+    "notes": []
+   },
+   {
+    "english": "He was floored straight off by that. But by now the passengers all around were pricking up their ears, so he pulled back into his heart the feeling from the koza he had just come up from with his hands now free. And the passengers all began to look like his own audience, so he felt he had got to give something back somehow. \"I daresay, eh,\" he said, putting on a suddenly solemn face, and just then, glancing to see their tram passing in front of the madhouse, he made material of it,",
+    "ids": [
+     "p5"
+    ],
+    "notes": [
+     "Madhouse is the Tenkyo hospital in front of which the tram is passing; left as madhouse as context gives it."
+    ]
+   },
+   {
+    "english": "\"Out in a place like Sugamo there is nothing living but madmen or monsters like Nekohachi, eh.\"",
+    "ids": [
+     "p6"
+    ],
+    "notes": [
+     "Kept madmen and monsters stable as load-bearing wording from the opening joke."
+    ]
+   },
+   {
+    "english": "\"Ha, ha, haa,\" somebody laughed, so even in such a place he got his usual response in a way, but when he thought of the place and tried to hold back any further light talk on top of it, somehow his mouth seemed unwilling to agree.",
+    "ids": [
+     "p7"
+    ],
+    "notes": [
+     "Kept the laughter as ha, ha, haa without upgrading; the mouth not agreeing is his compulsion to keep performing."
+    ]
+   }
+  ],
+  "say": "Drafted p1 to p7 keeping the tram heckle as work and the two registers unmerged."
+ },
+ "usage": {
+  "input_tokens": 27800,
+  "cached_tokens": 0,
+  "output_tokens": 2916,
+  "reasoning_tokens": 2327,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.047143,
+ "response_id": "resp_6aeb7ac4b041e89b17fe4e70",
+ "latency_s": 34.21,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2186
+  }
+ ],
+ "created": "2026-11-04T18:34:44Z"
+}

@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 31351,
+  "cached_tokens": 31092,
+  "output_tokens": 131,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.009874400000000002,
+ "response_id": "resp_6aeba63ef3f032a2ac3a444c",
+ "latency_s": 1.82,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_ef5806ef-20e5-4d26-8a86-5c8a3f301c64",
+   "name": "edit",
+   "arguments": "{\"old\":\"when ordinary men receive a schooling and the like\",\"new\":\"when ordinary men go through schooling and the like\",\"reason\":\"\\\"receive a schooling\\\" is unidiomatic for 学校の教育などをうける.\",\"replace_all\":false,\"answers\":[\"R10\"]}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T21:40:15Z"
+}

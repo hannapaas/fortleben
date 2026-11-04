@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 61603,
+  "cached_tokens": 61300,
+  "output_tokens": 158,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.016632,
+ "response_id": "resp_6aeb7e83ccc11bc77c6c4c3a",
+ "latency_s": 2.02,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_87684070-fd30-4506-ab54-63fd0c7c23b7",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"F12\"],\"new\":\"\\\"Ei!\\\" With a swift move he threw a shuriken with all his might.\",\"old\":\"\\\"Ei!\\\" With a swift move he threw with all his might, as one throws a dart.\",\"reason\":\"This is expansion: 手裏剣を打った has no dart simile, and removing it keeps the throw at the original's pace.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:50:43Z"
+}

@@ -1,0 +1,32 @@
+{
+ "prompt": "final-read",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 35492,
+  "cached_tokens": 35060,
+  "output_tokens": 125,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01124,
+ "response_id": "resp_6aeb7f5ceac3b83437a94bc0",
+ "latency_s": 2.15,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_a89b1bfc-0ee9-4d7a-a587-d7a74a15df79",
+   "name": "edit",
+   "arguments": "{\"old\":\"but if you come there there'll be no study, will there?\",\"new\":\"but if Mother comes there there'll be no study, will there?\",\"reason\":\"The wife means Mother would come to the Tokyo house, not 'you' (Taki).\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:54:20Z"
+}

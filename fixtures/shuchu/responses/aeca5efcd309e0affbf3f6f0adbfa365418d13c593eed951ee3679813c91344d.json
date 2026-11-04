@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 31180,
+  "cached_tokens": 30964,
+  "output_tokens": 142,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.009896799999999999,
+ "response_id": "resp_6aeba63d020b814b81254a58",
+ "latency_s": 2.3,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_a4a25311-4b4a-412c-ad9c-4aadd68157ca",
+   "name": "edit",
+   "arguments": "{\"old\":\"Then, saying he must not move, the barbarian monk wound\",\"new\":\"Then, telling him not to move, the barbarian monk wound\",\"reason\":\"\\\"saying he must not move\\\" leaves who must not move unclear; the monk tells Liu.\",\"replace_all\":false,\"answers\":[\"R9\"]}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T21:40:13Z"
+}

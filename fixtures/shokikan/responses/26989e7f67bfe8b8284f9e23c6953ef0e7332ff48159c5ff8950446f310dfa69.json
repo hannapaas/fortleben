@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 65709,
+  "cached_tokens": 65396,
+  "output_tokens": 161,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0175512,
+ "response_id": "resp_6aeb7f19662d44e886ca4b98",
+ "latency_s": 2.05,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_3327feb9-a3dd-48cd-a90d-c377d8d1a981",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"R14\"],\"new\":\"To trample that self-satisfied face underfoot will be as easy as breakfast.\",\"old\":\"To trample that self satisfied face underfoot will be as easy as breakfast.\",\"reason\":\"Only the missing hyphen is fixed; 'as easy as breakfast' keeps Tatsuya's brisk Japanese idiom visible rather than smoothing it to 'child's play'.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:53:13Z"
+}

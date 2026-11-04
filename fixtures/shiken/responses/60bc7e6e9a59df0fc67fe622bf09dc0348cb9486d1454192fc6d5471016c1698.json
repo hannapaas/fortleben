@@ -1,0 +1,42 @@
+{
+ "prompt": "copy-desk",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": null,
+ "usage": {
+  "input_tokens": 21757,
+  "cached_tokens": 21617,
+  "output_tokens": 1296,
+  "reasoning_tokens": 1160,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.008925549999999999,
+ "response_id": "resp_6aeb8fbe2f27bccad8064858",
+ "latency_s": 12.31,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_34c2e82e-0129-4a27-8a3f-cabc0aea35e9",
+   "name": "edit",
+   "arguments": "{\"new\":\"Imabori Settsu-no-kami\",\"old\":\"Imahori Settsu-no-kami\",\"reason\":\"Ruby reads imabori; author's reading wins\",\"replace_all\":true}"
+  }
+ ],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": "commentary",
+   "chars": 67
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T20:04:15Z"
+}

@@ -1,0 +1,52 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "At Mitsuyo's cry of \"Oh!\" Tatsuya lifted his downcast face, and saw Zenpei coming toward them with a strange man making straight for where they stood. \"Tsunao-sama!\" Mitsuyo cried, her face all at once alive, and ran straight toward him, saying as she ran, \"When did you ever get here! You cannot know how I have waited! While you stayed away, Father did nothing but torment me.\" With a soft, cajoling glance at her father — \"Father, I shall not lose to you now!\" — she turned again to Tsunao, laughing: \"Why did you not come sooner? It is too cruel. You care nothing for me, and that is horrid. And you have grown such a nasty beard—\" She had got so far when, catching sight of Tatsuya's thick black beard as he came up beside her, she turned back in a flash: \"Oh, forgive me! O-ho-ho-ho!\" — her manner changed in an instant.",
+    "ids": [
+     "p42"
+    ],
+    "notes": [
+     "Both hige terms here — Mitsuyo's tease at Tsunao and Tatsuya's black beard — use the same word 'beard' to keep the comic trip the Japanese sets up; her apology is aimed at Tatsuya."
+    ]
+   },
+   {
+    "english": "Presented by Zenpei as \"a kinsman of mine, Tojo Tsunao,\" Tatsuya greeted him with his usual free and easy civility, but inwardly he was far from calm. Who was this pale, close-looking, queer fellow? And what to make of Mitsuyo's behavior? \"Or perhaps—\" the suspicion came, but he let nothing show and kept a cheerful face to the last. Though Tsunao handled him with a haughtiness that seemed to brush him from the tip of his nose, and stung him again and again, Tatsuya, a man used to people, let it pass with an easy laugh; Tsunao showed no sign of meeting him, and without so much as a glance said, \"Mitsuyo, I have brought you a keepsake. What do you think it is? Guess.\"",
+    "ids": [
+     "p43"
+    ],
+    "notes": [
+     "Tatsuya's 'Or perhaps—' leaves the inference unfinished as in the Japanese; the speaker of the keepsake line is Tsunao, addressing Mitsuyo only."
+    ]
+   }
+  ],
+  "say": null
+ },
+ "usage": {
+  "input_tokens": 27602,
+  "cached_tokens": 26225,
+  "output_tokens": 2815,
+  "reasoning_tokens": 2292,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01761875,
+ "response_id": "resp_6aeb7bfc27c3506b33614134",
+ "latency_s": 24.43,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1962
+  }
+ ],
+ "created": "2026-11-04T18:39:56Z"
+}

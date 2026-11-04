@@ -1,0 +1,42 @@
+{
+ "prompt": "copy-desk",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": null,
+ "usage": {
+  "input_tokens": 23196,
+  "cached_tokens": 22769,
+  "output_tokens": 1837,
+  "reasoning_tokens": 1694,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01175635,
+ "response_id": "resp_6aeb81e93ba964e2d7d44a70",
+ "latency_s": 18.57,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_6e751241-1aec-42d5-986c-c71b8218aa62",
+   "name": "edit",
+   "arguments": "{\"new\":\"Kōdan Club\",\"old\":\"Kodan Club\",\"reason\":\"House form has macron; later roman use keeps spelling, per style sheet titles roman after first italic use\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": "commentary",
+   "chars": 97
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T19:05:13Z"
+}

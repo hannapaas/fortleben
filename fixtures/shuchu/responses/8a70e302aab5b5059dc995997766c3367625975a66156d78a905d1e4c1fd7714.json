@@ -1,0 +1,68 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"Is it out?\" Liu said as if groaning, lifting his swimming head, and from mere curiosity, forgetting even his thirst, crawled naked as he was to the side of the jar. At the sight, Sun Sensei too came hurrying toward the two, warding off the sun with his white-feather fan. When all three peered together into the jar, a thing like a small salamander, the colour of its flesh like red mud, was swimming in the wine. It may have been about three sun long. It had a mouth, it had eyes. Somehow, as it swam, it seemed to be drinking the wine. When Liu saw this, his stomach turned suddenly....",
+    "ids": [
+     "p51"
+    ],
+    "notes": [
+     "Kept \"three sun\" as a measure without conversion, as the tale measures its marvel; kept the low zoology flat: salamander, mouth, eyes, seeming to drink."
+    ]
+   },
+   {
+    "english": "IV",
+    "ids": [
+     "p52"
+    ],
+    "notes": []
+   },
+   {
+    "english": "The barbarian monk's cure showed itself at once. From that day Liu Dacheng abruptly became unable to drink wine. Now, he says, he dislikes even the smell of it. Yet strangely, from that time Liu's health began little by little to fail. This year makes three years since he spat out the wine worm, and nowhere remains a trace of the round, fat figure of former years. Skin of poor lustre, still oily, wraps the harsh bones of his face, and frost-touched locks linger only faintly above his temples, and there is said to be no counting how many times in the year he now takes to his bed.",
+    "ids": [
+     "p53"
+    ],
+    "notes": [
+     "Kept the hearsay distance of the decline report; left mu and field phrasing for p54."
+    ]
+   },
+   {
+    "english": "But it was not Liu's health alone that has failed since then. Liu's fortune too has declined with gathering speed, and now the fields by the city wall, counted at three hundred mu, have for the most part passed into other hands. Liu himself, of necessity, has taken a plough in unpractised hands and lives out his wretched days, day by day.",
+    "ids": [
+     "p54"
+    ],
+    "notes": [
+     "Kept \"three hundred mu\" and \"fields by the city wall\" as quantitative pseudo-record, not converted."
+    ]
+   }
+  ],
+  "say": "Drafted the viewing of the worm and the flat three-year decline without pathos."
+ },
+ "usage": {
+  "input_tokens": 16017,
+  "cached_tokens": 15089,
+  "output_tokens": 2490,
+  "reasoning_tokens": 1947,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01400585,
+ "response_id": "resp_6aeba5a25902dfb8ec764b48",
+ "latency_s": 23.08,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2150
+  }
+ ],
+ "created": "2026-11-04T21:37:39Z"
+}

@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 48535,
+  "cached_tokens": 48244,
+  "output_tokens": 207,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0149528,
+ "response_id": "resp_6aeb7eecd3cb12a7851f4d50",
+ "latency_s": 2.21,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_c8812032-d4c0-4a60-88b3-061ea856730c",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"R9\"],\"new\":\"when his wife — as if his ordering bored her, as if she had not taken it out for him at all but to beguile her own solitude as she pleased — said in a throwaway voice\",\"old\":\"when his wife, as if she found his ordering tiresome, as if she had not taken it out to answer his requests at all but to beguile her own solitude as she pleased — said in a throwaway voice\",\"reason\":\"Setting the double 'as if' between dashes keeps the narrator's hedging without losing who feels what before her line lands.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:52:28Z"
+}

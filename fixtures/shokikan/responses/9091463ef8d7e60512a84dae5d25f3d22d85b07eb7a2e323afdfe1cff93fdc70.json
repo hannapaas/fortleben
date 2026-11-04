@@ -1,0 +1,52 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "From the first Mitsuyo wore no pleasant face, and listened as if lending only her ears, until, with her wonted wilfulness showing its force at such a moment, she said, \"My stomach aches today, so please excuse me,\" and rose curtly from her place. That day she never once showed her face outside her room.",
+    "ids": [
+     "p99"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Before long the guests came in, for the most part in Western dress and black-bearded, and for a while after they entered the room they gave themselves to hushed and close counsel; then, as they opened out and settled to either side, the dishes carried in were the fruit of Zenshiro's careful knife, and before the exchange of cups was half done merry voices were already rising in laughter. Hearing it from afar, Mitsuyo's eyes brimmed with vexation. That in the hurry of the reception not one soul came to visit her was, to a girl's heart, one grievance more.",
+    "ids": [
+     "p100"
+    ],
+    "notes": [
+     "I read \"shichibu\" as \"for the most part\" rather than a counted seven in ten, and kept it vague as the Japanese is vague about number.",
+     "I read \"futakawa ni inagaretaru\" as the party opening from close counsel and settling to sit on both sides; the syntax leaves the exact movement open.",
+     "I keep \"black-bearded\" with the same \"beard\" word for the beard motif, though the Japanese here uses髯."
+    ]
+   }
+  ],
+  "say": "Drafted p99-p100 with Mitsuyo sullen in her room and the banquet heard from afar."
+ },
+ "usage": {
+  "input_tokens": 28096,
+  "cached_tokens": 26225,
+  "output_tokens": 2174,
+  "reasoning_tokens": 1805,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.015512,
+ "response_id": "resp_6aeb7d844da10ebcec8f4478",
+ "latency_s": 20.29,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1467
+  }
+ ],
+ "created": "2026-11-04T18:46:29Z"
+}

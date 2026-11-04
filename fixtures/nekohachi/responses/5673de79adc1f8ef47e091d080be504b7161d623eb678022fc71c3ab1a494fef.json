@@ -1,0 +1,50 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"Now, now, keep yourself quiet, eh,\" he was telling himself under his breath as he looked at the other's face. This was Takami, who had asked him along once or twice for some affair, and he was keeping that good-natured silent grin going on his sleepy face with a touch of drink in it. \"Oi, little Buddha of little Nara\" came right up to his throat, but he gulped it back down, thinking the man was no fellow performer to say that to. Then what looked like harmless words came rattling out. \"Had your one already, eh— things as dull as they are, Sensei looks to be doing pretty well for himself, eh? Let me have a bit of it, eh, what do you say? Me, I am off home now and if I am lucky, well, you know, I might get something hot, I suppose, eh, though whether the missus has got it ready or not I don't know.\"",
+    "ids": [
+     "p8"
+    ],
+    "notes": [
+     "Swallowed retort left literal: 'little Buddha of little Nara' is Nekohachi's private nickname for Takami from girth and sleepy face, gulped back because Takami is no fellow performer. 'Missus' renders kakaa, his Edokko word for his own wife."
+    ]
+   },
+   {
+    "english": "\"ha, ha, ha!\" The man holding his seat across the way and staring this way laughed again.",
+    "ids": [
+     "p9"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted p8-p9 to match the house first page patter."
+ },
+ "usage": {
+  "input_tokens": 28233,
+  "cached_tokens": 16241,
+  "output_tokens": 3385,
+  "reasoning_tokens": 3031,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.031812400000000005,
+ "response_id": "resp_6aeb7b16aaeb6b92d1e44be6",
+ "latency_s": 35.27,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1317
+  }
+ ],
+ "created": "2026-11-04T18:36:06Z"
+}

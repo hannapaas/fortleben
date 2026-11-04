@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 48964,
+  "cached_tokens": 48756,
+  "output_tokens": 155,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.013683200000000001,
+ "response_id": "resp_6aeb7ef131995a65505546fd",
+ "latency_s": 2.48,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_7d6f73a0-3b7e-4e41-9a1e-1f5a203d6f8d",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"R11\"],\"new\":\"effect to no one in particular as she got to her feet and turned to him\",\"old\":\"effect to no one in particular, his wife got to her feet and turned to him\",\"reason\":\"This ties the muttering to the wife, who is its subject in the Japanese, and removes the dangling participle.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:52:34Z"
+}

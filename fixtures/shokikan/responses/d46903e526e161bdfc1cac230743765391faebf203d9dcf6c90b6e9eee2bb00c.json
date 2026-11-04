@@ -1,0 +1,52 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "The guest was a secretary in one of the ministries, Okumura Tatsuya by name, a man on the rise, who had begged official leave for an unexpected illness and, his health at last restored, had come this very day to the Umeya to nurse himself onward. His glittering dress and his splendid beard brought the master flying out from the front desk, and from under a reverent bow he was led to this detached chamber, richest of all in prospect. His face was that of a man of thirty or so, though it looked older still, and within his keen eyes there was an unaccountable amiability, which one of the maids, case hardened to guests, had found out, till it was on every mouth and made sport for her friends. Tatsuya was by nature quick to make himself at home, and in a moment he had become a gentleman with whom none need stand on ceremony. The master, who had lost his bearings before so lavish a tea money, hastily changed his dress and came out to pay his respects, and when he heard Secretary-sama he revered him only the more.",
+    "ids": [
+     "p7"
+    ],
+    "notes": [
+     "Kept Japanese order Okumura Tatsuya on this first naming, and Secretary-sama with romanised suffix per bible to keep rank climbing visible. Kept tea money literal for the tip that unsettles the master. Kept beard as beard throughout."
+    ]
+   },
+   {
+    "english": "The koto presently brought its piece to an end, and quiet voices in talk within were faintly heard, uncertain. Tatsuya too was now gazing into the prospect spread before him, but his heart was already elsewhere. Just then a shoji opened with a rush, as if one within had risen to come out. Tatsuya's ear was quickest to catch it, and he turned. There at the rail stood one near fifty, full and round of face, at a glance a hale old man. Grown stout past all trace of bone, for all the world a Hotei, the squat laughing god, in a square sleeved robe, he turned with an amused face back toward the inside of the shoji, and at the tail of some word addressed to him bent his body back and laughed aloud. Of the one within, no shadow could be seen.",
+    "ids": [
+     "p8"
+    ],
+    "notes": [
+     "Glossed Hotei once inline as the squat laughing god. Left the speaker inside the room unseen and the closing remark unattributed, as the Japanese leaves who speaks to whom to infer."
+    ]
+   }
+  ],
+  "say": "Drafted the first naming of Tatsuya and first appearance of Zenpei, keeping rank forms and Hotei bulk."
+ },
+ "usage": {
+  "input_tokens": 27903,
+  "cached_tokens": 26225,
+  "output_tokens": 3117,
+  "reasoning_tokens": 2542,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0192785,
+ "response_id": "resp_6aeb7af1b3cb6a9fe27e4d06",
+ "latency_s": 34.96,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2398
+  }
+ ],
+ "created": "2026-11-04T18:35:30Z"
+}

@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 64732,
+  "cached_tokens": 64500,
+  "output_tokens": 198,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.017788,
+ "response_id": "resp_6aeb7f0ed5fc4bd6c4924e63",
+ "latency_s": 2.77,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_1383cf3e-17cd-4294-b6ed-e0bc534400df",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"R8\"],\"new\":\"A faint half-dimple, eyes stirring with a feeling they knew not how, a gentle bearing not to be passed over — Tatsuya stood a while unable to move.\",\"old\":\"A single dimple faintly breaking, eyes full of feeling stirring they knew not how, a gentle bearing not to be passed over, and ah, Tatsuya stood a while unable to move.\",\"reason\":\"The lingering inventory is kept, but one main clause carries it to Tatsuya instead of a list of fragments with an intrusive 'and ah'.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:53:02Z"
+}

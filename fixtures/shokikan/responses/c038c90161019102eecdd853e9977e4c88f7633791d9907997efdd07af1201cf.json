@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 66090,
+  "cached_tokens": 65780,
+  "output_tokens": 226,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.018916,
+ "response_id": "resp_6aeb7f1ec26affa30c1e4f4c",
+ "latency_s": 2.48,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_56d82b0d-3ea8-4bf9-b77c-3f960f1199f3",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"R16\"],\"new\":\"the yearly output in the hundreds of thousands of yen, dividends almost unheard of for a coal mine, coal far better even than Miike, with hundreds of thousands of tons a year sold for naval use at home and abroad;\",\"old\":\"the yearly output some hundreds of thousands, dividends so large as to be almost rare among coal mines, and the quality of the coal far surpassing even the coal of Miike, with sales for naval use at home and abroad of some hundreds of thousands of tons a year;\",\"reason\":\"Zenpei's breathless catalogue is kept vague as in the Japanese, but broken into units the eye can follow so the greed stays legible.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:53:19Z"
+}

@@ -1,0 +1,59 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "Mitsuyo turned back and looked into his face with an air of complaint. \"Father, why do you favour Okumura-san so?\" \"Why? What do you mean by that? I praise him because he is worth praising,\" her father said, knocking out his tobacco. Her face took on a look of having something in mind. \"But still, he is a stranger, is he not?\" \"Hm, I see. It vexes you that I do not favour Tsunao, is that it? Quite right, indeed it is. Oh, Tsunao is a splendid fellow. As you say, young and refined, and what was it now, yes, calm and high of spirit, and if you want still more, deep in learning and steady in hand and handsome and upright in conduct. Ah, I am worn out. A young man without a single fault to be found.\"",
+    "ids": [
+     "p22"
+    ],
+    "notes": [
+     "\"Steady in hand\" renders 腕が確かで, taken as general competence rather than a particular skill; the weariness is Zenpei's comic piling-on, not a break in the list."
+    ]
+   },
+   {
+    "english": "\"Say plenty of such things, do. When Tsunao-san comes I shall tell on you, so there. You really are a hateful Father,\" Mitsuyo said, sulking more than ever. \"Dear me, I have spoilt your good temper,\" Zenpei said, drawing the air pillow beside him toward him and laying himself on his side. \"I should like to show Tsunao just how you look like that,\" with a teasing face still.",
+    "ids": [
+     "p23"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Very well. Tease me as long as you like. With you like that, Father, who knows how ill you speak even of me behind my back. From now on I shall not take a word you say as true, so there. You do not love me at all, Father. That is why the other day at home you slipped away from me and went to the play. I bear a great grudge, so there.\"",
+    "ids": [
+     "p24"
+    ],
+    "notes": [
+     "Kept \"take as true\" for 真実にしない to hold the wording for her \"truly, truly\" outburst in p27 and Zenpei's mocking answer."
+    ]
+   }
+  ],
+  "say": "Drafted p22 to p24 as domestic comedy with Zenpei bluff and Mitsuyo wheedling kept intact."
+ },
+ "usage": {
+  "input_tokens": 27287,
+  "cached_tokens": 26225,
+  "output_tokens": 2383,
+  "reasoning_tokens": 1841,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.015389,
+ "response_id": "resp_6aeb7b77850f4908ed0249f8",
+ "latency_s": 19.97,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1971
+  }
+ ],
+ "created": "2026-11-04T18:37:43Z"
+}

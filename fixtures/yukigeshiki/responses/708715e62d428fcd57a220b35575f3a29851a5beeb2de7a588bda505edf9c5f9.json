@@ -1,0 +1,162 @@
+{
+ "prompt": "reader-readable",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "notes": [
+   {
+    "japanese": "石段を降つて、又ひよろ〳〵と降つて行く海辺へ近い松林の中途であつた。",
+    "paragraph": "p2",
+    "problem": "As English 'on wavering down' is ungrammatical and stops the opening walk cold.",
+    "span": "on wavering down toward the pine wood near the sea",
+    "suggestion": "down the stone steps and wavering on down toward the pine wood near the sea.",
+    "sureness": "Sure; a fluent rephrasing would settle it, keeping the wobble."
+   },
+   {
+    "japanese": "思ひ出は、あまり、無い家だからな、これは――",
+    "paragraph": "p14",
+    "problem": "Subject-verb agreement fails in English and makes Taki sound illiterate rather than flat.",
+    "span": "There's hardly any memories in this house, for me —",
+    "suggestion": "There are hardly any memories in this house, for me —",
+    "sureness": "Sure; grammar check settles it."
+   },
+   {
+    "japanese": "ペンを執りさへすれば半分も何もない何時からでも一気呵勢に書き綴れると思つてゐた。",
+    "paragraph": "p28",
+    "problem": "'write it off' in English means dismiss or cancel, the opposite of what he means.",
+    "span": "he thought he could write it off in one burst! at any time.",
+    "suggestion": "he thought he could dash it off in one burst! at any time, half or nothing.",
+    "sureness": "Very sure; 'write off' is a false friend here."
+   },
+   {
+    "japanese": "思えの他これあアてえ変な仕事だぜえ",
+    "paragraph": "p46",
+    "problem": "'queerer job' now reads as sexual innuendo, which the workmen's grumble does not intend.",
+    "span": "It's a queerer job than you'd think, this is.",
+    "suggestion": "It's a stranger job than you'd think, this is.",
+    "sureness": "Sure; modern connotation check settles it — 'queer' has moved since 1927."
+   },
+   {
+    "japanese": "素地の皮膚に般若の面の輪廓だけが八分通り型どられてゐた。",
+    "paragraph": "p48",
+    "problem": "'at about eight tenths' is not idiomatic English for a tattoo left unfinished.",
+    "span": "only the outline of a hannya mask traced at about eight tenths on the bare skin.",
+    "suggestion": "only the outline of a hannya mask traced, about eight-tenths finished, on the bare skin.",
+    "sureness": "Fairly sure; a tattooist's phrasing would settle it, but 'eight-tenths done' is the sense."
+   },
+   {
+    "japanese": "さう思つては彼は他易く楽天的になつて、更に余裕をつくつて「夢」の方へ没頭して来た。",
+    "paragraph": "p75",
+    "problem": "'made himself a little more leisure' is ungrammatical and blurs his key sedative move.",
+    "span": "made himself a little more leisure, and sank deeper into the 'dream'.",
+    "suggestion": "allowed himself a little more leisure, and sank deeper into the 'dream'.",
+    "sureness": "Sure; idiom check settles it."
+   },
+   {
+    "japanese": "彼は永い間の昼夜の転換を取り戻すために、反つてそれを幸ひにして直ぐに引き込めるであらう電灯を其処だけは点さなかつた。",
+    "paragraph": "p76",
+    "problem": "The sentence twists itself inside out in English; a reader has to parse it twice to get the simple fact.",
+    "span": "To recover his long reversed day and night, he had rather welcomed this and had left unlit there alone the light that could easily have been drawn in.",
+    "suggestion": "To undo his long reversal of day and night he had rather welcomed this, and had left unlit there alone the light that could easily have been wired in.",
+    "sureness": "Fairly sure; I may be smoothing a knot the author left, so the faithful reader should confirm how flat the Japanese is."
+   },
+   {
+    "japanese": "話が止絶《き》れると彼女は、帯の間からハーモニカを取り出して吹奏しながら歩いた。",
+    "paragraph": "p92",
+    "problem": "'When talk came to a stop' and 'from inside her sash' both sound like dictionary English, and the '(?)' is a proof mark, not prose.",
+    "span": "When talk came to a stop she took a harmonica from inside her sash and walked along playing it.",
+    "suggestion": "When the talk lapsed she took a harmonica from her obi sash and walked along playing it.",
+    "sureness": "Sure about 'talk lapsed' and dropping '(?)'; less sure about obi vs sash — house style will settle it."
+   },
+   {
+    "japanese": "甚だ爽やかな気持で滝が、次の曲目をあれこれと思案してゐると、細君は彼の註文が煩くでもなつたらしかつた、何も彼の求めに応じて取り出したわけではなかつたのだ、自由にひとりの徒然を慰めるつもりだつたのだ――そんな心地でもしたらしい彼女は投げやりな口調で、",
+    "paragraph": "p98–p99",
+    "problem": "The triple 'as if' nesting collapses in English; the reader loses who is feeling what before the quoted refusal lands.",
+    "span": "Taki, in the freshest of spirits, was casting about for the next number, when his wife, as if she found his ordering tiresome, as if she had not taken it out to answer his requests at all but to beguile her own solitude as she pleased — said in a throwaway voice, \"No Nancy Lee, thank you,\" and fell to practising \"Mori no Kajiya,\" which Taki did not know.",
+    "suggestion": "Taki, in the freshest of spirits, was casting about for the next number, when his wife — as if his ordering bored her, as if she had not taken it out for him at all but to beguile her own solitude as she pleased — said in a throwaway voice, \"No Nancy Lee, thank you,\" and fell to practising \"Mori no Kajiya,\" which Taki did not know.",
+    "sureness": "Fairly sure the em-dash reset helps; the faithful reader should confirm whether the double 'as if' is narration or free indirect hedging."
+   },
+   {
+    "japanese": "安逸の素面から口吟まれゝば厭に露骨でワザとらしく見えるのも当然だが",
+    "paragraph": "p106",
+    "problem": "'a comfortable sober face at ease' piles three synonyms and is not how an English writer would name a landsman's smugness.",
+    "span": "if hummed by a comfortable sober face at ease, would no doubt look blatantly forced",
+    "suggestion": "if hummed complacently by a sober landsman at ease, it would no doubt sound blatantly forced",
+    "sureness": "Fairly sure the current phrase is translationese; exact social nuance needs the faithful reader."
+   },
+   {
+    "japanese": "感心なのか、臆病なのか知らないが、金のことだと、この人は、はつきりしたアテがない限りはどんな借りも拵へない、だからいくら酔つたつて大丈夫だ――そんなやうな意味のことを細君は、誰に云ふともなしに呟きながら立ち上ると、彼に、",
+    "paragraph": "p119",
+    "problem": "The participle dangles in English so the 'I' who judges and the wife who mutters trade places mid-sentence.",
+    "span": "Whether it was admirable or timid I do not know, but when it comes to money this man never runs up any debt without a clear backing, so however drunk he gets he is all right — muttering something to that effect to no one in particular, his wife got to her feet and turned to him.",
+    "suggestion": "Whether it was admirable or timid I do not know, but when it comes to money this man never runs up a debt without something solid behind it, so however drunk he gets he is all right — so his wife muttered to no one in particular as she got to her feet and turned to him.",
+    "sureness": "Sure about the dangling modifier; whether the 'I' is intrusive narration is for the faithful reader."
+   },
+   {
+    "japanese": "チヨツ！　鈍《のれ》えや〳〵、あゝ、もうあんなに濁つてしまつたぢやないか。",
+    "paragraph": "p167",
+    "problem": "'slowcoaches' is cosy British school slang and deflates Taki's copied brutality into fussiness.",
+    "span": "Damn! You slowcoaches, ah, look, you've clouded it up again.",
+    "suggestion": "Damn! You dawdling idiots, ah, look, you've clouded it all up again.",
+    "sureness": "Sure it needs to be brutal and comic, less sure of the exact insult — a rougher period voice would settle it."
+   },
+   {
+    "japanese": "蝉の声が焦げつくやうにかまびすしい。",
+    "paragraph": "p180",
+    "problem": "'cried as if scorching' reverses the sense in English: it sounds as if the cicadas are doing the scorching.",
+    "span": "The cicadas cried as if scorching.",
+    "suggestion": "The cicadas screeched as if scorched.",
+    "sureness": "Sure; grammar of the simile settles it."
+   },
+   {
+    "japanese": "戦ひに疲れた芝居の侠客に違ひないＡが",
+    "paragraph": "p181",
+    "problem": "'who could only be' reads as identification in English, not as the intended looks-exactly-like simile.",
+    "span": "A, who could only be a playhouse gallant weary from battle, leaned on his long-handled net as on a spear",
+    "suggestion": "A, for all the world like a playhouse gallant weary from battle, leaned on his long-handled net as on a spear",
+    "sureness": "Very sure; idiom check settles it."
+   },
+   {
+    "japanese": "「旅」が、滝の書斎での「一気――な」仕事だけを待つた。",
+    "paragraph": "p208",
+    "problem": "'in one— work' is unintelligible in English and breaks the slogan concordance the whole book depends on.",
+    "span": "The 'trip' waited only on the 'in one—' work in Taki's study.",
+    "suggestion": "The 'trip' waited only on the 'in one burst' work in Taki's study.",
+    "sureness": "Fairly sure readability needs the full slogan here; the faithful reader should say if the truncation must show."
+   },
+   {
+    "japanese": "上げては降し、降しては上げる満身の力と共に思はずほとばしる彼等の懸声には恰もナンシー・リーのコーラスのやうな底力が籠り、颯爽の気に満ちてゐた。",
+    "paragraph": "p210",
+    "problem": "'to a common cry' is stiff and 'full of dash' is period pastiche; the pump chorus needs plain vigour to land as the book's one collective triumph.",
+    "span": "held the same underlying force as the chorus of Nancy Lee, and were full of dash.",
+    "suggestion": "had the same underlying force as the chorus of Nancy Lee, and were full of spirit.",
+    "sureness": "Sure about 'dash'; 'common cry' versus 'shout together' could go either way."
+   }
+  ],
+  "say": "The English carries the story but goes slack or stiff at the pressure points — workmen's oaths, slogan repetition, and tableau similes — noted above for the desk."
+ },
+ "usage": {
+  "input_tokens": 34665,
+  "cached_tokens": 0,
+  "output_tokens": 9158,
+  "reasoning_tokens": 6339,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.08225275,
+ "response_id": "resp_6aeb7e6f9a9a17174ca9446e",
+ "latency_s": 70.04,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 9503
+  }
+ ],
+ "created": "2026-11-04T18:50:24Z"
+}

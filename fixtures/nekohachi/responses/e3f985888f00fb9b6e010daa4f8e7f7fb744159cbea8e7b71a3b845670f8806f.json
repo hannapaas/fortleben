@@ -1,0 +1,75 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"...\" Nekohachi opened his eyes wide as if for the first time on hearing the word sorrow. It seemed to him more and more as if his own affair had been taken and remade and dug into. With his right hand stuck on the tatami and his left laid on the folded hand towel on his knee, admiring at how human feeling falls to the same place whoever feels it, he leaned his head a little back where he sat sideways and said, \"I see! To an unlearned one like me a novel seemed a slapdash made-up thing with eight hundred lies strung together in it — though that may have been rude from the start to Sensei gentlemen like yourselves — but to hear it now, sure enough it aims at the true thing, it does, eh\"",
+    "ids": [
+     "p57"
+    ],
+    "notes": [
+     "sorrow renders hiai, kept as in p56; eh and it does for な/でげす tics; em dashes only where the source has ——."
+    ]
+   },
+   {
+    "english": "\"Present-day novels are all like that, of course,\" the Tenjin-sama man answered, sounding a little angry. \"We are different novelists from novelists who write lies and rest satisfied with it!\"",
+    "ids": [
+     "p58"
+    ],
+    "notes": [
+     "Source gives the speaker only as 例のは; taken from the run p56-p61 to be the Tenjin-sama man, who is answered in p59-p61."
+    ]
+   },
+   {
+    "english": "\"Fu, fun,\" went the knowledge-face man, laughing through his nose.",
+    "ids": [
+     "p59"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"How you do flare up,\" said the very near-sighted-looking man, smiling as he teased him.",
+    "ids": [
+     "p60"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"I am not flaring up in particular, only there are plenty of fools in the world who take slapdash popular novels like Hekirurien's or Tokutomi Roka's for the fine standard and pass low, vulgar criticism.\"",
+    "ids": [
+     "p61"
+    ],
+    "notes": [
+     "Names left as written, without gloss; this continues the p58 speaker."
+    ]
+   }
+  ],
+  "say": "Drafted p57 to p61 holding Nekohachi's run-on patter against the group's flat critical talk."
+ },
+ "usage": {
+  "input_tokens": 28544,
+  "cached_tokens": 27377,
+  "output_tokens": 3742,
+  "reasoning_tokens": 3214,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0214688,
+ "response_id": "resp_6aeb7c664b3290e7fad640a7",
+ "latency_s": 41.02,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1958
+  }
+ ],
+ "created": "2026-11-04T18:41:42Z"
+}

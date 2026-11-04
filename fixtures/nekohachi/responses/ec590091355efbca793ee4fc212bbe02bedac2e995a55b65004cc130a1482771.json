@@ -1,0 +1,42 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 67331,
+  "cached_tokens": 67060,
+  "output_tokens": 227,
+  "reasoning_tokens": 38,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.019036,
+ "response_id": "resp_6aeb813039c724232b0a4d69",
+ "latency_s": 3.79,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_a8a1c148-5845-4584-aa45-e66a7b78a3ac",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"R8\"],\"new\":\"If this were the yose, with the gate money already settled, it would be easier to give it up.\",\"old\":\"If this were the yose, with the wooden gate charge already settled, it would be easier to give it up.\",\"reason\":\"木戸銭 is kept as one plain term, gate money, wherever it recurs.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": "commentary",
+   "chars": 66
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T19:02:08Z"
+}

@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 66345,
+  "cached_tokens": 66036,
+  "output_tokens": 147,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0173832,
+ "response_id": "resp_6aeb7f28b5f75f719cee485d",
+ "latency_s": 9.62,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_cf70d14d-71ce-4850-a34c-abd6bcc4d4c4",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"R17\"],\"new\":\"the master alone looked round on every side, crying, 'Splendid!'\",\"old\":\"the master alone looked round on every side, crying superb.\",\"reason\":\"In current English 'crying' reads as weeping; quoting his exclamation keeps his self-satisfaction as speech.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:53:28Z"
+}

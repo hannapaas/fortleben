@@ -1,0 +1,59 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "About the pond it was like the uproar at a fire. Beginning with the old man, the collector from the motor shop, the bill-collector from the cook-shop, the ‘horse’ from the brothel, the keeper of the restaurant, the head clerk of the sake shop, the ‘cashier’ of the assignation house — each stripped to the waist, they worked the handles of the hand-pump to a common cry under A’s direction. Not one wasted a word, and all, short of breath, were bent on the work before their eyes. Up and down, down and up, the cries that burst from them unbidden with all the strength of their bodies held the same underlying force as the chorus of Nancy Lee, and were full of dash.",
+    "ids": [
+     "p210"
+    ],
+    "notes": [
+     "I kept ‘horse’ and ‘cashier’ in quotes as in the Japanese; I take them to be period slang for a brothel servant and the cash-desk of an assignation house, but the text does not explain them and I did not want to settle them by invention."
+    ]
+   },
+   {
+    "english": "The muddy water spurting from the mouth of the pipe that B held braced toward the roof blew tiny gnats in midair, broke brightly and came down as rain grazing the eaves.",
+    "ids": [
+     "p211"
+    ],
+    "notes": [
+     "The clause about blowing tiny gnats in midair is literal; the image is odd but I left it as written rather than smoothing it away."
+    ]
+   },
+   {
+    "english": "Taki had left word that he was going to buy a lamp, and had gone to Tokyo, and was away.",
+    "ids": [
+     "p212"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted the closing pump scene in level narration, keeping the creditor list literal and the last line flat."
+ },
+ "usage": {
+  "input_tokens": 20998,
+  "cached_tokens": 0,
+  "output_tokens": 2978,
+  "reasoning_tokens": 2580,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.038904,
+ "response_id": "resp_6aeb7e29151aadf0771c4ae9",
+ "latency_s": 37.86,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1565
+  }
+ ],
+ "created": "2026-11-04T18:49:14Z"
+}

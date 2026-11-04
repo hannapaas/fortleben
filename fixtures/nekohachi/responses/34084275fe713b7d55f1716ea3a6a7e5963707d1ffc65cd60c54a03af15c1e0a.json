@@ -1,0 +1,85 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "One",
+    "ids": [
+     "p1"
+    ],
+    "notes": []
+   },
+   {
+    "english": "'Hey, boss,' he was hailed, and Nekohachi lifted his eyes from the Kodan Club he had been buried in till now. He knew at once from the voice who it was, so he felt at ease.",
+    "ids": [
+     "p2"
+    ],
+    "notes": [
+     "Kodan Club kept as title. 'boss' for taisho, a familiar hail from a patron, not a rank."
+    ]
+   },
+   {
+    "english": "'Well now, Sensei!' he said, putting on a blank look for it. 'We keep meeting on this tram, don't we — so then, some nice little nest turned up for you out this way, eh?'",
+    "ids": [
+     "p3"
+    ],
+    "notes": [
+     "'nest' holds su, both a job or opening and the second half of Sugamo, for the reply in p4. Sensei kept as his ingratiating address."
+    ]
+   },
+   {
+    "english": "'Oh, just the Sugamo nest!'",
+    "ids": [
+     "p4"
+    ],
+    "notes": []
+   },
+   {
+    "english": "... That got him, clean, right away. But just about then all the passengers around were pricking up their ears, so he dragged back up inside himself the feel from the koza he had just come off, with time on his hands now. And the passengers all began to look like his own audience, so here he felt he had got to get something back somehow. 'That is right, I suppose, eh,' he said, putting on a sudden solemn face, and just then catching with a sidelong glance that their tram was passing right in front of the asylum he worked it straight into his material: 'Out in a place like Sugamo there is nothing living, eh, but madmen or monsters like Nekohachi.'",
+    "ids": [
+     "p5",
+     "p6"
+    ],
+    "notes": [
+     "koza kept for his paid stage; 'madmen' and 'monsters' kept stable as the load bearing pair. 'I suppose, eh' carries his degesu and na tics without dialect."
+    ]
+   },
+   {
+    "english": "'ha, ha, ha,' somebody laughed, so even in a place like this he got, after a fashion, the response he always got. He thought of where he was and tried to hold back any more lip on top of that, but somehow his mouth seemed unwilling to agree.",
+    "ids": [
+     "p7"
+    ],
+    "notes": [
+     "Laughter kept thin as ha, ha, ha; 'lip' for karukuchi, a wisecrack held back because the place asks for it."
+    ]
+   }
+  ],
+  "say": null
+ },
+ "usage": {
+  "input_tokens": 27809,
+  "cached_tokens": 4721,
+  "output_tokens": 3797,
+  "reasoning_tokens": 3227,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0457054,
+ "response_id": "resp_6aeb7acb1c4ca2b2be7140d9",
+ "latency_s": 41.53,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2060
+  }
+ ],
+ "created": "2026-11-04T18:34:52Z"
+}

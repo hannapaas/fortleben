@@ -1,0 +1,75 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"My, how fearful. To be hated by you makes me sleepy,\" Zenpei said, closing his eyes as he was. \"Oh, you must not go to sleep. I shall be lonely,\" Mitsuyo said, drawing near and shaking him. \"Have you apologized, then?\" he said, opening his eyes a slit. \"I have nothing to apologize for. It is you, Father, who should apologize.\"",
+    "ids": [
+     "p25"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Why, why?\" Zenpei said, turning over onto his back, still letting a smile escape. \"And yet, after tormenting me so much,\" Mitsuyo said, showing a little sharpness in her beautiful eyes. \"What have I done to torment you? You are tormenting yourself alone. And indeed Tsunao is a fellow beyond compare.\"",
+    "ids": [
+     "p26"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"You speak of Tsunao-san again. Very well, Okumura-san is a splendid gentleman. I am truly, truly, truly, truly, truly, truly angry.\"",
+    "ids": [
+     "p27"
+    ],
+    "notes": [
+     "Kept the sixfold repetition unvaried as in the Japanese. The first carries ruby honto, the rest shinjitsu, but the effect depends on sameness, so one English word throughout."
+    ]
+   },
+   {
+    "english": "\"Ha ha ha ha. So greatly 'truly' angry. There is no need to announce each anger one by one. Since you are angry truly, shall I laugh lies, lies, lies?\"",
+    "ids": [
+     "p28"
+    ],
+    "notes": [
+     "Kept Zenpei's threefold uso ni parallel to Mitsuyo's truly, and kept truly in quotation marks as he mocks her word back."
+    ]
+   },
+   {
+    "english": "\"Do as you please. I... I... I am going home. I shall go home and tell Mother of this and have her avenge me. Tsunao-san and I have been passed over for Okumura-san. I want none of them now, neither the yuzen silk you had made for me the other day, nor that gold hairpin, nor sash, nor ring, nothing. Give them all, just as they are, to Okumura-san. That haori of yours you told me to have tailored and left at home as it was, I shall cut it wrong on purpose and leave it full of flaws, so there. And that Ninsei incense box you gave me before, saying my tea practice had improved, I shall dash against a stone and break it, so there.\"",
+    "ids": [
+     "p29"
+    ],
+    "notes": [
+     "yuzen is dyed kimono silk, haori a jacket worn over kimono, Ninsei the noted Kyoto ware; left in compact English form to keep the tantrum pace."
+    ]
+   }
+  ],
+  "say": "Drafted p25 to p29 keeping Mitsuyo's sixfold truly and Zenpei's mocking echo intact."
+ },
+ "usage": {
+  "input_tokens": 27382,
+  "cached_tokens": 26225,
+  "output_tokens": 3630,
+  "reasoning_tokens": 2994,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0208075,
+ "response_id": "resp_6aeb7b98de03ec4329394583",
+ "latency_s": 33.21,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2349
+  }
+ ],
+ "created": "2026-11-04T18:38:16Z"
+}

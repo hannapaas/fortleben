@@ -61,7 +61,7 @@ def test_a_bare_section_number_is_a_heading(client):
 
 def test_loading_fixtures_twice_adds_nothing(tmp_path):
     conn = connect(tmp_path / "site.db")
-    assert sorted(edition.load_fixtures(conn)) == ["bansan", "shuchu"]
+    assert sorted(edition.load_fixtures(conn)) == sorted(p.parent.name for p in FIXTURES.glob("*/run.json"))
     assert edition.load_fixtures(conn) == []
 
 
@@ -82,7 +82,7 @@ def test_a_work_opens_keikakus_edition_and_links_a_commissioned_one(tmp_path):
     page = site.get("/read/bansan").text
     assert "English by keikaku." in page and f'href="/read/bansan?edition={ed}"' in page
     assert "English by keikaku, commissioned by Ines Moreau." in site.get(f"/read/bansan?edition={ed}").text
-    assert site.get("/").text.count('class="ttl"') == 2  # one row per work, not per edition
+    assert site.get("/").text.count('class="ttl"') == len(list(FIXTURES.glob("*/run.json")))  # one row per work, not per edition
 
 
 def test_a_translation_marked_not_shown_is_never_named(client):
@@ -175,7 +175,8 @@ def test_analysis_pages_show_no_ids_and_link_hard_spots_to_their_unit(client, re
     assert f'#{first}">paragraph {pid[1:]}</a>' in page
     # a cast entry names the person once, then the Japanese
     shuchu = client.get("/read/shuchu/analysis").text
-    assert "<b>Liu Dacheng</b> <span class=\"nm\">劉大成</span>" in shuchu and "Liu Dacheng Liu Dacheng" not in shuchu
+    assert "<b>Liu Dacheng, master of the threshing-yard</b> <span class=\"nm\">劉大成</span>" in shuchu
+    assert "Liu Dacheng 劉大成" not in shuchu
 
 
 def test_the_shelf_counts_paragraphs_as_the_reader_shows_them(client):
@@ -188,16 +189,17 @@ def test_the_shelf_counts_paragraphs_as_the_reader_shows_them(client):
 def test_house_editions_take_the_colours_in_turn_and_an_editor_can_pick(tmp_path):
     conn = connect(tmp_path / "site.db")
     edition.load_fixtures(conn)
-    order = [r[0] for r in conn.execute("SELECT id FROM work WHERE id IN ('bansan', 'shuchu') ORDER BY rowid")]
-    assert [edition.accent(conn, w) for w in order] == list(edition.ACCENTS[:2])
+    order = [r[0] for r in conn.execute("SELECT DISTINCT work_id FROM edition ORDER BY (SELECT rowid FROM work WHERE id=work_id)")]
+    assert [edition.accent(conn, w) for w in order] == [edition.ACCENTS[i % len(edition.ACCENTS)] for i in range(len(order))]
     assert edition.accent(conn, order[0], "peach") == "peach" and edition.accent(conn, "nowhere") == "pink"
     conn.execute("UPDATE edition SET accent='lavender' WHERE work_id=?", (order[1],))
     assert edition.edition(conn, order[1])["accent"] == "lavender"
 
 
 def test_the_reader_wears_its_editions_colour(client):
-    pages = {w: client.get(f"/read/{w}").text for w in ("bansan", "shuchu")}
-    assert sum('class="accent-lime"' in p for p in pages.values()) == 1
+    works = sorted(p.parent.name for p in FIXTURES.glob("*/run.json"))
+    pages = {w: client.get(f"/read/{w}").text for w in works}
+    assert sum('class="accent-lime"' in p for p in pages.values()) == len(works[1::len(edition.ACCENTS)])
 
 
 def test_the_about_page_is_linked_from_every_page(client):
@@ -211,3 +213,25 @@ def test_a_word_the_english_sets_in_asterisks_is_shown_in_italics():
     out = edition.mark_notes("He wrote for the *Kōdan Club* <then>.", notes)
     assert "<em>Kōdan Club</em>" in out and "*" not in out and "&lt;then&gt;" in out
     assert edition.italics("a *haikei* & a * stray") == "a <em>haikei</em> &amp; a * stray"
+
+
+def test_a_work_recorded_again_is_the_next_release_of_its_house_edition(tmp_path, recorded):
+    conn = connect(tmp_path / "site.db")
+    edition.load_fixtures(conn)
+    again = tmp_path / "again" / "bansan"
+    again.mkdir(parents=True)
+    rec = json.loads(json.dumps(recorded))
+    rec["run"].update(id=4242, created_at="2026-11-05 10:00:00")
+    for table in ("revision", "query", "fork", "note", "event", "call"):
+        for r in rec[table]:
+            r["run_id"] = 4242
+    (again / "run.json").write_text(json.dumps(rec, ensure_ascii=False), encoding="utf-8")
+    assert edition.load_fixtures(conn, tmp_path / "again") == ["bansan"]
+    rels = conn.execute("SELECT r.run_id, r.version, e.current_release = r.id FROM release r JOIN edition e ON e.id = r.edition_id "
+                        "WHERE e.work_id='bansan' ORDER BY r.id").fetchall()
+    assert [tuple(r) for r in rels] == [(recorded["run"]["id"], "v0.1", 0), (4242, "v0.2", 1)]
+    # every row came in whole, under ids of its own, and still points at its own run's rows
+    for table in ("revision", "query", "note", "event", "call"):
+        assert conn.execute(f"SELECT COUNT(*) FROM {table} WHERE run_id=4242").fetchone()[0] == len(rec[table]), table
+    assert conn.execute("SELECT COUNT(*) FROM event e JOIN call c ON c.id = e.call_id WHERE e.run_id=4242 AND c.run_id != 4242").fetchone()[0] == 0
+    assert edition.edition(conn, "bansan")["units"]

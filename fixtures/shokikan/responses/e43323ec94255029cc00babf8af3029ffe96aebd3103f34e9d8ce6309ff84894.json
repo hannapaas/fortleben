@@ -1,0 +1,68 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "I",
+    "ids": [
+     "p1"
+    ],
+    "notes": []
+   },
+   {
+    "english": "The dew under the wild bush clover that fondles the wattle fence had already the color of autumn. People vied to hurry home. Upstairs and down, the Umeya, which holds first place for beauty among the baths of Komatsu and had been all bustle, now, moved to sadness by the stags calling across the ridge, let its footsteps passing in the corridors grow a little forlorn. Rickshaw after rickshaw, most of them laden with traveling bags and guests, ran for the station a ri ahead. The maids, grown close and familiar through long carrying of trays and tea, watched the departing backs a while and stood lingering. The mountain stream that rings the front flowed murmuring far away. Was it a thrush singing in the forest beyond.",
+    "ids": [
+     "p2"
+    ],
+    "notes": [
+     "Rendered 車 as rickshaw: context is Meiji spa traffic to the railway station. Kept the closing question open as in the Japanese, which only wonders at the bird."
+    ]
+   },
+   {
+    "english": "The mountain depths, which had known no smoke morning or evening, had gained unlooked for smoke with the summer guests year by year, and tiled roofs showed here and there through the leaves. There were clouds above the ridge, rising from the roots of one surpassingly tall pine to trail over the ivy that clings to the rocks. The unbroken peaks hid the sky of the market town, and the thousand streaks of competing falls shook out like tangled threads of silver. To the north, as far as the eye reaches, the deer fences stand stark and the clappers run far in a line, and the autumn of the mountain paddies looks busy. To the west the water shows its far course, mountains upon mountains, clouds upon clouds, birds flying high and leaves turning of themselves. One or two grass cutting children, rich at heart, walking their horses along and singing a merry tune together, were just now climbing the skirts of the outer hill.",
+    "ids": [
+     "p3"
+    ],
+    "notes": [
+     "Smoke here is hearth smoke, the sign of settlement. Clappers are the naruko strung to startle deer and birds from the grain."
+    ]
+   },
+   {
+    "english": "The waves of Lake Ogi were very still. Leaf boats coaxed by the storm showed faintly where their shadows slipped behind the islands. Just then, brushing the wind from the pines, the exquisite sound of a koto rose from a room on the second floor. The newly come guest in the detached room inclined his ear.",
+    "ids": [
+     "p4"
+    ],
+    "notes": [
+     "Lake Ogi is the lake named in the Japanese; left as a name rather than resolved to a map."
+    ]
+   }
+  ],
+  "say": null
+ },
+ "usage": {
+  "input_tokens": 26686,
+  "cached_tokens": 0,
+  "output_tokens": 2802,
+  "reasoning_tokens": 2200,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.045266,
+ "response_id": "resp_6aeb7a8ced2b4a9378c74c8f",
+ "latency_s": 30.48,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2541
+  }
+ ],
+ "created": "2026-11-04T18:33:49Z"
+}

@@ -1,0 +1,89 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"But with me it won't do to let it go at that,\" he said, hitching himself forward a little on his knees as if he were well and truly joining the debate now, standing up to the Tenjin-sama man. \"I've got children myself, you see, my eldest and my second boy go to grade school, and the second, the twelve-year-old, when it comes to copying me he's a genius, so if I'm out sick from my seat he says he'll go in Dad's place, eh\"",
+    "ids": [
+     "p93"
+    ],
+    "notes": [
+     "Son's line is indirect in the Japanese; kept as quoted offer in Dad's voice."
+    ]
+   },
+   {
+    "english": "\"Ha, ha,\" the Tenjin-sama man laughed, in a laugh half as if impressed and half as if making fun.",
+    "ids": [
+     "p94"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Trade it may be, but with the old man already doing fool tricks, I don't want the child laughed at too, so to keep the children from coming near the yose where their dad appears I've gone out of my way to live in this awkward suburb on purpose, eh\"",
+    "ids": [
+     "p95"
+    ],
+    "notes": [
+     "He calls himself oya ji here, not father; kept as old man and dad to hold the shift."
+    ]
+   },
+   {
+    "english": "\"Something of that sort of feeling does come out in it, too,\" the host answered him, \"but that is not all the story is about, so this is fine as it is, I suppose.\"",
+    "ids": [
+     "p96"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Don't you despise your own art too much, Nekohachi-kun?\" the near-sighted man put the question to him like that.",
+    "ids": [
+     "p97"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Of course,\" he stuck for a moment, but there was no need to think it over. \"There's nothing else for it, eh. Human as I am, such as I am, I've got to make even a tiger's cry to eat my rice, eh\"",
+    "ids": [
+     "p98"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"But,\" the other went on, \"unlike you, the hero of this piece always takes his child along to the theatre so he can become a performer all the sooner, doesn't he?\"",
+    "ids": [
+     "p99"
+    ],
+    "notes": [
+     "Speaker unnamed in the Japanese; taken to be the near-sighted man continuing from p97."
+    ]
+   }
+  ],
+  "say": "Drafted p93 to p99 keeping his patter unpolished and the room's replies flat."
+ },
+ "usage": {
+  "input_tokens": 28811,
+  "cached_tokens": 27377,
+  "output_tokens": 3503,
+  "reasoning_tokens": 2940,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.020786799999999998,
+ "response_id": "resp_6aeb7d64abc4c2dc17ae4daf",
+ "latency_s": 31.91,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2099
+  }
+ ],
+ "created": "2026-11-04T18:45:56Z"
+}

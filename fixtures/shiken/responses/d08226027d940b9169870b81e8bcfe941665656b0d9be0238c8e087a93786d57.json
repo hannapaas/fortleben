@@ -1,0 +1,42 @@
+{
+ "prompt": "copy-desk",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": null,
+ "usage": {
+  "input_tokens": 20946,
+  "cached_tokens": 20209,
+  "output_tokens": 1578,
+  "reasoning_tokens": 1505,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.010659100000000001,
+ "response_id": "resp_6aeb8f60a3baf83c2651437a",
+ "latency_s": 15.77,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_80b2b216-1ef2-417b-9dee-cca0fc61f6b2",
+   "name": "find",
+   "arguments": "{\"words\":\"Edosaki\"}"
+  }
+ ],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": "commentary",
+   "chars": 71
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T20:02:40Z"
+}

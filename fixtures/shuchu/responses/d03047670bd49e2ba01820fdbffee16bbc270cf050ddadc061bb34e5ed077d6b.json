@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 32565,
+  "cached_tokens": 32372,
+  "output_tokens": 120,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.009646400000000001,
+ "response_id": "resp_6aeba657eb7f4fea6df44aa6",
+ "latency_s": 2.66,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_4f8e12cf-6f13-4a21-8305-f0b404c54199",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"F4\"],\"new\":\"effect\",\"old\":\"a rich fragrant smell of wine assailed Liu's nose without pause\",\"reason\":\"Reverting placeholder wording to restore the sentence.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T21:40:39Z"
+}

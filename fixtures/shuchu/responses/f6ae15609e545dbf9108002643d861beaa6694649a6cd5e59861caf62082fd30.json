@@ -1,0 +1,42 @@
+{
+ "prompt": "copy-desk",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": null,
+ "usage": {
+  "input_tokens": 12150,
+  "cached_tokens": 12017,
+  "output_tokens": 1349,
+  "reasoning_tokens": 1220,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.00770205,
+ "response_id": "resp_6aeba6d522a24113e2cf4223",
+ "latency_s": 16.92,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_77056e24-f900-4e23-814b-1a7900783b12",
+   "name": "edit",
+   "arguments": "{\"new\":\"led by the maidservant\",\"old\":\"led by the maid\",\"reason\":\"Same person called two things; house form is maidservant\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": "commentary",
+   "chars": 64
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T21:42:45Z"
+}

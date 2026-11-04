@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 65899,
+  "cached_tokens": 65652,
+  "output_tokens": 162,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.017358400000000003,
+ "response_id": "resp_6aeb7f1cf1f9a10fc3ed4c00",
+ "latency_s": 2.84,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_156fa1d5-15a5-4b76-a981-b3d02765eeb3",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"R15\"],\"new\":\"Mitsuyo is only a peeping chick, after all. One blow and her wings are pinned.\",\"old\":\"Mitsuyo is only a peeping chick, after all. One blow to pinion her.\",\"reason\":\"The chick figure is kept from the Japanese; 'her wings are pinned' says what pinioning does without the technical term.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:53:16Z"
+}

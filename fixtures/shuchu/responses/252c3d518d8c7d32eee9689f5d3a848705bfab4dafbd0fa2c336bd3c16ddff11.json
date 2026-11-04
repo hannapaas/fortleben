@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 30842,
+  "cached_tokens": 29428,
+  "output_tokens": 139,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0143216,
+ "response_id": "resp_6aeba63912a6ce2630394835",
+ "latency_s": 2.48,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_63acdec7-d288-486f-8dad-94db73451248",
+   "name": "edit",
+   "arguments": "{\"old\":\"with eyes like cut amethysts\",\"new\":\"with eyes like faceted amethyst\",\"reason\":\"Plural \\\"cut amethysts\\\" sounds like loose jewels; singular faceted stone matches 紫石稜 eyes.\",\"replace_all\":false,\"answers\":[\"R7\"]}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T21:40:09Z"
+}

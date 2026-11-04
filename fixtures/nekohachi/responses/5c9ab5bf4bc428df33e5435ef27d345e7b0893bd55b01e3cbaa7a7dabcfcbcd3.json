@@ -1,0 +1,52 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"...\" Nekohachi stared with his eyes opened wide, as if thunderstruck, when he came to hear of this last business of weeping together. He knew well enough himself that this too was a face put on and exaggerated on purpose, and yet at the same time, before he knew it, what was always kept hidden in the bottom of his heart seemed to have come out upon his face, for the grief over his own trade and the wavering over whether to make his second son into a second Nekohachi had been coaxed out together at once. He tried not to show people a face so ill-suited to his comic trade, but the harder he tried the less the face itself would obey him, quite the other way, and if he saw it in a mirror he thought it must look like a blubbering face. But without patching it up any more, plainly, \"Well, I am impressed,\" he showed his respect as if the story were the very work of the company present. \"I've got the same sort of sorrow myself, and it truly struck home, it did, eh. But if I too may be allowed the one, what you gentlemen would call a criticism, this Fukai playing a part against his own wish and letting his child see it, that I think was a grave mistake, eh?\"",
+    "ids": [
+     "p91"
+    ],
+    "notes": [
+     "Kept 'sorrow' for 悲哀 and 'second Nekohachi' as fixed phrasing per bible; kept the self-known exaggeration and blubbering face straight, without ennobling into insight."
+    ]
+   },
+   {
+    "english": "\"That's neither here nor there, it's no question for the author.\"",
+    "ids": [
+     "p92"
+    ],
+    "notes": [
+     "Speaker unattributed in source; left unattributed. From p93 it answers as the Tenjin-like man's opinion."
+    ]
+   }
+  ],
+  "say": "Drafted p91-p92 keeping the recognition flat and the reply flat."
+ },
+ "usage": {
+  "input_tokens": 28189,
+  "cached_tokens": 27377,
+  "output_tokens": 2053,
+  "reasoning_tokens": 1623,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0138468,
+ "response_id": "resp_6aeb7d4408d1aca5f9764dff",
+ "latency_s": 22.4,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1704
+  }
+ ],
+ "created": "2026-11-04T18:45:24Z"
+}

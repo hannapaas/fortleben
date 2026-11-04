@@ -1,0 +1,135 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "From the next day the gloomy house above the stone steps, ringed round with mandarin trees, suddenly wore the bustle of a house where building work had begun.",
+    "ids": [
+     "p152"
+    ],
+    "notes": []
+   },
+   {
+    "english": "It was obstinacy now, they would show they could see it through with just the two of them, catch every last one alive, not one left, with a prize promised according to the day, and A and B's eyes were bloodshot.",
+    "ids": [
+     "p153"
+    ],
+    "notes": [
+     "I kept the prize phrase vague as the Japanese is: whether the reward varies by the day taken is not spelled out, so I did not settle it."
+    ]
+   },
+   {
+    "english": "\"It's cleared!\"",
+    "ids": [
+     "p154"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Shh!\"",
+    "ids": [
+     "p155"
+    ],
+    "notes": [
+     "The cry is written as a hissed scolding; I take it as a call for silence between whispers, but it could be a curse, so I kept it short."
+    ]
+   },
+   {
+    "english": "\"Shall we try a first throw with the cast net?\"",
+    "ids": [
+     "p156"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Idiot, that's to use after it's gone cloudy.\"",
+    "ids": [
+     "p157"
+    ],
+    "notes": [
+     "I kept cloudy for the clouding water concordance."
+    ]
+   },
+   {
+    "english": "\"Shall we fool them with bait?\"",
+    "ids": [
+     "p158"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"No good now, they won't rise to bait now.\"",
+    "ids": [
+     "p159"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Woken by whispering like thieves creeping in, Taki kicked his bedding aside in one bound. By the time his wife telephoned, he had his breakfast tray with the sake bottle on it set out near the veranda, and leaning on his newly arrived Hakone marquetry armrest and the like, he watched A and B at work with a grave look. — Taki had let 'the difficult work I'm holding in my head!' and 'delightful verse-like fancies!' and 'a fanciful story!' and 'the rapture of poetry that should have been choking on the vast, boundless, empty sky, with every trifle before my eyes forgotten!' and 'Nancy Lee' and 'the telephone!' and 'the terrifying blizzard!' and 'nothing but a snowscape to look at!' and '...in one burst!' scatter every one like goose down, and stared only at the pond, a haughty bourgeois waiting for his prey.",
+    "ids": [
+     "p160"
+    ],
+    "notes": [
+     "I kept the catalogue as single-quoted slogans in fixed wording so it reads as self-quotation back to p28, p74 and p61-62, with snowscape, blizzard, telephone and in one burst! held constant."
+    ]
+   },
+   {
+    "english": "\"You need not come! You are in the way.\"",
+    "ids": [
+     "p161"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"...Is that all right?\"",
+    "ids": [
+     "p162"
+    ],
+    "notes": [
+     "I take the speaker as the wife on the telephone, left unattributed as in the Japanese."
+    ]
+   },
+   {
+    "english": "\"Put everything on the month-end bill and order the same for me as usual. — You are a nuisance!\"",
+    "ids": [
+     "p163"
+    ],
+    "notes": []
+   },
+   {
+    "english": "He hung up the receiver with a clack and went back to his seat like a busy man of business.",
+    "ids": [
+     "p164"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted the pond siege opening through Taki's telephone snub, keeping the slogan catalogue as quotation."
+ },
+ "usage": {
+  "input_tokens": 21473,
+  "cached_tokens": 20465,
+  "output_tokens": 4437,
+  "reasoning_tokens": 3626,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.023187,
+ "response_id": "resp_6aeb7d5e590b54c8936b477e",
+ "latency_s": 48.6,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2994
+  }
+ ],
+ "created": "2026-11-04T18:45:50Z"
+}

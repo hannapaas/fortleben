@@ -1,0 +1,72 @@
+{
+ "prompt": "copy-desk",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": null,
+ "usage": {
+  "input_tokens": 20048,
+  "cached_tokens": 0,
+  "output_tokens": 1777,
+  "reasoning_tokens": 1564,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.03261225,
+ "response_id": "resp_6aeb867c3b7d5566a24449b7",
+ "latency_s": 17.54,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_ed82fa8b-7a60-48e2-9689-d9128e313388",
+   "name": "find",
+   "arguments": "{\"words\":\"Tojo\"}"
+  },
+  {
+   "call_id": "call_a8f23f83-8227-47cd-b89d-d63c31edd6a3",
+   "name": "find",
+   "arguments": "{\"words\":\"Kunitomo\"}"
+  },
+  {
+   "call_id": "call_f69e09db-4d3b-427b-b277-c9cb2b7d5246",
+   "name": "find",
+   "arguments": "{\"words\":\"Kijima\"}"
+  },
+  {
+   "call_id": "call_b2764aef-5343-4149-9d94-fb42a7fa3d98",
+   "name": "find",
+   "arguments": "{\"words\":\"Tsunao\"}"
+  }
+ ],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": "commentary",
+   "chars": 80
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T19:24:45Z"
+}

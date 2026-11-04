@@ -1,0 +1,82 @@
+{
+ "prompt": "copy-desk",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": null,
+ "usage": {
+  "input_tokens": 15332,
+  "cached_tokens": 15217,
+  "output_tokens": 415,
+  "reasoning_tokens": 160,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.004190049999999999,
+ "response_id": "resp_6aeb7fb591c8a1dc856d4d74",
+ "latency_s": 3.86,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_0afc8fcd-dcdd-4581-aedc-8b7964217651",
+   "name": "find",
+   "arguments": "{\"words\":\"dream\"}"
+  },
+  {
+   "call_id": "call_490f8dac-af80-4f25-b6a3-492ee8874909",
+   "name": "find",
+   "arguments": "{\"words\":\"trip\"}"
+  },
+  {
+   "call_id": "call_d5302ca8-d722-42d4-aa62-64e7ac487cc9",
+   "name": "find",
+   "arguments": "{\"words\":\"snowscape\"}"
+  },
+  {
+   "call_id": "call_875bd929-e1df-4953-9d95-ce58ea95e2a3",
+   "name": "find",
+   "arguments": "{\"words\":\"verse-like\"}"
+  },
+  {
+   "call_id": "call_10afb0bf-4a7f-4f32-bee9-2ac03dab7d2c",
+   "name": "find",
+   "arguments": "{\"words\":\"Nancy Lee\"}"
+  }
+ ],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": "commentary",
+   "chars": 83
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:55:49Z"
+}

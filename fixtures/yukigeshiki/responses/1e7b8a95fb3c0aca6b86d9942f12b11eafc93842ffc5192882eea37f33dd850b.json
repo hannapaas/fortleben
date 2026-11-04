@@ -1,0 +1,109 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"Let's hear the Tokyo March.\"",
+    "ids": [
+     "p93"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"You do love that one, don't you — like the old sports days —\"",
+    "ids": [
+     "p94"
+    ],
+    "notes": [
+     "Fragmentary in the Japanese; left as a trailing-off tease."
+    ]
+   },
+   {
+    "english": "\"...Good! — And next, American Patrol.\"",
+    "ids": [
+     "p95"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"You know a lot, don't you! — Right...\"",
+    "ids": [
+     "p96"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"...Good! Good! I couldn't do that even by whistling. ...Now next — well! What shall I ask for?\"",
+    "ids": [
+     "p97"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Taki, in the freshest of spirits, was casting about for the next number, when his wife, as if she found his ordering tiresome, as if she had not taken it out to answer his requests at all but to beguile her own solitude as she pleased — said in a throwaway voice, \"No Nancy Lee, thank you,\" and fell to practising \"Mori no Kajiya,\" which Taki did not know.",
+    "ids": [
+     "p98",
+     "p99"
+    ],
+    "notes": [
+     "Joined as one English paragraph: p98 breaks off on a dash leading straight into her words in p99. Song-titles kept as in house style; Mori no Kajiya left romanised as Taki does not know it."
+    ]
+   },
+   {
+    "english": "\"What's this, stealing a march on me like that. Who said, play me Nancy Lee!\"",
+    "ids": [
+     "p100"
+    ],
+    "notes": []
+   },
+   {
+    "english": "In fact when he was at a loss what to hear, knowing few tunes, what Taki always came to at once was \"Nancy Lee.\"",
+    "ids": [
+     "p101"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Rude, always marking me down for that.\"",
+    "ids": [
+     "p102"
+    ],
+    "notes": []
+   },
+   {
+    "english": "She seemed not to hear his muttering at all.",
+    "ids": [
+     "p103"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted the harmonica exchange p93-p103, joining p98-p99 as one paragraph."
+ },
+ "usage": {
+  "input_tokens": 21495,
+  "cached_tokens": 20465,
+  "output_tokens": 3807,
+  "reasoning_tokens": 3306,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.020537,
+ "response_id": "resp_6aeb7c8955539aaf751547c3",
+ "latency_s": 44.8,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1732
+  }
+ ],
+ "created": "2026-11-04T18:42:17Z"
+}

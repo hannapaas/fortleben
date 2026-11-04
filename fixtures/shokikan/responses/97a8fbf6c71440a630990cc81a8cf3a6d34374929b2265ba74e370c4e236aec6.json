@@ -1,0 +1,82 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "* * *",
+    "ids": [
+     "p118"
+    ],
+    "notes": []
+   },
+   {
+    "english": "The canvassing over the disposal of the Kijima mine grew fiercer and fiercer between the two sides. The party belonging to the Kunitomo Shōkai answered move with move and yielded nothing, and with other rivals now grown to several besides, the so-called estimated price rose steadily till a figure of 350,000 yen was heard, and as the contest showed no sign of readily ending, even those in charge could no longer manage it, and so it came to the issuing of a single cabinet ordinance. As this ordinance laid down the rules for the lease or disposal of mines, even such applications for disposal as had been made must now be submitted anew under it.",
+    "ids": [
+     "p119"
+    ],
+    "notes": [
+     "Cabinet ordinance renders kakurei, Official Gazette in p120 renders kanpō; kept as concrete procedure terms without explaining what context will show."
+    ]
+   },
+   {
+    "english": "It was the day before that ordinance was to appear in the Official Gazette. Tatsuya invited Zenpei, unknown to any other, to the upstairs of a certain machiai, an assignation house, and let him know how pressing matters had become, and told him that thus the last great victory stood once more before his eyes.",
+    "ids": [
+     "p120"
+    ],
+    "notes": [
+     "Machiai kept in Japanese with gloss, as assignation house used for secret political meeting; see p102 procedure note on machiai affair."
+    ]
+   },
+   {
+    "english": "\"Now, as to that long-standing affair, the Kunitomo party is working as fiercely as we are, so it has become an extraordinary contest on both sides, and after all your long labors up to now, the minister in charge will likely issue a cabinet ordinance about tomorrow, intending to settle victory and defeat at once by it, but even this is a secret within secrets, and besides the minister in charge not a soul in the ministry knows of it.\"",
+    "ids": [
+     "p121"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Sending him a smile full of triumph, as if to say look at me, Tatsuya in high spirits quietly blew out his cigar smoke.",
+    "ids": [
+     "p122"
+    ],
+    "notes": [
+     "Kept cigar smoke in same wording as p16 to hold calculation pause."
+    ]
+   },
+   {
+    "english": "\"That you should have come to hear of so weighty a design,\" Miyoshi, who had listened with keen attention, lifted his face and said, \"and under what manner of provisions shall the award be decided?\"",
+    "ids": [
+     "p123"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted p118 to p123 in flat procedural prose with Tatsuya triumphant and Zenpei attentive."
+ },
+ "usage": {
+  "input_tokens": 27316,
+  "cached_tokens": 26225,
+  "output_tokens": 3086,
+  "reasoning_tokens": 2496,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.018413,
+ "response_id": "resp_6aeb7e3433d49c35de884a5a",
+ "latency_s": 25.35,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2488
+  }
+ ],
+ "created": "2026-11-04T18:49:24Z"
+}

@@ -1,0 +1,36 @@
+{
+ "prompt": "parts",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": {
+  "say": "The book is a single short story in seven brief sections forming one continuous episode, so it is divided as one part.",
+  "starts": [
+   "p1"
+  ],
+  "why": "The seven numbered headings mark short scenes of one continuous night that only make sense judged together as a single voice and arc."
+ },
+ "usage": {
+  "input_tokens": 6514,
+  "cached_tokens": 0,
+  "output_tokens": 800,
+  "reasoning_tokens": 727,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0115425,
+ "response_id": "resp_6aeb799c54789ddb2b464e7d",
+ "latency_s": 8.86,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 291
+  }
+ ],
+ "created": "2026-11-04T18:29:48Z"
+}

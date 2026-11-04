@@ -1,0 +1,43 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"Tsunao has gone home. Please look at this,\" Mitsuyo said, holding out the letter. Zenpei did not even take it in his hand. \"What! Gone home in a temper, has he? The fool,\" and then, as if the rest were already forgotten, \"That does not matter. Leave it be. Let him alone.\" He hastily drew the inkstone to him, dashed off three telegrams, called a maid and sent her off at once to post them, all but whipping her on her way, and without taking up his pipe or drinking his tea, his face flushed and his eyes fixed in one direction as if they gazed at something most diverting there, \"A find, a find, this is a find indeed. With a secretary for a backer at one's back there is no question. Fellows like Tsunao cannot see a thing like this, and that is the trouble. The famous Kijima coal mine at any rate, two hundred thousand is a foolishly cheap price. Sold at a throwaway price it is still rated at five hundred thousand, the yearly output some hundreds of thousands, dividends so large as to be almost rare among coal mines, and the quality of the coal far surpassing even the coal of Miike, with sales for naval use at home and abroad of some hundreds of thousands of tons a year; why, the god of fortune has come to us from an unlooked for quarter. We must not let it slip to another. And Okumura is a worker. No course can come to a bad end,\" all as if no one stood before him.",
+    "ids": [
+     "p86"
+    ],
+    "notes": [
+     "Kept the money figures vague as in the Japanese (twenty-man, fifty-man, yearly output in the hundreds of thousands) rather than tidying into exact sums; tons renders噸. Kept the triple 'find' repetition and the fixed gaze that looks past Mitsuyo."
+    ]
+   }
+  ],
+  "say": null
+ },
+ "usage": {
+  "input_tokens": 27046,
+  "cached_tokens": 26225,
+  "output_tokens": 2822,
+  "reasoning_tokens": 2397,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0169535,
+ "response_id": "resp_6aeb7cf7d81ab0baaaf6417e",
+ "latency_s": 27.51,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1707
+  }
+ ],
+ "created": "2026-11-04T18:44:08Z"
+}

@@ -1,0 +1,139 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "VIII",
+    "ids": [
+     "p171"
+    ],
+    "notes": []
+   },
+   {
+    "english": "The weeds of every kind entangled about Kotora's whole body, and Ryujiro's hard labour to cut them away and free her from the water demon's captivity, were in truth no light business.",
+    "ids": [
+     "p172"
+    ],
+    "notes": [
+     "Suiyo literally water demon: kept literal as in the catalogue of water terrors, not explained away."
+    ]
+   },
+   {
+    "english": "He had to swim with one hand. The small knife held in the other hand, being underwater, would not work as he wished. If his care slackened for a moment he might wound Kotora's body. To cut off even a single finger would be a grave matter.",
+    "ids": [
+     "p173"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Do not panic. Bear it a little longer.\"",
+    "ids": [
+     "p174"
+    ],
+    "notes": [
+     "Speaker unstated: taken as Ryujiro steadying Kotora, and himself, while he cuts; left unattributed as in the original."
+    ]
+   },
+   {
+    "english": "Carrying on a feat more perilous than the diver who takes the jewel from before the nose of the sleeping dragon, Ryujiro at last cut the water weeds away and set Kotora free.",
+    "ids": [
+     "p175"
+    ],
+    "notes": [
+     "A familiar feat of daring, kept at its full length rather than smoothed down."
+    ]
+   },
+   {
+    "english": "\"You have saved my life. I shall never forget this debt,\" Kotora said in thanks from the bottom of her heart.",
+    "ids": [
+     "p176"
+    ],
+    "notes": [
+     "Inochi no oya, life parent, is the set phrase for one who has saved a life: given by sense, not by parts."
+    ]
+   },
+   {
+    "english": "\"Never mind that. Let us get ashore as quickly as we can.\" Ryujiro took the lead, cutting away the hindering water weeds again as he swam back to the bank they had come from. He had already cut a good way through before, so this time it was very much easier.",
+    "ids": [
+     "p177"
+    ],
+    "notes": []
+   },
+   {
+    "english": "So the two returned to the same bank. Ryujiro had left his clothes and his long sword there. Kotora, for her part, had not only no cut path through the man-eating weeds if she went on ahead, but she felt it wrong toward her benefactor to go on alone.",
+    "ids": [
+     "p178"
+    ],
+    "notes": [
+     "Both turn back: his reason is the clothes and sword left behind, hers is the uncut weeds ahead and loyalty to her rescuer."
+    ]
+   },
+   {
+    "english": "Once on the bank, the two breathed again.",
+    "ids": [
+     "p179"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Ryujiro happened to look toward Kotora and was startled. From several places on her hands and legs dark blood was gushing out. He thought for a moment the point of his small knife had touched her and wounded her. But when he saw they were leeches sucking there, he was relieved.",
+    "ids": [
+     "p180"
+    ],
+    "notes": [
+     "The blood is leeches, not a knife wound: left to resolve as in the original."
+    ]
+   },
+   {
+    "english": "\"Come, we will cross no more at such a spiteful place. Even if we go round, let us go by another way,\" Ryujiro said.",
+    "ids": [
+     "p181"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"That will be best,\" Kotora said, wringing out her wet clothes as she spoke.",
+    "ids": [
+     "p182"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Oh!\"",
+    "ids": [
+     "p183"
+    ],
+    "notes": [
+     "Exclamation left unattributed as in the original; the next paragraph shows it is Ryujiro on finding his clothes gone."
+    ]
+   }
+  ],
+  "say": "Drafted the underwater cutting free and climb back to the bank in plain past tense k–dan prose."
+ },
+ "usage": {
+  "input_tokens": 26568,
+  "cached_tokens": 25713,
+  "output_tokens": 4241,
+  "reasoning_tokens": 3392,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.02294995,
+ "response_id": "resp_6aeb7d5120e9a5383f9e4802",
+ "latency_s": 46.34,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 3240
+  }
+ ],
+ "created": "2026-11-04T18:45:37Z"
+}

@@ -1,0 +1,122 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "So saying, arms folded, he leaned his upper body back and stared hard at the picture with faint eyes.",
+    "ids": [
+     "p56"
+    ],
+    "notes": [
+     "Kept faint eyes literal for 微かな眼; it reads stiff in English but marks his strained pose after insisting the sketch is finished."
+    ]
+   },
+   {
+    "english": "\"So?\" she seemed to murmur without meaning to. And then, \"Somehow it looks like a snowscape, though it's midsummer—\" she said critically.",
+    "ids": [
+     "p57",
+     "p58"
+    ],
+    "notes": [
+     "Grouped p57 with p58: p57 is only a lead-in to her remark in p58. Kept snowscape as a hard noun and kept the trailing dash found in the Japanese."
+    ]
+   },
+   {
+    "english": "............",
+    "ids": [
+     "p59"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Taki flushed suddenly and muttered something under his breath. For the first time his wife wondered if she had said something wrong.",
+    "ids": [
+     "p60"
+    ],
+    "notes": []
+   },
+   {
+    "english": "It had lately become rare for Taki to mind what others said. — As if waking with his nerves strangely warped, he was seized by an unpleasant cold. His own eyes were an owl's eyes in daylight! He fell into such self-mockery. Drunk only on vague reveries, how much sorrow must his very existence be giving to the hearts of those around him, he ran even to such feeble, plausible worries. And the realistic novels he had written until now, and the buoyant and foolish way he had conducted himself in this world, all of it turned into a clumsy, mistake-ridden 'snowscape', and then at once a terrifying blizzard rose, and closing his eyes and bowing his chest he had no choice but to flee headlong into the white wilderness, able to see nothing....",
+    "ids": [
+     "p61"
+    ],
+    "notes": [
+     "Kept the excess literal: owl's eyes in daylight, terrifying blizzard, white wilderness. Single quotes for 'snowscape' mark it as his own word thrown back at him. One dash only, where the Japanese has one."
+    ]
+   },
+   {
+    "english": "\"Ah...\" Before he could even utter a groan, great sinful flakes of snow as large as peony petals came thickly down and in a moment buried his whole body.",
+    "ids": [
+     "p62"
+    ],
+    "notes": [
+     "Kept sinful flakes and peony petals literal and slightly too much, as written; not smoothed into a simile for his feelings."
+    ]
+   },
+   {
+    "english": "\"What's the matter?\"",
+    "ids": [
+     "p63"
+    ],
+    "notes": []
+   },
+   {
+    "english": "............",
+    "ids": [
+     "p64"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Eh?\"",
+    "ids": [
+     "p65"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"I'm not angry. — The country is all very well, but at dusk it is unbearably lonely! It's horribly hot and close. I wonder if I should go and lend a hand with that or something—\" he said, forcing a wry smile.",
+    "ids": [
+     "p66"
+    ],
+    "notes": [
+     "Dashes only where the Japanese has them. Forced smile for 事更に苦笑: a deliberate change of subject after the reverie."
+    ]
+   },
+   {
+    "english": "\"Stop it — you're strange.\"",
+    "ids": [
+     "p67"
+    ],
+    "notes": []
+   }
+  ],
+  "say": null
+ },
+ "usage": {
+  "input_tokens": 21318,
+  "cached_tokens": 20465,
+  "output_tokens": 4977,
+  "reasoning_tokens": 4195,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.02528825,
+ "response_id": "resp_6aeb7bf03ac2e50aa7124753",
+ "latency_s": 55.82,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2895
+  }
+ ],
+ "created": "2026-11-04T18:39:45Z"
+}

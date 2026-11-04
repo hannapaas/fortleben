@@ -1,0 +1,103 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "For his part, Liu of course paid no mind to any such thing.",
+    "ids": [
+     "p34"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Then will you use needles?\"",
+    "ids": [
+     "p35"
+    ],
+    "notes": [
+     "Speakers are unstated here as in the Japanese; taken from what surrounds them to be Liu asking and the monk answering in p35 through p38, left without tags."
+    ]
+   },
+   {
+    "english": "\"What, it is a far simpler matter than that.\"",
+    "ids": [
+     "p36"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Then is it an incantation?\"",
+    "ids": [
+     "p37"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"No, nor is it any incantation.\"",
+    "ids": [
+     "p38"
+    ],
+    "notes": []
+   },
+   {
+    "english": "After repeating such exchanges, the barbarian monk briefly explained his cure to them. — According to it, he had only to strip naked and lie still in the sun. To Liu this seemed a very easy thing. If he could be cured by that much, there was nothing better than to be cured. Moreover, without himself knowing it, he was a little moved by curiosity at the point of submitting to the barbarian monk's treatment.",
+    "ids": [
+     "p39"
+    ],
+    "notes": []
+   },
+   {
+    "english": "So at last Liu bowed his head from his own side, and it came to his saying, \"Then let me ask you to cure me.\" — There is such a history behind Liu's lying naked in the threshing-yard in the blazing sun.",
+    "ids": [
+     "p40"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Then, saying he must not move, the barbarian monk wound Liu's body round and round with thin cord. Then he bade one of the servants bring an unglazed jar filled with wine to Liu's pillow. That Sun Sensei, good friend of the wine mound, should in the course of things have come to stand witness to this strange cure goes without saying.",
+    "ids": [
+     "p41"
+    ],
+    "notes": [
+     "Kept \"good friend of the wine mound\" stiff to mark it as a borrowed learned tag, and \"thin cord\" and \"unglazed jar\" as in the opening tableau."
+    ]
+   },
+   {
+    "english": "What sort of thing a wine worm is, what becomes of a man when it is no longer in his belly, what the jar of wine at his pillow is meant for, no one knows but the barbarian monk. Put so, Liu, going out naked into the blazing sun knowing nothing, may seem very heedless, but when ordinary men receive a schooling and the like, in truth they are mostly doing much the same thing.",
+    "ids": [
+     "p42"
+    ],
+    "notes": [
+     "Kept the schooling comparison as a dry aside in the narrator's cooler voice, as written, without smoothing it into the tale."
+    ]
+   }
+  ],
+  "say": "Drafted p34 to p42 keeping the bare问答 and the schooling aside as written."
+ },
+ "usage": {
+  "input_tokens": 16194,
+  "cached_tokens": 15089,
+  "output_tokens": 3523,
+  "reasoning_tokens": 2875,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.018617349999999998,
+ "response_id": "resp_6aeba548190fc724b7bc4197",
+ "latency_s": 29.9,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2477
+  }
+ ],
+ "created": "2026-11-04T21:36:08Z"
+}

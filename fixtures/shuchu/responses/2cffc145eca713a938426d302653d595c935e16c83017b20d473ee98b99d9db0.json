@@ -1,0 +1,120 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"A disease— is it?\"",
+    "ids": [
+     "p22"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"It is.\"",
+    "ids": [
+     "p23"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"No, ever since I was a child . . .\" As Liu was about to say something, the barbarian monk cut him off.",
+    "ids": [
+     "p24"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Drink as you may, you never get drunk, do you?\"",
+    "ids": [
+     "p25"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\" . . .\" Liu stared hard at the other's face and shut his mouth. In fact, drink as he might, this man had never been drunk.",
+    "ids": [
+     "p26"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"That is the proof of the disease,\" the barbarian monk went on with a faint smile. \"There is a wine worm in your belly. Unless it is removed, this disease will not be cured. This poor monk has come to cure your disease.\"",
+    "ids": [
+     "p27"
+    ],
+    "notes": [
+     "Kept the monk's humble clerical self-reference as \"This poor monk\" for 貧道 rather than flattening to \"I\"."
+    ]
+   },
+   {
+    "english": "\"Can it be cured?\" Liu let out the words in an uncertain voice before he knew it. And he was ashamed of himself for it.",
+    "ids": [
+     "p28"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"It is because it can be cured that I have come.\"",
+    "ids": [
+     "p29"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Then Sun Sensei, who until now had listened in silence to the exchange, suddenly put in a word.",
+    "ids": [
+     "p30"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Will you be using some medicine?\"",
+    "ids": [
+     "p31"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"No, there will be no need to use anything like medicine,\" the barbarian monk answered curtly.",
+    "ids": [
+     "p32"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Sun Sensei, to begin with, despised the two teachings of Dao and Buddha with scarcely any reason. So even when thrown together with a Daoist priest or a monk, he had very rarely exchanged a word. That he should now suddenly feel moved to speak was wholly because the words \"wine worm\" had caught his interest; fond of wine himself, on hearing this he had grown a little uneasy lest there be a wine worm in his own belly too. When he heard the barbarian monk's grudging answer, however, he suddenly felt as if he had been made a fool of, so with a slight frown he began once more, in silence as before, to place his stones. And at the same time, inwardly, he thought his host Liu a fool for meeting with so insolent a monk.",
+    "ids": [
+     "p33"
+    ],
+    "notes": []
+   }
+  ],
+  "say": null
+ },
+ "usage": {
+  "input_tokens": 16026,
+  "cached_tokens": 15089,
+  "output_tokens": 3466,
+  "reasoning_tokens": 2826,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0181651,
+ "response_id": "resp_6aeba52a62b559c75a334f95",
+ "latency_s": 32.25,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2354
+  }
+ ],
+ "created": "2026-11-04T21:35:38Z"
+}

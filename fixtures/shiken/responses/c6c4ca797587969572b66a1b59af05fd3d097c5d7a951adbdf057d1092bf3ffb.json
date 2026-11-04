@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 62176,
+  "cached_tokens": 61940,
+  "output_tokens": 160,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.016532,
+ "response_id": "resp_6aeb7e8a2c453736f3ab480a",
+ "latency_s": 2.64,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_51b75101-fadf-46d9-8682-c7655567f2bf",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"R5\"],\"new\":\"All of it was of his own making, the price of disobeying his sword master's command\",\"old\":\"All of it was rust bred from his own body, from disobeying his sword master's command\",\"reason\":\"身から出た錆 is the idiom for self-inflicted trouble; literal 'rust' means nothing in English.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:50:50Z"
+}

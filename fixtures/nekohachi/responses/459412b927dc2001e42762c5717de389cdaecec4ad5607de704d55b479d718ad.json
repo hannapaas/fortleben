@@ -1,0 +1,112 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"Well, abroad there are men who have gone at it on a larger scale and have even studied the language of monkeys.\"",
+    "ids": [
+     "p131"
+    ],
+    "notes": [
+     "Speaker is not named in the text; reads as the host carrying on from his loud laugh at p129."
+    ]
+   },
+   {
+    "english": "\"If I ever get to learn English or something, I will try it myself, eh —\"",
+    "ids": [
+     "p132"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"But monkeys do not use English.\"",
+    "ids": [
+     "p133"
+    ],
+    "notes": [
+     "Speaker is not named in the text;reads as one of the group capping Nekohachi rather than the host."
+    ]
+   },
+   {
+    "english": "\"Wa ha, ha,\" two or three of them came out together.",
+    "ids": [
+     "p134"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"...\" He felt quite as if his own stock in trade had been taken from him, and his spirits fell a little flat. Just to cover it, \"They say on learned grounds that the monkey has turned into man, but in the story here the tiger has turned into a monkey, eh.\"",
+    "ids": [
+     "p135"
+    ],
+    "notes": [
+     "o-kabu wo torareta is his patter for having his thunder stolen; kept as stock in trade to hold the yose sense."
+    ]
+   },
+   {
+    "english": "\"No, we are glad to have it in your animal mimicry too,\" the host answered.",
+    "ids": [
+     "p136"
+    ],
+    "notes": []
+   },
+   {
+    "english": "5",
+    "ids": [
+     "p137"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"That aside,\" the man with the face like Tenjin-sama, whom he had till now thought a disagreeable fellow, asked him a good question this time. \"I want to hear your motive for coming to do such things, eh.\"",
+    "ids": [
+     "p138"
+    ],
+    "notes": [
+     "Kept Tenjin-sama as in the bible; the ne is the man's, not Nekohachi's na."
+    ]
+   },
+   {
+    "english": "\"Motive, you say —?\"",
+    "ids": [
+     "p139"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Well, call it the first notion that started it.\"",
+    "ids": [
+     "p140"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted the monkey English exchange and the turn to motives without polishing either side."
+ },
+ "usage": {
+  "input_tokens": 28418,
+  "cached_tokens": 27377,
+  "output_tokens": 3042,
+  "reasoning_tokens": 2530,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0183363,
+ "response_id": "resp_6aeb7e147df9ec1183ac4144",
+ "latency_s": 33.05,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1863
+  }
+ ],
+ "created": "2026-11-04T18:48:52Z"
+}

@@ -1,0 +1,1129 @@
+{
+ "prompt": "analyst-bible",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "cast": [
+   {
+    "first_appearance": "p2",
+    "first_person": "わたくし (habitual self-deprecating polite form); でげす endings; おいら only when quoting his own yose heckling voice in p153",
+    "forms": [
+     {
+      "form": "猫八 / ねこはち",
+      "note": "stage and everyday name; used by narrator throughout and by others",
+      "used_by": "narrator, Takami, study group, stout woman as 猫八さん"
+     },
+     {
+      "form": "大将",
+      "note": "familiar hail on the tram; Takami uses it to him, he reuses it to the stout woman as 大山大将 to save face",
+      "used_by": "Takami to Nekohachi (p2); Nekohachi to stout woman (p24)"
+     },
+     {
+      "form": "例の猫八",
+      "note": "introduction as a known mimic",
+      "used_by": "Takami introducing him (p37)"
+     },
+     {
+      "form": "猫八君",
+      "note": "literati's mildly condescending familiar form",
+      "used_by": "knowledge-face man, near-sighted man (p79, p97)"
+     },
+     {
+      "form": "江戸屋猫八",
+      "note": "full house-name claimed on the way home",
+      "used_by": "narrator for him (p185)"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "has wife and four sons; rheumatic father-performer; male yose role",
+    "handle": "Nekohachi",
+    "id": "c1",
+    "name_ja": "猫八",
+    "reading": "ねこはち",
+    "register": "Edo working yose patter in speech and in much of his thought: な, でげす, self-interruption, swallowed retorts, ingratiating jokes; never literary",
+    "relationships": [
+     "husband of c4",
+     "father of c5",
+     "protégé/guest of c2",
+     "guest of c10",
+     "neighbour of c6"
+    ],
+    "role": "protagonist: half-crippled yose animal-mimic who hears his life in Kume's Tiger and cannot answer in the room's language condensate knowingly.",
+    "romanised": "Nekohachi"
+   },
+   {
+    "first_appearance": "p2",
+    "first_person": "おれ (p17 おれについてこないか) - plain masculine, patron-to-dependent familiar",
+    "forms": [
+     {
+      "form": "高見 / 高見さん",
+      "note": "narrator gives surname once, then honorific; Nekohachi keeps -さん",
+      "used_by": "narrator and Nekohachi"
+     },
+     {
+      "form": "先生",
+      "note": "Nekohachi's ingratiating address; keeps distance while claiming intimacy",
+      "used_by": "Nekohachi to Takami (p3 ff.)"
+     },
+     {
+      "form": "小大仏の先生 / 小奈良の小大仏",
+      "note": "private nicknames from girth and sleepy face; second one swallowed unsaid",
+      "used_by": "Nekohachi in thought (p8, p14)"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "called 先生, uses おれ, described as slightly drunk sleepy male face",
+    "handle": "Takami",
+    "id": "c2",
+    "name_ja": "高見",
+    "reading": "たかみ",
+    "register": "easy casual standard; mildly kind patron speech, no jargon",
+    "relationships": [
+     "patron who has booked Nekohachi before; brings him to c10's study group; pays two yen"
+    ],
+    "role": "go-between patron: takes Nekohachi to the writers' meeting and quietly pays him",
+    "romanised": "Takami"
+   },
+   {
+    "first_appearance": "p5",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "乗客ども / 乗客",
+      "note": "pluralised with contempt-affection; become his audience",
+      "used_by": "narrator"
+     },
+     {
+      "form": "筋向うに座を占めてこちらを見詰めていた男",
+      "note": "one distinct laugher singled out",
+      "used_by": "narrator (p9)"
+     }
+    ],
+    "gender": "not shown",
+    "gender_evidence": "mixed tram crowd, no gender marked",
+    "handle": "the tram passengers",
+    "id": "c3",
+    "name_ja": null,
+    "reading": null,
+    "register": "laughter only: は、は、はア",
+    "relationships": [],
+    "role": "instant audience that turns the tram into a kōza and compels his comeback",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p8",
+    "first_person": "none in the text; seen only through Nekohachi",
+    "forms": [
+     {
+      "form": "かかア",
+      "note": "Nekohachi's spoken Edokko form for his own wife",
+      "used_by": "Nekohachi (p8)"
+     },
+     {
+      "form": "女房",
+      "note": "narrator and his own plain word; also in candy-origin memory",
+      "used_by": "narrator and Nekohachi"
+     },
+     {
+      "form": "かの女 (じょ)",
+      "note": "only for host's wife, not this wife; do not confuse",
+      "used_by": "n/a"
+     }
+    ],
+    "gender": "female",
+    "gender_evidence": "wife, mother of four; beats / is beaten over saving overnight money (p175, p158-159)",
+    "handle": "Nekohachi's wife",
+    "id": "c4",
+    "name_ja": null,
+    "reading": null,
+    "register": "no direct speech; reported as Edokko wife who wants to save",
+    "relationships": [
+     "wife of c1",
+     "mother of c5"
+    ],
+    "role": "offstage wife he plans to make taste the night's hiai; emblem of Edokko no-savings pride and its cost",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p11",
+    "first_person": "none in the text; the twelve-year-old quoted in indirect speech: お父アんの代りに行ってやろう",
+    "forms": [
+     {
+      "form": "家族 / 子供",
+      "note": "general; later specified as four boys",
+      "used_by": "narrator and Nekohachi"
+     },
+     {
+      "form": "総領 (14) / 次男 (12) / 男の子が四人",
+      "note": "eldest in higher primary year one, second in elementary year five, both class leaders; second is a gifted mimic",
+      "used_by": "narrator/Nekohachi (p50, p92-95)"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "男の子が四人, sons in school",
+    "handle": "Nekohachi's four sons, chiefly the gifted second son",
+    "id": "c5",
+    "name_ja": null,
+    "reading": null,
+    "register": "child speech reported only; second son mimics father",
+    "relationships": [
+     "sons of c1 and c4"
+    ],
+    "role": "reason he lives in the suburbs and hides the act; the threatened second Nekohachi; mirror of Fukai's child",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p11",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "隣り近所 / 長屋のものら",
+      "note": "general neighbours who share surplus vegetables",
+      "used_by": "narrator/Nekohachi"
+     },
+     {
+      "form": "鍛冶屋と山の神 / 女髪結い / 電車の車掌 / 目ッかちで跛足の蜆屋",
+      "note": "row-house inventory in p158: idle blacksmith always scolded, hairdresser with many men, early-rising conductor, bleary lame clam-seller",
+      "used_by": "Nekohachi in thought (p158)"
+     }
+    ],
+    "gender": "not shown",
+    "gender_evidence": "mixed row; individual genders as above but collective left open",
+    "handle": "the nagaya neighbours",
+    "id": "c6",
+    "name_ja": null,
+    "reading": null,
+    "register": "no direct speech; seen in Nekohachi's boastful inventory",
+    "relationships": [
+     "neighbours of c1; recipients of his vegetables; lender of kimono (blacksmith's wife)"
+    ],
+    "role": "the low world he claims pride in against the upper world; proof of his non-stage competence and generosity",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p22",
+    "first_person": "none in the text except reported そう / ほんとにあなたは稼ぎ手よ",
+    "forms": [
+     {
+      "form": "でぶでぶ女 / 太った図体",
+      "note": "narrator's body-first description",
+      "used_by": "narrator"
+     },
+     {
+      "form": "大山大将",
+      "note": "Nekohachi's teasing hail, turning her bulk into a wrestler's title",
+      "used_by": "Nekohachi (p24)"
+     },
+     {
+      "form": "猫八さん",
+      "note": "her friendly address to him",
+      "used_by": "stout woman (p23)"
+     }
+    ],
+    "gender": "female",
+    "gender_evidence": "女,優しい声,亭主に可愛がられて (said jokingly)",
+    "handle": "the stout woman acquaintance",
+    "id": "c7",
+    "name_ja": null,
+    "reading": null,
+    "register": "cheerful passing greeting; gentle voice contrasted with bulk",
+    "relationships": [
+     "street acquaintance of c1"
+    ],
+    "role": "street gag that shows his compulsion to turn every encounter into a routine and a face-saving lie about another engagement",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p28",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "亭主",
+      "note": "alleged doting husband; Nekohachi admits he knows nothing",
+      "used_by": "Nekohachi joking (p28)"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "亭主 husband, only as joke prop",
+    "handle": "the stout woman's husband",
+    "id": "c8",
+    "name_ja": null,
+    "reading": null,
+    "register": "no speech",
+    "relationships": [
+     "husband of c7 (unverified, a joke)"
+    ],
+    "role": "invented foil for a passing joke; Nekohachi notes he knows nothing about him",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p37",
+    "first_person": "none as a body; individuals use 僕 / わたくし",
+    "forms": [
+     {
+      "form": "六七名の一座 / 皆 / 先生方",
+      "note": "study group as audience; Nekohachi calls them 先生方 / お歴々",
+      "used_by": "narrator and Nekohachi"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "文士たち, all male-coded in discussion",
+    "handle": "the study group as a body",
+    "id": "c9",
+    "name_ja": null,
+    "reading": null,
+    "register": "flat literary-critical standard with loanwords; cool, mildly kind, easily bored",
+    "relationships": [
+     "guests of c10; hosts of c1 and c2 for the night"
+    ],
+    "role": "collective literati audience: paraphrase Tiger, judge it thin, applaud weakly, three walk out mid-story",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p42",
+    "first_person": "僕 (p43, p48, p80) - plain literary male",
+    "forms": [
+     {
+      "form": "当家の主人 / 主人 / 御主人",
+      "note": "bathhouse acquaintance, now host; does most of the Tiger paraphrase",
+      "used_by": "narrator and others"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "主人,細君を持つ, 僕 user",
+    "handle": "the host",
+    "id": "c10",
+    "name_ja": null,
+    "reading": null,
+    "register": "explanatory literary standard; reads and glosses the Tiger at length",
+    "relationships": [
+     "host to c9, c1, c2; husband of c29; bathhouse acquaintance of c1"
+    ],
+    "role": "chair of the night: retells Kume's Tiger, mediates verdicts, offers cakes not sake, sees them off",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p45",
+    "first_person": "none quoted; writes in quoted Tiger prose and savages himself anonymously",
+    "forms": [
+     {
+      "form": "久米氏 / 久米",
+      "note": "author of Tiger, May Bunsho Sekai; also the anonymous Jiji Shinpō monthly reviewer who damns himself",
+      "used_by": "host and group"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "氏, male literary network of 1910s",
+    "handle": "Kume, author of Tiger",
+    "id": "c11",
+    "name_ja": "久米",
+    "reading": "くめ",
+    "register": "quoted fiction is deft but thin; anonymous review is harsh self-denunciation",
+    "relationships": [
+     "author discussed by c9-c10; admired by c1 as 茶気のある wit"
+    ],
+    "role": "absent author whose mediocre fiction traps Nekohachi; his self-attack delights Nekohachi and proves 茶気",
+    "romanised": "Kume"
+   },
+   {
+    "first_appearance": "p49",
+    "first_person": "none quoted directly; speaks in paraphrase: 一生懸命やるだけはやるつもりなんですが",
+    "forms": [
+     {
+      "form": "三枚目俳優 / 主人公 / 深井 / 深井君",
+      "note": "comic actor cast only as a real tiger in sewn costume; named only at p54",
+      "used_by": "host/narrator paraphrase and group"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "father of 8-year-old son, male troupe role",
+    "handle": "Fukai, the tiger-actor in Kume's story",
+    "id": "c12",
+    "name_ja": "深井",
+    "reading": "ふかい",
+    "register": "paraphrased earnest-troupe speech, not distinguished from host's summary",
+    "relationships": [
+     "father of c13; mocked/encouraged by c15-c17"
+    ],
+    "role": "fiction-mirror: proud of applause for a yawn and leap, found weeping with his child in the wings",
+    "romanised": "Fukai"
+   },
+   {
+    "first_appearance": "p49",
+    "first_person": "none; calls お父さん in the dark (p87)",
+    "forms": [
+     {
+      "form": "八歳になる子 / 自分の子供 / 人間の子",
+      "note": "future shinpa actor; goes to zoo, then to theatre; weeps at father's foolish role",
+      "used_by": "host paraphrase"
+     },
+     {
+      "form": "お父さん",
+      "note": "cry from the shadow of the scenery",
+      "used_by": "child to Fukai (p87)"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "その子は...彼...未来をもっていた; 去年初舞台 (boy actor)",
+    "handle": "Fukai's small son",
+    "id": "c13",
+    "name_ja": null,
+    "reading": null,
+    "register": "no direct speech beyond お父さん",
+    "relationships": [
+     "son of c12"
+    ],
+    "role": "witness whose tears make the Tiger live for Nekohachi and accuse his own hiding of his sons",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p52",
+    "first_person": "僕 (p103 僕もほん気で...と思って読んでみた) - earnest male",
+    "forms": [
+     {
+      "form": "天神さまみたような顔つきの人 / 天神さま / 天神様",
+      "note": "Nekohachi's private nickname for a ruddy earnest face; kept throughout",
+      "used_by": "narrator/Nekohachi"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "さま, male study-group member",
+    "handle": "the Tenjin-like man",
+    "id": "c14",
+    "name_ja": null,
+    "reading": null,
+    "register": "earnest critical standard with 悲哀, 皮肉; explains Nekohachi back to himself",
+    "relationships": [
+     "member of c9"
+    ],
+    "role": "supplies the word hiai that Nekohachi adopts; first calls the earthworm story hiai/majime; reveals Kume is his own reviewer",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p54",
+    "first_person": "none quoted; reported as pointing: そりゃア深井君のはまり役だ",
+    "forms": [
+     {
+      "form": "座長",
+      "note": "troupe head inside Tiger who assigns the tiger and consoles him",
+      "used_by": "host paraphrase"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "座長 male-coded troupe head",
+    "handle": "the troupe leader in Tiger",
+    "id": "c15",
+    "name_ja": null,
+    "reading": null,
+    "register": "hearty troupe encouragement in paraphrase",
+    "relationships": [
+     "employer of c12"
+    ],
+    "role": "fiction-foil: declares the tiger Fukai's fit and feeds the compromise Nekohachi condemns",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p54",
+    "first_person": "none distinctive; sides with Tenjin-like man",
+    "forms": [
+     {
+      "form": "五分刈り...坊さんらしいの / 善智識顔 / 知識がお / 智識がお",
+      "note": "crew-cut with mountain-range bumps; priest-like knowing face; orthography wobbles 知識/智識 but same man",
+      "used_by": "narrator"
+     },
+     {
+      "form": "君",
+      "note": "condescending address to Nekohachi when warning of堕落",
+      "used_by": "this man to Nekohachi (p149)"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "坊さんらしい, male member",
+    "handle": "the priest-like knowledge-face man",
+    "id": "c16",
+    "name_ja": null,
+    "reading": null,
+    "register": "cutting critical standard: 浅薄, 通俗化, 堕落; sneers through nose (p59)",
+    "relationships": [
+     "member of c9"
+    ],
+    "role": "coolest judge: calls Tiger thin, warns Nekohachi against vulgarisation, proposes artless talk instead",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p55",
+    "first_person": "none quoted",
+    "forms": [
+     {
+      "form": "劇評家",
+      "note": "sharp critic inside Tiger who sees through the hippo lie: そりゃア嘘だろう、もう聴いてるよ、じつは虎だろう",
+      "used_by": "host paraphrase"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "male-coded critic role",
+    "handle": "the theatre critic in Tiger",
+    "id": "c17",
+    "name_ja": null,
+    "reading": null,
+    "register": "smart teasing reported speech",
+    "relationships": [
+     "exposes c12's zoo pretext"
+    ],
+    "role": "fiction device for the shame of the degrading role; Nekohachi notes he has never met such a critic",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p60",
+    "first_person": "僕 (p78 僕もこれは読んでいないが) - crisp male",
+    "forms": [
+     {
+      "form": "ひどい近眼らしい人 / 近眼",
+      "note": "identified by spectacles; unexpectedly crisp speech",
+      "used_by": "narrator"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "male member, 僕 user",
+    "handle": "the near-sighted man",
+    "id": "c18",
+    "name_ja": null,
+    "reading": null,
+    "register": "blunt critical standard; asks Nekohachi if he despises his own art; first to leave",
+    "relationships": [
+     "member of c9"
+    ],
+    "role": "asks the pointed question about self-contempt and background; leaves with two others mid-story",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p61",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "碧瑠璃園 / へきるりえん",
+      "note": "cited as exemplar of slapdash popular fiction",
+      "used_by": "Tenjin-like man (p61)"
+     }
+    ],
+    "gender": "not shown",
+    "gender_evidence": "pen-name only; text gives no gender",
+    "handle": "Hekiruri-en, cited popular writer",
+    "id": "c19",
+    "name_ja": "碧瑠璃園",
+    "reading": "へきるりえん",
+    "register": "no speech; name as insult",
+    "relationships": [],
+    "role": "polemical prop: what we are not, versus true fiction",
+    "romanised": "Hekirurien"
+   },
+   {
+    "first_appearance": "p61",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "徳富蘆花 / とくとみろか",
+      "note": "paired with Hekiruri-en as vulgar standard",
+      "used_by": "Tenjin-like man (p61)"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "historically male author; text marks only as通俗 author",
+    "handle": "Tokutomi Roka, cited popular writer",
+    "id": "c20",
+    "name_ja": "徳富蘆花",
+    "reading": "とくとみろか",
+    "register": "no speech",
+    "relationships": [],
+    "role": "polemical prop for the group's defence of their own fiction",
+    "romanised": "Tokutomi Roka"
+   },
+   {
+    "first_appearance": "p62",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "刑事",
+      "note": "mistakes night-long earthworm research for burglary and challenges him: 誰何",
+      "used_by": "Nekohachi anecdote (p62)"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "刑事 male-coded police role of the period",
+    "handle": "the detective who took him for a thief",
+    "id": "c21",
+    "name_ja": null,
+    "reading": null,
+    "register": "no quoted speech; official challenge",
+    "relationships": [],
+    "role": "punchline witness: proves his research looks like crime; gets no laugh from the group",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p66",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "由井の役",
+      "note": "another fool part cited as no better than the tiger",
+      "used_by": "troupe talk in paraphrase (p66)"
+     }
+    ],
+    "gender": "not shown",
+    "gender_evidence": "role-name only",
+    "handle": "Yui, cited stage role",
+    "id": "c22",
+    "name_ja": "由井",
+    "reading": "ゆい",
+    "register": "no speech",
+    "relationships": [],
+    "role": "throwaway comparison inside Tiger talk: every comic is equally foolish",
+    "romanised": "Yui"
+   },
+   {
+    "first_appearance": "p72",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "劇の女主人公",
+      "note": "leapt upon by the sewn tiger at curtain; triggers applause",
+      "used_by": "host paraphrase (p72)"
+     }
+    ],
+    "gender": "female",
+    "gender_evidence": "女主人公, heroine",
+    "handle": "the heroine in Tiger's play",
+    "id": "c23",
+    "name_ja": null,
+    "reading": null,
+    "register": "no speech; screams/leapt-upon function",
+    "relationships": [],
+    "role": "plot device: her attack scene wins Fukai his hollow triumph",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p73",
+    "first_person": "none shown",
+    "forms": [
+     {
+      "form": "ずッと若い人",
+      "note": "first intervention: 人をばかにしているじゃアありませんか",
+      "used_by": "narrator (p73)"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "人, young male member of group",
+    "handle": "the much younger member",
+    "id": "c24",
+    "name_ja": null,
+    "reading": null,
+    "register": "blunt youthful standard",
+    "relationships": [
+     "member of c9"
+    ],
+    "role": "naive moral question that lets the group laugh and Nekohachi vent about audiences",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p80",
+    "first_person": "none in the text; writes by postcard",
+    "forms": [
+     {
+      "form": "Ｔ君",
+      "note": "proposed Tiger for June meeting but absent tonight; motive guessed at",
+      "used_by": "host (p47, p80)"
+     }
+    ],
+    "gender": "not shown",
+    "gender_evidence": "initial only; group male but not stated",
+    "handle": "absent T-kun",
+    "id": "c25",
+    "name_ja": null,
+    "reading": null,
+    "register": "postcard request only",
+    "relationships": [
+     "member of c9"
+    ],
+    "role": "absent cause of the Tiger agenda; lets host pass over or guess at intent",
+    "romanised": "T-kun"
+   },
+   {
+    "first_appearance": "p100",
+    "first_person": "none in the text; classical Chinese poet quoted in Japanese",
+    "forms": [
+     {
+      "form": "陶淵明 / とうえんめい",
+      "note": "帰んなん、いざ帰んなん chanted inwardly when wanting to leave",
+      "used_by": "Nekohachi in thought (p100)"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "historical male poet",
+    "handle": "Tao Yuanming, quoted poet",
+    "id": "c26",
+    "name_ja": "陶淵明",
+    "reading": "とうえんめい",
+    "register": "classical Chinese in Japanese reading",
+    "relationships": [],
+    "role": "inner excuse to dignify his wish to go home to seedlings and fee-worry",
+    "romanised": "Tō Enmei"
+   },
+   {
+    "first_appearance": "p104",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "昔の三馬",
+      "note": "Shikitei Sanba-type wit; Nekohachi's hopeful comparison for Kume",
+      "used_by": "Nekohachi (p104)"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "historical male gesaku writer",
+    "handle": "Sanba, old wit",
+    "id": "c27",
+    "name_ja": "三馬",
+    "reading": "さんば",
+    "register": "no speech",
+    "relationships": [],
+    "role": "Nekohachi's term of praise: Kume as teahouse wit after his own heart",
+    "romanised": "Sanba"
+   },
+   {
+    "first_appearance": "p111",
+    "first_person": "わたくし (p111, p113) - stiff student polite",
+    "forms": [
+     {
+      "form": "書生らしい人 / 神経質",
+      "note": "silent till p111; nervous tone, tilts head, bows with smile",
+      "used_by": "narrator"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "書生, male student-coded",
+    "handle": "the nervous student-like man",
+    "id": "c28",
+    "name_ja": null,
+    "reading": null,
+    "register": "nervous idealist standard: 人物が裏づけ, 理想主義者的に; asks about backing by character",
+    "relationships": [
+     "member of c9"
+    ],
+    "role": "raises personality-versus-life polemic; recalls konnyaku mondō to Nekohachi; leaves voice with host",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p119",
+    "first_person": "none quoted",
+    "forms": [
+     {
+      "form": "主人の細君 / 奥さん / かの女 (じょ)",
+      "note": "serves mochi instead of sake; talks gardens and child education; gives children's magazines",
+      "used_by": "narrator/Nekohachi (p119-120, p172)"
+     }
+    ],
+    "gender": "female",
+    "gender_evidence": "細君, 奥さん, female hostess role",
+    "handle": "the host's wife",
+    "id": "c29",
+    "name_ja": null,
+    "reading": null,
+    "register": "warm domestic standard",
+    "relationships": [
+     "wife of c10"
+    ],
+    "role": "only uncondescending interlocutor: garden and children talk; softens the night",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p155",
+    "first_person": "おい、八公 phrasing is Nekohachi performing an imagined downtown line, not Hachi speaking",
+    "forms": [
+     {
+      "form": "八公",
+      "note": "stock Edokko butt in his failed aristocrat anecdote: bare buttocks cannot hitch up",
+      "used_by": "Nekohachi performing (p155)"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "male rakugo stock name",
+    "handle": "Hachi, rakugo stock figure",
+    "id": "c30",
+    "name_ja": "八公",
+    "reading": "はちこう",
+    "register": "beranmei downtown patter in performance",
+    "relationships": [],
+    "role": "illustrative nobody whose embarrassment fails to travel upstairs",
+    "romanised": "Hachi"
+   },
+   {
+    "first_appearance": "p155",
+    "first_person": "none quoted; summon by carriage and messenger",
+    "forms": [
+     {
+      "form": "宮様がた / ○○○様 / ○○家 / ○○子爵",
+      "note": "blanks in source; discretion performed in telling; summon, haggle, or invite him",
+      "used_by": "Nekohachi anecdotes (p155, p159, p168)"
+     }
+    ],
+    "gender": "not shown",
+    "gender_evidence": "titles only; deliberately blanked",
+    "handle": "the blanked noble patrons",
+    "id": "c31",
+    "name_ja": null,
+    "reading": null,
+    "register": "reported stiff house speech: すぐ来るように, いくらで来てくれるか",
+    "relationships": [],
+    "role": "upper world that wants him cheap and quick; occasion for his Edokko pride about fees and borrowed kimono",
+    "romanised": null
+   }
+  ],
+  "hard_spots": [
+   {
+    "anchors": [
+     "p53",
+     "p67",
+     "p68",
+     "p69",
+     "p77",
+     "p78",
+     "p79",
+     "p80",
+     "p111",
+     "p112",
+     "p114",
+     "p116",
+     "p118"
+    ],
+    "kind": "loanword jargon misheard",
+    "why_hard": "シチュエイション, バック/ハイケイ, ゲンジツシュギ, グタイ/クウタイ arrive as sound. Nekohachi guesses situation is a fix he is trapped in and compromise is flattery; he hears background as pure noise and thinks of konnyaku mondō. Translating them into smooth English criticism erases the joke and his truer misuse."
+   },
+   {
+    "anchors": [
+     "p82",
+     "p83",
+     "p84",
+     "p85",
+     "p154",
+     "p155"
+    ],
+    "kind": "rakugo expectation",
+    "why_hard": "He keeps asking a novel for an ochi/conclusion as if it were rakugo. The group laughs at the wrong place. English must keep punchline/fall without explaining rakugo or making him knowing."
+   },
+   {
+    "anchors": [
+     "p48",
+     "p49",
+     "p51",
+     "p55",
+     "p66",
+     "p72",
+     "p87"
+    ],
+    "kind": "story-within-story paraphrase",
+    "why_hard": "Half the night is second-hand Kume retold by the host, interrupted and judged thin. Polishing it into a moving tale betrays its flat reported texture and makes Nekohachi's recognition look disproportionate."
+   },
+   {
+    "anchors": [
+     "p62",
+     "p124",
+     "p125",
+     "p126",
+     "p127",
+     "p128",
+     "p141",
+     "p142"
+    ],
+    "kind": "performance onomatopoeia and patter",
+    "why_hard": "Nightingale, valley-crossing, crickets, cranes, frogs (くッくッ, かッかッ, けきょ), earthworm vs mole-cricket lore. They must read as act, with the room's thin laughter left thin, not as nature writing."
+   },
+   {
+    "anchors": [
+     "p155",
+     "p159",
+     "p168"
+    ],
+    "kind": "blanked names",
+    "why_hard": "○○○様, ○○家, ○○子爵 are in the source as discretion about lords. Filling them, footnoting guesses, or smoothing to a certain lord removes the performed knowing-how-to-behave."
+   },
+   {
+    "anchors": [
+     "p100",
+     "p104",
+     "p118"
+    ],
+    "kind": "allusion as evasion",
+    "why_hard": "Tao Yuanming's return, Sanba as praise, konnyaku mondō as cover for not understanding. Each is Nekohachi dignifying incomprehension or the wish to leave; footnotes must be minimal and never award him the point."
+   },
+   {
+    "anchors": [
+     "p2",
+     "p3",
+     "p5",
+     "p6",
+     "p8",
+     "p153",
+     "p158",
+     "p159"
+    ],
+    "kind": "Edo voice and period furniture",
+    "why_hard": "でげす, な, beranmei, 大山大将, Kōdan Club, Sugamo madhouse, Yoshiwara embankment, rickety suburban allotment, petitioned gas lamp. Requires dropped run-on colloquial syntax without Cockney or stage-Japanese, and inventory without lyricism."
+   }
+  ],
+  "motifs": [
+   {
+    "english": "Keep one plain English set for the plot-work and do not vary: ditch, ridge, caterpillar/worm, seedling/root, cucumber, eggplant/aubergine. The garden is his competence and his alibi at every pressure point.",
+    "id": "m1",
+    "motif": "allotment, vegetables and night pests",
+    "occurrences": [
+     "p11",
+     "p12",
+     "p13",
+     "p20",
+     "p31",
+     "p32",
+     "p33",
+     "p35",
+     "p100",
+     "p158",
+     "p168",
+     "p172",
+     "p173",
+     "p182"
+    ],
+    "source_forms": [
+     "畑, 明き地, 野菜, 畝並み, 溝, 青虫, 黒虫, 根切り虫, 苗, 根, 小かぶ, 大根, 胡瓜, 茄子, 枳殻垣"
+    ],
+    "why": "Returns whenever money, art or sons press him; the only generosity nobody applauds and the farewell gift he presses on the gentlemen. Varying it dissolves Berman's network."
+   },
+   {
+    "english": "Keep the catalogue unvaried and unlyrical: tiger, cat, frog, monkey, pig, boar?/crane/nightingale/cricket/mole-cricket/earthworm, aeroplane/motorcar, firefly/colic-worm. Let tiger stay tiger, frog stay frog.",
+    "id": "m2",
+    "motif": "animal catalogue and mimicry",
+    "occurrences": [
+     "p6",
+     "p50",
+     "p51",
+     "p55",
+     "p62",
+     "p66",
+     "p72",
+     "p87",
+     "p124",
+     "p125",
+     "p126",
+     "p127",
+     "p128",
+     "p135",
+     "p141",
+     "p142",
+     "p144",
+     "p147",
+     "p148",
+     "p153",
+     "p155",
+     "p169",
+     "p179",
+     "p180"
+    ],
+    "source_forms": [
+     "虎, 猫, 化け物, かわず, 猿, 豚, 鶯, 松虫, 鈴虫, 轡虫, 烏, ひばり, うずら, おけら, 鶴, 草ひばり, 蚯蚓, 螢, 疝気の虫, 飛行器, 自動車"
+    ],
+    "why": "Runs from the opening Sugamo joke through frog-origin to tiger-monkey-pig farewell. It is labour, evasion and identification at once; elegant variation would moralise it."
+   },
+   {
+    "english": "Keep child/children/sons and the fixed phrase second Nekohachi identical each time; keep the ages flatly stated.",
+    "id": "m3",
+    "motif": "children and the dreaded second Nekohachi",
+    "occurrences": [
+     "p11",
+     "p13",
+     "p20",
+     "p49",
+     "p50",
+     "p55",
+     "p64",
+     "p87",
+     "p92",
+     "p93",
+     "p94",
+     "p95",
+     "p99",
+     "p120",
+     "p182",
+     "p187",
+     "p188"
+    ],
+    "source_forms": [
+     "子供, 子, 家族, 男の子が四人, 総領, 次男, 第二の猫八"
+    ],
+    "why": "His suburban exile, his condemnation of Fukai for showing the child, and his delight at being known all turn on this. Softening it into fatherly love settles what the story leaves double."
+   },
+   {
+    "english": "Keep money words blunt and repeated: fee, wooden gate charge, contribution, two yen coins, overnight money. Do not euphemise the fretting.",
+    "id": "m4",
+    "motif": "fee that must not be named",
+    "occurrences": [
+     "p26",
+     "p153",
+     "p161",
+     "p162",
+     "p163",
+     "p164",
+     "p165",
+     "p166",
+     "p168",
+     "p171",
+     "p175",
+     "p176",
+     "p177",
+     "p187"
+    ],
+    "source_forms": [
+     "金, 木戸銭, 寄附, 円助二枚, 宵越しの金, 謝礼, お礼, 月謝"
+    ],
+    "why": "Edokko pride forbids naming a price yet he counts all night; relief at two yen and shame at relief are the evening's only wage. Tidying it ennobles him."
+   },
+   {
+    "english": "Keep hiai as sorrow/grief unvaried once adopted; keep situation/background/compromise/personality/concrete as English-derived abstractions set against his patter, with his misuses left visible.",
+    "id": "m5",
+    "motif": "borrowed critical words: hiai, situation, background",
+    "occurrences": [
+     "p52",
+     "p53",
+     "p56",
+     "p57",
+     "p67",
+     "p68",
+     "p69",
+     "p77",
+     "p78",
+     "p79",
+     "p80",
+     "p91",
+     "p103",
+     "p107",
+     "p111",
+     "p112",
+     "p114",
+     "p116",
+     "p118",
+     "p175",
+     "p188"
+    ],
+    "source_forms": [
+     "悲哀, シチュエイション, バック, ハイケイ/背景, 妥協/譲歩, 皮肉, 人物, 人格的生活, 具体的, 現実主義, 理想主義"
+    ],
+    "why": "The action is a language collision. He learns hiai across the room and carries it home as pay; he mouths situation/background without parsing them. Merging the two Englishes kills the tension."
+   },
+   {
+    "english": "Keep madman/monster/beast-fool wording stable; keep teasing/heckling/fooling and compromise/flattery wording stable.",
+    "id": "m6",
+    "motif": "madmen, monsters and fooling",
+    "occurrences": [
+     "p5",
+     "p6",
+     "p10",
+     "p50",
+     "p53",
+     "p66",
+     "p74",
+     "p75",
+     "p91",
+     "p98",
+     "p103",
+     "p104",
+     "p107",
+     "p108",
+     "p151",
+     "p153"
+    ],
+    "source_forms": [
+     "気違い, 化け物, けだ物, ばか, 茶化, ばかにする, 冷かし, 皮肉, 妥協"
+    ],
+    "why": "Opening joke that only madmen and monsters live in Sugamo quietly tests the whole night: who fools whom, audience or actor. Do not upgrade into irony or villainy."
+   }
+  ],
+  "narration": {
+   "english_tense": "Past as default for narrated action and interior slide; keep present only where Japanese stage directions or gnomic asides demand it. Do not hop tenses to manufacture climax at p175 or p185.",
+   "frame": "One evening's drift: tram ride home from two engagements, two-hour writers' meeting, midnight walk to a suburban row-house gate. Flash memories (candy-selling, frog discovery, lord visits) surface inside that drift without chapter breaks beyond the seven numbered cuts.",
+   "narrator": "Close third person glued to Nekohachi; slides into his idiom, jokes and self-justifications without endorsing or correcting them. Even at the most abject admissions (wife-beating, fee-shame) the tone stays dogged and garrulous.",
+   "person": "third person, internally focalised on Nekohachi",
+   "tense_habits": "Japanese moves freely between past recollection, present-tense stagey aside, and gnomic summary; subjects drop for stretches and speakers go unattributed. English must tolerate long associative sentences and delayed attribution rather than rationalising them.",
+   "timeline": [
+    "afternoon-evening: tram home after two kōza, heckle and tram reverie (p2-p21)",
+    "street meeting with stout woman, walk to house (p22-p35)",
+    "upstairs study group: Tiger paraphrase and verdicts (p37-p100)",
+    "Kume self-review debate, student exchange, side talk with hostess (p102-p120)",
+    "demand to perform: mimicry set and frog-origin story (p122-p159)",
+    "three leave mid-story; fee talk, pig-farming digression, hunger (p161-p173)",
+    "near 1 a.m.: dispersal, two yen outside, gate farewell, walk to door planning to retell it to wife (p175-p188)"
+   ]
+  },
+  "part_summaries": [
+   {
+    "starts": "p1",
+    "summary": "一. On the tram home reading Kōdan Club, Nekohachi is hailed by patron Takami. Passengers become an audience; he answers a Sugamo joke with a madmen-and-monsters quip, swallows a fat joke, then drifts into comedian's苦労, protecting his voice by not drinking, and allotment pests including night-working cutworms. Takami invites him to a writers' study group; worried about seedlings, he follows, rheumatic and limping."
+   },
+   {
+    "starts": "p34",
+    "summary": "二. They enter a house with a cucumber plot and climb to six or seven writers. Introduced as the famous Nekohachi, he charms and apologises for rheumatism. The host, a bathhouse acquaintance, begins the absent T-kun's agenda item: Kume's Tiger from May Bunsho Sekai. The paraphrase of a comic actor given only a beast's part hits Nekohachi as his own life with four sons and a gifted twelve-year-old he keeps from the yose."
+   },
+   {
+    "starts": "p65",
+    "summary": "三. The paraphrase continues through zoo research, a sharp critic, applause for a yawn and leap. Nekohachi misuses situation to protest the compromise and is ignored. The ending is told: after the ovation the costumed father finds his small son weeping in the dark wings and tiger and human child weep together. Nekohachi, half-performing grief, objects that Fukai should never have let the child see it and tells of hiding his own sons in the suburbs."
+   },
+   {
+    "starts": "p101",
+    "summary": "四. The group calls Tiger thin and backgroundless. The Tenjin-like man reveals Kume himself wrote the savage anonymous Jiji Shinpō review; Nekohachi takes Kume for a Sanba-like wit and says the audience decides. A silent student asks about personality backing work; host and others answer with concrete/abstract jargon Nekohachi hears as konnyaku mondō. Talk drifts; hostess gives him cakes and children's magazines; Takami calls for a performance."
+   },
+   {
+    "starts": "p137",
+    "summary": "五. Triumphant in his own world, he does caged and valley nightingales, crickets, crows, mole-crickets, cranes, and earthworm lore that once got him taken for a burglar. Asked for his motive, he tells the candy-seller origin: rheumatism, failed peddling, frog sexes distinguished on the Yoshiwara bank, then sales. Warned against vulgarisation, he defends fooling audiences, mimics a cat fight, and tells failed upper-house visits with borrowed kimono and blanked lordly names."
+   },
+   {
+    "starts": "p160",
+    "summary": "六. Three including the near-sighted man leave mid-story; Nekohachi resents it as true rudeness. Fee pride is debated: he will not name a price yet will go free if moved. Pig-farming talk excludes him; hungry and bored, he frets over who pays, talks gardens with the hostess to cover his face, and eats more cakes."
+   },
+   {
+    "starts": "p174",
+    "summary": "七. Near 1 a.m. by the waste-hospital forest they disperse. Pockets stuffed with old magazines and cake leavings as fee, he wants to embrace the tiger and weep. Takami quietly slips him two yen; ashamed of relief and wanting to quit, he sees them off, advertises cucumbers and eggplants at his dark gate, and goes to his door past sleeping rows to retell the novel to his wife."
+   }
+  ],
+  "say": "Keep Nekohachi's working patter and the writers' borrowed abstractions as two unblended Englishes; keep the Tiger paraphrase flat and the garden inventory serious; let his borrowed sorrow stay learned, performed and real at once without resolving him into victim or butt.",
+  "style_sheet": {
+   "annotation_density": "Sparse. Annotate only what the sentence cannot give: yose/kōza, Kōdan Club, Sugamo madhouse, shinpa, Tao Yuanming, Sanba, konnyaku mondō if kept. Never gloss what context supplies or explain his misunderstandings in-text.",
+   "author_voice": "Taishō naturalist inventory: dogged, repetitive, faintly garrulous even when sad; long associative slides; lists of food, pests, coins, cries. Do not lyricise the sad passages or brisk up the comic ones; the bathos at p175 and the rare humility at p185 must read at the same temperature as the tram jokes.",
+   "honorifics_and_names": "Japanese order surname-first for Japanese names. Keep Sensei for Nekohachi's address to Takami and others because the relation lives in it; keep -san/-kun/-sama where socially load-bearing (Takami-san, Nekohachi-san/Kun, Tenjin-sama as nickname). Romanise with macrons: Nekohachi, Takami, Kume, Tō Enmei, Fukai.",
+   "keep_in_japanese": "Keep Sensei, yose, kōza, and the English-derived loanwords as situation/background where the joke is mouthing English; keep ochi as fall/punchline glossed once if needed. Keep blanked names as blanks (Mr ___, the ___ house) not filled.",
+   "quotation": "Use single quotes for quoted Tiger paraphrase inside host speech where needed; double quotes for direct speech. Keep the group's thin laughter as ha, ha, ha without upgrading to roars.",
+   "register": "Two audible Englishes, never merged: Nekohachi in dropped, run-on, self-interrupting colloquial patter with verbal tics for な/でげす, competent about gardens and mimicry; writers in flat borrowed critical abstraction. Neither polished into the same literary fluency.",
+   "ruby_and_italics": "No ruby in English. Italicise only loanwords kept as Japanese and titles of works/magazines (Tiger, Bunso Sekai, Kōdan Club) on first use; otherwise roman.",
+   "standing_rules": []
+  }
+ },
+ "usage": {
+  "input_tokens": 20919,
+  "cached_tokens": 0,
+  "output_tokens": 16766,
+  "reasoning_tokens": 6291,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.09740425,
+ "response_id": "resp_6aeb7aa2872fa7ce53104f5e",
+ "latency_s": 166.84,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 34649
+  }
+ ],
+ "created": "2026-11-04T18:34:10Z"
+}

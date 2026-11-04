@@ -1,0 +1,112 @@
+{
+ "prompt": "notes",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": {
+  "notes": [
+   {
+    "anchor": "p11",
+    "body": "A hollow bolster of woven bamboo, leaned against for coolness in summer heat.",
+    "editions": [
+     "casual",
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "bamboo wife"
+   },
+   {
+    "anchor": "p10",
+    "body": "A mu is a Chinese measure of field area. Three hundred mu means a large landed estate.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "three hundred mu of fields by the city wall"
+   },
+   {
+    "anchor": "p51",
+    "body": "A sun is a traditional unit of length, about three centimetres. Three sun is roughly nine centimetres long.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "about three sun long"
+   },
+   {
+    "anchor": "p4",
+    "body": "The Congling, the Onion Range, is the mountains west of China. To come from beyond them is to come from Central Asia, far outside China.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "west of the Congling"
+   },
+   {
+    "anchor": "p13",
+    "body": "An obscure ailment of the private parts. The original names it without explaining it.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "Li Si's byouen"
+   },
+   {
+    "anchor": "p46",
+    "body": "A well-known Chinese anecdote: the general Cao Cao, on a thirsty march, told his men a plum grove lay ahead, and the thought of sour plums made their mouths water.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "there was a plum grove ahead"
+   },
+   {
+    "anchor": "p59",
+    "body": "The word appears in English in the original. It points to the habit of Chinese popular novels of closing with an explicit moral.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "Didacticism"
+   }
+  ],
+  "say": "Kept notes sparse to measures, place-names, ailments and allusions the sentence cannot give, leaving the moral suspension unexplained."
+ },
+ "usage": {
+  "input_tokens": 26670,
+  "cached_tokens": 0,
+  "output_tokens": 3013,
+  "reasoning_tokens": 2540,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.04614275,
+ "response_id": "resp_6aeba6f98fc357ab8a5e44c3",
+ "latency_s": 27.23,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1752
+  }
+ ],
+ "created": "2026-11-04T21:43:22Z"
+}

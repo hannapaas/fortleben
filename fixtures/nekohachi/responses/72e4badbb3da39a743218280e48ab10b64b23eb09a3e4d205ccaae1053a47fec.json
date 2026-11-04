@@ -1,0 +1,81 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"At that rate you will only throw yourself away and go downhill, won't you? Rather than that, why not talk just as you told your own history now, natural and without frills, even when you go to the yose. Wouldn't that be a good deal more natural and interesting?\" said the Tenjin-sama-like man again.",
+    "ids": [
+     "p149"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"I think that would be good too,\" the near-sighted man agreed.",
+    "ids": [
+     "p150"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"But my life is in making fools of the customers from up on the kouza and showing it, that is where it is.\"",
+    "ids": [
+     "p151"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"That's right, eh,\" said Takami-san, with his arms round both his knees, as if taking my side. \"His offhand sarcasm and heckling when they come, why, they are a treat to hear.\"",
+    "ids": [
+     "p152"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"In return, when I get to a certain point, I make my compromise and my concession, eh. There are times I even cry the firefly and the colic-worm for them. They are things that do not cry in any case, so it does not matter how I do it, see,\" and then putting on a sharp look, \"You don't understand much yourself, eh, can a colic-worm cry? If that will not do for you, I have taken your wooden gate charge already, so you can get home quick — only that would be too bare, so at the end I let the other fellow save face too — but you don't want to go home halfway either. Truth is, I don't want to go home either — that is what I make of it.\"",
+    "ids": [
+     "p153"
+    ],
+    "notes": [
+     "Quoted heckle shifts from watakushi to oira and omeesan, rough downtown address: kept as plain you and I with blunter syntax, no dialect spelling.",
+     "Wooden gate charge for kidaisen, compromise for dakyo, as fixed through-page terms."
+    ]
+   },
+   {
+    "english": "\"I wonder if that is a kind of ochi too?\" asked the near-sighted man, laughing.",
+    "ids": [
+     "p154"
+    ],
+    "notes": [
+     "Kept ochi for his rakugo punchline word, as before."
+    ]
+   }
+  ],
+  "say": null
+ },
+ "usage": {
+  "input_tokens": 28862,
+  "cached_tokens": 27377,
+  "output_tokens": 3813,
+  "reasoning_tokens": 3277,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.022168049999999998,
+ "response_id": "resp_6aeb7e82c88c051b0c2e4c51",
+ "latency_s": 41.57,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1988
+  }
+ ],
+ "created": "2026-11-04T18:50:42Z"
+}

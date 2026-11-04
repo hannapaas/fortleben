@@ -1,0 +1,135 @@
+{
+ "prompt": "notes",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": {
+  "notes": [
+   {
+    "anchor": "p9",
+    "body": "Kirishitan means the Christians of the sixteenth and seventeenth centuries, bateren comes from the Portuguese padre for priest. The rumour jokes that only foreign magic could explain her paralysing stare.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "She can hardly be a Kirishitan bateren priest, but they say one short glare from those eyes leaves the body numb and helpless."
+   },
+   {
+    "anchor": "p11",
+    "body": "A kan is an old weight of about 3.75 kilograms, so twenty kan is about 75 kilograms. Late cherry bloom is a set phrase for a woman past first youth.",
+    "editions": [
+     "casual",
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "A stout body that must have weighed over twenty kan."
+   },
+   {
+    "anchor": "p25",
+    "body": "The list names hereditary arrest-rope arts and holds: laying, throwing, hauling, fishing and slipping ropes, then cross-lattice, tortoise-shell, pine-needle and other ties. The same names return later in the story, when the weeds bind Ryujiro like a ganjigarame.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "In ways of laying a capture-rope she knew every hold: the ganjigarame cross-lattice bind, the kikko tortoise-shell tie, the matsuba pine-needle cinch, the rokuro-maki windlass coil, high hands, low hands, single-hand lift, reverse knot."
+   },
+   {
+    "anchor": "p61",
+    "body": "Fujita Sensei is the Mito school warning that the world will turn upside down and samurai must learn Western gunnery. Meriken and Oranda in the Japanese are the period names given here as America and Holland.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "when Fujita Sensei of Mito was still living I heard this from him: before long the world will turn clean upside down and change till you are startled."
+   },
+   {
+    "anchor": "p80",
+    "body": "A janome umbrella is a stout oiled-paper umbrella with a bull's-eye pattern in dark blue. Carrying one in fine weather marks her out as a runaway who snatched what came to hand.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "in this fine weather she carried a dark blue janome umbrella."
+   },
+   {
+    "anchor": "p112",
+    "body": "A ken is an old measure of length, about two yards. Fifty ken is about ninety metres, and the same measure is used throughout for the ferry cable and the throws.",
+    "editions": [
+     "casual",
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "a new channel fifty ken wide."
+   },
+   {
+    "anchor": "p125",
+    "body": "Lu Zhishen, the tattooed Flower Monk, is the strongman priest of the Chinese classic Water Margin. The comparison makes the eel-poaching monk at once laughable and dangerous.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "He looked for all the world like Lu Zhishen the Flower Monk of the Water Margin."
+   },
+   {
+    "anchor": "p160",
+    "body": "A kozuka is the small utility knife kept in the sword scabbard; here it is thrown like a dart. The white curl is the byakugo, the pale curl on a Buddha's brow.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "standing upright in the brow of the evil monk as if engraving a holy white curl there."
+   },
+   {
+    "anchor": "p224",
+    "body": "The circles print a name as blanks, a common redaction for a living or well-known figure. The coda leaps to mid-Meiji and leaves open whether Ryujiro ever received the secret transmission.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "Mr ○○○○○, famed until mid-Meiji as the Metropolitan Police's foremost old detective in arrests, was none other than the later self of this Isogai Ryujiro."
+   }
+  ],
+  "say": "Held rope terms, period names and measures literal and left sea-crossing, redaction and catalogue strangeness to the margin."
+ },
+ "usage": {
+  "input_tokens": 56318,
+  "cached_tokens": 0,
+  "output_tokens": 2887,
+  "reasoning_tokens": 1923,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.08266725,
+ "response_id": "resp_6aeb8fe201fdaddfe69c4286",
+ "latency_s": 29.06,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 3695
+  }
+ ],
+ "created": "2026-11-04T20:04:50Z"
+}

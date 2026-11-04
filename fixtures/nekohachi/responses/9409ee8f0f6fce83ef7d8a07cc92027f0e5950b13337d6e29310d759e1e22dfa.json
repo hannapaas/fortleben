@@ -1,0 +1,91 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "2",
+    "ids": [
+     "p34"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Talking this over as they went, they turned in at the gate of a house. That even here a little patch of cucumbers had been made struck him as genteel.",
+    "ids": [
+     "p35"
+    ],
+    "notes": [
+     "Okuyukashii taken as genteel, well-bred in the domestic sense, not showy: the small kitchen patch in a gentleman's house pleases his gardener's eye."
+    ]
+   },
+   {
+    "english": "To get up to the second floor of that house he could only twist his backside up in a queer bobbing way. But when Takami introduced him to the party of six or seven with, \"I've brought a rare guest along tonight. I thought we might have him do something for us later. This is the Nekohachi you've heard of,\" he felt the same pride as always when he cozies up to his customers.",
+    "ids": [
+     "p36",
+     "p37"
+    ],
+    "notes": [
+     "p36 ends mid-sentence on jibun no koto wo, completed by Takami's introduction in p37, so rendered as one paragraph.",
+     "Rei no Nekohachi kept as the introducer's flourish: the Nekohachi you've heard of."
+    ]
+   },
+   {
+    "english": "\"This should be fun,\" somebody cried out.",
+    "ids": [
+     "p38"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"That 'the' I took to, eh, I'm a performer with a bit of a name myself, you know. So to come out before great literary gentlemen like yourselves, eh, and not feel stage fright like that, that's lucky for me.\" Saying this he glanced round the party. Some laughed innocently and none seemed to have taken offence, so he took them for people who would generously take his joke. But to make surer still, meaning to make them understand more, \"Only let me tell you beforehand, with rheumatism my body doesn't work like other people's. So if I look to be sitting up stiff like this on purpose, that's why it is, eh, it's not exactly that I'm trembling before you gentlemen.\"",
+    "ids": [
+     "p39"
+    ],
+    "notes": [
+     "Kept his eh, you know run-on patter for na and degesu forms, without tidying into respectable grammar. Second sentence is his prepared apology, delivered as part of the act."
+    ]
+   },
+   {
+    "english": "\"ha, ha, ha\" came, so he felt safe for a start, and thinking they were his now he shut his mouth for a while.",
+    "ids": [
+     "p40"
+    ],
+    "notes": []
+   },
+   {
+    "english": "A study of somebody's novel had begun, but as the subject was actors, he pricked up his ears as a performer in something of the same line.",
+    "ids": [
+     "p41"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted p34 to p41, joining p36-p37 where the sentence runs over."
+ },
+ "usage": {
+  "input_tokens": 28252,
+  "cached_tokens": 27377,
+  "output_tokens": 2423,
+  "reasoning_tokens": 1787,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01549805,
+ "response_id": "resp_6aeb7bccedcf54ae52814e62",
+ "latency_s": 24.68,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2436
+  }
+ ],
+ "created": "2026-11-04T18:39:09Z"
+}

@@ -1,0 +1,80 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "Coming up on the night boat at Oshisuna-gashi, on the reed plain on the way to Awa village, when Ryujiro was suddenly seized with pain in the belly, O-Tetsu picked him up on her back as lightly as if he had been a child, carried him home the not quite half a ri, and nursed him with a care no kin could have matched. That much was well enough, but then never to be allowed a single step outside was a nuisance beyond all bearing.",
+    "ids": [
+     "p13"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Ryujiro's pain was soon cured, but the health he had happily got back began to fail again in two or three days, and with nothing in particular amiss he spent his days in a lingering sickness, like a man with the stuffing taken out of him. His topknot stubble had grown out. His colour turned pale. His own sunken eyes startled him. He had become the demon's prisoner in very truth.",
+    "ids": [
+     "p14"
+    ],
+    "notes": [
+     "Kept 'prisoner' to hold the book's binding-web: toriko here answers 'all but a prisoner' in p4."
+    ]
+   },
+   {
+    "english": "Today at last he had worked up his great resolve, and meaning to profit by O-Tetsu's absence to climb down the cliff from the back garden and make his way by the paddies toward Fukuda village.",
+    "ids": [
+     "p15"
+    ],
+    "notes": []
+   },
+   {
+    "english": "II",
+    "ids": [
+     "p16"
+    ],
+    "notes": []
+   },
+   {
+    "english": "With every step the pangs of conscience pressed harder. That Isogai Ryujiro, though a second son, born to a house of five hundred koku hatamoto, a direct retainer of the shogun, whose rare mastery of the sword was called heaven-born and rang through all the Kobusho, should for the sake of one woman, older than himself, of low standing, and of no great beauty, have been rolled in the palm of her hand and handled for three months like a plaything.",
+    "ids": [
+     "p17"
+    ],
+    "notes": []
+   },
+   {
+    "english": "At the Kobusho he had studied chiefly under the guidance of Imahori Settsu-no-kami, but besides that he had won the favour of Akioka Jinpusai, who lived retired at Azabu Furukawabata and had opened a new line from the Tenshin Dokumei school, and had received separate training as his one master with his one pupil, until he had advanced to the place of inheriting the secret of the Happo Makigumo swordsmanship.",
+    "ids": [
+     "p18"
+    ],
+    "notes": [
+     "Romanisation without macrons follows the house's chosen first page, against the bible's macrons, for consistency."
+    ]
+   }
+  ],
+  "say": "Drafted p13 to p18 in the brisk kodan voice, keeping prisoner and demon consistent with the opening."
+ },
+ "usage": {
+  "input_tokens": 27092,
+  "cached_tokens": 25713,
+  "output_tokens": 2666,
+  "reasoning_tokens": 2028,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0169112,
+ "response_id": "resp_6aeb7ade1425ea5c6d9841cd",
+ "latency_s": 33.1,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2474
+  }
+ ],
+ "created": "2026-11-04T18:35:11Z"
+}

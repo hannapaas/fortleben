@@ -1,0 +1,44 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "Yet, to think it over afterwards, this was still the part that was not so hard to bear. — Presently his throat grew thirsty. Liu too knew the story of how Cao Mengde or someone cured his soldiers of thirst by telling them there was a plum grove ahead. But now, however he called to mind the sweet-sour of plums, his thirst was none the less for it. He worked his chin and bit his tongue, but the inside of his mouth still held its heat. Even that would surely have been somewhat easier to bear if it had not been for the unglazed jar at his pillow. From the jar's mouth a thick reek of wine assailed Liu's nose without pause. And, perhaps it was only fancy, but he felt the reek grow stronger with every minute. Thinking at least to look at the jar, Liu opened his eyes. Glancing upward with his eyes alone, all that came in sight were the mouth of the jar and perhaps half of its amply bulging body. That was all that came in sight, but at the same time there rose in Liu's imagining the sight of wine brimming undisturbed in the dim interior of the jar, the colour of gold. Before he knew it he licked his cracked lips all round with his dry tongue, but there was no sign at all of spittle welling up. Even his sweat by now had been dried out of him by the sun, and no longer ran as before.",
+    "ids": [
+     "p46"
+    ],
+    "notes": [
+     "Kept \"Cao Mengde or someone\" for 曹孟徳か誰か: the vagueness is Liu's half-remembered version of the anecdote, not a doubt about the source.",
+     "Kept \"with his eyes alone\" for 上眼を使って: bound and dizzy from p44, he cannot lift his head and rolls only his eyes toward the jar at his pillow."
+    ]
+   }
+  ],
+  "say": null
+ },
+ "usage": {
+  "input_tokens": 16626,
+  "cached_tokens": 15089,
+  "output_tokens": 2800,
+  "reasoning_tokens": 2379,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0160846,
+ "response_id": "resp_6aeba57ac91582a2707d4634",
+ "latency_s": 25.6,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1648
+  }
+ ],
+ "created": "2026-11-04T21:36:58Z"
+}

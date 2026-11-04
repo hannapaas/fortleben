@@ -1,0 +1,89 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "For suffering himself to be detained on the road by O-Tetsu and breaking off his discipline of the sacred sword before the gods, for that fault he would apologize to the utmost. He would consult him too about going abroad to study gunnery. But praying that his master did not lie gravely ill as his dreams had shown him, he hastened his steps at every turn.",
+    "ids": [
+     "p75"
+    ],
+    "notes": []
+   },
+   {
+    "english": "His plan was to go from Fukawa to Fussa, and thence by way of Nakabyo to Abiko, so from Ichizaki he hurried on by cut-through paths between fields and paddies by way of Shiizukashita. When the woods of Tatsuki on Monmadai had come close into view, he became aware that a young girl was following behind him.",
+    "ids": [
+     "p76"
+    ],
+    "notes": []
+   },
+   {
+    "english": "She was by no means to be taken for a common farmer's daughter. Her hair was newly dressed in a bunkin high shimada, without a single hair astray.",
+    "ids": [
+     "p77"
+    ],
+    "notes": [
+     "Kept bunkin-takashimada as a period coiffure term; a formal high shimada worn by young women and performers."
+    ]
+   },
+   {
+    "english": "From white powder to lip rouge, her heavy make-up was complete in every point. Even without it she was beautiful enough to make one shiver, a beauty rare even in Edo.",
+    "ids": [
+     "p78"
+    ],
+    "notes": []
+   },
+   {
+    "english": "And yet, what was to be made of her dress. Her dyed yukata scattered with butterflies was all stained with dirt. With its large white ground, though it was still early autumn, it looked chill and shabby. Her obi too was narrow and all creased, wretched beyond words. Against the dressing of her hair and the painting of her face, her attire was all too mean, and the two did not accord at all. She must have been a riddle to any eye.",
+    "ids": [
+     "p79"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Stranger still, in this fine weather she carried a dark blue janome umbrella. And yet barefoot in straw sandals, she came stepping softly down the road.",
+    "ids": [
+     "p80"
+    ],
+    "notes": [
+     "janome: a bull's-eye-patterned oil-paper umbrella."
+    ]
+   },
+   {
+    "english": "Could it be a fox of Onabakehara turned into a girl and following to bewitch him. To change shape even by day, it must be a fox of uncommon rank, he was half minded to jest to himself.",
+    "ids": [
+     "p81"
+    ],
+    "notes": [
+     "Onabakehara is kept as a place-name; kanroku, literally official stipend, is taken as rank or power as a fox."
+    ]
+   }
+  ],
+  "say": "Drafted the roadside encounter with Kotora in brisk kodan English."
+ },
+ "usage": {
+  "input_tokens": 26813,
+  "cached_tokens": 25713,
+  "output_tokens": 2917,
+  "reasoning_tokens": 2287,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0176292,
+ "response_id": "resp_6aeb7bdc4915f805c83b4124",
+ "latency_s": 30.92,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2428
+  }
+ ],
+ "created": "2026-11-04T18:39:24Z"
+}

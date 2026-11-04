@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 67520,
+  "cached_tokens": 67316,
+  "output_tokens": 281,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.019899200000000002,
+ "response_id": "resp_6aeb813216cc46e00b654bdb",
+ "latency_s": 2.63,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_960ce8c0-7bc5-4b49-a268-20ea120cabd6",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"R1\"],\"new\":\"\\\"Had your one already? This slump and all, Sensei looks to be doing pretty well for himself — let me have a bit of it, what do you say? Me, I'm off home now, if I'm lucky I might get something hot — though whether the missus has got it ready I don't know.\\\"\",\"old\":\"\\\"Had your one already, eh— things as dull as they are, Sensei looks to be doing pretty well for himself, eh? Let me have a bit of it, eh, what do you say? Me, I am off home now and if I am lucky, well, you know, I might get something hot, I suppose, eh, though whether the missus has got it ready or not I don't know.\\\"\",\"reason\":\"The な/でげす patter is kept in run-on, self-interrupting syntax rather than an 'eh' on every clause, which reads as a translator's tic.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T19:02:10Z"
+}

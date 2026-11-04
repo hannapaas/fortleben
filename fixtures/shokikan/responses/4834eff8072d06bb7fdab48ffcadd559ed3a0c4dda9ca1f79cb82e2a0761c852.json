@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 64534,
+  "cached_tokens": 64244,
+  "output_tokens": 169,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.017388800000000003,
+ "response_id": "resp_6aeb7f0b87e0a8279494404d",
+ "latency_s": 2.41,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_6a68f9d7-bfd3-40db-8fe5-fb9ff79267fa",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"R7\"],\"new\":\"and at the end of some remark addressed to him threw his body back and laughed.\",\"old\":\"and at the tail of some word addressed to him bent his body back and laughed aloud.\",\"reason\":\"'At the tail of some word' is a calque; the Japanese is simply the close of a remark, and Zenpei's laugh is kept as 'laugh' for the laughter motif.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:52:59Z"
+}

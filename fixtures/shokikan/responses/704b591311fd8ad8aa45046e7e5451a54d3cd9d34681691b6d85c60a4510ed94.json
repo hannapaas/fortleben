@@ -1,0 +1,59 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"Shall I confess something odd?\" Tatsuya said, smiling. \"Apart from that time at Nasuno, how many times do you suppose I have heard your koto?\" \"There you go again,\" Mitsuyo said, stepping on ahead as if to escape, \"oh, but just look. Have we not come to a fine view? That island is quite beyond words. Oh, how lovely!\" And with that she made an end of the talk.",
+    "ids": [
+     "p39"
+    ],
+    "notes": [
+     "I kept \"that time at Nasuno\" literal; the passage gives no more context for what hearing is meant, so I did not explain it."
+    ]
+   },
+   {
+    "english": "The famed reeds grew thick and close in their narrow place, and the wind in their upper leaves broke the ripples that came softly beating in. This was the strand of the lake. The peaks that stood in rivalry drowned their shadows whole, and a rowing boat far off pushed its way on across them. Pine islet and sundered rock, mountains shutting out the world and water clear for ever, fishermen's chants and water-chestnut songs, smoke-waves fading far, and the sky more vast still. Mitsuyo set herself upon a fallen tree and rested a while. The wind struck her powder and bore its bewitching scent to Tatsuya.",
+    "ids": [
+     "p40"
+    ],
+    "notes": [
+     "\"Ogi\" names both the lake and the reed; I read the famed ogi here as the plant, not the place, but leave the echo audible. I kept the paired Chinese phrases as plain images rather than smoothing them away."
+    ]
+   },
+   {
+    "english": "\"Let us go on. Father will be coming home by now,\" Mitsuyo said, rising. \"There is nowhere here to rest at ease, and that is a pity,\" Tatsuya said, and left it to another time. Along the way Tatsuya spoke to her of one thing and another, but Mitsuyo gave only perfunctory answers and seemed to pay him no heed. Tatsuya too was plainly put out, and looked for all the world sunk in thought. The two walked on in silence.",
+    "ids": [
+     "p41"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted the lakeside turn from coaxing talk to lush tableau to silent walk back."
+ },
+ "usage": {
+  "input_tokens": 27542,
+  "cached_tokens": 26225,
+  "output_tokens": 2024,
+  "reasoning_tokens": 1525,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.014182,
+ "response_id": "resp_6aeb7be43e225ba9b5a5417c",
+ "latency_s": 19.03,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1976
+  }
+ ],
+ "created": "2026-11-04T18:39:32Z"
+}

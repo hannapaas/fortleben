@@ -1,0 +1,73 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "Turning on his heel, he laid his hand on the electric bell by the pillar, and before he had time to wait one of the maids came running. \"Look, go to Miyoshi-san's rooms and say this for me. I should like him to beat me at another game, and I have something else to talk of besides, so if he is free I would be glad if he would come at once. Hurry now, will you. Oh, your comb has fallen.\"",
+    "ids": [
+     "p50"
+    ],
+    "notes": [
+     "The owner of the fallen comb is unstated; I take it as the maid's, dropped as she ran in, which fits Tatsuya's familiar notice of the maids."
+    ]
+   },
+   {
+    "english": "* * *",
+    "ids": [
+     "p51"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"That is mere obstinacy on your part. He is not a man to be cast aside like that. Whatever else, he is a man who has become a secretary. Bend a little and try keeping company with him.\" To Zenpei soothing him so, Tsunao only arched himself back and stayed stiff. \"I have no thought whatever of mixing with such a man. Frivolous in looks, flippant, a man I dislike through and through. I hate even to see his face. I came here full of pleasure, and through that man I have met with nothing but disappointment. What good could come of company with such a creature. What is it in him that you find so much to your liking?\"",
+    "ids": [
+     "p52"
+    ],
+    "notes": [
+     "I read omae no ikkoku as obstinacy or prejudice on your part; the sense is plain from the reply but the wording is uncertain."
+    ]
+   },
+   {
+    "english": "\"I do not like him either, somehow,\" said Mitsuyo, playing with her ring.",
+    "ids": [
+     "p53"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Quite right. So it should be,\" said Tsunao, giving his pipe a tap. Even that sound grated on Zenpei's ears, and his laughing face clouded a little. \"With any man, if you look you will surely find faults. Taking each other's good points and enjoying one another, that is what keeping company is. You grow more perverse by degrees. In that temper you will never push your way through the world.\" His voice, even so, was still mild.",
+    "ids": [
+     "p54"
+    ],
+    "notes": []
+   }
+  ],
+  "say": null
+ },
+ "usage": {
+  "input_tokens": 27905,
+  "cached_tokens": 26225,
+  "output_tokens": 3036,
+  "reasoning_tokens": 2498,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01893675,
+ "response_id": "resp_6aeb7c52299b9098554346bc",
+ "latency_s": 27.26,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2050
+  }
+ ],
+ "created": "2026-11-04T18:41:22Z"
+}

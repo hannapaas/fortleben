@@ -1,0 +1,33 @@
+{
+ "prompt": "copy-desk",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": {
+  "say": "Made the house spellings one form: kouza to kōza throughout, Kodan Club to Kōdan Club, and the second *situation* to roman situation, keeping italics for first use only. Left the rest alone on purpose: back versus *back*, tiger versus Tiger, father versus 'Father', reply versus 'reply', and case or possessive forms are different words or sentence positions, not variants; Tiger quote marks at p155 and p179 were left as possibly deliberate echoes rather than title citations.",
+  "summary": "Standardised kōza and Kōdan Club and first-use italics for situation; left homograph and grammatical variants untouched."
+ },
+ "usage": {
+  "input_tokens": 23743,
+  "cached_tokens": 0,
+  "output_tokens": 1330,
+  "reasoning_tokens": 1180,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.03533125,
+ "response_id": "resp_6aeb821b635dbed4523c44ca",
+ "latency_s": 15.03,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 623
+  }
+ ],
+ "created": "2026-11-04T19:06:03Z"
+}

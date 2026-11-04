@@ -1,0 +1,146 @@
+{
+ "prompt": "reader-faithful",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "notes": [
+   {
+    "japanese": "二足の草鞋を穿いていた",
+    "paragraph": "p7",
+    "problem": "Literal footwear loses the set idiom for double-dealing, serving both sides.",
+    "span": "he wore two pairs of straw sandals at once",
+    "suggestion": "he was double-dealing, wearing two pairs of straw sandals at once",
+    "sureness": "Sure; any dictionary of idioms settles it, and the police-informer plus boss context confirms it."
+   },
+   {
+    "japanese": "生縄のお鉄は男の捕物に掛けては天下一で",
+    "paragraph": "p9",
+    "problem": "'taking men' sounds sexual and loses the arrest/capture sense that drives the rumour.",
+    "span": "is the best in the land at taking men",
+    "suggestion": "is the best in the land at taking men prisoner",
+    "sureness": "Fairly sure; 捕物 is arrest, not seduction, and the torture-murder list confirms it."
+   },
+   {
+    "japanese": "斯うした噂は至る処に立っていた。",
+    "paragraph": "p10",
+    "problem": "Literal 'stood' is unidiomatic and obscures the hearsay formula.",
+    "span": "Talk like this stood everywhere.",
+    "suggestion": "Talk like this was to be heard everywhere.",
+    "sureness": "Sure; 立つ of rumour means to be current."
+   },
+   {
+    "japanese": "裏庭から崖を降りて稲田伝いに福田村の方へ出ようと考えたので有った。",
+    "paragraph": "p15",
+    "problem": "The sentence has no main verb; the plan to escape is left as a dangling participle.",
+    "span": "Today at last he had worked up his great resolve, and meaning to profit by O-Tetsu's absence to climb down the cliff from the back garden and make his way by the paddies toward Fukuda village.",
+    "suggestion": "Today at last he had worked up his great resolve, and meaning to profit by O-Tetsu's absence, he planned to climb down the cliff from the back garden and make his way by the paddies toward Fukuda village.",
+    "sureness": "Certain; the Japanese ends with と考えた."
+   },
+   {
+    "japanese": "これでも一子相伝ですが",
+    "paragraph": "p28",
+    "problem": "Misreads the transmission term as from child to child rather than to a single heir.",
+    "span": "handed down from one child alone to one child alone",
+    "suggestion": "This is handed down to a single heir alone, but since it is you I will hand it down to you.",
+    "sureness": "Sure; 一子相伝 is single-heir transmission, check any dictionary."
+   },
+   {
+    "japanese": "持上げられるだけ持上げられても",
+    "paragraph": "p35",
+    "problem": "Literal lift loses the flattery idiom that the passage turns on.",
+    "span": "Lift him as high as they would, in truth it was no different from being locked in gaol.",
+    "suggestion": "Flatter him as they might, in truth it was no different from being locked in gaol.",
+    "sureness": "Sure; 持上げる here is to flatter, confirmed by the flattering speech in p34."
+   },
+   {
+    "japanese": "高手小手に縛り上げて",
+    "paragraph": "p42",
+    "problem": "Destroys the rope network by varying the set term: low hands in p25 becomes small-hands here.",
+    "span": "She bound him up in a high-hands, small-hands tie",
+    "suggestion": "She bound him up in a high-hands, low-hands tie, keeping the same English as the catalogue in p25.",
+    "sureness": "Certain on inconsistency; which English to standardise on the desk can settle."
+   },
+   {
+    "japanese": "さも口惜しそうに口を切った",
+    "paragraph": "p42",
+    "problem": "Regret softens vexation into remorse she does not feel.",
+    "span": "she opened her mouth as if full of regret",
+    "suggestion": "she opened her mouth as if full of vexation",
+    "sureness": "Fairly sure; 口惜しい is mortified/vexed, not remorseful."
+   },
+   {
+    "japanese": "米利堅へでも、和蘭陀へでも渡航して頂きたい",
+    "paragraph": "p61",
+    "problem": "Modernising to America/Holland flattens the period flavour the crux asks to keep.",
+    "span": "I am of a mind to have you cross over to America, or to Holland.",
+    "suggestion": "I am of a mind to have you cross over to Meriken, to America, or to Oranda, to Holland.",
+    "sureness": "Moderately sure; house reading asks for period terms, desk to decide gloss form."
+   },
+   {
+    "japanese": "手に取るように其独言が響く",
+    "paragraph": "p127",
+    "problem": "Over-literal hand image is awkward and hides the idiom for perfect clarity.",
+    "span": "his muttering rang out as if taken in the hand",
+    "suggestion": "his muttering rang out as plain as if beside us",
+    "sureness": "Sure; 手に取るように means vividly/clearly."
+   },
+   {
+    "japanese": "水草にも血が通り、脈が打っているかと怪しまれる程",
+    "paragraph": "p156",
+    "problem": "Reverses the sense: suspects blood runs turned into doubts whether it runs.",
+    "span": "so that you might have doubted whether blood ran and a pulse beat even in the water weeds",
+    "suggestion": "so uncanny you might well have suspected blood ran and a pulse beat even in the water weeds",
+    "sureness": "Certain; 怪しまれる is to suspect, not to doubt."
+   },
+   {
+    "japanese": "力一杯に手裏剣を打った",
+    "paragraph": "p160",
+    "problem": "Expansion adds a dart simile the author does not give.",
+    "span": "as one throws a dart",
+    "suggestion": "With a swift move he threw a shuriken with all his might.",
+    "sureness": "Sure; 手裏剣を打つ needs no gloss in the sentence."
+   },
+   {
+    "japanese": "恰も本縄の雁字搦みに掛ったように感じられた",
+    "paragraph": "p164",
+    "problem": "Varies the catalogue term from bind in p25 to hold here, weakening the exact echo the later fight depends on.",
+    "span": "He felt as if he had been caught in the ganjigarame hold of the main rope.",
+    "suggestion": "He felt as if he had been caught in the ganjigarame cross-lattice bind of the main rope.",
+    "sureness": "Sure on inconsistency; desk to fix the standard English for 雁字搦み throughout."
+   },
+   {
+    "japanese": "それをお鉄は執念深くも、足蹴にして",
+    "paragraph": "p214",
+    "problem": "Stray non-English characters corrupt the sentence.",
+    "span": "O-Tetsu with شع vindictive spite kicked her as she lay and even spat on her.",
+    "suggestion": "O-Tetsu with vindictive tenacity kicked her as she lay and even spat on her.",
+    "sureness": "Certain it is a typo; 執念深く confirms tenacious/vindictive spite."
+   }
+  ],
+  "say": "The part keeps the rope web, catalogue length and flat ending well, but needs fixes for idioms, term consistency and two misreadings."
+ },
+ "usage": {
+  "input_tokens": 51016,
+  "cached_tokens": 0,
+  "output_tokens": 15506,
+  "reasoning_tokens": 13713,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.1296705,
+ "response_id": "resp_6aeb7e53e7abe5b3f75c4799",
+ "latency_s": 109.83,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 6359
+  }
+ ],
+ "created": "2026-11-04T18:49:55Z"
+}

@@ -1,0 +1,68 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"...\" The English word situation the host had just used stayed in Nekohachi's ears, and he took it to mean something like a painful fix you get caught in. And he himself was in fact fitted into his customers' favour, and had gone and fitted himself right into it, till he was in the state he was in now where he could move neither one way nor the other, so he joked it to himself, quiet. But down underneath he felt the hateful part of the performer's trade all the more.",
+    "ids": [
+     "p53"
+    ],
+    "notes": [
+     "Kept situation as English to keep the mouthing-English joke visible, and kept fitted/fitted into/fitted part to hold the hame pun that runs into p54. His reading of it as a fix is left as his guess, as in the Japanese."
+    ]
+   },
+   {
+    "english": "\"There is the place where the leader points it out, eh, says that is just Fukai-kun's fitted part,\" said the priest-like one, close-cropped, with bumps rising fore and aft like a mountain range, the knowing face.",
+    "ids": [
+     "p54"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"And then they tell him the whole act will be eaten clean up by Fukai-kun's tiger, and such,\" the host went on, \"and he got that much proud again even. But being the tiger, with no lines to say, there was no call to turn up for rehearsals even. Glad to make use of the day when the child begged to go to Ueno Zoo, he says, well then shall I show you the much talked of hippo, while in truth he means to go and study how a tiger looks. Then on the way, in the tram, he meets a theatre critic, and is asked where he is off to, so he answers, truth to tell, to the zoo to show the child the much talked of hippo, but the sharp critic has him marked, that is a lie, I have heard it already, it is the tiger really.\"",
+    "ids": [
+     "p55"
+    ],
+    "notes": [
+     "Kept the retelling flat and a little long-winded as reported talk, without lifting it into a set piece."
+    ]
+   },
+   {
+    "english": "\"There is a kind of sorrow comes out in a bit like that too,\" said the Tenjin-sama man.",
+    "ids": [
+     "p56"
+    ],
+    "notes": [
+     "Sorrow renders hiai, first learned here; kept unlyrical to hold for p175/p188. Tenjin-sama kept as nickname per bible."
+    ]
+   }
+  ],
+  "say": "Drafted p53 to p56 holding situation and sorrow flat and keeping fitted as the repeated word."
+ },
+ "usage": {
+  "input_tokens": 28588,
+  "cached_tokens": 27377,
+  "output_tokens": 3652,
+  "reasoning_tokens": 3077,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0211413,
+ "response_id": "resp_6aeb7c3cd109ada9ab604b31",
+ "latency_s": 39.68,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2235
+  }
+ ],
+ "created": "2026-11-04T18:41:01Z"
+}

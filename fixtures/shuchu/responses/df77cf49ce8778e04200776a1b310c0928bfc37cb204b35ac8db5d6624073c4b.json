@@ -1,0 +1,66 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "Since he spat out the wine worm, why did Liu's health fail? Why did his fortune decline — once the spitting of the wine worm and Liu's later ruin are set side by side as cause and effect, this is a question that readily occurs to anyone. Indeed this question has been repeated by people of every occupation living in Changshan, and from their mouths answers of every kind have been given. The three answers given here are in truth no more than the most representative chosen from among them.",
+    "ids": [
+     "p55"
+    ],
+    "notes": []
+   },
+   {
+    "english": "The first answer. The wine worm was Liu's fortune, and not Liu's disease. By chancing to meet an ignorant barbarian monk, he willingly brought about the loss of this heaven-given fortune.",
+    "ids": [
+     "p56"
+    ],
+    "notes": [
+     "Kept \"fortune\" for 福 here to hold it apart from \"happiness\" for 幸福 in the second answer."
+    ]
+   },
+   {
+    "english": "The second answer. The wine worm was Liu's disease, and not Liu's fortune. For to empty a whole jar at a single drinking is quite beyond what an ordinary man can conceive. Had the wine worm not been removed, Liu must undoubtedly have died before long. Seen in this light, poverty and sickness arriving each in turn should rather be called happiness for Liu.",
+    "ids": [
+     "p57"
+    ],
+    "notes": []
+   },
+   {
+    "english": "The third answer. The wine worm was neither Liu's disease nor Liu's fortune. Liu from of old did nothing but drink. If wine were taken away from Liu's life, nothing would remain behind. Seen in this light, Liu is the wine worm, and the wine worm is Liu. Hence Liu's casting off the wine worm was the same as killing himself. That is to say, from the day he became unable to drink, Liu is Liu and yet is not Liu. If Liu himself were already gone, then it is entirely natural, and only to be expected, that the health and fortune of the Liu of former days should have been lost.",
+    "ids": [
+     "p58"
+    ],
+    "notes": [
+     "Rendered the 即 construction literally and in parallel to keep the third answer's dissolving equation, rather than smoothing it."
+    ]
+   }
+  ],
+  "say": null
+ },
+ "usage": {
+  "input_tokens": 16270,
+  "cached_tokens": 15089,
+  "output_tokens": 2490,
+  "reasoning_tokens": 1995,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0143221,
+ "response_id": "resp_6aeba5b8dbb66e5089eb4823",
+ "latency_s": 21.93,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2062
+  }
+ ],
+ "created": "2026-11-04T21:38:00Z"
+}

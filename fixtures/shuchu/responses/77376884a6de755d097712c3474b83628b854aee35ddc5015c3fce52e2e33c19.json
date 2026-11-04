@@ -1,0 +1,61 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "Why he should be lying naked in the blazing sun has a history behind it, as follows. — That day, as Liu, together with Sun Sensei, his fellow drinker (this is the scholar who had held the white-feather fan), was fighting out a game on the board, leaning against the bamboo wife in a well-aired room, the maidservant came and said, \"A monk, lodging they say at Hodoji or somewhere, has just come and insists upon seeing the master. What shall I do?\"",
+    "ids": [
+     "p11"
+    ],
+    "notes": [
+     "bamboo wife: a hollow bolster of woven bamboo leaned upon in summer heat; kept as in the Japanese.",
+     "Hodoji: temple name as reported by the maid, hence her \"or somewhere\"; kept transliterated."
+    ]
+   },
+   {
+    "english": "\"What, Hodoji?\" So saying, Liu blinked his small eyes as if dazzled, and then, raising his fat body that looked hot of itself, ordered, \"Then show him in here.\" Then, with a glance at Sun Sensei's face, he added, \"It must be that monk, I suppose.\"",
+    "ids": [
+     "p12"
+    ],
+    "notes": []
+   },
+   {
+    "english": "The monk lodging at Hodoji was a barbarian monk come from the Western Regions. As he both practised medicine and administered the arts of the bedchamber, his repute stood high in these parts. For instance, rumours all but miraculous were abroad in full force, that Zhang San's black cataract had suddenly taken a turn for the better, that Li Si's byouen had been healed on the spot. — Both men had heard these rumours. With what business could that barbarian monk now have gone out of his way to come to Liu's house? Of course Liu had no recollection at all of having sent to fetch him.",
+    "ids": [
+     "p13"
+    ],
+    "notes": [
+     "byouen left untranslated: the text does not gloss it and the exact ailment is uncertain, understood only as some disorder of the private parts; no modern diagnosis ventured.",
+     "Western Regions, Zhang San, Li Si: kept as transliterated proper terms; Zhang San and Li Si read as stock placeholder names in the reported gossip."
+    ]
+   }
+  ],
+  "say": "Drafted the chess-room interruption and the monk's rumoured cures in the learned deadpan, keeping measures and proper terms unvaried."
+ },
+ "usage": {
+  "input_tokens": 16163,
+  "cached_tokens": 15089,
+  "output_tokens": 3347,
+  "reasoning_tokens": 2819,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0178306,
+ "response_id": "resp_6aeba4ea9f637530db0d470d",
+ "latency_s": 28.56,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2105
+  }
+ ],
+ "created": "2026-11-04T21:34:34Z"
+}

@@ -1,0 +1,91 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"But that is just what makes it interesting, in a way —\" the host said.",
+    "ids": [
+     "p70"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"But I would never do such a thing,\" he said, turning earnest as if to show he was not fool enough for that, but neither the host nor any of the rest lent him an ear.",
+    "ids": [
+     "p71"
+    ],
+    "notes": [
+     "Speech breaks off in the source after sonna koto wa; completed as a full sentence to keep the patter readable."
+    ]
+   },
+   {
+    "english": "\"He went to the zoo and did no more than watch the tiger sitting still and yawning, and yet he came home thinking he had got the tiger's feelings better, somehow, than a handsome lover's feelings. When the first day came and the stuffed tiger came onto the stage and yawned, at that alone there were cries of Fukai, Fukai! from the gallery, and he grew not a little proud. And at the fall of the curtain, when he leapt upon the heroine of the play, gallery first and the whole house with it gave him a great burst of applause.\"",
+    "ids": [
+     "p72"
+    ],
+    "notes": [
+     "Kept flat as reported paraphrase; iro-otoko as handsome lover and omuko as gallery without gloss."
+    ]
+   },
+   {
+    "english": "\"Isn't that making fools of people?\" It was the words of the much younger man, speaking for the first time.",
+    "ids": [
+     "p73"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"That is making a fool of people, right enough,\" Tenjin-sama put in too, laughing this time.",
+    "ids": [
+     "p74"
+    ],
+    "notes": [
+     "Kept Tenjin-sama as nickname per bible."
+    ]
+   },
+   {
+    "english": "A grudge rose in Nekohachi too about the way customers treat him on the kōza, enough to make him want to have his say. \"From where I stand, it is the spectators he is making fools of, for getting delighted over trifles, and I daresay he is feeling for the actor himself, eh — spectators are the same as yose customers, you know.\"",
+    "ids": [
+     "p75"
+    ],
+    "notes": [
+     "Kept kōza and yose; kept his eh and run-on in place of degesu forms."
+    ]
+   },
+   {
+    "english": "\"Now, about that,\" Takami-san put in his first question with a mild look, \"is it a work where the author is being ironical — I have not read a scrap of it, so I can hardly have an opinion — but to go by what I have just heard?\"",
+    "ids": [
+     "p76"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted p70 to p76 keeping the Tiger summary flat and Nekohachi in run-on patter against the writers flat abstraction."
+ },
+ "usage": {
+  "input_tokens": 28317,
+  "cached_tokens": 27377,
+  "output_tokens": 4038,
+  "reasoning_tokens": 3411,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.02244305,
+ "response_id": "resp_6aeb7ce224d463e9c04e4c79",
+ "latency_s": 43.81,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2344
+  }
+ ],
+ "created": "2026-11-04T18:43:46Z"
+}

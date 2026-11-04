@@ -1,0 +1,105 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "Bound and left to lie as he was, Ryujiro was sickened by his own spiritlessness. He was sick of himself. This was all his punishment for betraying his master. For having fallen. Repenting in this way,",
+    "ids": [
+     "p45"
+    ],
+    "notes": [
+     "Fragmentary judgment in the original; kept as short flat sentences rather than smoothing into one moral reflection."
+    ]
+   },
+   {
+    "english": "\"Anego, forgive me, do. Whatever comes, I must make one journey to Edo and back.\"",
+    "ids": [
+     "p46"
+    ],
+    "notes": [
+     "Kept Anego, Ryujiro's placating address to O-Tetsu as senior woman and boss, rather than sister."
+    ]
+   },
+   {
+    "english": "\"Are you weary of this deep grass country? Or have you grown weary of me, that you tried to run away?\"",
+    "ids": [
+     "p47"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"It is by no means that. I will go and see, and when my mind is at ease I will come straight back. The truth is, a dream every night troubles me and troubles me till I cannot bear it.\"",
+    "ids": [
+     "p48"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"A dream?\"",
+    "ids": [
+     "p49"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"They say a dream is the weariness of the five viscera. Say that and there is an end of it, but one same dream repeated again and again will not leave my mind. It is my honoured master Akioka Jinpusai, in a dying state and near death. Now my master has not one kinsman. There can be no one to nurse him. He lives alone, and with his temper, which is peculiar, for a disciple he holds none but this Ryujiro here. That special training of one master and one disciple, that he will grant me the secret of the Happo Makigumo, I told you of it the other day.\"",
+    "ids": [
+     "p50"
+    ],
+    "notes": [
+     "Kept five viscera literal for the period commonplace; kept Happo Makigumo untranslated as school secret to be held consistent."
+    ]
+   },
+   {
+    "english": "\"That I have heard for certain.\"",
+    "ids": [
+     "p51"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Should I fail to be in time before my master passes away, the hard-won secret will perish and, to my grief, will not remain in this world. That I cannot bear to lose. And apart from that too, in these days when duty and feeling have grown so thin, if I let my honoured master die alone as if uncared for, Isogai Ryujiro could not hold up his face. When the bond of master and disciple has become as if it were a business bargain, and I am full of dissatisfaction at it, I would by all means go and nurse my master...\"",
+    "ids": [
+     "p52"
+    ],
+    "notes": [
+     "Kept business bargain literal; this master-disciple rebuke is a load-bearing motif mirrored later by Kotora."
+    ]
+   },
+   {
+    "english": "\"Is your master truly ill?\"",
+    "ids": [
+     "p53"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted p45 to p53 in brisk kodan voice, keeping the dream plea and master-disciple language literal."
+ },
+ "usage": {
+  "input_tokens": 26754,
+  "cached_tokens": 25713,
+  "output_tokens": 2645,
+  "reasoning_tokens": 1930,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01639945,
+ "response_id": "resp_6aeb7b5d6f962c15f7cd4fd4",
+ "latency_s": 31.05,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2714
+  }
+ ],
+ "created": "2026-11-04T18:37:17Z"
+}

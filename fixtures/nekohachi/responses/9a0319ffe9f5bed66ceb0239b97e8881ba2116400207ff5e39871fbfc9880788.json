@@ -1,0 +1,87 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "6",
+    "ids": [
+     "p160"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Just then the near-sighted man said he would be in a fix if it got any later, and stood up. He looked up sidelong at that profile to show a touch of displeasure, but the man never noticed. And on top of that two others stood up too, and went home together with him. If this were the yose, with the wooden gate charge already settled, it would be easier to give it up. But when a man has at last settled his heart and keeps on speaking straight, to walk out on him in the middle struck him as the true walk-out, and he could not give it up. He wanted to tell them he would come out and haunt them from some dark alley on the way, but with the host among them there were eager listeners still left, so the thread of his talk was hardly broken.",
+    "ids": [
+     "p161"
+    ],
+    "notes": [
+     "Kept 'wooden gate charge' for 木戸銭 and 'give it up' twice for 諦め to hold the repetition. Kept 'walk-out' for 失敬 to hold the pun on leaving and rudeness, and 'haunt' for 化けてでてやる to hold the monster network from p6."
+    ]
+   },
+   {
+    "english": "\"To come and fetch me at once just because my name happened to come up in talk, that is just like the nobility, eh. Even then, it is not that I will not go, you see, but with an Edokko temper, when they start with money straight off, I get contrary, eh.\"",
+    "ids": [
+     "p162"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"But if it is business, there is no need for that, is there?\" the host objected.",
+    "ids": [
+     "p163"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"No, business or no business, when they come at me squarely with how much will you come for, well, damn it, do as you please, is how I feel, eh. If it is a contribution then a contribution will do, and if they can pay then let them quietly pay what befits their station.\"",
+    "ids": [
+     "p164"
+    ],
+    "notes": [
+     "Kept 'contribution' for 寄附 and 'money / how much / pay' blunt, per the fee network, without tidying his run-on patter."
+    ]
+   },
+   {
+    "english": "\"That old-fashioned stuff will never do. Better to ask beforehand, no coming unless it is so many yen and more, and an aristocrat, as an aristocrat, to pay far higher than a commoner, that nowadays is rather the sensible way.\"",
+    "ids": [
+     "p165"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"But when money is named it turns dirty, eh.\"",
+    "ids": [
+     "p166"
+    ],
+    "notes": []
+   }
+  ],
+  "say": null
+ },
+ "usage": {
+  "input_tokens": 29262,
+  "cached_tokens": 27377,
+  "output_tokens": 3448,
+  "reasoning_tokens": 2818,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.021116799999999998,
+ "response_id": "resp_6aeb7f0d0b5ad300f30e4f15",
+ "latency_s": 38.78,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2315
+  }
+ ],
+ "created": "2026-11-04T18:53:01Z"
+}

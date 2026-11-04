@@ -1,0 +1,62 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "* * *",
+    "ids": [
+     "p82"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Tsunao would not bend, and in the end he went away. Leaving behind a single letter in which his brush had told his heart, with no farewell to Mitsuyo and none to Zenpei, he left the Umeya lightly, as if upon the wind. Clouds went and waters hastened, and his rickshaw left the sound of farewell in these hills, then vanished and was gone.",
+    "ids": [
+     "p83"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Five",
+    "ids": [
+     "p84"
+    ],
+    "notes": []
+   },
+   {
+    "english": "It was Zenpei who came back, calling \"Tsunao, Tsunao!\" from outside the room in high spirits and a voice still gladder. Mitsuyo, tear-faced, sat drooping where she was and gave him no welcome. \"What is it? What is wrong? Where has Tsunao gone?\"",
+    "ids": [
+     "p85"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted Tsunao's quiet departure and Zenpei's unknowing return."
+ },
+ "usage": {
+  "input_tokens": 27061,
+  "cached_tokens": 26225,
+  "output_tokens": 2036,
+  "reasoning_tokens": 1782,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01363175,
+ "response_id": "resp_6aeb7cdca58f7f6cb7814dea",
+ "latency_s": 18.07,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 864
+  }
+ ],
+ "created": "2026-11-04T18:43:40Z"
+}

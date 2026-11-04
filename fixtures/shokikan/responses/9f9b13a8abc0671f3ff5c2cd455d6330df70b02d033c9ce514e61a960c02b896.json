@@ -1,0 +1,64 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "Zenpei stood alone between them, bent on making the two men friends. Hearing the word secretary, Tsunao looked down on Tatsuya as a poor wretch adrift on the waves of the world; hearing the words a graduate of last year in philosophy, Tatsuya laughed to himself at a fool ready to bury a lifetime in the most roundabout empty theory. Zenpei, innocent to the last, took it for certain that they had conceived a respect for each other, and chuckled to himself with delight. \"Do show me the keepsake quickly,\" Mitsuyo said, as if coaxing him.",
+    "ids": [
+     "p44"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"We cannot talk at ease here. Shall we go back to the inn and drink a cup together?\" Zenpei proposed. \"Most excellent,\" Tatsuya answered on the instant. Zenpei turned. \"Tsunao, come along.\" Tsunao, coldly: \"Yes, let us go.\"",
+    "ids": [
+     "p45"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Each with his own thoughts, the four set out. \"I shall run ahead for the keepsake,\" Mitsuyo said, throwing away the wild flowers she had plucked, and ran off like a child. Her skirts fluttering, white chasing scarlet. \"Welcome back,\" came the chorus of voices from the Umeya.",
+    "ids": [
+     "p46"
+    ],
+    "notes": [
+     "The line on hem, snow and scarlet is a brief lyrical flash with no verb; I have kept it as a visual fragment of white under-robe chasing red, rather than supplying weather or motive the Japanese leaves out."
+    ]
+   },
+   {
+    "english": "Four",
+    "ids": [
+     "p47"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted p44 to p47 keeping the paired contempt, Zenpei's pleased misunderstanding, and the childlike run home intact."
+ },
+ "usage": {
+  "input_tokens": 27921,
+  "cached_tokens": 26225,
+  "output_tokens": 2528,
+  "reasoning_tokens": 2116,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01679775,
+ "response_id": "resp_6aeb7c13e4d41d61bc6f4526",
+ "latency_s": 22.44,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1586
+  }
+ ],
+ "created": "2026-11-04T18:40:19Z"
+}

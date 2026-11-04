@@ -1,0 +1,52 @@
+{
+ "prompt": "final-read",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 35069,
+  "cached_tokens": 0,
+  "output_tokens": 6734,
+  "reasoning_tokens": 6325,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.274956,
+ "response_id": "resp_6aeb7f591926fce7fa224f81",
+ "latency_s": 61.7,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_b3dc1cd0-74fe-4167-86cd-5008f9e18ed8",
+   "name": "edit",
+   "arguments": "{\"old\":\"\\\"I went and tumbled right into the trap, so it's not the heat. My arse is grazed raw all over! The water's going to soak in, isn't it?\\\"\",\"new\":\"\\\"I went and tumbled right into the trap — hot, ain't it! My arse is grazed raw all over! The water's going to soak in, isn't it?\\\"\",\"reason\":\"Japanese 熱アねえや is 'hot, isn't it', not a negation about the heat.\",\"replace_all\":false}"
+  },
+  {
+   "call_id": "call_c7d36723-30e6-41e5-af6a-3d308dc2e5e2",
+   "name": "edit",
+   "arguments": "{\"old\":\"\\\"If he does not look in here he is sure to go straight back there, it is one road so it is certain, so thinking, your wife telephoned and sent me to fetch him,\\\" the old man said.\",\"new\":\"\\\"If you do not look in here you are sure to go straight back there, it is one road so it is certain, so thinking, your wife telephoned and sent me to fetch you,\\\" the old man said.\",\"reason\":\"The old man is speaking to Taki; the dropped subject is Taki as addressee, not a third person.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": "commentary",
+   "chars": 142
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:54:17Z"
+}

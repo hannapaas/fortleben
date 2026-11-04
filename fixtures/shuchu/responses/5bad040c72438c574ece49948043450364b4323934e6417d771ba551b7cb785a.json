@@ -1,0 +1,154 @@
+{
+ "prompt": "reader-readable",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "notes": [
+   {
+    "japanese": "中にゐる雛や卵を、そのまゝ蒸殺してしまふかと思はれる",
+    "paragraph": "p2",
+    "problem": "‘like to’ reads as ‘enjoy’ rather than ‘likely to’, so the nest image misfires.",
+    "span": "like to steam the chicks and eggs inside them alive where they lay",
+    "suggestion": "seemed likely at this rate to steam the chicks and eggs inside alive where they lay",
+    "sureness": "Sure; any native reader will trip on ‘like to’ here."
+   },
+   {
+    "japanese": "朱柄の麈尾をふりふり、裸の男にたからうとする虻や蠅を追つてゐた",
+    "paragraph": "p4",
+    "problem": "‘flourishing’ sounds showy, not the patient shooing of flies.",
+    "span": "patiently flourishing a red-handled fly-whisk",
+    "suggestion": "patiently waving a red-handled fly-whisk",
+    "sureness": "Fairly sure; ‘flourish’ almost always implies display."
+   },
+   {
+    "japanese": "鼠の尻尾のやうな髯を、申訳だけに生やして",
+    "paragraph": "p5",
+    "problem": "‘by way of apology’ suggests he is apologising, when the point is a token, scanty beard, and the inversion reads backwards.",
+    "span": "by way of apology, a beard like a rat's tail",
+    "suggestion": "a mere token of a beard on the tip of his chin, like a rat's tail",
+    "sureness": "Sure about the misreading; wording could be settled by the faithful reader confirming ‘mōshiwake dake ni’ means token."
+   },
+   {
+    "japanese": "人並をはづれた酒量である",
+    "paragraph": "p10",
+    "problem": "‘measure’ is dictionary-flat for drinking capacity and stops the sentence.",
+    "span": "was a measure beyond ordinary men",
+    "suggestion": "was a capacity beyond ordinary men",
+    "sureness": "Sure; ‘measure’ for 酒量 is not idiomatic English here."
+   },
+   {
+    "japanese": "暑さうに肥つた体を起しながら",
+    "paragraph": "p12",
+    "problem": "‘that looked hot of itself’ is unidiomatic and has to be read twice.",
+    "span": "raising his fat body that looked hot of itself",
+    "suggestion": "heaving up his fat body, hot-looking in itself,",
+    "sureness": "Sure this is translationese; exact shade could be checked against the Japanese."
+   },
+   {
+    "japanese": "殆、奇蹟に近い噂が盛に行はれてゐる",
+    "paragraph": "p13",
+    "problem": "‘abroad in full force’ is tangled and archaic; the rumour sentence collapses under it.",
+    "span": "rumours all but miraculous were abroad in full force",
+    "suggestion": "rumours all but miraculous were going round in full force",
+    "sureness": "Fairly sure; the sense is clear but the phrasing is not prose a writer would sign."
+   },
+   {
+    "japanese": "紫石稜のやうな眼",
+    "paragraph": "p17",
+    "problem": "‘cut amethysts’ in the plural sounds like loose jewels, not eyes.",
+    "span": "with eyes like cut amethysts",
+    "suggestion": "with eyes like faceted amethyst",
+    "sureness": "Fairly sure; would want a check that 紫石稜 means a cut or faceted stone."
+   },
+   {
+    "japanese": "こつちから頭を下げて",
+    "paragraph": "p40",
+    "problem": "‘from his own side’ is literal Japanese and means nothing in English.",
+    "span": "bowed his head from his own side",
+    "suggestion": "Liu was the first to bow his head",
+    "sureness": "Sure; this is stiffness from literalness, not the author."
+   },
+   {
+    "japanese": "身動きをしてはいけないと云ふので",
+    "paragraph": "p41",
+    "problem": "‘saying he must not move’ leaves unclear who must not move.",
+    "span": "saying he must not move",
+    "suggestion": "telling him not to move,",
+    "sureness": "Sure; plain ambiguity for an English reader."
+   },
+   {
+    "japanese": "普通の人間が、学校の教育などをうけるのも",
+    "paragraph": "p42",
+    "problem": "‘receive a schooling and the like’ is stiff and unidiomatic.",
+    "span": "receive a schooling and the like",
+    "suggestion": "go through schooling and the like",
+    "sureness": "Sure; ‘receive a schooling’ is not natural English."
+   },
+   {
+    "japanese": "皮膚自身は、それに対して、毫も弾力を持つてゐない",
+    "paragraph": "p45",
+    "problem": "‘not a hair of spring’ is a word-for-word rendering of elasticity that stops a reader cold.",
+    "span": "while the skin itself had not a hair of spring to answer them",
+    "suggestion": "while the skin itself had not an ounce of elasticity to answer them",
+    "sureness": "Sure; the faithful note can confirm 弾力 is elasticity."
+   },
+   {
+    "japanese": "急に落ちつけてゐた尻を持ち上げて",
+    "paragraph": "p50",
+    "problem": "‘the haunches he had settled’ is unidiomatic body English.",
+    "span": "lifted the haunches he had settled",
+    "suggestion": "raised himself from his settled squat",
+    "sureness": "Fairly sure; sense is getting up from squatting, wording needs the desk."
+   },
+   {
+    "japanese": "肉の色が朱泥に似た、小さな山椒魚のやうなもの",
+    "paragraph": "p51",
+    "problem": "Double ‘like’ — ‘like a small salamander, the colour … like red mud’ — clutters a key sighting.",
+    "span": "the colour of its flesh like red mud",
+    "suggestion": "its flesh the colour of red mud",
+    "sureness": "Sure on the English clutter; zoology to be confirmed by faithful reader."
+   },
+   {
+    "japanese": "一年の中に、何度、床につくか、わからない位ださうである",
+    "paragraph": "p53",
+    "problem": "Passive and wordy; the flat report of decline has to be read twice.",
+    "span": "and there is said to be no counting how many times in the year he now takes to his bed",
+    "suggestion": "and they say there is no counting how many times in a year he now takes to his bed",
+    "sureness": "Fairly sure; simpler syntax keeps the flat report without adding pathos."
+   },
+   {
+    "japanese": "偶、暗愚の蛮僧に遇つた為に、好んで、この天与の福を失ふやうな事になつた",
+    "paragraph": "p56",
+    "problem": "‘By chancing … willingly’ contradicts itself in English and sounds archaic.",
+    "span": "By chancing to meet an ignorant barbarian monk, he willingly brought about the loss of this heaven-given fortune",
+    "suggestion": "Through meeting by chance with an ignorant barbarian monk, he willingly threw away this heaven-given fortune",
+    "sureness": "Fairly sure; the odd pairing is in the source, but ‘by chancing’ is not English."
+   }
+  ],
+  "say": "The English carries the tableau and the body well but is tripped throughout by small literalisms and dictionary words that a copy-edit for idiom would clear."
+ },
+ "usage": {
+  "input_tokens": 23276,
+  "cached_tokens": 0,
+  "output_tokens": 6880,
+  "reasoning_tokens": 5196,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.058335,
+ "response_id": "resp_6aeba616ca61c39c8e074aa2",
+ "latency_s": 75.56,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 5600
+  }
+ ],
+ "created": "2026-11-04T21:39:34Z"
+}

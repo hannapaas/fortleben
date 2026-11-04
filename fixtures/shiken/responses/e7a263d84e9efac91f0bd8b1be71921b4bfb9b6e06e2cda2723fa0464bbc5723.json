@@ -1,0 +1,46 @@
+{
+ "prompt": "crux-check",
+ "model": "muse-wonder-1.0",
+ "effort": "low",
+ "data": {
+  "confidence": "high",
+  "crux": [
+   {
+    "for_the_english": "Keep one audible lexical web — rope, cord, bind, tie, tangle, coil, haul, cut loose, escape — recurring even where idiomatic English would vary it, and keep the technical catalogues of knots and holds at full, incantatory length. Likewise let the swords stay inert: never drawn in combat, finally stolen while he is naked; do not heroicise Ryuujirou into a swordsman in action.",
+    "point": "The whole story is organised by rope displacing the sword, literally and metaphorically — this is what the title announces and what every episode re-enacts.",
+    "why": "Otetsu is Ikina wa, 'Living Rope': a bondage/arrest-rope (torinawa) expert whose house transmits knot-lists (ganjigarame, kikkou, matsuba, rokuro…) that Ryuujirou studies by being tied and tying her in midnight lessons. He is then held three months by an 'invisible rope' though never locked in, is hauled back by her thrown rope when he escapes, crosses paths with the ferry's hauling-ropes (made, pointedly, from retired arrest-ropes), watches Kotora tightrope the ferry vine, is nearly drowned by man-eating algae that binds him 'like a ganjigarame', and frees himself and her only by applying Otetsu's rope-escape/rope-cutting teaching with his small knife. Even Otetsu's jealous surveillance is described as a net spread along the road. Against this, the samurai's daishou do nothing: the long sword is left on the bank and stolen, and the only blades that work are the kozuka thrown at the monk and the kodachi cutting weeds in the water."
+   },
+   {
+    "for_the_english": "Preserve the sensational, deadpan narration and its refusals: do not clarify who is villain or victim, do not soften the bondage's erotic charge or the jealous violence, do not give the stabbing a moral build-up it doesn't have, and do not fill the epilogue's gap about the secret transmission. Where a fluent version would explain or resolve, leave the seam showing.",
+    "point": "The ending's moral and narrative abruptness is deliberate pulp mechanics, not a flaw to be repaired: the captive's problem is 'solved' by a near-stranger's sudden murder, and the frame then leaps to Meiji and openly admits it doesn't know the outcome that mattered most.",
+    "why": "Otetsu is simultaneously rumoured torturer-murderer of five or six men, tender nurse, would-be financier of a forward-looking future (sending Ryuujirou to America or Holland to learn gunnery, having heard Fujita in Mito predict the world overturned), infantilising captor, and pathologically jealous wife-figure. Ryuujirou is a 500-koku hatamoto swordsman of reputed genius who spends the tale sick, bound, carried, stripped and rescued. Kotora, met that afternoon, stabs Otetsu in the side without warning — 'a woman's pride' — hands back the wiped blade, and the narrative declares the insoluble problem simply settled; three asterisks later Ryuujirou is a famous Meiji police detective, Kotora his dead first wife, and whether he ever received the Happou Makigumo secret 'regrettably is not transmitted.'"
+   }
+  ],
+  "say": "The crux (one or two items), each with its reason and what follows for the English; a line on how confident you are and what would change your mind. Keep it under a page.",
+  "what_would_change_my_mind": "Evidence from the wider oeuvre or the magazine context that the rope vocabulary is stock kodan filler rather than patterned (e.g. the same knot-lists appearing verbatim in unrelated Emi Suiin tales), or a fuller version of the ending in another printing that motivates Kotora's stabbing and resolves the transmission — either would demote one of these from crux to local effect."
+ },
+ "usage": {
+  "input_tokens": 15923,
+  "cached_tokens": 0,
+  "output_tokens": 1450,
+  "reasoning_tokens": 579,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.092692,
+ "response_id": "resp_6aeb79ddc02f7c5e2ccd4e49",
+ "latency_s": 20.37,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 3643
+  }
+ ],
+ "created": "2026-11-04T18:30:53Z"
+}

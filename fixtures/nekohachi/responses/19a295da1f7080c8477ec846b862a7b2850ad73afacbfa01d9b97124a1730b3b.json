@@ -1,0 +1,122 @@
+{
+ "prompt": "reader-readable",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "notes": [
+   {
+    "japanese": "もう、一杯すみました、な――この不景気に先生はなかなか景気がよさそうじゃアございませんか？　少しあやかりてい、な、――えい？",
+    "paragraph": "p8",
+    "problem": "The terminal 'eh' on almost every clause does not read as working patter in English; it reads as a translator's tic and flattens the voice into monotony.",
+    "span": "Had your one already, eh— things as dull as they are, Sensei looks to be doing pretty well for himself, eh? Let me have a bit of it, eh, what do you say? Me, I am off home now and if I am lucky, well, you know, I might get something hot, I suppose, eh, whether the missus has got it ready or not I don't know.",
+    "suggestion": "Keep the run-on, self-interrupting syntax and swallowed asides for な / でげす, but vary or mostly drop the tag: e.g. 'Had your one already? Times being what they are, Sensei looks to be doing all right — spare a bit of it, eh? Me, I'm off home, if I'm lucky I might get something hot — that is, if the missus has got anything ready.'",
+    "sureness": "Fairly sure this is translation habit not author; faithful reader to confirm な / でげす density, but English needs audible patter not identical tags."
+   },
+   {
+    "japanese": "講談倶楽部から目をその方に転じた",
+    "paragraph": "p2",
+    "problem": "Romanization is inconsistent across the part and distracts an English reader: Koudan / Kodan, kouza / koza / kōza.",
+    "span": "from the Koudan Club he had been buried in",
+    "suggestion": "Standardize throughout to the house style once settled, e.g. Kōdan Club and kōza, and keep it identical at p5, p16, p20-p21, p32-p33, etc.",
+    "sureness": "Sure; just needs a desk search-and-replace against the bible."
+   },
+   {
+    "japanese": "人の笑いさえ聞えれば、自分には気持ちよく響くのであるが、自分自身には少しもおもしろくないのが不思議であった。",
+    "paragraph": "p10",
+    "problem": "The sentence is unidiomatic and has to be re-read: feelings do not 'ring pleasant in him' in English.",
+    "span": "So long as he heard people laughing it rang pleasant in him, and yet it was strange that there was nothing funny to himself at all.",
+    "suggestion": "As long as he could hear people laughing he felt it warm in him, and yet it was strange that he himself found nothing funny at all.",
+    "sureness": "Sure about the English failure; wording is only a suggestion, sense to be checked against faithful reader."
+   },
+   {
+    "japanese": "そのあとはお前の世界にしてやるから",
+    "paragraph": "p19",
+    "problem": "The promise reads as fantasy nonsense in English; a reader cannot picture what is being offered.",
+    "span": "Afterwards I will make it your world.",
+    "suggestion": "Afterwards I'll hand it over to you — your turn, your stage. Needs faithful check whether Takami means 'I'll make it your turf / let you perform'.",
+    "sureness": "Unsure what idiom was intended; flagging as opaque rather than proposing a fix, faithful reader needed."
+   },
+   {
+    "japanese": "お客の足なら、摺り小木にもなれでさア。",
+    "paragraph": "p33",
+    "problem": "As English this is incomprehensible: no reader can see what rubbing little sticks has to do with customers' feet.",
+    "span": "As for customers' feet, I'm seasoned to rubbing little sticks, you know.",
+    "suggestion": null,
+    "sureness": "Sure it fails in English, unsure what image to give; looks like yose clappers / suri-kogi wordplay, needs faithful reader and perhaps a sparse note, not an in-text gloss."
+   },
+   {
+    "japanese": "彼の振られた役というのは、ただ虎の一役だった",
+    "paragraph": "p51",
+    "problem": "Triple 'part' in one sentence reads as translationese rather than flat reported paraphrase; the flatness should sound deliberate, not clumsy.",
+    "span": "The part handed him was just the one part of the tiger.",
+    "suggestion": "The role he'd been given was just the tiger, nothing but the tiger.",
+    "sureness": "Fairly sure; the repetition here is English awkwardness, not Berman's network to preserve."
+   },
+   {
+    "japanese": "何か別に落ちでも？ / 小説には落ちなんかはないが / それも一種の落ちだろうか",
+    "paragraph": "p82",
+    "problem": "The load-bearing joke-term is varied away across the evening as fall, ochi / fall, ochi, conclusion, so an English reader cannot follow that he keeps asking for the same rakugo thing.",
+    "span": "And so, is this novel finished with that, eh — is there no other fall to it?",
+    "suggestion": "Fix one English set throughout and keep his misuse visible, e.g. keep ochi glossed once as punchline/fall and then reuse ochi: 'is there no other ochi to it?' Same at p87, p154-p155.",
+    "sureness": "Sure about the network break; exact gloss to be settled with faithful reader and bible."
+   },
+   {
+    "japanese": "おめえさんもずいぶんわからねい、な、疝気の虫が啼けるかい？　それが不満足なら、どうせ、もう木戸銭は取ってあるのだから、とッとと帰ってもいいぞ――",
+    "paragraph": "p153",
+    "problem": "The sudden shift into beranmei heckle-voice, which is the point of the passage, is invisible in English; it reads at the same temperature as his polite patter, and 'wooden gate charge' stops the act cold.",
+    "span": "You don't understand much yourself, eh, can a colic-worm cry? If that will not do for you, I have taken your wooden gate charge already, so you can get home quick — only that would be too bare, so at the end I let the other fellow save face too — but you don't want to go home halfway either. Truth is, I don't want to go home either — that is what I make of it.",
+    "suggestion": "Mark the turn into direct yose heckle in syntax and lineation, e.g. break into short jabbing lines — 'You lot don't get it either, do you — can a colic-worm cry, eh? Don't like it? I've took your gate-money already, so off you go home —' — and keep gate-money / wooden-gate money identical wherever 木戸銭 recurs.",
+    "sureness": "Sure the shift is lost; exact wording for beranmei and for 木戸銭 needs faithful reader so it stays period-plain, not modern slang."
+   },
+   {
+    "japanese": "ところが、これが宮様がたなどへ招かれてまいりますていと、ぎゃぎゃぎゃアなんて / おい、八公、いたか / べらんめい裸じゃア尻は捲くれねいから、な",
+    "paragraph": "p155",
+    "problem": "A long single paragraph mixes narration, cat-fight onomatopoeia, and failed rakugo dialogue with no beats, so the set-piece that should play as performance reads as summary.",
+    "span": "But then, when I get called to the princes and the like, why, gyagya-gya,",
+    "suggestion": "Keep it flat but give it stage beats in separate sentences/lines: teeth bared, eyes goggling, cats fighting — then his straight-face gloss — then the Hachi bit set as failed dialogue with its prim response — so the reader hears the flop the text describes.",
+    "sureness": "Sure about the English liveness failure; how far to vocalize gyagya and beranmei needs faithful check not to invent color."
+   },
+   {
+    "japanese": "女房が、女の弱い気に負けて、時々よい越しの金を残そうとするのを、自分が投ぐりつけてまで使わせてしまうところを見てもらっても、分ってるが",
+    "paragraph": "p175",
+    "problem": "The wife-beating admission, central to his Edokko boast and shame, is buried in a parenthetical dash and softened to idiom so a reader can skate past it.",
+    "span": "and he knocked her about till she spent it all",
+    "suggestion": "Give the clause its own weight at the same dogged temperature, e.g. 'and that too you'd know if you saw how I beat my wife when, Edokko herself, she gives in to a woman's weakness and tries to keep a night's money by, and I hit her till she spends it all —' rather than tucking it inside dashes.",
+    "sureness": "Sure the current syntax lets English evade it; exact bluntness to be weighed with faithful reader so it is neither euphemized nor lyricized."
+   },
+   {
+    "japanese": "誰れも無意義に自分の腹を痛めるものはないだけのことだ。",
+    "paragraph": "p186",
+    "problem": "The closing idiom is literally rendered and means nothing in English; the paragraph that should land his resignation drifts.",
+    "span": "It only came to this, that nobody would needlessly give himself a stomach-ache over it.",
+    "suggestion": null,
+    "sureness": "Sure it fails in English, unsure of intended resignation; literal stomach-ache likely means fretting/worrying oneself sick, needs faithful reader."
+   }
+  ],
+  "say": "Clean in story but rough in voice: eh-tic and inconsistent show-terms flatten Nekohachi's patter, and several literal renderings leave an English reader puzzling rather than listening."
+ },
+ "usage": {
+  "input_tokens": 51138,
+  "cached_tokens": 0,
+  "output_tokens": 6535,
+  "reasoning_tokens": 4245,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.09169625,
+ "response_id": "resp_6aeb7ffbcd3ec91b1ce240c4",
+ "latency_s": 54.09,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 8285
+  }
+ ],
+ "created": "2026-11-04T18:56:59Z"
+}

@@ -1,0 +1,98 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "Her boast had more than enough strength behind it. Woman though she was, she was practiced in it all: kakenawa laying-rope, nagenawa throwing-rope, hikinawa hauling-rope, tsurinawa fishing-rope, nukenawa slipping-rope. In ways of laying a capture-rope she knew every hold: the ganjigarame cross-lattice bind, the kikko tortoise-shell tie, the matsuba pine-needle cinch, the rokuro-maki windlass coil, high hands, low hands, single-hand lift, reverse knot.",
+    "ids": [
+     "p25"
+    ],
+    "notes": [
+     "Kept the catalogue at full length without varying rope/bind/tie. Rope arts given as Japanese with English gloss on first use; holds given in the same set to be reused later, especially ganjigarame."
+    ]
+   },
+   {
+    "english": "Agemaki topknot, cross, diamond, crab, fish-scale, and each of those had its three ways, shin, gyo, and so, formal, running, and grass. The minute exposition of each school had come down in the house as written copies.",
+    "ids": [
+     "p26"
+    ],
+    "notes": [
+     "Left shin-gyo-so as terms with plain gloss; did not compress the second list, as it is the same incantatory catalogue."
+    ]
+   },
+   {
+    "english": "Ryujiro took an interest in this capture-rope too, and to pass the boredom he read every copy that remained, and from there his wish to study only grew, and he learned the practice from O-Tetsu herself.",
+    "ids": [
+     "p27"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"This is handed down from one child alone to one child alone, but since it is you I will hand it down to you. Only it is strictly forbidden, no matter what, that I teach it by day, so I will teach you at midnight.\"",
+    "ids": [
+     "p28"
+    ],
+    "notes": []
+   },
+   {
+    "english": "To teach, O-Tetsu worked the capture-rope and bound Ryujiro. And she let Ryujiro bind her too.",
+    "ids": [
+     "p29"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"The art of slipping rope is not for thieves alone. I think it is good for a samurai house to learn it too. When you are taken prisoner by the enemy, it will serve you.\"",
+    "ids": [
+     "p30"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Even the tight binding of the main rope biting into fat O-Tetsu's rich flesh, while she writhed and cut the wind with her shoulders and set waves running across her belly, became a fine slipping free into a free body. Ryujiro could not help marveling from the bottom of his heart.",
+    "ids": [
+     "p31"
+    ],
+    "notes": [
+     "Kept the lingering at the original level, neither veiled nor heated: biting rope, shoulders, belly, slipping free."
+    ]
+   },
+   {
+    "english": "While this went on, Ryujiro felt as if he were bound at all times by an invisible rope and tied fast, and could not set a foot outside. O-Tetsu was almost never away from him and would not even let him worship at the nearby Osugi Shrine. When she had no choice but to go out, she had her kobun watch him.",
+    "ids": [
+     "p32"
+    ],
+    "notes": [
+     "Kept invisible rope / bound / tied fast literal to hold the binding web; kept kobun per style sheet."
+    ]
+   }
+  ],
+  "say": "Drafted the rope catalogue and midnight lessons at full length with a consistent set of holds."
+ },
+ "usage": {
+  "input_tokens": 26633,
+  "cached_tokens": 25713,
+  "output_tokens": 3057,
+  "reasoning_tokens": 2285,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0179992,
+ "response_id": "resp_6aeb7b1b8ad41d842619421d",
+ "latency_s": 35.69,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2961
+  }
+ ],
+ "created": "2026-11-04T18:36:11Z"
+}

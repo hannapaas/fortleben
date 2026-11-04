@@ -1,0 +1,102 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "I",
+    "ids": [
+     "p1"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Taki had grown heavy with thinking of nothing but his fiction, so he shouldered his sketch box and went out for a walk. Down the stone steps, then wavering on down toward the sea, he was halfway through the pine wood near the shore. More mindful of passersby than of the view, he left the little path and, stooping under the dwarf pines that caught at his head, hid himself from sight. Then, coming to a broken edge of the hill, he sat cross legged among the evening primroses. Far away, on the sand gleaming grey, four or five things like cloths tossed by the wind kept circling grandly without pause, and wondering what they could be, he looked up and saw they were the shadows of gulls wheeling low in wide circles.",
+    "ids": [
+     "p2"
+    ],
+    "notes": [
+     "Kept 'his fiction' for the glossed phrase creative work (novel). Left the circling 'cloths' as seen before they resolve into gulls' shadows, as the Japanese does."
+    ]
+   },
+   {
+    "english": "On the evening of the hot second day, he finished his board of the distant sea, but Taki came drifting back in a daze, and near the foot of the stone steps he met his wife, who seemed to have been wandering about looking for him.",
+    "ids": [
+     "p3"
+    ],
+    "notes": [
+     "'Second day' is literal; the text gives no month day to anchor it."
+    ]
+   },
+   {
+    "english": "\"Have you just got here? Have you come to visit?\"",
+    "ids": [
+     "p4"
+    ],
+    "notes": [
+     "Taken as Taki to his wife."
+    ]
+   },
+   {
+    "english": "\"I've come to watch them catch the scarlet carp, but they say they just can't catch them!\"",
+    "ids": [
+     "p5"
+    ],
+    "notes": [
+     "Kept plain 'catch' for the story's tolling verb. Higoi rendered as scarlet carp."
+    ]
+   },
+   {
+    "english": "\"Again... They had better give it up. To begin with, even if you took them to a pond like that, they would make no show. They would only stink miserably.\"",
+    "ids": [
+     "p6"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"But wasn't it dug on purpose for that? They say it is small but fairly deep, so it will be all right!\"",
+    "ids": [
+     "p7"
+    ],
+    "notes": [
+     "Taken as the wife, brisk and practical against his vagueness."
+    ]
+   },
+   {
+    "english": "\"I hear that hole was dug because they needed the earth somewhere and could not help it. I hear there are some goldfish and worthless carp in it, but I think that is just about right for it.\"",
+    "ids": [
+     "p8"
+    ],
+    "notes": [
+     "Kept the hole's makeshift origin and the dismissive 'worthless carp' literal; the passage, not the bible, will decide their value later."
+    ]
+   }
+  ],
+  "say": "Drafted the opening walk and first carp exchange in level modern English with catch kept plain."
+ },
+ "usage": {
+  "input_tokens": 20744,
+  "cached_tokens": 0,
+  "output_tokens": 3553,
+  "reasoning_tokens": 2886,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.04103025,
+ "response_id": "resp_6aeb7abed7794ee668d24b45",
+ "latency_s": 44.54,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2565
+  }
+ ],
+ "created": "2026-11-04T18:34:39Z"
+}

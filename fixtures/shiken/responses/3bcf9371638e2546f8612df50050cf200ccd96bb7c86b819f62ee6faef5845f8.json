@@ -1,0 +1,42 @@
+{
+ "prompt": "copy-desk",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": null,
+ "usage": {
+  "input_tokens": 21527,
+  "cached_tokens": 21361,
+  "output_tokens": 1437,
+  "reasoning_tokens": 1315,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0095189,
+ "response_id": "resp_6aeb8fa12c2d50df4da64d40",
+ "latency_s": 12.8,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_f0130fe9-12e1-47db-bc28-fb847e6a2f78",
+   "name": "edit",
+   "arguments": "{\"new\":\"Take-wari\",\"old\":\"Takewari\",\"reason\":\"House form is hyphenated Take-wari per cast\",\"replace_all\":true}"
+  }
+ ],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": "commentary",
+   "chars": 53
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T20:03:45Z"
+}

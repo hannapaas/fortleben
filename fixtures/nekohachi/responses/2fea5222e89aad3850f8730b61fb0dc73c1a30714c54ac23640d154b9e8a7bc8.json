@@ -1,0 +1,61 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "The wooded road by the Disabled Veterans' Hospital was so dark that, for the sake of passers turning in from the tram street, he had petitioned some time ago to be allowed to put up a gas lamp with his own name written in it, for his own advertisement. The permission looked as if it would be hard to get, but that no longer mattered to him now. It only came to this, that nobody would needlessly give himself a stomach-ache over it.",
+    "ids": [
+     "p186"
+    ],
+    "notes": [
+     "I kept the petition flat as inventory, not as ambition. The last sentence is uncertain: I read it as his gnomic shrug that no one frets himself for nothing, and left the belly-ache wording visible rather than smoothing it."
+    ]
+   },
+   {
+    "english": "It did nag at him, after a fashion, that he had taken this overnight money with his stingy spirit, but whatever he might buy for them the children would surely be fast asleep by now. The toy shops and the food shops along the tram street would surely have their shutters closed too. So he would likely laugh it off as having got, the other way round, what he himself ought to have paid out in school fees.",
+    "ids": [
+     "p187"
+    ],
+    "notes": [
+     "Overnight money keeps the earlier wording for the two yen coins. I took monthly school fees to mean what he pays out for his sons, received contrary-wise tonight, and had to decide this anyway."
+    ]
+   },
+   {
+    "english": "In any case, resolved to tell his wife at once the story from tonight's novel, and to make her taste it just as he had fully felt there an entertainer's sorrow, he drew near to the door of his own house.",
+    "ids": [
+     "p188"
+    ],
+    "notes": [
+     "Sorrow keeps hiai unvaried. I kept make her taste it straight, without softening it into sharing or teaching."
+    ]
+   }
+  ],
+  "say": "Drafted the gate walk to keep the gas lamp, the overnight money, and the sorrow at the same dogged temperature as the rest."
+ },
+ "usage": {
+  "input_tokens": 27991,
+  "cached_tokens": 27377,
+  "output_tokens": 2493,
+  "reasoning_tokens": 2047,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0154693,
+ "response_id": "resp_6aeb7fc5b8f50663eebb4f07",
+ "latency_s": 26.41,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1857
+  }
+ ],
+ "created": "2026-11-04T18:56:05Z"
+}

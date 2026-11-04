@@ -1,0 +1,100 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"Something bumped into my leg!\"",
+    "ids": [
+     "p68"
+    ],
+    "notes": [
+     "Speaker left floating in the Japanese, as with the pond-side talk throughout; kept unattributed."
+    ]
+   },
+   {
+    "english": "\"Whoa! Deep, deep here.\"",
+    "ids": [
+     "p69"
+    ],
+    "notes": []
+   },
+   {
+    "english": "In the muddy water of the dusk, the sight of the two tattooed men raging about like madmen struck Taki as eerie.",
+    "ids": [
+     "p70"
+    ],
+    "notes": [
+     "Kurikara monmon is tattoo slang, here used for the two workmen in general; rendered plainly as tattooed men without specifying dragon or hannya, which the text distinguishes only in p48."
+    ]
+   },
+   {
+    "english": "II",
+    "ids": [
+     "p71"
+    ],
+    "notes": []
+   },
+   {
+    "english": "That day too they kept up their noise in the pond until dusk, but it was failure again. Clicking their tongues in vexation, they withdrew to the caretaking old couple's sitting room and, with no thought of going back to their own homes, began to drink.",
+    "ids": [
+     "p72"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Taki lay face up in the middle of the empty, bare room, gazing at the ceiling. By day, if only the weather was fair, he went to the sea and did nothing but swim. He never tired of giving himself up to groundless, verselike reveries, but with thoughts of money coming to mind he muttered that he might soon make a start on his work.",
+    "ids": [
+     "p73"
+    ],
+    "notes": [
+     "Kakuu ni inbun-teki na omoi: kept literal as groundless and verselike to hold the interior register apart from narration, without poetizing."
+    ]
+   },
+   {
+    "english": "\"In one burst!\"",
+    "ids": [
+     "p74"
+    ],
+    "notes": [
+     "Ikki kasei kept to the fixed concordance in one burst throughout, from unwritten work to pond pumping."
+    ]
+   },
+   {
+    "english": "It had become like a pet phrase with him, and with the thought he easily turned optimistic, made himself a little more leisure, and sank deeper into the 'dream'.",
+    "ids": [
+     "p75"
+    ],
+    "notes": [
+     "Yume kept quoted as 'dream' to mark it as his slogan word recurring to p160."
+    ]
+   }
+  ],
+  "say": "Drafted the dusk pond shouts through the empty-room interior to the in one burst motto, keeping speakers floating and narration level."
+ },
+ "usage": {
+  "input_tokens": 21357,
+  "cached_tokens": 20465,
+  "output_tokens": 3147,
+  "reasoning_tokens": 2605,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0175595,
+ "response_id": "resp_6aeb7c15ec4b2b37fcd24fc6",
+ "latency_s": 36.04,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2068
+  }
+ ],
+ "created": "2026-11-04T18:40:21Z"
+}

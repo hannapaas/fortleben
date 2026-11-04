@@ -466,8 +466,8 @@ def analysis(conn, work_id: str, run_id: int, where: dict[str, str] | None = Non
     if not bible:
         return plain_all(out)
     for c in bible.get("cast") or []:
-        # the handle once, then the Japanese (and a romanisation only if it isn't the handle)
-        name = " ".join(x for x in (c.get("romanised"), c.get("name_ja")) if x and x != c["handle"])
+        # the handle once, then the Japanese (and a romanisation only if the handle doesn't already say it)
+        name = " ".join(x for x in (c.get("romanised"), c.get("name_ja")) if x and x not in c["handle"])
         out["cast"].append({"handle": c["handle"], "name": name,
                             "role": _sentence(c.get("role", "")), "register": c.get("register", ""),
                             "forms": [{"form": f["form"], "used_by": f.get("used_by", ""), "note": f.get("note") or ""}

@@ -1,0 +1,194 @@
+{
+ "prompt": "reader-readable",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "notes": [
+   {
+    "japanese": "それをお鉄は執念深くも、足蹴にして、痰唾まで吹掛けた。",
+    "paragraph": "p214",
+    "problem": "Stray non-English characters make the sentence unreadable as English.",
+    "span": "O-Tetsu with شع vindictive spite kicked her as she lay and even spat on her.",
+    "suggestion": "O-Tetsu vindictively kicked her as she lay and even spat on her.",
+    "sureness": "Certain; a proofread against the file would settle it, the Japanese has no foreign script."
+   },
+   {
+    "japanese": "肩に風を切り、下腹に波を打たせている間に",
+    "paragraph": "p31",
+    "problem": "\"cut the wind with her shoulders\" is literal Japanese with no picture in English.",
+    "span": "while she writhed and cut the wind with her shoulders and set waves running across her belly",
+    "suggestion": "while she writhed, throwing her shoulders back and setting waves running across her belly",
+    "sureness": "Sure; a fluent-reader check would confirm no English reader pictures shoulder wind-cutting, though the faithful reader should confirm how much twisting to keep."
+   },
+   {
+    "japanese": "其代り痒い処へ手の届かずという事なく",
+    "paragraph": "p33",
+    "problem": "\"left no itch unscratched\" reads in English as a sexual joke, not attentive hosting.",
+    "span": "she left no itch unscratched and showed him every indulgence.",
+    "suggestion": "she anticipated his every want and showed him every indulgence.",
+    "sureness": "Sure; any native reader hears the innuendo, the Japanese is a common idiom for attentiveness."
+   },
+   {
+    "japanese": "其傍でお鉄はやけからの茶碗酒を呷りながら、さも口惜しそうに口を切った。",
+    "paragraph": "p42",
+    "problem": "\"in spite\" is incomplete in English and \"opened her mouth\" is dictionary-literal for began to speak.",
+    "span": "gulping teacup sake in spite, she opened her mouth as if full of regret.",
+    "suggestion": "gulping teacup sake out of spite, she began, as if full of regret:",
+    "sureness": "Sure; \"in spite\" needs an object in English, and \"opened her mouth\" for speech is not idiomatic."
+   },
+   {
+    "japanese": "皆是剣道の師の命令に叛き、女侠客の為に抑留されて、心ならずも堕落していた身から出た錆。",
+    "paragraph": "p191",
+    "problem": "\"rust bred from his own body\" is literal proverb that means nothing in English.",
+    "span": "All of it was rust bred from his own body, from disobeying his sword master's command and letting himself be detained by a woman boss and falling, against his will, into idle ways.",
+    "suggestion": "All of it was of his own making, the price of disobeying his sword master's command and letting himself be detained by a woman boss and falling, against his will, into idle ways.",
+    "sureness": "Certain; the Japanese is 身から出た錆, an idiom for self-inflicted trouble, which English must render by sense."
+   },
+   {
+    "japanese": "未だ強力な或物に後髪を引かれるように思われて成らなかった。",
+    "paragraph": "p71",
+    "problem": "\"pulled him by the hair\" reads as physical hair-pulling rather than lingering reluctance.",
+    "span": "he could not shake the feeling that something strong still pulled him by the hair from behind.",
+    "suggestion": "he could not shake the feeling that something strong still tugged him back, as if his hair were being pulled from behind.",
+    "sureness": "Quite sure; the image is standard Japanese for reluctance to leave, English needs the simile marked as feeling."
+   },
+   {
+    "japanese": "鉄無地の道行半合羽、青羅紗の柄袋、浅黄甲斐絹の手甲脚半、霰小紋の初袷を裾短かに着て、袴は穿かず、鉄扇を手に持つばかり。",
+    "paragraph": "p67",
+    "problem": "Verbless catalogue fragment plus opaque \"first-lined kimono\" leaves the English reader with no sentence and no garment.",
+    "span": "A plain iron-grey travelling half-cape, a hilt-bag of blue woollen cloth, wrist-covers and leggings of pale yellow Kai silk, a first-lined kimono in hailstone pattern worn short at the hem, no hakama, only an iron fan in his hand.",
+    "suggestion": "He wore a plain iron-grey travelling half-cape, a blue-woollen hilt-bag, wrist-covers and leggings of pale yellow Kai silk, and a hailstone-patterned light-lined kimono worn short at the hem, no hakama, only an iron fan in his hand.",
+    "sureness": "Sure about the missing verb; less sure on the exact garment term for 初袷, which a costume check could settle."
+   },
+   {
+    "japanese": "鼠地の納所着に幅細の白くけ帯を前結びにして、それで尻からげという扮装。坊主頭に捻鉢巻をしているさえ奇抜を通越した大俗さ。",
+    "paragraph": "p124",
+    "problem": "Fragment with no verb and \"vulgarity past all outlandishness\" is not English.",
+    "span": "Mouse-grey temple servant's coat with a narrow white cotton sash tied in front and tucked up behind for work, a twisted headband round a shaven head, vulgarity past all outlandishness.",
+    "suggestion": "He wore a mouse-grey workman's coat with a narrow white cotton sash tied in front and tucked up behind for work, and a twisted headband round his shaven head, a vulgarity beyond all outlandishness.",
+    "sureness": "Sure the fragment fails in English; the exact job-title for 納所着 could be settled by the faithful reader."
+   },
+   {
+    "japanese": "腰巻の唐縮緬から、血の飛沫が八方へ散ったと見たのは、今まで藤蔓に止まっていた赤蜻蛉が、驚いて逃げたので有った。",
+    "paragraph": "p142",
+    "problem": "Subject-verb disagreement makes the reader reread: singular verb with plural dragonflies.",
+    "span": "What for an instant looked like blood spraying in all directions from the chirimen of her waistcloth was the red dragonflies that had been resting on the creeper-rope, startled into flight.",
+    "suggestion": "What for an instant looked like blood spraying in all directions from the crepe of her waistcloth were the red dragonflies that had been resting on the creeper-rope, startled into flight.",
+    "sureness": "Certain on grammar; \"chirimen\" spelling could be regularised to crepe elsewhere."
+   },
+   {
+    "japanese": "悪僧の眉間に白毫を刻する如く突立った。",
+    "paragraph": "p160",
+    "problem": "\"holy white curl\" is opaque in English and stops the action cold.",
+    "span": "standing upright in the brow of the evil monk as if engraving a holy white curl there.",
+    "suggestion": "standing upright between the evil monk's brows like a Buddha's brow-mark.",
+    "sureness": "Fairly sure; 白毫 needs some cue for an English reader, exact phrasing could be settled by house style for Buddhist terms."
+   },
+   {
+    "japanese": "廃物利用にも殊に意味深く覚えられるので有った。",
+    "paragraph": "p118",
+    "problem": "\"deeply pointed\" and \"making use of waste\" are dictionary-literal and clog the narrator's savouring aside.",
+    "span": "there was something deeply pointed in it even as mere making use of waste.",
+    "suggestion": "there was something deeply telling in it, even as mere reuse of worn-out things.",
+    "sureness": "Sure; 廃物利用 is reuse/recycling and pointed in this sense wants telling or pointedly apt."
+   },
+   {
+    "japanese": "水草にも血が通い、脈が打っているかと怪しまれる程。",
+    "paragraph": "p156",
+    "problem": "The English inverts the sense: it reads as doubting weeds have blood, not as feeling they must have.",
+    "span": "so that you might have doubted whether blood ran and a pulse beat even in the water weeds.",
+    "suggestion": "so that you might have thought even the water-weeds had blood running and pulses beating in them.",
+    "sureness": "Sure from the Japanese かと怪しまれる程; a faithful check would confirm the uncanny force to keep."
+   },
+   {
+    "japanese": "押砂河岸で夜船を上って、阿波村に行く途中の蘆原で、急に竜次郎が腹痛を覚えた時に、お鉄は宛如子供でも扱うようにして、軽々と背中に負い",
+    "paragraph": "p13",
+    "problem": "Dangling opener makes it sound as if Ryujiro came up on the night boat when the sense is O-Tetsu carried him.",
+    "span": "Coming up on the night boat at Oshisuna-gashi, on the reed plain on the way to Awa village, when Ryujiro was suddenly seized with pain in the belly, O-Tetsu picked him up on her back as lightly as if he had been a child",
+    "suggestion": "When they had come up on the night boat at Oshisuna-gashi and were crossing the reed plain toward Awa village, Ryujiro was suddenly seized with pain in the belly, and O-Tetsu picked him up on her back as lightly as if he had been a child",
+    "sureness": "Sure; the Japanese subject is O-Tetsu carrying him, English grammar currently gives the approach to Ryujiro alone."
+   },
+   {
+    "japanese": "まるで掌の内に円め込められて三月の間は玩具の如く扱われて了ったのだ。",
+    "paragraph": "p17",
+    "problem": "\"rolled in the palm\" is not an English idiom and sounds like dough.",
+    "span": "have been rolled in the palm of her hand and handled for three months like a plaything.",
+    "suggestion": "have been held in the palm of her hand and handled for three months like a plaything.",
+    "sureness": "Sure; \"held in the palm of her hand\" is the idiom, \"rolled\" comes from literal 円める."
+   },
+   {
+    "japanese": "それの刻み鯣に中って腹痛を感じたとのみは思えなかった。",
+    "paragraph": "p21",
+    "problem": "\"disagreeing with him\" is a modern euphemism for food that jars with period narration.",
+    "span": "He could not think it was only the chopped dried squid in it disagreeing with him that had given him the stomach pain.",
+    "suggestion": "He could not think the stomach pain came only from the chopped dried squid in it disagreeing with his stomach.",
+    "sureness": "Fairly sure on register; \"upset by\" or \"poisoned by\" would also do, the point is to avoid the modern menu idiom."
+   },
+   {
+    "japanese": "交通不便の時代には、隔絶している人の安否を気遣うのが、今よりも深甚に迫るので有った。電信電話郵便の無い世の中では、自然に想像を走らせる場合が多かった。",
+    "paragraph": "p101",
+    "problem": "\"those cut off from one\" and \"runs to imagining\" are literal and force a second reading of the essay's opening.",
+    "span": "In an age of poor roads, fearing for the safety of those cut off from one presses deeper than it does now. In a world with no telegraph, no telephone, no post, the mind by itself runs to imagining.",
+    "suggestion": "In an age of poor roads, fear for the safety of those far away presses deeper than it does now. In a world with no telegraph, no telephone, no post, the mind is left to run on by itself.",
+    "sureness": "Sure the current wording is unidiomatic; exact shape of the digression should stay discursive, just in clean English."
+   },
+   {
+    "japanese": "誰が狗鼠、遣るもんか",
+    "paragraph": "p126",
+    "problem": "\"Who the shit\" is not workable English abuse and sounds like a machine swap for 狗鼠.",
+    "span": "Who the shit would let you have it.",
+    "suggestion": "Like hell I'd let you have it.",
+    "sureness": "Sure it needs idiomatic vulgarism; the precise level of coarseness is a house call, but it must be speakable abuse."
+   },
+   {
+    "japanese": "赤の色褪めた唐縮緬の腰巻",
+    "paragraph": "p139",
+    "problem": "Unexplained \"to-chirimen\" stops an English reader who has no Japanese.",
+    "span": "Her faded red to-chirimen waistcloth stood out against the muddied water of the new cut and the mud below the low bank with an unexpected beauty.",
+    "suggestion": "Her faded red imported-crepe waistcloth stood out against the muddied water of the new cut and the mud below the low bank with an unexpected beauty.",
+    "sureness": "Fairly sure; 唐縮緬 is a fabric term needing a gloss on first use, exact gloss to be settled by house term list."
+   },
+   {
+    "japanese": "其前の妻女は正しく小虎で有ったが、それは明治初年に病死したという。",
+    "paragraph": "p224",
+    "problem": "\"former wife\" implies divorce, not a dead first wife, and misleads the coda.",
+    "span": "His former wife was none other than Kotora, though she is said to have died of illness early in Meiji.",
+    "suggestion": "His first wife was none other than Kotora, though she is said to have died of illness early in Meiji.",
+    "sureness": "Certain in English usage; \"former\" versus \"late/first\" changes the understood facts."
+   },
+   {
+    "japanese": "疾くに目的を達して今頃は江戸に帰り",
+    "paragraph": "p4",
+    "problem": "\"gained his end\" is dictionary English for achieved his aim.",
+    "span": "He should long since have gained his end and be back in Edo by now",
+    "suggestion": "He should long since have achieved his aim and be back in Edo by now",
+    "sureness": "Certain; 目的を達する is achieve an aim, \"gain his end\" is not idiomatic."
+   }
+  ],
+  "say": "Part is plot-clear but English repeatedly slips into literal idiom, fragmentary description and agreement errors, with one corrupted string needing instant correction."
+ },
+ "usage": {
+  "input_tokens": 47715,
+  "cached_tokens": 0,
+  "output_tokens": 10713,
+  "reasoning_tokens": 7260,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.105174,
+ "response_id": "resp_6aeb7e36fa706f110c124622",
+ "latency_s": 80.98,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 12427
+  }
+ ],
+ "created": "2026-11-04T18:49:26Z"
+}

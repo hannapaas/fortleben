@@ -1,0 +1,59 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "As if to mock him, Tatsuya left his chair, stepped down into the garden, and went out as he was to the riverbed to the east. Among the pines that crept across the earth, jumbled standing rocks had been hewn smooth and made, as nature offered, into seats to be seen here and there. The water that struck rock and broke on rock and pressed on white and blue entered into a thicket of green bamboo, and appeared again before a distant hill. The hanging bridge thrown across the stream laid black timbers over brushwood, and twined them about, uncertainly, with wisteria vines. Crossing the bridge, where the hill had been cut open, there was a little fall dropped as if without design. Climbing by a path left as it was, only just brushing aside the dew on the thorns, as if this were the way woodcutters should enter, halfway up, where pine and maple mingled their branches, there stood an arbour, clean to the very sight. The mountains opened of a sudden, and Lake Ogi, like a mirror, lay before his eyes.",
+    "ids": [
+     "p9"
+    ],
+    "notes": [
+     "First clause keeps the Japanese as it stands: the laugh within is heard as mocking him, without naming who mocks."
+    ]
+   },
+   {
+    "english": "Spreading a round straw mat, Tatsuya rested his body, so soon wearied after his illness. The single block of the Umeya that faced him, with the mountain behind and the water before, was built with a care that was very fine. Chancing to fix his eyes upon that room on the second floor, Tatsuya perceived something more. Leaning against the thrown-open shoji stood a maiden, turned this way. She must be the mistress of the singing, Tatsuya thought at once.",
+    "ids": [
+     "p10"
+    ],
+    "notes": [
+     "Round straw mat renders enzа, the woven seat laid out in the arbour. Mistress keeps the inference: he guesses the singer from the voice, as the Japanese leaves it."
+    ]
+   },
+   {
+    "english": "Her face could not be well seen for the distance, but the long pale face was surpassingly white, and her slender standing form was the more worth seeing. Idly looking up this way, as if startled to find one gazing hard at her, she hastily hid herself within the room. Tatsuya at last went down his way.",
+    "ids": [
+     "p11"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted p9-p11: Tatsuya's walk to Lake Ogi and first sight of the maiden."
+ },
+ "usage": {
+  "input_tokens": 28147,
+  "cached_tokens": 26225,
+  "output_tokens": 2648,
+  "reasoning_tokens": 2093,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01759025,
+ "response_id": "resp_6aeb7b0cc2305308cfa340c5",
+ "latency_s": 26.96,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2273
+  }
+ ],
+ "created": "2026-11-04T18:35:56Z"
+}

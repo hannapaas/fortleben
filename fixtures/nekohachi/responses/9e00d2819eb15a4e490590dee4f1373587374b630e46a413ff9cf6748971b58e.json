@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 64812,
+  "cached_tokens": 62964,
+  "output_tokens": 151,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.023004800000000002,
+ "response_id": "resp_6aeb80fddf243b1c5fd04a27",
+ "latency_s": 2.81,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_215484b9-8a23-4486-8e49-bead49907e12",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"F11\"],\"new\":\"Like thieves, like us, the things do their work only by night,\",\"old\":\"Like thieves, like people in our trade, the things do their work only by night,\",\"reason\":\"自分たち is left vague in the Japanese; 'people in our trade' clarifies what the text leaves open.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T19:01:17Z"
+}

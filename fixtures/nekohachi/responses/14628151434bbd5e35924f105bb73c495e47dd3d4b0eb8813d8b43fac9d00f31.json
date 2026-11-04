@@ -1,0 +1,61 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"Terribly sorry, I am sure,\" Nekohachi said, keeping a straight face and dipping his head a little, and they all laughed. But this time that alone left him feeling unsatisfied, so he offered up one joke. \"I for my part have never yet met a theatre critic in the course of my own researches, no, but once, to study the cry of the earthworm, I squatted up all night in the woods by the Soldiers' Home over there, and they took me for a thief and a detective challenged me, he did, eh.\"",
+    "ids": [
+     "p62"
+    ],
+    "notes": [
+     "Kept the long single-sentence patter and the sentence-final appeal for agreement for degesu/na. Soldiers' Home renders haihei-in, the disabled soldiers' home woods; same place as the earthworm story he tells again later. Suika is the Who goes there challenge."
+    ]
+   },
+   {
+    "english": "\"That too, you know, is the result of a kind of sorrow or earnestness,\" was all the explanation Tenjin-sama gave, and from no one else came any ha, ha, ha.",
+    "ids": [
+     "p63"
+    ],
+    "notes": [
+     "Kept hiai as sorrow and majime as earnestness flat, and left the thin laughter as ha, ha, ha without upgrading it."
+    ]
+   },
+   {
+    "english": "... Nekohachi felt the wind taken clean out of him, against all expectation. And for the first time it struck him that these were not his customers. As an entertainer he might make people cry or laugh, but he had no room left to cry or laugh himself. These people, though, were a cut above even that, for they seemed to study even the feeling of an entertainer himself who makes people cry or laugh and cannot cry or laugh himself. They were specialists in that line, right enough. At this rate an honest humility rose in him to take off his helmet cleanly and own himself beaten, and he asked, \"And what did the actor do after that?\" What he wanted to know most was about the child. All the same he had quite made up his mind the fall would be that he pleaded the part unworthy and did not go on the stage, or that at least he did not let the child come to the theatre.",
+    "ids": [
+     "p64"
+    ],
+    "notes": [
+     "Kabuto wo nugu is the idiom for admitting defeat; kept literal as take off his helmet. Ochi kept as fall to hold the rakugo expectation without explaining it."
+    ]
+   }
+  ],
+  "say": "Drafted p62 to p64 keeping the earthworm joke as patter and the flat room response flat."
+ },
+ "usage": {
+  "input_tokens": 28154,
+  "cached_tokens": 27377,
+  "output_tokens": 3525,
+  "reasoning_tokens": 2959,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.02005905,
+ "response_id": "resp_6aeb7c8ddcd4feb6ba4f41f5",
+ "latency_s": 39.46,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2301
+  }
+ ],
+ "created": "2026-11-04T18:42:21Z"
+}

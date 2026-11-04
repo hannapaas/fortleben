@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 60486,
+  "cached_tokens": 58868,
+  "output_tokens": 163,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0215056,
+ "response_id": "resp_6aeb7e73107796f912a246d9",
+ "latency_s": 3.46,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_4c41232d-c962-4e2f-9618-a256123afc5e",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"R2\"],\"new\":\"while she writhed, throwing her shoulders back and setting waves running across her belly\",\"old\":\"while she writhed and cut the wind with her shoulders and set waves running across her belly\",\"reason\":\"肩に風を切り is a vivid twist of the shoulders that 'cut the wind' does not picture in English; the writhing body is kept.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:50:27Z"
+}

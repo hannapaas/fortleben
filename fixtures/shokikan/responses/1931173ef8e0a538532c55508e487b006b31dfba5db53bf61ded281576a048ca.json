@@ -1,0 +1,579 @@
+{
+ "prompt": "analyst-bible",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "cast": [
+   {
+    "first_appearance": "p4",
+    "first_person": "Publicly 私 (watakushi/watashi) — polished, ingratiating ministry man; alone おれ (ore) in p48-p49 — coarse, proprietorial, sporting and conspiratorial. The split is the moral exposure.",
+    "forms": [
+     {
+      "form": "客 (the guest in the detached room)",
+      "note": "Narrator's anonymous handle until identity is given; keeps him a social surface before naming him.",
+      "used_by": "narrator in p4-p6"
+     },
+     {
+      "form": "奥村辰弥",
+      "note": "Full name on introduction; establishes rank and market value as a man.",
+      "used_by": "narrator in p7"
+     },
+     {
+      "form": "書記官 / 書記官様",
+      "note": "Title becomes his social handle; rank is what Zenpei hears.",
+      "used_by": "inn master, Zenpei, household, narrator"
+     },
+     {
+      "form": "奥村さん / 奥村様",
+      "note": "-san familiar, -sama fawning; Zenpei shifts upward as scheme deepens; Mitsuyo uses -sama with dislike/distance.",
+      "used_by": "Zenpei, Mitsuyo, Tsunao (as あの男 / 奥村)"
+     },
+     {
+      "form": "おれ",
+      "note": "Only in soliloquy p48-p49; counts people and money as prey and campaign.",
+      "used_by": "Tatsuya to himself"
+     },
+     {
+      "form": "あの男, 浮薄らしい男",
+      "note": "Dismissive hostile form denying his title.",
+      "used_by": "Tsunao in p52, p63"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "髭/髯 bearded man, 売出しの男, pronouns, marriage talk; explicitly male official.",
+    "handle": "Okumura Tatsuya",
+    "id": "c1",
+    "name_ja": "奥村辰弥",
+    "reading": "おくむら たつや",
+    "register": "Shifts at will: keigo-polite deference to seniors/hosts, light joking familiarity to maids and Zenpei, wheedling gallantry to Mitsuyo, brisk bureaucratic concrete prose in bribe talk. Alone: short, exclamatory, boyish-military.",
+    "relationships": [
+     "courts Miyoshi Zenpei as patron and intermediary for Kijima mine payoff",
+     "pursues Miyoshi Mitsuyo as desired woman and demanded reward",
+     "despises and plots to crush Tojo Tsunao as rival",
+     "bribes/manipulates bureau chief, supervisor, colleagues and other guests"
+    ],
+    "role": "Ministry secretary on sick leave; charming predator who turns social plausibility into corruption and sexual acquisition.",
+    "romanised": "Okumura Tatsuya"
+   },
+   {
+    "first_appearance": "p8",
+    "first_person": "わし (washi) to Tsunao and Mitsuyo; 私 (watashi) in formal bargaining with Tatsuya p101-p104. Bluff old-man familiar, turns formal when money is on the table.",
+    "forms": [
+     {
+      "form": "老人, 満丸顔の老人",
+      "note": "First seen as comic bulk behind railing; no name yet.",
+      "used_by": "narrator in p8"
+     },
+     {
+      "form": "布袋 / 布袋殿 / 布袋のその人",
+      "note": "Nickname from bulk and laugh; used by narrator and Tatsuya privately; softens him until it does not.",
+      "used_by": "narrator, Tatsuya in thought"
+     },
+     {
+      "form": "三好善平",
+      "note": "Full name reveals rich-man status.",
+      "used_by": "narrator in p16"
+     },
+     {
+      "form": "父様 / 親父(ちち) / 父 / お父様",
+      "note": "Father terms; Mitsuyo uses 父様 with wheedling intimacy, とっさま in Tatsuya report; Tsunao uses 伯父様 showing uncle relation.",
+      "used_by": "Mitsuyo, Tatsuya reporting, Tsunao as 伯父様"
+     },
+     {
+      "form": "三好さん",
+      "note": "Familiar -san from younger official; sign of engineered intimacy.",
+      "used_by": "Tatsuya to Zenpei"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "父, 親父, 肥え太りたる老人, 髯/角袖 description; husband and father; called 布袋.",
+    "handle": "Miyoshi Zenpei",
+    "id": "c2",
+    "name_ja": "三好善平",
+    "reading": "みよし ぜんぺい",
+    "register": "Bluff Edo-merchant familiar: short exclamations, self-delight, teasing, proverbial; shifts to hesitant formal mercantile polite in bribe negotiation p101-p104.",
+    "relationships": [
+     "father of Mitsuyo (doting, indulgent, then bargains her away)",
+     "uncle (伯父) to Tojo Tsunao by address and 伯父甥の間",
+     "new intimate and business partner of Okumura Tatsuya",
+     "head of Tokyo asset-holder household with wife, elder son and daughter, servants"
+    ],
+    "role": "Wealthy Tokyo asset-holder; vain, greedy, affectionate father whose love of rank and mine profit makes him Tatsuya's instrument.",
+    "romanised": "Miyoshi Zenpei"
+   },
+   {
+    "first_appearance": "p5",
+    "first_person": "私 (watashi/atashi forms: 私ア, 私なんぞ) — Tokyo young-lady colloquial, wheedling, theatrical; repeats and stretches sounds.",
+    "forms": [
+     {
+      "form": "琴の音 / 唄の主 / 琴の主",
+      "note": "Exists first only as music/voice behind shoji; Tatsuya infers identity.",
+      "used_by": "narrator, Tatsuya inference p10"
+     },
+     {
+      "form": "乙女",
+      "note": "Lyrical distant maiden on balcony/bath corridor; eroticised gaze before personhood.",
+      "used_by": "narrator in p10-p12"
+     },
+     {
+      "form": "光代 / 光代様 / 光代さん",
+      "note": "Given name; Tatsuya escalates to 光代様 as claimed reward p130.",
+      "used_by": "narrator, Zenpei, Tsunao (お前), Tatsuya"
+     },
+     {
+      "form": "娘 / 末の子 / 秘蔵のもの",
+      "note": "Social value: youngest, treasured child; already asset language.",
+      "used_by": "narrator reporting Zenpei account p16"
+     },
+     {
+      "form": "お前",
+      "note": "Familiar paternal/intimate second-person to her.",
+      "used_by": "Zenpei and Tsunao to Mitsuyo"
+     }
+    ],
+    "gender": "female",
+    "gender_evidence": "乙女, 娘,容色, feminine dress and speech, bath description, daughter/sister roles.",
+    "handle": "Miyoshi Mitsuyo",
+    "id": "c3",
+    "name_ja": "三好光代",
+    "reading": "みよし みつよ",
+    "register": "Bright Tokyo maiden speech: polite -ます/-なさいまし base with childish prolongation, pouting repetition, threats, giggles (おほほほ, あら). Not analytical; instinct in bodily terms (気味が悪い, 訝しい).",
+    "relationships": [
+     "youngest daughter treasured by Zenpei",
+     "intimate understood match with Tojo Tsunao, broken off by Zenpei p117",
+     "object of Tatsuya pursuit and final demanded payment",
+     "daughter to Mitsuyo mother, younger sister to elder brother and sister"
+    ],
+    "role": "Centre of erotic and bargaining plot; spoiled, quick, affectionate, intuitively repelled by Tatsuya and drawn to Tsunao.",
+    "romanised": "Miyoshi Mitsuyo"
+   },
+   {
+    "first_appearance": "p19",
+    "first_person": "私 (watashi) — stiff, formal, principled; will not bend self (自分を枉げることは出来ん).",
+    "forms": [
+     {
+      "form": "綱雄 / 東条綱雄",
+      "note": "Source twice prints variant 鋼雄 p77-p78, likely press/transcription error; normalise to 綱雄 but flag for check. Tojo surname via Zenpei introduction.",
+      "used_by": "narrator, Zenpei, Mitsuyo"
+     },
+     {
+      "form": "綱雄さん / 綱雄様",
+      "note": "Mitsuyo intimate -san/-sama; shows open affection and alliance.",
+      "used_by": "Mitsuyo to/about Tsunao"
+     },
+     {
+      "form": "かの東条という奴 / あやしき男 / 蒼白き男",
+      "note": "Hostile othering; each side privately misreads the other in p44.",
+      "used_by": "Tatsuya in thought about Tsunao; narrator focalised"
+     },
+     {
+      "form": "学者 / 学士 (philosophy graduate)",
+      "note": "Role-label as insult or fact; Tatsuya sneers, Zenpei family counts failures.",
+      "used_by": "Tatsuya, Zenpei, mother"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "若者, 男前, 学士, fiancé-like suitor, 髭 reference; male philosophy graduate.",
+    "handle": "Tojo Tsunao",
+    "id": "c4",
+    "name_ja": "東条綱雄",
+    "reading": "とうじょう つなお",
+    "register": "Formal, bookish, unyielding; moral directness without phatic softening; cannot laugh off insult. Calls Zenpei 伯父様.",
+    "relationships": [
+     "kinsman/nephew to Zenpei (親戚のもの, 伯父甥の間)",
+     "understood match to Mitsuyo, then announced broken by Zenpei",
+     "instant moral antipathy to Tatsuya, correct but socially hopeless"
+    ],
+    "role": "New philosophy graduate; the only integrity in the story, pale, stiff and unable to stay; counterweight whose rightness must not become heroics.",
+    "romanised": "Tōjō Tsunao"
+   },
+   {
+    "first_appearance": "p2",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "婢ども / 婢 / 女中 / 仲働きの婢",
+      "note": "Collective maids; Tatsuya wins them at once; one runs blushing with gossip.",
+      "used_by": "narrator"
+     },
+     {
+      "form": "梅屋の声々",
+      "note": "Inn voice as chorus at departures.",
+      "used_by": "narrator p46"
+     }
+    ],
+    "gender": "female",
+    "gender_evidence": "おんな reading gloss, bath/brothel-adjacent service language of Meiji inn; female servants.",
+    "handle": "the Umeya inn maids",
+    "id": "c5",
+    "name_ja": null,
+    "reading": null,
+    "register": "Brief polite servant speech (存じませぬ); giggling reported speech.",
+    "relationships": [
+     "serve Tatsuya, Zenpei party and other guests at Komatsu spa"
+    ],
+    "role": "Spa inn staff; barometer of Tatsuya charm and household bustle.",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p7",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "亭主 / 帳場より亭主",
+      "note": "Keeps best room for rank and big tea-money.",
+      "used_by": "narrator"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "亭主 (master) in Meiji inn context; not explicitly gendered beyond role but conventionally male.",
+    "handle": "the master of the Umeya inn",
+    "id": "c6",
+    "name_ja": null,
+    "reading": null,
+    "register": "Exaggerated respectful greeting (恭しき辞儀, 御挨拶).",
+    "relationships": [
+     "hosts Tatsuya and Miyoshi party"
+    ],
+    "role": "Innkeeper at Komatsu spa.",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p29",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "母様 / 母 / 光代の母",
+      "note": "Indulgent mother; scholar-hater; counts Tsunao slights.",
+      "used_by": "Mitsuyo, narrator"
+     }
+    ],
+    "gender": "female",
+    "gender_evidence": "母, mother of Mitsuyo, wife of Zenpei.",
+    "handle": "Mitsuyo's mother",
+    "id": "c7",
+    "name_ja": null,
+    "reading": null,
+    "register": "Reported as世情 worldly complaints; no direct dialogue quoted at length.",
+    "relationships": [
+     "wife of Zenpei",
+     "mother of Mitsuyo and elder children"
+    ],
+    "role": "Tokyo housewife; sides with worldly view against Tsunao.",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p96",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "姉 / 兄 / 上の隠居 / 末の婢より上の隠居に至るまで",
+      "note": "Whole household netted by Tatsuya spider thread; elder sister easy, elder brother smiling.",
+      "used_by": "narrator p96"
+     },
+     {
+      "form": "豊 / 利介",
+      "note": "Servants called by name in reception orders p98; gender not shown beyond names.",
+      "used_by": "Zenpei ordering"
+     },
+     {
+      "form": "善四郎",
+      "note": "Cook responsible for banquet knives.",
+      "used_by": "narrator p100"
+     }
+    ],
+    "gender": "not shown",
+    "gender_evidence": "Kin terms imply female elder sister and male elder brother but no pronouns; servants ungendered in text beyond names.",
+    "handle": "the rest of the Miyoshi household and servants",
+    "id": "c8",
+    "name_ja": "豊; 利介; 善四郎",
+    "reading": "とよ; りすけ; ぜんしろう",
+    "register": "Domestic order language; no distinctive dialogue.",
+    "relationships": [
+     "children/servants/retired parent in Miyoshi house"
+    ],
+    "role": "Background household showing how completely Tatsuya becomes intimate insider.",
+    "romanised": "Toyo; Risuke; Zenshirō"
+   },
+   {
+    "first_appearance": "p81",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "按摩",
+      "note": "Passing spa figure marking time.",
+      "used_by": "narrator"
+     }
+    ],
+    "gender": "not shown",
+    "gender_evidence": "Occupation only; gender not shown.",
+    "handle": "the masseur",
+    "id": "c9",
+    "name_ja": "按摩",
+    "reading": "あんま",
+    "register": "Formulaic (御療治は).",
+    "relationships": [],
+    "role": "Incidental spa worker.",
+    "romanised": "anma"
+   },
+   {
+    "first_appearance": "p97",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "局長 / 監督署長 (頬髯の濃い男) / 大臣 / 御同僚 / 国友商会 / 木島炭山・鉱山",
+      "note": "Bureaucratic-corruption apparatus: bureau chief holds rival Kunitomo application, supervisor-front man, minister issues cabinet order, colleagues share cuts; mine is prize.",
+      "used_by": "narrator, Tatsuya, Zenpei in procedure talk p101-p130"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "Titles and 頬髯 description imply male officials; company as collective not gendered.",
+    "handle": "officials, intermediaries and the Kunitomo rival group",
+    "id": "c10",
+    "name_ja": "局長; 監督署長; 国友商会; 木島炭山",
+    "reading": "きょくちょう; かんとくしょちょう; くにともしょうかい; きじまたんざん",
+    "register": "Airless procedural polite: 願書, 払い下げ, 閣令, 周旋料, 割賦金, 謝金. Concrete doors and papers, not atmosphere.",
+    "relationships": [
+     "targets and tools of Tatsuya-Zenpei mine campaign"
+    ],
+    "role": "Mining-disposal intrigue mechanism; corruption as sequence of papers and men.",
+    "romanised": "kyokuchō; kantokushochō; Kunitomo Shōkai; Kijima mine"
+   }
+  ],
+  "hard_spots": [
+   {
+    "anchors": [
+     "p2",
+     "p3",
+     "p37",
+     "p40"
+    ],
+    "kind": "ornate scenic periods",
+    "why_hard": "Long tide-like Meiji landscape sentences with kanbun colouring (堆藍前にあり凝黛後にあり, 煙波縹緲, 漁唱菱歌) and bird/plant names. Do not prune into efficient setting; luxuriance is the world Tatsuya exploits and the innocent cover for pursuit. Keep periodic rhythm without ennobling into Victorian purple."
+   },
+   {
+    "anchors": [
+     "p27",
+     "p28"
+    ],
+    "kind": "repetition wordplay",
+    "why_hard": "Mitsuyo 真実に six times, Zenpei mocks back 嘘に six times. Must stay repetitive and childish, not varied for elegance. Later bargaining echoes with きっと/ようございます certainty over her — preserve echo, do not smooth."
+   },
+   {
+    "anchors": [
+     "p97",
+     "p98"
+    ],
+    "kind": "antiquarian display list",
+    "why_hard": "Reception vessels named vessel by vessel: 銀穂屋付き手炉, 一閑釣瓶煙草盆, 探幽, 三夕三幅対, 宗甫花入, 蒔絵盆, 金溜塗重香合, 碪手青磁香炉, 七宝紫檀卓, 銀蒼鷹置物, 光琳金屏風. Social satire and circumstantial density at once. Needs identification plus material specificity; do not summarise away. Ruby/old names need glossing in margin."
+   },
+   {
+    "anchors": [
+     "p101",
+     "p102",
+     "p103",
+     "p119",
+     "p120",
+     "p121",
+     "p124",
+     "p126"
+    ],
+    "kind": "bureaucratic procedure",
+    "why_hard": "願書, 払い下げ, 借区, 閣令, 官報, 周旋料, 割賦金, 謝金, 待合事件. Corruption is concrete sequence of applications, first-filing rule, travel alibis. Must remain precise and slightly airless; do not turn into vague bribery atmosphere. 待合事件 (assignation scandal) is prior disgrace raising stakes — annotate."
+   },
+   {
+    "anchors": [
+     "p77",
+     "p78"
+    ],
+    "kind": "name variant",
+    "why_hard": "Tsunao printed once as 鋼雄 for 綱雄. Almost certainly press/transcription slip. Do not invent character difference; normalise in English to Tsunao and note for editor to check 1895 Taiyo text."
+   },
+   {
+    "anchors": [
+     "p48",
+     "p49",
+     "p130",
+     "p132"
+    ],
+    "kind": "register split and withheld ending",
+    "why_hard": "Tatsuya ore soliloquy (兵は神速, こん粉微塵) must sound exuberant/comic, not brooding; demand お貰い申しましたよ is brutal plain; close われはこの後のことを知らず with double rhetorical questions must not name wife or philosopher. English pronouns/connectives must keep knowing-and-not-knowing."
+   }
+  ],
+  "motifs": [
+   {
+    "english": "Keep same English word each time: 'beard' (with black/thick where source adds). Do not vary to whiskers/moustache. It marks fashionable manhood and trips the comedy when Mitsuyo insults Tsunao's beard and remembers Tatsuya's.",
+    "id": "m1",
+    "motif": "beard as social sign",
+    "occurrences": [
+     "p7",
+     "p42",
+     "p98"
+    ],
+    "source_forms": [
+     "髭",
+     "髯",
+     "頬髯"
+    ],
+    "why": "Admired splendid beard, accidental insult, returning official with thick side-whiskers. Deliberate echo of worldly masculinity."
+   },
+   {
+    "english": "Keep 'Hotei' with gloss once (squat laughing god), then repeat Hotei bulk/laugh. Keep 'laugh' verb repeated for Zenpei rather than varying to chuckle/guffaw.",
+    "id": "m2",
+    "motif": "Hotei bulk and laughter",
+    "occurrences": [
+     "p8",
+     "p13",
+     "p15",
+     "p21",
+     "p86"
+    ],
+    "source_forms": [
+     "布袋",
+     "満丸顔",
+     "肥え太り",
+     "笑",
+     "はははは"
+    ],
+    "why": "Softens everything Zenpei does until it does not; warmth that makes treating daughter as asset possible."
+   },
+   {
+    "english": "Keep 'cigar smoke' / 'puffed smoke' language steady. Smoke pauses mark calculation admiring its own plan.",
+    "id": "m3",
+    "motif": "cigar / tobacco smoke at calculation",
+    "occurrences": [
+     "p16",
+     "p21",
+     "p44",
+     "p104",
+     "p122"
+    ],
+    "source_forms": [
+     "葉巻",
+     "シガー",
+     "煙",
+     "煙草",
+     "煙管"
+    ],
+    "why": "Appetite taking a pause. Punctuates Tatsuya scheming and Zenpei self-satisfaction; links pleasure to plotting."
+   },
+   {
+    "english": "Keep Mitsuyo's 'truly, truly, truly...' unvaried and excessive; keep Zenpei's mocking 'lies, lies...' parallel. Later keep bargaining 'certainly / without fail / promise' flat and repeated to let horror rhyme.",
+    "id": "m4",
+    "motif": "truly / certainly insistence",
+    "occurrences": [
+     "p27",
+     "p28",
+     "p104",
+     "p105",
+     "p110"
+    ],
+    "source_forms": [
+     "真実に",
+     "嘘に",
+     "ようございます",
+     "きっと"
+    ],
+    "why": "Childish insistence becomes contractual certainty. Do not elegant-vary; structure depends on echo."
+   },
+   {
+    "english": "Keep 'voice' and 'listen' wording: singing voice, listening ear, still listening. Do not resolve singer early; preserve inference.",
+    "id": "m5",
+    "motif": "music behind the screen and listening",
+    "occurrences": [
+     "p4",
+     "p5",
+     "p6",
+     "p10",
+     "p39"
+    ],
+    "source_forms": [
+     "琴の音",
+     "唄",
+     "声",
+     "耳を傾ける"
+    ],
+    "why": "Mitsuyo first exists as sound; Tatsuya at lake still listening back to shoji. Governs desire as overhearing and pursuit as innocent aesthetic attention."
+   }
+  ],
+  "narration": {
+   "english_tense": "Past as default for narrative action; preserve scenic present participles only where Japanese scenic period invites sustained tableau, without flipping whole story into historic present. Dialogue past/present as spoken. Soliloquy in vivid present.",
+   "frame": "Third-person impersonal lyrical narrator with free access to private thought and soliloquy, but who withdraws at the end into professed ignorance. Linear seasonal movement autumn spa to autumn Tokyo with accelerated intrigue and rumoured aftermath.",
+   "narrator": "Elevated Meiji literary narrator, never judging villain directly; moral shown by juxtaposition of surface charm and private counting. Closes with われ (I) refusing knowledge.",
+   "person": "third person",
+   "tense_habits": "Classical-literary auxiliaries (なり, ぬ, たり, けり, ごとし) giving completed poetic past; scenery in sustained periodic present-like tableau; dialogue in Meiji colloquial -ます/-だ. Shifts freely without signalling interior vs exterior.",
+   "timeline": [
+    "Autumn: Tatsuya convalescing at Komatsu Umeya inn meets singing, Zenpei and Mitsuyo; walks, bath familiarity, learns names and wealth (p2-p16).",
+    "Next day(s): Go games, Zenpei-Mitsuyo pillow comedy, walk with Mitsuyo, Tsunao arrival, quarrel, Tsunao silent departure (p19-p83).",
+    "Immediate return to Tokyo: Zenpei telegrams over Kijima mine tip, Mitsuyo waits for Tsunao, Tatsuya becomes household intimate and spider (p85-p96).",
+    "Banquet and private bargain: commission/annual thanks-money, riddle of Mitsuyo, cabinet-order draft for first-filing win and demand of Mitsuyo (p97-p130).",
+    "Aftermath withheld: rumour of Tatsuya wife and philosopher recluse, seasonal close (p132)."
+   ]
+  },
+  "part_summaries": [
+   {
+    "starts": "p1",
+    "summary": "Part One at Komatsu spa in autumn decline. Tatsuya, ministry secretary on sick leave, hears koto and singing in annex, questions maid, is shown best room for rank and beard. He sees fat laughing old man at railing, walks to Ogi lake bower, glimpses maiden on second floor and takes her for singer, then meets her full beauty in bath corridor. Old man is Miyoshi Zenpei with daughter Mitsuyo; bath talk makes them intimates; Tatsuya learns names and wealth and privately marks Mitsuyo as beautiful prey and Zenpei as not to be let escape."
+   },
+   {
+    "starts": "p18",
+    "summary": "Part Two in Zenpei rooms. After half-day go, Zenpei praises Tatsuya rank and talent and disparages Tsunao; Mitsuyo defends Tsunao as younger, refined, calm, high-spirited. Teasing about Tsunao visit turns into father-daughter pillow comedy with six-times truly tantrum, threats to break incense box and spoil haori, seized air-pillow. Zenpei offers tea, Mitsuyo goes to bath. Establishes indulgence as household language and Tsunao as expected ally."
+   },
+   {
+    "starts": "p33",
+    "summary": "Part Three morning walk to lake shore. Tatsuya presses Mitsuyo to walk, shifts through light talk and confesses listening to her koto; she deflects to scenery. Lush lake tableau. On return they meet Zenpei bringing stranger Tojo Tsunao; Mitsuyo runs alive to him, mocks his beard then catches Tatsuya black beard and laughs apology. Introductions chill: Tsunao arrogant, Tatsuya inwardly hostile; Zenpei alone imagines mutual respect. Four walk back, Mitsuyo childishly runs ahead for souvenir."
+   },
+   {
+    "starts": "p47",
+    "summary": "Part Four split scene. Tatsuya alone in ore voice vows to crush Tojo to powder, take Mitsuyo at one blow, hook father to cover debts, speed is everything, summons Zenpei via maid. Intercut: Zenpei urges Tsunao to bend and associate; Tsunao refuses as floating thin man; Mitsuyo agrees she dislikes Tatsuya; Zenpei defends sociability; quarrel, Tatsuya summons arrives, Zenpei storms out, Mitsuyo begs Tsunao to bend and stay by her, Tsunao will not bend self, talks of leaving, tender wavering then refusal; country singing and masseur mark time. Tsunao leaves without farewell to either, leaving letter; car sound fades."
+   },
+   {
+    "starts": "p84",
+    "summary": "Part Five return. Zenpei returns calling for Tsunao, learns flight, forgets it for three telegrams on Kijima coal mine tip from Tatsuya: cheap at 200,000, worth 500,000, quality beyond Miike, naval contracts. Mitsuyo bored and uncomforted asks to go home; Zenpei plans hasty Tokyo return for arrangements. Corridor meeting with Tatsuya, Mitsuyo turns away; men whisper laugh; Tatsuya sends regards to Tsunao. Mine displaces daughter in attention."
+   },
+   {
+    "starts": "p93",
+    "summary": "Part Six in Tokyo autumn. Mitsuyo rushes to Tsunao who has not returned; Zenpei races east-west in consultations; Tatsuya becomes daily intimate, spider thread over whole house from maid to retiree while Mitsuyo alone grows hostile and waits gaunt for Tsunao. Great reception prepared vessel by vessel for Tatsuya and important guests; Mitsuyo pleads bellyache and hides weeping unvisited. After guests leave, private bargain: 10,000 handling plus 1,000 yearly thanks-money, shares to colleagues, blocking Kunitomo application via bureau chief travel and supervisor front, risk of exposure after machiai scandal; Zenpei agrees, Tatsuya presses promise of anything in his power and riddles at what Zenpei has made. Night payment hint 25,000 yen; Tatsuya stays at Shimbashi as usual."
+   },
+   {
+    "starts": "p114",
+    "summary": "Part Seven break and final trap. Tsunao return rumoured but does not visit; Zenpei resents contempt, mother counts scholar slights; Mitsuyo secretly visits absent Tsunao then finds he came in her absence. Zenpei in rage declares Mitsuyo-Tsunao understanding broken. Mining race intensifies to 350,000 yen estimates, cabinet ordinance to decide by conditions and first filing. Tatsuya lures Zenpei to secret assignation upstairs, reveals draft ordinance obtained, promises certain flag if paper filed instantly on publication, demands reward: Mitsuyo herself — O-morai moshimashita. Narrator withdraws: does not know aftermath; Tatsuya said to have taken wife — who?; someone cast trouble away for half-life philosophy — who?; autumn wind over Ogi and paulownia; whose turn tomorrow."
+   }
+  ],
+  "say": "Charm must stay charming and procedure stay procedural; do not rescue Tsunao into heroism, do not judge Tatsuya early, do not resolve the withheld ending.",
+  "style_sheet": {
+   "annotation_density": "Moderate: gloss spa, rank/title, mine system, vessels and ordinance terms, assignation-house and Shimbashi usage, Hotei and Kōrin references. Never annotate what context supplies; never use note to moralise or resolve ending.",
+   "author_voice": "Three movements: lush periodic scenery (long tide-like sentences, autumn plants, water, light) kept lush but readable; sharp colloquial dialogue where each speaker breaks register; flat concrete procedure for bribes and papers. Keep movement audible; do not flatten into uniform fluent novel prose. Avoid Berman tidying: no rationalised syntax, no clarified subjects, no ennobled diction, no varied synonyms for deliberate repeats.",
+   "honorifics_and_names": "Japanese order surname-given (Miyoshi Zenpei, Okumura Tatsuya) with macrons (Tōjō Tsunao, Miyoshi Mitsuyo) on first use; thereafter surname or given as Japanese does. Keep -san / -sama / -sama vs -san difference in romanised suffix because rank-climbing and intimacy live in it; explain once. Keep Sensei only if text uses 先生 (it does not; do not import). Servant/master terms (旦那-like 亭主, お方様) rendered to show deference without Victorianism.",
+   "keep_in_japanese": "Vessel and art terms with gloss once then English:探幽 (Tan'yū school painting), 仁清香合 (Ninsei incense box), 碪手青磁 (kinuta celadon), 光琳風 (Kōrin style). Keep realia: 梅屋 (Umeya), 停車場 spelling flavour, 待合 (assignation house), 官報 (Official Gazette), 閣令 (cabinet ordinance) with brief note. Keep cigar as 葉巻/シガー signal.",
+   "quotation": "Japanese binds dialogue in narrative without consistent quotes; use English double quotes for direct speech, single for thought-as-utterance where needed. Keep unattributed turns unattributed where Japanese leaves speaker to infer; do not add tags to tidy.",
+   "register": "Narrative high-literary but not archaic: plain strong English with periodic length for scenery. Dialogue colloquial Meiji Tokyo: Zenpei bluff and familiar, Mitsuyo girlish polite with prolongation and pout, Tsunao stiff formal, Tatsuya accommodating chameleon. Soliloquy coarse ore energy, comic and brisk, not Gothic.",
+   "ruby_and_italics": "Use italics for Japanese retentions (-san/-sama, vessel names, realia) on first setting and sparingly after. Render ruby glosses (笆まがき, 媚こぶる etc.) only where reading changes sense; otherwise silent. Do not italicise repeated motif English words.",
+   "standing_rules": []
+  }
+ },
+ "usage": {
+  "input_tokens": 21960,
+  "cached_tokens": 0,
+  "output_tokens": 9968,
+  "reasoning_tokens": 2229,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.069814,
+ "response_id": "resp_6aeb7a6e627d8b29428d445c",
+ "latency_s": 116.99,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 28510
+  }
+ ],
+ "created": "2026-11-04T18:33:18Z"
+}
