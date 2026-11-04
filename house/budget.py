@@ -49,33 +49,68 @@ def estimate(model: str, input_chars: int, expected_output_tokens: int) -> float
     return (input_chars * 1.5 * p_in + expected_output_tokens * p_out) / 1e6
 
 
-# Measured dollars per 1,000 source characters, per stage and model, from runs on 晩餐.
-# The chapter-by-chapter stages scale with length, so per-character rates carry over to long texts.
-STAGE_RATES = {
-    "first-read": {"wonder": 0.025}, "crux-check": {"wonder": 0.025}, "bible": {"spark": 0.015},
-    "checkpoint": {"spark": 0.036, "wonder": 0.075},  # page 1 once per voice take: priced as CHECKPOINT_CHARS of draft
-    "draft": {"spark": 0.036, "wonder": 0.075}, "readers": {"spark": 0.033, "wonder": 0.065},
-    "desk": {"spark": 0.019, "wonder": 0.047}, "final-read": {"spark": 0.015, "wonder": 0.04},
-    "notes": {"spark": 0.0075},
+# What each stage's calls take in and give out, in tokens, fitted on eight runs on the defaults
+# (3,400–19,500 characters: 晩餐, 草枕 II, 書記官, 雪景色, 死剣と生縄, 猫八; 4 Nov 2026).
+# A call's input is a fixed part (the prompt, the reading, the bible) plus a part that grows with the
+# source it sees; its output, reasoning included, stays about the same however long that source is.
+# So a stage is priced per call: once for the whole text, once a part, or once a page.
+# stage: (how often, model option or None, default model, input tokens per source character,
+#         fixed input tokens, output tokens per call)
+SHAPES = {
+    "parts":      ("run",  None,            "spark",  0.26,  2_300,  1_500),
+    "first-read": ("run",  None,            "wonder", 1.1,   2_100,  3_900),
+    "crux-check": ("run",  None,            "wonder", 0.84,  4_400,  2_700),  # two calls; the head's sees no source
+    "bible":      ("run",  None,            "spark",  0.86,  5_000,  None),   # output grows with the cast and parts
+    "draft":      ("page", "draft_model",   "spark",  1.02,  8_600,  3_500),
+    "readers":    ("part", "reader_model",  "spark",  6.7,     500, 25_000),  # two calls, one per reader
+    "desk":       ("part", "desk_model",    "wonder", 2.86,  8_600,  6_500),
+    "final-read": ("part", "final_model",   "wonder", 2.36,  7_200,  9_000),  # Wonder since experiment 10: 5,900–9,400 out over two turns
+    "copy-desk":  ("turn", "copy_model",    "spark",  0.65, 14_000,  1_400),  # a tool loop: each turn resends the English, mostly cached
+    "notes":      ("part", None,            "spark",  2.72,  8_400,  2_200),
 }
-CHECKPOINT_CHARS = 3 * 650  # three voice takes of one page (pager.TARGET), whatever the length of the work
-RUN_MARGIN = 1.5  # an estimate is meant to be high: a run that starts should not run out mid-way
+PAGE_CHARS = 540  # source characters a drafting page came to on average (pager.TARGET is the most)
+PART_CHARS = 20_000  # before the planner has run: it kept stories of 15–20k characters as one part, and keeps a book's parts under about 20,000
+DRAFT_UNCACHED = 4_500  # a drafting call's own page; the reading, the bible and the source before it are cached
+CHECKPOINT_PAGES = 3  # page 1 drafted once per voice take
+RUN_MARGIN = 1.15  # the eight runs above came to 0.89–1.10 of the estimate before it
+MODELS = {"spark": "muse-spark-1.3", "wonder": "muse-wonder-1.0"}
 
 
-def estimate_run(chars: int, chapters: int, options: dict) -> float:
-    """What a whole run will cost, overestimated: every stage live (no cache), and every earlier
-    chapter taken back to the desk once."""
-    pick = {"draft": "draft_model", "checkpoint": "draft_model",
-            "readers": "reader_model", "desk": "desk_model", "final-read": "final_model"}
+def _bible_output(chars: int) -> int:
+    return min(5_000 + int(0.6 * chars), 32_000)
+
+
+def _call(model: str, input_tokens: float, output_tokens: float, cached: float = 0) -> float:
+    return Usage(int(input_tokens), int(cached), int(output_tokens)).cost(MODELS[model])
+
+
+def estimate_run(chars: int, chapters: int | None, options: dict) -> float:
+    """What a whole run should cost, every call live (no cache), with every earlier part taken back to
+    the desk once by the emergency lever. A short text is seen whole by every page; a long one, a part
+    at a time (house/context.py). `chapters` is the planner's count of parts, or None before it has run."""
+    from house.context import WHOLE_TEXT_CHARS
+    chapters = max(chapters or -(-chars // PART_CHARS), 1)
+    part = chars / chapters
+    seen = chars if chars <= WHOLE_TEXT_CHARS else part  # what a drafting page sees of the source
+    pages = max(1, round(chars / PAGE_CHARS))
     total = 0.0
-    for stage, rates in STAGE_RATES.items():
-        rate = rates.get(options.get(pick.get(stage, ""), "") or "spark") or next(iter(rates.values()))
-        if stage == "checkpoint":
-            total += rate * min(chars, CHECKPOINT_CHARS) / 1000 if options.get("checkpoint") else 0
-            continue
-        total += rate * chars / 1000
-        if stage == "desk" and chapters > 1:
-            total += rate * chars / 1000 * (chapters - 1) / chapters  # the emergency lever's pass back
+    for stage, (per, option, default, per_char, fixed, out) in SHAPES.items():
+        model = (options.get(option) if option else None) or default
+        if stage == "bible":
+            out = _bible_output(chars)
+        if per == "run":
+            total += _call(model, fixed + per_char * chars, out)
+        elif per == "turn":  # the copy editor sends the English whole up to about 50,000 tokens, then works from lists
+            inp = fixed + min(per_char * chars, 50_000)
+            turns = min(30, 2 + chars // 600)  # its cap is 30: 晩餐 took 1 turn ($0.015), 死剣と生縄 (15,104 characters) all 30 ($0.32)
+            total += turns * _call(model, inp, out, cached=max(inp - DRAFT_UNCACHED, 0))
+        elif per == "part":
+            calls = chapters + (chapters - 1 if stage == "desk" else 0)  # the lever's pass back
+            total += calls * _call(model, fixed + per_char * part, out)
+        else:
+            n = pages + (CHECKPOINT_PAGES if options.get("checkpoint") else 0)
+            inp = fixed + per_char * seen
+            total += n * _call(model, inp, out, cached=max(inp - DRAFT_UNCACHED, 0))
     return round(total * RUN_MARGIN, 2)
 
 
