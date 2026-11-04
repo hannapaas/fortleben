@@ -199,13 +199,14 @@ def _insert(conn, table: str, row: dict, replace: bool = False) -> None:
 
 
 def shelf(conn) -> list[dict]:
-    """Every work with a current release, grouped by the language it was written in, newest first."""
+    """Every work with a current release, grouped by the language it was written in, in the order the works
+    arrived. That is the order their colours cycle in (`accent`), so neighbours on the shelf differ."""
     langs = {}
     # One row per work: its keikaku edition, or the first commissioned one if keikaku has none.
     for r in conn.execute("SELECT e.work_id, e.accent, w.language, r.version, r.created_at, r.body FROM edition e "
                           "JOIN release r ON r.id = e.current_release JOIN work w ON w.id = e.work_id "
                           "WHERE e.id = (SELECT e2.id FROM edition e2 WHERE e2.work_id = e.work_id AND e2.current_release "
-                          "IS NOT NULL ORDER BY e2.editor != 'the house', e2.id LIMIT 1) ORDER BY r.created_at DESC"):
+                          "IS NOT NULL ORDER BY e2.editor != 'the house', e2.id LIMIT 1) ORDER BY w.rowid"):
         body = json.loads(r["body"])
         paras = body["views"]["casual"]
         meta = _meta(conn, r["work_id"])
