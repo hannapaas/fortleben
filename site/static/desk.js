@@ -37,6 +37,7 @@
       '<span class="rs" aria-live="polite">' + status(r) + ' <span class="sm">' + (r.spent_words ? esc(r.spent_words) : n(r.spent) + ' drops spent' +
       (r.held ? ', ' + n(r.held) + ' still held' : '') + '.') + '</span></span>';
     if (r.status === 'done' && r.edition_url) h += '<a class="read" href="' + esc(r.edition_url) + '">Read it</a>';
+    if (r.status === 'done' && r.edit_url) h += '<a class="read" href="' + esc(r.edit_url) + '">Edit it</a>';
     if (r.status === 'waiting') h += '<a class="read" href="#checkpoint-' + esc(r.id) + '">Read the analysis</a>';
     if (r.status === 'interrupted' || r.status === 'failed') h += '<span class="rr">' +
       (r.resumable === false ? '' : '<button type="button" class="btn resume">Resume</button>') +
@@ -242,6 +243,12 @@
   // Runs already going when the page opened are watched too.
   runs.querySelectorAll('.run').forEach(function (li) { if (ACTIVE[li.dataset.status]) watch(li.dataset.run); });
 
+  // Unsaved file edits or a half-written note aren't lost to a reload without asking (unless the page reloads itself after a save).
+  var leaving = false;
+  addEventListener('beforeunload', function (e) {
+    if (!leaving && document.querySelector('.file-box[data-dirty]')) { e.preventDefault(); e.returnValue = ''; }
+  });
+
   // The checkpoint: a note is read in the background, and the page reloads with the house's reply.
   document.querySelectorAll('.checkpoint').forEach(function (cp) {
     var id = cp.dataset.run, url = base + '/runs/' + id;
@@ -249,7 +256,15 @@
     var box = cp.querySelector('.note-box'), msg = cp.querySelector('.err'), reading = cp.querySelector('.reading-note');
     var full = !!cp.dataset.full;  // the house has no room, or runs can't start here
     function voice() { var v = cp.querySelector('input[type="radio"]:checked'); return v ? Number(v.value) : 0; }
-    function busy(on) { send.disabled = on; approve.disabled = on || full; reading.hidden = !on; }
+    function busy(on) {
+      send.disabled = on; approve.disabled = on || full; reading.hidden = !on;
+      cp.querySelectorAll('.file .save').forEach(function (b) { b.disabled = on; });
+    }
+    // A file changed and not saved: the name of the first, so a note or an approval doesn't go without it.
+    function unsaved() {
+      var f = Array.prototype.find.call(cp.querySelectorAll('.file'), function (f) { return f.querySelector('.file-box').dataset.dirty; });
+      return f ? f.querySelector('summary').firstChild.textContent.trim() : null;
+    }
 
     // Ask until a new round is in, or the house has stopped reading (a failed note says so on reload).
     function wait(before) {
@@ -261,6 +276,7 @@
     }
 
     send.addEventListener('click', function () {
+      if (unsaved()) { say(msg, 'Save or undo your change to ' + unsaved().toLowerCase() + ' first.'); return; }
       var note = box.value.trim();
       if (!note) { say(msg, 'Write a note first.'); box.focus(); return; }
       say(msg, '');
@@ -272,6 +288,7 @@
     });
 
     approve.addEventListener('click', function () {
+      if (unsaved()) { say(msg, 'Save or undo your change to ' + unsaved().toLowerCase() + ' first.'); return; }
       say(msg, '');
       send.disabled = approve.disabled = true;
       approve.textContent = 'Approving…';
@@ -285,6 +302,29 @@
       }, function () {
         send.disabled = false; approve.disabled = full; approve.textContent = 'Approve and draft';
         say(msg, 'Couldn\'t reach Fortleben. Try again.');
+      });
+    });
+
+    // The files: saved one at a time. The page then comes back with them as keikaku now reads them, unless
+    // something else on it isn't sent or saved yet, which a reload would lose.
+    cp.querySelectorAll('.file').forEach(function (f) {
+      var save = f.querySelector('.save'), fbox = f.querySelector('.file-box'), said = f.querySelector('.saved');
+      var was = fbox.value;
+      function mark() { if (fbox.value === was) delete fbox.dataset.dirty; else fbox.dataset.dirty = '1'; }
+      fbox.addEventListener('input', function () { mark(); say(said, fbox.dataset.dirty ? 'Not saved yet.' : ''); });
+      save.addEventListener('click', function () {
+        save.disabled = true;
+        say(said, 'Saving…');
+        json('POST', url + '/files/' + f.dataset.file, { text: fbox.value }).then(function (d) {
+          save.disabled = false;
+          if (d.error || !d.ok) { say(said, d.error || 'It didn\'t save. Try again.'); return; }
+          was = fbox.value; mark();
+          if (!d.changed) { say(said, 'Nothing changed.'); return; }
+          if (box.value.trim() || unsaved()) { say(said, 'Saved. keikaku drafts from this now.'); return; }
+          leaving = true;
+          location.hash = 'checkpoint-' + id;
+          location.reload();
+        }, function () { save.disabled = false; say(said, 'Couldn\'t reach Fortleben. Try again.'); });
       });
     });
 

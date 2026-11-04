@@ -137,17 +137,37 @@ def _run_of(conn, args) -> int | None:
     return run_id
 
 
-def write_checkpoint(conn, work: str, run_id: int) -> list:
-    from house import steer
+def checkpoint_dir(work: str):
     from house.db import data_dir
 
-    out = data_dir() / "checkpoints" / work
-    out.mkdir(parents=True, exist_ok=True)
-    paths = []
-    for name, text in steer.markdown(conn, run_id).items():
-        (out / name).write_text(text, encoding="utf-8")
-        paths.append(out / name)
+    return data_dir() / "checkpoints" / work
+
+
+def write_checkpoint(conn, work: str, run_id: int) -> list:
+    from house import steer
+
+    paths, moved = steer.write(conn, run_id, checkpoint_dir(work))
+    for p in moved:
+        print(f"Your edit wasn't taken, so it was kept as {p}: its file was written for another run, or the run had been approved.")
     return paths
+
+
+def read_edits(conn, work: str, run_id: int) -> bool:
+    """Take any of the checkpoint's files edited by hand since they were written, before the command acts.
+    False, after saying why, if one can't be read."""
+    from house import steer
+
+    try:
+        changed = steer.read_back(conn, run_id, checkpoint_dir(work))
+    except ValueError as e:
+        print(f"Not done: {e}. Fix the file and try again.")
+        return False
+    for name in changed:
+        print(f"Your edit of {name} is saved: every stage from here reads your version.")
+    for name in steer.untaken(checkpoint_dir(work)):
+        print(f"Your edit of {name} wasn't taken: it was written for another run. "
+              f"Run `keikaku checkpoint {work}` for this run's files and edit those.")
+    return True
 
 
 def cmd_checkpoint(args) -> int:
@@ -158,6 +178,9 @@ def cmd_checkpoint(args) -> int:
     if run_id is None:
         return 1
     try:
+        if conn.execute("SELECT status FROM run WHERE id=?", (run_id,)).fetchone()[0] == "waiting" \
+                and not read_edits(conn, args.work, run_id):
+            return 1
         paths = write_checkpoint(conn, args.work, run_id)
     except steer.NotWaiting as e:
         print(f"Not done: {e}.")
@@ -181,6 +204,9 @@ def cmd_steer(args) -> int:
         return 1
     client = make_client(conn, replay=args.replay, run_cap=args.cap)
     try:
+        steer.waiting(conn, run_id)
+        if not read_edits(conn, args.work, run_id):
+            return 1
         rnd = steer.steer(conn, client, run_id, args.note)
     except (steer.NotWaiting, ValueError) as e:
         print(f"Not sent: {e}.")
@@ -215,6 +241,9 @@ def cmd_approve(args) -> int:
     if run_id is None:
         return 1
     try:
+        steer.waiting(conn, run_id)
+        if not read_edits(conn, args.work, run_id):
+            return 1
         steer.approve(conn, run_id, args.voice)
     except (steer.NotWaiting, ValueError) as e:
         print(f"Not approved: {e}.")
@@ -377,7 +406,7 @@ def main(argv: list[str] | None = None) -> int:
                    help="stop after the bible with page 1 drafted in each voice, to be steered and approved")
     p.set_defaults(func=cmd_run)
 
-    p = sub.add_parser("checkpoint", help="write a waiting run's reading, bible and voices as Markdown in the data folder")
+    p = sub.add_parser("checkpoint", help="write a waiting run's reading, bible and voices as Markdown in the data folder; edit them by hand and the next checkpoint, steer or approve takes your version")
     p.add_argument("work")
     p.add_argument("--run", type=int, help="default: the latest run of this work")
     p.set_defaults(func=cmd_checkpoint)

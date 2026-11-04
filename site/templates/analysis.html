@@ -15,6 +15,8 @@
 <section class="howread analysis">
 <h1 class="desk-h">How keikaku read <i{% if not ed.title_en %} lang="ja"{% endif %}>{{ ed.title_en or ed.title }}</i></h1>
 <p class="desk-lead">This English was drafted by keikaku, a translation engine running on Meta's models. Before a line was drafted, it wrote an analysis of the book, its people and its tone, and that analysis steered every stage: the draft, the two readings against the Japanese, and the editing. It is published here in full, with the voice the draft was written in.</p>
+{% set editor = ed.commissioned_by or 'the editor' %}
+{% if ed.file_edits %}<p class="desk-lead">{{ ed.commissioned_by or 'The editor' }} then edited it by hand before the draft started. <a href="#by-hand">What they changed</a> is at the end.</p>{% endif %}
 <p class="steer">If you'd read this story differently, <a href="/signup">start your own edition and steer it</a>. Or go back to <a href="/read/{{ ed.work_id }}{% if ed.id %}?edition={{ ed.id }}{% endif %}">the translation</a>.</p>
 <div class="form two">
   <div class="q">What is it about?</div>
@@ -29,7 +31,7 @@
   {% endif %}
   {% if hr.voice %}
   <div class="q">In what voice?</div>
-  <div class="a">{{ hr.voice }}</div>
+  <div class="a">{{ hr.voice }}{% if hr.voice_by %} <span class="sm">(as {{ hr.voice_by }} rewrote it)</span>{% endif %}</div>
   {% endif %}
   {% if hr.cast %}
   <div class="q">Who's who?</div>
@@ -52,6 +54,13 @@
   {% if hr.hard_spots %}
   <div class="q">The hard spots?</div>
   <div class="a"><ul class="cast">{% for h in hr.hard_spots %}<li><b>{{ h.kind|capitalize }}</b>{% if h.anchors %} ({% for a in h.anchors %}{% if a.href %}<a href="/read/{{ ed.work_id }}{% if ed.id %}?edition={{ ed.id }}{% endif %}#{{ a.href }}">{{ a.label }}</a>{% else %}{{ a.label }}{% endif %}{{ ', ' if not loop.last }}{% endfor %}){% endif %}. {{ h.why }}</li>{% endfor %}</ul></div>
+  {% endif %}
+  {% if ed.file_edits %}
+  <div class="q" id="by-hand">Changed by hand?</div>
+  <div class="a hand"><p class="lead">What {{ editor }} changed in the files keikaku drafts from, line by line: struck through where words were taken out, marked where they were put in. Everything above is keikaku's, except where it says otherwise.</p>
+    {% for e in ed.file_edits %}<div class="fe-edit"><p>{% if e.cause == 'note' %}<b>{{ e.title }}</b>, rewritten by keikaku after a note, in place of the edit above, {{ e.date }}{% else %}<span class="seal" aria-hidden="true"></span><b>{{ e.title }}</b>, edited by {{ e.by }}, {{ e.date }}{% endif %}</p>
+      <ul class="difflines">{% for line in e.lines %}<li>{{ line|safe }}</li>{% endfor %}</ul></div>{% endfor %}
+  </div>
   {% endif %}
 </div>
 </section>

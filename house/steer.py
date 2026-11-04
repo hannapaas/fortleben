@@ -4,10 +4,15 @@ drafted again under the amended bible, so the effect shows as English. The loop 
 approves, never on the house's decision.
 
 steer(conn, client, run_id, note) runs one round; approve(conn, run_id, voice) records the voice and
-queues the run, which whoever called it resumes from the draft.
+queues the run, which whoever called it resumes from the draft. edit(conn, run_id, file, text, by) is the
+other way to steer: the editor rewrites the reading, the voices or the bible by hand, and every later call
+reads their version.
 """
 
+import hashlib
 import json
+import re
+from pathlib import Path
 
 from house import context, events
 from house.client import WONDER, Call, load_schema
@@ -75,6 +80,29 @@ def quote(text: str) -> str:
     return "\n".join(f"> {line}" for line in text.strip().splitlines() or [""])
 
 
+def rewritten(doc: dict, kind: str) -> str:
+    """A reading or bible the editor rewrote by hand: what every call reads in place of the stored one, so a
+    note is read against it and the amended version returned carries it."""
+    if not doc.get("edited_text"):
+        return ""
+    return context.block(f"The {kind} as it now reads, rewritten by hand. Where it differs from the stored {kind} above, "
+                         f"this version stands, and the {kind} you return carries it", doc["edited_text"])
+
+
+def replaced(ctx, kind: str, old: dict, new: dict) -> None:
+    """A note's amended reading or bible took the place of the editor's hand edit: recorded like an edit, by
+    keikaku, so what every later call reads is never changed without a trace."""
+    if old.get("edited_text"):
+        after = _norm(context.bible_text(new) if kind == "bible" else context.reading_text(new))
+        ctx.emit("keikaku", "document.edited", {"file": kind, "before": old["edited_text"], "after": after, "by": "keikaku",
+                                                "cause": "note", "diff": edition_diff(old["edited_text"], after)})
+
+
+def edition_diff(before: str, after: str) -> list[str]:
+    from house.edition import diff_lines
+    return diff_lines(before, after)
+
+
 def fields(body: dict, keys: list[str]) -> dict:
     return {k: body.get(k) for k in keys}
 
@@ -101,8 +129,10 @@ def steer(conn, client, run_id: int, note: str) -> dict:
     inp = context.join(
         context.work_card(ctx.work),
         context.block("The house's reading, as stored", json.dumps(fields(reading, READING_FIELDS), ensure_ascii=False, indent=1)),
+        rewritten(reading, "reading"),
         second,
         context.block("The story bible, as stored", json.dumps(fields(bible, BIBLE_FIELDS), ensure_ascii=False, indent=1)),
+        rewritten(bible, "bible"),
         page_block(ctx, take, current_page(doc, voice)),
         rounds_block(doc["rounds"]),
         context.block("The new note, quoted: the person's own words, to interpret", quote(note)),
@@ -114,15 +144,19 @@ def steer(conn, client, run_id: int, note: str) -> dict:
     reading_v, bible_v = ctx.version("reading"), ctx.version("bible")
     if fields(out["reading"], READING_FIELDS) != fields(reading, READING_FIELDS):
         new = {**reading, **fields(out["reading"], READING_FIELDS)}  # keeps the second crux and the head's line
+        new.pop("edited_text", None)  # a hand edit is carried into the fields the reply returns
         eid = ctx.emit(ACTOR, "reading.written", {"version": reading_v + 1, "crux": new["crux"], "cause": "steer"},
                        call_id=res.call_id)
         reading_v = ctx.save("reading", new, eid)
+        replaced(ctx, "reading", reading, new)
     if fields(out["bible"], BIBLE_FIELDS) != fields(bible, BIBLE_FIELDS):
         new = {**bible, **fields(out["bible"], BIBLE_FIELDS)}
+        new.pop("edited_text", None)
         new["chapter_summaries"] = bible_stage.chapter_summaries(ctx, new)
         eid = ctx.emit(ACTOR, "bible.written", {"version": bible_v + 1, "cast": len(new["cast"]),
                                                 "motifs": len(new["motifs"]), "cause": "steer"}, call_id=res.call_id)
         bible_v = ctx.save("bible", new, eid)
+        replaced(ctx, "bible", bible, new)
 
     take = voice_take(ctx)  # the amended reading may have reworded or reordered the takes
     rnd = {"note": note, "reply": out["reply"], "changed": out["changed"], "question": out["question"] or None,
@@ -147,10 +181,167 @@ def approve(conn, run_id: int, voice: int) -> None:
     events.emit(conn, run_id, "editor", "checkpoint.approved", {"voice": int(voice), "take": takes[int(voice)]})
 
 
+# --- the files: what every stage after the checkpoint reads, which the editor can rewrite by hand -----------
+# The reading and the bible reach every call as context.reading and context.bible write them, and the voice as
+# its name and line. Those are the files. An editor's own version of the reading or the bible is kept as the
+# document's `edited_text` and read in place of the stored fields; the voices are parsed back into the reading.
+# Every edit is a new version of the document with a `document.edited` event holding before and after.
+
+FILES = {"reading": "reading.md", "voices": "voices.md", "bible": "bible.md"}
+_VOICE = re.compile(r"^##\s+Voice\s+(\d+)\s*:[ \t]*(.*?)[ \t]*$", re.M)
+WRITTEN = ".written.json"  # which run the terminal's files are for, and a hash of each as written
+
+
+def voices_text(takes: list[dict]) -> str:
+    return "\n\n".join(f"## Voice {n}: {t['label']}\n\n{t['line']}" for n, t in enumerate(takes))
+
+
+def texts(reading: dict, bible: dict) -> dict[str, str]:
+    """The three files as they stand: the reading and the bible as every call reads them, and the voices."""
+    return {"reading": context.reading_text(reading), "voices": voices_text(reading["voice_takes"]),
+            "bible": context.bible_text(bible)}
+
+
+def _norm(text: str) -> str:
+    lines = (text or "").replace("\r\n", "\n").replace("\r", "\n").strip().split("\n")
+    return "\n".join(line.rstrip() for line in lines)
+
+
+def parse_voices(text: str, takes: list[dict]) -> list[dict]:
+    """The voice takes with the names and lines a voices file gives them: '## Voice N: name', then the line
+    (in voices.md, the italic line under the heading). Every voice has to be there, once."""
+    marks = list(_VOICE.finditer(text))
+    found = {}
+    for i, m in enumerate(marks):
+        body = text[m.end():marks[i + 1].start() if i + 1 < len(marks) else len(text)].strip()
+        line = re.split(r"\n\s*\n", body, maxsplit=1)[0].strip()
+        line = re.sub(r"^([*_])(.+)\1$", r"\2", line, flags=re.S).strip()
+        found.setdefault(int(m.group(1)), (m.group(2).strip(), " ".join(line.split())))
+    if sorted(found) != list(range(len(takes))):
+        raise ValueError(f"keep one heading per voice, from '## Voice 0: …' to '## Voice {len(takes) - 1}: …', "
+                         "each with its line under it")
+    out = []
+    for n, t in enumerate(takes):
+        label, line = found[n]
+        if not label or not line:
+            raise ValueError(f"voice {n} needs a name after its heading and a line under it")
+        out.append({**t, "label": label, "line": line})
+    return out
+
+
+def edit(conn, run_id: int, name: str, text: str, by: str, person_id: int | None = None) -> bool:
+    """The editor rewrites one file by hand while the run waits at the checkpoint, and every later call reads
+    their version. Saved as a new version of the reading or the bible, in one transaction with the
+    `document.edited` event that keeps before, after and who. False if it reads as it did."""
+    if name not in FILES:
+        raise ValueError(f"there is no file called {name!r}")
+    waiting(conn, run_id)
+    ctx = context_for(conn, None, run_id)
+    reading, bible = ctx.latest("reading"), ctx.latest("bible")
+    before = _norm(texts(reading, bible)[name])
+    text = _norm(text)
+    if not text:
+        raise ValueError("the file is empty")
+    own = len(texts(*({k: v for k, v in d.items() if k != "edited_text"} for d in (reading, bible)))[name])
+    if len(text) > max(3 * own, 6000):  # every later call carries it, so it can't grow without end
+        raise ValueError(f"keep it to {max(3 * own, 6000):,} characters, three times what keikaku wrote")
+    if name == "voices":
+        kind, new = "reading", {**reading, "voice_takes": parse_voices(text, reading["voice_takes"])}
+        after = voices_text(new["voice_takes"])
+    else:
+        kind, doc = name, reading if name == "reading" else bible
+        new, after = {k: v for k, v in doc.items() if k != "edited_text"}, text
+        stored = context.reading_text(new) if name == "reading" else context.bible_text(new)
+        if after != _norm(stored):
+            new["edited_text"] = after  # put back as it was, it is the stored version again
+    if after == before:
+        return False
+    eid = events.emit(conn, run_id, "editor", "document.edited",
+                      {"file": name, "before": before, "after": after, "by": by, "person_id": person_id,
+                       "diff": edition_diff(before, after)}, commit=False)
+    ctx.save(kind, new, eid)  # commits both
+    return True
+
+
+def edits(conn, run_id: int) -> list[dict]:
+    """Every hand edit of the files a run was drafted from, oldest first: file, before, after, by, when."""
+    return [{**json.loads(r["payload"]), "at": r["created_at"]} for r in conn.execute(
+        "SELECT payload, created_at FROM event WHERE run_id=? AND type='document.edited' ORDER BY id", (run_id,))]
+
+
 # --- the checkpoint as Markdown, for the terminal and an assistant reading it to someone -----------------
 
+def _sha(text: str) -> str:
+    return hashlib.sha256(_norm(text).encode("utf-8")).hexdigest()
+
+
+def _written(folder: Path) -> dict:
+    try:
+        return json.loads((folder / WRITTEN).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
+def untaken(folder: Path) -> list[str]:
+    """Files changed by hand since they were written that `read_back` didn't take: written for another run,
+    or for a run that is no longer waiting."""
+    written = _written(folder)
+    return [f for f, h in (written.get("files") or {}).items()
+            if (folder / f).exists() and _sha((folder / f).read_text(encoding="utf-8")) != h]
+
+
+def write(conn, run_id: int, folder: Path) -> tuple[list[Path], list[Path]]:
+    """Write reading.md, bible.md and voices.md into `folder`, with a note of the run they're for, so
+    `read_back` takes only what was changed by hand since, and only for that run. A hand edit that wasn't
+    taken is moved aside to <name>.unused.md rather than written over. Returns the files and what was moved."""
+    folder.mkdir(parents=True, exist_ok=True)
+    moved = []
+    for f in untaken(folder):
+        (folder / f).replace(folder / f.replace(".md", ".unused.md"))
+        moved.append(folder / f.replace(".md", ".unused.md"))
+    paths, hashes = [], {}
+    for name, text in markdown(conn, run_id).items():
+        (folder / name).write_text(text, encoding="utf-8")
+        paths.append(folder / name)
+        hashes[name] = _sha(text)
+    (folder / WRITTEN).write_text(json.dumps({"run": run_id, "files": hashes}), encoding="utf-8")
+    return paths, moved
+
+
+def _untitled(text: str) -> str:
+    """A reading.md or bible.md without the title line `markdown` puts on it."""
+    lines = text.replace("\r\n", "\n").split("\n")
+    return "\n".join(lines[1:]) if lines and lines[0].startswith("# ") else text
+
+
+def read_back(conn, run_id: int, folder: Path, by: str = "the editor") -> list[str]:
+    """The files in `folder` that were changed by hand since `write` wrote them for this run, saved as the
+    editor's version (`edit`). Returns their names. Files written for another run are left alone."""
+    written = _written(folder)
+    if written.get("run") != run_id:
+        return []
+    changed = []
+    for name, fname in FILES.items():
+        path = folder / fname
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8")
+        if _sha(text) == written["files"].get(fname):
+            continue
+        try:
+            if edit(conn, run_id, name, text if name == "voices" else _untitled(text), by):
+                changed.append(fname)
+        except ValueError as e:
+            raise ValueError(f"{fname}: {e}" + (f" ({', '.join(changed)} saved)" if changed else "")) from e
+        written["files"][fname] = _sha(text)  # taken: not taken again, nor moved aside
+        (folder / WRITTEN).write_text(json.dumps(written), encoding="utf-8")
+    return changed
+
+
 def markdown(conn, run_id: int) -> dict[str, str]:
-    """reading.md, bible.md and voices.md for a run with a checkpoint: what `keikaku checkpoint` writes."""
+    """reading.md, bible.md and voices.md for a run with a checkpoint: what `keikaku checkpoint` writes.
+    reading.md and bible.md are, under their titles, exactly what every later call reads; voices.md gives
+    each voice's name in its heading and its line in italics under it, then page 1 in that voice."""
     doc, _ = checkpoint.document(conn, run_id)
     if doc is None:
         raise NotWaiting(f"run {run_id} has no checkpoint: it was started without --checkpoint, or hasn't reached it")
@@ -160,27 +351,19 @@ def markdown(conn, run_id: int) -> dict[str, str]:
     ja = {p.id: p.model_text.strip("　 ") for p in ctx.work.translatable()}
     voice = current_voice(ctx)
 
-    r = [f"# The house's reading: {title}", ""]
-    r += ["## The crux", ""] + [f"- **{c['point']}** {c['why']} *For the English:* {c['for_the_english']}" for c in reading["crux"]]
-    if reading.get("second_crux"):
-        r += ["", "## A second reader's crux", "", "A second reader, who never saw the reading, put it this way:", ""]
-        r += [f"- **{c['point']}** {c['why']} *For the English:* {c['for_the_english']}" for c in reading["second_crux"]]
-    r += ["", "## The reading", "", reading["reading"]]
-    if reading.get("open_questions"):
-        r += ["", "## Open questions", ""] + [f"- {q['question']} {q.get('why_it_matters') or ''}".rstrip() for q in reading["open_questions"]]
-    r += ["", "## The voices", "", "The draft is written in the voice you approve (`--voice N`); the first is the house's choice.", ""]
-    r += [f"- **{n}. {t['label']}**: {t['line']}" for n, t in enumerate(reading["voice_takes"])]
-
     def page(english):
         return "\n\n".join(en for _, en in english)
 
     v = [f"# Page 1 in each voice: {title}", "",
-         "The same page drafted once in each voice the reading offers. Nothing else has been drafted.", ""]
-    for n, t in enumerate(doc["takes"]):
-        v += [f"## Voice {n}: {t['label']}", "", f"*{t['line']}*", "", page(t["english"]), ""]
+         "The same page drafted once in each voice the reading offers. Nothing else has been drafted. "
+         "A voice's name (in its heading) and its line (in italics under it) are what the draft is told; edit them "
+         "here and the draft reads yours.", ""]
+    for n, t in enumerate(reading["voice_takes"]):
+        drafted = doc["takes"][n]["english"] if n < len(doc["takes"]) else []
+        v += [f"## Voice {n}: {t['label']}", "", f"*{t['line']}*", "", page(drafted), ""]
     for n, rnd in enumerate(doc["rounds"], 1):
         t = rnd.get("take") or doc["takes"][rnd.get("voice", 0)]
-        v += [f"## Note {n}", "", "\n".join(f"> {line}" for line in rnd["note"].splitlines()), "",
+        v += [f"### Note {n}", "", "\n".join(f"> {line}" for line in rnd["note"].splitlines()), "",
               f"**The house's reply:** {rnd['reply']}", ""]
         if rnd["changed"]:
             v += ["**What changed:**", ""] + [f"- {c}" for c in rnd["changed"]] + [""]
@@ -188,8 +371,9 @@ def markdown(conn, run_id: int) -> dict[str, str]:
             v += [f"**The house asks:** {rnd['question']}", ""]
         v += [f"**Page 1 again, in voice {rnd.get('voice', 0)} ({t['label']}):**", "", page(rnd["english"]), ""]
     first = doc["takes"][0]["english"]
-    v += ["## Page 1 in Japanese", "", "\n\n".join(ja.get(pid.split("–")[0], "") for pid, _ in first), ""]
+    v += ["### Page 1 in Japanese", "", "\n\n".join(ja.get(pid.split("–")[0], "") for pid, _ in first), ""]
     v += [f"The draft will be written in voice {voice} unless you approve another."]
 
-    b = [f"# The analysis: {title}", "", context.bible(bible).split("\n", 2)[2].strip()]
-    return {"reading.md": "\n".join(r) + "\n", "bible.md": "\n".join(b) + "\n", "voices.md": "\n".join(v) + "\n"}
+    return {"reading.md": f"# The house's reading: {title}\n\n{context.reading_text(reading).strip()}\n",
+            "bible.md": f"# The analysis: {title}\n\n{context.bible_text(bible).strip()}\n",
+            "voices.md": "\n".join(v) + "\n"}

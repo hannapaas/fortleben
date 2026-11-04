@@ -221,13 +221,50 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
         if not ed:
             raise HTTPException(404, "No edition of that work yet.")
         token = request.cookies.get(COOKIE) or secrets.token_urlsafe(24)
+        # The edition's own editor, signed in, can change its English (house/edition.py, `edit`).
+        me = request.state.person
+        mine = bool(me and not replay and ed["commissioned_by"] and edition.owner(c, ed["id"]) == me["id"])
         page = templates.TemplateResponse(request, "read.html", {
             "ed": ed, "labels": edition.LABELS, "replay": replay, "can_comment": can_comment,
-            "comments": comments.visible(c, work_id, token)})
+            "comments": comments.visible(c, work_id, token), "mine": mine,
+            "editing": mine and "edit" in request.query_params})
+        if me:
+            page.headers["Cache-Control"] = "no-store"  # it shows things only this person sees
         if COOKIE not in request.cookies:
             page.set_cookie(COOKIE, token, max_age=60 * 60 * 24 * 365, httponly=True, samesite="lax",
                             secure=https(request))
         return page
+
+    @app.post("/read/{work_id}/edit")
+    async def edit_paragraph(request: Request, work_id: str):
+        """The edition's editor changes a paragraph's English, from the page itself (reader.js)."""
+        if not from_desk(request):
+            return error("That request didn't come from the page.", 403)
+        if replay:
+            return error("This copy of the site serves recorded runs only, so nothing here can be edited.", 403)
+        me = request.state.person
+        if not me:
+            return error("Sign in first.", 401)
+        try:
+            data = await request.json()
+        except (ValueError, RecursionError):
+            data = None
+        if not isinstance(data, dict) or not whole(data):
+            return error("That request didn't arrive whole. Reload the page and try again.", 400)
+        eid, seg, english = data.get("edition"), data.get("segment"), data.get("english")
+        if not (isinstance(eid, int) and not isinstance(eid, bool) and known(eid)) or not isinstance(seg, str) \
+                or not isinstance(english, str):
+            return error("That request didn't make sense here.", 400)
+        c = conn()
+        if not c.execute("SELECT 1 FROM edition WHERE id=? AND work_id=?", (eid, work_id)).fetchone():
+            return error("There's no such edition.", 404)
+        if not accounts.allow_edit(me["id"]):
+            return error("That's a great many changes in an hour. Carry on in a little while.", 429)
+        try:
+            changed = edition.edit(c, eid, seg, english, me)
+        except edition.NotEditable as e:
+            return error(str(e), e.code)
+        return JSONResponse({"ok": True, "changed": changed}, headers=NOINDEX)
 
     @app.get("/read/{work_id}/analysis", response_class=HTMLResponse)
     def analysis(request: Request, work_id: str, edition_id: int | None = Query(None, alias="edition")):
@@ -489,6 +526,13 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
         note = data.get("note")
         desk.steer(db, pid, request.state.run_id, note if isinstance(note, str) else "", data.get("voice"))
         return {"ok": True}
+
+    # The files the draft reads (the reading, the voices, the analysis), edited by hand at the checkpoint.
+    @desk_route("POST", "/runs/{run_id}/files/{name}")
+    @json_post
+    async def desk_file(request, pid, data):
+        changed = desk.edit_file(db, pid, request.state.run_id, request.path_params["name"], data.get("text"))
+        return {"ok": True, "changed": changed}
 
     @desk_route("POST", "/runs/{run_id}/approve")
     @json_post

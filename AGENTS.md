@@ -12,7 +12,7 @@ This is for a coding assistant asked to translate a story with keikaku on behalf
 
 1. **Start the run with a checkpoint.** `uv run keikaku run <work> --checkpoint`. The house reads the story, writes its reading and the story bible, drafts the first page once in each voice it thinks the story allows, and stops. Nothing else is drafted yet.
 
-2. **Write out the checkpoint.** `uv run keikaku checkpoint <work>` writes three files and prints their paths: `reading.md` (what the house thinks the story turns on, and the voices), `bible.md` (who everyone is, the style, the repeated images, the hard spots) and `voices.md` (page 1 in each voice).
+2. **Write out the checkpoint.** `uv run keikaku checkpoint <work>` writes three files and prints their paths: `reading.md` (what the house thinks the story turns on), `bible.md` (who everyone is, the style, the repeated images, the hard spots) and `voices.md` (each voice's name and line, and page 1 in it). Under their titles, `reading.md` and `bible.md` are word for word what every later stage reads.
 
 3. **Show the person what the house made, in plain words.** Read the files yourself and tell them, briefly, what the house thinks the story turns on. Then show them the voices as the actual English of page 1, side by side or one after the other, each with its one-line description, and say which one the house would pick (the first). Don't summarise the voices instead of showing them: the English is what they're choosing between. Offer the bible if they want detail; most people won't.
 
@@ -29,6 +29,6 @@ This is for a coding assistant asked to translate a story with keikaku on behalf
 ## What not to do
 
 - Don't steer on their behalf. If they have no note, approve; the house's choices stand.
-- Don't edit `reading.md`, `bible.md` or `voices.md` to change the translation: they are written from the record, and the run never reads them.
+- Edit `reading.md`, `bible.md` or a voice's heading and italic line in `voices.md` only when the person asks you to change those words themselves, and change exactly what they asked. The next `checkpoint`, `steer` or `approve` takes the edit and every later stage reads it; the rest of `voices.md` (the drafted pages, the notes) is never read back. For anything they say about how it should read, send a note instead.
 - If a command says the run isn't waiting, it has been approved or never stopped at a checkpoint. Tell them so; don't start a new run without asking, because it costs money again.
 - Every command acts on the latest run of the work; add `--run N` to pick another.

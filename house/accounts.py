@@ -310,6 +310,7 @@ _signups: dict[str, deque] = defaultdict(deque)
 _logins: dict[str, deque] = defaultdict(deque)
 _resets: dict[str, deque] = defaultdict(deque)
 _account_tries: dict[str, deque] = defaultdict(deque)
+_edits: dict[str, deque] = defaultdict(deque)
 
 
 def _allow(seen: dict[str, deque], keys: list[str], limit: int, now: float | None, count: bool = True) -> bool:
@@ -325,6 +326,13 @@ def _allow(seen: dict[str, deque], keys: list[str], limit: int, now: float | Non
     for q in queues if count else ():
         q.append(now)
     return True
+
+
+EDITS_PER_HOUR = 120  # paragraph edits one editor may save in an hour (house/edition.py, `edit`)
+
+
+def allow_edit(person_id: int, now: float | None = None) -> bool:
+    return _allow(_edits, [f"person:{person_id}"], EDITS_PER_HOUR, now)
 
 
 def allow_signup(address: str, now: float | None = None, count: bool = True) -> bool:

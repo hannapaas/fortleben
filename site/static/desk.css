@@ -116,3 +116,9 @@
   .desk .a { font-size: 15.5px; }
   .work .wt { font-size: 1.2rem; }
 }
+/* The files at the checkpoint: opened one at a time, edited in place. */
+.files { max-width: 40rem; }
+.file summary { cursor: pointer; padding: 4px 0; }
+.file-box { display: block; width: 100%; box-sizing: border-box; margin-top: 6px; font: 14px/1.55 'DM Mono', ui-monospace, Menlo, monospace; padding: 8px; border: 1.5px solid var(--ink); background: var(--paper); color: var(--ink); resize: vertical; }
+.file-box:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.file-box[readonly] { color: var(--ink-2); border-color: var(--muted); }

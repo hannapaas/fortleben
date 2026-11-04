@@ -6,6 +6,7 @@ the readers' notes and what the desk did with each, the drafter's notes, the rev
 Live runs and `--replay` read the same tables; replay just loads them from fixtures/ first.
 """
 
+import difflib
 import html
 import json
 import re
@@ -217,7 +218,10 @@ def edition(conn, work_id: str, edition_id: int | None = None) -> dict | None:
     run_id = rel["run_id"]
     segs = {r["id"]: dict(r) for r in conn.execute("SELECT * FROM segment WHERE work_id=?", (work_id,))}
     queries = _rows(conn, "SELECT * FROM query WHERE run_id=? ORDER BY id", run_id, ("evidence", "answer"))
-    revisions = _rows(conn, "SELECT * FROM revision WHERE run_id=? ORDER BY id", run_id, ("segment_ids", "notes"))
+    hand = hand_edits(conn, run_id)
+    ours = {e["revision_id"] for e in hand}
+    revisions = [r for r in _rows(conn, "SELECT * FROM revision WHERE run_id=? ORDER BY id", run_id, ("segment_ids", "notes"))
+                 if r["id"] not in ours]  # the house's revisions; the editor's own are shown as theirs
 
     # One English text. The views' renderings of ledger terms are no longer offered: the text is the
     # plain (casual) rendering, and what a reader sees around it is a reading preset, not an edition.
@@ -244,6 +248,11 @@ def edition(conn, work_id: str, edition_id: int | None = None) -> dict | None:
         unit["history"] = [{"version": r["version"], "en": r["english"],
                             "date": _date(r["created_at"])} for r in revs]
         unit["changed"] = len({h["en"] for h in unit["history"]}) > 1
+        mine = [e for e in hand if e["ids"][0] == unit["id"]]
+        if mine:
+            unit["en"] = mine[-1]["english"]
+        unit["edits"] = [{"by": e["by"], "date": _date(e["at"]), "diff": e.get("diff") or diff_html(e["before"], e["english"])}
+                         for e in reversed(mine)]
         unit["en_html"] = mark_notes(unit["en"], unit["notes"])
 
     calls = conn.execute("SELECT COUNT(*), COALESCE(SUM(list_cost_usd), 0) FROM call WHERE run_id=?", (run_id,)).fetchone()
@@ -255,6 +264,8 @@ def edition(conn, work_id: str, edition_id: int | None = None) -> dict | None:
         "commissioned_by": None if rel["editor"] == "the house" else rel["editor"],
         "accent": accent(conn, work_id, rel["accent"]),
         "counts": {label: labels.count(label) for label in LABELS},
+        "edited": sum(1 for u in units if u["edits"]),
+        "file_edits": file_edits(conn, run_id),
         "label": _overall(labels), "colophon": body.get("colophon") or meta.get("colophon"),
         "calls": calls[0], "cost": calls[1],
         "queries": {"total": len(queries), "taken": sum(q["status"] == "taken" for q in queries),
@@ -263,6 +274,125 @@ def edition(conn, work_id: str, edition_id: int | None = None) -> dict | None:
         "models": sorted({r["model"] for r in conn.execute("SELECT DISTINCT model FROM call WHERE run_id=?", (run_id,))}),
         "analysis": analysis(conn, work_id, run_id, {pid: u["id"] for u in units for pid in u["paras"]}),
     }
+
+
+# --- the editor's own edits ---------------------------------------------------------------------
+# An edition's editor can change its English by hand at any time after it's published: each change is a
+# revision of the run's English with a `revision.created` event (cause "editor") that keeps before, after and
+# who. The page shows the latest over the release, and every change under the paragraph's *, as theirs.
+
+EDIT_CHARS = 20_000  # far more than any paragraph
+FILE_TITLES = {"reading": "The reading", "voices": "The voices", "bible": "The analysis"}
+
+
+def owner(conn, edition_id: int) -> int | None:
+    """The person whose run made the edition's current release, who may edit it; None for the house's own."""
+    row = conn.execute("SELECT json_extract(u.options, '$.editor_id') AS who FROM edition e JOIN release r ON r.id = e.current_release "
+                       "JOIN run u ON u.id = r.run_id WHERE e.id=?", (edition_id,)).fetchone()
+    return row["who"] if row else None
+
+
+def hand_edits(conn, run_id: int) -> list[dict]:
+    """The editor's own changes to a run's English, oldest first: ids, before, english, by, when, revision id."""
+    return [{**json.loads(r["payload"]), "at": r["created_at"]} for r in conn.execute(
+        "SELECT e.payload, r.created_at FROM revision r JOIN event e ON e.id = r.event_id WHERE r.run_id=? "
+        "AND e.type='revision.created' AND json_extract(e.payload, '$.cause')='editor' ORDER BY r.id", (run_id,))]
+
+
+class NotEditable(Exception):
+    """An edit the edition can't take, in plain words, with the HTTP status the site answers it with."""
+
+    def __init__(self, message: str, code: int = 400):
+        super().__init__(message)
+        self.code = code
+
+
+def edit(conn, edition_id: int, unit_id: str, english: str, person) -> bool:
+    """The edition's editor changes one paragraph's English (a group's, for a group the drafter joined).
+    Kept as a revision and an event in one transaction. False if it reads as it did."""
+    if owner(conn, edition_id) != person["id"]:
+        raise NotEditable("Only the editor of this edition can change its English.", 403)
+    ed = conn.execute("SELECT e.editor, r.run_id, r.body, u.work_id FROM edition e JOIN release r ON r.id = e.current_release "
+                      "JOIN run u ON u.id = r.run_id WHERE e.id=?", (edition_id,)).fetchone()
+    if ed["editor"] == "the house":
+        raise NotEditable("Only the editor of this edition can change its English.", 403)
+    paras = json.loads(ed["body"])["views"]["casual"]
+    unit = next((p for p in paras if p["id"] == unit_id and not p["grouped_with"]), None)
+    if unit is None or NUMBER.fullmatch(unit["ja"].strip("\u3000 ")):  # a section number is a heading, not English to edit
+        raise NotEditable("There's no such paragraph in this edition.", 404)
+    english = re.sub(r"[ \t\r\n]+", " ", english or "").strip()  # one paragraph; other spaces (NBSP) are the editor's
+    if not english:
+        raise NotEditable("A paragraph can't be empty. Write the English, or leave it as it was.")
+    if len(english) > EDIT_CHARS:
+        raise NotEditable(f"Keep a paragraph to {EDIT_CHARS:,} characters.")
+    ids = [unit_id] + [p["id"] for p in paras if p["grouped_with"] == unit_id]
+    before = next((e["english"] for e in reversed(hand_edits(conn, ed["run_id"])) if e["ids"][0] == unit_id), unit["en"])
+    if english == before:
+        return False
+    from house import events
+    from house.db import dumps
+    version = conn.execute("SELECT COALESCE(MAX(version), 0) + 1 FROM revision WHERE run_id=? AND segment_ids=?",
+                           (ed["run_id"], dumps(ids))).fetchone()[0]
+    rid = conn.execute("INSERT INTO revision (run_id, work_id, segment_ids, version, english) VALUES (?,?,?,?,?)",
+                       (ed["run_id"], ed["work_id"], dumps(ids), version, english)).lastrowid
+    eid = events.emit(conn, ed["run_id"], "editor", "revision.created",
+                      {"cause": "editor", "ids": ids, "revision_id": rid, "edition_id": edition_id, "before": before,
+                       "english": english, "diff": diff_html(before, english), "by": ed["editor"],
+                       "person_id": person["id"]}, commit=False)
+    conn.execute("UPDATE revision SET event_id=? WHERE id=?", (eid, rid))
+    conn.commit()
+    return True
+
+
+def file_edits(conn, run_id: int) -> list[dict]:
+    """The editor's hand edits of the files the run was drafted from, for the appendix: which, who, when,
+    and the lines that changed."""
+    from house import steer
+    return [{"title": FILE_TITLES.get(e["file"], e["file"]), "by": e["by"], "date": _date(e["at"]), "cause": e.get("cause"),
+             "lines": e.get("diff") or diff_lines(e["before"], e["after"])} for e in steer.edits(conn, run_id)]
+
+
+_WORDS = re.compile(r"\s+|\w+|[^\w\s]")
+DIFF_TOKENS = 1500  # past this a word diff gets slow (it's quadratic), so a longer change is shown whole, struck and replaced
+
+
+def diff_html(before: str, after: str, context: int | None = None) -> str:
+    """`after`, escaped, with what it took out struck through (<del>) and what it put in marked (<ins>), word by
+    word. With `context`, a long unchanged stretch keeps only that many characters either side of a change."""
+    a, b = _WORDS.findall(before or ""), _WORDS.findall(after or "")
+    if len(a) > DIFF_TOKENS or len(b) > DIFF_TOKENS:
+        return "".join(f"<{tag}>{html.escape(t)}</{tag}>" for tag, t in (("del", before), ("ins", after)) if t)
+    ops = difflib.SequenceMatcher(None, a, b, autojunk=False).get_opcodes()
+    out = []
+    for n, (op, i1, i2, j1, j2) in enumerate(ops):
+        if op == "equal":
+            same = "".join(a[i1:i2])
+            if context and len(same) > 2 * context + 20:
+                head = same[:context].rsplit(" ", 1)[0] + " " if n else ""
+                tail = " " + same[-context:].split(" ", 1)[-1] if n < len(ops) - 1 else ""
+                same = f"{head}…{tail}"
+            out.append(html.escape(same))
+            continue
+        if i2 > i1:
+            out.append(f"<del>{html.escape(''.join(a[i1:i2]))}</del>")
+        if j2 > j1:
+            out.append(f"<ins>{html.escape(''.join(b[j1:j2]))}</ins>")
+    return "".join(out)
+
+
+def diff_lines(before: str, after: str) -> list[str]:
+    """Only the lines that changed between two versions of a file, each as diff_html marks it."""
+    a, b = (before or "").split("\n"), (after or "").split("\n")
+    out = []
+    for op, i1, i2, j1, j2 in difflib.SequenceMatcher(None, a, b, autojunk=False).get_opcodes():
+        if op == "equal":
+            continue
+        old, new = a[i1:i2], b[j1:j2]
+        for k in range(max(len(old), len(new))):
+            line = diff_html(old[k] if k < len(old) else "", new[k] if k < len(new) else "", context=80)
+            if line.strip():
+                out.append(line)
+    return out
 
 
 def _document(conn, work_id: str, run_id: int, kind: str) -> dict | None:
@@ -290,6 +420,7 @@ def analysis(conn, work_id: str, run_id: int, where: dict[str, str] | None = Non
         "crux": reading.get("crux") or [], "second_crux": reading.get("second_crux") or [],
         "reading": [p.strip() for p in re.split(r"\n\s*\n", reading.get("reading") or "") if p.strip()],
         "voice": RECOMMENDED.sub("", voice["line"]).strip() if voice else None,
+        "voice_by": _voice_by(conn, run_id),
         "cast": [], "style": [], "narration": [], "motifs": [], "hard_spots": []}
     if not bible:
         return plain_all(out)
@@ -309,6 +440,12 @@ def analysis(conn, work_id: str, run_id: int, where: dict[str, str] | None = Non
     out["hard_spots"] = [{"anchors": [{"id": a, "href": where.get(a), "label": paragraph_label(a)} for a in h.get("anchors") or []],
                           "kind": h.get("kind", ""), "why": h.get("why_hard", "")} for h in bible.get("hard_spots") or []]
     return plain_all(out, cast_names(bible))
+
+
+def _voice_by(conn, run_id: int) -> str | None:
+    """Who rewrote the voices by hand, if anyone did: the voice on the page is then theirs, not keikaku's."""
+    from house import steer
+    return next((e["by"] for e in reversed(steer.edits(conn, run_id)) if e["file"] == "voices" and e["by"] != "keikaku"), None)
 
 
 def _sentence(text: str) -> str:

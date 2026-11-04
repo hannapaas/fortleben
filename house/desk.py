@@ -533,6 +533,36 @@ def approve(db, token: Who, run_id: int, voice) -> None:
     spawn(go, db, run_id, "draft")
 
 
+FILE_CHARS = 60_000  # far more than any reading or bible the house writes
+FILE_NAMES = {"reading": "The reading", "voices": "The voices", "bible": "The analysis"}
+
+
+def edit_file(db, token: Who, run_id: int, name: str, text) -> bool:
+    """The editor's own version of one of the files a waiting run drafts from (house/steer.py, `edit`):
+    every later stage reads it, and the edition publishes what they changed. False if nothing changed."""
+    from house import steer
+    conn = connect(db)
+    person, row = _mine(conn, token, run_id)
+    if name not in FILE_NAMES:
+        raise Refused("There's no such file.", 404)
+    if not isinstance(text, str) or not text.strip():
+        raise Refused("The file is empty. Write something in it, or leave it as it was.")
+    if len(text) > FILE_CHARS:
+        raise Refused(f"Keep a file to {FILE_CHARS:,} characters.")
+    with _lock:
+        if row["status"] != "waiting":
+            raise Refused("The files can be edited only while the run waits for you, before the draft starts.", 409)
+        if run_id in _steering:
+            raise Refused("keikaku is still reading your last note. Edit once its reply is here.", 409)
+        if run_id in _live:
+            raise Refused("That run is still finishing its checkpoint. Try again in a moment.", 409)
+        try:
+            # named as the edition credits them, since that's where the record is published
+            return steer.edit(conn, run_id, name, text, _options(conn, run_id).get("credit") or person["name"], person["id"])
+        except (steer.NotWaiting, ValueError) as e:
+            raise Refused(f"Not saved: {e}.")
+
+
 def spawn(fn, *args) -> None:
     """Run fn in a background thread. Tests replace this to run it in place."""
     threading.Thread(target=fn, args=args, daemon=True, name=f"desk-run-{args[1]}").start()
@@ -669,6 +699,7 @@ def _run_dict(conn, row) -> dict:
             "held": options.get("held_drops", 0),
             "spent": min(_used(conn, row["id"]), options.get("reserved_drops", 0)),
             "started": _date(row["created_at"]), "edition_url": _edition_url(conn, row) if status == "done" else None,
+            "edit_url": _edit_url(conn, row) if status == "done" else None,
             "failure": failure(options.get("error"), bool(options.get("own_key"))) if status == "failed" else None,
             "resumable": status in ("interrupted", "failed") and resumable(options),
             "rounds": len(_checkpoint_doc(conn, row["id"]).get("rounds") or []) if status == "waiting" else 0,
@@ -691,6 +722,12 @@ def _edition_url(conn, row) -> str:
     """The edition this run released: the editor's own, beside the house's."""
     r = conn.execute("SELECT edition_id FROM release WHERE run_id=? ORDER BY id DESC LIMIT 1", (row["id"],)).fetchone()
     return f"/read/{row['work_id']}" + (f"?edition={r['edition_id']}" if r else "")
+
+
+def _edit_url(conn, row) -> str | None:
+    """The edition this run released, open for its editor to edit the English."""
+    r = conn.execute("SELECT edition_id FROM release WHERE run_id=? ORDER BY id DESC LIMIT 1", (row["id"],)).fetchone()
+    return f"/read/{row['work_id']}?edition={r['edition_id']}&edit=1" if r else None
 
 
 def runs(conn, person_id: int) -> list[dict]:
@@ -783,14 +820,25 @@ def checkpoint(conn, row) -> dict:
               for r in cp.get("rounds") or []]
     voice = options.get("voice", 0)
     voice = voice if isinstance(voice, int) and 0 <= voice < len(takes) else 0
-    voices = [{"label": plain(t.get("label", ""), cast), "line": plain(t.get("line", ""), cast), "english": _paras(t.get("english")),
-               "redrafted": False} for t in takes]
+    named = reading.get("voice_takes") or []
+    named = named if len(named) == len(takes) else takes  # the reading's names, which a note or a hand edit may change
+    voices = [{"label": plain(n.get("label", ""), cast), "line": plain(n.get("line", ""), cast), "english": _paras(t.get("english")),
+               "redrafted": False} for n, t in zip(named, takes)]
     for r in rounds:  # each voice shows its latest redraft, if a note has redrafted it
         if isinstance(r["voice"], int) and 0 <= r["voice"] < len(voices):
             voices[r["voice"]].update(english=r["english"], redrafted=True)
     run = _run_dict(conn, row)
+    from house import steer
+    try:
+        texts = steer.texts(reading, bible)
+    except (KeyError, TypeError):  # a reading or bible missing its parts can't be written out as a file
+        texts = {}
+    edited = {"reading": bool(reading.get("edited_text")), "bible": bool(bible.get("edited_text")),
+              "voices": any(e["file"] == "voices" for e in steer.edits(conn, row["id"]))}
+    files = [{"name": k, "title": t, "text": texts[k], "edited": edited[k]} for k, t in FILE_NAMES.items() if k in texts]
     return {
-        "run_id": row["id"], "title_en": run["title_en"], "voice": voice, "voices": voices, "rounds": rounds,
+        "run_id": row["id"], "title_en": run["title_en"], "voice": voice, "voices": voices, "rounds": rounds, "files": files,
+        "edited": {f["name"]: f["text"] for f in files if f["edited"]},
         "steering": run["steering"], "steer_error": run["steer_error"],
         "reading": plain_all({
             "crux": [{"point": c.get("point", ""), "for_the_english": c.get("for_the_english", "")}
