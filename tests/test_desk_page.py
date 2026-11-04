@@ -93,12 +93,14 @@ def test_a_waiting_run_shows_the_checkpoint_in_order():
     assert "Waiting for you." in html and 'id="checkpoint-34"' in html
     assert '<li class="step done">Reading the story' in html and 'class="step now yours" aria-current="step">Your review' in html
     assert '<li class="step next">Drafting the English' in html and 'class="dots"' not in html  # nothing moves while it's yours
-    order = ["three files", "The reading", "A potato opens a vision", "The analysis", "c1 the young mother",
-             "The voices", "Plain and quiet.", "Voice a", "Voice b", "Less formal.", "The register is plainer now.",
+    order = ["what every stage of the translation will read", "The reading", "A potato opens a vision", "The analysis",
+             "c1 the young mother", "The voice", "Plain and quiet.", "Warmer.", "Less formal.", "The register is plainer now.",
              "Is the baby a girl", "Send note", "Approve and translate"]
     at = [html.index(x) for x in order]
     assert at == sorted(at)
-    assert html.count("A potato opens a vision") == 1 and html.count("Plain and quiet.") == 1  # each file once
+    assert html.count("A potato opens a vision") == 1  # each file once
+    assert 'class="voice picked"' in html and 'value="Warmer."' not in html  # no fields without a voices file
+    assert '<button type="button" class="btn go send" hidden>Send note</button>' in html  # until a note is written
     assert 'name="voice-34" value="1" checked' in html and "redrafted after your note" in html
     assert "<p>The lamp swung.</p>" in html and "Edited by you." in html
     assert '<button type="button" class="btn save" disabled>Save</button>' in html  # until something changes
@@ -117,10 +119,10 @@ def test_a_running_translation_shows_its_stage_moving():
 
 def test_the_checkpoint_while_a_note_is_read_and_when_the_house_is_full():
     html = render(desk(runs=[RUN], checkpoints=[dict(CHECKPOINT, steering=True)]), page="desk_run.html", run_id=34)
-    assert 'data-steering="1"' in html and 'class="btn send" disabled' in html and 'class="btn go approve" disabled' in html
+    assert 'data-steering="1"' in html and 'class="btn go send" hidden disabled' in html and 'class="btn go approve" disabled' in html
     assert 'class="line reading-note" aria-live="polite">' in html
     full = render(desk(busy=True, runs=[RUN], checkpoints=[CHECKPOINT]), page="desk_run.html", run_id=34)
-    assert 'class="btn send">' in full and 'class="btn go approve" disabled' in full and 'data-full="1"' in full
+    assert 'class="btn go send" hidden>' in full and 'class="btn go approve" disabled' in full and 'data-full="1"' in full
 
 
 def test_closed_disables_start_and_resume():

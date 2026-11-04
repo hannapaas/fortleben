@@ -450,10 +450,11 @@ def test_a_waiting_run_shows_the_checkpoint(conn, db, waiting, monkeypatch):
     assert f'href="/desk/{token}/translations/{run_id}">Review and approve' in home
     html = TestClient(web.create_app(db, screen=False), headers=DESK).get(f"/desk/{token}/translations/{run_id}").text
     assert "Waiting for you." in html and 'class="step now yours"' in html
-    assert "keikaku has read the story. These are the three files" in html
+    assert "keikaku has read the story. Below is what every stage" in html
+    assert 'class="vname"' in html and 'class="vtext"' in html  # the picked voice, as fields
     assert DOCS["reading"]["crux"][0]["point"][:60] in html.replace("&#34;", '"').replace("&#39;", "'")
     for i, t in enumerate(DOCS["reading"]["voice_takes"]):
-        assert f'name="voice-{run_id}" value="{i}"' in html and f"Voice {t['label']}" in html
+        assert f'name="voice-{run_id}" value="{i}"' in html and f"<b>{t['label']}</b>" in html
     assert 'value="0" checked' in html
     assert PAGE_1[0][1][:50] in html and f"[{DOCS['reading']['voice_takes'][1]['label']}] {PAGE_1[0][1][:40]}" in html
     assert "### Style sheet" in html and "### Cast" in html and "### Hard spots" in html  # the analysis, as its file

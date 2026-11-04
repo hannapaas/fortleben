@@ -101,7 +101,6 @@
 .rounds .changed { font-size: 15px; }
 .note-box { display: block; width: 100%; max-width: 40rem; box-sizing: border-box; font: inherit; padding: 8px; border: 1.5px solid var(--ink); background: var(--paper); color: var(--ink); }
 .note-box:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-.checkpoint .send { font-size: 1rem; padding: 6px 18px; }
 .checkpoint .reading-note { background: linear-gradient(transparent 60%, var(--accent-wash) 60%); display: inline-block; }
 .checkpoint .reading-note[hidden] { display: none; }
 
@@ -148,3 +147,17 @@
 @keyframes dots { to { width: 1em; } }
 @media (prefers-reduced-motion: reduce) { .dots::after { animation: none; width: auto; } }
 .runs.one .rt, .runs.one .read[href*="/translations/"] { display: none; }  /* its own page already says which, and shows it */
+/* The voice: the picked one's name and line are fields, ruled like the files; the others are read as they are. */
+.vhead { display: flex; align-items: center; gap: 0; }
+.voice .vedit, .voice .vname { display: none; }
+.voice .vedit { margin: 4px 0 10px; }
+.voice.picked .vedit { display: block; }
+.voice.picked .vname { display: block; flex: 1; min-width: 0; }
+.voice.picked .vline, .voice.picked .opt b { display: none; }
+.vline { margin: 4px 0 8px; font-size: 14px; color: var(--ink-2); }
+.vname, .vtext { display: block; width: 100%; box-sizing: border-box; font: inherit; color: var(--ink); background: transparent; border: 0;
+  border-left: 2px solid color-mix(in srgb, var(--rule) 35%, transparent); padding: 2px 0 2px 12px; resize: none; overflow: hidden; }
+.vname { font-weight: 600; font-size: 16px; }
+.vtext { font-size: 14px; line-height: 1.5; margin-top: 4px; field-sizing: content; }
+.vname:focus, .vtext:focus { outline: 0; border-left-color: var(--accent); }
+.voices.file > .filerow { grid-column: 1 / -1; padding-left: 0; }

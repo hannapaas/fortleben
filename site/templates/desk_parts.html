@@ -27,7 +27,7 @@
    as the file every later stage reads, and edited in place. #}
 <section class="desk checkpoint" id="checkpoint-{{ cp.run_id }}" data-run="{{ cp.run_id }}" data-rounds="{{ cp.rounds|length }}"{% if cp.steering %} data-steering="1"{% endif %}{% if full or closed %} data-full="1"{% endif %} aria-labelledby="cph-{{ cp.run_id }}">
   <h2 class="cp-h" id="cph-{{ cp.run_id }}">Your review</h2>
-  <p class="desk-lead">keikaku has read the story. These are the three files every stage of the translation reads: edit any of them, or send a note, then pick a voice and approve to start the translation.</p>
+  <p class="desk-lead">keikaku has read the story. Below is what every stage of the translation will read: its reading of the story, its analysis, and the voice. Edit any of it, or send a note, then pick a voice and approve to start the translation.</p>
   <p class="sm">What you change is published with the edition, with your name and the date.</p>
 
   <h3>The reading</h3>
@@ -36,17 +36,25 @@
   <h3>The analysis</h3>
   {{ file(cp, 'bible', closed) }}
 
-  <h3>The voices</h3>
-  {{ file(cp, 'voices', closed) }}
-  <p class="sm" id="voice-q-{{ cp.run_id }}">Page 1 in each voice. Pick the one to write the whole story in. Editing a voice doesn't draft page 1 again; a note does.</p>
-  <div class="voices" role="radiogroup" aria-labelledby="voice-q-{{ cp.run_id }}">
+  <h3 id="voice-q-{{ cp.run_id }}">The voice</h3>
+  <p class="sm">Page 1 in each voice keikaku thinks the story allows. Pick the one to write the whole story in, and change how it's described if you like: the drafter is told the name and the line. A change doesn't draft page 1 again; a note does.</p>
+  {% set vf = cp.files|selectattr('name', 'equalto', 'voices')|first %}
+  {# The voices file is written from the fields below (desk.js), so it saves like the other files. #}
+  <div class="voices{% if vf %} file{% endif %}"{% if vf %} data-file="voices"{% endif %} role="radiogroup" aria-labelledby="voice-q-{{ cp.run_id }}">
+    {% if vf %}<textarea class="file-box" hidden aria-hidden="true" tabindex="-1">{{ vf.text }}</textarea>{% endif %}
     {% for v in cp.voices %}
-    <div class="voice">
-      <label class="opt"><input type="radio" name="voice-{{ cp.run_id }}" value="{{ loop.index0 }}"{% if loop.index0 == cp.voice %} checked{% endif %}><span class="bx r" aria-hidden="true"></span><b>Voice {{ v.label }}</b></label>
+    <div class="voice{% if loop.index0 == cp.voice %} picked{% endif %}" data-label="{{ v.raw_label }}" data-line="{{ v.raw_line }}">
+      <div class="vhead"><label class="opt"><input type="radio" aria-label="{{ v.label }}" name="voice-{{ cp.run_id }}" value="{{ loop.index0 }}"{% if loop.index0 == cp.voice %} checked{% endif %}><span class="bx r" aria-hidden="true"></span><b>{{ v.label }}</b></label>
+        {% if vf %}<input class="vname" maxlength="200" value="{{ v.raw_label }}" aria-label="This voice's name"{% if closed or cp.steering %} readonly{% endif %}>{% endif %}</div>
       {% if v.redrafted %}<span class="tag">redrafted after your note</span>{% endif %}
+      <p class="vline">{{ v.line }}</p>
+      {% if vf %}<div class="vedit">
+        <textarea class="vtext" rows="2" maxlength="4000" aria-label="How this voice is described to the drafter"{% if closed or cp.steering %} readonly{% endif %}>{{ v.raw_line }}</textarea>
+      </div>{% endif %}
       <div class="page">{{ paras(v.english) }}</div>
     </div>
     {% endfor %}
+    {% if vf %}<div class="filerow"><button type="button" class="btn save" disabled>Save</button><span class="sm saved" aria-live="polite">{% if vf.edited %}Edited by you.{% endif %}</span></div>{% endif %}
   </div>
 
   {% if cp.rounds %}<h3>Your notes so far</h3>
@@ -60,14 +68,13 @@
     </li>{% endfor %}
   </ol>{% endif %}
 
-  <h3><label for="note-{{ cp.run_id }}">A note to keikaku</label></h3>
-  <p class="sm">Anything from “the daughter is older than this reads” to “less formal”. keikaku changes the files to match and drafts page 1 again, so you can see the difference.</p>
+  <h3><label for="note-{{ cp.run_id }}">A note to keikaku, or approve</label></h3>
+  <p class="sm">Say in your own words anything keikaku should hold differently, from “the daughter is older than this reads” to “less formal”: it changes what it wrote to match, drafts page 1 again and replies, and you look again. Or leave this empty and approve, and the translation starts in the voice you picked.</p>
   <textarea id="note-{{ cp.run_id }}" class="note-box" rows="4" maxlength="2000"></textarea>
   <div class="startrow">
-    <button type="button" class="btn send"{% if closed or cp.steering %} disabled{% endif %}>Send note</button>
+    <button type="button" class="btn go send" hidden{% if closed or cp.steering %} disabled{% endif %}>Send note</button>
     <button type="button" class="btn go approve"{% if full or closed or cp.steering %} disabled{% endif %}>Approve and translate</button>
   </div>
-  <p class="sm">Nothing else is translated until you approve.</p>
   <p class="line reading-note" aria-live="polite"{% if not cp.steering %} hidden{% endif %}>Reading your note…</p>
   {% if full and not closed %}<p class="line">Fortleben is full at the moment: three translations are going. Try again in a little while.</p>{% endif %}
   <p class="err" aria-live="polite"{% if not cp.steer_error %} hidden{% endif %}>{{ cp.steer_error or '' }}</p>
