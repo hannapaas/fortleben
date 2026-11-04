@@ -1,37 +1,6 @@
 {
   "type": "object",
   "properties": {
-    "changes": {
-      "type": "array",
-      "description": "Only what you changed: each an exact span of the current English and its replacement",
-      "items": {
-        "type": "object",
-        "properties": {
-          "paragraph": {
-            "type": "string",
-            "description": "The paragraph ID alone, exactly as labelled in the English given: p12, or p21–p23 for a group the translator joined"
-          },
-          "find": {
-            "type": "string",
-            "description": "The exact text to replace, copied from the paragraph's English as given"
-          },
-          "replace": {
-            "type": "string",
-            "description": "What goes in its place"
-          },
-          "answers": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Note numbers this change answers (F1, R2); empty if no note asked for it"
-          },
-          "reason": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "declined": {
       "type": "array",
       "items": {

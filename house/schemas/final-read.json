@@ -1,31 +1,6 @@
 {
   "type": "object",
   "properties": {
-    "fixes": {
-      "type": "array",
-      "description": "Every repair that matters; none for a clean text",
-      "items": {
-        "type": "object",
-        "properties": {
-          "paragraph": {
-            "type": "string",
-            "description": "The paragraph ID alone, exactly as labelled in the English given: p12, or p21–p23 for a group the translator joined"
-          },
-          "find": {
-            "type": "string",
-            "description": "The exact words to replace, as they stand in the English"
-          },
-          "replace": {
-            "type": "string",
-            "description": "What goes in their place"
-          },
-          "reason": {
-            "type": "string",
-            "description": "Why, in a sentence"
-          }
-        }
-      }
-    },
     "notes": {
       "type": "array",
       "description": "For the editor: only a judgement call the text can't settle. Usually none",
@@ -60,7 +35,7 @@
     "verdict": {
       "type": "string",
       "minLength": 1,
-      "description": "Ready or not, and why, in a sentence or two"
+      "description": "Ready or not, and why, in a sentence or two, after your edits"
     },
     "say": {
       "type": "string"
