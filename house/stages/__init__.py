@@ -1,13 +1,21 @@
 """Stages: one module per stage, each with run(ctx). The order is house/orchestrator.py."""
 
 import json
+import os
+import queue
 import sqlite3
+import threading
 from dataclasses import dataclass, field, replace
 
-from house import events
+from house import db, events
 from house.client import BaseClient, Call, Result
 from house.db import dumps
 from house.parser import ParsedWork
+
+
+def width() -> int:
+    """How many calls a stage may have out at once: KEIKAKU_PARALLEL, default 4; 1 makes every stage serial."""
+    return max(1, int(os.environ.get("KEIKAKU_PARALLEL") or 4))
 
 
 @dataclass
@@ -63,6 +71,63 @@ class Ctx:
             if n == max_turns - 1:
                 turns.append({"role": "user", "content": "That was your last turn with the tools: give your answer now."})
         raise AssertionError("unreachable")
+
+    def side_by_side(self, fn, items, then=None) -> list:
+        """fn(ctx, item) for every item, up to width() at once, and the results in the items' order. Only for
+        work that doesn't depend on itself: each runs on its own connection, may make calls and emit events, and
+        stores nothing. then(item, result), if given, stores a result here, in the items' order, as one by one
+        would. After an error no new item starts, the ones under way finish, the items before it are stored, and
+        it is raised, so no thread is left writing after the stage has stopped and a resumed stage redoes only
+        what wasn't stored. The threads are daemons, and Ctrl-C stops the queue, so the command line doesn't
+        wait for calls in flight. An in-memory database (some tests) runs them one by one, as does a single item."""
+        items, path = list(items), db.file_of(self.conn)
+        n = min(width(), len(items))
+        if n <= 1 or not path:
+            out = []
+            for it in items:
+                out.append(fn(self, it))
+                if then:
+                    then(it, out[-1])
+            return out
+        self.conn.commit()  # an open write on this connection would hold up every thread's writes
+        results, errors, todo, stop = [None] * len(items), {}, queue.SimpleQueue(), threading.Event()
+        for i in range(len(items)):
+            todo.put(i)
+
+        def worker():
+            while not stop.is_set():
+                try:
+                    i = todo.get_nowait()
+                except queue.Empty:
+                    return
+                conn = None
+                try:
+                    conn = db.another(path)
+                    results[i] = fn(replace(self, conn=conn, client=self.client.on(conn)), items[i])
+                except BaseException as e:
+                    errors[i] = e
+                    stop.set()
+                finally:
+                    if conn is not None:
+                        conn.close()
+
+        threads = [threading.Thread(target=worker, daemon=True, name=f"run-{self.run_id}-{k}") for k in range(n)]
+        try:
+            for t in threads:
+                t.start()
+            for t in threads:
+                while t.is_alive():
+                    t.join(0.5)  # a bare join can't be interrupted by Ctrl-C on Windows
+        except BaseException:
+            stop.set()
+            raise
+        first = min(errors) if errors else len(items)
+        if then:
+            for i in range(first):
+                then(items[i], results[i])
+        if errors:
+            raise errors[first]
+        return results
 
     # the versioned knowledge of a work: reading, crux check, bible
     def latest(self, kind: str) -> dict | None:
