@@ -299,7 +299,7 @@ CREATE TABLE IF NOT EXISTS reaction (
 );
 
 -- Comments in the margin: anyone, no account. Shown to everyone once the screen passes them;
--- until then only to their writer (matched by a cookie token, stored hashed). Removed ones are deleted.
+-- until then only to their writer (matched by a cookie token, stored hashed). Nothing is deleted: a removed one is hidden.
 CREATE TABLE IF NOT EXISTS comment (
   id            INTEGER PRIMARY KEY,
   work_id       TEXT NOT NULL,

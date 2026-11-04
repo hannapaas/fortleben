@@ -2,7 +2,7 @@
 
 Every change to text, queries, rules, budget or status is an event in the `event` table. The UI,
 the House stream, replay and evals read events; nothing else is a source of truth. Change this
-list only with a note in the commit and docs/ARCHITECTURE.md §7 updated in the same commit.
+list only with a note in the commit and docs/ARCHITECTURE.md ("The database and the event log") updated in the same commit.
 
 Each event has an actor (a department and role, a person, or 'house'), a type from TYPES, a
 JSON payload and the cost of the call behind it, if any. Every payload that comes from a model
