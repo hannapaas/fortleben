@@ -780,7 +780,7 @@ def serve(db: str | None, replay: bool, host: str, port: int) -> None:
 
     app = create_app(db, replay=replay)
     if not replay:
-        comments.start_digests(db)  # the editor's daily comments email
+        comments.start_digests(db)  # comments whose screen didn't run, and the editor's daily email
     # The address and scheme come from the connection; X-Forwarded-For is read by `address` only behind a
     # proxy (KEIKAKU_TRUST_PROXY), so uvicorn mustn't rewrite them from headers a client can send.
     uvicorn.run(app, host=host, port=port, proxy_headers=False)

@@ -50,6 +50,21 @@ def test_a_new_comment_is_seen_only_by_its_writer_until_it_passes(site, db, monk
     assert "This is the turn of the story." in stranger.get("/read/bansan").text
 
 
+def test_a_comment_whose_screen_didnt_run_is_screened_again_later(site, db, monkeypatch):
+    cid = post(site).json()["id"]
+
+    def closed(call):
+        raise RuntimeError("daily cap reached")
+
+    monkeypatch.setattr(comments, "make_client", lambda conn: SimpleNamespace(call=closed))
+    comments.screen(db, cid)
+    assert site.get(f"/comments/{cid}").json()["status"] == "pending"
+    assert comments.screen_pending(db) == 0  # a fresh one is left to the screen its post started
+    fake_screen(monkeypatch, "pass")
+    assert comments.screen_pending(db, older_than="+1 minute") == 1
+    assert site.get(f"/comments/{cid}").json()["status"] == "published"
+
+
 def test_a_failed_comment_tells_its_writer_why(site, db, monkeypatch):
     cid = post(site, body="Buy cheap watches").json()["id"]
     fake_screen(monkeypatch, "fail", "Advertising.")

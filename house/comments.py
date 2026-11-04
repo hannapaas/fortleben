@@ -110,6 +110,18 @@ def screen(db, comment_id: int) -> None:
     conn.commit()
 
 
+def screen_pending(db, older_than: str = "-5 minutes") -> int:
+    """Screen again every comment still pending a while after it was posted: its screen didn't run (the
+    day's cap was reached, the house was closed, the call failed), and nothing else would ever retry it.
+    The fresh ones are left to the screen their post started. Returns how many were tried."""
+    conn = connect(db)
+    ids = [r[0] for r in conn.execute("SELECT id FROM comment WHERE status='pending' AND created_at < datetime('now', ?) "
+                                      "ORDER BY id", (older_than,))]
+    for cid in ids:
+        screen(db, cid)
+    return len(ids)
+
+
 def english_of(conn, work_id: str, segment_id: str) -> str:
     import json
 
@@ -249,13 +261,15 @@ def _uk_date(utc: str):
 
 
 def start_digests(db, every: int = 900) -> None:
-    """Check every quarter of an hour, in the background, whether the day's email is due."""
+    """Every quarter of an hour, in the background: screen any comment whose screen didn't run, and check
+    whether the day's email is due."""
     def loop():
         while True:
-            try:
-                send_digest(db)
-            except Exception as e:
-                print(f"[comment digest failed: {e}]")
+            for job in (screen_pending, send_digest):
+                try:
+                    job(db)
+                except Exception as e:
+                    print(f"[comment {job.__name__} failed: {e}]")
             time.sleep(every)
     threading.Thread(target=loop, daemon=True, name="comment-digest").start()
 
