@@ -4,7 +4,7 @@ This is for a coding assistant asked to translate a story with keikaku on behalf
 
 ## Before you start
 
-- `uv sync` once. A live run needs `MODEL_API_KEY` in `.env` (a Meta Model API key). Without one, only the recorded story, `bansan`, can be replayed.
+- `uv sync` once. A live run needs `MODEL_API_KEY` in `.env` (a Meta Model API key). Without one, only a recorded story can be replayed: `bansan`, `shuchu`, `shiken` or `shokikan`.
 - The works the house can translate are in `fixtures/works.json`; a run takes the work's id, such as `bansan`.
 - Every run is priced before it starts and refused if it won't fit its cap. If it's refused, tell the person the estimate and ask before raising `--cap`.
 
