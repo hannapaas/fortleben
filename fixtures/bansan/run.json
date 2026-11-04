@@ -14,17 +14,7 @@
   "rights": {
    "author_died": 1918,
    "basis": "Aozora index 初出; the text's own closing note agrees",
-   "existing_translations": [
-    {
-     "by": "M Skeels",
-     "checked": "2026-11-01",
-     "kind": "hobbyist, complete, no licence stated",
-     "not_shown": "a hobbyist's translation on a personal blog; not named on the site without the translator's agreement",
-     "shown": false,
-     "where": "skeelstranslations.wordpress.com",
-     "year": 2020
-    }
-   ],
+   "existing_translations": [],
    "first_published": "「文章倶楽部」1917（大正6）年2月号",
    "first_published_year": 1917,
    "verdict": "public domain (author died 1918, published 1917)"

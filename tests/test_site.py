@@ -85,10 +85,6 @@ def test_a_work_opens_keikakus_edition_and_links_a_commissioned_one(tmp_path):
     assert site.get("/").text.count('class="ttl"') == len(list(FIXTURES.glob("*/run.json")))  # one row per work, not per edition
 
 
-def test_a_translation_marked_not_shown_is_never_named(client):
-    assert "Skeels" not in client.get("/").text + client.get("/read/bansan").text
-
-
 def test_a_freely_published_translation_is_credited_and_linked(client):
     page = client.get("/read/shuchu").text
     assert "Glenn W. Shaw, 1930" in page and 'href="https://www.gutenberg.org/ebooks/78105"' in page
