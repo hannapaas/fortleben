@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 21831,
+  "cached_tokens": 21620,
+  "output_tokens": 160,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.008368,
+ "response_id": "resp_6aeb449c0ad7481d98394321",
+ "latency_s": 1.62,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_1d5db958-f619-4cd1-9456-d91af5ca11fc",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"F7\",\"R14\"],\"new\":\"What was the suffering or sorrow of each single day? What was the tiredness or trouble of each single day?\",\"old\":\"What was the suffering or sorrow of each single day. What was the tiredness or trouble of each single day.\",\"reason\":\"なんだらう is wondering, so the English needs its question marks.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T14:43:40Z"
+}

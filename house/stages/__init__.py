@@ -49,6 +49,29 @@ class Ctx:
             self.emit(actor, "agent.say", {"say": res.data["say"], "prompt": call.prompt}, call_id=res.call_id)
         return res
 
+    def loop(self, actor: str, call: Call, handle, max_turns: int = 12) -> Result:
+        """A call with function tools: the model calls them, `handle(name, args)` runs each and its reply
+        goes back, until the model gives its answer. Meta's API takes tool_choice "auto" only, so the
+        model decides when it's done; after max_turns it's told to answer. Each turn is one call, ledgered
+        and cached like any other, so a loop replays."""
+        turns = []
+        for n in range(max_turns + 1):
+            res = self.call(actor, replace(call, turns=list(turns) or None))
+            if not res.tool_calls:
+                return res
+            if n == max_turns:
+                raise RuntimeError(f"{call.prompt}: still calling tools after {max_turns} turns")
+            for tc in res.tool_calls:
+                try:
+                    reply = handle(tc["name"], json.loads(tc["arguments"]))
+                except json.JSONDecodeError:
+                    reply = "Error: the arguments weren't valid JSON."
+                turns += [{"type": "function_call", "call_id": tc["call_id"], "name": tc["name"], "arguments": tc["arguments"]},
+                          {"type": "function_call_output", "call_id": tc["call_id"], "output": reply}]
+            if n == max_turns - 1:
+                turns.append({"role": "user", "content": "That was your last turn with the tools: give your answer now."})
+        raise AssertionError("unreachable")
+
     def side_by_side(self, fn, items, then=None) -> list:
         """fn(ctx, item) for every item, up to width() at once, and the results in the items' order. Only for
         work that doesn't depend on itself: each runs on its own connection, may make calls and emit events, and

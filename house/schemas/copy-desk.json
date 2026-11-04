@@ -1,0 +1,13 @@
+{
+  "type": "object",
+  "properties": {
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "description": "What you made consistent, and anything you left alone on purpose, in a sentence or two"
+    },
+    "say": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,186 @@
+{
+ "prompt": "reader-readable",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "notes": [
+   {
+    "japanese": "親子は、狭い部屋の壁際にぶらさがった、暗い電燈の下の卓に集まって",
+    "paragraph": "p2",
+    "problem": "Singular 'parent' for two parents reads as an error in English and confuses who is at the table.",
+    "span": "The parent and child had gathered at the table",
+    "suggestion": "The parents and child had gathered at the table",
+    "sureness": "Sure; any native speaker would stumble — no check needed beyond the Japanese showing both father and mother present."
+   },
+   {
+    "japanese": "だるさうな疲れの色が見えてゐた",
+    "paragraph": "p3",
+    "problem": "'a weary colour of tiredness' is tautological and unidiomatic; no English writer would double weary and tiredness with colour.",
+    "span": "there was to be seen a weary colour of tiredness",
+    "suggestion": "a weary tinge of exhaustion was to be seen in them",
+    "sureness": "Sure about the clunk; less sure about the best fix — desk to weigh against the tiredness motif."
+   },
+   {
+    "japanese": "その子供のすべてに瞳を注いだ",
+    "paragraph": "p4",
+    "problem": "'all of the child' sounds bodily and odd in English, as if staring at a whole body rather than everything about her.",
+    "span": "fixed their eyes on all of the child",
+    "suggestion": "fixed their eyes on everything in the child",
+    "sureness": "Fairly sure it will stop an English reader; faithful reader to confirm whether 'everything about the child' keeps subete."
+   },
+   {
+    "japanese": "肥えてまるく鞠のやうに短い両手",
+    "paragraph": "p5",
+    "problem": "'ball-short hands' is incomprehensible as a compound; a reader cannot picture it.",
+    "span": "with fat, round, ball-short hands",
+    "suggestion": "with fat, round hands, short as balls",
+    "sureness": "Sure it is wrong in English; the exact image for鞠のやうに needs the faithful reader to settle."
+   },
+   {
+    "japanese": "敏捷に怜悧にすきもなく動いてる、黒みがちの睫のながい子供の瞳をぢっと見てゐると",
+    "paragraph": "p7",
+    "problem": "The participle dangles so the arms and eyes themselves seem to move nimbly, and the very long sentence has to be read twice to find who is at a loss.",
+    "span": "at the child's eyes with their rather dark, long lashes, moving nimbly and shrewdly without a pause",
+    "suggestion": "at the child's small round arms and at her eyes with their rather dark, long lashes, darting nimbly and shrewdly without pause",
+    "sureness": "Sure about the misattachment in English; how much of the long accumulation to keep is for the desk and the reading."
+   },
+   {
+    "japanese": "彼女は鍋から熱い炊き立ての...御飯をついで彼に渡した",
+    "paragraph": "p8",
+    "problem": "'She' after 'put it in her hand' for the child inevitably reads as the child serving rice; the pronoun chain collapses for an English reader.",
+    "span": "She served the hot, freshly cooked rice, with its white steam rising thick, from the pot and handed it to him",
+    "suggestion": "The mother served the hot, freshly cooked rice, its white steam rising thick, from the pot and handed it to him",
+    "sureness": "Very sure — I first read it as the baby serving; needs a noun reset, faithful reader to confirm 彼女 = mother."
+   },
+   {
+    "japanese": "暖かい賑かさと、其上にひとりでに溢れる笑ひと嬉しさを持って",
+    "paragraph": "p8",
+    "problem": "'welling up of itself on top of it' is stiff and meaningless in English and makes the warmest paragraph go flat.",
+    "span": "with the smile and gladness welling up of itself on top of it",
+    "suggestion": "with a warm bustle, and with smile and gladness welling up of itself besides",
+    "sureness": "Sure it does not live as written; exact preposition for 其上に needs desk judgement."
+   },
+   {
+    "japanese": "彼の赤く大きな片手を",
+    "paragraph": "p9",
+    "problem": "'red, big hand' reverses normal English adjective order and sounds like a learner's phrase.",
+    "span": "his red, big hand",
+    "suggestion": "his big red hand",
+    "sureness": "Completely sure; no check needed."
+   },
+   {
+    "japanese": "彼女の心は、いつか淋しくうつむいてしまってゐた",
+    "paragraph": "p11",
+    "problem": "'bowed down lonely' uses an adjective where English needs an adverb or noun, so the crux-trigger sentence ungrammatically limps.",
+    "span": "her heart had already, before she knew it, bowed down lonely",
+    "suggestion": "her heart had already, before she knew it, bowed down in loneliness",
+    "sureness": "Sure about the grammar; whether to keep 'bowed down' or use 'sank' is for the desk."
+   },
+   {
+    "japanese": "静かに涙にみちた日のことや、物質の為めに脅かされ恐れてすごした日々や、病の為めに悲しみ苦しんだその日その日のこと",
+    "paragraph": "p13",
+    "problem": "Three heavy front-loaded 'of' phrases before the subject, plus passive 'threatened' with no agent, force the reader to re-read; the drift stalls here.",
+    "span": "And of days filled with quiet tears, and of days threatened and spent in fear for material things, and of each and every day grieved and suffered through sickness, her far heart was quietly remembering",
+    "suggestion": "And her far heart quietly remembered days filled with quiet tears, and days lived in fear and under threat for want of things, and each day grieved and suffered through sickness",
+    "sureness": "Sure it must be re-hung in English; faithful reader to confirm who threatens and whether 'material things' is want or money."
+   },
+   {
+    "japanese": "より合って頭をあつめてながい物語りをしてゐる",
+    "paragraph": "p16",
+    "problem": "'drawing together with their heads together' repeats together awkwardly and sounds clumsy rather than still.",
+    "span": "three people drawing together with their heads together telling a long story",
+    "suggestion": "three people gathered close, heads together, telling a long story",
+    "sureness": "Sure the present wording would not be signed; desk to decide if repetition of together must be kept literally."
+   },
+   {
+    "japanese": "其時彼等は永久に夜の様な安息の前にある",
+    "paragraph": "p17",
+    "problem": "'be before a rest' in English means time, not presence, so the vision's key sentence misleads.",
+    "span": "they would be before a rest like night, forever",
+    "suggestion": "they would lie before a rest like night, forever",
+    "sureness": "Fairly sure; I may be missing a doctrinal nuance, so faithful reader should confirm 前にある."
+   },
+   {
+    "japanese": "彼女の眼の底に映ってゐた",
+    "paragraph": "p18",
+    "problem": "'bottom of her eyes' is a literalism no English writer would use; it breaks the quietest seeing in the story.",
+    "span": "was mirrored darkly and quietly in the bottom of her eyes",
+    "suggestion": "was mirrored dark and quiet in the depths of her eyes",
+    "sureness": "Sure in English; faithful reader to say if 'depths' keeps 眼の底 without ennobling."
+   },
+   {
+    "japanese": "一日々々の苦しみや悲しみがなんだらう。一日々々の疲れやなやみがなんだらう。",
+    "paragraph": "p20",
+    "problem": "Two fragments with periods read as mistakes; in English these are clearly rhetorical questions and need question marks and plural agreement.",
+    "span": "What was the suffering or sorrow of each single day. What was the tiredness or trouble of each single day.",
+    "suggestion": "What were the suffering or sorrow of each single day? What were the tiredness or trouble of each single day?",
+    "sureness": "Sure about punctuation; the exact 'what does it matter' force needs faithful reader to settle."
+   },
+   {
+    "japanese": "と男にも思出して、種々のことを、結婚前の楽しかったことまでも、思出して下さいと云ふやうに云った",
+    "paragraph": "p21–p23",
+    "problem": "The whole explanatory clause is packed before the quoted speech, so the reader arrives at what she says exhausted and has to re-read.",
+    "span": "said as if asking him too to remember many things, even the happy things from before their marriage, \"Really only a little time has passed since we were married, hasn't it.\"",
+    "suggestion": "\"Really only a little time has passed since we were married, hasn't it,\" she said, as if asking him too to remember many things, even the happy things from before their marriage",
+    "sureness": "Sure the shape is the problem in English; moving the quote forward keeps every word but lets it breathe."
+   },
+   {
+    "japanese": "一日々々いろ〳〵なことに疲らされなやまされ苦しまされても",
+    "paragraph": "p28",
+    "problem": "Triple passive 'are tired and troubled and made to suffer' piles up and sounds mechanical, not like a tired husband speaking.",
+    "span": "Though day by day we are tired and troubled and made to suffer by all sorts of things, two years are already past",
+    "suggestion": "Though day by day all sorts of things tire us and trouble us and make us suffer, two years are already past",
+    "sureness": "Sure it reads as translationese; desk to weigh whether active voice betrays the causative passive."
+   },
+   {
+    "japanese": "手持ぶさたのやうにスプーンを持って立ってる子供",
+    "paragraph": "p29–p31",
+    "problem": "'its hand' for the established little girl dehumanises her and jars after 'her hand' in p7; an English reader feels the child become a thing.",
+    "span": "standing with the spoon in its hand as if with nothing to do",
+    "suggestion": "standing with the spoon in her hand as if with nothing to do",
+    "sureness": "Very sure for English; faithful reader to confirm pronoun policy for the child throughout."
+   },
+   {
+    "japanese": "小さな乳首をだして乳をのませ初めた",
+    "paragraph": "p35",
+    "problem": "'began to give milk' sounds like expressing milk, not nursing, and lands as clinical in a tender closing.",
+    "span": "she bared her small breast and began to give milk",
+    "suggestion": "she bared her small breast and began to nurse her",
+    "sureness": "Sure no English mother 'gives milk' this way; exact rendering of 乳首/乳房 needs faithful reader."
+   },
+   {
+    "japanese": "あたりは静まりかへった",
+    "paragraph": "p37",
+    "problem": "'All about' is archaic for 'all around' and will read as a typo rather than period voice.",
+    "span": "All about had fallen quite still",
+    "suggestion": "All around had fallen quite still",
+    "sureness": "Sure; a dictionary check would settle it, but no good writer would sign 'all about' here."
+   }
+  ],
+  "say": "The supper bustle reads warmly but pronouns, adjective order and three vision sentences stop belief; nineteen notes for the desk."
+ },
+ "usage": {
+  "input_tokens": 13277,
+  "cached_tokens": 0,
+  "output_tokens": 9547,
+  "reasoning_tokens": 6943,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.057171,
+ "response_id": "resp_6aeb4477cd5acd6a528d454d",
+ "latency_s": 108.12,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 9431
+  }
+ ],
+ "created": "2026-11-04T14:43:03Z"
+}

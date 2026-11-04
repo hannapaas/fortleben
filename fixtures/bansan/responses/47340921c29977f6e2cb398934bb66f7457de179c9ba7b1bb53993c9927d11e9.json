@@ -1,0 +1,57 @@
+{
+ "prompt": "notes",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": {
+  "notes": [
+   {
+    "anchor": "p8",
+    "body": "Bōya literally means a boy, but here it is an affectionate way to call a small baby, girl or boy.",
+    "editions": [
+     "casual",
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "Bōya"
+   },
+   {
+    "anchor": "p16",
+    "body": "The Japanese, natsukashimi, means a fond, aching remembrance of people and things loved.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "fond remembrance and forgiveness"
+   }
+  ],
+  "say": "Kept two brief glosses for Bōya and natsukashimi and left that day, the picture, and the years unexplained."
+ },
+ "usage": {
+  "input_tokens": 15746,
+  "cached_tokens": 0,
+  "output_tokens": 1925,
+  "reasoning_tokens": 1749,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.02786375,
+ "response_id": "resp_6aeb480458a7ad219f1e4ca7",
+ "latency_s": 19.39,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 562
+  }
+ ],
+ "created": "2026-11-04T14:58:12Z"
+}

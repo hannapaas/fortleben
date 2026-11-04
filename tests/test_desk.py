@@ -1,5 +1,6 @@
-from house.stages.common import apply_edit
-from house.stages.common import change_flags
+from types import SimpleNamespace
+
+from house.stages.common import Editor, change_flags
 
 OLD = "Outside the door, grown dark, a violent sound of rain and wind — a storm."
 
@@ -14,11 +15,38 @@ def test_a_shrunken_paragraph_is_flagged():
     assert any(f.startswith("paragraph shrank") for f in flags)
 
 
+def editor(units, locked=()):
+    conn = SimpleNamespace(execute=lambda *a: [{"segment_id": pid} for pid in locked])
+    return Editor(SimpleNamespace(conn=conn, work_id="w"), units)
+
+
 def test_an_edit_matches_once_and_forgives_copied_quotation_marks():
-    text = 'He said, "It\'s a storm." She nodded.'
-    assert apply_edit(text, '“"It\'s a storm."”', '“"A storm."”') == 'He said, "A storm." She nodded.'
-    assert apply_edit("a b a", "a", "c") is None
-    assert apply_edit("abc", "x", "y") is None
+    ed = editor({("p1",): 'He said, "It\'s a storm." She nodded.'})
+    assert ed("edit", {"old": '“"It\'s a storm."”', "new": '“"A storm."”', "reason": "", "replace_all": False}).startswith("Done")
+    assert ed.edited()[("p1",)]["english"] == 'He said, "A storm." She nodded.'
+
+
+def test_an_edit_found_more_than_once_is_refused_with_where_unless_replace_all():
+    ed = editor({("p1",): "Ryujiro ran.", ("p2",): "Ryujiro and Ryujiro laughed."})
+    reply = ed("edit", {"old": "Ryujiro", "new": "Ryūjirō", "reason": "", "replace_all": False})
+    assert reply.startswith("Error: found 3 times") and "p1" in reply and "p2 (2 times)" in reply
+    assert ed.edited() == {} and ed.refused == 1
+    assert ed("edit", {"old": "Ryujiro", "new": "Ryūjirō", "reason": "", "replace_all": True}) == "Done: 3 replaced, in p1, p2."
+    assert ed.edited()[("p2",)]["english"] == "Ryūjirō and Ryūjirō laughed."
+    assert ed("edit", {"old": "nowhere", "new": "x", "reason": "", "replace_all": False}).startswith("Error: not found")
+
+
+def test_an_edit_never_crosses_a_paragraph_or_touches_a_locked_line():
+    ed = editor({("p1",): "the end.", ("p2",): "The start."}, locked=["p2"])
+    assert ed("edit", {"old": "end. The", "new": "x", "reason": "", "replace_all": False}).startswith("Error: not found")
+    assert "locked" in ed("edit", {"old": "start", "new": "beginning", "reason": "", "replace_all": False})
+    assert ed("find", {"words": "end"}).startswith("1 times: p1")
+
+
+def test_an_edit_outside_the_part_it_was_given_is_not_found():
+    conn = SimpleNamespace(execute=lambda *a: [])
+    ed = Editor(SimpleNamespace(conn=conn, work_id="w"), {("p1",): "inside", ("p9",): "outside"}, {"p1"})
+    assert ed("edit", {"old": "outside", "new": "x", "reason": "", "replace_all": False}).startswith("Error: not found")
 
 
 def test_findings_go_back_to_every_earlier_chapter_once():

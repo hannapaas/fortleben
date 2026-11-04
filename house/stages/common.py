@@ -9,9 +9,9 @@ from house.client import SPARK, WONDER
 
 MODELS = {"spark": SPARK, "wonder": WONDER}
 # What a run uses unless told otherwise: the best set-up the experiments found (docs/experiments/).
-# Wonder sometimes returned filler for the final read, so it runs on Spark.
+# The final read runs on Wonder: judged blind on three texts, it made twice Spark's meaning fixes (experiment 10).
 DEFAULTS = {"draft_model": "spark", "draft_prompt": "translate-draft-plain", "reader_model": "spark",
-            "desk_model": "wonder", "final_model": "spark"}
+            "desk_model": "wonder", "final_model": "wonder", "copy_model": "spark"}
 
 
 def model(ctx, option: str) -> str:
@@ -89,28 +89,110 @@ def locked_lines(ctx) -> set[str]:
     return {r["segment_id"] for r in ctx.conn.execute("SELECT segment_id FROM lock WHERE work_id=?", (ctx.work_id,))}
 
 
-def apply_edits(ctx, units: dict, edits: list[dict], ids: set[str], who: str) -> tuple[dict, int]:
-    """Apply exact find-and-replace edits (each with 'paragraph', 'find', 'replace') to the current
-    English, as an editor's tool does: an edit outside `ids`, on a locked line, or whose words aren't in
-    the paragraph exactly once is refused and flagged, so nothing that wasn't named can change.
-    Returns {unit: {"english", "applied": [the edits that went in]}} and the edits that were refused."""
-    locked, edited, refused = locked_lines(ctx), {}, []
-    for e in edits:
-        unit = unit_of(units, e["paragraph"])
-        if unit is None or unit[0] not in ids or set(unit) & locked:
-            why = "a locked line" if unit and set(unit) & locked else f"{e['paragraph']}, outside this part"
-            ctx.emit("house", "check.flagged", {"segment_id": unit[0] if unit else e["paragraph"], "check": f"{who} edit to {why}: refused"})
-            refused.append(e)
-            continue
-        cur = edited.setdefault(unit, {"english": units[unit], "applied": []})
-        new = apply_edit(cur["english"], e["find"], e["replace"])
-        if new is None:
-            ctx.emit("house", "check.flagged", {"segment_id": unit[0], "check": f"{who} edit refused: “{e['find'][:60]}” not found once"})
-            refused.append(e)
-            continue
-        cur["english"] = new
-        cur["applied"].append(e)
-    return {u: c for u, c in edited.items() if c["english"] != units[u]}, refused
+EDIT_TOOL = {
+    "type": "function", "name": "edit", "strict": True,
+    "description": ("Replace words in the house's English. `old` must be the exact words as they stand now, and appear "
+                    "exactly once in the text you were given, unless replace_all is true, which changes every place they "
+                    "appear. If they appear more than once, or not at all, nothing changes and you're told where they are: "
+                    "include more of the surrounding words to pick one. An edit stays inside one paragraph."),
+    "parameters": {"type": "object", "additionalProperties": False,
+                   "required": ["old", "new", "reason", "replace_all"],
+                   "properties": {"old": {"type": "string", "description": "The exact words to replace"},
+                                  "new": {"type": "string", "description": "What goes in their place"},
+                                  "reason": {"type": "string", "description": "Why, in a sentence"},
+                                  "replace_all": {"type": "boolean", "description": "Change every place they appear"}}},
+}
+
+
+FIND_TOOL = {
+    "type": "function", "name": "find", "strict": True,
+    "description": "Where some words appear in the house's English: each paragraph, with the words around them. Changes nothing.",
+    "parameters": {"type": "object", "additionalProperties": False, "required": ["words"],
+                   "properties": {"words": {"type": "string", "description": "The exact words to look for"}}},
+}
+
+
+def edit_tool(answers: bool = False) -> dict:
+    """The one edit tool the desk, the final read and the copy editor share. The desk also says
+    which readers' notes an edit answers."""
+    if not answers:
+        return EDIT_TOOL
+    tool = json.loads(json.dumps(EDIT_TOOL))
+    tool["parameters"]["properties"]["answers"] = {"type": "array", "items": {"type": "string"},
+                                                   "description": "The labels of the notes this edit answers (F1, R2...); empty if none"}
+    tool["parameters"]["required"].append("answers")
+    return tool
+
+
+def label(unit: tuple) -> str:
+    return unit[0] if len(unit) == 1 else f"{unit[0]}–{unit[-1]}"
+
+
+class Editor:
+    """Runs the edit tool on the units a call was given, as an editor's tool does: the words must be
+    found exactly once (or replace_all), an edit never crosses a paragraph, and a locked line is never
+    changed. A refusal goes back to the model with what it found, so it can try again."""
+
+    def __init__(self, ctx, units: dict[tuple, str], ids: set[str] | None = None):
+        self.locked = locked_lines(ctx)
+        self.before = {u: en for u, en in units.items() if ids is None or u[0] in ids}
+        self.text = dict(self.before)
+        self.applied: dict[tuple, list[dict]] = {}
+        self.refused = 0
+
+    def hits(self, old: str) -> list[tuple[tuple, int]]:
+        return [(u, en.count(old)) for u, en in self.text.items() if old and old in en]
+
+    def where(self, old: str, hits) -> str:
+        out = []
+        for u, n in hits[:12]:
+            en, i = self.text[u], self.text[u].index(old)
+            out.append(f"{label(u)}{f' ({n} times)' if n > 1 else ''}: “…{en[max(0, i - 40):i + len(old) + 40]}…”")
+        return "; ".join(out) + (f"; and {len(hits) - 12} more paragraphs" if len(hits) > 12 else "")
+
+    def __call__(self, name: str, args: dict) -> str:
+        if name == "find":
+            hits = self.hits(args.get("words") or "")
+            return (f"{sum(n for _, n in hits)} times: {self.where(args['words'], hits)}" if hits else "Not found.")
+        if name != "edit":
+            self.refused += 1
+            return f"Error: there is no tool called {name}."
+        old, new = args.get("old") or "", args.get("new") or ""
+        hits = self.hits(old)
+        if not hits:  # a span quoted with its quotation marks, or with stray spaces
+            quotes = "“”\"‘’'"
+            for alt_old, alt_new in ((old.strip(), new.strip()), (old.strip().strip(quotes), new.strip().strip(quotes))):
+                if self.hits(alt_old):
+                    old, new, hits = alt_old, alt_new, self.hits(alt_old)
+                    break
+        total = sum(n for _, n in hits)
+        if old == new:
+            self.refused += 1
+            return "Error: old and new are the same."
+        if not total:
+            self.refused += 1
+            return ("Error: not found. Quote the English exactly as it stands now, with its punctuation; an earlier edit "
+                    "may have changed it. An edit can't cross from one paragraph into the next.")
+        if total > 1 and not args.get("replace_all"):
+            self.refused += 1
+            return f"Error: found {total} times, so nothing changed: {self.where(old, hits)}. Include more of the surrounding words, or set replace_all."
+        locked = [u for u, _ in hits if set(u) & self.locked]
+        done = []
+        for u, n in hits:
+            if u in locked:
+                continue
+            self.text[u] = self.text[u].replace(old, new)
+            self.applied.setdefault(u, []).append({**args, "old": old, "new": new})
+            done.append(label(u))
+        if not done:
+            self.refused += 1
+            return f"Error: {', '.join(label(u) for u in locked)} is locked by the editor and can't change."
+        skipped = f" Not in {', '.join(label(u) for u in locked)}, which the editor has locked." if locked else ""
+        return f"Done: {total - sum(n for u, n in hits if u in locked)} replaced, in {', '.join(done)}.{skipped}"
+
+    def edited(self) -> dict[tuple, dict]:
+        """{unit: {"english", "applied": [the edits that went in]}} for the units that changed."""
+        return {u: {"english": self.text[u], "applied": self.applied[u]} for u in self.applied if self.text[u] != self.before[u]}
 
 
 def change_flags(old: str, new: str) -> list[str]:

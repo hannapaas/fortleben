@@ -1,0 +1,62 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": {
+  "beyond_this_part": [],
+  "declined": [
+   {
+    "note": "R12",
+    "reason": "Declined in the suggested form: 一口に means 'all at once,' not only 'one mouthful' – the man had already eaten; 'in a single mouthful' misplaces the idiom. Already amended minimally to 'unable to put anything into words' on R12's evidence; no further change."
+   }
+  ],
+  "disagreements": [
+   {
+    "choice": "F9: the picture is reflected in the bottom of her eyes, keeping the Japanese optical image rather than flattening it or relocating it 'deep in' the eyes.",
+    "faithful_side": "F9: 映ってゐた means the far picture was reflected in the bottom of her eyes, not merely lying there.",
+    "notes": [
+     "F9",
+     "F6"
+    ],
+    "paragraph": "p18",
+    "readable_side": "R11: 'bottom of her eyes' and 'was to be seen' are anatomically and syntactically awkward in English.",
+    "send_up": false
+   },
+   {
+    "choice": "Neither the faithful reader's proposed 'stood reflected' nor the readable reader's 'could still be seen' is adopted; the gnomic summary remains 'would be forever before a rest like night,' preserving the Japanese refusal to specify posture or doctrine.",
+    "faithful_side": "F6: ある means simply 'be'; English 'stand forever' imports a posture and turns the summary into a tableau.",
+    "notes": [
+     "F6"
+    ],
+    "paragraph": "p17",
+    "readable_side": "No readable-reader note on this span; the accessible English temptation would be to clarify the image into standing before rest.",
+    "send_up": false
+   }
+  ],
+  "say": "I made the smaller, text-led changes and left the vision's diction unexalted.\n\nDeclined:\n- R2: declined. The suggested rewrite loses the repeated Japanese structure of tiredness being seen in the eyes and about the shoulders; the slightly stiff repetition carries the shared young exhaustion, so the text wins over smoother phrasing.\n- R3: declined. “All of the child” keeps the Japanese totalising すべて and its repetition chain into the vision; changing it to “everything in the child” would clarify and weaken that network.\n- R17: declined as an added attribution. The Japanese gives p36 no speaker tag, and adding “the man said” would clarify what the narration leaves carried by voice and sequence; the line remains unattributed as in the source.\n\nDisagreements and unsettled places:\n- p18, F9 against R11: the faithful reader is right that 映ってゐた is “reflected,” and the readable reader is right that “lay” was inert; I chose “was reflected dark and quiet in the bottom of her eyes.” The reading settles this in favour of keeping the eye-bottom picture, so it does not go up.\n- p17, F6: I removed “stand” because ある is only “be,” and kept “would be forever before a rest like night” unresolved rather than turning the summary into a posture or a doctrine. This is settled by the reading and does not go up.\n\nNothing in this part changes an earlier part.\n\nHouse log: The desk kept the potato hard and nasty, the picture reflected rather than explained, and the final return to work and storm unexalted."
+ },
+ "usage": {
+  "input_tokens": 23169,
+  "cached_tokens": 19444,
+  "output_tokens": 2170,
+  "reasoning_tokens": 1448,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0621888,
+ "response_id": "resp_6aeb479bd33efa66a892448f",
+ "latency_s": 24.8,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2939
+  }
+ ],
+ "created": "2026-11-04T14:56:27Z"
+}

@@ -6,19 +6,19 @@
 {% set others = ed.editions|selectattr('kind', 'equalto', 'person')|list %}
 {% block htmlattrs %}{% if ed.accent != 'pink' %} class="accent-{{ ed.accent }}"{% endif %}{% endblock %}
 {% block title %}{{ ed.title_en or ed.title }} · Fortleben{% endblock %}
-{% block bodyclass %}layout-english marks-essential hide-status no-tools quiet-comments{% endblock %}
+{% block bodyclass %}layout-english marks-essential no-tools quiet-comments{% endblock %}
 {# The saved view's classes before anything paints, so Clean never flashes the tools; reader.js keeps them in step after. #}
 {% block bodystart %}<script>
 window.FL_PRESETS = {
-  clean:     { layout: 'english',  marks: 'essential', inline: false, status: false, furigana: true, tools: false, comments: false, numbers: false },
-  curious:   { layout: 'english',  marks: 'all',       inline: false, status: true,  furigana: true, tools: true,  comments: true,  numbers: false },
-  annotated: { layout: 'parallel', marks: 'all',       inline: true,  status: true,  furigana: true, tools: true,  comments: true,  numbers: true }
+  clean:     { layout: 'english',  marks: 'essential', inline: false, furigana: true, tools: false, comments: false, numbers: false },
+  curious:   { layout: 'english',  marks: 'all',       inline: false, furigana: true, tools: true,  comments: true,  numbers: false },
+  annotated: { layout: 'parallel', marks: 'all',       inline: true,  furigana: true, tools: true,  comments: true,  numbers: true }
 };
 (function (b) {
   var P = window.FL_PRESETS, s = Object.assign({}, P.clean);
   try { var v = JSON.parse(localStorage.getItem('fl-reader') || '{}'); Object.assign(s, P[v.preset] || {}, v); } catch (e) {}
   location.hash.slice(1).split('/').forEach(function (t) { if (P[t]) Object.assign(s, P[t]); });
-  b.className = ['layout-' + s.layout, 'marks-' + s.marks, s.furigana ? '' : 'no-furigana', s.status ? '' : 'hide-status',
+  b.className = ['layout-' + s.layout, 'marks-' + s.marks, s.furigana ? '' : 'no-furigana',
     s.inline ? 'inline' : '', s.tools ? '' : 'no-tools', s.comments ? '' : 'quiet-comments', s.numbers ? 'numbers' : ''].join(' ').replace(/\s+/g, ' ').trim();
   if (s.size) document.documentElement.style.setProperty('--size', s.size + 'px');
   document.documentElement.style.setProperty('--leading', s.leading ? '1.85' : '1.6');
@@ -131,7 +131,7 @@ window.FL_PRESETS = {
     <div>
       <div class="presets" data-group="preset">
         <button type="button" class="cb" data-val="clean"><span class="bx r"></span><span><b>Clean</b><br><span class="blurb">Like a printed novel: just the text and the few notes you need. Open a paragraph for the rest.</span></span></button>
-        <button type="button" class="cb" data-val="curious"><span class="bx r"></span><span><b>Curious</b><br><span class="blurb">Every note marked, who checked what, the Japanese under each paragraph when you want it.</span></span></button>
+        <button type="button" class="cb" data-val="curious"><span class="bx r"></span><span><b>Curious</b><br><span class="blurb">Every note marked, the Japanese under each paragraph when you want it.</span></span></button>
         <button type="button" class="cb" data-val="annotated"><span class="bx r"></span><span><b>Annotated</b><br><span class="blurb">Side by side with the Japanese, notes open under each paragraph.</span></span></button>
       </div>
       <p class="blurb" id="custom" hidden>You've made your own mix below.</p>
@@ -159,8 +159,7 @@ window.FL_PRESETS = {
         <div class="row"><button type="button" class="cb" data-toggle="comments"><span class="bx"></span>show them in the margin</button></div>
       </div>
       <div class="sub"><span class="q">Show?</span>
-        <div class="row"><button type="button" class="cb" data-toggle="status"><span class="bx"></span>which paragraphs a person checked</button>
-          <button type="button" class="cb" data-toggle="tools"><span class="bx"></span>原 and * beside paragraphs</button>
+        <div class="row"><button type="button" class="cb" data-toggle="tools"><span class="bx"></span>原 and * beside paragraphs</button>
           <button type="button" class="cb" data-toggle="numbers"><span class="bx"></span>paragraph numbers</button></div>
       </div>
       <div class="sub"><span class="q">Font?</span>
@@ -168,7 +167,6 @@ window.FL_PRESETS = {
           <button type="button" class="cb" data-val="standard"><span class="bx r"></span>standard</button>
           <button type="button" class="cb" data-val="dyslexic"><span class="bx r"></span>OpenDyslexic</button>
         </div>
-        <p class="blurb">A typeface made to be easier to read with dyslexia. It changes the English; the Japanese keeps its own.</p>
       </div>
       <div class="sub"><span class="q">Size?</span>
         <div class="row"><button type="button" class="cb" data-size="-1">A−</button><button type="button" class="cb" data-size="1">A+</button><button type="button" class="cb" data-leading>line spacing</button></div>

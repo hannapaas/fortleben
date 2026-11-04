@@ -8,7 +8,7 @@ import importlib
 import json
 import traceback
 
-from house import budget, context, events, works
+from house import budget, events, works
 from house.db import dumps
 from house.stages import Ctx
 from house.stages.common import DEFAULTS
@@ -80,7 +80,7 @@ def run(conn, client, work_id: str, *, to: str | None = None, from_: str | None 
         # A run is priced before it starts and refused if it won't fit: better no translation than
         # one that stops half-way.
         chars = sum(len(p.text) for p in work.translatable())
-        est = budget.estimate_run(chars, len(context.chapters(work)), options)
+        est = budget.estimate_run(chars, None, options)  # before the planner, so it expects the planner's parts
         cap, room = client.budget.run_cap, client.budget.room()
         if not client.replay_only and est > room:
             b = client.budget

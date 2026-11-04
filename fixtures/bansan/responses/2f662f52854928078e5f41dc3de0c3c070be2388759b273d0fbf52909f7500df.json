@@ -1,0 +1,84 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "The mother, silent and bowed by the wall, was serving onto a white dish the beef and onion, the carrot and potato, simmered in the deep blue pot. And as if to say something, she put a potato, simmered sweet and soft, into her mouth and looked at the man's face, but as if she had noticed something, she closed her mouth and gazed vacantly at a far place.",
+    "ids": [
+     "p10"
+    ],
+    "notes": []
+   },
+   {
+    "english": "The potato in her mouth was hard and gritty, as if frozen, and very bad. As if startled, she silently bit it again with her front teeth, but her heart had already bowed in loneliness, before she knew it.",
+    "ids": [
+     "p11"
+    ],
+    "notes": [
+     "Chose 'hard and gritty' for固くざくざく to keep the teeth-feel physical and uninterpreted, without making it a symbol."
+    ]
+   },
+   {
+    "english": "She remembered the suffering and sorrow and tiredness of each day. And the tasteless, detached, cold badness of the potato gave her a quiet, lonely, far-removed heart. She called to mind the poor, sorrow-filled, real life since her marriage.",
+    "ids": [
+     "p12"
+    ],
+    "notes": [
+     "Kept かかはりのない as 'detached' in the sense of having nothing to do with her, and 'far-removed heart' literal for遠くはなれた心."
+    ]
+   },
+   {
+    "english": "And it seemed as if it were a life that had dragged on for far too long. She felt, suddenly, as if she herself had grown quite old. And her far heart was quietly remembering the quiet tear-filled days, and the days spent threatened and afraid for material things, and each day grieved and suffered through sickness. But to her remembering now, everything was like a dream. Suffering and sorrow too were like a fond dream.",
+    "ids": [
+     "p13"
+    ],
+    "notes": [
+     "Kept 'far too long', 'far heart', 'everything' and 'dream' repeated plainly. Left物質 as 'material things' rather than money, andなつかしい as 'fond' to hold its tie to laterなつかしみ."
+    ]
+   },
+   {
+    "english": "And when she came to think of it, it was only barely three years of life since her marriage.",
+    "ids": [
+     "p14"
+    ],
+    "notes": []
+   },
+   {
+    "english": "She gazed vacantly far off, as if her attention had been caught, before she knew when, by something. Her quiet heart was, before she knew it, seeing a picture like a phantom.",
+    "ids": [
+     "p15"
+    ],
+    "notes": [
+     "Kept絵 as 'picture' and幻のよう as 'like a phantom', with no dream-marking or upgrade, to let the drift stay inside ordinary sentences."
+    ]
+   }
+  ],
+  "say": "Drafted p10 to p15 as the unmarked slide from table to far heart, keeping the potato physical and the repetitions plain."
+ },
+ "usage": {
+  "input_tokens": 11092,
+  "cached_tokens": 9585,
+  "output_tokens": 3146,
+  "reasoning_tokens": 2503,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.016692,
+ "response_id": "resp_6aeb4616bd9987a0f0b443bf",
+ "latency_s": 25.1,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2443
+  }
+ ],
+ "created": "2026-11-04T14:49:58Z"
+}

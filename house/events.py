@@ -23,6 +23,7 @@ TYPES = {
     "call.downgraded": "a model's answer failed twice, so the call was made again on a smaller model",
     "parts.planned": "the planner divided the book into parts for the later stages",
     "final.read": "the final read finished: its fixes, notes and verdict",
+    "copy.done": "the copy editor finished: paragraphs made consistent, from how many variant spellings and name readings",
     "run.stopped": "the run stopped mid-way because the budget ran out; nothing was released",
     "run.done": "the run finished",
     "stage.started": "a stage began",

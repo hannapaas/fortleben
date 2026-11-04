@@ -66,7 +66,7 @@
       },
       "minItems": 2,
       "maxItems": 3,
-      "description": "Two or three voices the reading allows, the one you'd choose first: the house drafts in the first unless the editor picks another"
+      "description": "Two or three voices the reading allows, each a short label and a few sentences (the narration, how the main speakers sound and differ, what English would be wrong), the one you'd choose first: the house drafts in the first unless the editor picks another"
     },
     "say": {
       "type": "string",

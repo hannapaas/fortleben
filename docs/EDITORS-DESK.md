@@ -35,7 +35,7 @@ Every stage writes its results to the record before the next stage starts (`STAG
 ## Money
 
 - **Reserved before it starts.** The full estimate comes off the allowance at start. No reservation, no run. This is the rule that stops anyone spending the house's tokens without cover.
-- **The estimate is high on purpose.** The engine prices the whole run before it starts (every stage live with no cache, the lever's pass back, then ×1.5) and refuses to start one that won't fit (`RUNNING-A-TEXT.md` §5). Nothing is given up part-way.
+- **The estimate is a little high.** The engine prices the whole run before it starts (every call live with no cache, the lever's pass back, then 15% on top) and refuses to start one that won't fit (`RUNNING-A-TEXT.md` §5). Nothing is given up part-way.
 - **If it still runs out**, the hard caps stop it: it's committed where it stands, nothing is released, and the house editor decides whether to raise the cap and resume it on the house. That's an operational failure to fix in the estimate, not a state the product offers. (Planned for the site: the house covering a small overrun, up to 20%, so the text finishes.)
 - **Unused reservation is released** at the end of the run.
 

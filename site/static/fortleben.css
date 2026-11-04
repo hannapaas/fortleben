@@ -3,24 +3,24 @@
    Display in Sorts Mill Goudy italic, reading in Schibsted Grotesk, Japanese in Zen Old Mincho. */
 :root {
   --paper: #fcfcfa; --ink: #2a43a0; --ink-2: #4b5fae; --muted: #7b86b8; --rule: #2a43a0;
-  --accent: #ff4fa7; --accent-wash: color-mix(in srgb, var(--accent) 32%, transparent); --accent-text: #c81f73;
+  --accent: light-dark(#ff4fa7, #ff5fb0); --accent-wash: color-mix(in srgb, var(--accent) 32%, transparent); --accent-text: light-dark(#c81f73, #ff8cc6);
   --serif: 'Sorts Mill Goudy', 'Goudy Old Style', Georgia, serif;
   --sans: 'Schibsted Grotesk', 'Helvetica Neue', Arial, sans-serif;
   --jp: 'Zen Old Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
   --blend: multiply; --size: 18px; --leading: 1.6;
   color-scheme: light;
 }
-/* Dark is near-black for legibility; the accent is retuned to hold on it. */
+/* Dark is near-black for legibility; each accent carries a dark shade (light-dark) to hold on it. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]):not([data-theme="cream"]) {
     --paper: #121214; --ink: #ece6d4; --ink-2: #c2c0c8; --muted: #8b8a96; --rule: #7f8fd6;
-    --accent: #ff5fb0; --accent-text: #ff8cc6; --blend: screen; color-scheme: dark;
+    --blend: screen; color-scheme: dark;
   }
 }
 :root[data-theme="cream"] { --paper: #f8f1d9; }
 :root[data-theme="dark"] {
   --paper: #121214; --ink: #ece6d4; --ink-2: #c2c0c8; --muted: #8b8a96; --rule: #7f8fd6;
-  --accent: #ff5fb0; --accent-text: #ff8cc6; --blend: screen; color-scheme: dark;
+  --blend: screen; color-scheme: dark;
 }
 /* An edition's own colour, picked from these by its editor (house/edition.py ACCENTS); pink is the
    site's and needs no class. The pale ones carry a darker shade for text on light paper. */
@@ -248,7 +248,6 @@ body > .wrap > .push { flex: 1 0 3rem; }
 
 /* What the settings hide. */
 .no-tools .hang .tools { display: none; }
-.hide-status .hang .seal, .hide-status .hang .stn { display: none; }
 .marks-none .t, .marks-essential .t:not(.ess) { text-decoration: none; }
 /* Notes opened under each paragraph, as many as the note setting allows. */
 .inotes { display: none; list-style: none; margin: .7rem 0 0; padding: 0; font-size: calc(var(--size) - 3px); line-height: 1.45; color: var(--ink-2); }
@@ -338,6 +337,7 @@ body > .wrap > .push { flex: 1 0 3rem; }
 .settings .form > details { border-right: 1px solid var(--rule); }
 .settings .row { display: flex; flex-wrap: wrap; gap: 4px 16px; }
 .settings .blurb { font-size: 13px; color: var(--ink-2); margin: 2px 0 0; line-height: 1.35; }
+.settings #custom { margin-top: 12px; }
 .presets { display: grid; gap: 8px; margin-top: 4px; }
 .presets .cb { align-items: flex-start; text-align: left; }
 .presets .cb .bx { margin-top: 5px; }

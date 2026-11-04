@@ -1,12 +1,14 @@
 """Stage 8: the desk. One call per part, the only one that writes after the draft, as the translator owns the
 wording in a publishing house and everyone else queries. It gets the
 chapter in both languages, both readers' notes numbered side by side (F1… faithful, R1… readable)
-and the house's reading, and returns only its edits, each an exact span of the current English and its
-replacement, with the notes it answers; the notes it declined and why; and where the readers disagreed.
+and the house's reading. It makes its edits with the edit tool the final read and the copy editor share
+(stages.common.Editor), each an exact span of the current English and its replacement with the notes it
+answers, and then answers with the notes it declined and why, and where the readers disagreed.
 
 Code does the rest: a chapter with no notes is never sent; every note must come back taken,
-declined or in a disagreement, or it's flagged; an edit whose span isn't in the English is refused, so
-nothing the desk didn't name can change; a changed paragraph is checked for stray
+declined or in a disagreement, or it's flagged; the tool refuses words it can't find exactly once and
+says where they are, so nothing the desk didn't name can change and a near miss gets a second try;
+a changed paragraph is checked for stray
 scripts and shrinking; locked lines are never
 changed; disagreements the reading doesn't settle go up as forks, at most five a run.
 
@@ -26,7 +28,7 @@ import json
 from house import context, queries
 from house.client import Call, load_schema
 from house.db import dumps
-from house.stages.common import apply_edits, change_flags, latest_units, model, new_revision, translator_notes
+from house.stages.common import Editor, change_flags, edit_tool, latest_units, model, new_revision, translator_notes
 
 ACTOR = "desk"
 MAX_FORKS = 5
@@ -58,9 +60,9 @@ def render_notes(notes: dict[str, dict]) -> str:
     return context.block("The readers' notes", "\n\n".join(out))
 
 
-def decided(d: dict) -> set[str]:
-    """The note labels an answer from the desk takes, declines or records as a disagreement."""
-    return ({n for ch in d["changes"] for n in ch["answers"]} | {x["note"] for x in d["declined"]}
+def decided(d: dict, editor: Editor) -> set[str]:
+    """The note labels the desk took with an edit, declined, or recorded as a disagreement."""
+    return ({n for edits in editor.applied.values() for e in edits for n in e["answers"]} | {x["note"] for x in d["declined"]}
             | {n for dis in d["disagreements"] for n in dis["notes"]})
 
 
@@ -126,10 +128,13 @@ def desk_chapter(ctx, paras, units: dict, stats: dict, notes: dict | None = None
                        context.bible(ctx.latest("bible")),
                        standing(ctx), context.chapter_pairs(paras, units, "ja"), drafter_notes(ctx, paras),
                        "" if recheck else findings_block(findings(ctx)), render_notes(notes))
+    ids = {p.id for p in paras}
     for attempt in range(2):  # an answer that decides none of the notes is asked for once more
-        res = ctx.call(ACTOR, Call("desk", model(ctx, "desk_model"), "medium", inp, load_schema("desk"),
-                                   f"{ctx.cache_key()}:desk", expected_output_tokens=7000, strict=True))  # once a chapter
-        if decided(res.data) & set(notes) or attempt:
+        editor = Editor(ctx, units, ids)
+        res = ctx.loop(ACTOR, Call("desk", model(ctx, "desk_model"), "medium", inp, load_schema("desk"),
+                                   f"{ctx.cache_key()}:desk", expected_output_tokens=7000, strict=True,
+                                   tools=[edit_tool(answers=True)]), editor)  # once a chapter
+        if decided(res.data, editor) & set(notes) or attempt:
             break
         ctx.emit("house", "check.flagged", {"segment_id": paras[0].id, "check": "the desk decided none of the notes: asked again"})
         inp = context.join(inp, context.block("A note on the previous attempt",
@@ -137,16 +142,9 @@ def desk_chapter(ctx, paras, units: dict, stats: dict, notes: dict | None = None
                                               "a change that answers it, or a reason it's declined."))
     d = res.data
     record_findings(ctx, paras, d, recheck)
-    ids = {p.id for p in paras}
     accounted = set()
-    edited, refused = apply_edits(ctx, units, d["changes"], ids, "desk")
-    stats["refused"] += len(refused)
-    for ch in refused:  # the desk answered these notes, but its edit didn't match the English
-        for n in ch["answers"]:
-            if n in notes and n not in accounted:
-                queries.set_status(ctx, notes[n]["id"], "unaddressed", "house", {"note": n, "reason": "the desk's edit didn't match the English"})
-                accounted.add(n)
-                stats["unaddressed"] += 1
+    edited = editor.edited()
+    stats["refused"] += editor.refused  # edits the tool sent back; the desk saw why and could try again
     for unit, cur in edited.items():
         cur["answers"] = [n for ch in cur["applied"] for n in ch["answers"] if n in notes]
         cur["reasons"] = [ch["reason"] for ch in cur["applied"]]

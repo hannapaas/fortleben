@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 21101,
+  "cached_tokens": 20852,
+  "output_tokens": 195,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.009066400000000002,
+ "response_id": "resp_6aeb449492de50c317cb458b",
+ "latency_s": 1.97,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_8542fbb2-dc61-4b0a-93df-8438c3cfd196",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"R10\"],\"new\":\"And her far heart quietly remembered days filled with quiet tears, and days threatened and spent in fear for material things, and each and every day grieved and suffered through sickness.\",\"old\":\"And of days filled with quiet tears, and of days threatened and spent in fear for material things, and of each and every day grieved and suffered through sickness, her far heart was quietly remembering.\",\"reason\":\"Re-hanging the remembered days after 'her far heart' keeps the same words and the drift without forcing a re-read.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T14:43:33Z"
+}

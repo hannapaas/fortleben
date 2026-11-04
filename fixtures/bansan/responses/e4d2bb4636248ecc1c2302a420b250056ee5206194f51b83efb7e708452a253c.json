@@ -1,0 +1,40 @@
+{
+ "prompt": "head-select",
+ "model": "muse-wonder-1.0",
+ "effort": "low",
+ "data": {
+  "decision": "pick",
+  "fork": {
+   "options": [],
+   "question": ""
+  },
+  "pick": 0,
+  "reason": "Option 0 and Option 1 name the same crux in different words: a frozen potato detaches the mother mid-supper, three years expand into an aged life seen from far off as forgiven and dear, and she returns unexplained to the table. Option 0 states that movement more completely, including its contraction to \"only three years,\" the unexalted return to work tomorrow, and the storm frame that closes on the bare last line, so it gives the desk more to translate against. Option 1 got the carrying mechanism exactly right — the incantatory repetitions and long, drifting sentences against the baby's broken noise — and that emphasis is consistent with, not rival to, Option 0's account.",
+  "same_or_different": "same",
+  "say": "They name the same crux, so Option 0 stands as the house reading and no fork is opened."
+ },
+ "usage": {
+  "input_tokens": 2803,
+  "cached_tokens": 0,
+  "output_tokens": 876,
+  "reasoning_tokens": 656,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.028732,
+ "response_id": "resp_6aeb42784d12231528d54c4a",
+ "latency_s": 9.58,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 895
+  }
+ ],
+ "created": "2026-11-04T14:34:32Z"
+}

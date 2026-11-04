@@ -100,7 +100,8 @@ def test_the_edition_links_to_the_analysis_on_its_own_page(client, recorded):
     page = client.get("/read/bansan/analysis").text
     reading, bible = (_body(next(b["body"] for b in reversed(recorded["bible"]) if b["kind"] == k)) for k in ("reading", "bible"))
     assert "How keikaku read" in page and "story bible" not in page and "the house" not in page
-    assert escape(reading["crux"][0]["point"]) in page
+    crux = reading["crux"][0]["point"].strip('"“”')
+    assert escape(crux[:crux.find(" (p") if " (p" in crux else 60][:60]) in page  # the site turns paragraph IDs into links
     for c in bible["cast"]:
         assert escape(c["handle"]) in page
     assert "Recommended" not in page  # the voice it was drafted in, without the first read's marking
@@ -160,15 +161,18 @@ def test_model_text_says_paragraph_numbers_and_names_not_ids():
     assert out == {"anchors": [{"id": "p30", "href": "p29", "label": "paragraph 30"}], "why": "see paragraph 30"}
 
 
-def test_analysis_pages_show_no_ids_and_link_hard_spots_to_their_unit(client):
+def test_analysis_pages_show_no_ids_and_link_hard_spots_to_their_unit(client, recorded):
     import re
     for work in ("bansan", "shuchu"):
         for path in (f"/read/{work}/analysis", f"/read/{work}"):
             text = re.sub(r"<[^>]+>", " ", re.sub(r"<script.*?</script>", "", client.get(path).text, flags=re.S))
             assert not re.search(r"\b[pc]\d+\b", text), path
     page = client.get("/read/bansan/analysis").text
-    # 「晩餐」's p31 is shown merged into the unit that starts at p29: the link goes there, labelled p31
-    assert '#p29">paragraph 31</a>' in page
+    # a hard spot on a paragraph the drafter merged into a group links to the group, labelled with its own number
+    bible = _body(next(b["body"] for b in reversed(recorded["bible"]) if b["kind"] == "bible"))
+    groups = [ids for ids in (_body(r["segment_ids"]) for r in recorded["revision"]) if len(ids) > 1]
+    pid, first = next((a, g[0]) for h in bible["hard_spots"] for a in h["anchors"] for g in groups if a in g[1:])
+    assert f'#{first}">paragraph {pid[1:]}</a>' in page
     # a cast entry names the person once, then the Japanese
     shuchu = client.get("/read/shuchu/analysis").text
     assert "<b>Liu Dacheng</b> <span class=\"nm\">劉大成</span>" in shuchu and "Liu Dacheng Liu Dacheng" not in shuchu

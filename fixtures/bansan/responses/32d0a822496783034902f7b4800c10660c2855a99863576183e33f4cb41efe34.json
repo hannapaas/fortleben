@@ -1,0 +1,52 @@
+{
+ "prompt": "final-read",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 13689,
+  "cached_tokens": 0,
+  "output_tokens": 4803,
+  "reasoning_tokens": 4462,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.150816,
+ "response_id": "resp_6aeb47c830cb26a40f35474e",
+ "latency_s": 45.37,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_d1f36c97-3744-4b55-ad1c-a59e235a5e3a",
+   "name": "edit",
+   "arguments": "{\"new\":\"The mother, leaning against the wall, silent and with head bowed, was serving\",\"old\":\"The mother, silent and bowed by the wall, was serving\",\"reason\":\"Japanese has her leaning against the wall (壁によって) while bowed; “bowed by the wall” loses the leaning and misplaces the posture.\",\"replace_all\":false}"
+  },
+  {
+   "call_id": "call_a33b9d41-cc57-41b1-ac5e-f4a10c19ea1d",
+   "name": "edit",
+   "arguments": "{\"new\":\"her eyes shining as if she must tell him of some great hope, a hope she herself did not understand and yet a great hope,\",\"old\":\"her eyes shining as if she must tell him of something great, something she herself did not understand and yet something great,\",\"reason\":\"Japanese names the thing as a great 希み (hope) she must tell him; “something great” omits that noun.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": "commentary",
+   "chars": 141
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T14:57:12Z"
+}

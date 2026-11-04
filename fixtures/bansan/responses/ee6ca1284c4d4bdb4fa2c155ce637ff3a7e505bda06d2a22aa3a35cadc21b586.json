@@ -1,0 +1,105 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"That's so. Though day by day we are tired and troubled and made to suffer by one thing and another, two years are already past. In a little while Bōya will come to walk.\"",
+    "ids": [
+     "p28"
+    ],
+    "notes": [
+     "Kept 'two years' as written, though p25 and p27 have just said three years; the passage wins over consistency."
+    ]
+   },
+   {
+    "english": "The man looked at the child standing with the spoon in its hand as if at a loss. She at once called out gladly, \"Bōya!\" and at the same moment the child gave a loud cry, looking at its mother's face, and banged the spoon upon the table, \"Yum-yum-yum-yum.\"",
+    "ids": [
+     "p29",
+     "p30",
+     "p31"
+    ],
+    "notes": [
+     "Grouped as one English paragraph: p29-p31 are one sentence broken by the quotation marks. Kept Bōya in romanisation though the child is a girl, as an affectionate generic address. Rendered uma-uma as Yum-yum for the child's tasty babble."
+    ]
+   },
+   {
+    "english": "The father hastily put rice into the child's mouth.",
+    "ids": [
+     "p32"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Presently they laid down their chopsticks.",
+    "ids": [
+     "p33"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Just a little longer,\" the man said firmly, as if to himself.",
+    "ids": [
+     "p34"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Yes, let us work,\" she said, calm and at peace. And holding the child upon her knees, she bared her small breast and began to nurse.",
+    "ids": [
+     "p35"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Come, let us clear away. And let us sleep; let us get up early tomorrow.\"",
+    "ids": [
+     "p36"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Presently the man stood up. And when he was about to begin to clear the table, the child had already closed its eyes with its cheek against the breast. All around had fallen still.",
+    "ids": [
+     "p37"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"A storm,\" the man whispered, standing still.",
+    "ids": [
+     "p38"
+    ],
+    "notes": [
+     "Kept bare and short to close the storm frame without swelling into symbol."
+    ]
+   }
+  ],
+  "say": "Drafted the closing contraction from talk of work to nursing and the whispered storm."
+ },
+ "usage": {
+  "input_tokens": 10292,
+  "cached_tokens": 9585,
+  "output_tokens": 3693,
+  "reasoning_tokens": 3151,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01801675,
+ "response_id": "resp_6aeb46738a0fddc7dc1247cd",
+ "latency_s": 34.45,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2004
+  }
+ ],
+ "created": "2026-11-04T14:51:31Z"
+}

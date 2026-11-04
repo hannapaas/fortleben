@@ -6,29 +6,29 @@
   "confidence": "high",
   "crux": [
    {
-    "for_the_english": "Do not clarify the vision into a daydream about old age, a religious consolation, or a resolution to endure. Keep its tense, distance and agency vague, its key words unvaried, and do not soften the nearness of that peace to death. The mother must be allowed to find the present already becoming sweet from an imagined afterwards, then to return without the story explaining her.",
-    "point": "The frozen, tasteless potato opens a temporal reversal: three years of married poverty feel like a whole aged life, yet seen from a far future they already look like a dear, forgiven dream.",
-    "why": "In p11-14 a badly cooked potato — hard, gritty, coldly flavourless — detaches the mother from supper. She recalls tears, want and sickness, feels suddenly old, then corrects herself: it has been only about three years. In p16-20 that detachment becomes the still picture of three people telling an endless story containing all good, evil, sorrow and anger, while simply smiling; everything will change into なつかしみ and 許し only once life has passed. Her silence at the table, and the husband twice asking why she is silent, is the action of the story."
+    "for_the_english": "Do not label it — not 'she imagined heaven', 'she dreamed', 'she thought of death'. Keep the modal, unresolved terms ('that day', 'would', 'seemed', 'as if'), let the vision arrive and recede unexplained, and keep it visually still rather than turning it into narrative action.",
+    "point": "The bad potato turns an ordinary supper into life seen from beyond its end, and that vision must stay unexplained.",
+    "why": "Nothing dramatic happens: in p11–13 the potato is inexplicably hard, 'frozen', tasteless, and its 'unconnected cold badness' detaches the young mother from the room. She feels suddenly old, remembers the three married years as if from far away — suffering already 'like a dream' (p13) — then sees, p16–18, three motionless figures in dim light telling an endless story in which good, evil, sorrow, anger and joy are all spoken of, yet wrapped only in 'nostalgia and forgiveness' and deep rest, 'like night'. In p20 she repeats the turn as certainty: 'that day exists', after long life, long sorrow. The story stands on this not being reduced to a cause: not simply fatigue, not a stated premonition of death, not religious consolation, not a daydream about old age. It is the present moment already viewed from after time has passed over it (p17: life will pass, and only on that passed day does everything change to nostalgia and forgiveness)."
    },
    {
-    "for_the_english": "Preserve the repeated words and the long, drifting periods in the interior passages, even where fluent English would vary, shorten or connect them. Keep plain words plain — quiet, far, smile, sorrow, suffering, dear/longed-for, forgiveness, peace — rather than ennobling them. Let noisy scene and motionless vision remain syntactically unlike.",
-    "point": "That reversal is carried by incantatory repetition and unbroken, drifting sentences set against the baby's noisy, abruptly broken supper scene.",
-    "why": "From p12 on, 静か, 遠い, 悲しみ, 苦しみ, なつかしみ, 許し and 安らかさ recur in long chains, often with little logical tightening; p20 and p28 repeat days, years and 'after' until time itself blurs. Around it the child bangs a spoon, shouts うまうま, is fed in haste (p5-9, p29-32), and dialogue is short. If the repetitions are treated as redundancy and the vision is made concise and lyrical, its trance — and the mother's absence from the room — disappears."
+    "for_the_english": "Resist rationalisation, expansion and synonym-variation (Berman's tidyings). Keep long cumulative sentences where the Japanese accumulates, repeat the same English words for the same Japanese ones — quiet, lonely, far, rest/peace, nostalgic/dear, smile, dream — even where elegant English would vary them, and keep dialogue plain and slightly unfinished ('It's only been... hasn't it', 'just a little longer').",
+    "point": "The incantatory repetition and unbroken domestic surface are how three years become a lifetime; varied, tightened prose would make the vision an inserted purple passage instead of a change of distance.",
+    "why": "The text works by recurrence, not event: storm heard at start, forgotten in the child's noise (p8, p19, p38), people repeatedly 'young' yet exhausted (p2–3 against p13–14: barely three years, yet she feels wholly aged), words circling — 静か, 淋しい, 遠い, 安らかさ, なつかしみ, 許し, 微笑, 夢 — across both the noisy supper and the silent vision, so the vision feels like the same room seen from far off rather than another world. Sentences also drift: dropped subjects, tense loosening, だろう / やうだ speculation, and dialogue that resolves nothing except 'let us work', 'clear up', 'get up early tomorrow' (p34–36)."
    }
   ],
-  "say": "Confidence: high that these two, together, are where this text stands or falls; the temporal pivot is explicit in the three-years correction, and the lexical repetitions are pervasive rather than incidental.\nWhat would change my mind: evidence from Shizu's other work or from period usage that なつかしみ/許し/安らかさ carried a fixed religious meaning here, which would make a more doctrinal English rendering faithful rather than clarifying.",
-  "what_would_change_my_mind": "evidence from Shizu's other work or from period usage that なつかしみ/許し/安らかさ carried a fixed religious meaning here, which would make a more doctrinal English rendering faithful rather than clarifying."
+  "say": "The translation stands or falls on keeping the mother's vision in p16–20 ambiguous and on letting repetition, not event, stretch three years into a lifetime.",
+  "what_would_change_my_mind": "Evidence from elsewhere in Shiraki's work or contemporary reception that the 'day' is a specific, named doctrine (e.g. an explicit Christian afterlife or Buddhist rite she elsewhere names) would justify one clarifying note; nothing in this text names it, so any such label here would be invention."
  },
  "usage": {
   "input_tokens": 4125,
   "cached_tokens": 0,
-  "output_tokens": 1116,
-  "reasoning_tokens": 427,
+  "output_tokens": 1193,
+  "reasoning_tokens": 433,
   "web_searches": 0
  },
- "list_cost_usd": 0.03882,
- "response_id": "resp_6ae9cacbb02fa161371a4739",
- "latency_s": 17.12,
+ "list_cost_usd": 0.04036,
+ "response_id": "resp_6aeb456b60a8de12150f4451",
+ "latency_s": 17.43,
  "citations": [],
  "items": [
   {
@@ -39,8 +39,8 @@
   {
    "type": "message",
    "phase": null,
-   "chars": 2842
+   "chars": 3167
   }
  ],
- "created": "2026-11-03T11:51:39Z"
+ "created": "2026-11-04T14:47:07Z"
 }

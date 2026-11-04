@@ -6,7 +6,7 @@ contains prompt text. Output is JSON against the prompt's schema in house/schema
 
 Each call is priced from `usage` into the spend ledger (the `call` table). Responses are kept
 in a cache keyed on (model, effort, prompt hash, input hash, schema hash, tools), so a rerun or
-a replay costs nothing. FakeClient serves the same cache from fixtures/ and never needs a key.
+a replay costs nothing. A call with function tools is a loop of such calls, one per turn (Ctx.loop). FakeClient serves the same cache from fixtures/ and never needs a key.
 """
 
 import copy
@@ -139,6 +139,7 @@ class Result:
     response_id: str | None = None
     latency_s: float | None = None
     citations: list = field(default_factory=list)
+    tool_calls: list = field(default_factory=list)  # [{call_id, name, arguments}] when the model called a tool instead of answering
 
 
 @dataclass
@@ -157,6 +158,8 @@ class Call:
     max_output_tokens: int = 32000
     run_id: int | None = None
     stage: str | None = None
+    tools: list | None = None  # function tools the model may call (Ctx.loop runs them)
+    turns: list | None = None  # the tool calls so far and what they returned, after the input
 
     def instructions(self) -> str:
         return instructions(self.prompt)
@@ -176,6 +179,8 @@ class Call:
             "schema": sha(json.dumps(self.schema, sort_keys=True)) if self.schema else None,
             "web_search": self.web_search,
             **({"strict": True} if self.is_strict() else {}),
+            **({"tools": sha(json.dumps(self.tools, sort_keys=True))} if self.tools else {}),
+            **({"turns": sha(json.dumps(self.turns, sort_keys=True, ensure_ascii=False))} if self.turns else {}),
         }
         return sha(json.dumps(parts, sort_keys=True))
 
@@ -232,6 +237,7 @@ class BaseClient:
             usage=Usage(**record["usage"]), cost_usd=0.0, list_cost_usd=record["list_cost_usd"],
             from_cache=True, response_key=key, response_id=record.get("response_id"),
             latency_s=record.get("latency_s"), citations=record.get("citations", []),
+            tool_calls=record.get("tool_calls", []),
         )
 
     def call(self, call: Call) -> Result:
@@ -286,7 +292,7 @@ class ModelClient(BaseClient):
         req = {
             "model": call.model,
             "instructions": call.instructions(),
-            "input": call.input,
+            "input": [{"role": "user", "content": call.input}, *call.turns] if call.turns else call.input,
             "reasoning": {"effort": call.effort},
             "max_output_tokens": call.max_output_tokens,
             "store": False,
@@ -299,12 +305,14 @@ class ModelClient(BaseClient):
             # calls go non-strict and parse() validates them; Wonder's go strict (Call.is_strict).
             req["text"] = {"format": {"type": "json_schema", "name": call.prompt.replace("-", "_"),
                                       "schema": for_api(strict(call.schema)), "strict": call.is_strict()}}
-        if call.web_search:
-            req["tools"] = [{"type": "web_search"}]
+        tools = list(call.tools or []) + ([{"type": "web_search"}] if call.web_search else [])
+        if tools:
+            req["tools"] = tools
         return req
 
     def live(self, call: Call, key: str) -> Result:
-        est = budget.estimate(call.model, len(call.instructions()) + len(call.input), call.expected_output_tokens)
+        turns = len(json.dumps(call.turns, ensure_ascii=False)) if call.turns else 0
+        est = budget.estimate(call.model, len(call.instructions()) + len(call.input) + turns, call.expected_output_tokens)
         last_error = None
         for attempt in range(2):  # a schema failure is retried once (docs/STAGES.md)
             self.budget.check(est, call.run_id)
@@ -316,14 +324,17 @@ class ModelClient(BaseClient):
             cost = usage.cost(call.model)
             res = Result(data=None, model=call.model, effort=call.effort, usage=usage,
                          cost_usd=cost, list_cost_usd=cost, from_cache=False, response_key=key,
-                         response_id=resp.id, latency_s=round(latency, 2), citations=citations)
+                         response_id=resp.id, latency_s=round(latency, 2), citations=citations,
+                         tool_calls=[{"call_id": i.call_id, "name": i.name, "arguments": i.arguments}
+                                     for i in resp.output if i.type == "function_call"])
             try:
                 if resp.status != "completed":
                     raise SchemaError(f"response {resp.status}: {resp.incomplete_details}")
-                res.data = self.parse(text, call.schema)
-                broken = looks_broken(res.data, call.schema)
-                if broken:
-                    raise SchemaError(broken)
+                if not res.tool_calls:  # a turn that calls tools has no answer to check yet
+                    res.data = self.parse(text, call.schema)
+                    broken = looks_broken(res.data, call.schema)
+                    if broken:
+                        raise SchemaError(broken)
             except (SchemaError, json.JSONDecodeError, jsonschema.ValidationError) as e:
                 last_error = f"{type(e).__name__}: {str(e)[:500]}"
                 self.ledger(call, res, ok=False, error=last_error)
@@ -332,6 +343,7 @@ class ModelClient(BaseClient):
                 "prompt": call.prompt, "model": call.model, "effort": call.effort,
                 "data": res.data, "usage": asdict(usage), "list_cost_usd": cost,
                 "response_id": resp.id, "latency_s": res.latency_s, "citations": citations,
+                **({"tool_calls": res.tool_calls} if res.tool_calls else {}),
                 # what came back, item by item, so an odd answer can be diagnosed later (Meta keeps no copy)
                 "items": [{"type": i.type, "phase": getattr(i, "phase", None),
                            "chars": sum(len(getattr(p, "text", "") or "") for p in (getattr(i, "content", None) or []))}

@@ -274,6 +274,7 @@ def cmd_download(args) -> int:
         print(f"Not downloaded: no such run of {args.work} in this database.")
         return 1
     out = Path(args.out or f"{args.work}-run{run_id}.zip")
+    out.parent.mkdir(parents=True, exist_ok=True)
     out.write_bytes(fixture.download(conn, run_id))
     print(out)
     return 0

@@ -4,7 +4,7 @@ You read a part of the English against the Japanese and write margin notes for t
 
 ## How to read
 
-Read the whole part in Japanese first, as a reader, and let it settle. Then the English on its own. Only then go line by line, looking for where the English has become a different piece of writing: an explanation slipped in, a rough sentence made graceful, a repeated word varied, an emotion stated that the author only implied, a tone warmer, cooler or more knowing than hers, a subject or speaker the text doesn't support, something gone, something added. The reading tells you what this text stands or falls on; check that first, because a part can be accurate in every line and still lose it.
+Read the whole part in Japanese first, as a reader, and let it settle. Then the English on its own. Only then go line by line. First for sense, because smooth English that says the wrong thing is the error no English reader can catch: a dropped subject given to the wrong person, a kinship or address term read from the wrong speaker's side, reported speech (〜って, 〜とさ) read as the speaker's own, a set phrase, proverb or period word read literally, a negation or question turned round. Then for where the English has become a different piece of writing: an explanation slipped in, a rough sentence made graceful, a repeated word varied, an emotion stated that the author only implied, a tone warmer, cooler or more knowing than hers, a subject or speaker the text doesn't support, something gone, something added. The reading tells you what this text stands or falls on; check that first, because a part can be accurate in every line and still lose it.
 
 Berman's names are a shared vocabulary, not a checklist: rationalisation, clarification, expansion, ennoblement, impoverishment, destroyed rhythm, destroyed networks of repetition, flattened vernacular. Use one where it fits.
 
@@ -12,7 +12,7 @@ Berman's names are a shared vocabulary, not a checklist: rationalisation, clarif
 
 A note points at a span, says in a sentence what the Japanese is doing that the English isn't, quotes the Japanese, and suggests a wording where you can see one, the whole sentence or passage if that's what it takes. Say how sure you are in plain words, and what would settle it if you aren't. The desk decides what changes.
 
-Five notes that each name a real loss are worth more than twenty that register preferences. A clean part gets no notes, and that happens: say so in one line for the House log and stop.
+How many notes is up to the part. Some parts are clean and get none; some have a misreading in every other paragraph and need that many. What makes something a note is that it's a real loss, not a preference, so don't hold back a real one to keep the list short, and don't pad a clean part. If it's clean, say so in one line for the House log and stop.
 
 ## What not to do
 

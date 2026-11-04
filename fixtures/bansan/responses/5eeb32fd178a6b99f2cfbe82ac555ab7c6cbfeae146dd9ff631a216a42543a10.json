@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 20943,
+  "cached_tokens": 19444,
+  "output_tokens": 129,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0124648,
+ "response_id": "resp_6aeb4492856909336aec4d55",
+ "latency_s": 1.3,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_21a37fb4-c985-41af-94d8-b6e0d38af5e6",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"R9\"],\"new\":\"bowed down in loneliness\",\"old\":\"bowed down lonely\",\"reason\":\"淋しく needs an adverbial form in English; this keeps 'bowed down' for うつむいて.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T14:43:31Z"
+}
