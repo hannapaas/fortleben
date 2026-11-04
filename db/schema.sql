@@ -1,4 +1,4 @@
--- keikaku: the SQLite schema. Part of the contract between lanes (docs/CONVENTIONS.md).
+-- keikaku: the SQLite schema. Changes go with the matching doc (docs/CONVENTIONS.md).
 -- Change it only with a note in the commit and the matching doc updated in the same commit.
 -- JSON columns hold text; the shape of each is the schema in house/schemas/ named in the comment.
 
@@ -299,7 +299,7 @@ CREATE TABLE IF NOT EXISTS reaction (
 );
 
 -- Comments in the margin: anyone, no account. Shown to everyone once the screen passes them;
--- until then only to their writer (matched by a cookie token, stored hashed). Removed ones are deleted.
+-- until then only to their writer (matched by a cookie token, stored hashed). Nothing is deleted: a removed one is hidden.
 CREATE TABLE IF NOT EXISTS comment (
   id            INTEGER PRIMARY KEY,
   work_id       TEXT NOT NULL,

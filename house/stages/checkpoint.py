@@ -1,4 +1,4 @@
-"""The checkpoint, between the bible and the draft (docs/STEERING.md). With the run's `checkpoint`
+"""The checkpoint, between the bible and the draft (docs/EDITORS-DESK.md). With the run's `checkpoint`
 option off it does nothing. With it on, it drafts the first page once in each voice take the reading
 offers, with the drafting prompt and model the run uses, keeps those drafts in the `checkpoint`
 document (not as revisions: none of them is the run's English yet), and sets the run `waiting`. The

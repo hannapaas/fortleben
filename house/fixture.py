@@ -1,5 +1,5 @@
 """Export a recorded run to fixtures/<work>/: every model response (so FakeClient can replay the
-run with no key) and the run's record as JSON (so the site and House lanes can build on it).
+run with no key) and the run's record as JSON (which the site loads at start).
 download() gives an editor the same record and the finished editions, readable, as one zip.
 
 fixtures/<work>/run.json holds the work, its paragraphs, the latest reading, crux check, bible and

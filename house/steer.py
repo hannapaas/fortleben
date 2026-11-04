@@ -1,4 +1,4 @@
-"""Steering a run at the checkpoint (docs/STEERING.md): an editor's note goes to the model that wrote
+"""Steering a run at the checkpoint (docs/EDITORS-DESK.md): an editor's note goes to the model that wrote
 the reading, which carries it into the reading and the bible as house style and replies; page 1 is then
 drafted again under the amended bible, so the effect shows as English. The loop ends when the editor
 approves, never on the house's decision.

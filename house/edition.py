@@ -1,7 +1,7 @@
 """What the site reads: a work's latest release, put together with its record for the reader.
 
 The release body (house/stages/release.py) holds the views. Everything else a paragraph shows,
-its margin, comes from the record anchored to it (docs/ARCHITECTURE.md §2, "The margin"):
+its margin, comes from the record anchored to it (docs/ARCHITECTURE.md, "The site"):
 the readers' notes and what the desk did with each, the drafter's notes, the revisions, the notes.
 Live runs and `--replay` read the same tables; replay just loads them from fixtures/ first.
 """

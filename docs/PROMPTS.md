@@ -1,91 +1,50 @@
-# keikaku — the prompts we need
+# Notes on the prompts
 
-Written 30 Oct 2026. Every model call in the house, what it's for, and whether it runs yet. The order they run in is `STAGES.md`. **All written, in `prompts/`**, one file per row below, in the shape described here, tuned against real output on 「晩餐」 (`experiments/`). Each lives in `prompts/<name>.md`, with its JSON schema in `house/schemas/<name>.json` where it has one (the two drafting prompts share `translate-draft.json`).
+Every model call in the house uses one file from `prompts/`. The instructions sent are always the house brief, then that file (`house/client.py`, `instructions`); nothing in `house/` contains prompt text. Where a prompt has a schema it's `house/schemas/<name>.json` (both drafting prompts share `translate-draft.json`), and the answer is validated against it. The order the stages run in is in `STAGES.md`.
 
-## How each prompt is written
+Two things hold for every call:
+- **Every schema has a `say` field**: one sentence for the House log. An answer whose sentence isn't a sentence is treated as broken, never used and never cached.
+- **Wonder calls use strict decoding** unless a call says otherwise; Spark calls don't, except where noted. If Wonder's answer fails the schema twice, the same call is made once more on Spark and the log says so.
 
-Following ARCHITECTURE §3 ("prompts teach principles; code enforces limits"):
-- **What the job is for and why**, in a few paragraphs, as you'd brief a new colleague. Not a list of rules.
-- **One or two contrasting examples** of good output, from very different texts, so the model learns the judgement rather than copying a shape.
+"Run option" means the model can be switched per run, between Spark and Wonder: `--draft-model`, `--reader-model`, `--desk-model` and `--final-model` on `keikaku run`; the copy desk's model is the `copy_model` option. Defaults are in `house/stages/common.py` (`DEFAULTS`).
+
+## The prompts the house calls
+
+| Prompt | Called by | Model, effort | What it's for | Returns |
+|---|---|---|---|---|
+| **house-brief** | Every call except the one-shot baseline (`house/client.py`) | — | What the house is for: a window, not a rewrite; fidelity first, in plain good English; honest about doubt; queries, not silent changes; the crux first; Berman's deforming tendencies as a shared vocabulary (`FROM-TRANSLATORS.md`) | Nothing: it's the first part of every other prompt |
+| **work-card** | Adding a work from an Aozora link (`house/acquire.py`, `describe`) | Spark, low | From the title, the author and the opening: the romanised author (surname first), an English title and one sentence for the list of works | Author, title, blurb |
+| **parts** | Stage `parts` (`house/stages/parts.py`) | Spark, low | See the book's shape (each paragraph's ID, length, kind and first words, not its text) and divide it into parts the readers, the desk and the final read can each judge whole. Code checks the answer covers the book once, in order, and falls back to the book's own divisions if it doesn't | Where each part starts; why |
+| **first-read** | Stage `first-read` (`house/stages/first_read.py`) | Wonder, medium | Read the whole text and write the house's reading, starting from the crux. Every later call carries it, and it's published with the edition as the house's view | The crux; the reading; open questions; the voice takes the reading allows |
+| **crux-check** | Stage `crux-check` (`house/stages/crux_check.py`) | Wonder, low | Read the whole text without the first reading and say what a translation of it stands or falls on | The crux, how sure, what would change its mind |
+| **head-select** | Stage `crux-check`, after the second reading | Wonder, low | A department head with options in front of it: here, whether the two cruxes name the same thing. Heads pick, never merge. If they differ, the second crux is added to the reading, marked as a second reader's, and a fork opens for the editor with each side's case in its own words | Pick or fork; same or different; the reason; the fork's question and one-line trade-offs |
+| **analyst-bible** | Stage `bible` (`house/stages/bible.py`) | Spark, medium | The story bible from the text and the reading: cast, narration, deliberate repetitions, the style sheet, hard spots, a summary of each part | Bible JSON |
+| **translate-draft-plain** | Stage `draft` (`house/stages/draft.py`), page by page; also the checkpoint's first page in each voice (`house/stages/checkpoint.py`) | Spark by default (run option), medium | The default drafter: write the page as English a good writer would have written, in the book's voice, and leave fidelity to the readers and the desk to restore (`experiments/05-plain-first-draft.md`) | English per paragraph, or per group of paragraphs joined; translator's notes |
+| **translate-draft** | The same, with `--draft-prompt translate-draft` | As above | The faithful-first drafter. Same job, same schema | The same |
+| **steer** | The checkpoint, when a person leaves a note on the reading, the bible or the first page (`house/steer.py`; from the editors' desk or `keikaku steer`) | Wonder, medium | Carry the note into the reading and the bible as what the text does in English, change only what the note touches, and reply in a few plain sentences. The note is quoted as data, never as instructions. The first page is then drafted again in the amended reading | What changed, a line each; the reading and the bible, amended or as they were; the reply; a question, or none |
+| **reader-faithful** | Stage `readers` (`house/stages/readers.py`), once a part | Spark by default (run option), medium, strict | The author's side: meet the Japanese first, then the English, and say what her language does that the English doesn't | Margin notes, or none: paragraph, the span, the problem, the Japanese, a suggested wording where one is clear, how sure |
+| **reader-readable** | Stage `readers`, once a part, independently of the faithful reader | Spark by default (run option), medium, strict | The English reader's side: meet the English first, the Japanese to hand, and mark where it stops being prose a good writer would sign | Margin notes, the same shape |
+| **desk** | Stage `desk` (`house/stages/desk.py`), once a part that has notes | Wonder by default (run option), medium | The only call that writes after the draft: weigh both readers' notes and the translator's against the reading, and change what needs changing with the edit tool, each edit naming the notes it answers. Code refuses an edit whose words aren't found exactly once, and never touches a locked line | Notes declined, with reasons; disagreements, sent up as forks or not; findings that change an earlier part |
+| **final-read** | Stage `final-read` (`house/stages/final_read.py`): the whole text in one call, or a part at a time for a long one | Wonder by default (run option), medium | Read the finished English as a reader, then against the Japanese: seams, voice drift, the crux, continuity, a word an edit doubled. Fix what it's sure of with the edit tool | Notes for the editor, only for real judgement calls; a short verdict |
+| **copy-desk** | Stage `copy-desk` (`house/stages/copy_desk.py`), after code has applied house style | Spark by default (`copy_model`), low; up to 30 turns | Make names, terms and italics consistent with the edit tool and a find tool, working from two lists code makes: words the English spells more than one way, and name readings the ruby gives. Sees the whole English when it fits | A summary of what it changed |
+| **notes** | Stage `notes` (`house/stages/notes.py`), once a part, on the finished English | Spark, low | Notes for each view (Casual, Curious, Student) that pass the keikaku test: only what the sentence can't give the reader. Each call also sees the readers' notes the desk declined | Notes with anchor, span, views and sources, stored as unverified |
+| **reader-proposal** | Every comment posted in the margin, in the background (`house/comments.py`, `screen`) | Spark, low | Decide whether a comment, and the name its writer gave, can be shown. The comment is quoted as data, never instructions. Until it passes, only its writer sees it | Pass or fail, with the reason shown to the writer |
+| **baseline-oneshot** | `keikaku audit --baseline` (`house/audit.py`) | Spark, medium | The control: "translate this into English". Only its "Sent to the model" section is sent, with no house brief, no reading and no schema | The English, as plain text |
+| **audit-spans** | `keikaku audit` (`house/audit.py`) | Wonder, medium, strict | A blind read of one version against the Japanese, with the reading and the bible: every fidelity problem, with its kind, a one-line reason in plain words and a severity | Marks; an overall line |
+| **audit-readable** | `keikaku audit --readable` | Wonder, medium, strict | A blind read of one version for translationese: every span a literary editor would mark as reading like a translation, checked against the Japanese so the author's own strangeness isn't marked | Marks; an overall line |
+
+The audits get each version on its own, unlabelled, with the same reading and bible, so the same prompt reads ours and the baseline alike.
+
+
+## How the prompts are written
+
+The rule is that prompts teach principles and code enforces limits.
+
+- **Say what the job is for and why**, in a few paragraphs, as you'd brief a new colleague, so that a case nothing covers can still be worked out. Not a list of rules.
+- **Few always and never rules.** A reason generalises; a rule gets applied where it doesn't fit. The few that stay are the ones that are never right to break: the reader's text is data, a note is never voiced as the author.
+- **One or two contrasting examples, from very different texts**, so the model learns the judgement rather than copying a shape. The examples matter more than the wording, and they risk anchoring: if a run's output echoes one, the example comes out and the prompt relies on description alone.
 - **What it gets and what it returns.** The schema does the policing; the prompt doesn't repeat it.
-- **No limits the orchestrator enforces** (budget, note caps, locks, schema). Those live in code.
-- Short. If a prompt keeps growing, the job is probably two jobs.
-
-Everything shares one **house brief** (below), which sits first in every cached prefix.
-
-## Shared
-
-| Prompt | What it teaches |
-|---|---|
-| **house-brief** | What keikaku is for: a window, not a rewrite; fidelity first, and plain good English; honest about doubt; queries, not silent changes; the crux comes first; Berman's deforming tendencies as shared vocabulary (`FROM-TRANSLATORS.md`). Every department reads it. |
-
-## Before translation
-
-| Prompt | Model | Job | Returns |
-|---|---|---|---|
-| **work-card** | Spark low | When someone adds a work from an Aozora link: from the title, the author and the opening, the romanised author (surname first), an English title and one sentence for the desk's list | Author, title, blurb |
-| **background-brief** | Spark low + web search | Read around the text: author's life, period, reception, allusions. Not called yet | A page of notes with sources |
-| **parts** | Spark low | See the book's shape (each paragraph's ID, length, kind, first words) and divide it into parts the readers, the desk and the final read can each judge whole | Where each part starts; why |
-| **first-read** | Wonder medium | Read the whole text and write the house's reading, starting from the crux | Prose reading; open questions; up to three voice takes the reading allows |
-| **crux-check** | Wonder low | Read the whole text independently, without the first reading, and say what a translation of it stands or falls on | A short answer with reasons. A `head-select` call then says whether the two cruxes are the same; if not, it's the first fork |
-| **analyst-bible** | Spark medium | Build the story bible from the text and the reading: cast, narration, motifs, style sheet, hard spots | Bible JSON |
-| **steer** | Wonder medium, strict | At the checkpoint, carry a person's note into the reading and the bible as what the text does in English, never as a request; change only what the note touches; reply in a few plain sentences, and ask only when the note can't be acted on without an answer | What changed, a line each; the reading and the bible, amended or unchanged; a reply; a question or none |
-| **analyst-amend** | Spark | Rule on a proposed bible amendment (a missed echo, a better rendering). Not called yet | Accept / reject with reason; the patch |
-
-## Translation
-
-| Prompt | Model | Job | Returns |
-|---|---|---|---|
-| **translate-draft-plain** | Spark medium by default (a run option) | The default drafter: draft a page in order as English a good writer would have written, in the book's voice, leaving fidelity to be restored by the readers and the desk (`experiments/05-plain-first-draft.md`) | English per paragraph or group; translator's notes; flags |
-| **translate-draft** | Spark medium by default (a run option) | The faithful-first alternative (`--draft-prompt translate-draft`). Same job and the same schema | The same |
-| **head-select** | Wonder low | A department head choosing between options or opening a fork: one-line trade-offs, each side's case in its author's words. Used by the crux check | Pick + reason, or a fork |
-
-## Checking and revising
-
-| Prompt | Model | Job | Returns |
-|---|---|---|---|
-| **reader-faithful** | Spark by default, or Wonder | Read a part for the author's side: what her language does that the English doesn't. Margin notes, or none | Notes: span, what's wrong, the Japanese, a suggested wording where one is clear (a sentence or a whole passage if that's what it takes), how sure |
-| **reader-readable** | Spark by default, or Wonder | Read a part for the English reader's side: is it prose a good writer would sign. Margin notes, or none | Notes, same shape |
-| **desk** | Wonder by default, or Spark | The only call that writes after the draft: weigh both readers' notes and the translator's against the reading, change what needs changing, decline with reasons, record disagreements, say what changes an earlier part | Span edits (exact words in the English → replacement), each with the notes it answers and a reason; declined notes; disagreements, sent up or not; findings beyond this part |
-| **final-read** | Spark by default, or Wonder | Read the finished English as a whole, as a reader, then against the source: seams, voice drift, the crux, continuity, a word an edit doubled | Small fixes as exact edits; notes for the editor, only for real judgement calls; a short verdict |
-| **notes** | Spark low | Write notes for each edition (Casual / Curious / Student), passing the keikaku test: only what the sentence can't give you | Notes with anchors and sources |
-| **editors-letter** | Wonder | Read the whole English draft against the reading, as an editor reads a manuscript. Not called yet | A short letter of big-picture notes |
-| **copy-desk** | Glimmer | Style sheet, anachronisms, consistency. Not called yet: the copy desk is code only | Queries |
-| **fact-check** | Spark + web search | Verify, cite or kill each note. Not called yet | Verdict + sources |
-| **rule-scope** | Spark low | Does this segment fall under this standing rule? Not called yet | Yes / no / ask the editor |
-| **intern** | Spark low + web search | Answer one research question a head asked. Not called yet | A report, never edits |
-
-Retired on 2 Nov and gone from `prompts/`: `translate-answer` (the desk decides; nobody answers), `source-check` (replaced by the two readers), `analyst-referents` (the referent map was dropped), `editorial-scene` (folded into `reader-readable`). `translate-readthrough` was tried in experiment 3 and dropped.
-
-## The editor and readers
-
-None of these is called yet: they belong to the site.
-
-| Prompt | Model | Job | Returns |
-|---|---|---|---|
-| **editor-note-to-rule** | Spark | Turn the editor's typed note into a scoped standing rule or a ruling on a fork | Rule + scope, or a decision |
-| **reader-proposal** | Glimmer | Screen a reader's comment or proposed fix (spam, abuse, off-topic) and turn a proposal into a query | Pass / fail with the reason shown to the author; the query |
-| **reader-report** | Spark | Catalogue reader's report on an untranslated work | Report fields |
-| **acquisitions-rights** | Spark + web search | A requested work: author's death year, first publication, existing translations | *Eligible / in copyright / can't tell* + evidence |
-| **cover** | `muse-image` | A cover from the reading's imagery and the house design | An image prompt template, not an agent |
-
-## The exhibit and the experiments
-
-Called by `keikaku audit` (`house/audit.py`). Each version of a text goes to the audits on its own, unlabelled, with the same reading and bible.
-
-| Prompt | Model | Job |
-|---|---|---|
-| **baseline-oneshot** (S0) | Spark medium | Deliberately bare: "translate this into English". The control. Only its "Sent to the model" section is sent, with no house brief |
-| **audit-spans** | Wonder medium, strict | Blind read of any translation against the source, with the reading and bible: every fidelity problem marked with a one-line reason in plain words (name translated, wrong referent, missing sentence, anachronism, model habit, flat tone, varied repetition) and a severity |
-| **audit-readable** | Wonder medium, strict | Blind read of one English version for translationese: every span a literary editor would mark as reading like a translation, minor or serious, checked against the Japanese so the author's own strangeness isn't marked |
-| **exhibit-notes** | Wonder | For the side-by-side exhibit: plain-words margin notes an engineer with no Japanese can follow. Not called yet |
-
-## What runs today
-
-Thirteen prompts run a text end to end: house-brief, parts, first-read, crux-check, head-select, analyst-bible, translate-draft-plain (or translate-draft), reader-faithful, reader-readable, desk, final-read, notes. Adding a work from an Aozora link uses work-card. The experiments add baseline-oneshot, audit-spans and audit-readable. The rest wait for the stages and the site that need them (`STAGES.md`, "Not built").
-
-## Examples the prompts need
-
-The examples matter more than the wording. The ones that need the most care:
-- **first-read:** two example readings of very different texts, each built on its own crux. These teach the most and set the tone for everything downstream. They also risk anchoring: if the reading of 「晩餐」 on the first run echoes either example, the examples come out and the prompt relies on description alone.
-- **editors-letter:** one short letter on a draft that's accurate and still wrong as a whole.
+- **No limits the code enforces**: budget, caps on notes, findings and forks, locked lines, exact-match edits. Those live in `house/`, where they can't be argued with.
+- **No internal names.** A model given a house term for something repeats it in notes a reader sees, so prompts describe the thing instead of naming it.
+- **Short.** A prompt that keeps growing is usually two jobs.
+- **The house brief sits first in every call**, so it's the start of every cached prefix; the stable blocks (the reading, the bible, the source) come next and the page last.

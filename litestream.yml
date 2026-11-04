@@ -1,4 +1,4 @@
-# Litestream streams the database to S3-compatible object storage as it changes (docs/ARCHITECTURE.md §8).
+# Litestream streams the database to S3-compatible object storage as it changes (docs/ARCHITECTURE.md, "Hosting").
 # Start the service under it:   litestream replicate -config litestream.yml -exec "<the start command>"
 # Restore onto an empty volume:  litestream restore -config litestream.yml "$KEIKAKU_DATA_DIR/keikaku.db"
 # Only the database is backed up; the response cache only saves money. Variables are in .env.example.

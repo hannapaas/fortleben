@@ -1,7 +1,7 @@
 """Stage 13: notes, one call per part, on the finished English. The keikaku test, after the fansub joke
 about a note explaining that "keikaku means plan": only what the sentence can't give the reader. Notes are
-the house's and never voiced as the author (Japanese Copyright Act art. 60; docs/REFERENCES.md). They start
-unverified; a fact-check stage, not built yet, would verify or kill them.
+the house's and never voiced as the author (Japanese Copyright Act art. 60; docs/REFERENCES.md). They are
+stored as unverified.
 
 Each call also sees, for its part, the readers' notes the desk declined and the places the two readers
 pulled opposite ways: the road not taken, which a curious reader may want a note on when it's about the text."""
