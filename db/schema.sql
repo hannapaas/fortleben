@@ -308,10 +308,12 @@ CREATE TABLE IF NOT EXISTS comment (
   name          TEXT,                      -- optional, screened like the body
   status        TEXT NOT NULL DEFAULT 'pending',  -- pending / published / failed / hidden; nothing is deleted
   reason        TEXT,                      -- why it failed the screen (shown to its writer) or was hidden
+  category      TEXT,                      -- the screen's category for a fail: spam, promotion, link, hate, ...
   author        TEXT NOT NULL,             -- hash of the writer's cookie token
   ip            TEXT NOT NULL,             -- hash of the address, for rate limits
   created_at    TEXT NOT NULL DEFAULT (datetime('now')),
-  screened_at   TEXT
+  screened_at   TEXT,
+  screen_tries  INTEGER NOT NULL DEFAULT 0 -- screens the model answered badly; after MAX_TRIES it waits for the editor
 );
 CREATE INDEX IF NOT EXISTS comment_work ON comment(work_id, status);
 

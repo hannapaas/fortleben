@@ -1,8 +1,8 @@
 """One model client for the whole house.
 
 Every call goes to a Meta model on the Meta Model API's Responses API. The instructions are
-always the house brief followed by one department prompt from prompts/; nothing in house/
-contains prompt text. Output is JSON against the prompt's schema in house/schemas/, validated here.
+the house brief followed by one department prompt from prompts/ (the comment screen goes
+without the brief); nothing in house/ contains prompt text. Output is JSON against the prompt's schema in house/schemas/, validated here.
 
 Each call is priced from `usage` into the spend ledger (the `call` table). Responses are kept
 in a cache keyed on (model, effort, prompt hash, input hash, schema hash, tools), so a rerun or
@@ -69,18 +69,22 @@ def sha(text: str) -> str:
 
 
 BARE = "## Sent to the model"
+ALONE = {"comment-screen"}  # not translation work: the house brief would only be noise
 
 
 def instructions(prompt: str) -> str:
     """The house brief, then the department prompt. Both are files; neither is edited here.
     A prompt with a "Sent to the model" section (the one-shot baseline) sends only that section,
-    with no house brief: it is the control, what the model does when simply asked."""
+    with no house brief: it is the control, what the model does when simply asked. A prompt in
+    ALONE is sent whole, with no house brief."""
     brief = (PROMPTS / "house-brief.md").read_text(encoding="utf-8")
     if prompt == "house-brief":
         return brief
     text = (PROMPTS / f"{prompt}.md").read_text(encoding="utf-8")
     if BARE in text:
         return text.split(BARE, 1)[1].split("\n## ", 1)[0].strip()
+    if prompt in ALONE:
+        return text
     return brief + "\n\n---\n\n" + text
 
 

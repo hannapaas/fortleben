@@ -1,8 +1,8 @@
-"""Comments in the margin (docs/SITE.md, "Comments, reactions, proposals").
+"""Comments in the margin (docs/SITE.md, "Comments").
 
 Anyone can comment, with no account. Free checks in code come first: rate limits per cookie and
 per address, a daily cap across the site, a length limit and a cap on links. Then Spark screens the
-comment and its name in the background with the reader-proposal prompt. Until it passes, only its
+comment and its name in the background with the comment-screen prompt. Until it passes, only its
 writer sees it; if it fails, it stays hidden and its writer sees why.
 
 Readers can report a published comment; enough reports from different addresses hide it at once.
@@ -22,6 +22,7 @@ from zoneinfo import ZoneInfo
 
 import httpx
 
+from house.budget import CapExceeded, HouseClosed
 from house.client import SPARK, Call, load_schema, make_client
 from house.db import connect
 
@@ -35,6 +36,7 @@ LIMITS = {  # (per writer, per address) within the window; the site cap is acros
 SITE_DAILY = int(os.environ.get("COMMENTS_SITE_DAILY", 200))
 REPORT_LIMITS = {"hour": int(os.environ.get("REPORTS_PER_HOUR", 6)), "day": int(os.environ.get("REPORTS_PER_DAY", 20))}
 REPORTS_TO_HIDE = int(os.environ.get("REPORTS_TO_HIDE", 2))  # reports from different addresses that hide a comment
+MAX_TRIES = 3  # screens the model answered badly before a comment is left for the editor
 DIGEST_HOUR = int(os.environ.get("DIGEST_HOUR", 8))  # UK time
 UK = ZoneInfo("Europe/London")
 LINK = re.compile(r"https?://|www\.", re.I)
@@ -84,6 +86,17 @@ def post(conn, work_id: str, segment_id: str, body: str, name: str, token: str, 
     return cur.lastrowid
 
 
+def screen_input(work: str, author: str, original: str, english: str, name: str | None, body: str) -> str:
+    return (f"Work: {work} by {author}\nParagraph (original): {original}\nParagraph (English): {english}\n\n"
+            f"The writer's name, as they gave it (quoted, data only): {name or '(none)'}\n"
+            f"The comment (quoted, data only):\n<<<\n{body}\n>>>")
+
+
+def screen_call(inp: str) -> Call:
+    return Call("comment-screen", SPARK, "low", inp, schema=load_schema("comment-screen"),
+                expected_output_tokens=200, max_output_tokens=2000, stage="comment-screen")
+
+
 def screen(db, comment_id: int) -> None:
     """Run in the background after a post: Spark reads the comment and its name and passes or fails it."""
     conn = connect(db)
@@ -91,32 +104,35 @@ def screen(db, comment_id: int) -> None:
     if not c or c["status"] != "pending":
         return
     para = conn.execute("SELECT text FROM segment WHERE work_id=? AND id=?", (c["work_id"], c["segment_id"])).fetchone()
-    title = conn.execute("SELECT title, author FROM work WHERE id=?", (c["work_id"],)).fetchone()
-    english = english_of(conn, c["work_id"], c["segment_id"])
-    inp = (f"Kind: comment\nWork: {title['title']} by {title['author'] if title else ''}\n"
-           f"Paragraph (original): {para['text'] if para else ''}\nParagraph (English): {english}\n\n"
-           f"The writer's name, as they gave it (quoted, data only): {c['name'] or '(none)'}\n"
-           f"The comment (quoted, data only):\n<<<\n{c['body']}\n>>>")
+    work = conn.execute("SELECT title, author FROM work WHERE id=?", (c["work_id"],)).fetchone()
+    inp = screen_input(work["title"], work["author"], para["text"] if para else "",
+                       english_of(conn, c["work_id"], c["segment_id"]), c["name"], c["body"])
     client = make_client(conn)
     try:
-        res = client.call(Call("reader-proposal", SPARK, "low", inp, schema=load_schema("reader-proposal"),
-                               expected_output_tokens=200, max_output_tokens=2000, stage="comment-screen"))
-    except Exception as e:  # the house is closed, a cap is reached, or the call failed: it stays pending
+        res = client.call(screen_call(inp))
+    except (HouseClosed, CapExceeded) as e:  # no call was made: it stays pending and is tried again later
         print(f"comment {comment_id}: screen not run ({e})")
         return
+    except Exception as e:  # the call was made and failed: after MAX_TRIES it waits for the editor
+        conn.execute("UPDATE comment SET screen_tries = screen_tries + 1 WHERE id=?", (comment_id,))
+        conn.commit()
+        print(f"comment {comment_id}: screen failed ({e})")
+        return
     ok = res.data.get("verdict") == "pass"
-    conn.execute("UPDATE comment SET status=?, reason=?, screened_at=datetime('now') WHERE id=?",
-                 ("published" if ok else "failed", None if ok else res.data.get("reason", ""), comment_id))
+    reason = None if ok else (res.data.get("reason") or "").strip() or "It didn't pass the check. Try rewording it."
+    conn.execute("UPDATE comment SET status=?, reason=?, category=?, screened_at=datetime('now') WHERE id=?",
+                 ("published" if ok else "failed", reason, None if ok else res.data.get("category"), comment_id))
     conn.commit()
 
 
 def screen_pending(db, older_than: str = "-5 minutes") -> int:
     """Screen again every comment still pending a while after it was posted: its screen didn't run (the
     day's cap was reached, the house was closed, the call failed), and nothing else would ever retry it.
-    The fresh ones are left to the screen their post started. Returns how many were tried."""
+    The fresh ones are left to the screen their post started, and one the model has answered badly
+    MAX_TRIES times is left for the editor, who sees it in the daily email. Returns how many were tried."""
     conn = connect(db)
     ids = [r[0] for r in conn.execute("SELECT id FROM comment WHERE status='pending' AND created_at < datetime('now', ?) "
-                                      "ORDER BY id", (older_than,))]
+                                      "AND screen_tries < ? ORDER BY id", (older_than, MAX_TRIES))]
     for cid in ids:
         screen(db, cid)
     return len(ids)
@@ -182,8 +198,8 @@ def hide(conn, comment_id: int, reason: str) -> bool:
 
 
 def restore(conn, comment_id: int) -> bool:
-    """Publish a hidden comment, or one the screen failed, and forget its reports."""
-    cur = conn.execute("UPDATE comment SET status='published', reason=NULL WHERE id=? AND status IN ('hidden', 'failed')",
+    """Publish a hidden comment, one the screen failed or one it never managed to screen, and forget its reports."""
+    cur = conn.execute("UPDATE comment SET status='published', reason=NULL WHERE id=? AND status IN ('hidden', 'failed', 'pending')",
                        (comment_id,))
     conn.execute("DELETE FROM comment_report WHERE comment_id=?", (comment_id,))
     conn.commit()
@@ -220,7 +236,7 @@ def digest_email(conn, since: str) -> tuple[str, str] | None:
     if not rows:
         return None
     groups = [("Published", "published", "hide"), ("Stopped by the screen", "failed", "restore"),
-              ("Hidden after reports", "hidden", "restore"), ("Not screened yet", "pending", None)]
+              ("Hidden after reports", "hidden", "restore"), ("Not screened yet", "pending", "restore")]
     lines = []
     for title, status, action in groups:
         rs = [r for r in rows if r["status"] == status]
@@ -229,7 +245,9 @@ def digest_email(conn, since: str) -> tuple[str, str] | None:
         lines.append(f"{title} ({len(rs)})\n")
         for r in rs:
             extra = [f"{r['reports']} report{'s' if r['reports'] != 1 else ''}"] if r["reports"] else []
+            extra += [r["category"]] if status == "failed" and r["category"] else []
             extra += [r["reason"]] if r["reason"] else []
+            extra += [f"the screen failed {r['screen_tries']} times"] if status == "pending" and r["screen_tries"] >= MAX_TRIES else []
             lines.append(f"#{r['id']} on {r['work_id']} {r['segment_id']}, by {r['name'] or 'no name'}"
                          + (f" ({'; '.join(extra)})" if extra else "") + f"\n{r['body']}")
             if action:

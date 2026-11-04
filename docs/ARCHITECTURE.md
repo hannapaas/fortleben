@@ -75,7 +75,7 @@ Every model this repo calls is a Meta model, through the Meta Model API.
 | Copy desk | `copy-desk` | Spark | low | `copy_model` (no flag) |
 | Notes | `notes` | Spark | low | |
 | A work's English title and blurb, on adding it | `work-card` | Spark | low | |
-| Screening a comment | `reader-proposal` | Spark | low | |
+| Screening a comment | `comment-screen` (no house brief) | Spark | low | |
 | Audits; their one-shot baseline | `audit-spans`, `audit-readable`; `baseline-oneshot` | Wonder; Spark | medium | |
 
 The defaults (`DEFAULTS` in `house/stages/common.py`) are the best set-up the experiments found ([experiments/](experiments/README.md)). Wonder takes the jobs that weigh most and need the whole text in one call: the reading, the crux, the desk, the final read. On three texts audited blind, a Wonder final read made twice the meaning fixes a Spark one did (experiment 10). Spark does the volume. The two come from the same family, so a Wonder desk over a Spark draft is a different and stronger checkpoint, not an independent one.
@@ -207,7 +207,7 @@ A desk run uses the same orchestrator as the command line, in a background threa
 
 ## Comments and moderation
 
-Anyone can comment on a paragraph with no account. Code checks come first: 1,200 characters, one link, limits per writer and per address by the hour and day (both stored hashed), 200 a day across the site. Then Spark screens the comment and its name in the background. Until it passes only its writer sees it; if it fails, its writer sees why. A background loop every 15 minutes rescreens any comment whose screen didn't run. Reports from two different addresses hide a published comment. Once a day (after 8:00 UK time) the editor gets an email listing the day's comments, what the screen stopped and what readers reported, each with a signed link to hide or restore it; `keikaku comments` does the same from the terminal. Nothing is deleted. Mail goes through Resend (`RESEND_API_KEY`), or to the server log without a key.
+Anyone can comment on a paragraph with no account. Code checks come first: 1,200 characters, one link, limits per writer and per address by the hour and day (both stored hashed), 200 a day across the site. Then Spark screens the comment and its name in the background. Until it passes only its writer sees it; if it fails, its writer sees why. A background loop every 15 minutes rescreens any comment whose screen didn't run, giving up after three badly formed answers. Reports from two different addresses hide a published comment. Once a day (after 8:00 UK time) the editor gets an email listing the day's comments, what the screen stopped and what readers reported, each with a signed link to hide or restore it; `keikaku comments` does the same from the terminal. Nothing is deleted. Mail goes through Resend (`RESEND_API_KEY`), or to the server log without a key.
 
 ## Hosting
 
