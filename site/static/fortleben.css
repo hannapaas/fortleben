@@ -10,13 +10,8 @@
   --blend: multiply; --size: 18px; --leading: 1.6;
   color-scheme: light;
 }
-/* Dark is near-black for legibility; each accent carries a dark shade (light-dark) to hold on it. */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]):not([data-theme="cream"]) {
-    --paper: #121214; --ink: #ece6d4; --ink-2: #c2c0c8; --muted: #8b8a96; --rule: #7f8fd6;
-    --blend: screen; color-scheme: dark;
-  }
-}
+/* White paper unless the reader picks cream or dark. Dark is near-black for legibility; each accent
+   carries a dark shade (light-dark) to hold on it. */
 :root[data-theme="cream"] { --paper: #f8f1d9; }
 :root[data-theme="dark"] {
   --paper: #121214; --ink: #ece6d4; --ink-2: #c2c0c8; --muted: #8b8a96; --rule: #7f8fd6;

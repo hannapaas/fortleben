@@ -30,11 +30,11 @@
 </div>
 <script>
 (function () {
-  // Paper: white, cream or dark. Until a reader picks one, it follows the system's light or dark.
+  // Paper: white, cream or dark. White until a reader picks one; the choice is kept in the browser.
   // One circle shows the paper in use; it opens the three to choose from.
   var root = document.documentElement, btns = document.querySelectorAll('[data-paper]');
   var now = document.getElementById('paperNow'), list = document.getElementById('paperList');
-  function current() { return root.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }
+  function current() { return root.dataset.theme || 'light'; }
   function sync() {
     btns.forEach(function (b) {
       var on = b.dataset.paper === current();
