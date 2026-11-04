@@ -291,15 +291,17 @@
       var each = Array.prototype.slice.call(voices.querySelectorAll('.voice'));
       var written = function () {
         return each.map(function (v, i) {
-          return '## Voice ' + i + ': ' + v.querySelector('.vname').value.trim() + '\n\n' + v.querySelector('.vtext').value.trim();
+          return '## Voice ' + i + ': ' + v.querySelector('.vname').value.replace(/\s+/g, ' ').trim() + '\n\n' + v.querySelector('.vtext').value.trim();
         }).join('\n\n');
       };
       each.forEach(function (v) {
-        var t = v.querySelector('.vtext');
-        function fitLine() { t.style.height = 'auto'; t.style.height = (t.scrollHeight + t.offsetHeight - t.clientHeight) + 'px'; }
+        var t = v.querySelector('.vtext'), name = v.querySelector('.vname');
+        function fitLine() {  // the name and the description, each as tall as its words
+          [name, t].forEach(function (x) { x.style.height = 'auto'; x.style.height = (x.scrollHeight + x.offsetHeight - x.clientHeight) + 'px'; });
+        }
         v.querySelectorAll('.vname, .vtext').forEach(function (el) {
           el.addEventListener('input', function () {
-            if (el === t) fitLine();
+            fitLine();
             v.querySelector('.opt b').textContent = v.querySelector('.vname').value;  // as it reads once another is picked
             v.querySelector('.vline').textContent = t.value;
             hidden.value = written();  // the same text the server wrote, until a field changes it
@@ -307,6 +309,7 @@
           });
           el.addEventListener('keydown', function (e) {
             if (e.key === 's' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); voices.querySelector(':scope > .filerow .save').click(); }
+            if (e.key === 'Enter' && el === name) e.preventDefault();  // a name is one line, however long
           });
         });
         // Page 1 in this voice: each paragraph its own box; together, a blank line between, they're the page file.

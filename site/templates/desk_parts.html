@@ -45,7 +45,7 @@
     {% for v in cp.voices %}
     <div class="voice{% if loop.index0 == cp.voice %} picked{% endif %}" data-label="{{ v.raw_label }}" data-line="{{ v.raw_line }}">
       <div class="vhead"><label class="opt"><input type="radio" aria-label="{{ v.label }}" name="voice-{{ cp.run_id }}" value="{{ loop.index0 }}"{% if loop.index0 == cp.voice %} checked{% endif %}><span class="bx r" aria-hidden="true"></span><b>{{ v.label }}</b></label>
-        {% if vf %}<input class="vname" maxlength="200" value="{{ v.raw_label }}" aria-label="This voice's name"{% if closed or cp.steering %} readonly{% endif %}>{% endif %}</div>
+        {% if vf %}<textarea class="vname" rows="1" maxlength="200" aria-label="This voice's name"{% if closed or cp.steering %} readonly{% endif %}>{{ v.raw_label }}</textarea>{% endif %}</div>
       {% if v.redrafted %}<span class="tag">redrafted after your note</span>{% endif %}{% if v.page_edited %}<span class="tag">page 1 edited by you</span>{% endif %}
       <p class="vline">{{ v.line }}</p>
       {% if vf %}<div class="vedit">
