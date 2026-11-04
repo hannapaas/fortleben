@@ -120,12 +120,21 @@ OUTCOMES = {"taken": "taken", "declined": "declined", "forked": "sent to the edi
 TABLES = ("segment", "bible", "term", "call", "revision", "query", "fork", "note", "status", "event")
 
 
+# The rows a recorded run brings with their own ids, and the ids an event's payload names.
+OWN_IDS = ("call", "revision", "query", "fork", "note", "event")
+PAYLOAD_IDS = {"query_id": "query", "revision_id": "revision", "fork_id": "fork", "note_id": "note"}
+
+
 def load_fixtures(conn, root: Path = FIXTURES) -> list[str]:
     """Load every recorded run under fixtures/ into the database, once. Returns the works loaded.
 
-    A recorded run keeps its id. If the database already has a run with that id it's skipped: silently
-    when it's the same recording, with a warning when it's a different run (a live database that
-    started before the fixtures were loaded), since nothing can be loaded over it."""
+    A recorded run keeps its run id; the recordings are numbered from 1001, clear of a live database's
+    own runs. If the database already has a run with that id it's skipped: silently when it's the same
+    recording, with a warning when it's a different run. Its other rows keep their ids where they're
+    free; where the database already uses them (a live database, or another recording), they move past
+    its highest, and everything that points at them moves with them. Its reading and bible become the
+    work's next versions, and its release the next version of the work's house edition: a work
+    recorded again replaces the old recording on the shelf, which stays in the edition's history."""
     loaded = []
     for path in sorted(root.glob("*/run.json")):
         record = json.loads(path.read_text(encoding="utf-8"))
@@ -136,16 +145,45 @@ def load_fixtures(conn, root: Path = FIXTURES) -> list[str]:
             if (have["work_id"], have["created_at"]) != (run["work_id"], run["created_at"]):
                 print(f"warning: fixtures/{work_id}: run {run['id']} is already another run in this database; not loaded")
             continue
+        off = {}
+        for table in OWN_IDS:
+            ids = [r["id"] for r in record.get(table, [])]
+            taken = ids and conn.execute(f"SELECT 1 FROM {table} WHERE id BETWEEN ? AND ? LIMIT 1", (min(ids), max(ids))).fetchone()
+            off[table] = conn.execute(f"SELECT MAX(id) FROM {table}").fetchone()[0] if taken else 0
+        versions = {r["kind"]: r["v"] for r in conn.execute(
+            "SELECT kind, MAX(version) v FROM bible WHERE work_id=? GROUP BY kind", (work_id,))}
+
+        def moved(table, i):
+            return None if i is None else i + off[table]
+
         _insert(conn, "work", record["work"], replace=True)
         _insert(conn, "run", record["run"])
         for table in TABLES:
             for row in record.get(table, []):
-                _insert(conn, table, row, replace=table in ("segment", "term", "status", "bible"))
+                row = dict(row)
+                if table in OWN_IDS:
+                    row["id"] = moved(table, row["id"])
+                if "event_id" in row:
+                    row["event_id"] = moved("event", row["event_id"])
+                if table == "event":
+                    row["call_id"] = moved("call", row["call_id"])
+                    p = row["payload"]
+                    if isinstance(p, dict):
+                        row["payload"] = p = {**p, **{k: moved(t, p[k]) for k, t in PAYLOAD_IDS.items() if isinstance(p.get(k), int)}}
+                        kind = {"reading.written": "reading", "bible.written": "bible"}.get(row["type"])
+                        if kind and isinstance(p.get("version"), int):
+                            p["version"] += versions.get(kind, 0)
+                if table == "bible":
+                    row["version"] += versions.get(row["kind"], 0)
+                _insert(conn, table, row, replace=table in ("segment", "term", "status"))
         if "release" in record:
-            ed = conn.execute("INSERT INTO edition (work_id) VALUES (?)", (work_id,)).lastrowid
+            ed = conn.execute("SELECT id FROM edition WHERE work_id=? AND editor='the house' ORDER BY id LIMIT 1",
+                              (work_id,)).fetchone()
+            ed = ed[0] if ed else conn.execute("INSERT INTO edition (work_id) VALUES (?)", (work_id,)).lastrowid
+            n = conn.execute("SELECT COUNT(*) FROM release WHERE edition_id=?", (ed,)).fetchone()[0]
             rel = conn.execute("INSERT INTO release (edition_id, run_id, version, changelog, body, created_at) "
                                "VALUES (?,?,?,?,?,?)",
-                               (ed, record["run"]["id"], "v0.1", "Recorded house run, replayed.",
+                               (ed, record["run"]["id"], f"v0.{n + 1}", "Recorded house run, replayed.",
                                 json.dumps(record["release"], ensure_ascii=False), record["run"]["created_at"])).lastrowid
             conn.execute("UPDATE edition SET current_release=? WHERE id=?", (rel, ed))
         loaded.append(work_id)
