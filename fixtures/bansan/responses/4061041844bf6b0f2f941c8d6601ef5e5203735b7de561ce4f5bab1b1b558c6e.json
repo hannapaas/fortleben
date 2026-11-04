@@ -1,0 +1,34 @@
+{
+ "prompt": "final-read",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": {
+  "notes": [],
+  "say": "The small punctuation seam in the vision paragraph has been repaired in place. **Ready to publish** — the English holds as one voice from the crowded supper through the mother's unmarked drift and back to the plain final line, and it says what the Japanese says on the second pass. **House log:** Final read passed after one sentence-boundary repair; no editor notes.",
+  "verdict": "ready"
+ },
+ "usage": {
+  "input_tokens": 13831,
+  "cached_tokens": 13684,
+  "output_tokens": 2474,
+  "reasoning_tokens": 2374,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.052804800000000006,
+ "response_id": "resp_6aeb44f017fbe0a68f464a87",
+ "latency_s": 23.26,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 412
+  }
+ ],
+ "created": "2026-11-04T14:45:04Z"
+}

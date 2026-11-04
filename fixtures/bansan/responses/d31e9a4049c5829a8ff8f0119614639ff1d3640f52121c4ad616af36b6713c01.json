@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 21677,
+  "cached_tokens": 21492,
+  "output_tokens": 125,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.007538400000000001,
+ "response_id": "resp_6aeb449a51f68c1e0fbd4a80",
+ "latency_s": 2.06,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_07ea74e6-0459-45bb-af86-339f8aa03451",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"F6\"],\"new\":\"Young, she sighed\",\"old\":\"Young as she was, she sighed\",\"reason\":\"若い彼女は is plain description, with no concessive contrast in the Japanese.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T14:43:38Z"
+}

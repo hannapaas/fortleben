@@ -1,0 +1,33 @@
+{
+ "prompt": "copy-desk",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": {
+  "say": "No edits made — the text is already consistent.",
+  "summary": "Checked names, terms, spelling and style and made no changes; left Bōya, man/father and mother/woman variation, plate descriptions and British spellings as deliberate per the bible."
+ },
+ "usage": {
+  "input_tokens": 7944,
+  "cached_tokens": 0,
+  "output_tokens": 1154,
+  "reasoning_tokens": 1087,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0148345,
+ "response_id": "resp_6aeb44ff3156c2a53e584841",
+ "latency_s": 15.69,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 254
+  }
+ ],
+ "created": "2026-11-04T14:45:20Z"
+}

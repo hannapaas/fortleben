@@ -1,0 +1,40 @@
+{
+ "prompt": "head-select",
+ "model": "muse-wonder-1.0",
+ "effort": "low",
+ "data": {
+  "decision": "pick",
+  "fork": {
+   "options": [],
+   "question": ""
+  },
+  "pick": 0,
+  "reason": "Both readers name the same crux: the bad potato opens, without explanation, a view of the present supper from beyond a whole life, and the story depends on that expansion and its plain contraction to three years and tomorrow's work. Option 1's repetition and unbroken domestic surface are the mechanism of that movement, already described in Option 0's frame, recurrences, and diction of distance, not a separate crux. Option 0 therefore stands as the house reading because it holds trigger, vision, and return in the single movement by which the text stands or falls.",
+  "same_or_different": "same",
+  "say": "Pick: Option 0.\n\nBoth readers name the same crux: the bad potato opens, without explanation, a view of the present supper from beyond a whole life, and the story depends on that expansion and its plain contraction to three years and tomorrow's work. Option 1's repetition and unbroken domestic surface are the mechanism of that movement, already described in Option 0's frame, recurrences, and diction of distance, not a separate crux. Option 0 therefore stands as the house reading because it holds trigger, vision, and return in the single movement by which the text stands or falls.\n\nHouse log: The two independent crux statements were judged to name the same movement, and Option 0 was adopted as the house reading."
+ },
+ "usage": {
+  "input_tokens": 2921,
+  "cached_tokens": 0,
+  "output_tokens": 748,
+  "reasoning_tokens": 423,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.026644,
+ "response_id": "resp_6aeb4573418d12273cca4850",
+ "latency_s": 7.99,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1417
+  }
+ ],
+ "created": "2026-11-04T14:47:15Z"
+}

@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 21325,
+  "cached_tokens": 20980,
+  "output_tokens": 146,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.008496,
+ "response_id": "resp_6aeb44960d88b41944f24ff8",
+ "latency_s": 1.8,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_fc7d901c-e17b-478f-b6c0-e09c219c7829",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"F4\"],\"new\":\"three people were drawn together with their heads together telling a long story\",\"old\":\"three people drawing together with their heads together telling a long story.\",\"reason\":\"してゐるのだった is a finite state, and the vision sentence needs its verb to keep the long accumulation.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T14:43:34Z"
+}

@@ -1,0 +1,84 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "The mother, silent with bowed head close by the wall, was serving onto a white plate the beef and onion, the carrot and potato stewed in the deep blue pot. And about to say something, she put into her mouth a potato stewed sweet and soft, and looked at the man's face, but as if she had noticed something, she shut her mouth and gazed vacantly at a far place.",
+    "ids": [
+     "p10"
+    ],
+    "notes": []
+   },
+   {
+    "english": "The potato in her mouth was hard and gritty between the teeth, as if it had frozen, and thoroughly nasty. As if startled, she said nothing and bit it again with her front teeth, but her heart had already, before she knew it, bowed down lonely.",
+    "ids": [
+     "p11"
+    ],
+    "notes": [
+     "Kept texture close to the Japanese: hard, gritty, as if frozen, nasty, with front teeth, without making it explain the drift that follows."
+    ]
+   },
+   {
+    "english": "She recalled the suffering and sorrow and tiredness of each day. And the tasteless, indifferent, cold nastiness of the potato gave her a quiet, lonely, far-removed heart. She pictured the poor, sorrow-filled, real life since her marriage.",
+    "ids": [
+     "p12"
+    ],
+    "notes": [
+     "Kept 'far-removed heart' literal as the ordinary diction of distance that carries the slide."
+    ]
+   },
+   {
+    "english": "And it seemed to her like a life that had gone on far too long. She found herself thinking, all at once, as if she had grown quite old. And of days filled with quiet tears, and of days threatened and spent in fear for material things, and of each and every day grieved and suffered through sickness, her far heart was quietly remembering. Yet to her remembering now, all of it was like a dream. Suffering and sorrow, too, were like a fond dream.",
+    "ids": [
+     "p13"
+    ],
+    "notes": [
+     "'For material things' keeps busshitsu literal; I take it as want and money pressure but did not replace it. 'Fond dream' keeps natsukashii in plain English, ahead of the natsukashimi trio, without turning it into nostalgia."
+    ]
+   },
+   {
+    "english": "And when she thought, it was no more than barely three years of life since her marriage.",
+    "ids": [
+     "p14"
+    ],
+    "notes": []
+   },
+   {
+    "english": "She gazed vacantly far off, as if her attention had been caught by something before she knew it. Her quiet heart was, before she knew it, seeing a picture like a phantom.",
+    "ids": [
+     "p15"
+    ],
+    "notes": [
+     "Kept e as 'picture' and maboroshi no you na as 'like a phantom', not vision or dream, so it stays something seen by the eye."
+    ]
+   }
+  ],
+  "say": "Drafted p10-p15 keeping the potato physical and the far and quiet repetitions literal."
+ },
+ "usage": {
+  "input_tokens": 11052,
+  "cached_tokens": 0,
+  "output_tokens": 2565,
+  "reasoning_tokens": 1937,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.02471625,
+ "response_id": "resp_6aeb4314430f746813044f76",
+ "latency_s": 28.07,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2512
+  }
+ ],
+ "created": "2026-11-04T14:37:08Z"
+}

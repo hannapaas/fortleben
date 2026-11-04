@@ -1,0 +1,130 @@
+{
+ "prompt": "reader-faithful",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "notes": [
+   {
+    "japanese": "ごた〳〵した騒がしさの為に、雨風の音を耳にしない。",
+    "paragraph": "p8",
+    "problem": "Inverts causality: Japanese says because of the clatter they do not hear the storm, English 'for all' reads as despite the noise.",
+    "span": "And for all the clattering noise, they did not hear the sound of the rain and wind.",
+    "suggestion": "And in all the clattering noise, they did not hear the sound of the rain and wind.",
+    "sureness": "Very sure; 為に here is cause, as the reading's storm-heard / storm-unheard frame requires."
+   },
+   {
+    "japanese": "大きな茶碗をテーブルの下から探すやうにしてとると、彼女の手に渡した。",
+    "paragraph": "p7",
+    "problem": "Ambiguous pronoun: 彼女 is the child, but English 'her hands' can be read as the mother's.",
+    "span": "took a large tea-bowl from under the table as if feeling for it and put it into her hands.",
+    "suggestion": "took a large tea-bowl from under the table as if feeling for it and put it into the child's hands.",
+    "sureness": "Very sure; bible confirms p7 彼女 is the child, and the English reader has no other way to know."
+   },
+   {
+    "japanese": "小さな乳首をだして乳をのませ初めた。",
+    "paragraph": "p35",
+    "problem": "Mistranslates anatomy and collapses a deliberate pair: 乳首 is nipple, distinct from 乳房 breast in p37.",
+    "span": "she bared her small breast and began to nurse.",
+    "suggestion": "she put out her small nipple and began to give suck / began to nurse.",
+    "sureness": "Sure on the words; a period dictionary or nursing usage would settle the softest English for 乳首 without upgrading to breast."
+   },
+   {
+    "japanese": "くり〳〵と肥ってる女の子だった。(p2) ／ スプーンを持って立ってる子供を見た。(p29)",
+    "paragraph": "p29–p31",
+    "problem": "Uses neuter for a child explicitly established as a girl, dehumanizing and breaking the fact.",
+    "span": "The man looked at the child standing with the spoon in its hand as if at a loss.",
+    "suggestion": "The man looked at the child standing with the spoon in her hand as if at a loss.",
+    "sureness": "Very sure; p2 says 女の子, p5 and p7 already use her/she, so 'its' is inconsistent."
+   },
+   {
+    "japanese": "母親の顔を見ながら (p30) ／ 乳房に頬をつけて眼を閉ぢてゐた (p37)",
+    "paragraph": "p37",
+    "problem": "Same neuter flattening for the girl child, also in p30 'its mother's face'.",
+    "span": "the child had already closed its eyes with its cheek against the breast.",
+    "suggestion": "the child had already closed her eyes with her cheek against the breast.",
+    "sureness": "Very sure for the same reason; check house style on her vs the child if pronoun repetition is unwanted."
+   },
+   {
+    "japanese": "其時彼等は永久に夜の様な安息の前にあるのであった。",
+    "paragraph": "p17",
+    "problem": "Adds posture not in the text: they are / exist before rest, not stand, which ennobles summary into tableau.",
+    "span": "And then they would stand forever before a rest like night.",
+    "suggestion": "And then they would be forever before a rest like night.",
+    "sureness": "Sure; ある is be, no standing verb, and the crux forbids upgrading the vision."
+   },
+   {
+    "japanese": "一日々々の苦しみや悲しみがなんだらう。一日々々の疲れやなやみがなんだらう。",
+    "paragraph": "p20",
+    "problem": "Turns two rhetorical questions that dismiss daily suffering into declarative fragments by using periods.",
+    "span": "What were the suffering and sorrow of each single day. What were the tiredness and trouble of each single day.",
+    "suggestion": "What were the suffering and sorrow of each single day? What were the tiredness and trouble of each single day?",
+    "sureness": "Very sure on the grammar; なんだらう is interrogative-inferential, only the punctuation needs fixing."
+   },
+   {
+    "japanese": "若い彼女は一人で淋しいひそかな溜息をついた",
+    "paragraph": "p18",
+    "problem": "Imports concession not in Japanese: 'as she was' suggests though young, where Japanese simply predicates young.",
+    "span": "Young as she was, alone she gave a lonely secret sigh,",
+    "suggestion": "Young, alone, she gave a lonely secret sigh,",
+    "sureness": "Fairly sure; no のに / けれど contrast in the sentence, though an editor should confirm no concessive intent is wanted."
+   },
+   {
+    "japanese": "遠い絵が暗く静かに、彼女の眼の底に映ってゐた。",
+    "paragraph": "p18",
+    "problem": "Flattens optical verb 映る to lay, losing that the picture is seen/reflected in the eye's bottom.",
+    "span": "The far picture lay dark and quiet in the bottom of her eyes.",
+    "suggestion": "The far picture was mirrored dark and quiet in the bottom of her eyes.",
+    "sureness": "Sure that 映る is reflected/projected; less sure of the best verb — was reflected / stood reflected would also do."
+   },
+   {
+    "japanese": "丁度凍ったかのやうに固くざく〳〵してゐて、非常に不味かったのだった。",
+    "paragraph": "p11",
+    "problem": "Impoverishment: 'very bad' flattens period taste-word 不味 into generic badness.",
+    "span": "and very bad.",
+    "suggestion": "The potato in her mouth was hard and gritty, as if frozen, and tasted thoroughly nasty.",
+    "sureness": "Sure that 不味 is tasted-nasty, not morally bad; exact adjective open to desk."
+   },
+   {
+    "japanese": "彼女は、すぐに嬉しさうに、『坊や。』と大きな声を出した、",
+    "paragraph": "p29–p31",
+    "problem": "Drops explicit loudness 大きな声, which matters against the quiet/silence network, keeping only gladness.",
+    "span": "She at once called out gladly, \"Bōya!\"",
+    "suggestion": "She at once called out gladly in a loud voice, \"Bōya!\"",
+    "sureness": "Very sure; both 嬉しさうに and 大きな声 are present and need carrying."
+   },
+   {
+    "japanese": "彼の赤く大きな片手",
+    "paragraph": "p9",
+    "problem": "English can be read as he has only one hand; Japanese 片手 is one of his hands spread over the table.",
+    "span": "The young father kept his one large red hand spread busily over the table.",
+    "suggestion": "The young father kept one large red hand spread busily over the table.",
+    "sureness": "Fairly sure this is ambiguity rather than error in intent; dropping 'his' removes the one-handed reading with no loss."
+   }
+  ],
+  "say": "Part is largely faithful on repetitions and vision diction; notes keep storm causality, child gender and pronouns, nipple/breast, and the p20 questions."
+ },
+ "usage": {
+  "input_tokens": 14134,
+  "cached_tokens": 0,
+  "output_tokens": 11806,
+  "reasoning_tokens": 10136,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.067843,
+ "response_id": "resp_6aeb46d1d071316c103f40d5",
+ "latency_s": 94.14,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 5705
+  }
+ ],
+ "created": "2026-11-04T14:53:06Z"
+}
