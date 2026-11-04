@@ -125,8 +125,8 @@ class Budget:
         self.conn = conn
         self.own_key = own_key  # a client on an editor's own key: their run cap applies, the house's day and total don't
         self.cap_given = run_cap is not None  # False: the default, which a resumed run replaces with its own
-        self.run_cap = run_cap if run_cap is not None else _cap("KEIKAKU_CAP_RUN", 3.0)
-        self.daily_cap = _cap("KEIKAKU_CAP_DAILY", 10)
+        self.run_cap = run_cap if run_cap is not None else _cap("KEIKAKU_CAP_RUN", 30.0)  # a novel fits (docs/ARCHITECTURE.md, "Cost model")
+        self.daily_cap = _cap("KEIKAKU_CAP_DAILY", 30)
         self.total_cap = _cap("KEIKAKU_CAP_TOTAL", 100)
 
     def room(self) -> float:
