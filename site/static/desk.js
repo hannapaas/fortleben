@@ -238,25 +238,28 @@
     function voice() { var v = cp.querySelector('input[type="radio"]:checked'); return v ? Number(v.value) : 0; }
     function busy(on) {
       send.disabled = on; approve.disabled = on || full; reading.hidden = !on;
-      files.forEach(function (f) { f.querySelector('.file-box').readOnly = on; f.querySelector('.save').disabled = on || !f.querySelector('.file-box').dataset.dirty; });
-      cp.querySelectorAll('.vname, .vtext').forEach(function (el) { el.readOnly = on; });
+      cp.querySelectorAll('.file-box, .vname, .vtext, .vpara').forEach(function (el) { el.readOnly = on; });
+      cp.querySelectorAll('.filerow .save').forEach(function (b) { b.disabled = on || !b.closest('.file').querySelector('.file-box[data-dirty]'); });
     }
 
     // Each file reads as part of the page: its box is as tall as its text, so the page is the only thing that scrolls.
+    // A page 1 is a file of its own inside the voice section, saved by that section's one Save with the voices.
     files.forEach(function (f) {
-      var save = f.querySelector('.save'), fbox = f.querySelector('.file-box'), said = f.querySelector('.saved');
+      var group = f.parentNode.closest('.voices.file') || f;
+      var save = group.querySelector(':scope > .filerow .save'), fbox = f.querySelector(':scope > .file-box');
+      var said = group.querySelector(':scope > .filerow .saved');
       var was = fbox.value;
       function fit() { fbox.style.height = 'auto'; fbox.style.height = (fbox.scrollHeight + fbox.offsetHeight - fbox.clientHeight) + 'px'; }
       function mark() {
         if (fbox.value === was) delete fbox.dataset.dirty; else fbox.dataset.dirty = '1';
-        save.disabled = !fbox.dataset.dirty || fbox.readOnly;
+        save.disabled = !group.querySelector('.file-box[data-dirty]') || fbox.readOnly;
       }
       f.saveNow = function () {  // resolves true once saved (or nothing to save), false if it couldn't be
         if (!fbox.dataset.dirty) return Promise.resolve(true);
         var text = fbox.value;
         save.disabled = true;
         say(said, 'Saving…');
-        return json('POST', url + '/files/' + f.dataset.file, { text: text }).then(function (d) {
+        return json('POST', url + '/files/' + f.dataset.file, body(text)).then(function (d) {
           if (d.error || !d.ok) { mark(); say(said, d.error || 'It didn\'t save. Try again.'); return false; }
           was = text; mark();
           say(said, fbox.dataset.dirty ? 'Not saved yet.' : 'Saved.');
@@ -266,13 +269,16 @@
       f.leave = function () {  // the page is going: send what's unsaved in a request that outlives it
         if (!fbox.dataset.dirty || leaving) return;
         fetch(url + '/files/' + f.dataset.file, { method: 'POST', keepalive: true, credentials: 'same-origin',
-          headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'fetch' }, body: JSON.stringify({ text: fbox.value }) });
+          headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'fetch' }, body: JSON.stringify(body(fbox.value)) });
       };
-      fbox.addEventListener('input', function () { fit(); mark(); say(said, fbox.dataset.dirty ? 'Not saved yet.' : ''); });
+      function body(text) { return f.dataset.voice ? { text: text, voice: Number(f.dataset.voice) } : { text: text }; }
+      fbox.addEventListener('input', function () { fit(); mark(); say(said, group.querySelector('.file-box[data-dirty]') ? 'Not saved yet.' : ''); });
       fbox.addEventListener('keydown', function (e) {
         if (e.key === 's' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); f.saveNow(); }
       });
-      save.addEventListener('click', function () { f.saveNow(); });
+      if (group === f) save.addEventListener('click', function () {
+        files.forEach(function (g) { if (g === f || f.contains(g)) g.saveNow(); });  // the voices and every page 1 in them
+      });
       fit();
       addEventListener('resize', fit);
     });
@@ -300,8 +306,23 @@
             hidden.dispatchEvent(new Event('input'));
           });
           el.addEventListener('keydown', function (e) {
-            if (e.key === 's' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); voices.saveNow(); }
+            if (e.key === 's' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); voices.querySelector(':scope > .filerow .save').click(); }
           });
+        });
+        // Page 1 in this voice: each paragraph its own box; together, a blank line between, they're the page file.
+        var page = v.querySelector('.vpage'), pbox = page && page.querySelector('.file-box');
+        if (page) page.querySelectorAll('.vpara').forEach(function (para) {
+          function fitPara() { para.style.height = 'auto'; para.style.height = (para.scrollHeight + para.offsetHeight - para.clientHeight) + 'px'; }
+          para.addEventListener('input', function () {
+            fitPara();
+            pbox.value = Array.prototype.map.call(page.querySelectorAll('.vpara'), function (x) { return x.value.replace(/\s+/g, ' ').trim(); }).join('\n\n');
+            pbox.dispatchEvent(new Event('input'));
+          });
+          para.addEventListener('keydown', function (e) {
+            if (e.key === 's' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); voices.querySelector(':scope > .filerow .save').click(); }
+          });
+          v.querySelector('input[type="radio"]').addEventListener('change', fitPara);
+          fitPara();
         });
         v.querySelector('input[type="radio"]').addEventListener('change', function () {
           each.forEach(function (w) { w.classList.toggle('picked', w === v); });
