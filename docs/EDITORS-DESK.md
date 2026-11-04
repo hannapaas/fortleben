@@ -1,71 +1,120 @@
-# keikaku — the editors' desk: how a run works for the person steering it
+# The editors' desk: steering a run
 
-Written 1 Nov 2026, simplified the same day. The code is open source, but the way most people will run the house is on this site, signed in as an editor, not from a clone. That makes the run itself a product, and a product has to be exact about what happens to someone's text and their allowance. This is that spec. `STAGES.md` is the engine's view of the same run; this is the editor's.
+The desk is where a person starts a translation and steers it. It's a few pages on the site (`/desk`), backed by `house/desk.py`, `house/steer.py` and `house/accounts.py`; the same steering works from the terminal and through a coding assistant. `STAGES.md` is the engine's view of a run; this is the view of the person running it.
 
-**Only editors start runs.** The House is the demo for everyone else: a walkthrough of a finished run, where nothing runs (`SITE.md`, `/house`). A *run* is the real thing: a whole work, with the whole estimate reserved from the editor's allowance before it starts. There are no partial translations: nothing starts that can't finish, and nobody can spend the house's tokens without an allowance that covers them.
+A run is always a whole work. Nothing starts that the allowance (or, on your own key, the run cap) can't cover, it stops once for the editor to review, and everything it makes is published on the site under the editor's credit. There are no private translations, and no pasted text: a work comes from the list or from an Aozora Bunko link that passes the rights check.
 
-## Two ways to try it
+## Two ways in
 
-| | No sign-in | Signed in as an editor |
-|---|---|---|
-| Where | `/house` | `/desk`, signed in with an email address and password, or by invite link |
-| What runs | Nothing: a walkthrough of the showcase run, with picked moments and every stage's full output | A **run**: any work in the eligible index, whole, with the full estimate reserved first. The invite page suggests a short story that the allowance covers |
-| Who pays | Nobody; it's read from the record | The editor's allowance, in drops |
-| Where it goes | Nothing new is made | Published on the site under the editor's name when the run is released |
+**An invite link with an allowance.** `keikaku invite "Name" --drops 4000` makes a person, an allowance in drops and a link, `/desk/<token>`, printed once. Opening it signs the person in (a session cookie, as below), so `/desk` works for them afterwards, and from the desk they can add an email address and password to sign in without the link. Their runs spend the site's key, out of their allowance. An invite can name a work to suggest (`--work`); otherwise the desk suggests the shortest work the allowance covers.
 
-Both exist because we don't know how much time anyone will give this. Someone with thirty seconds gets the House. Someone digging deeper gets an invite link with an allowance already on it, a suggested short story it covers, and can take that story the whole way, with their name on the edition if they want it there.
+**Sign up and bring your own Meta key.** `/signup` takes a name (it goes on the edition), an email address and a password of at least 8 characters, and signs the person straight in to `/desk`. The desk then asks for their Meta Model API key, with plain advice: make a key for this alone, put on it only what you're willing to spend, start small, turn off automatic top-up. Their runs spend that key and have no allowance.
 
-## Starting a run
+**The key** is encrypted with `KEIKAKU_SECRET` (Fernet) and decrypted only to build the model client for that person's own runs and notes. It's never logged and never shown back except as its last four characters. *Forget this key* on the desk deletes it; *Add a key* takes a new one. A site without the secret can't hold keys and says so; changing the secret makes stored keys unreadable (the desk treats them as gone) and voids every invite link, whose tokens are stored only as a hash salted with the same secret. A site with no model key of its own still lets people start runs on theirs.
 
-1. **Pick a work** from the eligible index (rights already checked) or from the Catalogue. Requests from outside the index go through Acquisitions first and aren't startable until the rights verdict is *eligible*.
-2. **See the estimate.** Length in sheets at 100 drops a sheet, which includes the brief. Also: how much allowance you have. If the allowance doesn't cover the whole estimate, the run can't start, and the page says what it would take.
-3. **Agree to publication.** Everything that runs here is published here under the house's labels. There's no private run. The editor's name goes on the edition unless they choose to stay unnamed, in which case it says *an editor*.
-4. **Start.** The whole estimate is reserved from the allowance before the first call. The run spends against the reservation; whatever it doesn't use is released at the end.
+**Signing in.** `/login` takes the email and password; `/reset` mails a link good for an hour and once, and reads the same whether or not the address has an account. Passwords are salted scrypt hashes; a session is a random id in the `fl_session` cookie for 90 days, stored only as a hash. A new password ends the person's other sessions. Revoking an invite ends that person's sessions and clears any email and password they added. Sign-ups, wrong sign-ins and reset mails are each limited per hour.
 
-## What pauses, and what doesn't
+## The pages
 
-- **The checkpoint**, once, after the brief: crux (and any disagreement between the two readers), the reading and its voice takes, the handful of bible decisions that touch everything, and open forks. About ten minutes to read. The editor approves, changes things (each change is a scoped rule, before a line of the full run is drafted) or sends it back for another first read. An editor can switch this pause off for a text; a text with no editor never pauses here.
-- **Nothing else waits.** Forks, the final read's notes for the editor, sensitivity flags and the editor's letter all land on the desk as they arise, and the run carries on with the house's pick, labelled as such. The editor's rulings apply when they come: to lines not yet drafted directly, and to drafted lines as revisions through the desk. Locked lines are never touched by a rule; they raise a query to the editor instead.
-- **The editor can pause or stop a run at any time.** Pausing finishes the call in flight, commits, and holds. Stopping does the same and releases what exists.
+- **`/desk`**: your translations, each with where it has got to and what it has spent; *Start a new translation*; and your account (email and password, the key or the allowance).
+- **`/desk/new`**: pick or add a work and start it.
+- **`/desk/translations/<id>`**: one translation. Its steps run down the page (done, the current one with a moving ellipsis, the rest faded; the editor's review is drawn round where keikaku's steps are square). While the run waits for the editor, the review sits underneath.
 
-## What is committed when
+Every desk route answers at `/desk/…` for a signed-in person and at `/desk/<token>/…` for an invite link. The pages ask the server how runs are getting on every five seconds, and a translation's page reloads when its run moves on a step.
 
-Every stage writes its results to the record before the next stage starts (`STAGES.md`, "Stop and resume"), so a run that's paused or interrupted (a crash, the house closing, the daily cap) resumes from the last completed stage and page, and the response cache means nothing is paid for twice. While a run is in progress the House shows it live and the desk shows the record; the library shows it only once it's released. There are no partial editions in the library.
+## Starting a translation
 
-## Money
+1. **Pick a work.** The list is every work whose rights record passes and whose text is stored, with its length in sheets (400 characters of the Japanese) and, for an allowance, its estimate in drops and whether the allowance covers it. A work you can't afford is shown but can't be picked. A work already on the shelf can be translated again: yours is a separate edition under your credit.
+2. **Or add one from Aozora Bunko.** Paste the link to a work's card (or a file on it). The house reads the card and applies the rights rule in code: everyone credited died in 1931 or earlier, and every year in 初出 is 1930 or earlier; a year it can't read is a refusal, never a guess. A work split across several cards, or a card with no ruby text, is refused. A work that passes is kept in the data folder's `sources/` and added to everyone's list, marked *Added from Aozora*, with an English title, romanised author and one-line blurb from one small model call (if it fails, the Japanese shows alone and the call is tried again, at most hourly, when the work is next listed). The same card twice is the same work. Each person can have ten cards read a day; a card refused on what it says is remembered for 30 days and refused again without being fetched or counted.
+3. **The estimate.** Sheets times a rate: the average cost per sheet of the last five finished runs, with a tenth on top, never under 100 drops a sheet, and 175 until there are finished runs to go on (`DESK_DROPS_PER_SHEET`). A start never holds more than the page showed, and is refused with a request to reload if the page's figure is more than a quarter below the fresh one. On your own key there's no figure in drops; a work whose estimate is over the run cap is marked as longer than one run may spend.
+4. **Credit.** How the edition names you, up to 60 characters, no links, and not one of the site's own names. Left empty, the edition says *an editor*. On the site the edition reads as *keikaku, commissioned by* that name. An editor's next run of the same work revises their own edition; nobody's run lands in someone else's.
+5. **Colour.** The edition's own accent, for its title and marks: pink, lime, lavender or peach.
+6. **Publication.** The page says it plainly: everything translated here is published on Fortleben with your credit on it. Starting is agreeing; the server refuses a start without that agreement.
+7. **Start.** On an allowance, the whole estimate is reserved before the first call. The run's cap is the reservation plus 20%. Start goes straight to the translation's own page, and you can close it while the run goes.
 
-- **Reserved before it starts.** The full estimate comes off the allowance at start. No reservation, no run. This is the rule that stops anyone spending the house's tokens without cover.
-- **The estimate is a little high.** The engine prices the whole run before it starts (every call live with no cache, the lever's pass back, then 15% on top) and refuses to start one that won't fit (`RUNNING-A-TEXT.md` §5). Nothing is given up part-way.
-- **If it still runs out**, the hard caps stop it: it's committed where it stands, nothing is released, and the house editor decides whether to raise the cap and resume it on the house. That's an operational failure to fix in the estimate, not a state the product offers. (Planned for the site: the house covering a small overrun, up to 20%, so the text finishes.)
-- **Unused reservation is released** at the end of the run.
+A desk run stops at the checkpoint unless the start request sends `"checkpoint": false`, which the desk page never does.
 
-## States of a run
+## The review (the checkpoint)
 
-`queued → brief → checkpoint (waiting for the editor) → drafting → revising → notes and checks → final read → released`, with two side states: *paused* (by the editor, or by the house closing or a cap) and *stopped* (by the editor). Every transition is an event, so the House shows it live and the record explains it afterwards.
+After the story bible, the run drafts page 1 once in each voice the reading offers (two or three), saves those drafts, and stops with status `waiting`. A waiting run is settled first, so nothing is held from the allowance while it waits, and it doesn't count as a run going.
 
-## As built (2 Nov 2026, checkpoint 3 Nov)
+The translation's page then shows:
 
-Where the code (`house/desk.py`, `house/accounts.py`, the `/desk` routes in `house/web.py`) differs from the above, or settles what it left open:
+- **The reading**: what the house thinks the story turns on, and how the English should carry it.
+- **The analysis**: the story bible (who everyone is, the style sheet, the motifs, the hard spots).
+- **The voice**: page 1 drafted in each voice, side by side, each with its name and description. Pick one.
+- **Your notes so far**, each with keikaku's reply, what it changed, any question it asked, and page 1 as it came back.
 
-- **Signing in.** People sign up at `/signup` with a name, an email address, a password (at least 8 characters) and their own Meta key, and are signed in to `/desk` straight away; no link is shown. `/login` takes the email and password (a wrong pair says only "That email and password don't match."; ten wrong pairs an hour per address and per email address, and a sign-in that works doesn't count); `POST /logout` signs out. The password is an scrypt hash with its own salt. A session is a random id in the `fl_session` cookie (httponly, SameSite=Lax, secure over https, 90 days); only its hash is stored, in `session`. One email address, one account. *Forgotten your password?* mails a link through Resend (the same path as the comments email), good for an hour and once; the page says the same whether or not the address has an account, and without `RESEND_API_KEY` it says reset mail isn't set up, gives `KEIKAKU_CONTACT` to email if the server has one, and the link goes to the server log. Setting a new password signs the person in and ends their other sessions.
-- **One desk, two ways in.** Invite links still exist for editors we invite. Opening `/desk/<token>` signs the editor in with the same session, so `/desk` works for them afterwards, and from the desk they can add an email address and password to sign in without the link. Once a person has a password, changing the email or password from the desk needs the current one (ten wrong current passwords an hour per person, counted apart from sign-ins), the new password can be left empty to change only the email, and a new password ends their other sessions, keeping the one in use. Every desk route answers at `/desk/…` for a signed-in person and at `/desk/<token>/…` for a link; the web layer turns either into the person and the desk's functions (`desk.state`, `start`, `steer`, `approve`, …) take their id. Revoking an invite ends that person's sessions and clears any password they added.
-- **Forms and requests that change things.** The desk's JSON requests carry `X-Requested-With: fetch` and are refused without it; the HTML forms (sign-up, sign-in, sign-out, reset, forget or add a key, add an email) carry a token that must match the `fl_csrf` cookie. Desk, sign-in and reset pages send `X-Robots-Tag: noindex` and `Cache-Control: no-store`.
+These are the three files every later stage reads, word for word: the reading, the bible and the voice's name and line go into every call from the draft to the notes.
 
-- **Invites.** `keikaku invite "Name" [--drops 4000] [--work sumiyaki] [--base-url …]` makes a person, an allowance and a link, and prints the link once. Only a hash of the token is stored (salted with `KEIKAKU_SECRET`, so changing that secret voids every link). `keikaku invite --list` shows who has what left; `keikaku invite --revoke <token or id>` closes a link.
-- **The checkpoint.** Desk runs start with `checkpoint: true` (a start request can send `"checkpoint": false`). After the bible the run stops with status `waiting` and is settled, so nothing is held while it waits. The desk is three pages: */desk* (your translations, *Start a new translation*, and your account), */desk/new* (pick or add a work and start it; Start goes straight to the new translation's page) and */desk/translations/<id>* (one translation: its stages down the page, done, now with a moving ellipsis, and to come faded, with the editor's review as the round one; the page reloads as the run moves on). While a run waits, its page shows, under the stages: the three files every later stage reads (the reading, the analysis, the voices), each once, as an editable box with its own *Save* (`STEERING.md`, "The editor's own hand"); page 1 drafted in each voice, to pick one; the notes so far with the house's reply, what it changed, any question, and page 1 drafted again, which also replaces page 1 under the voice it was drafted in. *Send note* posts to `/desk/runs/<id>/steer` and the house reads it in the background (`house.steer.steer`); the page says "Reading your note" and reloads when the round is in. A round's calls are charged like the rest of the run. The note box has one button: *Send note* while something is written in it, *Approve and translate* while it's empty, so a note is never dropped by approving. The picked voice's name and line are fields (they make up the voices file); the others read as they are. *Approve and translate* posts the voice to `/approve` (`house.steer.approve`), holds what's left of the reservation again and carries the run on from the draft. Notes and approval are refused unless the run is waiting. Pause and stop aren't built.
-- **One run at a time per person; three across the site.** A run is going while its status is `queued` or `running`; a run waiting at the checkpoint doesn't count. A person with a run going can't start or approve another. Beyond three going runs on the site (from the desk or the command line) a start, resume or approval is refused with "The house is full at the moment", and the desk says so before anyone tries.
-- **Money.** The estimate is `ceil(sheets × DROPS_PER_SHEET)`, reserved at start. The rate is worked out afresh from the last finished runs, so it can move after the page was drawn: a start never holds more than the page showed, and if the page's figure is more than a quarter below the fresh one it's refused with a request to reload. The run's cap is the reservation plus 20%. At the end the editor is charged what the ledger says it spent, rounded up to whole drops and never more than the reservation; the rest is released. A failed or interrupted run is settled the same way, and resuming it reserves what's left of its estimate again.
-- **States** on the desk are `queued`, `running`, `waiting`, `done`, `failed` and `interrupted`. A run left going when the site restarts is marked `interrupted` and can be resumed from the stage after the last one it finished; one approved at the checkpoint resumes from the draft. A waiting run carries on only through approval. A failed run (a stage error, the cap, or a key that ran out or was turned down) can be resumed too, and the desk says what stopped it in plain words: "It stopped when its budget ran out. Everything it finished is kept; resume it and it carries on from there."
-- **Credit.** The edition carries the editor's name, or *an editor*. Each credit gets its own edition of the work beside the house's.
-- **Any work on Aozora Bunko.** Above the list, an editor can paste the link of a work's card (or a file on it). `POST /desk/works` reads the card, applies the rights rule by code (everyone credited died by 1931; every year in 初出 is 1930 or earlier; anything unreadable is refused), keeps the ruby text in the data folder's `sources/`, and adds the work to everyone's list, marked "Added from Aozora", with an English title, romanised author and blurb from one Spark call (prompts/work-card.md); if that call fails the English fields stay empty, pages show the Japanese alone, and the call is tried again in the background when the desk or the wishlist is next shown, at most once an hour per work. The same card twice is the same work, `aozora-<author id>-<card>`, and isn't fetched again. A work split across cards, or a card with no ruby text, is refused. Ten cards read from Aozora a day per person: a link that never reaches a card (a 404) doesn't count, and a card refused on what it says is remembered for 30 days, so the same link again is refused with nothing fetched or counted. `keikaku add <url>` does the same from the command line, and `keikaku run <id>` runs it.
-- **Where it's off.** The desk can't start runs under `--replay`, without `MODEL_API_KEY`, or with `HOUSE_OPEN=false`, and says so. Desk pages send `X-Robots-Tag: noindex`.
+**Notes in plain words.** Write anything from "the daughter is older than this reads" to "less formal" and press *Send note*. One call goes to the model that wrote the reading, with the reading, the bible, page 1 in the picked voice, the earlier notes and your note. It returns a short reply, a line for each thing it changed, a question only if two quite different changes would both fit, and the reading and bible amended where the note reaches; these are saved as new versions only where they differ. Then page 1 is drafted again in the picked voice, under the amended bible, so you see the effect as English. The page says "Reading your note" and reloads when the round is in. Send as many as you like; nothing else is drafted until you approve. A round's calls are charged like the rest of the run, against its cap.
 
-## Allowances
+A note goes in as what the text does, never as what someone asked for: "I want the mother colder" becomes something like "her lines are short and she adds nothing to soften them". Every later stage carries the bible, and would otherwise repeat the request into the reader's margin.
 
-Drops are granted by hand: by the house to an editor it has invited, or against a Catalogue funding target once it's met. No payments are taken by the site in this version. An allowance is per editor, visible on the desk, and spends only on runs that editor starts. Judges and reviewers get invite links with an allowance already on them and a suggested short story it covers.
+**Editing the files by hand.** Each file is a box you can type in, as tall as its text. A change is saved with *Save* or Ctrl/Cmd-S, before a note or the approval goes, and when the page is left. Every later stage reads your version. The voice's name and description are fields on the picked voice and together make up the voices file (one `## Voice N: name` heading per voice, then its line). A file can grow to three times what keikaku wrote (at least 6,000 characters) and can't be emptied. A note sent after an edit is read against your version; if it amends that file, its version replaces yours, and the record says so.
 
-**Bring your own key.** Anyone can sign up at `/signup` with a name, an email address, a password and their own Meta Model API key, and gets a desk they sign in to, with no allowance: their runs spend their key, capped by the run cap (`KEIKAKU_CAP_RUN`) only, and the desk shows what a run spent in tokens, never money. The key is stored encrypted with `KEIKAKU_SECRET`, used only by the client of that person's runs, at least 12 characters, shown back only as its last four characters, and forgotten when they press *Forget this key*; *Add a key* on the desk takes a new one. A site with no key of its own still lets them start runs. Sign-ups are limited to five an hour from one address.
+**Rewriting page 1.** Page 1 in a voice can be rewritten paragraph by paragraph, keeping the same number of paragraphs. Approve in that voice and the draft takes your page as its first page instead of drafting it, and every later page is written to match it. A note that redrafts that page replaces your edit, and the record says so.
 
-## What we don't do
+Every hand edit is kept as a new version with a `document.edited` event holding before, after and who. The edition's analysis page (`/read/<work>/analysis`) publishes the reading and the bible, and every edit as a line-by-line diff under the editor's credit and the date.
 
-No private runs, no sample runs or partial editions (the House walkthrough is the demo), no runs on text that isn't in the public domain in Japan and the US, no pasted text, no deleting a published edition (a release can be superseded, never removed, except for a rights or safety takedown, which leaves a stub saying so).
+**Approving.** The note box has one button: *Send note* while something is written in it, *Approve and translate* while it's empty, so a note is never lost by approving. Approval records the picked voice, reserves what's left of the run's reservation again, and carries the run on from the draft. Notes, edits and approval are refused unless the run is waiting, and while a note is still being read. Approval is also refused if you have another run going or the site is full; notes aren't.
+
+## After approval
+
+The run drafts every page in the chosen voice, checks and revises it against the Japanese, gives it a final read and a copy-edit, writes the notes and releases the edition (`STAGES.md` has each stage). Nothing waits for the editor again.
+
+When it's done, the desk links the edition (*Read it*) and the page for editing it (*Edit it*). At the end of the run you are charged what the ledger says it spent, rounded up to whole drops and never more than the reservation; the rest comes back to the allowance.
+
+## Editing the published English
+
+The edition's own editor, signed in, can change any paragraph from the reading page (`/read/<work>?edition=<id>&edit=1`, which *Edit it* opens), at any time. Each change is a new revision of the run's English with a `revision.created` event, cause `editor`, keeping before, after and who. The page shows the latest version. An edited paragraph carries a round mark; under its `*`, each change is listed as *Edited by* the editor, with the date and what was struck out and put in. The edition's closing line says how many paragraphs the editor changed by hand.
+
+Section headings can't be edited, nor can a paragraph be emptied. One editor can save 120 changes an hour. Nobody else can edit an edition, and the house's own editions can't be edited from the site.
+
+## States, resume and failure
+
+A run on the desk is `queued`, `running`, `waiting`, `done`, `failed` or `interrupted`. Every stage commits its results before the next starts, so a run that stops can carry on from the stage after the last one it finished, and the response cache means nothing is paid for twice.
+
+- **Interrupted.** A desk run left going when the site restarts is marked `interrupted` and settled, so its hold is released. *Resume* carries it on; one approved at the checkpoint carries on from the draft.
+- **Failed.** A stage error, the run's cap, the site's daily or total cap, a key that ran out of credit or was turned down, or the site switched off. The desk says what stopped it in plain words, for example: "It stopped when its budget ran out. Everything it finished is kept; resume it and it carries on from there." A run that stopped at its cap after using its whole reservation holds a quarter more on resume, and its cap rises to match. A run on your own key that the key turned down can't be resumed (a translation can't change keys part-way): start it afresh with a key that works. A run on a key you've since forgotten can't be resumed until you add one.
+- **Waiting.** Goes on only through approval.
+
+Resuming reserves what's left of the estimate again. A failed or interrupted run is settled like a finished one: charged what it spent, the rest released.
+
+## Allowances and caps
+
+- **Drops.** An allowance is counted in drops of ink. One drop is `KEIKAKU_DROP_USD` of model spend ($0.0006 by default); the site shows drops only. Allowances are granted by hand, with `keikaku invite`; the site takes no payments. An allowance is per person, visible on the desk, and spends only on that person's runs.
+- **Run cap.** An allowance run is capped at its reservation plus 20%; an overrun past the reservation is never charged to the editor. A run on your own key is capped by the run cap alone (`KEIKAKU_CAP_RUN`, $30 by default), and a work whose estimate is over it can't start. The desk shows what an own-key run spent in tokens and calls, never money.
+- **The house's caps.** `KEIKAKU_CAP_DAILY` and `KEIKAKU_CAP_TOTAL` limit what the site's own key spends. Runs on someone's own key don't count against them and aren't stopped by them.
+- **Room.** One run going at a time per person, and three across the site, from the desk or the command line. A run waiting at the checkpoint doesn't count as going. Past three, a start, resume or approval is refused with "Fortleben is full at the moment", and the desk says so before anyone tries.
+- **Where it's off.** The desk can't start runs under `--replay`, with `HOUSE_OPEN=false`, or without `MODEL_API_KEY` (except for people with their own key), and says why.
+
+Desk JSON requests must carry `X-Requested-With: fetch`, and the HTML forms a token matching the `fl_csrf` cookie. Desk and account pages are `noindex` and `no-store`.
+
+## From the terminal
+
+The same checkpoint, as Markdown files in the data folder (`KEIKAKU_DATA_DIR`, else `var/`). Runs from the terminal spend the site's key under its caps, and are priced before they start: a run whose estimate is over what it may spend isn't started, and the message says which cap to raise.
+
+```
+keikaku run <work> --checkpoint          # stops at the checkpoint, page 1 drafted in each voice
+keikaku checkpoint <work>                # writes reading.md, bible.md, voices.md to checkpoints/<work>/
+keikaku steer <work> "your note"         # one round: prints the reply, what changed, any question; rewrites the files
+keikaku approve <work> --voice N         # approves in voice N (from 0, as voices.md numbers them)
+keikaku run <work> --from draft          # carries on
+```
+
+Each acts on the latest run of the work; `--run N` picks another. `reading.md` and `bible.md` are, under their titles, exactly what every later stage reads; `voices.md` gives each voice's name in its heading and its line in italics, then page 1 in it, the rounds so far and page 1 in Japanese. Edit `reading.md`, `bible.md`, or a voice's heading and line, and the next `checkpoint`, `steer` or `approve` takes your version for that run. An edit it can't take (the files were written for another run, or the run was approved) is said so and kept aside as `<name>.unused.md`, never written over. Page 1 itself can be rewritten only on the desk. `keikaku run --from draft` refuses a run that's still waiting.
+
+Invites:
+
+```
+keikaku invite "Name" [--drops 4000] [--work <id>] [--base-url https://…]   # prints the link once
+keikaku invite --list                                                     # who has what left
+keikaku invite --revoke <token or id>                                     # closes a link
+```
+
+`keikaku add <aozora link>` adds a work from Aozora with the same rights check as the desk, and `keikaku run <id>` runs it.
+
+## Through a coding assistant
+
+`AGENTS.md` at the repo root tells a coding assistant how to drive a run for someone who isn't technical: start it with a checkpoint, read the files, show the person the voices as the actual English of page 1, pass their notes on word for word, edit the files only when they ask for exact words changed, and approve in the voice they choose. The commands are the ones above.
