@@ -204,3 +204,10 @@ def test_the_about_page_is_linked_from_every_page(client):
     assert 'href="/about"' in client.get("/").text
     r = client.get("/about")
     assert r.status_code == 200 and "How keikaku translates" in r.text
+
+
+def test_a_word_the_english_sets_in_asterisks_is_shown_in_italics():
+    notes = [{"span_html": "the *Kōdan Club*", "essential": False}]
+    out = edition.mark_notes("He wrote for the *Kōdan Club* <then>.", notes)
+    assert "<em>Kōdan Club</em>" in out and "*" not in out and "&lt;then&gt;" in out
+    assert edition.italics("a *haikei* & a * stray") == "a <em>haikei</em> &amp; a * stray"

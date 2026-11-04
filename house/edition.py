@@ -12,6 +12,8 @@ import json
 import re
 from pathlib import Path
 
+from markupsafe import Markup
+
 from house import works
 from house.client import FIXTURES
 
@@ -516,16 +518,24 @@ def ruby_html(seg: dict) -> str:
     return "".join(out).strip("　 ")
 
 
+ITALIC = re.compile(r"\*([^*\n]+?)\*")
+
+
+def italics(text: str, escaped: bool = False) -> Markup:
+    """Text as HTML, escaped, with the English's *word* (a Japanese word, a title) set in italics."""
+    return Markup(ITALIC.sub(r"<em>\1</em>", text if escaped else html.escape(text)))
+
+
 def mark_notes(english: str, notes: list[dict]) -> str:
-    """The English, escaped, with each note's span underlined and tappable; a note whose span
-    isn't found is still listed in the margin."""
+    """The English, escaped, with each note's span underlined and tappable, and its *word* in italics;
+    a note whose span isn't found is still listed in the margin."""
     text = html.escape(english)
     for i, n in enumerate(notes):
         span = html.escape(n["span_html"])
         if span and span in text:
             cls = "t ess" if n["essential"] else "t"
             text = text.replace(span, f'<span class="{cls}" data-note="{i}" tabindex="0" role="button">{span}</span>', 1)
-    return text
+    return italics(text, escaped=True)
 
 
 # Reasons the engine records in its own shorthand (house/stages/desk.py), as a reader should see them.

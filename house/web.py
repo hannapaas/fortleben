@@ -39,6 +39,7 @@ MAX_ID = 2**63 - 1  # SQLite's largest integer; a bigger id in an address is no 
 MAX_BODY = 256 * 1024  # no form or desk request comes near this
 templates = Jinja2Templates(directory=SITE / "templates")
 templates.env.filters["datefmt"] = edition._date
+templates.env.filters["italics"] = edition.italics
 # Stamped on the stylesheet and script links, so a browser fetches them again when they change instead of keeping old ones.
 templates.env.globals["v"] = int(max(f.stat().st_mtime for f in (SITE / "static").iterdir() if f.is_file()))
 

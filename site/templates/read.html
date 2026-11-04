@@ -68,7 +68,7 @@ window.FL_PRESETS = {
     <div class="body">
       <p class="en" tabindex="0">{{ u.en_html|safe }}</p>
       <div class="ja" lang="ja">{% for j in u.ja %}<p>{{ j.html|safe }}</p>{% endfor %}</div>
-      {% if u.notes %}<ul class="inotes">{% for n in u.notes %}<li class="{{ 'ess' if n.essential }}"><b>{{ n.span_html }}</b>: {{ n.body }}</li>{% endfor %}</ul>{% endif %}
+      {% if u.notes %}<ul class="inotes">{% for n in u.notes %}<li class="{{ 'ess' if n.essential }}"><b>{{ n.span_html|italics }}</b>: {{ n.body|italics }}</li>{% endfor %}</ul>{% endif %}
       <div class="slip" hidden>
         {% if u.edits %}
         {# A person's change, so it's marked as people are here (round), and set apart from keikaku's own work below. #}
@@ -98,10 +98,10 @@ window.FL_PRESETS = {
         {% endfor %}
         {% endif %}
         {% if u.changed and not u.decisions %}
-        <ul class="hist">{% for h in u.history %}<li>{% if not loop.last %}<em>First draft</em> <span class="old">{{ h.en }}</span>{% else %}{{ h.en }}{% endif %}</li>{% endfor %}</ul>
+        <ul class="hist">{% for h in u.history %}<li>{% if not loop.last %}<em>First draft</em> <span class="old">{{ h.en|italics }}</span>{% else %}{{ h.en|italics }}{% endif %}</li>{% endfor %}</ul>
         {% endif %}
         {% if u.notes %}
-        <ul class="nl">{% for n in u.notes %}<li data-note="{{ loop.index0 }}"><b>{{ n.span_html }}</b>: {{ n.body }}</li>{% endfor %}</ul>
+        <ul class="nl">{% for n in u.notes %}<li data-note="{{ loop.index0 }}"><b>{{ n.span_html|italics }}</b>: {{ n.body|italics }}</li>{% endfor %}</ul>
         {% endif %}
       </div>
     </div>
