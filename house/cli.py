@@ -258,7 +258,7 @@ def cmd_fixture(args) -> int:
 
     conn = connect(args.db)
     run_id = args.run or orchestrator.latest_run(conn, args.work)
-    print(fixture.export(conn, args.work, run_id))
+    print(fixture.export(conn, args.work, run_id, args.as_id))
     return 0
 
 
@@ -427,6 +427,7 @@ def main(argv: list[str] | None = None) -> int:
     p = sub.add_parser("fixture", help="export a recorded run to fixtures/<work>/ for replay and the site")
     p.add_argument("work")
     p.add_argument("--run", type=int)
+    p.add_argument("--as", dest="as_id", type=int, help="the run id it's recorded under (default the next from 1001)")
     p.set_defaults(func=cmd_fixture)
 
     p = sub.add_parser("download", help="a run as a zip for the editor: the full record and the finished editions")

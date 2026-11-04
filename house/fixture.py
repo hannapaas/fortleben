@@ -69,11 +69,31 @@ def run_record(conn, work_id: str, run_id: int) -> dict:
     return record
 
 
-def export(conn, work_id: str, run_id: int) -> Path:
+def next_id(root: Path = FIXTURES) -> int:
+    """The run id a new recording takes: the recordings are numbered from 1001, clear of a live
+    database's own runs, and a work recorded again takes a new number, so a site that has loaded the
+    old recording loads the new one too (edition.load_fixtures)."""
+    ids = [json.loads(p.read_text(encoding="utf-8"))["run"]["id"] for p in root.glob("*/run.json")]
+    return max([1000, *ids]) + 1
+
+
+def renumber(rec: dict, new: int) -> dict:
+    """A run's record under another run id: the run, every row of it, and an event's run_id."""
+    rec["run"]["id"] = new
+    for rows in rec.values():
+        for r in rows if isinstance(rows, list) else []:
+            if "run_id" in r:
+                r["run_id"] = new
+            if isinstance(r.get("payload"), dict) and isinstance(r["payload"].get("run_id"), int):
+                r["payload"]["run_id"] = new
+    return rec
+
+
+def export(conn, work_id: str, run_id: int, as_id: int | None = None) -> Path:
     dest = FIXTURES / work_id
     responses = dest / "responses"
     responses.mkdir(parents=True, exist_ok=True)
-    rec = run_record(conn, work_id, run_id)
+    rec = renumber(run_record(conn, work_id, run_id), as_id or next_id())
     for c in rec["call"]:
         src = cache_dir() / f"{c['response_key']}.json"
         if src.exists():

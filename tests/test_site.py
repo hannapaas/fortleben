@@ -235,3 +235,14 @@ def test_a_work_recorded_again_is_the_next_release_of_its_house_edition(tmp_path
         assert conn.execute(f"SELECT COUNT(*) FROM {table} WHERE run_id=4242").fetchone()[0] == len(rec[table]), table
     assert conn.execute("SELECT COUNT(*) FROM event e JOIN call c ON c.id = e.call_id WHERE e.run_id=4242 AND c.run_id != 4242").fetchone()[0] == 0
     assert edition.edition(conn, "bansan")["units"]
+
+
+def test_a_new_recording_takes_the_next_number_from_1001(tmp_path, recorded):
+    from house import fixture
+
+    assert fixture.next_id(tmp_path) == 1001
+    (tmp_path / "bansan").mkdir()
+    (tmp_path / "bansan" / "run.json").write_text(json.dumps(recorded), encoding="utf-8")
+    assert fixture.next_id(tmp_path) == recorded["run"]["id"] + 1
+    rec = fixture.renumber(json.loads(json.dumps(recorded)), 2002)
+    assert rec["run"]["id"] == 2002 and {r["run_id"] for t in ("event", "call", "revision") for r in rec[t]} == {2002}
