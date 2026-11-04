@@ -239,6 +239,7 @@
     function busy(on) {
       send.disabled = on; approve.disabled = on || full; reading.hidden = !on;
       files.forEach(function (f) { f.querySelector('.file-box').readOnly = on; f.querySelector('.save').disabled = on || !f.querySelector('.file-box').dataset.dirty; });
+      cp.querySelectorAll('.vname, .vtext').forEach(function (el) { el.readOnly = on; });
     }
 
     // Each file reads as part of the page: its box is as tall as its text, so the page is the only thing that scrolls.
@@ -271,16 +272,44 @@
       fbox.addEventListener('keydown', function (e) {
         if (e.key === 's' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); f.saveNow(); }
       });
-      save.addEventListener('click', function () {
-        f.saveNow().then(function (ok) {
-          // A renamed voice shows under page 1 only once the page is drawn again; nothing unsaved is lost to it.
-          if (ok && f.dataset.file === 'voices' && !box.value.trim() && !files.some(function (g) { return g.querySelector('.file-box').dataset.dirty; })) reload();
-        });
-      });
+      save.addEventListener('click', function () { f.saveNow(); });
       fit();
       addEventListener('resize', fit);
     });
     addEventListener('pagehide', function () { files.forEach(function (f) { f.leave(); }); });
+
+    // The voice: the picked one shows its name and line as fields; what's in the fields is the voices file.
+    var voices = cp.querySelector('.voices.file');
+    if (voices) {
+      var hidden = voices.querySelector('.file-box');
+      var each = Array.prototype.slice.call(voices.querySelectorAll('.voice'));
+      var written = function () {
+        return each.map(function (v, i) {
+          return '## Voice ' + i + ': ' + v.querySelector('.vname').value.trim() + '\n\n' + v.querySelector('.vtext').value.trim();
+        }).join('\n\n');
+      };
+      each.forEach(function (v) {
+        var t = v.querySelector('.vtext');
+        function fitLine() { t.style.height = 'auto'; t.style.height = (t.scrollHeight + t.offsetHeight - t.clientHeight) + 'px'; }
+        v.querySelectorAll('.vname, .vtext').forEach(function (el) {
+          el.addEventListener('input', function () {
+            if (el === t) fitLine();
+            v.querySelector('.opt b').textContent = v.querySelector('.vname').value;  // as it reads once another is picked
+            v.querySelector('.vline').textContent = t.value;
+            hidden.value = written();  // the same text the server wrote, until a field changes it
+            hidden.dispatchEvent(new Event('input'));
+          });
+          el.addEventListener('keydown', function (e) {
+            if (e.key === 's' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); voices.saveNow(); }
+          });
+        });
+        v.querySelector('input[type="radio"]').addEventListener('change', function () {
+          each.forEach(function (w) { w.classList.toggle('picked', w === v); });
+          fitLine();
+        });
+        fitLine();
+      });
+    }
     function saveAll() {
       return Promise.all(files.map(function (f) { return f.saveNow(); })).then(function (oks) { return oks.every(Boolean); });
     }
@@ -321,6 +350,11 @@
         }, function () { undo('Couldn\'t reach Fortleben. Try again.'); });
       });
     });
+
+    // A note or the approval, never both: with something written the button sends it, and with nothing it approves.
+    function either() { var note = !!box.value.trim(); send.hidden = !note; approve.hidden = note; }
+    box.addEventListener('input', either);
+    either();
 
     if (cp.dataset.steering) wait(Number(cp.dataset.rounds));
   });

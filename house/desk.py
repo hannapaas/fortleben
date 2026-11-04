@@ -850,6 +850,7 @@ def checkpoint(conn, row) -> dict:
     named = reading.get("voice_takes") or []
     named = named if len(named) == len(takes) else takes  # the reading's names, which a note or a hand edit may change
     voices = [{"label": plain(n.get("label", ""), cast), "line": plain(n.get("line", ""), cast), "english": _paras(t.get("english")),
+               "raw_label": n.get("label", ""), "raw_line": n.get("line", ""),  # as the drafter reads them, for editing
                "redrafted": False} for n, t in zip(named, takes)]
     for r in rounds:  # each voice shows its latest redraft, if a note has redrafted it
         if isinstance(r["voice"], int) and 0 <= r["voice"] < len(voices):

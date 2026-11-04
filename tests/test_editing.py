@@ -339,7 +339,7 @@ def test_the_desk_route_saves_a_file_and_refuses_without_its_header(conn, db, wa
     assert site.post(url, json={"text": 7}, headers=DESK).status_code == 400
     assert site.post(f"/desk/{token}/runs/{run_id}/files/nope", json={"text": "x"}, headers=DESK).status_code == 404
     page = site.get(f"/desk/{token}/translations/{run_id}").text
-    assert "three files" in page and "Edited by you." in page
+    assert "what every stage of the translation will read" in page and "Edited by you." in page
 
 
 # --- what the review turned up --------------------------------------------------------------------------
