@@ -56,4 +56,4 @@ Which Meta model does what: `muse-spark-1.3` plans the parts, writes the story b
 
 ## Licence
 
-The code, prompts and docs are Apache-2.0. The English keikaku produces, and the recorded runs in `fixtures/`, are CC BY-SA 4.0. See `LICENSE`.
+The code, prompts and docs are AGPL-3.0-or-later: if you run a changed version as a service, you share your changes. The English keikaku produces, and the recorded runs in `fixtures/`, are CC BY-SA 4.0. See `LICENSE`.
