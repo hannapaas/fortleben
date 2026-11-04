@@ -23,10 +23,9 @@
 
   function apply(keep) {
     var a = keep && anchor();
-    body.className = body.className.replace(/\b(layout|marks)-\w+|\b(no-furigana|hide-status|inline|no-tools|quiet-comments|numbers)\b/g, '').trim();
+    body.className = body.className.replace(/\b(layout|marks)-\w+|\b(no-furigana|inline|no-tools|quiet-comments|numbers)\b/g, '').trim();
     body.classList.add('layout-' + s.layout, 'marks-' + s.marks);
     if (!s.furigana) body.classList.add('no-furigana');
-    if (!s.status) body.classList.add('hide-status');
     if (s.inline) body.classList.add('inline');
     if (!s.tools) body.classList.add('no-tools');
     if (!s.comments) body.classList.add('quiet-comments');
