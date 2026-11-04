@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{# One translation: how far it has got, and, while it waits for the editor, the checkpoint (docs/STEERING.md).
+   desk.js watches it and reloads the page when it moves on. #}
+{% from "desk_parts.html" import run_row, steps, checkpoint %}
+{% set r = desk.runs|selectattr('id', 'equalto', run_id)|first %}
+{% set cp = (desk.checkpoints or [])|selectattr('run_id', 'equalto', run_id)|first %}
+{% block title %}{{ r.title_en }} · Fortleben{% endblock %}
+{% block head %}<link rel="stylesheet" href="/static/desk.css?v={{ v }}">{% endblock %}
+{% block main %}
+<p class="back"><a href="{{ desk.base }}">← Your desk</a></p>
+<h1 class="desk-h"><i>{{ r.title_en }}</i></h1>
+<div class="desk" id="run" data-base="{{ desk.base }}">
+  <ul class="runs one" id="runs">{{ run_row(r, closed or desk.busy or desk.keyless, desk.base) }}</ul>
+  {{ steps(r) }}
+</div>
+{% if cp %}{{ checkpoint(cp, desk.busy, closed) }}{% endif %}
+{% endblock %}
+{% block scripts %}<script src="/static/desk.js?v={{ v }}"></script>{% endblock %}

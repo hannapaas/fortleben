@@ -60,6 +60,14 @@ STAGE_LABELS = {  # one per stage in orchestrator.NAMES
     "notes": "writing the notes",
     "release": "publishing",
 }
+# The stages a person sees on a translation's page, in their order: a few steps, each one or more engine stages.
+STEPS = [("Reading the story and writing the analysis", ("parse", "parts", "first-read", "crux-check", "bible")),
+         ("Your review: edit the analysis or send notes, then approve", ("checkpoint",)),
+         ("Drafting the English", ("draft",)),
+         ("Checking it against the Japanese and revising", ("readers", "desk")),
+         ("A last read and a copy-edit", ("final-read", "copy-desk")),
+         ("Writing the notes", ("notes",)),
+         ("Publishing", ("release",))]
 GOING = ("queued", "running")
 STATUSES = ("queued", "running", "waiting", "done", "failed", "interrupted")
 CAPACITY = 3  # runs queued or running across the site at once
@@ -675,6 +683,32 @@ def failure(error: str | None, own_key: bool = False) -> str:
     return f"{why} Everything it finished is kept; {then}"
 
 
+def steps(row, options: dict) -> list[dict]:
+    """The run's STEPS, each done, now, next, or stopped (where a failed or interrupted run is). The review step is
+    the editor's, and shown only for a run that stops for it."""
+    names = [n for n in orchestrator.NAMES if n != "checkpoint" or options.get("checkpoint")]
+    status = row["status"]
+    if status == "done":
+        at = len(names)
+    elif status == "waiting" and "checkpoint" in names:
+        at = names.index("checkpoint")
+    else:
+        nxt = _next(row["stage"])
+        while nxt is not None and nxt not in names:  # a stage this run skips
+            nxt = _next(nxt)
+        at = names.index(nxt) if nxt else len(names)
+    out = []
+    for label, group in STEPS:
+        where = [names.index(g) for g in group if g in names]
+        if not where:
+            continue
+        state = "done" if max(where) < at else "next" if min(where) > at else "now"
+        if state == "now" and status in ("failed", "interrupted"):
+            state = "stopped"
+        out.append({"label": label, "state": state, "yours": group == ("checkpoint",)})
+    return out
+
+
 def _run_dict(conn, row) -> dict:
     options = json.loads(row["options"] or "{}")
     status = row["status"] if row["status"] in STATUSES else "interrupted"
@@ -705,7 +739,8 @@ def _run_dict(conn, row) -> dict:
             "rounds": len(_checkpoint_doc(conn, row["id"]).get("rounds") or []) if status == "waiting" else 0,
             "steering": row["id"] in _steering,
             "steer_error": _steer_error(options),
-            "spent_words": accounts.spent_words(conn, row["id"]) if options.get("own_key") else None}
+            "spent_words": accounts.spent_words(conn, row["id"]) if options.get("own_key") else None,
+            "steps": steps(row, options)}
 
 
 def _steer_error(options: dict) -> str | None:

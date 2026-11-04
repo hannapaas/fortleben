@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{# A new translation (docs/EDITORS-DESK.md): pick a work the allowance or key covers, or add one from an Aozora
+   link, and start it; desk.js starts it and goes to its own page. #}
+{% from "desk_parts.html" import n %}
+{% block title %}A new translation · Fortleben{% endblock %}
+{% block head %}<link rel="stylesheet" href="/static/desk.css?v={{ v }}">{% endblock %}
+{% block main %}
+<p class="back"><a href="{{ desk.base }}">← Your desk</a></p>
+<h1 class="desk-h">A new translation</h1>
+{% set al = desk.allowance %}
+{% set works = (desk.works|selectattr('id', 'equalto', desk.suggested)|list) + (desk.works|rejectattr('id', 'equalto', desk.suggested)|list) %}
+{% set open = works|selectattr('covered')|list %}
+{% set pick = open[0] if open else none %}
+{% set blocked = closed or desk.busy %}
+{% set unstartable = blocked or desk.going or desk.keyless %}
+<p class="desk-lead">Pick a work and keikaku translates the whole of it, checks it and publishes it here. It stops once, after reading the story, for you to review what it wrote. You can close the page while it runs.</p>
+
+<form class="form two desk" id="desk" data-base="{{ desk.base }}"{% if unstartable %} data-unstartable="1"{% endif %}{% if desk.key_tail or desk.keyless %} data-own="1"{% endif %} data-granted="{{ al.granted }}" data-spent="{{ al.spent }}" data-reserved="{{ al.reserved }}" data-available="{{ al.available }}" novalidate>
+  {% if desk.key_tail %}
+  <div class="q">Paid by?</div>
+  <div class="a">Your own key, ending ····{{ desk.key_tail }}.</div>
+  {% elif desk.keyless %}
+  <div class="q">Paid by?</div>
+  <div class="a">Add your Meta key on <a href="{{ desk.base }}">your desk</a> to start.</div>
+  {% else %}
+  <div class="q">Allowance?</div>
+  <div class="a"><b class="big" id="avail">{{ n(al.available) }}</b> drops of ink to spend.
+    <span class="sm" id="altail">{{ n(al.granted) }} granted, {{ n(al.spent) }} spent{% if al.reserved %}, {{ n(al.reserved) }} held for a translation in progress{% endif %}.</span>
+    <span class="sm block">A sheet is 400 characters of the original Japanese.</span></div>
+  {% endif %}
+
+  <div class="q" id="work-q">Translate a work?</div>
+  <div class="a">
+    {% if not closed %}
+    <div class="addwork">
+      <label for="aozora-url" class="sm block">Or paste a link to any work on Aozora Bunko</label>
+      <div class="addrow">
+        <input type="url" id="aozora-url" class="url-box" form="addwork" name="url" inputmode="url" autocomplete="off" spellcheck="false" placeholder="https://www.aozora.gr.jp/cards/…">
+        <button type="submit" class="btn" form="addwork" id="add">Add</button>
+      </div>
+      <p class="err" id="adderr" aria-live="polite" hidden></p>
+    </div>
+    {% endif %}
+    <div class="works" id="works" role="radiogroup" aria-labelledby="work-q"{% if not works %} hidden{% endif %}>
+      {% for w in works %}
+      <label class="work{% if not w.covered %} short{% endif %}">
+        <input type="radio" name="work" value="{{ w.id }}" data-estimate="{{ w.estimate }}" data-title="{{ w.title_en or w.title }}"{% if pick and w.id == pick.id %} checked{% endif %}{% if not w.covered %} disabled{% endif %}>
+        <span class="bx r" aria-hidden="true"></span>
+        <span class="wb">
+          <span class="wj" lang="ja">{{ w.title }}</span>
+          {% if w.title_en %}<span class="wt">{{ w.title_en }}</span>{% endif %}{% if w.id == desk.suggested %} <span class="tag">suggested</span>{% endif %}
+          {% if desk.key_tail or desk.keyless %}<span class="meta">{{ w.author_en or w.author }}{% if w.year %}, {{ w.year }}{% endif %} · {{ '%g' % (w.sheets|round(1)) }} sheets.{% if not w.covered %} Longer than one run here may spend.{% endif %}</span>{% else %}
+          <span class="meta">{{ w.author_en or w.author }}{% if w.year %}, {{ w.year }}{% endif %} · {{ '%g' % (w.sheets|round(1)) }} sheets · {{ n(w.estimate) }} drops.
+            {% if w.covered %}Your allowance covers it.{% else %}That's {{ n(w.estimate - al.available) }} more than you have.{% endif %}</span>{% endif %}
+          {% if w.blurb %}<span class="meta blurb">{{ w.blurb }}</span>{% endif %}
+          {% if w.has_edition %}<span class="meta">Already on the shelf. Yours would be a separate edition, under your credit.</span>{% endif %}
+          {% if w.added %}<span class="meta added">Added from Aozora</span>{% endif %}
+        </span>
+      </label>
+      {% endfor %}
+    </div>
+    {% if works and not open %}<p class="sm" id="noneopen">{% if desk.key_tail or desk.keyless %}Each of these is longer than one run here may spend.{% else %}Your allowance doesn't cover any of these.{% endif %}</p>{% endif %}
+    {% if not works %}<p id="noworks">No works are open to translate.</p>{% endif %}
+  </div>
+
+  <div class="q"><label for="credit">Credit?</label></div>
+  <div class="a">
+    <input type="text" id="credit" class="field" name="credit" maxlength="60" value="{{ desk.editor.credit_as or '' }}" placeholder="an editor" autocomplete="off">
+    <span class="sm block">How the edition names you. Leave it empty to be credited as an editor.</span>
+  </div>
+
+  <div class="q" id="accent-q">Colour?</div>
+  <div class="a">
+    <div class="row" role="radiogroup" aria-labelledby="accent-q">
+      {% for a in accents %}<label class="opt accent-{{ a }}"><input type="radio" name="accent" value="{{ a }}"{% if loop.first %} checked{% endif %}><span class="bx r swatch" aria-hidden="true"></span>{{ a }}</label>{% endfor %}
+    </div>
+    <span class="sm block">The edition's own colour, for its title and its marks.</span>
+  </div>
+
+  <div class="q">Published?</div>
+  <div class="a">Yes, always. Everything translated here is published on Fortleben, with your credit on it. There are no private translations.</div>
+
+  <div class="q" aria-hidden="true"></div>
+  <div class="a">
+    <div class="startrow">
+      <button type="submit" class="btn go" id="start"{% if unstartable or not pick %} disabled{% endif %}>Start</button>
+      {% if desk.key_tail or desk.keyless %}<span class="sm" id="hold"{% if desk.keyless %} hidden{% endif %}>It spends your own key as it goes, and stops at the run's cap.</span>{% else %}
+      <span class="sm" id="hold"{% if not pick %} hidden{% endif %}>Holds <span id="holdn">{{ n(pick.estimate if pick else 0) }}</span> drops from your allowance; whatever isn't used comes back at the end.</span>{% endif %}
+    </div>
+    {% if closed %}<p class="line" id="busy">{{ closed }}</p>{% elif desk.going %}<p class="line" id="busy" data-going="1">You have a translation going already. Start the next one when it has finished.</p>{% elif desk.busy %}<p class="line" id="busy">Fortleben is full at the moment: three translations are going. Try again in a little while.</p>{% endif %}
+    <p class="err" id="err" aria-live="polite" hidden></p>
+  </div>
+
+</form>
+{% if not closed %}<form id="addwork" hidden></form>{% endif %}
+{% endblock %}
+{% block scripts %}<script src="/static/desk.js?v={{ v }}"></script>{% endblock %}

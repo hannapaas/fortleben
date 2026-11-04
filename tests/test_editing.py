@@ -338,7 +338,7 @@ def test_the_desk_route_saves_a_file_and_refuses_without_its_header(conn, db, wa
     assert site.post(url, json={"text": CRUX}, headers=DESK).json() == {"ok": True, "changed": False}
     assert site.post(url, json={"text": 7}, headers=DESK).status_code == 400
     assert site.post(f"/desk/{token}/runs/{run_id}/files/nope", json={"text": "x"}, headers=DESK).status_code == 404
-    page = site.get(f"/desk/{token}").text
+    page = site.get(f"/desk/{token}/translations/{run_id}").text
     assert "three files" in page and "Edited by you." in page
 
 
@@ -415,3 +415,15 @@ def test_paragraph_edits_are_capped_per_hour(monkeypatch):
     assert all(accounts.allow_edit(7, now=1000.0) for _ in range(accounts.EDITS_PER_HOUR))
     assert not accounts.allow_edit(7, now=1000.0) and accounts.allow_edit(8, now=1000.0)
     assert accounts.allow_edit(7, now=1000.0 + 3601)
+
+
+def test_a_translations_page_shows_its_stages(conn, db, waiting):
+    token, run_id = waiting
+    s = [(x["state"], x["yours"]) for x in desk.state(conn, token)["runs"][0]["steps"]]
+    assert s[0] == ("done", False) and s[1] == ("now", True) and all(st == "next" for st, _ in s[2:])
+    desk.approve(db, token, run_id, 0)  # the recorded voice: the rest replays, and it's published
+    assert {x["state"] for x in desk.state(conn, token)["runs"][0]["steps"]} == {"done"}
+    row = conn.execute("SELECT * FROM run WHERE id=?", (run_id,)).fetchone()
+    stopped = desk.steps({**dict(row), "status": "failed", "stage": "draft"}, {"checkpoint": True})
+    assert [x["state"] for x in stopped][2:4] == ["done", "stopped"]
+    assert [x["label"] for x in desk.steps({**dict(row), "status": "running", "stage": "bible"}, {})][1] == "Drafting the English"  # no review step

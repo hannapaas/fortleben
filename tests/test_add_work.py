@@ -264,7 +264,7 @@ def test_a_work_with_no_english_card_shows_the_japanese_once_and_is_described_ag
 
     card = {"title_en": "The Spider's Thread", "author_en": "Akutagawa Ryūnosuke", "blurb": "Walking beside the lotus pond."}
     monkeypatch.setattr(acquire, "describe", lambda conn, title, author, romaji, first, text: card)  # it works now
-    page = client.get(f"/desk/{token}").text  # the page as drawn: the Japanese alone; then the retry runs
+    page = client.get(f"/desk/{token}/new").text  # the page as drawn: the Japanese alone; then the retry runs
     assert page.count(">蜘蛛の糸<") == 1 and "芥川竜之介" in page
     assert works.info(row["id"], conn)["title_en"] == "The Spider's Thread"
     assert works.info(row["id"], conn)["author_en"] == "Akutagawa Ryūnosuke" and acquire.undescribed(conn) == []
@@ -312,7 +312,7 @@ def test_the_desk_adds_a_work_and_lists_it(site, fetched):
     assert row["id"] == "aozora-000879-92" and row["title_en"] == "The Spider's Thread" and row["added"] is True
     assert row["covered"] is True and row["sheets"] == 7.2 and row["estimate"] > 0
     assert set(row) == set(desk.state(conn, token)["works"][0])  # the same shape as the desk's list
-    page = client.get(f"/desk/{token}").text
+    page = client.get(f"/desk/{token}/new").text
     assert "Or paste a link to any work on Aozora Bunko" in page and "Added from Aozora" in page
     assert "The Spider&#39;s Thread" in page
 
@@ -359,7 +359,7 @@ def test_desk_html_draws_the_add_field_only_where_runs_can_start(tmp_path, monke
     monkeypatch.setenv("KEIKAKU_SECRET", "test-secret")
     db = tmp_path / "closed.db"
     token = desk.invite(connect(db), "C")
-    page = TestClient(web.create_app(db, screen=False), headers=DESK).get(f"/desk/{token}").text
+    page = TestClient(web.create_app(db, screen=False), headers=DESK).get(f"/desk/{token}/new").text
     assert "Or paste a link" not in page
 
 

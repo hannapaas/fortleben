@@ -116,12 +116,35 @@
   .desk .a { font-size: 15.5px; }
   .work .wt { font-size: 1.2rem; }
 }
-/* The checkpoint's files: each shown once, as the text every later stage reads, and edited in place. */
+/* The checkpoint's files: each shown once, as the text every later stage reads, and edited in place. The box is as
+   tall as its text (desk.js), so it reads as part of the page, with a rule down its side and no scroller of its own. */
 .file { max-width: 40rem; }
-.file-box { display: block; width: 100%; box-sizing: border-box; font: inherit; font-size: 16px; line-height: 1.55;
-  padding: 10px 12px; border: 1.5px solid var(--ink); background: var(--paper); color: var(--ink); resize: vertical;
-  min-height: 10em; max-height: 70vh; field-sizing: content; }
-.file-box:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-.file-box[readonly] { color: var(--ink-2); border-color: var(--muted); }
-.filerow { display: flex; align-items: center; gap: 12px; padding: 8px 0 4px; }
-.checkpoint .save { font-size: 1rem; padding: 6px 18px; }
+.file-box { display: block; width: 100%; box-sizing: border-box; font: inherit; font-size: 16px; line-height: 1.6;
+  padding: 2px 0 2px 16px; border: 0; border-left: 2px solid color-mix(in srgb, var(--rule) 35%, transparent); border-radius: 0;
+  background: transparent; color: var(--ink); resize: none; overflow: hidden; field-sizing: content; }
+.file-box:focus { outline: 0; border-left-color: var(--accent); }
+.file-box[readonly] { color: var(--ink-2); }
+.filerow { display: flex; align-items: center; gap: 12px; padding: 8px 0 4px 16px; }
+.checkpoint .save { font-size: 1rem; padding: 4px 16px; }
+.checkpoint .save:disabled { opacity: .35; }
+
+/* A translation's page: back to the desk, its row, and its stages down the page. */
+.back { margin: 0 0 .4rem; font-size: 15px; }
+.back a { text-decoration: none; color: var(--ink-2); }
+.back a:hover { color: var(--ink); }
+.runs.one { margin: 0 0 1.4rem; }
+.steps { list-style: none; margin: 0 0 2.5rem; padding: 0; font-size: 17px; line-height: 1.5; }
+.step { position: relative; padding: 5px 0 5px 24px; }
+.step::before { content: ''; position: absolute; left: 0; top: 13px; width: 9px; height: 9px; box-sizing: border-box; border: 1.5px solid var(--ink); }
+.step.yours::before { border-radius: 50%; }  /* keikaku's stages are square, the editor's round */
+.step.done { color: var(--ink-2); }
+.step.done::before { background: var(--ink-2); border-color: var(--ink-2); }
+.step.now { font-weight: 600; }
+.step.now::before { background: var(--accent); border-color: var(--accent); }
+.step.stopped::before { background: transparent; border-color: var(--accent-text); }
+.step.stopped { color: var(--accent-text); }
+.step.next { opacity: .4; }
+.dots::after { content: '…'; display: inline-block; width: 0; overflow: hidden; vertical-align: bottom; animation: dots 1.6s steps(4, jump-none) infinite; }
+@keyframes dots { to { width: 1em; } }
+@media (prefers-reduced-motion: reduce) { .dots::after { animation: none; width: auto; } }
+.runs.one .rt, .runs.one .read[href*="/translations/"] { display: none; }  /* its own page already says which, and shows it */

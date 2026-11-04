@@ -454,12 +454,14 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
                 return refused(e)
         return route
 
-    def desk_page(request: Request, person, status: int = 200, **ctx) -> HTMLResponse:
+    def desk_page(request: Request, person, status: int = 200, template: str = "desk.html", **ctx) -> HTMLResponse:
         if replay:
             return plain(closed, 200)
         who = request.path_params.get("token") or person["id"]
         state = desk.state(conn(), who)
-        return retry_cards(page(request, "desk.html", status, desk=state, closed=closed_for(person),
+        if template == "desk_run.html" and not any(r["id"] == ctx.get("run_id") for r in state["runs"]):
+            raise HTTPException(404, "There's no such translation on this desk.")
+        return retry_cards(page(request, template, status, desk=state, closed=closed_for(person),
                                 accents=edition.ACCENTS, **ctx))
 
     def retry_cards(response):
@@ -468,6 +470,22 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
         if not closed:
             response.background = BackgroundTask(acquire.describe_missing, db)
         return response
+
+    # A new translation, and one translation's own page. Registered before /desk/{token}, which would take /desk/new.
+    @desk_route("GET", "/new")
+    def desk_new(request: Request):
+        person = person_of(request)
+        if not person:
+            return RedirectResponse("/login", status_code=303, headers=NOINDEX)
+        return desk_page(request, person, template="desk_new.html")
+
+    @desk_route("GET", "/translations/{run_id}")
+    def desk_translation(request: Request, run_id: str):
+        person = person_of(request)
+        if not person:
+            return RedirectResponse("/login", status_code=303, headers=NOINDEX)
+        rid = int(run_id) if run_id.isascii() and run_id.isdigit() and known(int(run_id)) else 0
+        return desk_page(request, person, template="desk_run.html", run_id=rid)
 
     @app.get("/desk", response_class=HTMLResponse)
     def desk_home(request: Request):
