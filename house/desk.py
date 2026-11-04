@@ -794,21 +794,13 @@ def _checkpoint_doc(conn, run_id: int) -> dict:
     return stage.document(conn, run_id)[0] or {}
 
 
-def _words(v) -> str:
-    return "; ".join(str(x) for x in v) if isinstance(v, list) else ("" if v is None else str(v))
-
-
-def _pairs(d: dict | None) -> list[dict]:
-    return [{"label": k.replace("_", " ").capitalize(), "value": _words(v)} for k, v in (d or {}).items() if _words(v)]
-
-
 def _paras(english) -> list[str]:
     return [e for _, e in (english or [])]
 
 
 def checkpoint(conn, row) -> dict:
-    """A run waiting at the checkpoint, shaped for the desk page: the reading, the voices with page 1
-    under each, the bible as a person reads it, and the rounds of notes so far."""
+    """A run waiting at the checkpoint, shaped for the desk page: the three files every later stage reads
+    (house/steer.py), the voices with page 1 under each, and the rounds of notes so far."""
     options = json.loads(row["options"] or "{}")
     cp = _checkpoint_doc(conn, row["id"])
     reading = _doc(conn, row, "reading") or {}
@@ -838,23 +830,5 @@ def checkpoint(conn, row) -> dict:
     files = [{"name": k, "title": t, "text": texts[k], "edited": edited[k]} for k, t in FILE_NAMES.items() if k in texts]
     return {
         "run_id": row["id"], "title_en": run["title_en"], "voice": voice, "voices": voices, "rounds": rounds, "files": files,
-        "edited": {f["name"]: f["text"] for f in files if f["edited"]},
         "steering": run["steering"], "steer_error": run["steer_error"],
-        "reading": plain_all({
-            "crux": [{"point": c.get("point", ""), "for_the_english": c.get("for_the_english", "")}
-                     for c in reading.get("crux") or []],
-            "second_crux": [{"point": c.get("point", ""), "for_the_english": c.get("for_the_english", "")}
-                            for c in reading.get("second_crux") or []],
-            "prose": [p.strip() for p in re.split(r"\n\s*\n", reading.get("reading") or "") if p.strip()],
-            "questions": [q.get("question", "") for q in reading.get("open_questions") or []]}, cast),
-        "bible": plain_all({
-            "cast": [{"handle": c.get("handle", ""), "role": c.get("role", ""),
-                      "name": " ".join(x for x in (c.get("name_ja"), c.get("romanised")) if x and x != c.get("handle")),
-                      "addressed": "; ".join(f"{f.get('form', '')} ({f.get('used_by', '')})" for f in c.get("forms") or [])}
-                     for c in bible.get("cast") or []],
-            "style_sheet": _pairs(bible.get("style_sheet")),
-            "narration": _pairs(bible.get("narration")),
-            "motifs": [{"motif": m.get("motif", ""), "english": m.get("english", "")} for m in bible.get("motifs") or []],
-            "hard_spots": [{"where": ", ".join(h.get("anchors") or []), "kind": h.get("kind", ""), "why": h.get("why_hard", "")}
-                           for h in bible.get("hard_spots") or []]}, cast),
     }

@@ -68,27 +68,26 @@ CHECKPOINT = {
                {"label": "b", "line": "Warmer.", "english": ["Outside, the storm had come.", "The lamp swung."], "redrafted": True}],
     "rounds": [{"note": "Less formal.", "reply": "The register is plainer now.", "changed": ["Style sheet: register"],
                 "question": "Is the baby a girl throughout?", "english": ["Outside, the storm had come."]}],
-    "reading": {"crux": [{"point": "A potato opens a vision.", "for_the_english": "Keep it plain."}], "second_crux": [],
-                "prose": ["First paragraph of the reading.", "Second."], "questions": ["Is 坊や a girl's pet name?"]},
-    "bible": {"cast": [{"handle": "the young mother", "role": "wife and mother", "name": "", "addressed": "女 (narrator)"}],
-              "style_sheet": [{"label": "Register", "value": "Plain."}], "narration": [{"label": "Narrator", "value": "Close third."}],
-              "motifs": [{"motif": "quiet and rest", "english": "Repeat, don't vary."}],
-              "hard_spots": [{"where": "p8, p30", "kind": "address", "why": "坊や for a girl."}]}}
+    "files": [{"name": "reading", "title": "The reading", "text": "**The crux**\n\n- A potato opens a vision.", "edited": True},
+              {"name": "voices", "title": "The voices", "text": "## Voice 0: a\n\nPlain and quiet.", "edited": False},
+              {"name": "bible", "title": "The analysis", "text": "### Cast\n- **c1 the young mother**", "edited": False}]}
 
 
 def test_a_waiting_run_shows_the_checkpoint_in_order():
     waiting = {"id": 34, "work_id": "bansan", "title_en": "Supper", "status": "waiting", "stage": "checkpoint",
                "stage_label": "waiting for the editor", "reserved": 0, "spent": 300, "started": "3 Nov 2026", "edition_url": None}
     html = render(desk(runs=[waiting], checkpoints=[CHECKPOINT]))
-    assert "Waiting for you." in html and 'href="#checkpoint-34"' in html
-    order = ["ready to draft", "A potato opens a vision", "First paragraph of the reading", "Is 坊や a girl",
-             "Voice a", "Voice b", "Style sheet", "the young mother", "quiet and rest", "Less formal.",
-             "The register is plainer now.", "Is the baby a girl", "Send note", "Approve and draft"]
+    assert "Waiting for you." in html and 'href="#checkpoint-34">Review and approve' in html
+    assert 'id="checkpoint-34"' in html and 'aria-labelledby="cph-34" hidden>' in html  # opened from the run's link
+    order = ["three files", "The reading", "A potato opens a vision", "The analysis", "c1 the young mother",
+             "The voices", "Plain and quiet.", "Voice a", "Voice b", "Less formal.", "The register is plainer now.",
+             "Is the baby a girl", "Send note", "Approve and translate"]
     at = [html.index(x) for x in order]
     assert at == sorted(at)
+    assert html.count("A potato opens a vision") == 1 and html.count("Plain and quiet.") == 1  # each file once
     assert 'name="voice-34" value="1" checked' in html and "redrafted after your note" in html
-    assert "<p>The lamp swung.</p>" in html
-    assert '<details class="bible" open><summary>Style sheet' in html and '<details class="bible"><summary>Cast' in html
+    assert "<p>The lamp swung.</p>" in html and "Edited by you." in html
+    assert '<button type="button" class="btn save" disabled>Save</button>' in html  # until something changes
     assert "Reading your note" in html and 'class="line reading-note" aria-live="polite" hidden' in html
 
 

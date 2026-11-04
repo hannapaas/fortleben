@@ -38,7 +38,7 @@
       (r.held ? ', ' + n(r.held) + ' still held' : '') + '.') + '</span></span>';
     if (r.status === 'done' && r.edition_url) h += '<a class="read" href="' + esc(r.edition_url) + '">Read it</a>';
     if (r.status === 'done' && r.edit_url) h += '<a class="read" href="' + esc(r.edit_url) + '">Edit it</a>';
-    if (r.status === 'waiting') h += '<a class="read" href="#checkpoint-' + esc(r.id) + '">Read the analysis</a>';
+    if (r.status === 'waiting') h += '<a class="read" href="#checkpoint-' + esc(r.id) + '">Review and approve</a>';
     if (r.status === 'interrupted' || r.status === 'failed') h += '<span class="rr">' +
       (r.resumable === false ? '' : '<button type="button" class="btn resume">Resume</button>') +
       '<span class="sm">' + (r.status === 'failed' && r.failure ? esc(r.failure) :
@@ -249,6 +249,14 @@
     if (!leaving && document.querySelector('.file-box[data-dirty]')) { e.preventDefault(); e.returnValue = ''; }
   });
 
+  // A waiting run's checkpoint opens from its "Review and approve", or when the address names it.
+  function reveal() {
+    var cp = /^#checkpoint-\d+$/.test(location.hash) && document.getElementById(location.hash.slice(1));
+    if (cp) { cp.hidden = false; cp.scrollIntoView(); }
+  }
+  addEventListener('hashchange', reveal);
+  reveal();
+
   // The checkpoint: a note is read in the background, and the page reloads with the house's reply.
   document.querySelectorAll('.checkpoint').forEach(function (cp) {
     var id = cp.dataset.run, url = base + '/runs/' + id;
@@ -258,7 +266,7 @@
     function voice() { var v = cp.querySelector('input[type="radio"]:checked'); return v ? Number(v.value) : 0; }
     function busy(on) {
       send.disabled = on; approve.disabled = on || full; reading.hidden = !on;
-      cp.querySelectorAll('.file .save').forEach(function (b) { b.disabled = on; });
+      cp.querySelectorAll('.file').forEach(function (f) { f.querySelector('.save').disabled = on || !f.querySelector('.file-box').dataset.dirty; });
     }
     // A file changed and not saved: the name of the first, so a note or an approval doesn't go without it.
     function unsaved() {
@@ -294,13 +302,13 @@
       approve.textContent = 'Approving…';
       json('POST', url + '/approve', { voice: voice() }).then(function (d) {
         if (d.error || !d.ok) {
-          send.disabled = false; approve.disabled = full; approve.textContent = 'Approve and draft';
+          send.disabled = false; approve.disabled = full; approve.textContent = 'Approve and translate';
           say(msg, d.error || 'It didn\'t go. Try again.');
           return;
         }
         location.reload();
       }, function () {
-        send.disabled = false; approve.disabled = full; approve.textContent = 'Approve and draft';
+        send.disabled = false; approve.disabled = full; approve.textContent = 'Approve and translate';
         say(msg, 'Couldn\'t reach Fortleben. Try again.');
       });
     });
@@ -310,7 +318,10 @@
     cp.querySelectorAll('.file').forEach(function (f) {
       var save = f.querySelector('.save'), fbox = f.querySelector('.file-box'), said = f.querySelector('.saved');
       var was = fbox.value;
-      function mark() { if (fbox.value === was) delete fbox.dataset.dirty; else fbox.dataset.dirty = '1'; }
+      function mark() {
+        if (fbox.value === was) delete fbox.dataset.dirty; else fbox.dataset.dirty = '1';
+        save.disabled = !fbox.dataset.dirty || fbox.readOnly;
+      }
       fbox.addEventListener('input', function () { mark(); say(said, fbox.dataset.dirty ? 'Not saved yet.' : ''); });
       save.addEventListener('click', function () {
         save.disabled = true;

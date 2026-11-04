@@ -12,54 +12,46 @@
     <span class="sm">{% if r.spent_words %}{{ r.spent_words }}{% else %}{{ n(r.spent) }} drops spent{% if r.held %}, {{ n(r.held) }} still held{% endif %}.{% endif %}</span></span>
   {% if r.status == 'done' and r.edition_url %}<a class="read" href="{{ r.edition_url }}">Read it</a>{% endif %}
   {% if r.status == 'done' and r.edit_url %}<a class="read" href="{{ r.edit_url }}">Edit it</a>{% endif %}
-  {% if r.status == 'waiting' %}<a class="read" href="#checkpoint-{{ r.id }}">Read the analysis</a>{% endif %}
+  {% if r.status == 'waiting' %}<a class="read" href="#checkpoint-{{ r.id }}">Review and approve</a>{% endif %}
   {% if r.status in ('interrupted', 'failed') %}<span class="rr">{% if r.get('resumable', True) %}<button type="button" class="btn resume"{% if blocked %} disabled{% endif %}>Resume</button>{% endif %}
     <span class="sm">{% if r.status == 'failed' and r.failure %}{{ r.failure }}{% else %}It carries on from the last finished stage; nothing is paid for twice.{% endif %}</span>
     <span class="err" aria-live="polite" hidden></span></span>{% endif %}
 </li>
 {%- endmacro %}
 {% macro paras(english) %}{% for e in english %}<p>{{ e }}</p>{% endfor %}{% endmacro %}
-{% macro pairs(rows) %}<dl class="pairs">{% for r in rows %}<dt>{{ r.label }}</dt><dd>{{ r.value }}</dd>{% endfor %}</dl>{% endmacro %}
+{% macro file(cp, name, closed) -%}
+{% set f = cp.files|selectattr('name', 'equalto', name)|first %}
+{% if f %}<div class="file" data-file="{{ f.name }}">
+  <textarea class="file-box" rows="14" maxlength="60000" aria-label="{{ f.title }}"{% if closed or cp.steering %} readonly{% endif %}>{{ f.text }}</textarea>
+  <div class="filerow"><button type="button" class="btn save" disabled>Save</button><span class="sm saved" aria-live="polite">{% if f.edited %}Edited by you.{% endif %}</span></div>
+</div>{% endif %}
+{%- endmacro %}
 {% macro checkpoint(cp, full, closed) -%}
-<section class="desk checkpoint" id="checkpoint-{{ cp.run_id }}" data-run="{{ cp.run_id }}" data-rounds="{{ cp.rounds|length }}"{% if cp.steering %} data-steering="1"{% endif %}{% if full or closed %} data-full="1"{% endif %} aria-labelledby="cph-{{ cp.run_id }}">
+{# Shown from the run's "Review and approve" (desk.js). The reading, the voices and the analysis are each shown once,
+   as the file every later stage reads, and edited in place. #}
+<section class="desk checkpoint" id="checkpoint-{{ cp.run_id }}" data-run="{{ cp.run_id }}" data-rounds="{{ cp.rounds|length }}"{% if cp.steering %} data-steering="1"{% endif %}{% if full or closed %} data-full="1"{% endif %} aria-labelledby="cph-{{ cp.run_id }}" hidden>
   <h2 class="cp-h" id="cph-{{ cp.run_id }}"><i>{{ cp.title_en }}</i>: before the draft</h2>
-  <p class="desk-lead">keikaku has read the story and is ready to draft. Read its analysis, pick a voice, and say in your own words anything it should hold differently before it starts.</p>
+  <p class="desk-lead">keikaku has read the story. These are the three files every stage of the translation reads: edit any of them, or send a note, then pick a voice and approve to start the translation.</p>
+  <p class="sm">What you change is published with the edition, with your name and the date.</p>
 
   <h3>The reading</h3>
-  {% if (cp.edited or {}).reading %}<p class="sm">You've edited the reading by hand; keikaku drafts from your version, below in its file.</p>
-  {% else %}
-  {% if cp.reading.crux %}<p class="sm">What the story turns on:</p>
-  <ul class="crux">{% for c in cp.reading.crux %}<li>{{ c.point }}{% if c.for_the_english %} <span class="sm block">For the English: {{ c.for_the_english }}</span>{% endif %}</li>{% endfor %}</ul>{% endif %}
-  {% if cp.reading.second_crux %}<p class="sm">A second reader, who never saw the reading, put it this way:</p>
-  <ul class="crux">{% for c in cp.reading.second_crux %}<li>{{ c.point }}</li>{% endfor %}</ul>{% endif %}
-  <div class="prose">{{ paras(cp.reading.prose) }}</div>
-  {% if cp.reading.questions %}<p class="sm">What it hasn't settled:</p>
-  <ul class="questions">{% for q in cp.reading.questions %}<li>{{ q }}</li>{% endfor %}</ul>{% endif %}{% endif %}
+  {{ file(cp, 'reading', closed) }}
 
-  <h3 id="voice-q-{{ cp.run_id }}">The voices</h3>
-  <p class="sm">The first page, drafted in each voice the reading allows. Pick the one keikaku should write the whole story in.</p>
+  <h3>The analysis</h3>
+  {{ file(cp, 'bible', closed) }}
+
+  <h3>The voices</h3>
+  {{ file(cp, 'voices', closed) }}
+  <p class="sm" id="voice-q-{{ cp.run_id }}">Page 1 in each voice. Pick the one to write the whole story in. Editing a voice doesn't draft page 1 again; a note does.</p>
   <div class="voices" role="radiogroup" aria-labelledby="voice-q-{{ cp.run_id }}">
     {% for v in cp.voices %}
     <div class="voice">
       <label class="opt"><input type="radio" name="voice-{{ cp.run_id }}" value="{{ loop.index0 }}"{% if loop.index0 == cp.voice %} checked{% endif %}><span class="bx r" aria-hidden="true"></span><b>Voice {{ v.label }}</b></label>
-      <span class="sm block">{{ v.line }}</span>
       {% if v.redrafted %}<span class="tag">redrafted after your note</span>{% endif %}
       <div class="page">{{ paras(v.english) }}</div>
     </div>
     {% endfor %}
   </div>
-
-  <h3>The analysis</h3>
-  <p class="sm">Who everyone is and how the English handles them, as keikaku understands it before drafting.</p>
-  {% if (cp.edited or {}).bible %}<p class="sm">You've edited the analysis by hand, so this is keikaku's version: it drafts from yours, below in its file.</p>{% endif %}
-  <details class="bible" open><summary>Style sheet</summary>{{ pairs(cp.bible.style_sheet) }}</details>
-  {% if cp.bible.cast %}<details class="bible"><summary>Cast</summary>
-    <table class="cast"><thead><tr><th scope="col">Who</th><th scope="col">What they are</th><th scope="col">How they're addressed</th></tr></thead><tbody>
-    {% for c in cp.bible.cast %}<tr><td>{{ c.handle }}{% if c.name %} <span class="sm" lang="ja">{{ c.name }}</span>{% endif %}</td><td>{{ c.role }}</td><td>{{ c.addressed }}</td></tr>{% endfor %}
-    </tbody></table></details>{% endif %}
-  {% if cp.bible.narration %}<details class="bible"><summary>Narration</summary>{{ pairs(cp.bible.narration) }}</details>{% endif %}
-  {% if cp.bible.motifs %}<details class="bible"><summary>Motifs</summary><dl class="pairs">{% for m in cp.bible.motifs %}<dt>{{ m.motif }}</dt><dd>{{ m.english }}</dd>{% endfor %}</dl></details>{% endif %}
-  {% if cp.bible.hard_spots %}<details class="bible"><summary>Hard spots</summary><dl class="pairs">{% for h in cp.bible.hard_spots %}<dt>{{ h.where }}{% if h.kind %} <span class="sm">({{ h.kind }})</span>{% endif %}</dt><dd>{{ h.why }}</dd>{% endfor %}</dl></details>{% endif %}
 
   {% if cp.rounds %}<h3>Your notes so far</h3>
   <ol class="rounds">{% for r in cp.rounds %}
@@ -72,23 +64,14 @@
     </li>{% endfor %}
   </ol>{% endif %}
 
-  {% if cp.files %}<h3>The files</h3>
-  <p class="sm">Every stage from here reads these word for word, so you can edit them yourself instead of sending a note. What you change is published with the edition, with your name and the date. An edit doesn't redraft page 1; a note does, and is read against your version, which keikaku's amended one then replaces.</p>
-  <div class="files">{% for f in cp.files %}
-    <details class="file" data-file="{{ f.name }}"><summary>Edit {{ f.title|lower }}{% if f.edited %} <span class="tag">edited by you</span>{% endif %}</summary>
-      <textarea class="file-box" rows="14" maxlength="60000" aria-label="{{ f.title }}"{% if closed or cp.steering %} readonly{% endif %}>{{ f.text }}</textarea>
-      <div class="startrow"><button type="button" class="btn save"{% if closed or cp.steering %} disabled{% endif %}>Save</button><span class="sm saved" aria-live="polite"></span></div>
-    </details>{% endfor %}
-  </div>{% endif %}
-
   <h3><label for="note-{{ cp.run_id }}">A note to keikaku</label></h3>
-  <p class="sm">Anything from “the daughter is older than this reads” to “less formal”.</p>
+  <p class="sm">Anything from “the daughter is older than this reads” to “less formal”. keikaku changes the files to match and drafts page 1 again, so you can see the difference.</p>
   <textarea id="note-{{ cp.run_id }}" class="note-box" rows="4" maxlength="2000"></textarea>
   <div class="startrow">
     <button type="button" class="btn send"{% if closed or cp.steering %} disabled{% endif %}>Send note</button>
-    <button type="button" class="btn go approve"{% if full or closed or cp.steering %} disabled{% endif %}>Approve and draft</button>
+    <button type="button" class="btn go approve"{% if full or closed or cp.steering %} disabled{% endif %}>Approve and translate</button>
   </div>
-  <p class="sm">A note changes the analysis, never the Japanese, and keikaku drafts page 1 again so you can see the difference. Send as many as you like; nothing else is drafted until you approve.</p>
+  <p class="sm">Nothing else is translated until you approve.</p>
   <p class="line reading-note" aria-live="polite"{% if not cp.steering %} hidden{% endif %}>Reading your note…</p>
   {% if full and not closed %}<p class="line">Fortleben is full at the moment: three translations are going. Try again in a little while.</p>{% endif %}
   <p class="err" aria-live="polite"{% if not cp.steer_error %} hidden{% endif %}>{{ cp.steer_error or '' }}</p>
