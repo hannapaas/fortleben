@@ -41,7 +41,7 @@ def copy_edit(ctx, stats: dict) -> None:
     units = latest_units(ctx)
     bible = ctx.latest("bible")
     found = style.variants(units, label)
-    names = style.readings(ctx.work.translatable(), bible, "\n".join(units.values()))
+    names = style.readings(ctx.work.translatable(), bible, units)
     english = "\n\n".join(f"{label(u)}　{en}" for u, en in units.items())
     whole = context.block("The English", english) if len(english) <= WHOLE_ENGLISH_CHARS else ""
     inp = context.join(context.bible(bible),

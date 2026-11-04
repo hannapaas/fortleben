@@ -117,14 +117,24 @@ def named(bible: dict) -> dict[str, set[str]]:
     return out
 
 
-def readings(paragraphs, bible: dict, english: str) -> list[str]:
+def readings(paragraphs, bible: dict, units: dict) -> list[str]:
     """Names the English may have misread: where the ruby gives a reading for a name or a place (the
     cast's names, anything ending like a place) and the English never spells it that way, the reading
-    and the English forms closest to it. A form the bible gives for some other Japanese word is that
-    word's, not a misreading: 東屋《あずまや》 (an arbour) is near Umeya, which the bible gives for 梅屋.
-    And any cast entry whose romanised form doesn't match its own reading, since every page follows the cast."""
+    and the English forms closest to it, among those that stand in a paragraph whose Japanese has the
+    name. A near form only elsewhere is some other word's (石原 is Ishihara, near 蘆原 Ashihara), and so is
+    one the bible gives for another Japanese word: 東屋《あずまや》 (an arbour) is near Umeya, which the
+    bible gives for 梅屋. And any cast entry whose romanised form doesn't match its own reading, since
+    every page follows the cast. `units` is the English by unit, as latest_units gives it."""
     names = {c.get("name_ja") or "" for c in bible.get("cast") or []} - {""}
     others = named(bible)
+    japanese = {p.id: p.text for p in paragraphs}
+    english = "\n".join(units.values())
+
+    def beside(base: str) -> set[str]:
+        """The keys of the capitalised words in the English of every unit whose Japanese has `base`."""
+        return {_key(w) for unit, en in units.items() if base in "".join(japanese.get(pid, "") for pid in unit)
+                for w in re.findall(r"[A-ZĀĒĪŌŪ][\wāēīōū]+", en) if len(w) > 2}
+
     words = Counter(re.findall(r"[A-ZĀĒĪŌŪ][\wāēīōū]+", english))
     plain = {_key(w): w for w in words}
     seq = re.findall(r"[A-Za-zĀāĒēĪīŌōŪū']+", english)
@@ -137,15 +147,19 @@ def readings(paragraphs, bible: dict, english: str) -> list[str]:
                 continue
             base = "".join(b.get("s", b.get("raw", "")) for b in t.get("base", []))
             after = (toks[i + 1].get("s") or "")[:1] if i + 1 < len(toks) else ""
-            if not base or base in seen or not (any(base in n for n in names) or base.endswith(PLACE) or after in PLACE):
+            in_cast = base in names or (len(base) > 1 and any(base in n for n in names))  # not 長 for 局長
+            if not base or base in seen or not (in_cast or base.endswith(PLACE) or after in PLACE):
                 continue
             seen.add(base)
             rom = romaji(t["reading"])
             k = _key(rom)
             if len(k) < 4 or any(r.startswith(k) for r in runs) or any(k == r + suffix for r in runs for suffix in SUFFIXES if k.endswith(suffix)):
                 continue  # too short to judge, or the English has it (with a space, with the okurigana after it, or 村 as "village")
-            near = [m for m in difflib.get_close_matches(k, list(plain), n=2, cutoff=0.65)
-                    if m not in others or any(base in ja or ja in base for ja in others[m])]
+            # among the words where the name stands, so a looser match (あんば written "Awa" is 0.57), and not
+            # a short word that only begins it (Edo, the city, in Edozaki; Ikina for Ikinawa is a misreading)
+            near = [m for m in difflib.get_close_matches(k, sorted(beside(base) & plain.keys()), n=2, cutoff=0.55)
+                    if not (k.startswith(m) and 2 * len(m) <= len(k))
+                    and (m not in others or any(base in ja or ja in base for ja in others[m]))]
             if near:
                 out.append(f"{base}《{t['reading']}》 reads {rom.capitalize()}; the English has "
                            + " and ".join(f"{plain[k]} ×{words[plain[k]]}" for k in near) + f" (first at {p.id})")
