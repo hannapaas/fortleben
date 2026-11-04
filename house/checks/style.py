@@ -3,6 +3,7 @@ style, one dash, British spelling, a silence printed one way), and the two lists
 from: words the English spells more than one way, and the name readings the ruby gives."""
 
 import difflib
+import json
 import re
 import unicodedata
 from collections import Counter, defaultdict
@@ -99,12 +100,31 @@ SUFFIXES = ("mura", "son", "machi", "cho", "kawa", "gawa", "yama", "san", "ji", 
             "shita", "shima", "jima", "hashi", "bashi", "zaka", "saka", "ya", "kuni")  # the place-word a translation may put in English
 
 
+def named(bible: dict) -> dict[str, set[str]]:
+    """The English words the bible gives for Japanese ones: each cast entry's romanised name, and every
+    "梅屋 (Umeya)" in its text. Keyed like _key, to the Japanese they stand for."""
+    out = {}
+
+    def add(ja, en):
+        for w in re.findall(r"[A-ZĀĒĪŌŪ][\wāēīōū']+", en or ""):
+            out.setdefault(_key(w), set()).add(ja)
+
+    for c in bible.get("cast") or []:
+        if c.get("name_ja"):
+            add(c["name_ja"], c.get("romanised"))
+    for ja, en in re.findall(r"([぀-ヿ一-鿿々〆]+)\s*[(（]([^()（）]{1,60})[)）]", json.dumps(bible, ensure_ascii=False)):
+        add(ja, en)
+    return out
+
+
 def readings(paragraphs, bible: dict, english: str) -> list[str]:
     """Names the English may have misread: where the ruby gives a reading for a name or a place (the
     cast's names, anything ending like a place) and the English never spells it that way, the reading
-    and the English forms closest to it. And any cast entry whose romanised form doesn't match its own
-    reading, since every page follows the cast."""
+    and the English forms closest to it. A form the bible gives for some other Japanese word is that
+    word's, not a misreading: 東屋《あずまや》 (an arbour) is near Umeya, which the bible gives for 梅屋.
+    And any cast entry whose romanised form doesn't match its own reading, since every page follows the cast."""
     names = {c.get("name_ja") or "" for c in bible.get("cast") or []} - {""}
+    others = named(bible)
     words = Counter(re.findall(r"[A-ZĀĒĪŌŪ][\wāēīōū]+", english))
     plain = {_key(w): w for w in words}
     seq = re.findall(r"[A-Za-zĀāĒēĪīŌōŪū']+", english)
@@ -124,7 +144,8 @@ def readings(paragraphs, bible: dict, english: str) -> list[str]:
             k = _key(rom)
             if len(k) < 4 or any(r.startswith(k) for r in runs) or any(k == r + suffix for r in runs for suffix in SUFFIXES if k.endswith(suffix)):
                 continue  # too short to judge, or the English has it (with a space, with the okurigana after it, or 村 as "village")
-            near = difflib.get_close_matches(k, list(plain), n=2, cutoff=0.65)
+            near = [m for m in difflib.get_close_matches(k, list(plain), n=2, cutoff=0.65)
+                    if m not in others or any(base in ja or ja in base for ja in others[m])]
             if near:
                 out.append(f"{base}《{t['reading']}》 reads {rom.capitalize()}; the English has "
                            + " and ".join(f"{plain[k]} ×{words[plain[k]]}" for k in near) + f" (first at {p.id})")

@@ -30,7 +30,7 @@
    "verdict": "public domain (author died 1918, published 1917)"
   },
   "status": "parsed",
-  "created_at": "2026-11-04 14:33:43"
+  "created_at": "2026-11-04 19:22:43"
  },
  "run": {
   "id": 1,
@@ -48,7 +48,7 @@
    "pipeline": "readers-desk",
    "reader_model": "spark"
   },
-  "created_at": "2026-11-04 14:33:43"
+  "created_at": "2026-11-04 19:22:43"
  },
  "segment": [
   {
@@ -1989,7 +1989,7 @@
     }
    },
    "event_id": 29,
-   "created_at": "2026-11-04 14:35:37"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
@@ -2003,30 +2003,30 @@
       "question": ""
      },
      "pick": 0,
-     "reason": "Option 0 and Option 1 name the same crux in different words: a frozen potato detaches the mother mid-supper, three years expand into an aged life seen from far off as forgiven and dear, and she returns unexplained to the table. Option 0 states that movement more completely, including its contraction to \"only three years,\" the unexalted return to work tomorrow, and the storm frame that closes on the bare last line, so it gives the desk more to translate against. Option 1 got the carrying mechanism exactly right — the incantatory repetitions and long, drifting sentences against the baby's broken noise — and that emphasis is consistent with, not rival to, Option 0's account.",
+     "reason": "Both readers name the same crux: the bad potato opens, without explanation, a view of the present supper from beyond a whole life, and the story depends on that expansion and its plain contraction to three years and tomorrow's work. Option 1's repetition and unbroken domestic surface are the mechanism of that movement, already described in Option 0's frame, recurrences, and diction of distance, not a separate crux. Option 0 therefore stands as the house reading because it holds trigger, vision, and return in the single movement by which the text stands or falls.",
      "same_or_different": "same",
-     "say": "They name the same crux, so Option 0 stands as the house reading and no fork is opened."
+     "say": "Pick: Option 0.\n\nBoth readers name the same crux: the bad potato opens, without explanation, a view of the present supper from beyond a whole life, and the story depends on that expansion and its plain contraction to three years and tomorrow's work. Option 1's repetition and unbroken domestic surface are the mechanism of that movement, already described in Option 0's frame, recurrences, and diction of distance, not a separate crux. Option 0 therefore stands as the house reading because it holds trigger, vision, and return in the single movement by which the text stands or falls.\n\nHouse log: The two independent crux statements were judged to name the same movement, and Option 0 was adopted as the house reading."
     },
     "second": {
      "confidence": "high",
      "crux": [
       {
-       "for_the_english": "Do not clarify the vision into a daydream about old age, a religious consolation, or a resolution to endure. Keep its tense, distance and agency vague, its key words unvaried, and do not soften the nearness of that peace to death. The mother must be allowed to find the present already becoming sweet from an imagined afterwards, then to return without the story explaining her.",
-       "point": "The frozen, tasteless potato opens a temporal reversal: three years of married poverty feel like a whole aged life, yet seen from a far future they already look like a dear, forgiven dream.",
-       "why": "In p11-14 a badly cooked potato — hard, gritty, coldly flavourless — detaches the mother from supper. She recalls tears, want and sickness, feels suddenly old, then corrects herself: it has been only about three years. In p16-20 that detachment becomes the still picture of three people telling an endless story containing all good, evil, sorrow and anger, while simply smiling; everything will change into なつかしみ and 許し only once life has passed. Her silence at the table, and the husband twice asking why she is silent, is the action of the story."
+       "for_the_english": "Do not label it — not 'she imagined heaven', 'she dreamed', 'she thought of death'. Keep the modal, unresolved terms ('that day', 'would', 'seemed', 'as if'), let the vision arrive and recede unexplained, and keep it visually still rather than turning it into narrative action.",
+       "point": "The bad potato turns an ordinary supper into life seen from beyond its end, and that vision must stay unexplained.",
+       "why": "Nothing dramatic happens: in p11–13 the potato is inexplicably hard, 'frozen', tasteless, and its 'unconnected cold badness' detaches the young mother from the room. She feels suddenly old, remembers the three married years as if from far away — suffering already 'like a dream' (p13) — then sees, p16–18, three motionless figures in dim light telling an endless story in which good, evil, sorrow, anger and joy are all spoken of, yet wrapped only in 'nostalgia and forgiveness' and deep rest, 'like night'. In p20 she repeats the turn as certainty: 'that day exists', after long life, long sorrow. The story stands on this not being reduced to a cause: not simply fatigue, not a stated premonition of death, not religious consolation, not a daydream about old age. It is the present moment already viewed from after time has passed over it (p17: life will pass, and only on that passed day does everything change to nostalgia and forgiveness)."
       },
       {
-       "for_the_english": "Preserve the repeated words and the long, drifting periods in the interior passages, even where fluent English would vary, shorten or connect them. Keep plain words plain — quiet, far, smile, sorrow, suffering, dear/longed-for, forgiveness, peace — rather than ennobling them. Let noisy scene and motionless vision remain syntactically unlike.",
-       "point": "That reversal is carried by incantatory repetition and unbroken, drifting sentences set against the baby's noisy, abruptly broken supper scene.",
-       "why": "From p12 on, 静か, 遠い, 悲しみ, 苦しみ, なつかしみ, 許し and 安らかさ recur in long chains, often with little logical tightening; p20 and p28 repeat days, years and 'after' until time itself blurs. Around it the child bangs a spoon, shouts うまうま, is fed in haste (p5-9, p29-32), and dialogue is short. If the repetitions are treated as redundancy and the vision is made concise and lyrical, its trance — and the mother's absence from the room — disappears."
+       "for_the_english": "Resist rationalisation, expansion and synonym-variation (Berman's tidyings). Keep long cumulative sentences where the Japanese accumulates, repeat the same English words for the same Japanese ones — quiet, lonely, far, rest/peace, nostalgic/dear, smile, dream — even where elegant English would vary them, and keep dialogue plain and slightly unfinished ('It's only been... hasn't it', 'just a little longer').",
+       "point": "The incantatory repetition and unbroken domestic surface are how three years become a lifetime; varied, tightened prose would make the vision an inserted purple passage instead of a change of distance.",
+       "why": "The text works by recurrence, not event: storm heard at start, forgotten in the child's noise (p8, p19, p38), people repeatedly 'young' yet exhausted (p2–3 against p13–14: barely three years, yet she feels wholly aged), words circling — 静か, 淋しい, 遠い, 安らかさ, なつかしみ, 許し, 微笑, 夢 — across both the noisy supper and the silent vision, so the vision feels like the same room seen from far off rather than another world. Sentences also drift: dropped subjects, tense loosening, だろう / やうだ speculation, and dialogue that resolves nothing except 'let us work', 'clear up', 'get up early tomorrow' (p34–36)."
       }
      ],
-     "say": "Confidence: high that these two, together, are where this text stands or falls; the temporal pivot is explicit in the three-years correction, and the lexical repetitions are pervasive rather than incidental.\nWhat would change my mind: evidence from Shizu's other work or from period usage that なつかしみ/許し/安らかさ carried a fixed religious meaning here, which would make a more doctrinal English rendering faithful rather than clarifying.",
-     "what_would_change_my_mind": "evidence from Shizu's other work or from period usage that なつかしみ/許し/安らかさ carried a fixed religious meaning here, which would make a more doctrinal English rendering faithful rather than clarifying."
+     "say": "The translation stands or falls on keeping the mother's vision in p16–20 ambiguous and on letting repetition, not event, stretch three years into a lifetime.",
+     "what_would_change_my_mind": "Evidence from elsewhere in Shiraki's work or contemporary reception that the 'day' is a specific, named doctrine (e.g. an explicit Christian afterlife or Buddhist rite she elsewhere names) would justify one clarifying note; nothing in this text names it, so any such label here would be invention."
     }
    },
    "event_id": 23,
-   "created_at": "2026-11-04 14:34:32"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
@@ -2037,10 +2037,10 @@
     "starts": [
      "p1"
     ],
-    "why": "The 38-paragraph story totals only about 3,400 characters with no chapters or scene breaks, so the whole supper scene holds in one reading as a single part."
+    "why": "This 38-paragraph short story is a single continuous supper scene of about 3,400 characters with no chapters or major breaks, so it is best judged whole as one part."
    },
    "event_id": 8,
-   "created_at": "2026-11-04 14:33:43"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
@@ -2108,7 +2108,7 @@
     ]
    },
    "event_id": 14,
-   "created_at": "2026-11-04 14:34:23"
+   "created_at": "2026-11-04 19:22:43"
   }
  ],
  "revision": [
@@ -2127,7 +2127,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 38,
-   "created_at": "2026-11-04 14:35:58"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 2,
@@ -2146,7 +2146,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 39,
-   "created_at": "2026-11-04 14:35:58"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 3,
@@ -2163,7 +2163,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 40,
-   "created_at": "2026-11-04 14:35:58"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 4,
@@ -2182,7 +2182,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 41,
-   "created_at": "2026-11-04 14:35:58"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 5,
@@ -2201,7 +2201,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 42,
-   "created_at": "2026-11-04 14:35:58"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 6,
@@ -2218,7 +2218,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 43,
-   "created_at": "2026-11-04 14:35:58"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 7,
@@ -2237,7 +2237,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 47,
-   "created_at": "2026-11-04 14:36:40"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 8,
@@ -2256,7 +2256,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 48,
-   "created_at": "2026-11-04 14:36:40"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 9,
@@ -2273,7 +2273,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 49,
-   "created_at": "2026-11-04 14:36:40"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 10,
@@ -2290,7 +2290,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 53,
-   "created_at": "2026-11-04 14:37:08"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 11,
@@ -2309,7 +2309,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 54,
-   "created_at": "2026-11-04 14:37:08"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 12,
@@ -2328,7 +2328,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 55,
-   "created_at": "2026-11-04 14:37:08"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 13,
@@ -2347,7 +2347,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 56,
-   "created_at": "2026-11-04 14:37:08"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 14,
@@ -2364,7 +2364,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 57,
-   "created_at": "2026-11-04 14:37:08"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 15,
@@ -2383,7 +2383,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 58,
-   "created_at": "2026-11-04 14:37:08"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 16,
@@ -2402,7 +2402,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 61,
-   "created_at": "2026-11-04 14:37:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 17,
@@ -2421,7 +2421,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 62,
-   "created_at": "2026-11-04 14:37:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 18,
@@ -2440,7 +2440,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 63,
-   "created_at": "2026-11-04 14:37:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 19,
@@ -2459,7 +2459,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 67,
-   "created_at": "2026-11-04 14:39:05"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 20,
@@ -2478,7 +2478,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 68,
-   "created_at": "2026-11-04 14:39:05"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 21,
@@ -2499,7 +2499,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 69,
-   "created_at": "2026-11-04 14:39:05"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 22,
@@ -2516,7 +2516,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 70,
-   "created_at": "2026-11-04 14:39:05"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 23,
@@ -2535,7 +2535,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 71,
-   "created_at": "2026-11-04 14:39:05"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 24,
@@ -2555,7 +2555,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 72,
-   "created_at": "2026-11-04 14:39:05"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 25,
@@ -2574,7 +2574,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 76,
-   "created_at": "2026-11-04 14:39:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 26,
@@ -2595,7 +2595,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 77,
-   "created_at": "2026-11-04 14:39:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 27,
@@ -2612,7 +2612,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 78,
-   "created_at": "2026-11-04 14:39:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 28,
@@ -2629,7 +2629,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 79,
-   "created_at": "2026-11-04 14:39:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 29,
@@ -2646,7 +2646,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 80,
-   "created_at": "2026-11-04 14:39:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 30,
@@ -2665,7 +2665,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 81,
-   "created_at": "2026-11-04 14:39:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 31,
@@ -2682,7 +2682,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 82,
-   "created_at": "2026-11-04 14:39:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 32,
@@ -2699,7 +2699,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 83,
-   "created_at": "2026-11-04 14:39:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 33,
@@ -2718,7 +2718,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 84,
-   "created_at": "2026-11-04 14:39:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 34,
@@ -2735,7 +2735,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 146,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 35,
@@ -2752,7 +2752,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 149,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 36,
@@ -2769,7 +2769,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 152,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 37,
@@ -2786,7 +2786,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 154,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 38,
@@ -2803,7 +2803,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 158,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 39,
@@ -2820,7 +2820,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 160,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 40,
@@ -2837,7 +2837,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 162,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 41,
@@ -2854,7 +2854,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 164,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 42,
@@ -2871,7 +2871,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 167,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 43,
@@ -2888,7 +2888,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 169,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 44,
@@ -2905,7 +2905,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 172,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 45,
@@ -2924,7 +2924,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 174,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 46,
@@ -2943,7 +2943,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 176,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 47,
@@ -2960,7 +2960,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 179,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 48,
@@ -2977,7 +2977,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 181,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 49,
@@ -2994,7 +2994,7 @@
    "flags": null,
    "variant": "lead",
    "event_id": 203,
-   "created_at": "2026-11-04 14:45:04"
+   "created_at": "2026-11-04 19:22:43"
   }
  ],
  "query": [
@@ -3022,7 +3022,7 @@
    },
    "say": "Singular 'parent' misreads 親子, which here covers father, mother and child, and loses the crowded household the opening needs.",
    "resolver": "desk",
-   "event_id": 90
+   "event_id": 93
   },
   {
    "id": 2,
@@ -3048,7 +3048,7 @@
    },
    "say": "Future-tag 'will you' flattens the father's rough-affectionate vernacular 奴だな into a scolding question.",
    "resolver": "desk",
-   "event_id": 91
+   "event_id": 94
   },
   {
    "id": 3,
@@ -3074,7 +3074,7 @@
    },
    "say": "'Firmly' makes her sound stern at the moment the smile overflows, reversing the tone.",
    "resolver": "desk",
-   "event_id": 92
+   "event_id": 95
   },
   {
    "id": 4,
@@ -3100,7 +3100,7 @@
    },
    "say": "Participles leave the central vision sentence without a finite verb, destroying the long accumulating rhythm.",
    "resolver": "desk",
-   "event_id": 93
+   "event_id": 96
   },
   {
    "id": 5,
@@ -3126,7 +3126,7 @@
    },
    "say": "'Anguish' upgrades なやみ and breaks the flat trouble/suffering network kept elsewhere as 'trouble'.",
    "resolver": "desk",
-   "event_id": 94
+   "event_id": 97
   },
   {
    "id": 6,
@@ -3152,7 +3152,7 @@
    },
    "say": "'Young as she was' adds a concessive contrast not in 若い彼女は, turning description into commentary.",
    "resolver": "desk",
-   "event_id": 95
+   "event_id": 98
   },
   {
    "id": 7,
@@ -3178,7 +3178,7 @@
    },
    "say": "Periods turn two rhetorical wonder-questions into flat statements, losing the drifting なんだらう hedge.",
    "resolver": "desk",
-   "event_id": 96
+   "event_id": 99
   },
   {
    "id": 8,
@@ -3204,7 +3204,7 @@
    },
    "say": "'Been through a great deal' impoverishes 苦労, the working-poor toil word, into vagueness.",
    "resolver": "desk",
-   "event_id": 97
+   "event_id": 100
   },
   {
    "id": 9,
@@ -3230,7 +3230,7 @@
    },
    "say": "'Its' for the explicitly girl child dehumanizes her and contradicts p7 'her', breaking pronoun continuity.",
    "resolver": "desk",
-   "event_id": 98
+   "event_id": 101
   },
   {
    "id": 10,
@@ -3256,7 +3256,7 @@
    },
    "say": "'Breast' replaces the precise bodily 乳首, small nipple/teat, ennobling poverty-plain detail.",
    "resolver": "desk",
-   "event_id": 99
+   "event_id": 102
   },
   {
    "id": 11,
@@ -3282,7 +3282,7 @@
    },
    "say": "Same pronoun loss as p29-31: 'its' erases the girl established in p2 and p7.",
    "resolver": "desk",
-   "event_id": 100
+   "event_id": 103
   },
   {
    "id": 12,
@@ -3850,266 +3850,266 @@
    "segment_id": "p1",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:35:58"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p10",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:37:08"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p11",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:37:08"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p12",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:37:08"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p13",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:37:08"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p14",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:37:08"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p15",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:37:08"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p16",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:37:51"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p17",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:37:51"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p18",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:37:51"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p19",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:39:05"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p2",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:35:58"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p20",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:39:05"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p21",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:39:05"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p22",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:39:05"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p23",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:39:05"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p24",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:39:05"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p25",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:39:05"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p26",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:39:05"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p27",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:39:05"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p28",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:39:51"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p29",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:39:51"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p3",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:35:58"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p30",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:39:51"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p31",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:39:51"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p32",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:39:51"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p33",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:39:51"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p34",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:39:51"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p35",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:39:51"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p36",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:39:51"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p37",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:39:51"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p38",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:39:51"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p4",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:35:58"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p5",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:35:58"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p6",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:35:58"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p7",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:36:40"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p8",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:36:40"
+   "updated_at": "2026-11-04 19:22:43"
   },
   {
    "work_id": "bansan",
    "segment_id": "p9",
    "label": "house-checked",
    "who": "the house",
-   "updated_at": "2026-11-04 14:36:40"
+   "updated_at": "2026-11-04 19:22:43"
   }
  ],
  "event": [
@@ -4121,7 +4121,7 @@
    "type": "run.started",
    "payload": {
     "cap_usd": 3.0,
-    "estimate_usd": 1.34,
+    "estimate_usd": 1.23,
     "options": {
      "copy_model": "spark",
      "desk_model": "wonder",
@@ -4135,7 +4135,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:33:43"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 2,
@@ -4148,7 +4148,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:33:43"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 3,
@@ -4165,7 +4165,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:33:43"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 4,
@@ -4178,7 +4178,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:33:43"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 5,
@@ -4193,7 +4193,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:33:43"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 6,
@@ -4206,16 +4206,16 @@
     "effort": "low",
     "from_cache": true,
     "input_tokens": 2519,
-    "list_cost_usd": 0.007951,
+    "list_cost_usd": 0.007038,
     "model": "muse-spark-1.3",
-    "output_tokens": 1130,
+    "output_tokens": 915,
     "prompt": "parts",
-    "reasoning_tokens": 1056,
+    "reasoning_tokens": 839,
     "web_searches": 0
    },
    "cost_usd": 0.0,
    "call_id": 1,
-   "created_at": "2026-11-04 14:33:43"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 7,
@@ -4225,11 +4225,11 @@
    "type": "agent.say",
    "payload": {
     "prompt": "parts",
-    "say": "The book is kept as a single part beginning at p1."
+    "say": "The story is kept as a single part beginning at p1."
    },
    "cost_usd": 0.0,
    "call_id": 1,
-   "created_at": "2026-11-04 14:33:43"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 8,
@@ -4241,11 +4241,11 @@
     "starts": [
      "p1"
     ],
-    "why": "The 38-paragraph story totals only about 3,400 characters with no chapters or scene breaks, so the whole supper scene holds in one reading as a single part."
+    "why": "This 38-paragraph short story is a single continuous supper scene of about 3,400 characters with no chapters or major breaks, so it is best judged whole as one part."
    },
    "cost_usd": 0.0,
    "call_id": 1,
-   "created_at": "2026-11-04 14:33:43"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 9,
@@ -4261,7 +4261,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:33:43"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 10,
@@ -4274,7 +4274,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:33:43"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 11,
@@ -4289,7 +4289,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:33:43"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 12,
@@ -4300,7 +4300,7 @@
    "payload": {
     "cached_tokens": 0,
     "effort": "medium",
-    "from_cache": false,
+    "from_cache": true,
     "input_tokens": 5182,
     "list_cost_usd": 0.079148,
     "model": "muse-wonder-1.0",
@@ -4309,9 +4309,9 @@
     "reasoning_tokens": 858,
     "web_searches": 0
    },
-   "cost_usd": 0.079148,
+   "cost_usd": 0.0,
    "call_id": 2,
-   "created_at": "2026-11-04 14:34:23"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 13,
@@ -4325,7 +4325,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 2,
-   "created_at": "2026-11-04 14:34:23"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 14,
@@ -4345,7 +4345,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 2,
-   "created_at": "2026-11-04 14:34:23"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 15,
@@ -4354,12 +4354,12 @@
    "actor": "house",
    "type": "stage.done",
    "payload": {
-    "spent_usd": 0.07915,
+    "spent_usd": 0.0,
     "stage": "first-read"
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:34:23"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 16,
@@ -4372,7 +4372,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:34:23"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 17,
@@ -4387,7 +4387,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:34:23"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 18,
@@ -4400,16 +4400,16 @@
     "effort": "low",
     "from_cache": true,
     "input_tokens": 4125,
-    "list_cost_usd": 0.03882,
+    "list_cost_usd": 0.04036,
     "model": "muse-wonder-1.0",
-    "output_tokens": 1116,
+    "output_tokens": 1193,
     "prompt": "crux-check",
-    "reasoning_tokens": 427,
+    "reasoning_tokens": 433,
     "web_searches": 0
    },
    "cost_usd": 0.0,
    "call_id": 3,
-   "created_at": "2026-11-04 14:34:23"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 19,
@@ -4419,11 +4419,11 @@
    "type": "agent.say",
    "payload": {
     "prompt": "crux-check",
-    "say": "Confidence: high that these two, together, are where this text stands or falls; the temporal pivot is explicit in the three-years correction, and the lexical repetitions are pervasive rather than incidental.\nWhat would change my mind: evidence from Shizu's other work or from period usage that なつかしみ/許し/安らかさ carried a fixed religious meaning here, which would make a more doctrinal English rendering faithful rather than clarifying."
+    "say": "The translation stands or falls on keeping the mother's vision in p16–20 ambiguous and on letting repetition, not event, stretch three years into a lifetime."
    },
    "cost_usd": 0.0,
    "call_id": 3,
-   "created_at": "2026-11-04 14:34:23"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 20,
@@ -4438,7 +4438,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:34:23"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 21,
@@ -4449,18 +4449,18 @@
    "payload": {
     "cached_tokens": 0,
     "effort": "low",
-    "from_cache": false,
-    "input_tokens": 2803,
-    "list_cost_usd": 0.028732,
+    "from_cache": true,
+    "input_tokens": 2921,
+    "list_cost_usd": 0.026644,
     "model": "muse-wonder-1.0",
-    "output_tokens": 876,
+    "output_tokens": 748,
     "prompt": "head-select",
-    "reasoning_tokens": 656,
+    "reasoning_tokens": 423,
     "web_searches": 0
    },
-   "cost_usd": 0.028732,
+   "cost_usd": 0.0,
    "call_id": 4,
-   "created_at": "2026-11-04 14:34:32"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 22,
@@ -4470,11 +4470,11 @@
    "type": "agent.say",
    "payload": {
     "prompt": "head-select",
-    "say": "They name the same crux, so Option 0 stands as the house reading and no fork is opened."
+    "say": "Pick: Option 0.\n\nBoth readers name the same crux: the bad potato opens, without explanation, a view of the present supper from beyond a whole life, and the story depends on that expansion and its plain contraction to three years and tomorrow's work. Option 1's repetition and unbroken domestic surface are the mechanism of that movement, already described in Option 0's frame, recurrences, and diction of distance, not a separate crux. Option 0 therefore stands as the house reading because it holds trigger, vision, and return in the single movement by which the text stands or falls.\n\nHouse log: The two independent crux statements were judged to name the same movement, and Option 0 was adopted as the house reading."
    },
    "cost_usd": 0.0,
    "call_id": 4,
-   "created_at": "2026-11-04 14:34:32"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 23,
@@ -4490,32 +4490,32 @@
       "question": ""
      },
      "pick": 0,
-     "reason": "Option 0 and Option 1 name the same crux in different words: a frozen potato detaches the mother mid-supper, three years expand into an aged life seen from far off as forgiven and dear, and she returns unexplained to the table. Option 0 states that movement more completely, including its contraction to \"only three years,\" the unexalted return to work tomorrow, and the storm frame that closes on the bare last line, so it gives the desk more to translate against. Option 1 got the carrying mechanism exactly right — the incantatory repetitions and long, drifting sentences against the baby's broken noise — and that emphasis is consistent with, not rival to, Option 0's account.",
+     "reason": "Both readers name the same crux: the bad potato opens, without explanation, a view of the present supper from beyond a whole life, and the story depends on that expansion and its plain contraction to three years and tomorrow's work. Option 1's repetition and unbroken domestic surface are the mechanism of that movement, already described in Option 0's frame, recurrences, and diction of distance, not a separate crux. Option 0 therefore stands as the house reading because it holds trigger, vision, and return in the single movement by which the text stands or falls.",
      "same_or_different": "same",
-     "say": "They name the same crux, so Option 0 stands as the house reading and no fork is opened."
+     "say": "Pick: Option 0.\n\nBoth readers name the same crux: the bad potato opens, without explanation, a view of the present supper from beyond a whole life, and the story depends on that expansion and its plain contraction to three years and tomorrow's work. Option 1's repetition and unbroken domestic surface are the mechanism of that movement, already described in Option 0's frame, recurrences, and diction of distance, not a separate crux. Option 0 therefore stands as the house reading because it holds trigger, vision, and return in the single movement by which the text stands or falls.\n\nHouse log: The two independent crux statements were judged to name the same movement, and Option 0 was adopted as the house reading."
     },
     "same": true,
     "second": {
      "confidence": "high",
      "crux": [
       {
-       "for_the_english": "Do not clarify the vision into a daydream about old age, a religious consolation, or a resolution to endure. Keep its tense, distance and agency vague, its key words unvaried, and do not soften the nearness of that peace to death. The mother must be allowed to find the present already becoming sweet from an imagined afterwards, then to return without the story explaining her.",
-       "point": "The frozen, tasteless potato opens a temporal reversal: three years of married poverty feel like a whole aged life, yet seen from a far future they already look like a dear, forgiven dream.",
-       "why": "In p11-14 a badly cooked potato — hard, gritty, coldly flavourless — detaches the mother from supper. She recalls tears, want and sickness, feels suddenly old, then corrects herself: it has been only about three years. In p16-20 that detachment becomes the still picture of three people telling an endless story containing all good, evil, sorrow and anger, while simply smiling; everything will change into なつかしみ and 許し only once life has passed. Her silence at the table, and the husband twice asking why she is silent, is the action of the story."
+       "for_the_english": "Do not label it — not 'she imagined heaven', 'she dreamed', 'she thought of death'. Keep the modal, unresolved terms ('that day', 'would', 'seemed', 'as if'), let the vision arrive and recede unexplained, and keep it visually still rather than turning it into narrative action.",
+       "point": "The bad potato turns an ordinary supper into life seen from beyond its end, and that vision must stay unexplained.",
+       "why": "Nothing dramatic happens: in p11–13 the potato is inexplicably hard, 'frozen', tasteless, and its 'unconnected cold badness' detaches the young mother from the room. She feels suddenly old, remembers the three married years as if from far away — suffering already 'like a dream' (p13) — then sees, p16–18, three motionless figures in dim light telling an endless story in which good, evil, sorrow, anger and joy are all spoken of, yet wrapped only in 'nostalgia and forgiveness' and deep rest, 'like night'. In p20 she repeats the turn as certainty: 'that day exists', after long life, long sorrow. The story stands on this not being reduced to a cause: not simply fatigue, not a stated premonition of death, not religious consolation, not a daydream about old age. It is the present moment already viewed from after time has passed over it (p17: life will pass, and only on that passed day does everything change to nostalgia and forgiveness)."
       },
       {
-       "for_the_english": "Preserve the repeated words and the long, drifting periods in the interior passages, even where fluent English would vary, shorten or connect them. Keep plain words plain — quiet, far, smile, sorrow, suffering, dear/longed-for, forgiveness, peace — rather than ennobling them. Let noisy scene and motionless vision remain syntactically unlike.",
-       "point": "That reversal is carried by incantatory repetition and unbroken, drifting sentences set against the baby's noisy, abruptly broken supper scene.",
-       "why": "From p12 on, 静か, 遠い, 悲しみ, 苦しみ, なつかしみ, 許し and 安らかさ recur in long chains, often with little logical tightening; p20 and p28 repeat days, years and 'after' until time itself blurs. Around it the child bangs a spoon, shouts うまうま, is fed in haste (p5-9, p29-32), and dialogue is short. If the repetitions are treated as redundancy and the vision is made concise and lyrical, its trance — and the mother's absence from the room — disappears."
+       "for_the_english": "Resist rationalisation, expansion and synonym-variation (Berman's tidyings). Keep long cumulative sentences where the Japanese accumulates, repeat the same English words for the same Japanese ones — quiet, lonely, far, rest/peace, nostalgic/dear, smile, dream — even where elegant English would vary them, and keep dialogue plain and slightly unfinished ('It's only been... hasn't it', 'just a little longer').",
+       "point": "The incantatory repetition and unbroken domestic surface are how three years become a lifetime; varied, tightened prose would make the vision an inserted purple passage instead of a change of distance.",
+       "why": "The text works by recurrence, not event: storm heard at start, forgotten in the child's noise (p8, p19, p38), people repeatedly 'young' yet exhausted (p2–3 against p13–14: barely three years, yet she feels wholly aged), words circling — 静か, 淋しい, 遠い, 安らかさ, なつかしみ, 許し, 微笑, 夢 — across both the noisy supper and the silent vision, so the vision feels like the same room seen from far off rather than another world. Sentences also drift: dropped subjects, tense loosening, だろう / やうだ speculation, and dialogue that resolves nothing except 'let us work', 'clear up', 'get up early tomorrow' (p34–36)."
       }
      ],
-     "say": "Confidence: high that these two, together, are where this text stands or falls; the temporal pivot is explicit in the three-years correction, and the lexical repetitions are pervasive rather than incidental.\nWhat would change my mind: evidence from Shizu's other work or from period usage that なつかしみ/許し/安らかさ carried a fixed religious meaning here, which would make a more doctrinal English rendering faithful rather than clarifying.",
-     "what_would_change_my_mind": "evidence from Shizu's other work or from period usage that なつかしみ/許し/安らかさ carried a fixed religious meaning here, which would make a more doctrinal English rendering faithful rather than clarifying."
+     "say": "The translation stands or falls on keeping the mother's vision in p16–20 ambiguous and on letting repetition, not event, stretch three years into a lifetime.",
+     "what_would_change_my_mind": "Evidence from elsewhere in Shiraki's work or contemporary reception that the 'day' is a specific, named doctrine (e.g. an explicit Christian afterlife or Buddhist rite she elsewhere names) would justify one clarifying note; nothing in this text names it, so any such label here would be invention."
     }
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:34:32"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 24,
@@ -4524,12 +4524,12 @@
    "actor": "house",
    "type": "stage.done",
    "payload": {
-    "spent_usd": 0.02873,
+    "spent_usd": 0.0,
     "stage": "crux-check"
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:34:32"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 25,
@@ -4542,7 +4542,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:34:32"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 26,
@@ -4557,7 +4557,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:34:32"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 27,
@@ -4568,7 +4568,7 @@
    "payload": {
     "cached_tokens": 0,
     "effort": "medium",
-    "from_cache": false,
+    "from_cache": true,
     "input_tokens": 6852,
     "list_cost_usd": 0.041587,
     "model": "muse-spark-1.3",
@@ -4577,9 +4577,9 @@
     "reasoning_tokens": 2927,
     "web_searches": 0
    },
-   "cost_usd": 0.0415875,
+   "cost_usd": 0.0,
    "call_id": 5,
-   "created_at": "2026-11-04 14:35:37"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 28,
@@ -4593,7 +4593,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 5,
-   "created_at": "2026-11-04 14:35:37"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 29,
@@ -4608,7 +4608,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 5,
-   "created_at": "2026-11-04 14:35:37"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 30,
@@ -4619,12 +4619,12 @@
    "payload": {
     "cast": 4,
     "motifs": 10,
-    "spent_usd": 0.04159,
+    "spent_usd": 0.0,
     "stage": "bible"
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:35:37"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 31,
@@ -4637,7 +4637,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:35:37"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 32,
@@ -4652,7 +4652,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:35:37"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 33,
@@ -4665,7 +4665,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:35:37"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 34,
@@ -4729,7 +4729,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:35:37"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 35,
@@ -4744,7 +4744,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:35:37"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 36,
@@ -4755,7 +4755,7 @@
    "payload": {
     "cached_tokens": 0,
     "effort": "medium",
-    "from_cache": false,
+    "from_cache": true,
     "input_tokens": 9875,
     "list_cost_usd": 0.022344,
     "model": "muse-spark-1.3",
@@ -4764,9 +4764,9 @@
     "reasoning_tokens": 1825,
     "web_searches": 0
    },
-   "cost_usd": 0.022344,
+   "cost_usd": 0.0,
    "call_id": 6,
-   "created_at": "2026-11-04 14:35:58"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 37,
@@ -4780,7 +4780,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 6,
-   "created_at": "2026-11-04 14:35:58"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 38,
@@ -4799,7 +4799,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 6,
-   "created_at": "2026-11-04 14:35:58"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 39,
@@ -4820,7 +4820,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 6,
-   "created_at": "2026-11-04 14:35:58"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 40,
@@ -4839,7 +4839,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 6,
-   "created_at": "2026-11-04 14:35:58"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 41,
@@ -4860,7 +4860,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 6,
-   "created_at": "2026-11-04 14:35:58"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 42,
@@ -4881,7 +4881,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 6,
-   "created_at": "2026-11-04 14:35:58"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 43,
@@ -4900,7 +4900,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 6,
-   "created_at": "2026-11-04 14:35:58"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 44,
@@ -4915,7 +4915,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:35:58"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 45,
@@ -4926,7 +4926,7 @@
    "payload": {
     "cached_tokens": 0,
     "effort": "medium",
-    "from_cache": false,
+    "from_cache": true,
     "input_tokens": 10568,
     "list_cost_usd": 0.02993,
     "model": "muse-spark-1.3",
@@ -4935,9 +4935,9 @@
     "reasoning_tokens": 3367,
     "web_searches": 0
    },
-   "cost_usd": 0.0299295,
+   "cost_usd": 0.0,
    "call_id": 7,
-   "created_at": "2026-11-04 14:36:40"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 46,
@@ -4951,7 +4951,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 7,
-   "created_at": "2026-11-04 14:36:40"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 47,
@@ -4972,7 +4972,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 7,
-   "created_at": "2026-11-04 14:36:40"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 48,
@@ -4993,7 +4993,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 7,
-   "created_at": "2026-11-04 14:36:40"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 49,
@@ -5012,7 +5012,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 7,
-   "created_at": "2026-11-04 14:36:40"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 50,
@@ -5027,7 +5027,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:36:40"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 51,
@@ -5038,7 +5038,7 @@
    "payload": {
     "cached_tokens": 0,
     "effort": "medium",
-    "from_cache": false,
+    "from_cache": true,
     "input_tokens": 11052,
     "list_cost_usd": 0.024716,
     "model": "muse-spark-1.3",
@@ -5047,9 +5047,9 @@
     "reasoning_tokens": 1937,
     "web_searches": 0
    },
-   "cost_usd": 0.02471625,
+   "cost_usd": 0.0,
    "call_id": 8,
-   "created_at": "2026-11-04 14:37:08"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 52,
@@ -5063,7 +5063,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 8,
-   "created_at": "2026-11-04 14:37:08"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 53,
@@ -5082,7 +5082,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 8,
-   "created_at": "2026-11-04 14:37:08"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 54,
@@ -5103,7 +5103,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 8,
-   "created_at": "2026-11-04 14:37:08"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 55,
@@ -5124,7 +5124,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 8,
-   "created_at": "2026-11-04 14:37:08"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 56,
@@ -5145,7 +5145,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 8,
-   "created_at": "2026-11-04 14:37:08"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 57,
@@ -5164,7 +5164,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 8,
-   "created_at": "2026-11-04 14:37:08"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 58,
@@ -5185,7 +5185,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 8,
-   "created_at": "2026-11-04 14:37:08"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 59,
@@ -5200,7 +5200,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:37:08"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 60,
@@ -5211,7 +5211,7 @@
    "payload": {
     "cached_tokens": 9585,
     "effort": "medium",
-    "from_cache": false,
+    "from_cache": true,
     "input_tokens": 10301,
     "list_cost_usd": 0.022193,
     "model": "muse-spark-1.3",
@@ -5220,9 +5220,9 @@
     "reasoning_tokens": 4190,
     "web_searches": 0
    },
-   "cost_usd": 0.022193,
+   "cost_usd": 0.0,
    "call_id": 9,
-   "created_at": "2026-11-04 14:37:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 61,
@@ -5243,7 +5243,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 9,
-   "created_at": "2026-11-04 14:37:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 62,
@@ -5264,7 +5264,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 9,
-   "created_at": "2026-11-04 14:37:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 63,
@@ -5285,7 +5285,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 9,
-   "created_at": "2026-11-04 14:37:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 64,
@@ -5300,7 +5300,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:37:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 65,
@@ -5311,7 +5311,7 @@
    "payload": {
     "cached_tokens": 9585,
     "effort": "medium",
-    "from_cache": false,
+    "from_cache": true,
     "input_tokens": 10481,
     "list_cost_usd": 0.029932,
     "model": "muse-spark-1.3",
@@ -5320,9 +5320,9 @@
     "reasoning_tokens": 5831,
     "web_searches": 0
    },
-   "cost_usd": 0.029932,
+   "cost_usd": 0.0,
    "call_id": 10,
-   "created_at": "2026-11-04 14:39:05"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 66,
@@ -5336,7 +5336,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 10,
-   "created_at": "2026-11-04 14:39:05"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 67,
@@ -5357,7 +5357,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 10,
-   "created_at": "2026-11-04 14:39:05"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 68,
@@ -5378,7 +5378,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 10,
-   "created_at": "2026-11-04 14:39:05"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 69,
@@ -5401,7 +5401,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 10,
-   "created_at": "2026-11-04 14:39:05"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 70,
@@ -5420,7 +5420,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 10,
-   "created_at": "2026-11-04 14:39:05"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 71,
@@ -5441,7 +5441,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 10,
-   "created_at": "2026-11-04 14:39:05"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 72,
@@ -5463,7 +5463,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 10,
-   "created_at": "2026-11-04 14:39:05"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 73,
@@ -5478,7 +5478,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:39:05"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 74,
@@ -5489,7 +5489,7 @@
    "payload": {
     "cached_tokens": 9585,
     "effort": "medium",
-    "from_cache": false,
+    "from_cache": true,
     "input_tokens": 10234,
     "list_cost_usd": 0.018947,
     "model": "muse-spark-1.3",
@@ -5498,9 +5498,9 @@
     "reasoning_tokens": 3354,
     "web_searches": 0
    },
-   "cost_usd": 0.01894725,
+   "cost_usd": 0.0,
    "call_id": 11,
-   "created_at": "2026-11-04 14:39:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 75,
@@ -5514,7 +5514,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 11,
-   "created_at": "2026-11-04 14:39:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 76,
@@ -5535,7 +5535,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 11,
-   "created_at": "2026-11-04 14:39:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 77,
@@ -5558,7 +5558,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 11,
-   "created_at": "2026-11-04 14:39:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 78,
@@ -5577,7 +5577,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 11,
-   "created_at": "2026-11-04 14:39:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 79,
@@ -5596,7 +5596,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 11,
-   "created_at": "2026-11-04 14:39:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 80,
@@ -5615,7 +5615,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 11,
-   "created_at": "2026-11-04 14:39:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 81,
@@ -5636,7 +5636,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 11,
-   "created_at": "2026-11-04 14:39:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 82,
@@ -5655,7 +5655,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 11,
-   "created_at": "2026-11-04 14:39:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 83,
@@ -5674,7 +5674,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 11,
-   "created_at": "2026-11-04 14:39:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 84,
@@ -5695,7 +5695,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 11,
-   "created_at": "2026-11-04 14:39:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 85,
@@ -5707,12 +5707,12 @@
     "drafted": 6,
     "model": "muse-spark-1.3",
     "pages": 6,
-    "spent_usd": 0.14806,
+    "spent_usd": 0.0,
     "stage": "draft"
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:39:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 86,
@@ -5725,7 +5725,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:39:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 87,
@@ -5740,7 +5740,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:39:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 88,
@@ -5751,7 +5751,7 @@
    "payload": {
     "cached_tokens": 0,
     "effort": "medium",
-    "from_cache": false,
+    "from_cache": true,
     "input_tokens": 14118,
     "list_cost_usd": 0.059042,
     "model": "muse-spark-1.3",
@@ -5760,9 +5760,9 @@
     "reasoning_tokens": 8215,
     "web_searches": 0
    },
-   "cost_usd": 0.0590425,
+   "cost_usd": 0.0,
    "call_id": 12,
-   "created_at": "2026-11-04 14:41:15"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 89,
@@ -5776,12 +5776,63 @@
    },
    "cost_usd": 0.0,
    "call_id": 12,
-   "created_at": "2026-11-04 14:41:15"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 90,
    "run_id": 1,
    "seq": 90,
+   "actor": "reader/readable",
+   "type": "call.started",
+   "payload": {
+    "effort": "medium",
+    "model": "muse-spark-1.3",
+    "prompt": "reader-readable"
+   },
+   "cost_usd": 0.0,
+   "call_id": null,
+   "created_at": "2026-11-04 19:22:43"
+  },
+  {
+   "id": 91,
+   "run_id": 1,
+   "seq": 91,
+   "actor": "reader/readable",
+   "type": "call.done",
+   "payload": {
+    "cached_tokens": 0,
+    "effort": "medium",
+    "from_cache": true,
+    "input_tokens": 13277,
+    "list_cost_usd": 0.057171,
+    "model": "muse-spark-1.3",
+    "output_tokens": 9547,
+    "prompt": "reader-readable",
+    "reasoning_tokens": 6943,
+    "web_searches": 0
+   },
+   "cost_usd": 0.0,
+   "call_id": 13,
+   "created_at": "2026-11-04 19:22:43"
+  },
+  {
+   "id": 92,
+   "run_id": 1,
+   "seq": 92,
+   "actor": "reader/readable",
+   "type": "agent.say",
+   "payload": {
+    "prompt": "reader-readable",
+    "say": "The supper bustle reads warmly but pronouns, adjective order and three vision sentences stop belief; nineteen notes for the desk."
+   },
+   "cost_usd": 0.0,
+   "call_id": 13,
+   "created_at": "2026-11-04 19:22:43"
+  },
+  {
+   "id": 93,
+   "run_id": 1,
+   "seq": 93,
    "actor": "reader/faithful",
    "type": "query.raised",
    "payload": {
@@ -5797,12 +5848,12 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:41:15"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
-   "id": 91,
+   "id": 94,
    "run_id": 1,
-   "seq": 91,
+   "seq": 94,
    "actor": "reader/faithful",
    "type": "query.raised",
    "payload": {
@@ -5818,12 +5869,12 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:41:15"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
-   "id": 92,
+   "id": 95,
    "run_id": 1,
-   "seq": 92,
+   "seq": 95,
    "actor": "reader/faithful",
    "type": "query.raised",
    "payload": {
@@ -5839,12 +5890,12 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:41:15"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
-   "id": 93,
+   "id": 96,
    "run_id": 1,
-   "seq": 93,
+   "seq": 96,
    "actor": "reader/faithful",
    "type": "query.raised",
    "payload": {
@@ -5860,12 +5911,12 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:41:15"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
-   "id": 94,
+   "id": 97,
    "run_id": 1,
-   "seq": 94,
+   "seq": 97,
    "actor": "reader/faithful",
    "type": "query.raised",
    "payload": {
@@ -5881,12 +5932,12 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:41:15"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
-   "id": 95,
+   "id": 98,
    "run_id": 1,
-   "seq": 95,
+   "seq": 98,
    "actor": "reader/faithful",
    "type": "query.raised",
    "payload": {
@@ -5902,12 +5953,12 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:41:15"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
-   "id": 96,
+   "id": 99,
    "run_id": 1,
-   "seq": 96,
+   "seq": 99,
    "actor": "reader/faithful",
    "type": "query.raised",
    "payload": {
@@ -5923,12 +5974,12 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:41:15"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
-   "id": 97,
+   "id": 100,
    "run_id": 1,
-   "seq": 97,
+   "seq": 100,
    "actor": "reader/faithful",
    "type": "query.raised",
    "payload": {
@@ -5944,12 +5995,12 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:41:15"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
-   "id": 98,
+   "id": 101,
    "run_id": 1,
-   "seq": 98,
+   "seq": 101,
    "actor": "reader/faithful",
    "type": "query.raised",
    "payload": {
@@ -5965,12 +6016,12 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:41:15"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
-   "id": 99,
+   "id": 102,
    "run_id": 1,
-   "seq": 99,
+   "seq": 102,
    "actor": "reader/faithful",
    "type": "query.raised",
    "payload": {
@@ -5986,12 +6037,12 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:41:15"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
-   "id": 100,
+   "id": 103,
    "run_id": 1,
-   "seq": 100,
+   "seq": 103,
    "actor": "reader/faithful",
    "type": "query.raised",
    "payload": {
@@ -6007,12 +6058,12 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:41:15"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
-   "id": 101,
+   "id": 104,
    "run_id": 1,
-   "seq": 101,
+   "seq": 104,
    "actor": "reader/faithful",
    "type": "chapter.read",
    "payload": {
@@ -6061,58 +6112,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 12,
-   "created_at": "2026-11-04 14:41:15"
-  },
-  {
-   "id": 102,
-   "run_id": 1,
-   "seq": 102,
-   "actor": "reader/readable",
-   "type": "call.started",
-   "payload": {
-    "effort": "medium",
-    "model": "muse-spark-1.3",
-    "prompt": "reader-readable"
-   },
-   "cost_usd": 0.0,
-   "call_id": null,
-   "created_at": "2026-11-04 14:41:15"
-  },
-  {
-   "id": 103,
-   "run_id": 1,
-   "seq": 103,
-   "actor": "reader/readable",
-   "type": "call.done",
-   "payload": {
-    "cached_tokens": 0,
-    "effort": "medium",
-    "from_cache": false,
-    "input_tokens": 13277,
-    "list_cost_usd": 0.057171,
-    "model": "muse-spark-1.3",
-    "output_tokens": 9547,
-    "prompt": "reader-readable",
-    "reasoning_tokens": 6943,
-    "web_searches": 0
-   },
-   "cost_usd": 0.057171,
-   "call_id": 13,
-   "created_at": "2026-11-04 14:43:03"
-  },
-  {
-   "id": 104,
-   "run_id": 1,
-   "seq": 104,
-   "actor": "reader/readable",
-   "type": "agent.say",
-   "payload": {
-    "prompt": "reader-readable",
-    "say": "The supper bustle reads warmly but pronouns, adjective order and three vision sentences stop belief; nineteen notes for the desk."
-   },
-   "cost_usd": 0.0,
-   "call_id": 13,
-   "created_at": "2026-11-04 14:43:03"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 105,
@@ -6133,7 +6133,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:03"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 106,
@@ -6154,7 +6154,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:03"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 107,
@@ -6175,7 +6175,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:03"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 108,
@@ -6196,7 +6196,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:03"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 109,
@@ -6217,7 +6217,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:03"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 110,
@@ -6238,7 +6238,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:03"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 111,
@@ -6259,7 +6259,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:03"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 112,
@@ -6280,7 +6280,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:03"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 113,
@@ -6301,7 +6301,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:03"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 114,
@@ -6322,7 +6322,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:03"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 115,
@@ -6343,7 +6343,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:03"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 116,
@@ -6364,7 +6364,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:03"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 117,
@@ -6385,7 +6385,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:03"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 118,
@@ -6406,7 +6406,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:03"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 119,
@@ -6427,7 +6427,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:03"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 120,
@@ -6448,7 +6448,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:03"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 121,
@@ -6469,7 +6469,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:03"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 122,
@@ -6490,7 +6490,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:03"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 123,
@@ -6511,7 +6511,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:03"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 124,
@@ -6565,7 +6565,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 13,
-   "created_at": "2026-11-04 14:43:03"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 125,
@@ -6578,12 +6578,12 @@
     "faithful": 11,
     "model": "muse-spark-1.3",
     "readable": 19,
-    "spent_usd": 0.11621,
+    "spent_usd": 0.0,
     "stage": "readers"
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:03"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 126,
@@ -6596,7 +6596,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:03"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 127,
@@ -6611,7 +6611,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:03"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 128,
@@ -6622,7 +6622,7 @@
    "payload": {
     "cached_tokens": 0,
     "effort": "medium",
-    "from_cache": false,
+    "from_cache": true,
     "input_tokens": 19558,
     "list_cost_usd": 0.141752,
     "model": "muse-wonder-1.0",
@@ -6631,9 +6631,9 @@
     "reasoning_tokens": 1954,
     "web_searches": 0
    },
-   "cost_usd": 0.141752,
+   "cost_usd": 0.0,
    "call_id": 14,
-   "created_at": "2026-11-04 14:43:29"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 129,
@@ -6648,7 +6648,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:29"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 130,
@@ -6659,7 +6659,7 @@
    "payload": {
     "cached_tokens": 19444,
     "effort": "medium",
-    "from_cache": false,
+    "from_cache": true,
     "input_tokens": 20943,
     "list_cost_usd": 0.012465,
     "model": "muse-wonder-1.0",
@@ -6668,9 +6668,9 @@
     "reasoning_tokens": 0,
     "web_searches": 0
    },
-   "cost_usd": 0.0124648,
+   "cost_usd": 0.0,
    "call_id": 15,
-   "created_at": "2026-11-04 14:43:31"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 131,
@@ -6685,7 +6685,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:31"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 132,
@@ -6696,7 +6696,7 @@
    "payload": {
     "cached_tokens": 20852,
     "effort": "medium",
-    "from_cache": false,
+    "from_cache": true,
     "input_tokens": 21101,
     "list_cost_usd": 0.009066,
     "model": "muse-wonder-1.0",
@@ -6705,9 +6705,9 @@
     "reasoning_tokens": 0,
     "web_searches": 0
    },
-   "cost_usd": 0.009066400000000002,
+   "cost_usd": 0.0,
    "call_id": 16,
-   "created_at": "2026-11-04 14:43:33"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 133,
@@ -6722,7 +6722,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:33"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 134,
@@ -6733,7 +6733,7 @@
    "payload": {
     "cached_tokens": 20980,
     "effort": "medium",
-    "from_cache": false,
+    "from_cache": true,
     "input_tokens": 21325,
     "list_cost_usd": 0.008496,
     "model": "muse-wonder-1.0",
@@ -6742,9 +6742,9 @@
     "reasoning_tokens": 0,
     "web_searches": 0
    },
-   "cost_usd": 0.008496,
+   "cost_usd": 0.0,
    "call_id": 17,
-   "created_at": "2026-11-04 14:43:34"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 135,
@@ -6759,7 +6759,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:34"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 136,
@@ -6770,7 +6770,7 @@
    "payload": {
     "cached_tokens": 21236,
     "effort": "medium",
-    "from_cache": false,
+    "from_cache": true,
     "input_tokens": 21500,
     "list_cost_usd": 0.008263,
     "model": "muse-wonder-1.0",
@@ -6779,9 +6779,9 @@
     "reasoning_tokens": 0,
     "web_searches": 0
    },
-   "cost_usd": 0.0082632,
+   "cost_usd": 0.0,
    "call_id": 18,
-   "created_at": "2026-11-04 14:43:36"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 137,
@@ -6796,7 +6796,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:36"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 138,
@@ -6807,7 +6807,7 @@
    "payload": {
     "cached_tokens": 21492,
     "effort": "medium",
-    "from_cache": false,
+    "from_cache": true,
     "input_tokens": 21677,
     "list_cost_usd": 0.007538,
     "model": "muse-wonder-1.0",
@@ -6816,9 +6816,9 @@
     "reasoning_tokens": 0,
     "web_searches": 0
    },
-   "cost_usd": 0.007538400000000001,
+   "cost_usd": 0.0,
    "call_id": 19,
-   "created_at": "2026-11-04 14:43:38"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 139,
@@ -6833,7 +6833,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:38"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 140,
@@ -6844,7 +6844,7 @@
    "payload": {
     "cached_tokens": 21620,
     "effort": "medium",
-    "from_cache": false,
+    "from_cache": true,
     "input_tokens": 21831,
     "list_cost_usd": 0.008368,
     "model": "muse-wonder-1.0",
@@ -6853,9 +6853,9 @@
     "reasoning_tokens": 0,
     "web_searches": 0
    },
-   "cost_usd": 0.008368,
+   "cost_usd": 0.0,
    "call_id": 20,
-   "created_at": "2026-11-04 14:43:40"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 141,
@@ -6870,7 +6870,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:40"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 142,
@@ -6881,7 +6881,7 @@
    "payload": {
     "cached_tokens": 21748,
     "effort": "medium",
-    "from_cache": false,
+    "from_cache": true,
     "input_tokens": 22020,
     "list_cost_usd": 0.052678,
     "model": "muse-wonder-1.0",
@@ -6890,9 +6890,9 @@
     "reasoning_tokens": 1243,
     "web_searches": 0
    },
-   "cost_usd": 0.0526776,
+   "cost_usd": 0.0,
    "call_id": 21,
-   "created_at": "2026-11-04 14:43:58"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 143,
@@ -6907,7 +6907,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:43:58"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 144,
@@ -6918,7 +6918,7 @@
    "payload": {
     "cached_tokens": 22004,
     "effort": "medium",
-    "from_cache": false,
+    "from_cache": true,
     "input_tokens": 23291,
     "list_cost_usd": 0.040129,
     "model": "muse-wonder-1.0",
@@ -6927,9 +6927,9 @@
     "reasoning_tokens": 711,
     "web_searches": 0
    },
-   "cost_usd": 0.040128800000000006,
+   "cost_usd": 0.0,
    "call_id": 22,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 145,
@@ -6943,7 +6943,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 22,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 146,
@@ -6970,7 +6970,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 147,
@@ -6987,7 +6987,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 148,
@@ -7004,7 +7004,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 149,
@@ -7031,7 +7031,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 150,
@@ -7048,7 +7048,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 151,
@@ -7065,7 +7065,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 152,
@@ -7091,7 +7091,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 153,
@@ -7108,7 +7108,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 154,
@@ -7136,7 +7136,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 155,
@@ -7153,7 +7153,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 156,
@@ -7170,7 +7170,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 157,
@@ -7187,7 +7187,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 158,
@@ -7213,7 +7213,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 159,
@@ -7230,7 +7230,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 160,
@@ -7256,7 +7256,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 161,
@@ -7273,7 +7273,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 162,
@@ -7299,7 +7299,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 163,
@@ -7316,7 +7316,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 164,
@@ -7343,7 +7343,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 165,
@@ -7360,7 +7360,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 166,
@@ -7377,7 +7377,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 167,
@@ -7403,7 +7403,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 168,
@@ -7420,7 +7420,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 169,
@@ -7447,7 +7447,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 170,
@@ -7464,7 +7464,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 171,
@@ -7481,7 +7481,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 172,
@@ -7507,7 +7507,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 173,
@@ -7524,7 +7524,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 174,
@@ -7552,7 +7552,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 175,
@@ -7569,7 +7569,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 176,
@@ -7600,7 +7600,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 177,
@@ -7617,7 +7617,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 178,
@@ -7634,7 +7634,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 179,
@@ -7660,7 +7660,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 180,
@@ -7677,7 +7677,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 181,
@@ -7704,7 +7704,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 182,
@@ -7721,7 +7721,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 183,
@@ -7738,7 +7738,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 184,
@@ -7754,7 +7754,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 185,
@@ -7770,7 +7770,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 186,
@@ -7786,7 +7786,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 187,
@@ -7802,7 +7802,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 188,
@@ -7818,7 +7818,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 189,
@@ -7834,7 +7834,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 190,
@@ -7855,7 +7855,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 22,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 191,
@@ -7876,7 +7876,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 22,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 192,
@@ -7897,7 +7897,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 22,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 193,
@@ -7913,7 +7913,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 194,
@@ -7927,7 +7927,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 195,
@@ -7982,7 +7982,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 22,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 196,
@@ -8001,7 +8001,7 @@
     "model": "muse-wonder-1.0",
     "refused": 0,
     "skipped": 0,
-    "spent_usd": 0.28876,
+    "spent_usd": 0.0,
     "stage": "desk",
     "taken": 23,
     "taken_back": 0,
@@ -8010,7 +8010,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 197,
@@ -8023,7 +8023,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 198,
@@ -8038,7 +8038,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 199,
@@ -8049,7 +8049,7 @@
    "payload": {
     "cached_tokens": 0,
     "effort": "medium",
-    "from_cache": false,
+    "from_cache": true,
     "input_tokens": 13685,
     "list_cost_usd": 0.12408,
     "model": "muse-wonder-1.0",
@@ -8058,9 +8058,9 @@
     "reasoning_tokens": 3321,
     "web_searches": 0
    },
-   "cost_usd": 0.12408,
+   "cost_usd": 0.0,
    "call_id": 23,
-   "created_at": "2026-11-04 14:44:41"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 200,
@@ -8075,7 +8075,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:44:41"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 201,
@@ -8086,7 +8086,7 @@
    "payload": {
     "cached_tokens": 13684,
     "effort": "medium",
-    "from_cache": false,
+    "from_cache": true,
     "input_tokens": 13831,
     "list_cost_usd": 0.052805,
     "model": "muse-wonder-1.0",
@@ -8095,9 +8095,9 @@
     "reasoning_tokens": 2374,
     "web_searches": 0
    },
-   "cost_usd": 0.052804800000000006,
+   "cost_usd": 0.0,
    "call_id": 24,
-   "created_at": "2026-11-04 14:45:04"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 202,
@@ -8111,7 +8111,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 24,
-   "created_at": "2026-11-04 14:45:04"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 203,
@@ -8133,7 +8133,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:45:04"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 204,
@@ -8188,7 +8188,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 24,
-   "created_at": "2026-11-04 14:45:04"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 205,
@@ -8202,12 +8202,12 @@
     "model": "muse-wonder-1.0",
     "notes": 0,
     "refused": 0,
-    "spent_usd": 0.17688,
+    "spent_usd": 0.0,
     "stage": "final-read"
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:45:04"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 206,
@@ -8220,7 +8220,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:45:04"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 207,
@@ -8235,7 +8235,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:45:04"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 208,
@@ -8247,17 +8247,17 @@
     "cached_tokens": 0,
     "effort": "low",
     "from_cache": false,
-    "input_tokens": 7944,
-    "list_cost_usd": 0.014835,
+    "input_tokens": 7999,
+    "list_cost_usd": 0.016314,
     "model": "muse-spark-1.3",
-    "output_tokens": 1154,
+    "output_tokens": 1486,
     "prompt": "copy-desk",
-    "reasoning_tokens": 1087,
+    "reasoning_tokens": 1396,
     "web_searches": 0
    },
-   "cost_usd": 0.0148345,
+   "cost_usd": 0.01631425,
    "call_id": 25,
-   "created_at": "2026-11-04 14:45:20"
+   "created_at": "2026-11-04 19:22:59"
   },
   {
    "id": 209,
@@ -8267,11 +8267,11 @@
    "type": "agent.say",
    "payload": {
     "prompt": "copy-desk",
-    "say": "No edits made — the text is already consistent."
+    "say": "No changes needed — the text is already consistent, so I left it as it stands."
    },
    "cost_usd": 0.0,
    "call_id": 25,
-   "created_at": "2026-11-04 14:45:20"
+   "created_at": "2026-11-04 19:22:59"
   },
   {
    "id": 210,
@@ -8282,12 +8282,12 @@
    "payload": {
     "edited": 0,
     "readings": 0,
-    "summary": "Checked names, terms, spelling and style and made no changes; left Bōya, man/father and mother/woman variation, plate descriptions and British spellings as deliberate per the bible.",
+    "summary": "Checked names, terms, Bōya form, storm/smile repetitions and British styling; found no variant spellings or misread names to unify and left deliberate variations (man/father/husband, pot/blue pot, wind-and-rain/storm) alone.",
     "variants": 0
    },
    "cost_usd": 0.0,
    "call_id": 25,
-   "created_at": "2026-11-04 14:45:20"
+   "created_at": "2026-11-04 19:22:59"
   },
   {
    "id": 211,
@@ -8301,12 +8301,12 @@
     "model": "muse-spark-1.3",
     "queries": 0,
     "refused": 0,
-    "spent_usd": 0.01483,
+    "spent_usd": 0.01631,
     "stage": "copy-desk"
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:45:20"
+   "created_at": "2026-11-04 19:22:59"
   },
   {
    "id": 212,
@@ -8319,7 +8319,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:45:20"
+   "created_at": "2026-11-04 19:22:59"
   },
   {
    "id": 213,
@@ -8334,7 +8334,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:45:20"
+   "created_at": "2026-11-04 19:22:59"
   },
   {
    "id": 214,
@@ -8345,7 +8345,7 @@
    "payload": {
     "cached_tokens": 0,
     "effort": "low",
-    "from_cache": false,
+    "from_cache": true,
     "input_tokens": 16327,
     "list_cost_usd": 0.030086,
     "model": "muse-spark-1.3",
@@ -8354,9 +8354,9 @@
     "reasoning_tokens": 1976,
     "web_searches": 0
    },
-   "cost_usd": 0.030086,
+   "cost_usd": 0.0,
    "call_id": 26,
-   "created_at": "2026-11-04 14:45:50"
+   "created_at": "2026-11-04 19:22:59"
   },
   {
    "id": 215,
@@ -8370,7 +8370,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 26,
-   "created_at": "2026-11-04 14:45:50"
+   "created_at": "2026-11-04 19:22:59"
   },
   {
    "id": 216,
@@ -8394,7 +8394,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 26,
-   "created_at": "2026-11-04 14:45:50"
+   "created_at": "2026-11-04 19:22:59"
   },
   {
    "id": 217,
@@ -8417,7 +8417,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 26,
-   "created_at": "2026-11-04 14:45:50"
+   "created_at": "2026-11-04 19:22:59"
   },
   {
    "id": 218,
@@ -8440,7 +8440,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 26,
-   "created_at": "2026-11-04 14:45:50"
+   "created_at": "2026-11-04 19:22:59"
   },
   {
    "id": 219,
@@ -8463,7 +8463,7 @@
    },
    "cost_usd": 0.0,
    "call_id": 26,
-   "created_at": "2026-11-04 14:45:50"
+   "created_at": "2026-11-04 19:22:59"
   },
   {
    "id": 220,
@@ -8473,12 +8473,12 @@
    "type": "stage.done",
    "payload": {
     "notes": 4,
-    "spent_usd": 0.03009,
+    "spent_usd": 0.0,
     "stage": "notes"
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:45:50"
+   "created_at": "2026-11-04 19:22:59"
   },
   {
    "id": 221,
@@ -8491,7 +8491,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:45:50"
+   "created_at": "2026-11-04 19:22:59"
   },
   {
    "id": 222,
@@ -8508,7 +8508,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:45:50"
+   "created_at": "2026-11-04 19:22:59"
   },
   {
    "id": 223,
@@ -8524,7 +8524,7 @@
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:45:50"
+   "created_at": "2026-11-04 19:22:59"
   },
   {
    "id": 224,
@@ -8534,11 +8534,11 @@
    "type": "run.done",
    "payload": {
     "after": "release",
-    "spent_usd": 0.9243
+    "spent_usd": 0.01631
    },
    "cost_usd": 0.0,
    "call_id": null,
-   "created_at": "2026-11-04 14:45:50"
+   "created_at": "2026-11-04 19:22:59"
   }
  ],
  "call": [
@@ -8551,21 +8551,21 @@
    "effort": "low",
    "input_tokens": 2519,
    "cached_tokens": 0,
-   "output_tokens": 1130,
-   "reasoning_tokens": 1056,
+   "output_tokens": 915,
+   "reasoning_tokens": 839,
    "web_searches": 0,
    "cost_usd": 0.0,
-   "list_cost_usd": 0.00795125,
+   "list_cost_usd": 0.0070375,
    "from_cache": 1,
    "prompt_hash": "ee2af906357f1d72ed1bb77735652265715236db9ca0827ea6609127a27ddab5",
    "input_hash": "0ecd745a9d4d48c5fdaadbdb2c21190d7276fad5e10b41ff9f667a43fb730b69",
    "cache_key": "bansan:parts",
    "response_key": "2e27fa134862dd2fadd174aa989254dc3aa32b3e541a77562dd854606023d984",
-   "response_id": "resp_6ae9ca89971361f0787443b8",
-   "latency_s": 8.1,
+   "response_id": "resp_6aeb4559276757fc9a264964",
+   "latency_s": 8.86,
    "ok": 1,
    "error": null,
-   "created_at": "2026-11-04 14:33:43"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 2,
@@ -8579,9 +8579,9 @@
    "output_tokens": 2921,
    "reasoning_tokens": 858,
    "web_searches": 0,
-   "cost_usd": 0.079148,
+   "cost_usd": 0.0,
    "list_cost_usd": 0.079148,
-   "from_cache": 0,
+   "from_cache": 1,
    "prompt_hash": "c4cc528ed835933432fb26889ef7bc166bd1e60ea8d7be594cd2dc877913267f",
    "input_hash": "664bd64d9dd7e84f10180493bd21a835740ec5f94898c20de6a77ed282e67625",
    "cache_key": "bansan:source",
@@ -8590,7 +8590,7 @@
    "latency_s": 39.1,
    "ok": 1,
    "error": null,
-   "created_at": "2026-11-04 14:34:23"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 3,
@@ -8601,21 +8601,21 @@
    "effort": "low",
    "input_tokens": 4125,
    "cached_tokens": 0,
-   "output_tokens": 1116,
-   "reasoning_tokens": 427,
+   "output_tokens": 1193,
+   "reasoning_tokens": 433,
    "web_searches": 0,
    "cost_usd": 0.0,
-   "list_cost_usd": 0.03882,
+   "list_cost_usd": 0.04036,
    "from_cache": 1,
    "prompt_hash": "c33fe35cf493172b6faa9d0a16a7fda396a38c58cecfe932369f56ede64cd421",
    "input_hash": "664bd64d9dd7e84f10180493bd21a835740ec5f94898c20de6a77ed282e67625",
    "cache_key": "bansan:source",
    "response_key": "ecd6d1ec3e75b2c4e79afb9966af97e81e5b0303ce9e40476d664c6571d759e4",
-   "response_id": "resp_6ae9cacbb02fa161371a4739",
-   "latency_s": 17.12,
+   "response_id": "resp_6aeb456b60a8de12150f4451",
+   "latency_s": 17.43,
    "ok": 1,
    "error": null,
-   "created_at": "2026-11-04 14:34:23"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 4,
@@ -8624,23 +8624,23 @@
    "prompt": "head-select",
    "model": "muse-wonder-1.0",
    "effort": "low",
-   "input_tokens": 2803,
+   "input_tokens": 2921,
    "cached_tokens": 0,
-   "output_tokens": 876,
-   "reasoning_tokens": 656,
+   "output_tokens": 748,
+   "reasoning_tokens": 423,
    "web_searches": 0,
-   "cost_usd": 0.028732,
-   "list_cost_usd": 0.028732,
-   "from_cache": 0,
+   "cost_usd": 0.0,
+   "list_cost_usd": 0.026644,
+   "from_cache": 1,
    "prompt_hash": "233923af01152d03e71d4a6b3a8259e536213bf03a5c949c500faad66896bfc9",
-   "input_hash": "cd77adfa3655134c4e51bab921958d818473958f61a845bbec0019661b0e3ddf",
+   "input_hash": "83e97dff3128492cdc08556da707edf0c3cd921e115a1ee2bd4ab760cf642562",
    "cache_key": "bansan:source",
-   "response_key": "e4d2bb4636248ecc1c2302a420b250056ee5206194f51b83efb7e708452a253c",
-   "response_id": "resp_6aeb42784d12231528d54c4a",
-   "latency_s": 9.58,
+   "response_key": "62c36b8da08ed2559cdd9432ffd9fb322fcaeff2adf21b53ee8640675c53e6d2",
+   "response_id": "resp_6aeb4573418d12273cca4850",
+   "latency_s": 7.99,
    "ok": 1,
    "error": null,
-   "created_at": "2026-11-04 14:34:32"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 5,
@@ -8654,9 +8654,9 @@
    "output_tokens": 7770,
    "reasoning_tokens": 2927,
    "web_searches": 0,
-   "cost_usd": 0.0415875,
+   "cost_usd": 0.0,
    "list_cost_usd": 0.0415875,
-   "from_cache": 0,
+   "from_cache": 1,
    "prompt_hash": "5bc2c0fbf504f7ba6f2509c4c97dc3a9e8fbfc100db7ca4ed5c8aba42c47af08",
    "input_hash": "9e688a494f8b06c2e0d03c582102ca8e551e3c2d4695afdee6a469d0c53da510",
    "cache_key": "bansan:analyst",
@@ -8665,7 +8665,7 @@
    "latency_s": 65.28,
    "ok": 1,
    "error": null,
-   "created_at": "2026-11-04 14:35:37"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 6,
@@ -8679,9 +8679,9 @@
    "output_tokens": 2353,
    "reasoning_tokens": 1825,
    "web_searches": 0,
-   "cost_usd": 0.022344,
+   "cost_usd": 0.0,
    "list_cost_usd": 0.022344,
-   "from_cache": 0,
+   "from_cache": 1,
    "prompt_hash": "c866f42189ba08cb12f451ab14df13d047bcbdea16fd317c6b2c43df73d3fbfe",
    "input_hash": "baf336e6af9d4239e93d58241cf7dcb01ac7746ee50e6586af2e4080e6c8a725",
    "cache_key": "bansan:bible-v1:draft",
@@ -8690,7 +8690,7 @@
    "latency_s": 20.99,
    "ok": 1,
    "error": null,
-   "created_at": "2026-11-04 14:35:58"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 7,
@@ -8704,9 +8704,9 @@
    "output_tokens": 3934,
    "reasoning_tokens": 3367,
    "web_searches": 0,
-   "cost_usd": 0.0299295,
+   "cost_usd": 0.0,
    "list_cost_usd": 0.0299295,
-   "from_cache": 0,
+   "from_cache": 1,
    "prompt_hash": "c866f42189ba08cb12f451ab14df13d047bcbdea16fd317c6b2c43df73d3fbfe",
    "input_hash": "c597b325ae2e13e0e09a0ac6f0c2949618877692fe722ca2ac03a97025bc44fd",
    "cache_key": "bansan:bible-v1:draft",
@@ -8715,7 +8715,7 @@
    "latency_s": 41.65,
    "ok": 1,
    "error": null,
-   "created_at": "2026-11-04 14:36:40"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 8,
@@ -8729,9 +8729,9 @@
    "output_tokens": 2565,
    "reasoning_tokens": 1937,
    "web_searches": 0,
-   "cost_usd": 0.02471625,
+   "cost_usd": 0.0,
    "list_cost_usd": 0.02471625,
-   "from_cache": 0,
+   "from_cache": 1,
    "prompt_hash": "c866f42189ba08cb12f451ab14df13d047bcbdea16fd317c6b2c43df73d3fbfe",
    "input_hash": "7eea61e695d463de8764f05e34939284345e4d42f1b645f5258426fda21f4429",
    "cache_key": "bansan:bible-v1:draft",
@@ -8740,7 +8740,7 @@
    "latency_s": 28.07,
    "ok": 1,
    "error": null,
-   "created_at": "2026-11-04 14:37:08"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 9,
@@ -8754,9 +8754,9 @@
    "output_tokens": 4673,
    "reasoning_tokens": 4190,
    "web_searches": 0,
-   "cost_usd": 0.022193,
+   "cost_usd": 0.0,
    "list_cost_usd": 0.022193,
-   "from_cache": 0,
+   "from_cache": 1,
    "prompt_hash": "c866f42189ba08cb12f451ab14df13d047bcbdea16fd317c6b2c43df73d3fbfe",
    "input_hash": "0b914ac78d3b347bb924712525fdf0367f009571375c3550313826411d0bdd73",
    "cache_key": "bansan:bible-v1:draft",
@@ -8765,7 +8765,7 @@
    "latency_s": 43.16,
    "ok": 1,
    "error": null,
-   "created_at": "2026-11-04 14:37:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 10,
@@ -8779,9 +8779,9 @@
    "output_tokens": 6441,
    "reasoning_tokens": 5831,
    "web_searches": 0,
-   "cost_usd": 0.029932,
+   "cost_usd": 0.0,
    "list_cost_usd": 0.029932,
-   "from_cache": 0,
+   "from_cache": 1,
    "prompt_hash": "c866f42189ba08cb12f451ab14df13d047bcbdea16fd317c6b2c43df73d3fbfe",
    "input_hash": "6ae703087e4ff9c72fadbfd9660428bcfa4a39e5d90ceaad71aadde4e490b9c4",
    "cache_key": "bansan:bible-v1:draft",
@@ -8790,7 +8790,7 @@
    "latency_s": 73.11,
    "ok": 1,
    "error": null,
-   "created_at": "2026-11-04 14:39:05"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 11,
@@ -8804,9 +8804,9 @@
    "output_tokens": 3929,
    "reasoning_tokens": 3354,
    "web_searches": 0,
-   "cost_usd": 0.01894725,
+   "cost_usd": 0.0,
    "list_cost_usd": 0.01894725,
-   "from_cache": 0,
+   "from_cache": 1,
    "prompt_hash": "c866f42189ba08cb12f451ab14df13d047bcbdea16fd317c6b2c43df73d3fbfe",
    "input_hash": "214709bd3c6bbafc010e58e0ef187a5e999d31b2a699de72986c3f3ee9be3f56",
    "cache_key": "bansan:bible-v1:draft",
@@ -8815,7 +8815,7 @@
    "latency_s": 46.93,
    "ok": 1,
    "error": null,
-   "created_at": "2026-11-04 14:39:51"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 12,
@@ -8829,9 +8829,9 @@
    "output_tokens": 9740,
    "reasoning_tokens": 8215,
    "web_searches": 0,
-   "cost_usd": 0.0590425,
+   "cost_usd": 0.0,
    "list_cost_usd": 0.0590425,
-   "from_cache": 0,
+   "from_cache": 1,
    "prompt_hash": "c3696b962d94cafa608b0b367594ac6b4b07539de7ed61f00085b0a0e4acf79f",
    "input_hash": "8bf022cf68b1cbd39636f5ca8c9fc816c3a38d5c436b248692bc3b7b400497ca",
    "cache_key": "bansan:bible-v1:reader-faithful",
@@ -8840,7 +8840,7 @@
    "latency_s": 83.41,
    "ok": 1,
    "error": null,
-   "created_at": "2026-11-04 14:41:15"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 13,
@@ -8854,9 +8854,9 @@
    "output_tokens": 9547,
    "reasoning_tokens": 6943,
    "web_searches": 0,
-   "cost_usd": 0.057171,
+   "cost_usd": 0.0,
    "list_cost_usd": 0.057171,
-   "from_cache": 0,
+   "from_cache": 1,
    "prompt_hash": "29eb72a34d299c607fbe571feef89275eaa983dc58acaf0d596ee98d6172d4ec",
    "input_hash": "406d4d809d83bd467ba2f42c75c7e839ce32311c8e743dd0d5bd05eee563d921",
    "cache_key": "bansan:bible-v1:reader-readable",
@@ -8865,7 +8865,7 @@
    "latency_s": 108.12,
    "ok": 1,
    "error": null,
-   "created_at": "2026-11-04 14:43:03"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 14,
@@ -8879,9 +8879,9 @@
    "output_tokens": 3176,
    "reasoning_tokens": 1954,
    "web_searches": 0,
-   "cost_usd": 0.141752,
+   "cost_usd": 0.0,
    "list_cost_usd": 0.141752,
-   "from_cache": 0,
+   "from_cache": 1,
    "prompt_hash": "8db36cbb6db290f2875cc9f17d314dabc9de228c6f27b1f8332609576773b64a",
    "input_hash": "09158b3d61f09c7e3d90d6b2d548414562aa10597d88d510809c171fe25020a7",
    "cache_key": "bansan:bible-v1:desk",
@@ -8890,7 +8890,7 @@
    "latency_s": 26.25,
    "ok": 1,
    "error": null,
-   "created_at": "2026-11-04 14:43:29"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 15,
@@ -8904,9 +8904,9 @@
    "output_tokens": 129,
    "reasoning_tokens": 0,
    "web_searches": 0,
-   "cost_usd": 0.0124648,
+   "cost_usd": 0.0,
    "list_cost_usd": 0.0124648,
-   "from_cache": 0,
+   "from_cache": 1,
    "prompt_hash": "8db36cbb6db290f2875cc9f17d314dabc9de228c6f27b1f8332609576773b64a",
    "input_hash": "09158b3d61f09c7e3d90d6b2d548414562aa10597d88d510809c171fe25020a7",
    "cache_key": "bansan:bible-v1:desk",
@@ -8915,7 +8915,7 @@
    "latency_s": 1.3,
    "ok": 1,
    "error": null,
-   "created_at": "2026-11-04 14:43:31"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 16,
@@ -8929,9 +8929,9 @@
    "output_tokens": 195,
    "reasoning_tokens": 0,
    "web_searches": 0,
-   "cost_usd": 0.009066400000000002,
+   "cost_usd": 0.0,
    "list_cost_usd": 0.009066400000000002,
-   "from_cache": 0,
+   "from_cache": 1,
    "prompt_hash": "8db36cbb6db290f2875cc9f17d314dabc9de228c6f27b1f8332609576773b64a",
    "input_hash": "09158b3d61f09c7e3d90d6b2d548414562aa10597d88d510809c171fe25020a7",
    "cache_key": "bansan:bible-v1:desk",
@@ -8940,7 +8940,7 @@
    "latency_s": 1.97,
    "ok": 1,
    "error": null,
-   "created_at": "2026-11-04 14:43:33"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 17,
@@ -8954,9 +8954,9 @@
    "output_tokens": 146,
    "reasoning_tokens": 0,
    "web_searches": 0,
-   "cost_usd": 0.008496,
+   "cost_usd": 0.0,
    "list_cost_usd": 0.008496,
-   "from_cache": 0,
+   "from_cache": 1,
    "prompt_hash": "8db36cbb6db290f2875cc9f17d314dabc9de228c6f27b1f8332609576773b64a",
    "input_hash": "09158b3d61f09c7e3d90d6b2d548414562aa10597d88d510809c171fe25020a7",
    "cache_key": "bansan:bible-v1:desk",
@@ -8965,7 +8965,7 @@
    "latency_s": 1.8,
    "ok": 1,
    "error": null,
-   "created_at": "2026-11-04 14:43:34"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 18,
@@ -8979,9 +8979,9 @@
    "output_tokens": 148,
    "reasoning_tokens": 0,
    "web_searches": 0,
-   "cost_usd": 0.0082632,
+   "cost_usd": 0.0,
    "list_cost_usd": 0.0082632,
-   "from_cache": 0,
+   "from_cache": 1,
    "prompt_hash": "8db36cbb6db290f2875cc9f17d314dabc9de228c6f27b1f8332609576773b64a",
    "input_hash": "09158b3d61f09c7e3d90d6b2d548414562aa10597d88d510809c171fe25020a7",
    "cache_key": "bansan:bible-v1:desk",
@@ -8990,7 +8990,7 @@
    "latency_s": 2.04,
    "ok": 1,
    "error": null,
-   "created_at": "2026-11-04 14:43:36"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 19,
@@ -9004,9 +9004,9 @@
    "output_tokens": 125,
    "reasoning_tokens": 0,
    "web_searches": 0,
-   "cost_usd": 0.007538400000000001,
+   "cost_usd": 0.0,
    "list_cost_usd": 0.007538400000000001,
-   "from_cache": 0,
+   "from_cache": 1,
    "prompt_hash": "8db36cbb6db290f2875cc9f17d314dabc9de228c6f27b1f8332609576773b64a",
    "input_hash": "09158b3d61f09c7e3d90d6b2d548414562aa10597d88d510809c171fe25020a7",
    "cache_key": "bansan:bible-v1:desk",
@@ -9015,7 +9015,7 @@
    "latency_s": 2.06,
    "ok": 1,
    "error": null,
-   "created_at": "2026-11-04 14:43:38"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 20,
@@ -9029,9 +9029,9 @@
    "output_tokens": 160,
    "reasoning_tokens": 0,
    "web_searches": 0,
-   "cost_usd": 0.008368,
+   "cost_usd": 0.0,
    "list_cost_usd": 0.008368,
-   "from_cache": 0,
+   "from_cache": 1,
    "prompt_hash": "8db36cbb6db290f2875cc9f17d314dabc9de228c6f27b1f8332609576773b64a",
    "input_hash": "09158b3d61f09c7e3d90d6b2d548414562aa10597d88d510809c171fe25020a7",
    "cache_key": "bansan:bible-v1:desk",
@@ -9040,7 +9040,7 @@
    "latency_s": 1.62,
    "ok": 1,
    "error": null,
-   "created_at": "2026-11-04 14:43:40"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 21,
@@ -9054,9 +9054,9 @@
    "output_tokens": 2362,
    "reasoning_tokens": 1243,
    "web_searches": 0,
-   "cost_usd": 0.0526776,
+   "cost_usd": 0.0,
    "list_cost_usd": 0.0526776,
-   "from_cache": 0,
+   "from_cache": 1,
    "prompt_hash": "8db36cbb6db290f2875cc9f17d314dabc9de228c6f27b1f8332609576773b64a",
    "input_hash": "09158b3d61f09c7e3d90d6b2d548414562aa10597d88d510809c171fe25020a7",
    "cache_key": "bansan:bible-v1:desk",
@@ -9065,7 +9065,7 @@
    "latency_s": 17.74,
    "ok": 1,
    "error": null,
-   "created_at": "2026-11-04 14:43:58"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 22,
@@ -9079,9 +9079,9 @@
    "output_tokens": 1529,
    "reasoning_tokens": 711,
    "web_searches": 0,
-   "cost_usd": 0.040128800000000006,
+   "cost_usd": 0.0,
    "list_cost_usd": 0.040128800000000006,
-   "from_cache": 0,
+   "from_cache": 1,
    "prompt_hash": "8db36cbb6db290f2875cc9f17d314dabc9de228c6f27b1f8332609576773b64a",
    "input_hash": "09158b3d61f09c7e3d90d6b2d548414562aa10597d88d510809c171fe25020a7",
    "cache_key": "bansan:bible-v1:desk",
@@ -9090,7 +9090,7 @@
    "latency_s": 13.62,
    "ok": 1,
    "error": null,
-   "created_at": "2026-11-04 14:44:11"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 23,
@@ -9104,9 +9104,9 @@
    "output_tokens": 3467,
    "reasoning_tokens": 3321,
    "web_searches": 0,
-   "cost_usd": 0.12408,
+   "cost_usd": 0.0,
    "list_cost_usd": 0.12408,
-   "from_cache": 0,
+   "from_cache": 1,
    "prompt_hash": "094fbffa55398e693ddc6e1301dd6b8e51846c37cae2faf71315f246c6ea8e43",
    "input_hash": "d5cad4f299d72f5550cbfbc8c0fd4a73bdd2eacbddba225fed4ff884b87275c7",
    "cache_key": "bansan:bible-v1:final-read",
@@ -9115,7 +9115,7 @@
    "latency_s": 29.14,
    "ok": 1,
    "error": null,
-   "created_at": "2026-11-04 14:44:41"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 24,
@@ -9129,9 +9129,9 @@
    "output_tokens": 2474,
    "reasoning_tokens": 2374,
    "web_searches": 0,
-   "cost_usd": 0.052804800000000006,
+   "cost_usd": 0.0,
    "list_cost_usd": 0.052804800000000006,
-   "from_cache": 0,
+   "from_cache": 1,
    "prompt_hash": "094fbffa55398e693ddc6e1301dd6b8e51846c37cae2faf71315f246c6ea8e43",
    "input_hash": "d5cad4f299d72f5550cbfbc8c0fd4a73bdd2eacbddba225fed4ff884b87275c7",
    "cache_key": "bansan:bible-v1:final-read",
@@ -9140,7 +9140,7 @@
    "latency_s": 23.26,
    "ok": 1,
    "error": null,
-   "created_at": "2026-11-04 14:45:04"
+   "created_at": "2026-11-04 19:22:43"
   },
   {
    "id": 25,
@@ -9149,23 +9149,23 @@
    "prompt": "copy-desk",
    "model": "muse-spark-1.3",
    "effort": "low",
-   "input_tokens": 7944,
+   "input_tokens": 7999,
    "cached_tokens": 0,
-   "output_tokens": 1154,
-   "reasoning_tokens": 1087,
+   "output_tokens": 1486,
+   "reasoning_tokens": 1396,
    "web_searches": 0,
-   "cost_usd": 0.0148345,
-   "list_cost_usd": 0.0148345,
+   "cost_usd": 0.01631425,
+   "list_cost_usd": 0.01631425,
    "from_cache": 0,
-   "prompt_hash": "5940505fe42ad60756e66bd8d02daebc9287507e797da3c1db6368fc77e2c386",
+   "prompt_hash": "d0ae81b967652f7a55679ceabe6aeec42aba9d74707949be86632c1ecd70519a",
    "input_hash": "045adc938505db10c2a1429aaa80f9c304c77cf94044d78642126729b5d013fd",
    "cache_key": "bansan:bible-v1:copy-desk",
-   "response_key": "9af0eef5e2289ffb503ef2c5a775b2bb0bd68b9e856ee7ec5c291ea5657879eb",
-   "response_id": "resp_6aeb44ff3156c2a53e584841",
-   "latency_s": 15.69,
+   "response_key": "ba0f1b7b14e55b9d471a0a2ae505bff0485900030b7ab786139d18b883c1825f",
+   "response_id": "resp_6aeb8613a6ba729508864816",
+   "latency_s": 15.58,
    "ok": 1,
    "error": null,
-   "created_at": "2026-11-04 14:45:20"
+   "created_at": "2026-11-04 19:22:59"
   },
   {
    "id": 26,
@@ -9179,9 +9179,9 @@
    "output_tokens": 2277,
    "reasoning_tokens": 1976,
    "web_searches": 0,
-   "cost_usd": 0.030086,
+   "cost_usd": 0.0,
    "list_cost_usd": 0.030086,
-   "from_cache": 0,
+   "from_cache": 1,
    "prompt_hash": "6e11aef1b5eee1418fc1f5ddf4af969cb492afcc5d4c172b8085230c439f3254",
    "input_hash": "d9825ec50f2c6577899f3558bc29227735f5a86ef49b1daddbff08d08f841274",
    "cache_key": "bansan:bible-v1:notes",
@@ -9190,7 +9190,7 @@
    "latency_s": 30.2,
    "ok": 1,
    "error": null,
-   "created_at": "2026-11-04 14:45:50"
+   "created_at": "2026-11-04 19:22:59"
   }
  ],
  "release": {
@@ -10881,7 +10881,7 @@
   "by_prompt": {
    "parts": {
     "calls": 1,
-    "usd": 0.008
+    "usd": 0.007
    },
    "first-read": {
     "calls": 1,
@@ -10889,11 +10889,11 @@
    },
    "crux-check": {
     "calls": 1,
-    "usd": 0.0388
+    "usd": 0.0404
    },
    "head-select": {
     "calls": 1,
-    "usd": 0.0287
+    "usd": 0.0266
    },
    "analyst-bible": {
     "calls": 1,
@@ -10921,7 +10921,7 @@
    },
    "copy-desk": {
     "calls": 1,
-    "usd": 0.0148
+    "usd": 0.0163
    },
    "notes": {
     "calls": 1,

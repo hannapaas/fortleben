@@ -24,6 +24,15 @@ def test_a_name_the_english_misread_against_its_ruby_is_listed():
     assert style.readings([p], {"cast": []}, "Ikinawa no O-Tetsu was there.") == []
 
 
+def test_a_near_form_the_bible_gives_for_another_word_is_not_listed():
+    # 東屋《あずまや》 is an arbour; Umeya, close to it in spelling, is the inn 梅屋, as the style sheet says
+    ruby = {"t": "ruby", "base": [{"s": "東屋"}], "reading": "あずまや"}
+    p = SimpleNamespace(id="p9", tokens=[ruby, {"t": "text", "s": "あり"}])
+    english = "They stayed at the Umeya. The Umeya was quiet."
+    assert style.readings([p], {"cast": []}, english)[0].startswith("東屋《あずまや》 reads Azumaya; the English has Umeya ×2")
+    assert style.readings([p], {"cast": [], "style": "Keep realia: 梅屋 (Umeya), 官報 (Official Gazette)"}, english) == []
+
+
 def test_words_spelled_more_than_one_way_are_listed_but_not_capitals():
     units = {("p1",): "Ryūjirō ran. *Sensei* said.", ("p2",): "Ryujiro laughed. Sensei nodded. The end.", ("p3",): "the end"}
     lines = style.variants(units, lambda u: u[0])
