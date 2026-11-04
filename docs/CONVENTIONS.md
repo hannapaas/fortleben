@@ -89,7 +89,6 @@ Copy `.env.example` to `.env` and fill in what you need; it lists every setting 
 - `RESEND_API_KEY`, `REPORT_EMAIL_TO`, `REPORT_EMAIL_FROM`: mail for the comments email and password resets; without a key, mail goes to the server log.
 - `KEIKAKU_BASE_URL`: the site's own address, for links in mail and invites.
 - `KEIKAKU_TRUST_PROXY`, `KEIKAKU_CONTACT`, the comment limits and the Litestream backup settings.
-- `KEIKAKU_PRIVATE_DIR` names an optional overlay folder outside the repo; nothing here depends on it, and the house runs at full quality without it.
 
 ## Security, given that the code is public
 
