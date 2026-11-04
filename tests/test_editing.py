@@ -120,7 +120,7 @@ def test_an_edited_bible_is_read_and_the_desk_shows_the_files(conn, db, waiting)
     ctx = ctx_of(conn, run_id)
     assert "The baby is a girl throughout." in context.bible(ctx.latest("bible"))
     cp = desk.state(conn, token)["checkpoints"][0]
-    assert [f["edited"] for f in cp["files"]] == [False, False, True] and "bible" in cp["edited"]
+    assert [f["edited"] for f in cp["files"]] == [False, False, True]
 
 
 def test_files_are_refused_unless_the_run_waits_and_the_text_is_there(conn, db, waiting):
@@ -339,7 +339,7 @@ def test_the_desk_route_saves_a_file_and_refuses_without_its_header(conn, db, wa
     assert site.post(url, json={"text": 7}, headers=DESK).status_code == 400
     assert site.post(f"/desk/{token}/runs/{run_id}/files/nope", json={"text": "x"}, headers=DESK).status_code == 404
     page = site.get(f"/desk/{token}").text
-    assert "The files" in page and "edited by you" in page and "edited the reading by hand" in page
+    assert "three files" in page and "Edited by you." in page
 
 
 # --- what the review turned up --------------------------------------------------------------------------

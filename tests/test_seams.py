@@ -56,7 +56,8 @@ def put(conn, run_id, kind, body):
 
 def wait_at_checkpoint(conn, run_id, english):
     put(conn, run_id, "reading", {"voice_takes": TAKES, "crux": [], "reading": ""})
-    put(conn, run_id, "bible", {"style_sheet": {"register": f"register of run {run_id}", "standing_rules": []}})
+    put(conn, run_id, "bible", {"style_sheet": {"register": f"register of run {run_id}", "standing_rules": []},
+                                "narration": {}, "cast": [], "motifs": [], "hard_spots": []})
     put(conn, run_id, "checkpoint", {"run_id": run_id, "rounds": [],
                                      "takes": [{**t, "english": [["p1", f"{english} {t['label']}"]]} for t in TAKES]})
     conn.execute("UPDATE run SET status='waiting', stage='checkpoint' WHERE id=?", (run_id,))
@@ -72,10 +73,10 @@ def test_two_runs_of_one_work_keep_their_own_checkpoint_reading_and_bible(conn, 
     wait_at_checkpoint(conn, a, "A's page")  # saved last, so the work's latest is A's
     cp = desk.state(conn, b_token)["checkpoints"][0]
     assert cp["voices"][0]["english"] == ["B's page a"]
-    assert dict((x["label"], x["value"]) for x in cp["bible"]["style_sheet"])["Register"] == f"register of run {b}"
+    files = {f["name"]: f["text"] for f in cp["files"]}
+    assert f"register of run {b}" in files["bible"] and f"register of run {a}" not in files["bible"]
     assert latest_document(conn, "bansan", "bible", b)["style_sheet"]["register"] == f"register of run {b}"
     assert latest_document(conn, "bansan", "bible")["style_sheet"]["register"] == f"register of run {a}"
-    assert "Standing rules" not in {x["label"] for x in cp["bible"]["style_sheet"]}  # empty rows aren't shown
 
 
 def test_a_waiting_run_holds_nothing_and_the_desk_says_so(conn, db, held):

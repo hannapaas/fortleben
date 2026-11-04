@@ -448,15 +448,15 @@ def test_a_waiting_run_shows_the_checkpoint(conn, db, waiting, monkeypatch):
     monkeypatch.setenv("MODEL_API_KEY", "test")
     html = TestClient(web.create_app(db, screen=False), headers=DESK).get(f"/desk/{token}").text  # the real template
     assert "Waiting for you." in html and f'href="#checkpoint-{run_id}"' in html
-    assert "keikaku has read the story and is ready to draft." in html
+    assert "keikaku has read the story. These are the three files" in html
     assert DOCS["reading"]["crux"][0]["point"][:60] in html.replace("&#34;", '"').replace("&#39;", "'")
     for i, t in enumerate(DOCS["reading"]["voice_takes"]):
         assert f'name="voice-{run_id}" value="{i}"' in html and f"Voice {t['label']}" in html
     assert 'value="0" checked' in html
     assert PAGE_1[0][1][:50] in html and f"[{DOCS['reading']['voice_takes'][1]['label']}] {PAGE_1[0][1][:40]}" in html
-    assert '<details class="bible" open><summary>Style sheet' in html and "<summary>Cast" in html
-    assert DOCS["bible"]["cast"][0]["handle"] in html and "Hard spots" in html
-    assert "Send note" in html and "Approve and draft" in html and "$" not in html
+    assert "### Style sheet" in html and "### Cast" in html and "### Hard spots" in html  # the analysis, as its file
+    assert DOCS["bible"]["cast"][0]["handle"] in html
+    assert "Send note" in html and "Approve and translate" in html and "$" not in html
 
 
 def test_a_note_is_read_and_its_round_appears(conn, db, waiting, monkeypatch):
@@ -483,7 +483,7 @@ def test_a_note_is_read_and_its_round_appears(conn, db, waiting, monkeypatch):
     assert cp["voice"] == 1 and cp["rounds"][0]["note"].startswith("This sounds too modern")
     assert cp["voices"][1]["redrafted"] and cp["voices"][1]["english"][0].startswith("Redrafted in voice 1")
     assert not cp["voices"][0]["redrafted"]
-    assert dict((x["label"], x["value"]) for x in cp["bible"]["style_sheet"])["Register"].startswith("Plainer and older")
+    assert "Plainer and older" in next(f["text"] for f in cp["files"] if f["name"] == "bible")
 
     monkeypatch.setenv("MODEL_API_KEY", "test")
     site = TestClient(web.create_app(db, screen=False), headers=DESK)
