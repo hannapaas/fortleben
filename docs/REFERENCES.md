@@ -47,7 +47,7 @@ The papers, books and experiments behind the house's design, grouped by the deci
 - **Ferstler, Podoxin, Brassington, Taboada, Karpinska & Grundkiewicz (2026)**, "AI translation of literary texts is 'fine', but readers still prefer human translations". https://arxiv.org/abs/2606.26040
   Agentic translation of novels, Japanese among them: metrics and an LLM judge preferred the machine translations, readers preferred the human ones. The Japanese problems readers flagged were speaker attribution, self-reference and sentence structure.
 
-→ Two independent readers rather than a translator revising itself: one holds the Japanese, one holds the English, and neither sees the other's notes. The faithful reader is asked about subjects and speakers the text doesn't support. The audits always read against the Japanese, and we don't claim the house beats a human translator on a judge's say-so.
+→ Two independent readers rather than a translator revising itself: one holds the Japanese, one holds the English, and neither sees the other's notes. The faithful reader is asked about subjects and speakers the text doesn't support. The audits always read against the Japanese, and we don't claim the house beats a human translator on a model's say-so.
 
 ## Why the desk decides, with no rounds of debate
 
@@ -55,15 +55,15 @@ The papers, books and experiments behind the house's design, grouped by the deci
 - **Yao et al. (2025)**, "Peacemaker or Troublemaker: How Sycophancy Shapes Multi-Agent Debate". https://arxiv.org/abs/2509.23055
 - **Cemri et al. (2025)**, "Why Do Multi-Agent LLM Systems Fail?". https://arxiv.org/abs/2503.13657
 
-→ One desk per part weighs both readers' notes once, gives a reason for every decision, and sends a real disagreement to the editor as a fork (`STAGES.md`, "How the readers and the desk work").
+→ One desk per part weighs both readers' notes once, gives a reason for every decision, and sends a real disagreement to the editor as a fork (`STAGES.md`).
 
-## How we judge the results
+## How we measure the results
 
 - **Panickssery, Bowman & Feng (2024)**, "LLM Evaluators Recognize and Favor Their Own Generations", NeurIPS 2024. https://arxiv.org/abs/2404.13076
 - **Zheng et al. (2023)**, "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena". https://arxiv.org/abs/2306.05685
-  Judges favour their own output and are swayed by order and length.
+  Model graders favour their own output and are swayed by order and length.
 
-→ Blind audits: versions unlabelled, shuffled, against the Japanese, beside a one-shot baseline and, where one exists, a published human translation; rankings trusted over counts (`experiments/README.md`).
+→ Blind audits: versions unlabelled, read against the Japanese, beside a one-shot baseline (`keikaku audit`, `house/audit.py`). In the experiments, also beside a published human translation where one exists, with rankings trusted over counts (`experiments/README.md`).
 
 ## How publishing houses and fan translators divide the work
 
@@ -76,7 +76,7 @@ The papers, books and experiments behind the house's design, grouped by the deci
 ## Rights
 
 - **Aozora Bunko's terms for its files** (収録ファイルの取り扱い規準, https://www.aozora.gr.jp/guide/kijyunn.html): the texts may be copied, reformatted and translated, with the source credited and no claim of endorsement. → Every release carries the file's colophon, and every download adds that Aozora Bunko hasn't endorsed the edition (`house/stages/release.py`, `house/fixture.py`).
-- **Japanese Copyright Act, art. 60:** an author's moral rights are protected after death, so nothing may be presented as the author's that the author didn't write. → Notes and the house's reading are labelled as the house's and are never voiced as the author (`prompts/notes.md`, `STORY-STATE.md` §0).
+- **Japanese Copyright Act, art. 60:** an author's moral rights are protected after death, so nothing may be presented as the author's that the author didn't write. → Notes and the house's reading are labelled as the house's and are never voiced as the author (`prompts/notes.md`, `STORY-STATE.md`).
 - **The works we translate:** the author died by 1931 (a few later, each with a stated reason) and the work was first published by 1930, so it's out of copyright in Japan and, by its date of publication, in the US (`fixtures/works.json` carries each work's rights record, and `house/works.py` refuses one that doesn't pass).
 
 ## Translation and publishing
