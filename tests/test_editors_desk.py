@@ -446,8 +446,10 @@ def test_a_waiting_run_shows_the_checkpoint(conn, db, waiting, monkeypatch):
     assert not s["going"]  # a waiting run doesn't stop its editor starting another
 
     monkeypatch.setenv("MODEL_API_KEY", "test")
-    html = TestClient(web.create_app(db, screen=False), headers=DESK).get(f"/desk/{token}").text  # the real template
-    assert "Waiting for you." in html and f'href="#checkpoint-{run_id}"' in html
+    home = TestClient(web.create_app(db, screen=False), headers=DESK).get(f"/desk/{token}").text
+    assert f'href="/desk/{token}/translations/{run_id}">Review and approve' in home
+    html = TestClient(web.create_app(db, screen=False), headers=DESK).get(f"/desk/{token}/translations/{run_id}").text
+    assert "Waiting for you." in html and 'class="step now yours"' in html
     assert "keikaku has read the story. These are the three files" in html
     assert DOCS["reading"]["crux"][0]["point"][:60] in html.replace("&#34;", '"').replace("&#39;", "'")
     for i, t in enumerate(DOCS["reading"]["voice_takes"]):
@@ -488,7 +490,7 @@ def test_a_note_is_read_and_its_round_appears(conn, db, waiting, monkeypatch):
     monkeypatch.setenv("MODEL_API_KEY", "test")
     site = TestClient(web.create_app(db, screen=False), headers=DESK)
     assert site.get(f"/desk/{token}/runs/{run_id}").json()["rounds"] == 1
-    html = site.get(f"/desk/{token}").text
+    html = site.get(f"/desk/{token}/translations/{run_id}").text
     assert "The register now keeps the period" in html and "Should the baby" in html and "redrafted after your note" in html
 
     monkeypatch.setattr(desk, "spawn", lambda fn, *args: fn(*args))
