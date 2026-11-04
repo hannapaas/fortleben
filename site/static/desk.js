@@ -263,7 +263,7 @@
     // A file changed and not saved: the name of the first, so a note or an approval doesn't go without it.
     function unsaved() {
       var f = Array.prototype.find.call(cp.querySelectorAll('.file'), function (f) { return f.querySelector('.file-box').dataset.dirty; });
-      return f ? f.querySelector('summary').firstChild.textContent.trim() : null;
+      return f ? f.querySelector('.file-box').getAttribute('aria-label') : null;
     }
 
     // Ask until a new round is in, or the house has stopped reading (a failed note says so on reload).

@@ -116,9 +116,15 @@
   .desk .a { font-size: 15.5px; }
   .work .wt { font-size: 1.2rem; }
 }
-/* The files at the checkpoint: opened one at a time, edited in place. */
+/* The files at the checkpoint: opened one at a time, edited in place, like the note box but long. */
 .files { max-width: 40rem; }
-.file summary { cursor: pointer; padding: 4px 0; }
-.file-box { display: block; width: 100%; box-sizing: border-box; margin-top: 6px; font: 14px/1.55 'DM Mono', ui-monospace, Menlo, monospace; padding: 8px; border: 1.5px solid var(--ink); background: var(--paper); color: var(--ink); resize: vertical; }
+.file { border-top: 1px dotted var(--muted); }
+.file:last-child { border-bottom: 1px dotted var(--muted); }
+.file summary { padding: 8px 0; }
+.file-box { display: block; width: 100%; box-sizing: border-box; margin: 4px 0 0; font: inherit; font-size: 16px; line-height: 1.55;
+  padding: 10px 12px; border: 1.5px solid var(--ink); background: var(--paper); color: var(--ink); resize: vertical;
+  min-height: 14em; max-height: 75vh; field-sizing: content; }
 .file-box:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .file-box[readonly] { color: var(--ink-2); border-color: var(--muted); }
+.checkpoint .save { font-size: 1rem; padding: 6px 18px; }
+.file .startrow { padding-bottom: 12px; }

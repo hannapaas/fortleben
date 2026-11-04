@@ -75,8 +75,8 @@
   {% if cp.files %}<h3>The files</h3>
   <p class="sm">Every stage from here reads these word for word, so you can edit them yourself instead of sending a note. What you change is published with the edition, with your name and the date. An edit doesn't redraft page 1; a note does, and is read against your version, which keikaku's amended one then replaces.</p>
   <div class="files">{% for f in cp.files %}
-    <details class="file" data-file="{{ f.name }}"><summary>{{ f.title }}{% if f.edited %} <span class="tag">edited by you</span>{% endif %}</summary>
-      <textarea class="file-box" rows="16" maxlength="60000" spellcheck="false" aria-label="{{ f.title }}"{% if closed or cp.steering %} readonly{% endif %}>{{ f.text }}</textarea>
+    <details class="file" data-file="{{ f.name }}"><summary>Edit {{ f.title|lower }}{% if f.edited %} <span class="tag">edited by you</span>{% endif %}</summary>
+      <textarea class="file-box" rows="14" maxlength="60000" aria-label="{{ f.title }}"{% if closed or cp.steering %} readonly{% endif %}>{{ f.text }}</textarea>
       <div class="startrow"><button type="button" class="btn save"{% if closed or cp.steering %} disabled{% endif %}>Save</button><span class="sm saved" aria-live="polite"></span></div>
     </details>{% endfor %}
   </div>{% endif %}
