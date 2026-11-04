@@ -321,12 +321,14 @@
           para.addEventListener('keydown', function (e) {
             if (e.key === 's' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); voices.querySelector(':scope > .filerow .save').click(); }
           });
-          v.querySelector('input[type="radio"]').addEventListener('change', fitPara);
+          para.fit = fitPara;
           fitPara();
         });
         v.querySelector('input[type="radio"]').addEventListener('change', function () {
           each.forEach(function (w) { w.classList.toggle('picked', w === v); });
+          // Sized once shown: a box measured while hidden would come out with no height at all.
           fitLine();
+          v.querySelectorAll('.vpara').forEach(function (para) { para.fit(); });
         });
         fitLine();
       });

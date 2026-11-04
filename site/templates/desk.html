@@ -20,8 +20,10 @@
       {% for r in desk.runs %}{{ run_row(r, blocked or desk.keyless, desk.base) }}{% endfor %}
     </ul>
     <p class="sm" id="noruns"{% if desk.runs %} hidden{% endif %}>None started.</p>
-    <p class="startrow">{% if closed %}<span class="line">{{ closed }}</span>{% else %}<a class="btn go" href="{{ desk.base }}/new">Start a new translation</a>{% endif %}</p>
   </div>
+
+  <div class="q">A new one?</div>
+  <div class="a"><p class="startrow">{% if closed %}<span class="line">{{ closed }}</span>{% else %}<a class="btn go" href="{{ desk.base }}/new">Start a new translation</a>{% endif %}</p></div>
 
   <div class="q">Who?</div>
   <div class="a">{{ desk.editor.name }}, {% if desk.key_tail %}signed up with your own key.{% elif desk.keyless %}signed up.{% else %}invited as an editor.{% endif %}
