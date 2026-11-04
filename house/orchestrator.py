@@ -21,7 +21,7 @@ STAGES = [
     ("first-read", "first_read"),
     ("crux-check", "crux_check"),
     ("bible", "bible"),
-    ("checkpoint", "checkpoint"),  # waits for the editor when the run's options ask for it (docs/STEERING.md)
+    ("checkpoint", "checkpoint"),  # waits for the editor when the run's options ask for it (docs/EDITORS-DESK.md)
     ("draft", "draft"),
     ("readers", "readers"),
     ("desk", "desk"),

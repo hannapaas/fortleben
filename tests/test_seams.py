@@ -1,4 +1,4 @@
-"""Where the checkpoint, the desk, accounts and the edition meet: the cases each lane's own tests
+"""Where the checkpoint, the desk, accounts and the edition meet: the cases each module's own tests
 couldn't see. Nothing here calls a model."""
 
 import json

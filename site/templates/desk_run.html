@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{# One translation: how far it has got, and, while it waits for the editor, the checkpoint (docs/STEERING.md).
+{# One translation: how far it has got, and, while it waits for the editor, the checkpoint (docs/EDITORS-DESK.md).
    desk.js watches it and reloads the page when it moves on. #}
 {% from "desk_parts.html" import run_row, steps, checkpoint %}
 {% set r = desk.runs|selectattr('id', 'equalto', run_id)|first %}

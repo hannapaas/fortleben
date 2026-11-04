@@ -6,7 +6,7 @@ session, the person's id: `editor` resolves both, and everything after it is one
 from their allowance first; the run goes in a background thread under a cap of the reservation
 plus the house's 20% margin; at the end what it spent is charged (never more than the
 reservation) and the rest released. A run pauses once, at the checkpoint after the bible, for the
-editor to read the house's reading, pick a voice, leave notes and approve (docs/STEERING.md).
+editor to read the house's reading, pick a voice, leave notes and approve (docs/EDITORS-DESK.md).
 One run goes at a time per person, and at most CAPACITY across the site.
 """
 
@@ -431,7 +431,7 @@ def resume(db, token: Who, run_id: int) -> None:
 
 
 # --- the checkpoint ----------------------------------------------------------------------------
-# The engine side is house/steer.py (docs/STEERING.md, "The contract between lanes"). It's imported
+# The engine side is house/steer.py (docs/EDITORS-DESK.md). It's imported
 # when it's used, through these two names, which tests replace.
 
 def steer_round(conn, client, run_id: int, note: str) -> dict:

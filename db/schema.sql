@@ -1,4 +1,4 @@
--- keikaku: the SQLite schema. Part of the contract between lanes (docs/CONVENTIONS.md).
+-- keikaku: the SQLite schema. Changes go with the matching doc (docs/CONVENTIONS.md).
 -- Change it only with a note in the commit and the matching doc updated in the same commit.
 -- JSON columns hold text; the shape of each is the schema in house/schemas/ named in the comment.
 

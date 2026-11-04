@@ -1,4 +1,4 @@
-"""The checkpoint and steering (docs/STEERING.md), on 「晩餐」 from the committed fixture, with no key."""
+"""The checkpoint and steering (docs/EDITORS-DESK.md), on 「晩餐」 from the committed fixture, with no key."""
 
 import json
 

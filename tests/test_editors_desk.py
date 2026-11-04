@@ -365,7 +365,7 @@ def test_startup_leaves_a_command_line_run_alone(conn):
 
 # --- the checkpoint ------------------------------------------------------------------------------
 # The engine in this checkout has no checkpoint stage, so a stand-in for the orchestrator takes a run
-# to it as the contract says (docs/STEERING.md): the fixture's reading and bible, a checkpoint
+# to it as docs/EDITORS-DESK.md describes: the fixture's reading and bible, a checkpoint
 # document with page 1 in each voice take, status `waiting`, stage `checkpoint`.
 
 DOCS = {b["kind"]: b["body"] for b in RECORDED["bible"] if b["kind"] in ("reading", "bible")}

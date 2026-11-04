@@ -1,4 +1,4 @@
-"""The blind audit behind the exhibit (docs/BUILD-PLAN.md, "The exhibit"). Each version of a text,
+"""The blind audit (`keikaku audit`, docs/experiments/). Each version of a text,
 the house's runs and the one-shot baseline alike, goes to the same audit call with the same
 reading and bible, as plain paragraphs with no labels or IDs, so the auditor can't tell which is
 which. The one-shot baseline is Spark given the bare prompt and the Japanese, nothing else.

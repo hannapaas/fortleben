@@ -46,7 +46,7 @@ def info(work_id: str, conn=None) -> dict:
 
 
 def eligible(rights: dict) -> bool:
-    """The hackathon rule: the author died ≤1931 and the work was published ≤1930,
+    """The rights rule: the author died ≤1931 and the work was published ≤1930,
     or the record says why a later death is used (docs/CONVENTIONS.md, "Rights")."""
     died = rights.get("author_died") or 9999
     pub = rights.get("first_published_year")

@@ -1,4 +1,4 @@
-"""Event types: the only way state changes are recorded. Part of the contract between lanes.
+"""Event types: the only way state changes are recorded. Changes go with the matching doc (docs/CONVENTIONS.md).
 
 Every change to text, queries, rules, budget or status is an event in the `event` table. The UI,
 the House stream, replay and evals read events; nothing else is a source of truth. Change this
@@ -37,7 +37,7 @@ TYPES = {
     "reading.written": "the house's reading (first read), versioned",
     "crux.checked": "the second reader's crux and whether it matches",
     "bible.written": "the story bible, versioned",
-    # the checkpoint: the editor steers before the draft (docs/STEERING.md)
+    # the checkpoint: the editor steers before the draft (docs/EDITORS-DESK.md)
     "checkpoint.waiting": "the run waits for the editor: page 1 drafted in each voice take",
     "checkpoint.steered": "the house answered an editor's note: its reply, what changed, page 1 drafted again",
     "checkpoint.approved": "the editor approved the checkpoint and chose the voice the draft is written in",

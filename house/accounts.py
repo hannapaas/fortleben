@@ -1,4 +1,4 @@
-"""Accounts: an email address and a password, with their own key (docs/STEERING.md, "Paying: bring your own key").
+"""Accounts: an email address and a password, with their own key (docs/EDITORS-DESK.md).
 
 Anyone can sign up with a name, an email address, a password and their own Meta Model API key, and
 has a desk with no allowance: their runs spend their key, capped by the run cap only. The key is
