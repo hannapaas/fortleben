@@ -63,7 +63,7 @@ The orchestrator can stop after any stage and resume from it, so this one checkp
 
 ## 5. When the money is short
 
-As built, nothing is given up part-way. Before a run starts the house estimates its whole cost, high on purpose (every stage live with no cache, the emergency lever's pass back, then ×1.5, from the per-stage rates measured on 「晩餐」 in `house/budget.py`), and refuses to start it if that's over the run's cap or what's left of the day's or the total budget. Better no translation than one that stops half-way. If a run still runs out mid-way, it stops, releases nothing, and says which cap to raise and how to resume; a resumed run keeps the cap it started with, and the response cache means nothing is paid for twice.
+As built, nothing is given up part-way. Before a run starts the house estimates its whole cost, a little high (every call live with no cache, the emergency lever's pass back, then 15% on top, from the tokens per call measured in `house/budget.py`), and refuses to start it if that's over the run's cap or what's left of the day's or the total budget. Better no translation than one that stops half-way. If a run still runs out mid-way, it stops, releases nothing, and says which cap to raise and how to resume; a resumed run keeps the cap it started with, and the response cache means nothing is paid for twice.
 
 The plan for later, once there are tiers and second drafts to give up, is an order: interns first, then second drafts, then fact-check on Casual notes. The faithful reader and the desk go last: they're what stops fluent drift, the error a reader can't see.
 

@@ -4,14 +4,14 @@ Written 27 Oct 2026, the second day of the hackathon; updated 2 Nov to match the
 
 Design choices worth knowing first:
 - **Built per source language, Japanese first.** `work.language` is a field; a text enters through a source adapter (Aozora is the first); the bible, departments and site are language-neutral; anything Japanese-specific (the Aozora adapter and parser, ruby, gaiji) sits in `house/lang/ja/`. Nothing else assumes Japanese.
-- **Wonder where it earns its cost, Spark elsewhere.** Wonder writes the reading, checks the crux and runs the desk; Spark plans the parts, writes the bible, drafts, reads and does the final read. The model for drafting, reading, the desk and the final read is a run option; the defaults are what the experiments found best (`experiments/`).
+- **Wonder where it earns its cost, Spark elsewhere.** Wonder writes the reading, checks the crux, runs the desk and does the final read; Spark plans the parts, writes the bible, drafts, reads and copy-edits. The model for drafting, reading, the desk and the final read is a run option; the defaults are what the experiments found best (`experiments/`).
 - **Views share one base text**: one English per paragraph, not three separate translations; they differ only in their notes. (Work → edition → view: `CONCEPT.md`, "Words".)
 - **The catalogue's reader's reports are generated on Meta models.**
 - **Glimmer isn't used yet.** When it is, it works only on the English unless a spot check shows it reads Japanese well; its model card doesn't list Japanese.
 
 ## 1. Departments and flow
 
-No manager agent. A deterministic orchestrator (plain code, the stages in order) moves the text between departments. Translation drafts the English; after the draft only the desk writes to it, plus the final read's small exact fixes. The two readers leave margin notes; the desk takes, declines or forks each one, with a reason. Heads select, never merge, and send forks up with each side's case word for word. The models in the chart are the defaults; the draft, the readers, the desk and the final read can each run on either.
+No manager agent. A deterministic orchestrator (plain code, the stages in order) moves the text between departments. Translation drafts the English; after the draft only the desk, the final read and the copy desk write to it, all through one edit tool: the words to replace, exactly as they stand, found once in the text the call was given (or every one, if it says so), or the tool refuses and says where they are, and the model tries again. The two readers leave margin notes; the desk takes, declines or forks each one, with a reason. Heads select, never merge, and send forks up with each side's case word for word. The models in the chart are the defaults; the draft, the readers, the desk and the final read can each run on either.
 
 ```mermaid
 flowchart TD
@@ -76,7 +76,7 @@ Nothing is collected for the margin specially; it falls out of the record. Every
 - Plain Python, one call at a time, with the OpenAI SDK pointed at Meta's API on the **Responses API** (needed for caching hints and web_search). No agent framework.
 - A stage is a module with `run(ctx)`; its prompt is a file in `prompts/` and its output schema is in `house/schemas/`. Every output schema has a `say` field, one plain sentence for the House log; an answer whose sentence is junk counts as a broken answer. Muse never exposes its reasoning, so the visible debate *is* what the agents write.
 - **Prompts teach principles; code enforces limits.** A department prompt explains what the job is for and why (fidelity over fluency, keep deliberate ambiguity, raise a query only when it matters), so the agent can make a sensible call on a case nobody foresaw. Absolute "always / never" lines are kept for the few things that are crucial, because models follow them literally even where they stop making sense. Anything that must hold no matter what (the spend caps, the note caps, output schemas, locked lines) is enforced by code, not by the prompt. Prompts stay short as a result.
-- The model client has a `FakeClient` that serves recorded responses from `fixtures/`, so the tests and a replay of a recorded run need no key. A paragraph's English changes at most at the draft, the desk (once more if the lever takes its part back) and the final read; nothing is argued over again.
+- The model client has a `FakeClient` that serves recorded responses from `fixtures/`, so the tests and a replay of a recorded run need no key. A paragraph's English changes at most at the draft, the desk (once more if the lever takes its part back), the final read and the copy desk; nothing is argued over again.
 - Everything runs in order: translation page by page, because each page sees the English before it; the later stages part by part. 429s and 5xx get retries with backoff (the SDK's, four tries). A schema failure is retried once; a Wonder call that fails twice is made again on Spark and logged.
 - **A response cache** keyed on (model, effort, prompt, input, schema, tools, strict) makes reruns in development free and replays deterministic. A broken answer is never cached.
 - **Standing-rule propagation** (planned, not built): a scoped search (regex, then a cheap Spark classifier on the candidates) finds the affected segments and sends them to the desk. The UI would show "R4 · 12 lines, 2 locked lines sent to the editor".
@@ -85,7 +85,7 @@ Nothing is collected for the margin specially; it falls out of the record. Every
 
 | Job | Model | Why |
 |---|---|---|
-| Parts, Analyst, translation, the readers, final read, notes | `muse-spark-1.3`, effort low for the parts and notes, medium elsewhere; reasoning can't be switched off. `prompt_cache_key` per work + bible version, `prompt_cache_retention: "24h"`. Non-strict schemas, validated by the client, except the readers and the final read (strict: once a part, it costs little) | Strong and cheap. The stable prefix caches at 88% off; strict mode gets no cache hits |
+| Parts, Analyst, translation, the readers, copy desk, notes | `muse-spark-1.3`, effort low for the parts and notes, medium elsewhere; reasoning can't be switched off. `prompt_cache_key` per work + bible version, `prompt_cache_retention: "24h"`. Non-strict schemas, validated by the client, except the readers (strict: once a part, it costs little) | Strong and cheap. The stable prefix caches at 88% off; strict mode gets no cache hits |
 | First read, crux check and its comparison, the desk, the audits | `muse-wonder-1.0`, effort medium (low for the crux check and the comparison); always strict | A different and stronger checkpoint from the drafter, where the judgement is heaviest. The 1M context holds the whole source and translation in one call. Non-strict, Wonder left fields empty and wrote filler (2 Nov). A Wonder call that fails twice is made again on Spark |
 | Copy desk (consistency, register) | Muse Glimmer 30B hosted on Modal, planned; not used yet, so the copy desk is code only | Open weights, near-free. Would propose replacements for flagged spans; never write the base text |
 | Fact-check (planned) | Spark + `web_search` | Every note cites a source or dies |
@@ -101,7 +101,7 @@ Not built yet; this is the design.
 
 When a head meets something no department covers (an embedded poem, a dialect line, a classical quotation, a Buddhist term, a period object), it can ask for an intern: one research question with a reason. A real house would ring a specialist reader. Here the intern is a single Spark call at low effort with web search that returns a short report with sources; the head then continues with the report in hand. Interns never edit text and never hire.
 
-**Mechanics, no tool calls.** The head's output schema has an optional `needs_intern: {question, reason}`. If it's set, the orchestrator checks the caps, runs the `intern` prompt, and re-runs the head with the report added to its input. Two plain calls instead of a tool call inside a structured-output call, which the API makes awkward (`tool_choice` is `auto` only). It replays from the cache like everything else.
+**Mechanics: a tool.** The intern is a function tool, `ask_intern(question, reason)`, offered to the head alongside its output schema. The head calls it when it needs to; the orchestrator checks the caps, runs the `intern` prompt, returns the report as the tool's result, and the head goes on to its answer. Meta's API takes `tool_choice: "auto"` only, so the head can't be made to call it, which is right: an intern is the head's choice. Each turn of the loop is cached like any other call, so a run with interns replays too.
 
 **The runtime enforces:** one level only; at most 3 interns per run; $0.10 per department per run; a report, never edits; first thing given up when the pool runs low. The reason is logged and shown; in the House an intern is a dotted square attached to its department. Typical triggers are the Analyst's hard-spot flags. We make no quality claim for them; they're shown, not scored.
 
@@ -114,7 +114,7 @@ The full design is in `STORY-STATE.md`. In short:
 - **Look-ahead:** each call also sees the next paragraph of Japanese, read-only, because Japanese often resolves a subject or speaker after the fact.
 - **Prompt order** (stable first, so it caches): house brief and department prompt; reading, voice and bible; the source; voice reference (the house's first page); the previous two paragraphs and the next one; the page.
 - **A new bible version** bumps the cache key (`<work>:bible-v<N>`), so changes to it should be batched, not made mid-stage.
-- **Continuity** is checked in the final read: one Spark call over the whole English and source up to 15,000 characters, part by part above that, with a short summary of the other parts. The planted test (`BUILD-PLAN.md`, "The one test that's about the engine") would measure what it catches.
+- **Continuity** is checked in the final read: one Wonder call over the whole English and source up to 15,000 characters, part by part above that, with a short summary of the other parts. The planted test (`BUILD-PLAN.md`, "The one test that's about the engine") would measure what it catches.
 - Novels use the same pipeline (`STORY-STATE.md` §5); the bible's one-line part summaries aren't built, so the other parts show as their headings or first words.
 
 ## 7. Showing the house at work
@@ -171,21 +171,23 @@ What it changes: reasoning is far cheaper than assumed (medium ≈ 0.6× visible
 
 Prices per million tokens (in / cached / out): Spark $1.25 / $0.15 / $4.25; Wonder $4 / $0.20 / $20; Glimmer hosted ≈ $0.30 / $0.04 / $1.20; web_search $2.50 per 1k searches.
 
-**Measured on 「晩餐」, 2 Nov**, in dollars per 1,000 source characters, with the default set-up (`house/budget.py`, `STAGE_RATES`; the parts call is too small to count):
+**Measured on eight runs on the default set-up, 3–4 Nov**, from 3,400 to 19,500 characters (「晩餐」, 『草枕』 II, 「書記官」, 「雪景色」, 「死剣と生縄」, 「猫八」). A call's input is a fixed part (the prompt, the reading, the bible) plus a part that grows with the source it sees; its output, reasoning included, stays about the same however long that is. So the estimate prices each stage per call from tokens, not per character (`house/budget.py`, `SHAPES`):
 
-| Stage | Default model | $ per 1,000 chars | On the other model |
-|---|---|---|---|
-| First read | Wonder | 0.025 | |
-| Crux check | Wonder | 0.025 | |
-| Bible | Spark | 0.015 | |
-| Draft | Spark | 0.036 | Wonder 0.075 |
-| Both readers | Spark | 0.033 | Wonder 0.065 |
-| Desk | Wonder | 0.047 | Spark 0.019 |
-| Final read | Spark | 0.015 (a first guess) | Wonder 0.04 |
-| Notes | Spark | 0.0075 | |
-| **Total** | | **≈ $0.20** | |
+| Stage | Calls | Default model | Input tokens | Output tokens per call | 「晩餐」 (3,400 chars) | 149,000 chars, 8 parts |
+|---|---|---|---|---|---|---|
+| Parts | 1 | Spark | 2,300 + 0.26 a character | 1,500 | $0.01 | $0.06 |
+| First read | 1 | Wonder | 2,100 + 1.1 | 3,900 | $0.10 | $0.74 |
+| Crux check | 2 | Wonder | 4,400 + 0.84 | 2,700 | $0.09 | $0.57 |
+| Bible | 1 | Spark | 5,000 + 0.86 | grows with the text, to 32k | $0.04 | $0.30 |
+| Draft | a page (about 540 chars) | Spark | 8,600 + 1.0 of what the page sees, mostly cached | 3,500 | $0.13 | $6.62 |
+| Both readers | 2 a part | Spark | 500 + 6.7 of the part | 25,000 together | $0.14 | $2.10 |
+| Desk | a part, and once more for each earlier part (the lever) | Wonder | 8,600 + 2.86 | 6,500 | $0.20 | $5.66 |
+| Final read | a part, with the edit tool | Wonder | 7,200 + 2.36 | 9,000 | $0.24 | $3.08 |
+| Copy desk | 2 turns + one per 600 characters, at most 30 | Spark | 14,000 + 0.65 a character, at most 50,000 more, mostly cached | 1,400 a turn | $0.09 | $0.61 |
+| Notes | a part | Spark | 8,400 + 2.72 | 2,200 | $0.03 | $0.67 |
+| **Total, before the margin** | | | | | **$1.07** | **$20.41** |
 
-The plan said $0.16 base and $0.27 pessimistic; the measured total sits between them. The estimate a run is checked against before it starts takes these rates, adds the lever's pass back for a text of more than one part, and multiplies by 1.5, so a run that starts shouldn't run out.
+The estimate a run is checked against before it starts adds 15% to this. The eight runs came to 0.89–1.10 of the figure before the margin, on a Spark final read and with no copy editor; the Wonder final read and the copy desk are priced from test runs on 「雪景色」, 「死剣と生縄」 and 「晩餐」 (experiment 10). The re-recorded 「晩餐」 run on the new set-up cost $0.92, 0.86 of the figure before the margin. The desk and the final read now work through the edit tool in several turns, and after the first turn about 95% of each turn's input comes from the prompt cache, even on strict calls, so a turn costs about a cent. Until the planner has run, the estimate expects a part every 20,000 characters: the planner kept stories of 15,000–20,000 characters as one part. A book has only been priced, not run: the figures for one come from texts of up to 19,500 characters.
 
 The per-text figures below were planned on 30 Oct at the planned rates; at the measured rate a full run of 「晩餐」 costs about $0.70, and 8,000 characters about $1.60.
 
