@@ -317,6 +317,7 @@ body > .wrap > .push { flex: 1 0 3rem; }
 .settings .form > details { border-right: 1px solid var(--rule); }
 .settings .row { display: flex; flex-wrap: wrap; gap: 4px 16px; }
 .settings .blurb { font-size: 13px; color: var(--ink-2); margin: 2px 0 0; line-height: 1.35; }
+.settings #custom { margin-top: 12px; }
 .presets { display: grid; gap: 8px; margin-top: 4px; }
 .presets .cb { align-items: flex-start; text-align: left; }
 .presets .cb .bx { margin-top: 5px; }
