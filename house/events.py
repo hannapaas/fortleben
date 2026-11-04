@@ -65,10 +65,11 @@ def emit(conn: sqlite3.Connection, run_id: int | None, actor: str, type_: str, p
          cost_usd: float = 0.0, call_id: int | None = None, commit: bool = True) -> int:
     if type_ not in TYPES:
         raise ValueError(f"unknown event type {type_!r}")
-    seq = conn.execute("SELECT COALESCE(MAX(seq), 0) + 1 FROM event WHERE run_id IS ?", (run_id,)).fetchone()[0]
+    # seq in the same statement as the insert, so two connections writing one run's events never share a number
     cur = conn.execute(
-        "INSERT INTO event (run_id, seq, actor, type, payload, cost_usd, call_id) VALUES (?,?,?,?,?,?,?)",
-        (run_id, seq, actor, type_, dumps(payload), cost_usd, call_id),
+        "INSERT INTO event (run_id, seq, actor, type, payload, cost_usd, call_id) "
+        "SELECT ?, COALESCE(MAX(seq), 0) + 1, ?, ?, ?, ?, ? FROM event WHERE run_id IS ?",
+        (run_id, actor, type_, dumps(payload), cost_usd, call_id, run_id),
     )
     if commit:
         conn.commit()
