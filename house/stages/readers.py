@@ -23,7 +23,8 @@ def actor(reader: str) -> str:
     return f"reader/{reader}"
 
 
-def read_chapter(ctx, reader: str, paras, units: dict) -> int:
+def read(ctx, reader: str, paras, units: dict):
+    """One reader's call on one chapter. It stores nothing, so the readers can read side by side."""
     spec = READERS[reader]
     bible = ctx.latest("bible")
     inp = context.join(
@@ -31,9 +32,13 @@ def read_chapter(ctx, reader: str, paras, units: dict) -> int:
         context.bible(bible),
         context.chapter_pairs(paras, units, spec["first"]),
     )
-    res = ctx.call(actor(reader), Call(spec["prompt"], model(ctx, "reader_model"), "medium", inp,
-                                       load_schema(spec["prompt"]), f"{ctx.cache_key()}:{spec['prompt']}",
-                                       expected_output_tokens=5000, strict=True))  # once a chapter: strict costs little
+    return ctx.call(actor(reader), Call(spec["prompt"], model(ctx, "reader_model"), "medium", inp,
+                                        load_schema(spec["prompt"]), f"{ctx.cache_key()}:{spec['prompt']}",
+                                        expected_output_tokens=5000, strict=True))  # once a chapter: strict costs little
+
+
+def file_notes(ctx, reader: str, paras, units: dict, res) -> int:
+    """A reader's notes on a chapter, stored as queries for the desk."""
     ids = {p.id for p in paras}
     n = 0
     for note in res.data["notes"]:
@@ -58,11 +63,13 @@ def run(ctx) -> dict:
     units = latest_units(ctx)
     done = {(json.loads(r["payload"])["reader"], json.loads(r["payload"])["ids"][0]) for r in ctx.conn.execute(
         "SELECT payload FROM event WHERE run_id=? AND type='chapter.read'", (ctx.run_id,))}
-    stats = {"chapters": 0, "faithful": 0, "readable": 0}
-    for paras in context.chapters(ctx.work):
-        stats["chapters"] += 1
-        for reader in READERS:
-            if (reader, paras[0].id) not in done:
-                stats[reader] += read_chapter(ctx, reader, paras, units)
+    chapters = context.chapters(ctx.work)
+    todo = [(reader, paras) for paras in chapters for reader in READERS if (reader, paras[0].id) not in done]
+    stats = {"chapters": len(chapters), "faithful": 0, "readable": 0}
+
+    def store(t, res):  # filed in the order they were read one by one
+        stats[t[0]] += file_notes(ctx, t[0], t[1], units, res)
+
+    ctx.side_by_side(lambda c, t: read(c, t[0], t[1], units), todo, then=store)  # every reader is independent
     stats["model"] = model(ctx, "reader_model")
     return stats

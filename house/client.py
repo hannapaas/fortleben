@@ -9,6 +9,7 @@ in a cache keyed on (model, effort, prompt hash, input hash, schema hash, tools)
 a replay costs nothing. FakeClient serves the same cache from fixtures/ and never needs a key.
 """
 
+import copy
 import hashlib
 import json
 import os
@@ -188,6 +189,13 @@ class BaseClient:
         self.conn = conn
         self.cache_dirs = cache_dirs if cache_dirs is not None else [cache_dir(), *sorted(FIXTURES.glob("*/responses"))]
         self.budget = budget.Budget(conn, run_cap)
+
+    def on(self, conn: sqlite3.Connection) -> "BaseClient":
+        """The same client writing its ledger through another connection: for calls made on another thread."""
+        other = copy.copy(self)
+        other.conn, other.budget = conn, copy.copy(self.budget)
+        other.budget.conn = conn
+        return other
 
     def lookup(self, key: str) -> dict | None:
         for d in self.cache_dirs:

@@ -30,6 +30,20 @@ def connect(path: str | Path | None = None) -> sqlite3.Connection:
     return conn
 
 
+def file_of(conn: sqlite3.Connection) -> str | None:
+    """The file a connection is open on, or None for an in-memory database."""
+    return conn.execute("PRAGMA database_list").fetchone()["file"] or None
+
+
+def another(path: str) -> sqlite3.Connection:
+    """A second connection to a database connect() has already set up, for another thread. It waits up
+    to 30 seconds for another connection's write rather than failing."""
+    conn = sqlite3.connect(path, timeout=30)
+    conn.row_factory = sqlite3.Row
+    conn.execute("PRAGMA foreign_keys = ON")  # per connection, as db/schema.sql sets it for connect()'s
+    return conn
+
+
 # Columns added to tables after databases with them already existed: CREATE TABLE IF NOT EXISTS
 # leaves an old table as it was, so these are added here, once.
 ADDED = {"person": {"api_key": "TEXT", "key_tail": "TEXT", "email": "TEXT", "password_hash": "TEXT",

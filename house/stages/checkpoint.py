@@ -49,8 +49,8 @@ def run(ctx) -> dict:
         return {"skipped": True}
     if approved(ctx.conn, ctx.run_id):  # a run resumed from an earlier stage doesn't ask again
         return {"skipped": True, "approved": True}
-    takes = [{"label": t["label"], "line": t["line"], "english": draft_first_page(ctx, t)}
-             for t in ctx.latest("reading")["voice_takes"]]
+    takes = ctx.side_by_side(lambda c, t: {"label": t["label"], "line": t["line"], "english": draft_first_page(c, t)},
+                             ctx.latest("reading")["voice_takes"])  # each take's page is independent of the others
     before, _ = document(ctx.conn, ctx.run_id)
     doc = {"run_id": ctx.run_id, "takes": takes, "rounds": before["rounds"] if before else []}
     eid = ctx.emit("house", "checkpoint.waiting", {"takes": takes})
