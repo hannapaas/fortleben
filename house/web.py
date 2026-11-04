@@ -551,7 +551,7 @@ def create_app(db: str | Path | None = None, replay: bool = False, screen: bool 
     @desk_route("POST", "/runs/{run_id}/files/{name}")
     @json_post
     async def desk_file(request, pid, data):
-        changed = desk.edit_file(db, pid, request.state.run_id, request.path_params["name"], data.get("text"))
+        changed = desk.edit_file(db, pid, request.state.run_id, request.path_params["name"], data.get("text"), data.get("voice"))
         return {"ok": True, "changed": changed}
 
     @desk_route("POST", "/runs/{run_id}/approve")

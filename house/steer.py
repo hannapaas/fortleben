@@ -48,7 +48,10 @@ def current_voice(ctx) -> int:
 
 
 def current_page(doc: dict, voice: int) -> list[list[str]]:
-    """Page 1 as it stands in this voice: the last round's redraft in it, else the take."""
+    """Page 1 as it stands in this voice: the editor's own version of it, else the last round's redraft in it,
+    else the take. A note that redrafts the voice's page replaces the editor's version (`steer`)."""
+    if (doc.get("edited") or {}).get(str(voice)):
+        return doc["edited"][str(voice)]
     for r in reversed(doc["rounds"]):
         if r.get("voice", 0) == voice:
             return r["english"]
@@ -164,7 +167,13 @@ def steer(conn, client, run_id: int, note: str) -> dict:
            "take": {"label": take["label"], "line": take["line"]},
            "english": checkpoint.draft_first_page(ctx, take)}
     eid = ctx.emit("house", "checkpoint.steered", rnd, call_id=res.call_id)
-    ctx.save("checkpoint", {**doc, "rounds": doc["rounds"] + [rnd]}, eid)
+    edited = dict(doc.get("edited") or {})
+    mine = edited.pop(str(voice), None)
+    ctx.save("checkpoint", {**doc, "rounds": doc["rounds"] + [rnd], "edited": edited}, eid)
+    if mine:  # the editor's page 1 in this voice gave way to the redraft: recorded, like a replaced file
+        before, after = page_text(mine), page_text(rnd["english"])
+        ctx.emit("keikaku", "document.edited", {"file": "page", "voice": voice, "label": take["label"], "before": before,
+                                                "after": after, "by": "keikaku", "cause": "note", "diff": edition_diff(before, after)})
     return rnd
 
 
@@ -260,6 +269,37 @@ def edit(conn, run_id: int, name: str, text: str, by: str, person_id: int | None
                       {"file": name, "before": before, "after": after, "by": by, "person_id": person_id,
                        "diff": edition_diff(before, after)}, commit=False)
     ctx.save(kind, new, eid)  # commits both
+    return True
+
+
+def page_text(english: list[list[str]]) -> str:
+    return "\n\n".join(en for _, en in english)
+
+
+def edit_page(conn, run_id: int, voice, text: str, by: str, person_id: int | None = None) -> bool:
+    """The editor rewrites page 1 in one voice while the run waits: paragraph by paragraph, with a blank line
+    between, as many as the page has. If the run is approved in that voice, the draft takes this page as its
+    first page instead of drafting it, and every later page follows it as the voice to match. Kept in the
+    checkpoint document with a `document.edited` event (file "page"). False if it reads as it did."""
+    doc = waiting(conn, run_id)
+    if isinstance(voice, bool) or not isinstance(voice, int) or not 0 <= voice < len(doc["takes"]):
+        raise ValueError("there's no such voice")
+    page = current_page(doc, voice)
+    paras = [" ".join(p.split()) for p in re.split(r"\n\s*\n", _norm(text)) if p.strip()]
+    if len(paras) != len(page):
+        raise ValueError(f"keep page 1 to its {len(page)} paragraphs, with a blank line between each")
+    before, after = page_text(page), "\n\n".join(paras)
+    if after == before:
+        return False
+    if len(after) > max(3 * len(before), 6000):
+        raise ValueError("keep page 1 to about the length keikaku drafted it")
+    ctx = context_for(conn, None, run_id)
+    label = ctx.latest("reading")["voice_takes"][min(voice, len(ctx.latest("reading")["voice_takes"]) - 1)]["label"]
+    eid = events.emit(conn, run_id, "editor", "document.edited",
+                      {"file": "page", "voice": voice, "label": label, "before": before, "after": after, "by": by,
+                       "person_id": person_id, "diff": edition_diff(before, after)}, commit=False)
+    edited = {**(doc.get("edited") or {}), str(voice): [[pid, en] for (pid, _), en in zip(page, paras)]}
+    ctx.save("checkpoint", {**doc, "edited": edited}, eid)  # commits both
     return True
 
 

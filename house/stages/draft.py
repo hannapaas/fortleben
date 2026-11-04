@@ -117,6 +117,22 @@ def store(ctx, res) -> list[int]:
     return out
 
 
+def editors_page(ctx, paras) -> SimpleNamespace | None:
+    """The editor's own page 1 in the voice the run was approved in (house/steer.py, `edit_page`), as a drafting
+    answer, or None. A group the drafter joined is labelled p21–p23 and stands for the paragraphs between."""
+    from house.stages import checkpoint  # imported here: it imports this module
+    doc, _ = checkpoint.document(ctx.conn, ctx.run_id)
+    voice = int(ctx.options.get("voice") or 0)
+    page = ((doc or {}).get("edited") or {}).get(str(voice))
+    if not page:
+        return None
+    ids, items = [p.id for p in paras], []
+    for label, english in page:
+        first, _, last = label.partition("–")
+        items.append({"ids": ids[ids.index(first):ids.index(last) + 1] if last else [first], "english": english, "notes": []})
+    return SimpleNamespace(data={"items": items}, call_id=None)
+
+
 def run(ctx) -> dict:
     all_paras = ctx.work.translatable()
     pages = pager.pages(ctx.work.paragraphs)
@@ -132,6 +148,7 @@ def run(ctx) -> dict:
             voice_ref = context.voice_reference([(p.id, en[p.id]) for p in pages[0] if p.id in en])
         if all(p.id in done for p in paras):
             continue
-        store(ctx, draft_page(ctx, paras, all_paras, stable, voice_ref))
+        mine = editors_page(ctx, paras) if n == 0 else None  # the editor's own first page, taken as it is
+        store(ctx, mine or draft_page(ctx, paras, all_paras, stable, voice_ref))
         drafted += 1
     return {"pages": len(pages), "drafted": drafted, "model": model(ctx, "draft_model")}

@@ -427,3 +427,62 @@ def test_a_translations_page_shows_its_stages(conn, db, waiting):
     stopped = desk.steps({**dict(row), "status": "failed", "stage": "draft"}, {"checkpoint": True})
     assert [x["state"] for x in stopped][2:4] == ["done", "stopped"]
     assert [x["label"] for x in desk.steps({**dict(row), "status": "running", "stage": "bible"}, {})][1] == "Drafting the English"  # no review step
+
+
+# --- page 1 in a voice ------------------------------------------------------------------------------------
+
+def test_the_editors_page_one_is_recorded_and_the_draft_starts_from_it(conn, db, waiting, monkeypatch):
+    from house.stages import checkpoint as cp_stage
+    from house.stages import draft
+    token, run_id = waiting
+    doc, _ = cp_stage.document(conn, run_id)
+    page = steer.current_page(doc, 0)
+    mine = [en.replace(" ", "  ") + " (mine)" if i == 0 else en for i, (_, en) in enumerate(page)]
+    with pytest.raises(desk.Refused, match="paragraphs"):
+        desk.edit_file(db, token, run_id, "page", "only one paragraph", 0)
+    with pytest.raises(desk.Refused, match="no such voice"):
+        desk.edit_file(db, token, run_id, "page", "\n\n".join(mine), 9)
+    assert desk.edit_file(db, token, run_id, "page", "\n\n".join(mine), 0) is True
+    assert desk.edit_file(db, token, run_id, "page", "\n\n".join(mine), 0) is False
+    rec = steer.edits(conn, run_id)[-1]
+    assert (rec["file"], rec["voice"], rec["by"]) == ("page", 0, "Ines Example") and rec["after"].split("\n\n")[0].endswith("(mine)")
+    cp = desk.state(conn, token)["checkpoints"][0]
+    assert cp["voices"][0]["page_edited"] and cp["voices"][0]["english"][0].endswith("(mine)")
+    assert "Page 1, in the voice" in edition.file_edits(conn, run_id)[-1]["title"]
+
+    # Approved in that voice, the draft takes the page as it is and drafts the rest to match it.
+    desk.approve_run(conn, run_id, 0)
+    ctx = ctx_of(conn, run_id)
+    asked = []
+    monkeypatch.setattr(draft, "draft_page", lambda c, paras, *a: asked.append((paras[0].id, a[-1])) or SimpleNamespace(
+        call_id=None, data={"items": [{"ids": [p.id], "english": "x", "notes": []} for p in paras]}))
+    draft.run(ctx)
+    first = pager.pages(ctx.work.paragraphs)[0]
+    assert first[0].id not in [pid for pid, _ in asked]  # page 1 wasn't drafted
+    en = dict(conn.execute("SELECT json_extract(segment_ids, '$[0]'), english FROM revision WHERE run_id=?", (run_id,)).fetchall())
+    assert en[page[0][0].split("–")[0]].endswith("(mine)")
+    assert "(mine)" in asked[0][1]  # the next page is told to match it
+
+
+def test_a_note_in_that_voice_replaces_the_edited_page_and_says_so(conn, db, waiting, monkeypatch):
+    from house.stages import checkpoint as cp_stage
+    token, run_id = waiting
+    page = steer.current_page(cp_stage.document(conn, run_id)[0], 0)
+    desk.edit_file(db, token, run_id, "page", "\n\n".join(en + " (mine)" for _, en in page), 0)
+    reading, bible = ctx_of(conn, run_id).latest("reading"), ctx_of(conn, run_id).latest("bible")
+    first = [p.id for p in pager.pages(ctx_of(conn, run_id).work.paragraphs)[0]]
+    seen = []
+
+    def call(self, actor, c):
+        seen.append(c.input)
+        if c.prompt == "steer":
+            return SimpleNamespace(call_id=None, data={"reply": "Done.", "changed": [], "question": "",
+                                                       "reading": steer.fields(reading, steer.READING_FIELDS),
+                                                       "bible": steer.fields(bible, steer.BIBLE_FIELDS)})
+        return SimpleNamespace(call_id=None, data={"items": [{"ids": [pid], "english": "redrafted", "notes": []} for pid in first]})
+    monkeypatch.setattr(Ctx, "call", call)
+    steer.steer(conn, SimpleNamespace(budget=SimpleNamespace(cap_given=True)), run_id, "Plainer.")
+    assert "(mine)" in seen[0]  # the note was read against the editor's page
+    assert steer.current_page(cp_stage.document(conn, run_id)[0], 0)[0][1] == "redrafted"
+    last = steer.edits(conn, run_id)[-1]
+    assert (last["file"], last["by"], last["cause"]) == ("page", "keikaku", "note")

@@ -37,7 +37,7 @@
   {{ file(cp, 'bible', closed) }}
 
   <h3 id="voice-q-{{ cp.run_id }}">The voice</h3>
-  <p class="sm">Page 1 in each voice keikaku thinks the story allows. Pick the one to write the whole story in, and change how it's described if you like: the drafter is told the name and the line. A change doesn't draft page 1 again; a note does.</p>
+  <p class="sm">Page 1 in each voice keikaku thinks the story allows. Pick the one to write the whole story in. You can change its name, its description and page 1 itself: the drafter is told the name and the description, starts from your page 1, and writes every later page to match it. A note drafts page 1 again, in place of your edit.</p>
   {% set vf = cp.files|selectattr('name', 'equalto', 'voices')|first %}
   {# The voices file is written from the fields below (desk.js), so it saves like the other files. #}
   <div class="voices{% if vf %} file{% endif %}"{% if vf %} data-file="voices"{% endif %} role="radiogroup" aria-labelledby="voice-q-{{ cp.run_id }}">
@@ -46,12 +46,17 @@
     <div class="voice{% if loop.index0 == cp.voice %} picked{% endif %}" data-label="{{ v.raw_label }}" data-line="{{ v.raw_line }}">
       <div class="vhead"><label class="opt"><input type="radio" aria-label="{{ v.label }}" name="voice-{{ cp.run_id }}" value="{{ loop.index0 }}"{% if loop.index0 == cp.voice %} checked{% endif %}><span class="bx r" aria-hidden="true"></span><b>{{ v.label }}</b></label>
         {% if vf %}<input class="vname" maxlength="200" value="{{ v.raw_label }}" aria-label="This voice's name"{% if closed or cp.steering %} readonly{% endif %}>{% endif %}</div>
-      {% if v.redrafted %}<span class="tag">redrafted after your note</span>{% endif %}
+      {% if v.redrafted %}<span class="tag">redrafted after your note</span>{% endif %}{% if v.page_edited %}<span class="tag">page 1 edited by you</span>{% endif %}
       <p class="vline">{{ v.line }}</p>
       {% if vf %}<div class="vedit">
         <textarea class="vtext" rows="2" maxlength="4000" aria-label="How this voice is described to the drafter"{% if closed or cp.steering %} readonly{% endif %}>{{ v.raw_line }}</textarea>
       </div>{% endif %}
       <div class="page">{{ paras(v.english) }}</div>
+      {% if vf %}{# Page 1 in this voice, editable while it's the one picked; saved with the voice above it. #}
+      <div class="file vpage" data-file="page" data-voice="{{ loop.index0 }}">
+        <textarea class="file-box" hidden aria-hidden="true" tabindex="-1">{{ v.english|join('\n\n') }}</textarea>
+        <div class="pedit">{% for e in v.english %}<textarea class="vpara" rows="2" aria-label="Page 1, paragraph {{ loop.index }}"{% if closed or cp.steering %} readonly{% endif %}>{{ e }}</textarea>{% endfor %}</div>
+      </div>{% endif %}
     </div>
     {% endfor %}
     {% if vf %}<div class="filerow"><button type="button" class="btn save" disabled>Save</button><span class="sm saved" aria-live="polite">{% if vf.edited %}Edited by you.{% endif %}</span></div>{% endif %}

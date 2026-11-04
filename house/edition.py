@@ -348,7 +348,8 @@ def file_edits(conn, run_id: int) -> list[dict]:
     """The editor's hand edits of the files the run was drafted from, for the appendix: which, who, when,
     and the lines that changed."""
     from house import steer
-    return [{"title": FILE_TITLES.get(e["file"], e["file"]), "by": e["by"], "date": _date(e["at"]), "cause": e.get("cause"),
+    return [{"title": f"Page 1, in the voice “{plain(e.get('label', ''))}”" if e["file"] == "page" else FILE_TITLES.get(e["file"], e["file"]),
+             "by": e["by"], "date": _date(e["at"]), "cause": e.get("cause"),
              "lines": e.get("diff") or diff_lines(e["before"], e["after"])} for e in steer.edits(conn, run_id)]
 
 

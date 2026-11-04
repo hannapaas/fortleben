@@ -545,13 +545,14 @@ FILE_CHARS = 60_000  # far more than any reading or bible the house writes
 FILE_NAMES = {"reading": "The reading", "voices": "The voices", "bible": "The analysis"}
 
 
-def edit_file(db, token: Who, run_id: int, name: str, text) -> bool:
-    """The editor's own version of one of the files a waiting run drafts from (house/steer.py, `edit`):
-    every later stage reads it, and the edition publishes what they changed. False if nothing changed."""
+def edit_file(db, token: Who, run_id: int, name: str, text, voice=None) -> bool:
+    """The editor's own version of one of the files a waiting run drafts from (house/steer.py, `edit`), or of
+    page 1 in one voice (`name` "page", `edit_page`): every later stage reads it, and the edition publishes
+    what they changed. False if nothing changed."""
     from house import steer
     conn = connect(db)
     person, row = _mine(conn, token, run_id)
-    if name not in FILE_NAMES:
+    if name not in FILE_NAMES and name != "page":
         raise Refused("There's no such file.", 404)
     if not isinstance(text, str) or not text.strip():
         raise Refused("The file is empty. Write something in it, or leave it as it was.")
@@ -566,7 +567,10 @@ def edit_file(db, token: Who, run_id: int, name: str, text) -> bool:
             raise Refused("That run is still finishing its checkpoint. Try again in a moment.", 409)
         try:
             # named as the edition credits them, since that's where the record is published
-            return steer.edit(conn, run_id, name, text, _options(conn, run_id).get("credit") or person["name"], person["id"])
+            by = _options(conn, run_id).get("credit") or person["name"]
+            if name == "page":
+                return steer.edit_page(conn, run_id, voice, text, by, person["id"])
+            return steer.edit(conn, run_id, name, text, by, person["id"])
         except (steer.NotWaiting, ValueError) as e:
             raise Refused(f"Not saved: {e}.")
 
@@ -855,6 +859,9 @@ def checkpoint(conn, row) -> dict:
     for r in rounds:  # each voice shows its latest redraft, if a note has redrafted it
         if isinstance(r["voice"], int) and 0 <= r["voice"] < len(voices):
             voices[r["voice"]].update(english=r["english"], redrafted=True)
+    for k, page in (cp.get("edited") or {}).items():  # or the editor's own page 1 in it, which a later redraft replaces
+        if k.isdigit() and int(k) < len(voices):
+            voices[int(k)].update(english=_paras(page), redrafted=False, page_edited=True)
     run = _run_dict(conn, row)
     from house import steer
     try:

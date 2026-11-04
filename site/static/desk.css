@@ -161,3 +161,11 @@
 .vtext { font-size: 14px; line-height: 1.5; margin-top: 4px; field-sizing: content; }
 .vname:focus, .vtext:focus { outline: 0; border-left-color: var(--accent); }
 .voices.file > .filerow { grid-column: 1 / -1; padding-left: 0; }
+/* Page 1 in the picked voice: each paragraph a box as tall as itself, ruled like the files. */
+.voice .pedit { display: none; }
+.voice.picked .pedit { display: block; }
+.voice.picked .page { display: none; }
+.vpara { display: block; width: 100%; box-sizing: border-box; margin: 0 0 .8em; font: inherit; font-family: var(--serif); font-size: 1rem; line-height: 1.5;
+  color: var(--ink); background: transparent; border: 0; border-left: 2px solid color-mix(in srgb, var(--rule) 35%, transparent);
+  padding: 0 0 0 12px; resize: none; overflow: hidden; field-sizing: content; }
+.vpara:focus { outline: 0; border-left-color: var(--accent); }
