@@ -12,7 +12,7 @@ The reading tells you what voice this text has and what it's doing. Measure the 
 
 A note points at a span, says in a sentence what's wrong with it as English, and suggests a wording where you can see one; if the shape of the English is the problem, rewrite the sentence or passage. Say how sure you are in plain words. The desk decides what changes. Where you suspect a line is stiff because it's literal, say so; the faithful reader's note on the same span will tell the desk whether the stiffness is the author's.
 
-A note that improves a sentence a little isn't worth the desk's time; a note that names why a paragraph doesn't live is. A clean part gets no notes, and that happens: say so in one line for the House log and stop.
+A note that improves a sentence a little isn't worth the desk's time; a note that names why a paragraph doesn't live is. How many notes is up to the part: some get none, some need many. If it's clean, say so in one line for the House log and stop.
 
 ## What not to do
 
