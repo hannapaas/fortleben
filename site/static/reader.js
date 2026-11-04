@@ -249,9 +249,10 @@
     var b = document.createElement('b'); b.textContent = note; span.appendChild(b);
     return span;
   }
-  // A new comment shows only to its writer until the screen has read it; check back for a minute or two.
+  // A new comment shows only to its writer until the screen has read it; check back every few seconds for
+  // two minutes, then every half minute for twenty, since a screen that didn't run is tried again later.
   function watch(el, id, tries) {
-    if (tries > 40) return;
+    if (tries > 76) return;
     setTimeout(function () {
       fetch('/comments/' + id).then(function (r) { return r.ok ? r.json() : null; }).then(function (st) {
         if (!st || st.status === 'pending') return watch(el, id, tries + 1);
@@ -261,7 +262,7 @@
         else { el.classList.add('failed'); b.textContent = 'Not posted: ' + st.reason; }
         layout();
       });
-    }, 3000);
+    }, tries < 40 ? 3000 : 30000);
   }
   document.querySelectorAll('.cmp').forEach(function (f) {
     var work = location.pathname.split('/')[2];
@@ -280,7 +281,7 @@
           var c = document.createElement('div'); c.className = 'cm mine';
           c.dataset.id = res.j.id; c.dataset.status = 'pending';
           var p = document.createElement('p'); p.textContent = text; c.appendChild(p);
-          c.appendChild(by(name, 'Only you can see this until it’s checked.'));
+          c.appendChild(by(name, 'Only you can see this until it\'s checked.'));
           var mar = f.closest('.mar'), list = mar.querySelector('.list');
           list.appendChild(c); list.dataset.open = '1'; fold(list); mar.classList.remove('empty');
           t.value = ''; mar.classList.remove('writing'); layout();
