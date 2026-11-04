@@ -1,0 +1,113 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"Who is it that is ill?\" he found himself asking, before he knew it.",
+    "ids": [
+     "p96"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"It is only that I kept dreaming that our grand-master lay gravely ill, night after night, until I could bear it no longer, and so I alone slipped out and came away like this.\"",
+    "ids": [
+     "p97"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"What! A dream that your grand-master is ill--\"",
+    "ids": [
+     "p98"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Ryujiro could not help starting.",
+    "ids": [
+     "p99"
+    ],
+    "notes": []
+   },
+   {
+    "english": "V",
+    "ids": [
+     "p100"
+    ],
+    "notes": []
+   },
+   {
+    "english": "In an age of poor roads, fearing for the safety of those cut off from one presses deeper than it does now. In a world with no telegraph, no telephone, no post, the mind by itself runs to imagining. And with that, superstition cannot help but run high.",
+    "ids": [
+     "p101"
+    ],
+    "notes": []
+   },
+   {
+    "english": "A diviner's words. A dream. A crow's cry. Even a broken sandal-thong is feared as an evil omen. And so to set out from afar to visit the sick, taking a bad dream as if it were fact, is by no means rash or heedless.",
+    "ids": [
+     "p102"
+    ],
+    "notes": [
+     "Crow's cry renders karasutobi/karasu naki phrasing; the sense is a crow's call taken as omen, not certain of the exact form."
+    ]
+   },
+   {
+    "english": "Ryujiro himself was bound for Edo on account of just such a dream, so he harboured no doubt of the girl. And at their being in the same plight, a sudden fellow feeling came over him.",
+    "ids": [
+     "p103"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"And that grand-master is--\" Ryujiro asked, hastening onward all the while, of course.",
+    "ids": [
+     "p104"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"I am a travelling acrobat, one of the Takewari troupe, and I am called Kotora. The master I walk the circuits with is Takewari Toramatsu, and his master again is Takewari Toradayu, the grand-master of our art,\" the girl told her story for the first time.",
+    "ids": [
+     "p105"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Ho, I had heard of the Takewari troupe.\"",
+    "ids": [
+     "p106"
+    ],
+    "notes": []
+   }
+  ],
+  "say": null
+ },
+ "usage": {
+  "input_tokens": 26707,
+  "cached_tokens": 25713,
+  "output_tokens": 2321,
+  "reasoning_tokens": 1748,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0149637,
+ "response_id": "resp_6aeb7c18c240db51a30c4d89",
+ "latency_s": 27.16,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2028
+  }
+ ],
+ "created": "2026-11-04T18:40:24Z"
+}

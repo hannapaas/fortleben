@@ -1,0 +1,103 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "Presently she had worked her tightrope walk to the halfway point. However high the creeper is stretched from bank to bank, at its middle a slack forms of itself and hangs close to the face of the water. With the weight of a person's body added, it all but dipped and threatened to sink. Even that Kotora passed with skill. The hard place was all but passed, just when one thought she might pause to draw a breath.",
+    "ids": [
+     "p145"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Ah!\"",
+    "ids": [
+     "p146"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Almost in the same instant as Kotora's sharp cry, the stoutly twisted creeper-rope snapped apart. With a fearful great splash of water Kotora fell into the Shin-Tone cut. Ryujiro's horror rose to its height.",
+    "ids": [
+     "p147"
+    ],
+    "notes": [
+     "Kept creeper-rope literal for the rope web; ぷつり as a short snap."
+    ]
+   },
+   {
+    "english": "VII",
+    "ids": [
+     "p148"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Fooling about, are you! I fixed it so you should not cross, and coming tightrope-walking to fetch the boat, damn you — serve you right!\"",
+    "ids": [
+     "p149"
+    ],
+    "notes": [
+     "Monk in vulgar bluster, as in bible."
+    ]
+   },
+   {
+    "english": "Between the riverside willows on the far bank, the same evil monk as before had reappeared at some unseen moment, an eel-splitting knife in his hand. The fierceness of the eyes with which he glared this way was beyond telling. It was this fellow beyond doubt who had cut the creeper.",
+    "ids": [
+     "p150"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"I can swim a little. I shall be quite all right.\"",
+    "ids": [
+     "p151"
+    ],
+    "notes": []
+   },
+   {
+    "english": "So saying, Kotora cast away her umbrella and struck out in a breaststroke. Even in a stroke or two her mastery in the water could be seen, and Ryujiro, reassured, beckoned to her, \"Come this way, at any rate...\"",
+    "ids": [
+     "p152"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Seeing the woman could swim, the evil monk on the far bank flared into a rage fit to send steam from his very crown,",
+    "ids": [
+     "p153"
+    ],
+    "notes": [
+     "Sentence runs on into the abuse quoted in p154, which is outside this page; left as a lead-in rather than closed off."
+    ]
+   }
+  ],
+  "say": "Drafted the creeper-rope fall and the monk's reappearance keeping rope and vulgar registers literal."
+ },
+ "usage": {
+  "input_tokens": 26948,
+  "cached_tokens": 25713,
+  "output_tokens": 2733,
+  "reasoning_tokens": 2140,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.017015950000000002,
+ "response_id": "resp_6aeb7cd99953ff19887642a6",
+ "latency_s": 32.19,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2201
+  }
+ ],
+ "created": "2026-11-04T18:43:37Z"
+}

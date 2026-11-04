@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 61043,
+  "cached_tokens": 60788,
+  "output_tokens": 170,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.016577599999999998,
+ "response_id": "resp_6aeb7e7b2ddc9670099b4806",
+ "latency_s": 2.19,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_932bf8c2-4f89-4dbf-b1dd-15d9aac88a98",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"F8\",\"R4\"],\"new\":\"gulping teacup sake out of spite, she began, as if full of vexation:\",\"old\":\"gulping teacup sake in spite, she opened her mouth as if full of regret.\",\"reason\":\"口惜しい is vexation, not remorse, and 口を切る is beginning to speak; 'in spite' also lacks its object in English.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:50:35Z"
+}

@@ -1,0 +1,60 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "I",
+    "ids": [
+     "p1"
+    ],
+    "notes": []
+   },
+   {
+    "english": "It was a heat unknown in recent years. Wherever one looked, the roof-tiles of the mud-plastered houses reflected the sunlight dully, like lead, and even the swallows' nests hung beneath them seemed, at this rate, likely to steam the chicks and eggs inside alive as they were. Still more, every field that was a field, whether hemp or millet, hung its head limply in the rising heat from the earth, and there was not a single thing that was not wilted, green as it stood. The sky seen above those fields, as if dazed by the humidity of these past days, was turbid and heavy with the air near the ground, for all that it was fine, and here and there floated in drops mere shapes of towering clouds, like hail parched in a roasting pan. — The story of the \"wine worm\" begins with three men who, in this weather, have gone deliberately out into a threshing-yard in the blazing sun.",
+    "ids": [
+     "p2"
+    ],
+    "notes": [
+     "I have kept the hail-in-a-roasting-pan simile literal. It is a deliberately bookish, kitchenware comparison for clouds; smoothing it would lose its odd flatness.",
+     "I keep \"wine worm\" as the fixed term in quotes, to mark it as a borrowed tag."
+    ]
+   },
+   {
+    "english": "Strangely, one of them lay stark naked on his back on the ground. What was more, for some reason his hands and feet were wound round and round with thin cord. Yet the man himself did not look particularly troubled by it. He was short, fresh-complexioned, somehow suggestive of dull heaviness, a man fat as a pig. Then a conveniently sized unglazed earthen jar stood at this man's pillow, though what was in that, too, was unknown.",
+    "ids": [
+     "p3"
+    ],
+    "notes": [
+     "Thin cord renders hosobiki; unglazed earthen jar renders suyaki no kame. I leave what the jar holds unstated, as the text does."
+    ]
+   }
+  ],
+  "say": null
+ },
+ "usage": {
+  "input_tokens": 15558,
+  "cached_tokens": 0,
+  "output_tokens": 2266,
+  "reasoning_tokens": 1795,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.029078,
+ "response_id": "resp_6aeb5b9038c0511fcfa84731",
+ "latency_s": 28.45,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1849
+  }
+ ],
+ "created": "2026-11-04T16:21:36Z"
+}

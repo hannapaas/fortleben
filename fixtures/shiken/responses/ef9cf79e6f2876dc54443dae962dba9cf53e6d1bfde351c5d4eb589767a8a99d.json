@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 61982,
+  "cached_tokens": 61684,
+  "output_tokens": 165,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0168288,
+ "response_id": "resp_6aeb7e8825a35e2498934842",
+ "latency_s": 2.6,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_70893b41-4021-4e51-addb-9c898aabeebc",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"F14\",\"R1\"],\"new\":\"O-Tetsu vindictively kicked her as she lay and even spat on her.\",\"old\":\"O-Tetsu with شع vindictive spite kicked her as she lay and even spat on her.\",\"reason\":\"Stray non-English characters corrupt the sentence; 執念深く is vindictive tenacity, kept in the adverb.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:50:48Z"
+}

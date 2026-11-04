@@ -1,0 +1,34 @@
+{
+ "prompt": "final-read",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": {
+  "notes": [],
+  "say": "Verdict: Ready. The English holds together as one dogged, repetitive voice against the literati's flat abstraction, the Tiger paraphrase stays properly flat, and the remaining obscurities are the ones the text itself preserves.",
+  "verdict": "ready — sense, continuity, the fee, the garden network and Nekohachi's unmerged registers now run clean to p188"
+ },
+ "usage": {
+  "input_tokens": 52450,
+  "cached_tokens": 52212,
+  "output_tokens": 2942,
+  "reasoning_tokens": 2853,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.07023439999999999,
+ "response_id": "resp_6aeb81ae857bacfc099643f1",
+ "latency_s": 26.97,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 372
+  }
+ ],
+ "created": "2026-11-04T19:04:14Z"
+}

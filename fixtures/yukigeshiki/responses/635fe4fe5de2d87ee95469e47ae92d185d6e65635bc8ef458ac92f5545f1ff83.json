@@ -1,0 +1,100 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"Times are bad, you know, so I wonder if it would sell right away? But if that were suddenly gone now, you'd be in a fix. 'Call the missus, there! What do you want to eat, there! Go buy fireworks, there!' If I have to go running out every time, that will never suit your way of living, will it?\"",
+    "ids": [
+     "p144"
+    ],
+    "notes": [
+     "Caretaker's old-servant speech: the three short orders in sore, sore manner quote back Taki's own peremptory way of using the telephone, which is why they are abrupt."
+    ]
+   },
+   {
+    "english": "\"I'll be gone, you know, I'll be gone, so there'll be no trouble, as soon as it sells, with a fortune in my pocket, eh?\"",
+    "ids": [
+     "p145"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Well, well, you are in a fine mood. Mind the steps there, the steps, the stone steps... Not yet, not yet, a little farther, a little farther, no steps yet. What dreadful long strides! A dangerous way to sway! Dear me, really, just like walking in deep snow...\"",
+    "ids": [
+     "p146"
+    ],
+    "notes": [
+     "Kept the closing stagger literal as a callback to the snowscape, and left the sentence unfinished as in the Japanese."
+    ]
+   },
+   {
+    "english": "III",
+    "ids": [
+     "p147"
+    ],
+    "notes": []
+   },
+   {
+    "english": "A, one of the scaffolders, told Taki what he had heard about the worth of the scarlet carp from the goldfish dealer who had come to watch. He had brought this offer: if Taki felt like parting with them, if they caught them here and handed them over, he would take them on the spot at such and such a price, what did he think? They could look at what was caught and then talk the price over again according to the number, but—",
+    "ids": [
+     "p148"
+    ],
+    "notes": [
+     "Kept scarlet carp as in the house English for p5. The sentence trails off in the Japanese into A's quoted line in the next paragraph."
+    ]
+   },
+   {
+    "english": "\"You won't sell, I suppose, but they say that is about what they are worth,\" A told Taki. Taki marvelled at the unexpected high sum of around four hundred yen.",
+    "ids": [
+     "p149"
+    ],
+    "notes": [
+     "Japanese idiom is marvelled/was astonished, not disapproval; figure kept exact."
+    ]
+   },
+   {
+    "english": "\"I'll sell,\" he said, nodding firmly.",
+    "ids": [
+     "p150"
+    ],
+    "notes": []
+   },
+   {
+    "english": "That night Taki took A and B with him and drove by motor up to a brothel in town. From the second floor of a teahouse by the sea, where in these hard times the sound of strings was seldom heard, gaudy drums rang out. Applause broke out and cheers went up.",
+    "ids": [
+     "p151"
+    ],
+    "notes": [
+     "Took toki no koe as raised cheers/shouts rather than a literal war-cry."
+    ]
+   }
+  ],
+  "say": "Drafted the drunken lantern walk into the brothel night, keeping the snow simile and unfinished sentences as written."
+ },
+ "usage": {
+  "input_tokens": 21294,
+  "cached_tokens": 20465,
+  "output_tokens": 3522,
+  "reasoning_tokens": 2823,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0190745,
+ "response_id": "resp_6aeb7d2da4681365074f492c",
+ "latency_s": 41.35,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2661
+  }
+ ],
+ "created": "2026-11-04T18:45:01Z"
+}

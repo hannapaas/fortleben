@@ -1,0 +1,66 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"Living-Rope O-Tetsu is the best in the land at taking men. Once she takes you, you are done for. Guilty or not does not come into it. By some torture strange to this world, she must have killed five or six by now. Arashi Hinamaru, the travelling player who came to the market at Awa, was killed. The young fellow selling Echigo chijimi was killed. Then the travelling painter from Kyoto and the journeyman carpenter from Odawara. The second son of the makomo magnate of Ukishima was caught too, but none of them lasted three months. Is that what they call the deep love of a wicked woman. She can hardly be a Kirishitan bateren priest, but they say one short glare from those eyes leaves the body numb and helpless.\"",
+    "ids": [
+     "p9"
+    ],
+    "notes": [
+     "Kept as performed rumour speech, not settled fact. Left Kirishitan bateren unglossed for the margin. Kept five or six and three months literal."
+    ]
+   },
+   {
+    "english": "Talk like this stood everywhere.",
+    "ids": [
+     "p10"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Knowing none of this, Isogai Ryujiro set out on his warrior pilgrimage, boarded the night boat on the Tone, and found himself together with O-Tetsu, on her way back from Edo. She was already close to forty, an older woman well past the late cherry bloom. A stout body that must have weighed over twenty kan. Her colour dark, her hair showing a marked wavy quirk and thin at the temples, which she always wore twisted up carelessly with a comb. Low nose, large mouth, a chin that looked double, and yet about her eyes there was an overflowing charm. Everything she said and did was deft, brisk in every way and full of tact. In her youth, a woman of just this sort might rather have moved a man's heart.",
+    "ids": [
+     "p11"
+    ],
+    "notes": [
+     "Kept twenty kan as a measure and the appraisal flat as written, neither leering nor rescuing. Rendered ubazakura literally as late cherry bloom."
+    ]
+   },
+   {
+    "english": "\"If you are going to worship at Osugi-sama, you must stop by at our house.\"",
+    "ids": [
+     "p12"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted the rumour set piece and O-Tetsu portrait keeping hearsay, catalogue of victims, and physical appraisal literal."
+ },
+ "usage": {
+  "input_tokens": 26904,
+  "cached_tokens": 21361,
+  "output_tokens": 2097,
+  "reasoning_tokens": 1555,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01904515,
+ "response_id": "resp_6aeb7abd65e3002b5ae744b8",
+ "latency_s": 25.52,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2146
+  }
+ ],
+ "created": "2026-11-04T18:34:38Z"
+}

@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 49148,
+  "cached_tokens": 48884,
+  "output_tokens": 158,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.013992800000000001,
+ "response_id": "resp_6aeb7ef3a46dc6d0e8214ff9",
+ "latency_s": 1.74,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_1202892d-db15-4383-88d1-4056963af51a",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"R12\"],\"new\":\"\\\"Damn! You dawdling idiots, ah, look, you've clouded it all up again.\\\"\",\"old\":\"\\\"Damn! You slowcoaches, ah, look, you've clouded it up again.\\\"\",\"reason\":\"'Slowcoaches' is cosy school slang and softens Taki's copied brutality at the pond.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:52:35Z"
+}

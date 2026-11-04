@@ -1,0 +1,112 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "IV",
+    "ids": [
+     "p65"
+    ],
+    "notes": []
+   },
+   {
+    "english": "O-Tetsu saw to his travelling dress down to the last thing and sent him off in the best of humour.",
+    "ids": [
+     "p66"
+    ],
+    "notes": []
+   },
+   {
+    "english": "A plain iron-grey travelling half-cape, a hilt-bag of blue woollen cloth, wrist-covers and leggings of pale yellow Kai silk, a first-lined kimono in hailstone pattern worn short at the hem, no hakama, only an iron fan in his hand. So dressed, Ryujiro's fine manly figure shone all the more.",
+    "ids": [
+     "p67"
+    ],
+    "notes": [
+     "Garment names are rendered as plain description rather than glossed Japanese terms; hakama and iron fan are left as in the house style for swordsman dress."
+    ]
+   },
+   {
+    "english": "\"See you do not fall in with any woman on the way. Will you promise me that. My kobun are everywhere, you know. They will be watching you proper.\"",
+    "ids": [
+     "p68"
+    ],
+    "notes": [
+     "Keeps O-Tetsu's cajoling command and her kobun surveillance warning literal."
+    ]
+   },
+   {
+    "english": "\"Have no fear. Now I think only of my master's state, and next of yourself.\"",
+    "ids": [
+     "p69"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Ryujiro left her pleased with that, and pressed onward with all haste. Over the Fukuda upland and out to Ichizaki was but a breath.",
+    "ids": [
+     "p70"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Though now a free man, he could not shake the feeling that something strong still pulled him by the hair from behind. By it he knew how matchlessly O-Tetsu's power had pressed upon him till now.",
+    "ids": [
+     "p71"
+    ],
+    "notes": [
+     "The hair-pulled-from-behind image is kept literal; it carries the invisible-rope binding without adding the word rope."
+    ]
+   },
+   {
+    "english": "By degrees the feeling grew upon him, as of a hooked fish out of the creel and swimming in the great river again. Now he was being drawn toward Edo.",
+    "ids": [
+     "p72"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"To my master, a moment the sooner.\"",
+    "ids": [
+     "p73"
+    ],
+    "notes": []
+   },
+   {
+    "english": "His master Jinpusai was in truth a man dogged by ill fortune. The more he thought of it the more pitiable it seemed. Set beside such fencing masters as Saito Yakuro, Chiba Shusaku and Momoi Shunzo, his skill was in nothing inferior. Yet while the others took disciples by the thousand and were patronised by the shogunate or the lords, Akioka Jinpusai lived on in poverty in a ronin's lodgings, with in truth but a single disciple, himself. There, however, lay his greatness. He may have hidden himself of purpose in such a fate, but in any case the debt must be repaid in full.",
+    "ids": [
+     "p74"
+    ],
+    "notes": [
+     "Keeps the three fashionable masters as a full list and the single-disciple poverty as the point of the passage, without ennobling or explaining it away."
+    ]
+   }
+  ],
+  "say": "Page drafted in brisk kodan voice, keeping the outfit catalogue and ill-fortune meditation at full length."
+ },
+ "usage": {
+  "input_tokens": 26705,
+  "cached_tokens": 25713,
+  "output_tokens": 2781,
+  "reasoning_tokens": 2046,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0169162,
+ "response_id": "resp_6aeb7bbd27ed1f82830b420a",
+ "latency_s": 33.88,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2802
+  }
+ ],
+ "created": "2026-11-04T18:38:53Z"
+}

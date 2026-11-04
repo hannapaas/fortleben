@@ -1,0 +1,44 @@
+{
+  "type": "object",
+  "properties": {
+    "notes": {
+      "type": "array",
+      "description": "For the editor: only a judgement call the text can't settle. Usually none",
+      "items": {
+        "type": "object",
+        "properties": {
+          "paragraph": {
+            "type": "string",
+            "description": "The paragraph ID alone, exactly as labelled in the English given: p12, or p21–p23 for a group the translator joined"
+          },
+          "span": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The English it points at, quoted exactly, if it's one place"
+          },
+          "problem": {
+            "type": "string",
+            "description": "What's wrong, in a sentence or two"
+          },
+          "evidence": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The Japanese, or the earlier passage, it rests on"
+          }
+        }
+      }
+    },
+    "verdict": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Ready or not, and why, in a sentence or two, after your edits"
+    },
+    "say": {
+      "type": "string"
+    }
+  }
+}

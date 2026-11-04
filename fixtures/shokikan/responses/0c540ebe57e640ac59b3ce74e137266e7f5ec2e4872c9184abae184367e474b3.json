@@ -1,0 +1,52 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "The voice that joined the strings overbore the waters choking between the rocks and poured forth, with practised ease, a phrase in the Ikuta manner, and the guest, moved more deeply still, let his tobacco lie and looked up toward that quarter before he knew it. The shoji set its barrier between, and the pines, heedless, lodged shadows in the Kōrin manner. The guest turned his gaze as it was toward the valley below, yet as though his ear were still caught by the music he twirled his beard and did not stir. Like jewels spilling in disorder the hands on the koto quickened of a sudden, then flowed again, and after them rose a clear and gliding voice. The guest looked up toward that quarter once more.",
+    "ids": [
+     "p5"
+    ],
+    "notes": [
+     "Ikuta is the Ikuta school of koto playing; Kōrin manner kept as in bible. 'Like jewels spilling' renders the image for the falling notes, not literal jewels."
+    ]
+   },
+   {
+    "english": "Stopping a maid who passed along the corridor and asking who it was that sang, he had her look him in the face and laugh in a strange way. Then she must indeed be some beauty. When he pressed her again, asking who, she would say only that she did not know, and already flushed to the brow she ran off toward the maids' room. No doubt to make a tale of it with one or another of her fellows. The guest smiled as he watched her go, then stepped out to the veranda edge above the water and leaned against a chair beside him. The player of the koto still sent forth a beautiful voice, unsparing.",
+    "ids": [
+     "p6"
+    ],
+    "notes": [
+     "Kept singer and player ungendered to preserve the withholding: the Japanese gives only主. Oka-yaki rendered as flushing; tamari as maids' room."
+    ]
+   }
+  ],
+  "say": null
+ },
+ "usage": {
+  "input_tokens": 27780,
+  "cached_tokens": 4337,
+  "output_tokens": 3093,
+  "reasoning_tokens": 2668,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.04309955,
+ "response_id": "resp_6aeb7ace4b6d8e80708b45d6",
+ "latency_s": 32.14,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1713
+  }
+ ],
+ "created": "2026-11-04T18:34:55Z"
+}

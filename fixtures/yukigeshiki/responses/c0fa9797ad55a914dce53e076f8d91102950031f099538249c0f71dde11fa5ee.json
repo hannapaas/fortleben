@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 49507,
+  "cached_tokens": 49268,
+  "output_tokens": 151,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.013829600000000001,
+ "response_id": "resp_6aeb7ef82700c804ade34c08",
+ "latency_s": 2.45,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_135249f5-eb27-4a48-9104-4bb5edccb81b",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"R14\"],\"new\":\"A, for all the world like a playhouse gallant weary from battle, leaned\",\"old\":\"A, who could only be a playhouse gallant weary from battle, leaned\",\"reason\":\"に違ひない here is a looks-like simile for the frozen tableau, not an identification.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:52:40Z"
+}

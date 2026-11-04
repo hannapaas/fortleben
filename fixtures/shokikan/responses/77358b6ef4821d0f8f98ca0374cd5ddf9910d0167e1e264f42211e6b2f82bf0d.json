@@ -1,0 +1,34 @@
+{
+ "prompt": "final-read",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": {
+  "notes": [],
+  "say": "Note for the editor: the Japanese twice prints Tsunao as 鋼雄 (p77–p78) for 綱雄; the English normalises to Tsunao, as the bible directs — please check against the 1895 text.\n\nVerdict: Ready. The English holds the reading to the end — Tatsuya charming in company and coarse in soliloquy, Mitsuyo's repetitions unvaried, the ending left unresolved — and the few sense errors found (the bath joke, the deer-whistles, the grain-ear misreading, and the unnamed subject opening p97) have been corrected.\n\nHouse log: Final read completed; four sense fixes made and the text is ready to publish.",
+  "verdict": "ready_with_notes"
+ },
+ "usage": {
+  "input_tokens": 51903,
+  "cached_tokens": 51060,
+  "output_tokens": 1375,
+  "reasoning_tokens": 1199,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.041084,
+ "response_id": "resp_6aeb7f8196760a61226f402c",
+ "latency_s": 14.05,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 644
+  }
+ ],
+ "created": "2026-11-04T18:54:57Z"
+}

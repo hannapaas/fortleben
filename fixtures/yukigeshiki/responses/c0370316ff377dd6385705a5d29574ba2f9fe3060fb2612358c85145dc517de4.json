@@ -1,0 +1,32 @@
+{
+ "prompt": "final-read",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 37146,
+  "cached_tokens": 36724,
+  "output_tokens": 110,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0112328,
+ "response_id": "resp_6aeb7f9919617de43f6f462e",
+ "latency_s": 2.13,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_c9a0896e-c221-4cbd-adb7-43f8b7d49289",
+   "name": "edit",
+   "arguments": "{\"old\":\"and was all too glad to have that little job of it\",\"new\":\"and was all too glad to have that little job of it\",\"reason\":\"Revert identical wording test\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:55:21Z"
+}

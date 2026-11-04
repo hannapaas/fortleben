@@ -1,0 +1,119 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"Ei!\" With a swift move he threw with all his might, as one throws a dart. It was the little knife drawn from his sword. That it flew fifty ken was splendid in itself, and it struck true, standing upright in the brow of the evil monk as if engraving a holy white curl there.",
+    "ids": [
+     "p160"
+    ],
+    "notes": [
+     "kozuka is the small utility knife housed in the sword-scabbard; the text says he \"threw shuriken\" with it. Byakugo is the white curl on a Buddha's brow. Fifty ken is kept as written."
+    ]
+   },
+   {
+    "english": "\"Wah!\" With a single cry he toppled backwards and vanished from this side. It was indescribably satisfying.",
+    "ids": [
+     "p161"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Ryujiro quickly stripped off his clothes. He stopped short of his wrist-guards and leggings. He thrust his small knife behind him into his loincloth and dived into the Shin-Tone channel.",
+    "ids": [
+     "p162"
+    ],
+    "notes": [
+     "He keeps tekko and kyahan on and keeps only the small knife; the long sword is left behind on the bank."
+    ]
+   },
+   {
+    "english": "Five or six ken were nothing, but as he pushed on to ten and fourteen or fifteen ken, the growth of weeds was thicker than he had thought. They tangled his hands, they tangled his feet, and he was startled by the dreadful power in them. There was nothing for it but to think that the weeds and water-caltrops had spirits in them and were spitefully taking revenge. If this was hard for him naked, he thought, how hard swimming must be for Kotora in her clothes.",
+    "ids": [
+     "p163"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Quite literally floundering through the weeds, he pushed on another ken or two, but then he could get no further forward. He felt as if he had been caught in the ganjigarame hold of the main rope.",
+    "ids": [
+     "p164"
+    ],
+    "notes": [
+     "Mozogaki mozogaki plays on mogaki, to struggle, with mo, weeds. Ganjigarame is kept as the named hold from the catalogue; hon-nawa is the main binding cord."
+    ]
+   },
+   {
+    "english": "\"Oh, that's it!\"",
+    "ids": [
+     "p165"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Ryujiro understood. Here he would at once apply the art of rope-escape and rope-cutting he had been taught by Living-Rope O-Tetsu. That, he thought, was the best plan.",
+    "ids": [
+     "p166"
+    ],
+    "notes": []
+   },
+   {
+    "english": "He drew his small knife underwater. Swimming with one hand, he cut the water weeds clear with single-handed cuts. At once a way out opened.",
+    "ids": [
+     "p167"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Struggling hard and fighting the man-eating weeds, he at last got to Kotora's side.",
+    "ids": [
+     "p168"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Oh, Danna-sama!\"",
+    "ids": [
+     "p169"
+    ],
+    "notes": [
+     "Kept Kotora's polite address to Ryujiro."
+    ]
+   },
+   {
+    "english": "By this time Kotora was utterly worn out. But she did not, like one who knows no swimming, make the dangerous mistake of suddenly clinging to her rescuer.",
+    "ids": [
+     "p170"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted the weed-rescue page keeping the small knife and ganjigarame hold literal."
+ },
+ "usage": {
+  "input_tokens": 26533,
+  "cached_tokens": 25713,
+  "output_tokens": 3134,
+  "reasoning_tokens": 2360,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01820145,
+ "response_id": "resp_6aeb7d23135812368e094dac",
+ "latency_s": 36.94,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2920
+  }
+ ],
+ "created": "2026-11-04T18:44:51Z"
+}

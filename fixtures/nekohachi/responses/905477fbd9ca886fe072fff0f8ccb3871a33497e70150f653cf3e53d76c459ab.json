@@ -1,0 +1,80 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"You're no rakugo man,\" Tenjin-sama had stuck in another unasked word, or so it felt to Nekohachi, but he saw at once his own ignorance was being teased, so he buried his awkwardness in another apology.",
+    "ids": [
+     "p85"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Yes, quite sorry about that.\"",
+    "ids": [
+     "p86"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"There is no ochi, no fall, in a novel, but what Nekohachi would take for a fall is what closes this story, and it is that which keeps the piece, thin as it is, alive. Fukai gets his great applause at the curtain and is going off proud in his sewn-up shape when from the shadow of the dark flats something cries 'Father' and clings to him. He looks back in surprise and finds his own child crying, child as he is, at the foolish part his father has played. He too cannot help crying, now at last. And then, 'the tiger and the human child wept together for a while in the shadow of the dark background,' that is how it ends.\"",
+    "ids": [
+     "p87"
+    ],
+    "notes": [
+     "Kept ochi with gloss as fall, since the joke is his asking a novel for a rakugo punchline. Kept the paraphrase flat and long-winded on purpose, and kept background for haikei to hold the network with the group's critical word."
+    ]
+   },
+   {
+    "english": "\"The last bit has a good swing to it, eh,\" the near-sighted man said to them all.",
+    "ids": [
+     "p88"
+    ],
+    "notes": [
+     "Unsure of futteru here: I take it as stage slang for having flair or lift, and render it flat rather than upgrading to brilliant or moving."
+    ]
+   },
+   {
+    "english": "\"That without it the whole piece goes slack shows,\" the knowledge-face man put in, \"how feeble a thing this story is, don't you think?\"",
+    "ids": [
+     "p89"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"That's it, eh,\" the host answered as if the strength had gone out of his shoulders. \"In the end it isn't much of a piece.\"",
+    "ids": [
+     "p90"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted p85 to p90 keeping the Tiger ending flat and the verdicts thin."
+ },
+ "usage": {
+  "input_tokens": 28330,
+  "cached_tokens": 27377,
+  "output_tokens": 4282,
+  "reasoning_tokens": 3767,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.023496299999999998,
+ "response_id": "resp_6aeb7d2ed81d5a166cdb4214",
+ "latency_s": 41.92,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1949
+  }
+ ],
+ "created": "2026-11-04T18:45:02Z"
+}

@@ -1,0 +1,96 @@
+{
+ "prompt": "first-read",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": {
+  "crux": [
+   {
+    "for_the_english": "Keep the cure's success and the ruin that follows it in the same level tone, and keep the three closing explanations standing side by side, mutually cancelling, with the narrator's admission that he does not know which is right. Do not let diction decide for the reader: the monk must not become a charlatan or a villain in the telling, Liu must not become a cautionary drunk, and the worm must not become a symbol with a settled meaning. The closing word \"Didacticism\" — in English in the Japanese — is part of the joke and part of the refusal; it should stay visibly imported and slightly pedantic, not be naturalised into \"moralising.\"",
+    "point": "The story stands or falls on a refusal it performs rather than states: nobody, least of all the narrator, can say whether the wine worm was Liu Dacheng's disease, his fortune, or Liu himself — and the tale is built so that removing it is at once a perfect cure and a slow killing. A rich man who drinks a whole jar at a sitting and never gets drunk is cured, exactly as promised, in a single noon; from that day he cannot bear the smell of wine, and over three years his body, his colour, his three hundred mu of fields and his place in the world drain away together. The ending then offers the three available morals — the worm was his luck and the ignorant monk robbed him of it; the worm was his disease and poverty-with-life is happiness; the worm was neither, because Liu minus wine is nothing, so expelling it was a kind of self-killing — and declines to choose. This is not a puzzle with a hidden answer. It is a Chinese tale, retold from the strange-tale tradition, whose borrowed machinery of moral judgement is assembled at the end, labelled as borrowed, and left running with nothing inside it.",
+    "why": "Everything in the construction serves this suspension: the treatment is described as therapy and experienced as torture; the expelled creature, three sun long, with mouth and eyes, swims in the jar apparently drinking, and the sight makes Liu sick, not relieved; the narrator intrudes with an essayist's comparisons (ordinary people submitting to schooling do much the same as Liu lying down naked knowing nothing) instead of with verdicts. A fluent English version will be tempted on every page to settle the question — to make the monk sinister, the cure grotesque-but-liberating, the decline pathetic, or the third answer the author's own — and each settling produces a simpler, different story: a fable against drink, a fable against doctors, a fable about genius destroyed."
+   },
+   {
+    "for_the_english": "Keep the two weathers distinct. The scene-setting should be still, pictorial, almost airless — short declarative pressure, the tableau held a beat too long — and then, in the third section, let the English narrow to Liu's skin, eyelids, throat and the smell from the jar, in sentences that follow his sensations as they come rather than summarising them. Do not apply one uniform \"vivid\" style across both, and do not cool the bodily passage into clinical description.",
+    "point": "The second thing the translation stands or falls on is that the story is told in two weathers. The frame is a frozen, heat-struck tableau: three men in a threshing-yard at noon, one naked and bound, not moving, not speaking, likened to clay images in a temple, while the narrator withholds the explanation and then supplies it as learned back-story, complete with Chinese names, offices, temples, units of land and rumours of miraculous cures. Inside that frame, the middle section suddenly contracts to one sweating body: sweat running into the eyes and learning, for the first time in a life, that sweat stings; skin prickling as if forces pulled it in every direction while it had no elasticity to answer; thirst worked on by the uninterrupted smell of wine from the jar at his pillow, until something soft climbs the gullet like an earthworm, like a gecko, like a loach, and drops into the wine with a small splash. The comedy and the horror are both in the disproportion — this elaborate, erudite apparatus of a tale, all to stage one man's thirst at noon.",
+    "why": "This is why the opening must not be hurried into exposition and why the suffering must not be trimmed as repetition. The stillness of the first two sections is what makes the third section's crawling, peristaltic attention to the body land; and the body's reality is what makes the ending's abstract three answers feel so inadequate, which is the point."
+   }
+  ],
+  "open_questions": [
+   {
+    "anchors": [
+     "p42",
+     "p59"
+    ],
+    "question": "How far to take the narrator's essayistic intrusions — the comparison of Liu's blind submission to ordinary schooling, and the closing invocation of the Chinese novelists' \"Didacticism\"? The reading allows them as deliberate breaks in the tale's surface, in a cooler, more modern voice than the sinophile scene-setting; but how audible that gear-change is in English — a dry aside or a marked change of register — is an editor's fork. Cutting or softening them would make a smoother folktale and lose the story's actual narrator.",
+    "why_it_matters": "These intrusions are where a 1916 Japanese author shows his hand over his Chinese material; they determine whether the English reader meets a retold tale or a retelling."
+   },
+   {
+    "anchors": [
+     "p56",
+     "p57",
+     "p58"
+    ],
+    "question": "How parallel should the three closing answers be made in English? In the Japanese they are formally matched — \"The first answer… The second answer… The third answer…\" — and increasingly metaphysical, the third dissolving the distinction the first two argue over (\"Liu is the wine worm; the wine worm is Liu\"). Keeping the full formal parallelism makes the borrowed didactic machinery visible; varying the formulations would be livelier English and would hide it.",
+    "why_it_matters": "The parallelism is the mechanism of the refusal named in the crux: three equally well-built morals, none endorsed. Ennobling or enlivening any one of them — especially the third, which an English version will want to crown as the true one — tips the ending."
+   },
+   {
+    "anchors": [
+     "p4",
+     "p13",
+     "p17"
+    ],
+    "question": "How to render the monk's foreignness? The text marks it repeatedly and physically — skin exceptionally dark, curled hair and beard, a man apparently from west of the Congling, tall with strange eyes — in the period vocabulary of the exotic (\"barbarian monk,\" a monk from the Western Regions). Whether to keep that period marking at full strength, as what the 1916 text does, or to mute its othering edge in English, needs an editor's decision; the reading is only that his outsider status is functional — only someone from outside both Chinese respectability and the Confucian Mr. Sun's contempt can know about the worm — and should not be converted into mystery or menace the text doesn't supply.",
+    "why_it_matters": "He is the tale's one agent of knowledge, and he explains almost nothing; making him picturesque, sinister or sage-like in English would quietly assign him the moral role the narrator refuses to assign anyone."
+   },
+   {
+    "anchors": [
+     "p10",
+     "p51",
+     "p53"
+    ],
+    "question": "How much of the Chinese material culture to carry over untranslated — the jar-measures of wine, the three hundred mu of fields, the three-sun worm, the bamboo wife Liu leans on at the chess board, titles and temple names? Notes exist for what the sentence cannot give, but several of these are doing quantitative, almost documentary work: the tale measures its marvel. Keeping the measures (with minimal help) preserves its pseudo-record flavour; converting everything to English approximations makes it vaguer and more fable-like than it is.",
+    "why_it_matters": "The exact numbers are part of the strange-tale contract — the impossible thing reported like a fact — and the decline at the end is likewise measured in fields lost and days in bed."
+   }
+  ],
+  "reading": "Begin where the text begins: not with Liu's history but with a held image and a withheld explanation — an unbearable summer, tiled roofs reflecting the sun like lead, swallows' nests that might steam their young alive, every field of hemp and millet drooping, and in the middle of it a naked man bound hand and foot with cord, lying on his back in a threshing-yard, apparently untroubled, with an unglazed jar at his pillow, a foreign monk shooing horseflies off him with a red-handled fly-whisk, and a Confucian scholar standing apart under the eaves, fanning himself and watching. The narrator lets this sit, insists on the silence and the noon stillness, and only then remarks, almost as an aside, that of course this is not Japan: it happened one summer at the Liu family's threshing-yard in Changshan, China. That order — image first, provenance second, explanation third, and the explanation itself a flashback to a chess game interrupted by a servant girl announcing a visitor — is the story's method throughout, and the English must resist rationalising it into a tidier sequence. The strangeness is the architecture.\n\nThe register is the second thing to fix before drafting. This is a young Taishō writer performing erudition: a kanji-dense, sinophile literary Japanese, full of Chinese place-names, reign-flavoured detail, furigana glosses and quoted tags (\"whenever he drank alone, he finished a whole jar\"; \"three hundred mu of fields by the city wall, half planted with millet\"), written over a Chinese strange tale. The English should feel learned and slightly bookish — a man who has read a great deal of Chinese fiction and is enjoying the fit of it — but it should not tip into period pastiche, mock-antique \"thees\" and \"verilys,\" or into chinoiserie local colour. The pleasure the text takes in its materials is a scholar's, not a traveller's: names, measures, temples, the bamboo wife against the heat, the white-feather fan. Where the Japanese is dense with specification, the English should specify; impoverishing that texture into generic \"old China\" atmosphere would flatten exactly what the author is showing off.\n\nAgainst that bookish frame, keep the body writing in section three as unliterary as it is. The similes there are deliberately low and exact — the thing in Liu's throat creeping like an earthworm, shifting like a gecko, slipping out at last like a loach; the expelled worm like a little salamander the colour of red mud, swimming in the wine and seeming to drink. Do not upgrade these into grotesque poetry, and do not downgrade them into clinical terms; their flat zoological oddity is the tale's evidence. The same flatness should govern the physical details of the frame — the pimple-like smallness of the scholar's rat-tail beard, the monk squatting \"like a turkey\" beside the jar — comparisons that are a little unflattering and entirely unmoved. Ennoblement, in Berman's sense, is the standing danger everywhere in this text: it wants to be made elegant, exotic or wise, and it is none of those things; it is learned, dry and faintly disgusting.\n\nWatch the repetitions, because the text thinks in them. Heat returns in image after image — sun, drought, steaming nests, leaden roofs, the burning of Liu's upturned skin — and should be allowed to accumulate rather than be varied away; the reader is meant to be half-roasted by the time the thirst begins. Silence and stillness mark the three men at the start and return as the emptied stillness of Liu's decline. Wine is everywhere measured: the jar at a sitting, the jar at the pillow, the wine the worm swims in and drinks. The word for the creature itself, \"wine worm,\" should stay one term, unvaried — not \"alcohol parasite\" here and \"drinking demon\" there — because the ending's argument turns on the single word: disease, fortune, or self. Destroying that verbal network, or the sun-rose-and-set regularity of the heat passages, would quietly unbuild the story.\n\nThe people should be kept at the distance the narrator keeps them. Liu is fat, good-humoured, small-eyed, vain in a childish way about being seen to receive a famous guest, curious enough to lie down naked on a stranger's say-so, and resentful of the monk only once the suffering starts; he is never introspective and never, even in ruin, presented for pity — the decline is reported almost as local news (\"they say there is no counting how many times a year he takes to his bed now\"). The monk is blunt to the point of rudeness, answers questions with counter-questions, explains his method only when pressed, and is never given a motive, a doctrine or a backward glance; his brusqueness is information. Mr. Sun, the Confucian chess partner, despises monks and Daoists on principle, speaks only because the words \"wine worm\" make him anxious about his own belly, and withdraws into his chess stones the moment he feels slighted; his snobbery is the tale's one piece of social comedy and should stay dry rather than broad. Nobody's speech should be warmed up, and nobody should be given the reflective interiority the Japanese pointedly reserves for sweat, thirst and nausea alone.\n\nThe fluent failures to guard against, gathered: clarifying what the text leaves open (why the monk came, what the jar was for until the moment it is used, whether anyone is to blame); expanding the Chinese setting into explanation a reader of the tale is trusted to absorb; smoothing the narrator's intrusions — the schooling comparison, the closing \"Didacticism\" — into the tale's voice; making the ending's three answers into a crescendo with the third as truth; and letting the decline gather pathos. The last pages should read as flatly as a report of weather changing: the man who could drink anything cannot bear the smell of wine; the round body is gone; the fields have passed to other hands; he ploughs, inexpertly, day by day. If the English makes a reader feel instructed, it has failed; if it leaves a reader holding a cured man who is somehow dead, it has worked.",
+  "say": "Reading delivered: the crux is the story's performed refusal to decide whether the wine worm was Liu's disease, his fortune or himself, with the narration's two weathers — frozen sinophile tableau and contracted bodily ordeal — as the second crux; four open questions (the narrator's intrusions, the parallelism of the three answers, the monk's period foreignness, and how much Chinese material measure to carry over) and three voice takes, the first recommended being the dry sinophile storyteller.",
+  "voice_takes": [
+   {
+    "label": "The dry sinophile storyteller (recommended)",
+    "line": "First choice: learned, deadpan, and unmoved — the voice of a man retelling a Chinese record he half believes, whose erudition is real and whose sympathy is withheld until it leaks out only as physical detail. Wrong for it: chinoiserie, archaism, whimsy, or any warmth of moral feeling at the end."
+   },
+   {
+    "label": "The brisk modern ironist",
+    "line": "Second choice: plainer and faster, letting the absurdity of the noon cure and the pedantry of the three morals read as open satire on doctors, moralists and self-help. This sharpens the schooling aside and the \"Didacticism\" coda, but risks settling the question the text leaves open — an ironist this brisk will sound as if he knows the monk was a fraud, and the tale's flat, sorrowful last report of fields and sickbeds would have to be played against the grain."
+   },
+   {
+    "label": "The archaic tale-teller",
+    "line": "Third choice: lean into the strange-tale source with a slightly older English — measured, formulaic, \"it is said\" — making the piece feel like a translated record from another century. This honours the pseudo-documentary measures and the marvel reported as fact, but in English it easily becomes pastiche, muffles the distinctly 1916 essayistic intrusions, and could make Akutagawa's performance of learning sound like the real antiquity it is imitating."
+   }
+  ]
+ },
+ "usage": {
+  "input_tokens": 8662,
+  "cached_tokens": 0,
+  "output_tokens": 4225,
+  "reasoning_tokens": 607,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.119148,
+ "response_id": "resp_6aeb5af7fa2ba251df644cfa",
+ "latency_s": 58.91,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 16205
+  }
+ ],
+ "created": "2026-11-04T16:19:03Z"
+}

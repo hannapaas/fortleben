@@ -1,0 +1,42 @@
+{
+ "prompt": "copy-desk",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": null,
+ "usage": {
+  "input_tokens": 20162,
+  "cached_tokens": 0,
+  "output_tokens": 304,
+  "reasoning_tokens": 233,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0264945,
+ "response_id": "resp_6aeb8f423c3f552a36a74de6",
+ "latency_s": 4.58,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_09fcb288-002e-4a85-ab00-2de6134f0eeb",
+   "name": "find",
+   "arguments": "{\"words\":\"master's\"}"
+  }
+ ],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": "commentary",
+   "chars": 73
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T20:02:10Z"
+}

@@ -1,0 +1,72 @@
+{
+ "prompt": "copy-desk",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": null,
+ "usage": {
+  "input_tokens": 22371,
+  "cached_tokens": 22129,
+  "output_tokens": 1667,
+  "reasoning_tokens": 1453,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0107066,
+ "response_id": "resp_6aeb81cf8484186f404e464b",
+ "latency_s": 15.03,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_6ab8f34e-edb8-4ece-bc4a-a9e19a32abab",
+   "name": "find",
+   "arguments": "{\"words\":\"*situation*\"}"
+  },
+  {
+   "call_id": "call_3d8e8326-e1bd-487f-857f-b1d3bc9297f6",
+   "name": "find",
+   "arguments": "{\"words\":\"*back*\"}"
+  },
+  {
+   "call_id": "call_cf40de43-b11b-4ddb-9b9d-20deba40f75f",
+   "name": "find",
+   "arguments": "{\"words\":\"Kodan Club\"}"
+  },
+  {
+   "call_id": "call_a064891c-96b6-4e87-9630-2e4dc2482fb3",
+   "name": "find",
+   "arguments": "{\"words\":\"reply\"}"
+  }
+ ],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": "commentary",
+   "chars": 91
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T19:04:47Z"
+}

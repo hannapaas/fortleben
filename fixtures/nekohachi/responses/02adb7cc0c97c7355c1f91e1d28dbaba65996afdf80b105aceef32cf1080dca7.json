@@ -1,0 +1,61 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"...\" Hearing this reading, Nekohachi felt he had walked into an awful place. He knew himself that this was a bit of an overblown thought, and yet it sounded just as if they were talking about himself. He had four boys, the eldest fourteen in first year of higher primary, the next twelve in fifth year of elementary, both doing well and both monitors. This twelve year old was good at mimicking his father, and had an art even beyond his father's, but for all that he would not make him a second Nekohachi. No, it was just so as not to let the children see their father mimicking cat fights and animal voices and coaxing good humour out of the customers from up on the koza that he had long ago gone out of his way to choose this inconvenient suburb to live in. Cat turned to tiger, there was no great difference in that.",
+    "ids": [
+     "p50"
+    ],
+    "notes": [
+     "Kept school years flat as in the source, and kept second Nekohachi as the fixed phrase. Kept koza as in the house voice reference."
+    ]
+   },
+   {
+    "english": "\"The part handed him was just the one part of the tiger.\" What the host was reading seemed to be the text of the story itself. \"Not a man's name. Just the one part dressed up as a real beast of a tiger. He had even taken the byname of animal actor, so what wonder now to be handed the tiger to play. And yet he felt a little sad. Used to it as he long was, profession as he thought it, teasing as he knew it to be, he felt the human inside him being made a fool of, and even felt a little angry. The hero is in that sort of situation.\"",
+    "ids": [
+     "p51"
+    ],
+    "notes": [
+     "Kept situation as the English word to leave the loanword joke visible, and kept the paraphrase flat and reported as in the source."
+    ]
+   },
+   {
+    "english": "\"Quite deftly the point the author was aiming at holds together throughout,\" put in the man with the face like Tenjin-sama, in an earnest tone.",
+    "ids": [
+     "p52"
+    ],
+    "notes": [
+     "Kept Tenjin-sama as the private nickname per the bible."
+    ]
+   }
+  ],
+  "say": "Drafted p50 to p52 keeping the interior slide, the flat Tiger paraphrase, and the earnest critical interjection in their separate registers."
+ },
+ "usage": {
+  "input_tokens": 28613,
+  "cached_tokens": 27377,
+  "output_tokens": 3371,
+  "reasoning_tokens": 2851,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0199783,
+ "response_id": "resp_6aeb7c152859d5138dde4fa6",
+ "latency_s": 32.85,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2129
+  }
+ ],
+ "created": "2026-11-04T18:40:21Z"
+}

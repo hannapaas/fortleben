@@ -1,0 +1,48 @@
+{
+  "type": "object",
+  "properties": {
+    "notes": {
+      "type": "array",
+      "maxItems": 20,
+      "description": "Margin notes for the desk; none for a clean part",
+      "items": {
+        "type": "object",
+        "properties": {
+          "paragraph": {
+            "type": "string",
+            "description": "The paragraph ID alone, exactly as labelled in the English given: p12, or p21–p23 for a group the translator joined"
+          },
+          "span": {
+            "type": "string",
+            "description": "The English it points at, quoted exactly"
+          },
+          "problem": {
+            "type": "string",
+            "description": "What's wrong, in a sentence"
+          },
+          "japanese": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The Japanese, quoted, where it bears on the note"
+          },
+          "suggestion": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "A wording if you can see one, the sentence or passage rewritten where that is what it takes"
+          },
+          "sureness": {
+            "type": "string",
+            "description": "How sure, in plain words, and what would settle it"
+          }
+        }
+      }
+    },
+    "say": {
+      "type": "string"
+    }
+  }
+}

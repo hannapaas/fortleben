@@ -1,0 +1,42 @@
+{
+ "prompt": "copy-desk",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": null,
+ "usage": {
+  "input_tokens": 21277,
+  "cached_tokens": 21105,
+  "output_tokens": 1657,
+  "reasoning_tokens": 1537,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.010423,
+ "response_id": "resp_6aeb8f922bc869873d744752",
+ "latency_s": 19.81,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_401c7bb7-b014-4789-b396-a6510966fbcd",
+   "name": "edit",
+   "arguments": "{\"new\":\"Iioka\",\"old\":\"Ioka\",\"reason\":\"Ruby reads Iioka; author's reading wins\",\"replace_all\":true}"
+  }
+ ],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": "commentary",
+   "chars": 73
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T20:03:30Z"
+}

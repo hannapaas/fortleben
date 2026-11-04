@@ -1,0 +1,105 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"I'm the master, here, here — that other house and all that...\" Taki said, dropping his voice for no reason. \"Look, that pretty girl who poured for us, Pin-ko — she said she likes me! She said. I've been thinking about her all day today. It's awkward going alone, so come with me, won't you? Even if we go three or four times more, if we sell the lot there'll still be plenty left over, won't there?\"",
+    "ids": [
+     "p201"
+    ],
+    "notes": [
+     "Taki answering the worry about face in p200; vague, agreeable evasion tipping into bragging about Pin-ko, name kept hyphenated per bible."
+    ]
+   },
+   {
+    "english": "As he said this, Taki began working out the figures closely to himself.",
+    "ids": [
+     "p202"
+    ],
+    "notes": []
+   },
+   {
+    "english": "IV",
+    "ids": [
+     "p203"
+    ],
+    "notes": []
+   },
+   {
+    "english": "When night came the frogs grew loud around the pond, and insects began to be heard.",
+    "ids": [
+     "p204"
+    ],
+    "notes": []
+   },
+   {
+    "english": "New creditors of all sorts had come visiting the house among the mandarin trees above the stone steps.",
+    "ids": [
+     "p205"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Between them, A and B had borrowed a hand pump from a villa they frequented, and it was settled that they would dry up the pond in one burst.",
+    "ids": [
+     "p206"
+    ],
+    "notes": [
+     "Kept 'in one burst' in the same words as Taki's motto in p74-75, now attached to the pump plan; this migration is the point."
+    ]
+   },
+   {
+    "english": "Taki watched the face of the abacus the old man was clicking.",
+    "ids": [
+     "p207"
+    ],
+    "notes": [
+     "I think this means the face of the abacus itself, though the Japanese could also be read as the old man's face as he works; left literal rather than choosing for him."
+    ]
+   },
+   {
+    "english": "The 'trip' waited only on the 'in one—' work in Taki's study.",
+    "ids": [
+     "p208"
+    ],
+    "notes": [
+     "Kept both terms as cited slogans in single quotes, with the second cut short as in the Japanese, to read as self-quotation."
+    ]
+   },
+   {
+    "english": "Cloudy days in the middle of the dog days went on. Word came round that the waves had begun to rise.",
+    "ids": [
+     "p209"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted p201 to p209 keeping in one burst and trip as fixed self-quotations."
+ },
+ "usage": {
+  "input_tokens": 21323,
+  "cached_tokens": 20465,
+  "output_tokens": 3738,
+  "reasoning_tokens": 3164,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.02002875,
+ "response_id": "resp_6aeb7e03415aac361e044a85",
+ "latency_s": 42.12,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2119
+  }
+ ],
+ "created": "2026-11-04T18:48:36Z"
+}

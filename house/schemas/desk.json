@@ -1,0 +1,71 @@
+{
+  "type": "object",
+  "properties": {
+    "declined": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "note": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "disagreements": {
+      "type": "array",
+      "description": "Where the readers pulled opposite ways, or a note you couldn't settle",
+      "items": {
+        "type": "object",
+        "properties": {
+          "notes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "paragraph": {
+            "type": "string",
+            "description": "The paragraph ID alone, exactly as labelled in the English given: p12, or p21–p23 for a group the translator joined"
+          },
+          "faithful_side": {
+            "type": "string"
+          },
+          "readable_side": {
+            "type": "string"
+          },
+          "choice": {
+            "type": "string"
+          },
+          "send_up": {
+            "type": "boolean",
+            "description": "True only where the reading doesn't settle it and being wrong would matter"
+          }
+        }
+      }
+    },
+    "beyond_this_part": {
+      "type": "array",
+      "description": "What you learned in this part that changes how an earlier part should read (a person, a word, what a scene means), for the house to take back to it. When nothing does, the list is empty",
+      "items": {
+        "type": "object",
+        "properties": {
+          "finding": {
+            "type": "string",
+            "description": "What should change, in a sentence"
+          },
+          "why": {
+            "type": "string",
+            "description": "What in this part shows it"
+          }
+        }
+      }
+    },
+    "say": {
+      "type": "string"
+    }
+  }
+}

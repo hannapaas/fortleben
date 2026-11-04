@@ -1,0 +1,100 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "He would yell, truculent and high-handed as if copying A's tone, \"Lying on your bellies just peering in will get you nowhere — if you're so afraid of clouding it, go for the little ones first, hey, you idiot! What are you gaping at, there's a mottled one surfacing in this corner!\"",
+    "ids": [
+     "p165"
+    ],
+    "notes": [
+     "Taki is imitating A's rough pond-side speech here; kept rough and compressed, without borrowed dialect. Mottled (madara) kept literal for a patterned carp."
+    ]
+   },
+   {
+    "english": "\"There! It's come up under the fatsia, throw it, the net! the net! the net!\" He brandished his conducting arm boldly.",
+    "ids": [
+     "p166"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Damn! You slowcoaches, ah, look, you've clouded it up again.\" He ground his teeth and banged the table.",
+    "ids": [
+     "p167"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Hold steady here, you can still dimly make out a shape, look through the glass box, there's a ripple!\" He cheered them on in this vein.",
+    "ids": [
+     "p168"
+    ],
+    "notes": [
+     "Glass box kept literal; device for looking into the water, not explained further in the text."
+    ]
+   },
+   {
+    "english": "\"Come now, gentlemen, it's noon already, take a rest, rest. These are not creatures that will escape anywhere if we do not catch them this instant, there is no need to hurry — have your meal, tell the old man whatever lunch you fancy and have him get it for you.\" So he played the thoughtful host.",
+    "ids": [
+     "p169"
+    ],
+    "notes": [
+     "Catch kept as fixed verb; gentlemen keeps the impresario note of shokun against the workmen's vernacular."
+    ]
+   },
+   {
+    "english": "\"Even if you see a shadow they will only duck away, so please, this way, please come up.\" He did not forget the warning, and pressed the onlookers peering through the hedge to come up to the best seats.",
+    "ids": [
+     "p170",
+     "p171"
+    ],
+    "notes": []
+   },
+   {
+    "english": "When onlookers joined, Taki's swagger shifted to a large and murderous ease.",
+    "ids": [
+     "p172"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"If it clouds, let it cloud, wade straight in and churn it up! What does it matter if you beat a couple to death!\" Such was the worthless generosity he displayed.",
+    "ids": [
+     "p173",
+     "p174"
+    ],
+    "notes": [
+     "Cloud kept stable; beat to death kept blunt as the turn from fisherman to general."
+    ]
+   }
+  ],
+  "say": "Drafted the pond-siege shouting sequence keeping catch and cloud fixed and Taki's imitation of A rough."
+ },
+ "usage": {
+  "input_tokens": 21359,
+  "cached_tokens": 20465,
+  "output_tokens": 4253,
+  "reasoning_tokens": 3636,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0222625,
+ "response_id": "resp_6aeb7d94ae578009c9554120",
+ "latency_s": 54.04,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2349
+  }
+ ],
+ "created": "2026-11-04T18:46:44Z"
+}

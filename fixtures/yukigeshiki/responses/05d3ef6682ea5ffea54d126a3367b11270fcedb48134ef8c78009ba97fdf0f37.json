@@ -1,0 +1,168 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"I heard your voice, you know! Just after I'd come down the stone steps...\"",
+    "ids": [
+     "p126"
+    ],
+    "notes": []
+   },
+   {
+    "english": "........",
+    "ids": [
+     "p127"
+    ],
+    "notes": []
+   },
+   {
+    "english": "(That is certainly mine! How is it I never noticed such a thing!)",
+    "ids": [
+     "p128"
+    ],
+    "notes": [
+     "The referent, the telephone from p125, is left as 'that' as in the Japanese."
+    ]
+   },
+   {
+    "english": "\"There's no standing up to the missus. When she says come home, you come home, certain as anything!\"",
+    "ids": [
+     "p129"
+    ],
+    "notes": []
+   },
+   {
+    "english": "........",
+    "ids": [
+     "p130"
+    ],
+    "notes": []
+   },
+   {
+    "english": "(I'll sell it, sell it, that's where I can get my breath back.) \"Grandad, isn't there someone who would buy a telephone?\"",
+    "ids": [
+     "p131"
+    ],
+    "notes": [
+     "Interior flash and spoken appeal kept in one paragraph as in the Japanese, with the flash in parentheses."
+    ]
+   },
+   {
+    "english": "\"Whatever for? So sudden!\"",
+    "ids": [
+     "p132"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Can't a thing like that be sold straight off? By tomorrow, say?\"",
+    "ids": [
+     "p133"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"I can't make out what this is about at all.\"",
+    "ids": [
+     "p134"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Grandad, I've got the difficult work on me now, you see, that is... well, I can start it any time really, but as I am now I want to hold it in my head as long as I can, even if I go on holding it and holding it it doesn't matter, it's interesting! Mother and my wife wouldn't understand.\"",
+    "ids": [
+     "p135"
+    ],
+    "notes": [
+     "Kept 'the difficult work' and 'hold it in my head' to the fixed concordance for p160. The Japanese slides from ore to boku mid speech; plain English I cannot show it."
+    ]
+   },
+   {
+    "english": "........",
+    "ids": [
+     "p136"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"It's because I want to go on the trip. I'd like that too, so, well, let's go... but look, to do the work with my back to the wall like that, I hate it.\"",
+    "ids": [
+     "p137"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Surely it is not as bad as that.\"",
+    "ids": [
+     "p138"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Sell it for me, sell it for me! Sell the telephone for me...\"",
+    "ids": [
+     "p139"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"...True enough, from now on there will be no need for a telephone here.\"",
+    "ids": [
+     "p140"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Tomorrow! Tomorrow! Oh, I feel bright for no reason at all. Just being woken by it in the morning is more than I can bear.\"",
+    "ids": [
+     "p141"
+    ],
+    "notes": [
+     "'It' is the telephone and its morning call; left as in the Japanese."
+    ]
+   },
+   {
+    "english": "\"But that is because you asked the missus to do it, is it not?\"",
+    "ids": [
+     "p142"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Wouldn't it feel clean and good if it stopped coming every morning...\"",
+    "ids": [
+     "p143"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drunken telephone inspiration drafted with caretaker patter and parenthetical flashes kept rhythmically apart."
+ },
+ "usage": {
+  "input_tokens": 21309,
+  "cached_tokens": 20465,
+  "output_tokens": 3866,
+  "reasoning_tokens": 3082,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.02055525,
+ "response_id": "resp_6aeb7d0408035d0b7e3149d0",
+ "latency_s": 42.58,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2819
+  }
+ ],
+ "created": "2026-11-04T18:44:20Z"
+}

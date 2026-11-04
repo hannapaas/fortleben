@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{# The public wishlist (house/wishlist.py): works on Aozora people would like in English, and a form
+   for one more link. Anonymous: no name, no email, no sign-in. #}
+{% block title %}Wishlist · Fortleben{% endblock %}
+{% block head %}<link rel="stylesheet" href="/static/desk.css?v={{ v }}">
+<style>
+.wish .asked { font-size: 14px; color: var(--ink-2); white-space: nowrap; text-align: right; }
+.wish .asked b { display: block; font-family: var(--serif); font-size: 1.6rem; font-weight: 400; color: var(--ink); line-height: 1; }
+.wish .ttl { font-size: 1.5rem; }
+.wishform { max-width: 40rem; margin: 0 0 4rem; }
+.wishform .line { margin: 8px 0 0; }
+@media (max-width: 560px) { .shelf.wish li { grid-template-columns: 1fr auto; } .shelf.wish .ja { grid-column: 1 / -1; } }
+</style>{% endblock %}
+{% macro row(w) -%}
+<li>
+  {# The Japanese title alone when there's no English one yet #}
+  <span class="ja" lang="ja">{% if w.title_en %}{{ w.title }}{% endif %}</span>
+  <span>
+    {% set ttl = w.title_en or w.title %}{% set lang = '' if w.title_en else ' lang="ja"' %}
+    {% if w.edition_url %}<a class="ttl" href="{{ w.edition_url }}"{{ lang|safe }}>{{ ttl }}</a>{% else %}<span class="ttl"{{ lang|safe }}>{{ ttl }}</span>{% endif %}<br>
+    <span class="meta">{{ w.author_en or w.author }}{% if w.year %}, {{ w.year }}{% endif %} · {{ '%g' % w.sheets }} sheets{% if w.card_url %} · <a href="{{ w.card_url }}" hreflang="ja">the Japanese on Aozora</a>{% endif %}</span>
+    {% if w.blurb %}<p class="blurb">{{ w.blurb }}</p>{% endif %}
+    {% if w.edition_url %}<span class="meta">Translated: <a href="{{ w.edition_url }}">read it here</a>.</span>{% endif %}
+  </span>
+  <span class="asked" aria-label="asked for by {{ w.asked }}"><b>{{ w.count }}</b>asked for it</span>
+</li>
+{%- endmacro %}
+{% block main %}
+<h1 class="desk-h">Wishlist</h1>
+<p class="desk-lead">Works on Aozora Bunko that people would like to read in English. Anyone can paste a link to add one. Editors pick from here to translate, and anyone can <a href="/signup">sign up</a> to be one.</p>
+
+{% if wishes.wanted %}
+<ul class="shelf wish">{% for w in wishes.wanted %}{{ row(w) }}{% endfor %}</ul>
+{% elif not closed %}
+<p class="meta">Nobody has asked for anything.</p>
+{% endif %}
+
+{% if closed %}
+<p class="line">Adding to the list is off on this copy of the site.</p>
+{% else %}
+<form class="desk wishform" id="ask" method="post" action="/wishlist#ask" autocomplete="off">
+  <label for="url" class="sm block">A link to a work on Aozora Bunko</label>
+  <div class="addrow">
+    <input type="url" id="url" class="url-box" name="url" inputmode="url" spellcheck="false" maxlength="500" required value="{{ url or '' }}" placeholder="https://www.aozora.gr.jp/cards/…">
+    <button type="submit" class="btn">Ask for it</button>
+  </div>
+  {% if said %}<p class="line" role="status">{{ said.message }}{% if said.edition_url %} <a href="{{ said.edition_url }}">Read it</a>.{% endif %}</p>{% endif %}
+  {% if error %}<p class="err" role="alert">{{ error }}</p>{% endif %}
+  <p class="sm">keikaku translates works whose authors died by 1931 and that were first published by 1930. No name, no email: anyone can ask.</p>
+</form>
+{% endif %}
+
+{% if wishes.translated %}
+<h2 class="sec">Translated</h2>
+<ul class="shelf wish">{% for w in wishes.translated %}{{ row(w) }}{% endfor %}</ul>
+{% endif %}
+{% endblock %}

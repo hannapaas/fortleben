@@ -1,194 +1,235 @@
-# keikaku — architecture
+# Architecture
 
-Written 27 Oct 2026, the second day of the hackathon; updated 28 Oct with the final text picks. The plan, not yet the code: sections change as the build proves or disproves them. See `CONCEPT.md` for what it's for and `BUILD-PLAN.md` for the order of work.
+Fortleben is one Python process: a FastAPI site, a translation engine (keikaku) and a SQLite database. The engine takes a Japanese work from Aozora Bunko and runs it through a fixed sequence of stages, each one or a few calls to one of two Meta models, `muse-spark-1.3` (Spark) and `muse-wonder-1.0` (Wonder). Everything a run does is written to the database as it happens, and the site reads that record.
 
-Design choices worth knowing first:
-- **Built per source language, Japanese first.** `work.language` is a field; a text enters through a source adapter (Aozora is the first); the bible, departments and site are language-neutral; anything Japanese-specific (the Aozora parser, ruby and furigana, the honorific policy, `fugashi` for stats) sits in `house/lang/ja/`. Nothing else assumes Japanese.
-- **Source check runs on Wonder for every chunk**, not only on hard passages. It's affordable (§10), and same-model critique does most damage in exactly this department.
-- **Views share one base text**: one English per paragraph with controlled tokens, not three separate translations. (Work → edition → view: `CONCEPT.md`, "Words".)
-- **The catalogue's reader's reports are generated on Meta models.**
-- **Glimmer works only on the English** unless a spot check shows it reads Japanese well. Its model card doesn't list Japanese.
+This page is the map. The exact stage order and the limits code enforces are in [STAGES.md](STAGES.md); how the house remembers a text across calls, in [STORY-STATE.md](STORY-STATE.md); every prompt, in [PROMPTS.md](PROMPTS.md); the site page by page, in [SITE.md](SITE.md); steering a run, in [EDITORS-DESK.md](EDITORS-DESK.md).
 
-## 1. Departments and flow
+## The parts
 
-No manager agent. A deterministic orchestrator (plain code, a state machine per chunk) moves *text + open queries* between departments. Translation **owns** the English. Everyone else raises queries (`open → answered → accepted | stet | revised`). Department heads **select, never merge**, and send forks up with dissent quoted word for word.
+| Part | Where | What it does |
+|---|---|---|
+| Command line | `house/cli.py` (`keikaku`) | Fetch and add works, run them, steer at the checkpoint, export fixtures, audit, serve, invite, moderate |
+| Orchestrator and stages | `house/orchestrator.py`, `house/stages/` | The stages in order, one module each with `run(ctx)`; the up-front estimate; stop and resume |
+| Context | `house/context.py`, `house/pager.py` | What each call sees, stable blocks first; pages and parts |
+| Model client | `house/client.py` | The only code that calls a model: validation, retries, the response cache, the ledger |
+| Budget | `house/budget.py` | Prices, the run estimate, the caps, the kill switch |
+| Source adapter | `house/lang/ja/` | Reads an Aozora card; parses its ruby text into paragraphs |
+| Intake | `house/acquire.py`, `house/works.py`, `house/wishlist.py` | Adds a work from an Aozora link if it passes the rights rule; the wishlist |
+| Database | `db/schema.sql`, `house/db.py`, `house/events.py` | One SQLite file and its append-only event log |
+| Site | `house/web.py`, `house/edition.py`, `site/` | Reading pages, the margin, the analysis, the wishlist |
+| Editors' desk | `house/desk.py`, `house/steer.py`, `house/accounts.py` | Invites, sign-in, own keys, allowances in drops, runs from the browser, the checkpoint |
+| Comments | `house/comments.py` | Margin comments, screening, reports, the daily email |
+| Fixtures and audits | `house/fixture.py`, `fixtures/`, `house/audit.py` | Recorded runs that replay with no key; blind audits beside a one-shot translation |
+
+Prompts are files in `prompts/` and output schemas are files in `house/schemas/`. No Python file contains prompt text.
+
+## A run
+
+There is no manager agent. The orchestrator is plain code that calls the stages in a fixed order. Each stage writes its results to the database before the next starts, so a run can stop after any stage and pick up from the record.
 
 ```mermaid
 flowchart TD
-  ACQ["Acquisitions<br/>readers' reports + rights check"] --> P{{"Editor: provenance"}}
-  P --> PARSE["Aozora parser (code)<br/>ruby, IDs, colophon"]
-  PARSE --> BG["Background brief · Spark + web_search"]
-  BG --> RDG["First read · Wonder<br/>the house's reading, from the crux"]
-  RDG --> CX["Crux check · Spark, independent<br/>same crux, or the first fork"]
-  CX --> AN["Analyst · Spark<br/>story bible: cast, ledger, referent map,<br/>narration, motifs, style sheet, hard spots, tiers"]
-  AN --> VT["Voice trial · Spark ×2–3, checked by Wonder;<br/>head selects"]
-  VT --> CP{{"Editor: checkpoint<br/>crux, reading, voice, key bible choices"}}
-  CP --> TR["Translation desk · Spark — OWNER<br/>draft page by page; 2nd draft on tricky/hard paragraphs"]
-  TR -->|"draft"| SC["Source check · Wonder<br/>every paragraph, every diff"]
-  SC -->|"queries"| TR
-  TR --> EL["Editor's letter · Wonder, English only<br/>the whole draft against the reading"]
-  EL -->|"notes"| TR
-  TR --> ED["Editorial · Spark, English only<br/>a scene at a time"]
-  ED -->|"span queries"| TR
-  TR --> CD["Copy desk · code + Glimmer<br/>ledger, callbacks, length, tics"]
-  CD -->|"queries"| TR
-  TR --> NE["Notes · Spark<br/>per edition, anchored"]
-  NE --> FC["Fact-check · Spark + web_search<br/>cite or kill"]
-  FC --> FR["Final read · Wonder<br/>whole, then against the source: seams, drift, crux, continuity"]
-  FR -->|"queries"| TR
-  TR -. "forks + verbatim dissent" .-> EIC{{"Editor: forks, standing rules, locks"}}
-  EIC -. "rules (scoped)" .-> TR
-  FR --> QC["Proof/QC (code)"] --> ED3["Views: Casual · Curious · Student"]
-  ED3 --> RD["Reader desk<br/>reactions, proposals"]
-  RD -. "queries by reason" .-> SC & ED & FC
+  PARSE["Parse · code<br/>paragraphs, ruby, colophon, rights record"] --> PARTS["Parts · Spark<br/>where each part starts; code checks it"]
+  PARTS --> FR1["First read · Wonder<br/>the house's reading, crux first"]
+  FR1 --> CX["Crux check · Wonder<br/>an independent crux; a head compares"]
+  CX --> BIB["Bible · Spark<br/>cast, narration, motifs, style sheet, hard spots"]
+  BIB --> CP{{"Checkpoint (optional)<br/>page 1 in each voice; the editor steers and approves"}}
+  CP --> DR["Draft · Spark<br/>page by page, English first"]
+  DR --> RF["Faithful reader · Spark<br/>Japanese first"]
+  DR --> RR["Readable reader · Spark<br/>English first"]
+  RF -->|notes| DK["Desk · Wonder<br/>exact edits; every note taken, declined or forked"]
+  RR -->|notes| DK
+  DK -. "findings that change an earlier part:<br/>one pass back, at most 5 a run" .-> DK
+  DK --> FIN["Final read · Wonder<br/>whole text, then against the source"]
+  FIN --> CD["Copy desk · code + Spark<br/>house style, names, terms; omission checks"]
+  CD --> NO["Notes · Spark"]
+  NO --> REL["Release · code<br/>QC, edition version"]
 ```
 
-**The exact order of stages, what each call takes and returns, and the limits code enforces are in `STAGES.md`; that list is what the orchestrator implements.** How a whole text moves through it (passes, difficulty tiers, the allowance per manuscript sheet, and what gets cut when money is short) is in `RUNNING-A-TEXT.md`. Rounds are capped at two per query. If it's unresolved after that, it goes to the editor as a fork with a one-line trade-off per option (at most 5 forks per checkpoint, global ones first). Critics edit **flagged spans only** and may answer "none". The English-only pass never sees the Japanese, and every change it makes goes back through Source check. Sensitivity flags (dated or harmful content in the source) are a query type routed to the editor. They lead to context notes, never bowdlerising.
+The first read, the crux check and the bible see the whole text; the draft goes page by page; the readers, the desk and the notes go a part at a time. A few things hold throughout:
 
-## 2. Data model (SQLite)
+- **One edit tool.** After the draft, only the desk, the final read and the copy desk change the English, all through the same tool (`Editor` in `house/stages/common.py`). An edit names the exact words to replace. If they aren't found exactly once (or `replace_all` is set), nothing changes and the model is told where the words are, so it can try again. An edit never crosses a paragraph, and code checks every changed paragraph for stray scripts and for shrinking below 70% of its length.
+- **One decision per note.** The two readers never see each other or the translator's notes. The desk must take each note with an edit, decline it with a reason, or record a disagreement; anything left is marked unaddressed and flagged. A part with no notes never reaches the desk. There are no rounds of debate.
+- **Limits are code, not prompts.** At most five forks a run from the desk, plus the crux fork; at most five findings taken back to earlier parts, once; note counts capped by the schemas; spend caps checked before every call.
+- **Every answer has a `say` field**, one plain sentence for the log. An answer whose sentence is junk counts as broken: it is retried and never cached. The models don't expose their reasoning, so what the agents write is the whole visible record.
+- **Independent calls run side by side.** The readers' calls (both readers, every part) and the checkpoint's voice takes go out up to `KEIKAKU_PARALLEL` at once (default 4). Results are stored in their original order, so the record matches a serial run. Drafting stays in order, because each page sees the English before it.
 
-| Table | Holds |
-|---|---|
-| `work` | Aozora card, full colophon, rights record (death year, 初出, translation search + date), status |
-| `bible` | The story bible and the house's reading per work, as versioned JSON (`STORY-STATE.md`); each version points at the event that changed it |
-| `author_file` | Per author: what the house learned across their works, each entry with its provenance (`STORY-STATE.md` §1a) |
-| `segment` | Paragraphs `p12` from the source, Japanese with structured ruby, with sentence anchors `p12-s3` inside them for queries and notes. **The paragraph is the unit of English** (`STAGES.md`); which English renders which sentence is best-effort metadata the drafter returns, not a constraint on it |
-| `revision` | Base English per paragraph, versioned, with the drafter's sentence spans. Each revision points at the event that caused it (draft, accepted query, rule, human edit) |
-| `term` | Ledger: entity, reading, rendering per edition (Casual / Curious / Student), first-use note. Base text carries `{t:genin}` tokens, so **editions are presentations of one base text**, checked once |
-| `note` | Anchor, editions it shows in, body, sources[], status `verified / unverified / killed`, author (department or person). Student hides anything unsourced |
-| `query` | From → owner, span, category, reason, evidence[], recommendation, verbatim dissent, status, resolver |
-| `fork` | Options (author + one-line trade-off), head's pick, the editor's decision, the rule it created |
-| `rule` | Standing rule text, **explicit scope** (line / character / term / work / author / house), origin, lines it touched |
-| `lock` | Segment, who locked it. Rules don't rewrite locked lines; they raise a query to the editor instead |
-| `status` | Per segment: draft / house-checked / editor-approved / human-reviewed, plus who. Nothing waits on the last two |
-| `event` | Append-only log: run, seq, actor (department + role, or person), type, payload, cost. The single source for history, the House stream and replay |
-| `call` | Model, effort, tokens (input / cached / output / reasoning), $, prompt hash, cache key |
-| `intern` | Department, brief, logged reason, budget, spend, report |
-| `allowance` | Per editor: drops granted, reserved, spent; every grant with its reason (invite, funding target, house) |
-| `reaction`, `proposal`, `person` | Two-axis reactions on a target (paragraph, note, or an alternative in a debate), with their counts never used to order or change anything; span proposals that become queries; trust level and how each person wants to be credited |
-| `report` | Catalogue reader's report: reader-facing fields, internal scores, what it was based on, label, translation-status evidence and date |
-| `edition` | One translation of a work: the editor (a person, or the house), its runs, current release |
-| `release` | Edition version (v1, v1.1), changelog, credits |
-| `vote` | "I'd read this": work, voter token (cookie + IP hash), date. One per voter per work |
-| `request` | An Aozora work ID or an outside reference (title, author, link), the requester's reason (screened), the Acquisitions verdict (*eligible / in copyright / can't tell*) with evidence, the editor's decision, status |
+**Stop and resume.** `keikaku run <work> --to bible` stops after a stage, `--from desk` resumes the latest run from one, `--only` reruns one. Each stage skips what it has already stored and the response cache serves calls already made, so a resumed run pays only for new calls. A stage that throws marks the run `failed`; a cap that runs out marks it `stopped: budget`. Either way nothing is released, and the error says how to resume.
 
-### The margin: how the debate reaches the page
+## Which model does what
 
-Nothing is collected for the margin specially; it falls out of the record. Every query, answer, fork, ruling, rule application, note, intern report and revision is stored with an anchor: a paragraph ID, and a span inside it where there is one. The reader's margin for paragraph `p12` is simply everything anchored to `p12`, in time order, rendered by kind: the critic's query with its evidence, the translator's answer, the head's pick or the fork with both cases, the editor's ruling and the rule it made, the alternatives the drafter left, the notes with their sources, and the revision history. Each agent's one-sentence `say` is the plain-words line at the top of its entry. A paragraph nobody queried shows *drafted · checked · no queries* and nothing else. So the margin is a database read, the same read the House replay and the editor's desk use, and it is complete by construction: there is no way for a decision to happen that isn't anchored somewhere.
+Every model this repo calls is a Meta model, through the Meta Model API.
 
-## 3. Agent runtime
+| Call | Prompt | Model | Effort | Run option |
+|---|---|---|---|---|
+| Parts | `parts` | Spark | low | |
+| First read | `first-read` | Wonder | medium | |
+| Crux check | `crux-check`, then `head-select` | Wonder | low | |
+| Bible | `analyst-bible` | Spark | medium | |
+| Checkpoint voice takes | the drafting prompt | as the draft | medium | |
+| A steering note at the checkpoint | `steer` | Wonder | medium | |
+| Draft | `translate-draft-plain` (or `translate-draft`) | Spark | medium | `--draft-model`, `--draft-prompt` |
+| Readers | `reader-faithful`, `reader-readable` | Spark | medium | `--reader-model` |
+| Desk | `desk` | Wonder | medium | `--desk-model` |
+| Final read | `final-read` | Wonder | medium | `--final-model` |
+| Copy desk | `copy-desk` | Spark | low | `copy_model` (no flag) |
+| Notes | `notes` | Spark | low | |
+| A work's English title and blurb, on adding it | `work-card` | Spark | low | |
+| Screening a comment | `comment-screen` (no house brief) | Spark | low | |
+| Audits; their one-shot baseline | `audit-spans`, `audit-readable`; `baseline-oneshot` | Wonder; Spark | medium | |
 
-- Python `asyncio`, with the OpenAI SDK pointed at Meta's API on the **Responses API** (needed for caching hints, web_search and reasoning summaries). No agent framework.
-- A department is a module: prompt files, a strict JSON schema, and `run(task, state) → queries | edits | notes`. Every output schema has a `say` field, one plain sentence for the House log. Muse never exposes its reasoning, so the visible debate *is* what the agents write.
-- **Prompts teach principles; code enforces limits.** A department prompt explains what the job is for and why (fidelity over fluency, keep deliberate ambiguity, raise a query only when it matters), so the agent can make a sensible call on a case nobody foresaw. Absolute "always / never" lines are kept for the few things that are crucial, because models follow them literally even where they stop making sense. Anything that must hold no matter what (the spend cap, two rounds per query, output schemas, locked lines) is enforced by the orchestrator, not by the prompt. Prompts stay short as a result.
-- The model client has a `FakeClient` that serves recorded responses from `fixtures/`, so the site, the House view and the tests run with no key. A paragraph gets at most three revision cycles per run; after that it's *flagged, unresolved* rather than argued over again.
-- Translation runs chunk by chunk in order, because the state is carried forward. Other departments work behind it in parallel, under a concurrency semaphore. 429s and 5xx get retries with backoff.
-- **A response cache** keyed on (model, prompt hash, input hash) makes reruns in development free and replays deterministic.
-- **Standing-rule propagation:** a scoped search (ledger plus regex, then a cheap Spark classifier on the candidates) finds the affected segments. Translation revises them as queries. The UI shows "R4 · 12 lines, 2 locked lines sent to the editor".
+The defaults (`DEFAULTS` in `house/stages/common.py`) are the best set-up the experiments found ([experiments/](experiments/README.md)). Wonder takes the jobs that weigh most and need the whole text in one call: the reading, the crux, the desk, the final read. On three texts audited blind, a Wonder final read made twice the meaning fixes a Spark one did (experiment 10). Spark does the volume. The two come from the same family, so a Wonder desk over a Spark draft is a different and stronger checkpoint, not an independent one.
 
-## 4. Which model does what
+**Strict schemas.** We measured that strict structured output gets no prompt-cache hits across separate calls. So Spark calls go non-strict and the client validates every answer itself. Wonder calls go strict, because non-strict Wonder left required fields empty and wrote filler on long outputs, and its calls are few. The readers are strict on either model; they run once a part. Inside one tool loop, later turns hit the cache even when strict: on the recorded 「晩餐」 run, the desk's second turn had 19,444 of 20,943 input tokens cached.
 
-| Job | Model | Why |
-|---|---|---|
-| Analyst, translation, editorial, notes, query answers | `muse-spark-1.3`, effort medium for drafting, low elsewhere, minimal for classifiers (rule scope, crux comparison); reasoning can't be switched off. `prompt_cache_key` per work + style-sheet version, `prompt_cache_retention: "24h"` | Strong and cheap. The stable prefix caches at 88% off |
-| First read (the house's reading); Source check (every chunk, every diff); critic at forks; whole-text continuity read | `muse-wonder-1.0`, effort low (medium for the first read) | A different and stronger checkpoint from the drafter. The 1M context holds the whole source and translation in one call |
-| Copy desk (English-side tics, register, consistency) | Muse Glimmer 30B hosted on Modal ($30 of credits, a listed partner, so the open-weight bonus can be verified) for the recorded runs and the live site; the laptop is too slow to rely on. Until the Modal endpoint exists the code checks run alone | Open weights, near-free. Proposes replacements for flagged spans; never writes the base text |
-| Fact-check | Spark + `web_search` | Every note cites a source or dies |
-| Catalogue | Spark low as the acquisitions editor; Glimmer as chunk reader if it passes a 10-report spot check, else Spark | Cheap at 200 reports |
-| Requests from outside Aozora | Spark low + `web_search`: author dates, first publication, existing English translations; a short reader's report if a text is found | Capped per day; the editor confirms every verdict |
-| Covers | `muse-image-1.0` | Decorative, $0.01 each. Cut first |
+**Downgrade.** A Wonder answer that fails validation twice is asked for once more on Spark, and a `call.downgraded` event records it.
 
-**About the shared lineage:** Glimmer is distilled from Spark, and Spark Open is Spark released as open weights. Wonder is a different, larger model but from the same family. So "a different model as critic" here means a different checkpoint, not independence, and the README will say so. **Every model this repo calls is a Meta model**, in the product and in the exhibit's audit alike: the hackathon's rule is strict (a participant's own tiny checker was ruled out), and the audit runs from this repo. So the auditor behind the exhibit is Wonder, cross-checked by Spark Open (open weights, run on any host), two checkpoints of one family, and the page says so. What's independent of any model is the editor's read of the marked-up passages, the 1918 human translation in the exhibit, and the deterministic checks.
+## The model client
 
-## 5. Interns
+- **Requests.** The OpenAI SDK, pointed at `https://api.meta.ai/v1` (or `MODEL_API_BASE`), on the Responses API. Instructions are always the house brief (`prompts/house-brief.md`) followed by one department prompt. Calls after the bible carry `prompt_cache_key` `<work>:bible-v<N>:<stage>`, so a new bible version starts a new cached prefix, with 24-hour retention. `store` is off. The SDK retries 429s and 5xx four times with backoff.
+- **Validation.** Output is JSON against the prompt's schema, checked with every key required. An incomplete, invalid or junk answer is logged as a failed call and retried once.
+- **Tool loops.** The desk, the final read and the copy desk get function tools (`edit`; the copy desk also `find`). `Ctx.loop` runs each tool call and sends the result back until the model answers, for up to 12 turns (30 for the copy desk). Meta's API takes `tool_choice: "auto"` only, so the model decides when it's done. Each turn is an ordinary call, cached and ledgered.
+- **The response cache.** Every good answer is stored under a key made of the model, effort, the hashes of instructions, input and schema, the tools, the turns so far, and strictness. The same call again costs nothing. The cache is `cache/responses/` in the data folder; the client also reads every `fixtures/*/responses/`.
+- **FakeClient** serves the same cache and never calls out. `make_client` returns it under `--replay` or with no key; a call with no recording raises `FixtureMissing`. `keikaku fixture <work>` exports a run's responses and full record to `fixtures/<work>/`, which is how 「晩餐」 and 「酒虫」 replay with no key. The tests run the same way.
 
-When a head meets something no department covers (an embedded poem, a dialect line, a classical quotation, a Buddhist term, a period object), it can ask for an intern: one research question with a reason. A real house would ring a specialist reader. Here the intern is a single Spark call at low effort with web search that returns a short report with sources; the head then continues with the report in hand. Interns never edit text and never hire.
+## Spend: the ledger, the estimate, the caps
 
-**Mechanics, no tool calls.** The head's output schema has an optional `needs_intern: {question, reason}`. If it's set, the orchestrator checks the caps, runs the `intern` prompt, and re-runs the head with the report added to its input. Two plain calls instead of a tool call inside a structured-output call, which the API makes awkward (`tool_choice` is `auto` only). It replays from the cache like everything else.
+Every call, live or cached, gets a row in `call`: model, effort, input, cached, output and reasoning tokens, what it cost now (0 from the cache) and what it cost when first made. Prices per million tokens, from `house/budget.py`:
 
-**The runtime enforces:** one level only; at most 3 interns per run; $0.10 per department per run; a report, never edits; first thing given up when the pool runs low. The reason is logged and shown; in the House an intern is a dotted square attached to its department. Typical triggers are the Analyst's hard-spot flags. We make no quality claim for them; they're shown, not scored.
-
-## 6. Long context
-
-The full design is in `STORY-STATE.md`. In short:
-
-- **Pages** of about 1K source tokens, never splitting a paragraph.
-- **The whole source sits in the cached prefix** for every text we run (all under ~30k characters). At $0.15 per million cached tokens, 24k tokens cost about $0.004 a call. So the model can look anywhere in the book, and the bible carries the decisions.
-- **Look-ahead:** each call also sees the next paragraph of Japanese, read-only, because Japanese often resolves a subject or speaker after the fact.
-- **Prompt order** (stable first, so it caches): house rules and department prompt; reading and bible; whole source; voice reference; the previous two paragraphs; the page with the analyst's speaker and subject notes.
-- **Rule changes** bump the style-sheet version, which bumps the cache key, so rules are batched at the checkpoint.
-- **Continuity** is checked in the final read, one Wonder call over the whole source and translation; the planted test (`BUILD-PLAN.md`, "The proof") measures what that catches.
-- Novels, where the whole source can't sit in the prefix, are a later design (`STORY-STATE.md` §5).
-
-## 7. Streaming the house at work
-
-Every event is written to `event` and then broadcast in-process. `GET /runs/{id}/stream` is Server-Sent Events, with `Last-Event-ID` so a viewer can resume. Event types: `call.started`, `agent.say`, `draft.paragraph` (each paragraph of the lead draft as it lands; token-level `draft.delta` only if streaming text out of a JSON response turns out to be easy), `query.raised/resolved`, `fork.opened`, `intern.hired`, `budget.tick`, `rule.applied`, `run.done`. Replay is the same endpoint with `?replay=1&speed=8`. The House view is a floor plan with rooms lit by department, beside the message stream as the log, plus budget meters. **There's one live run at a time and every viewer watches the same one**: cheap, and true to the metaphor.
-
-## 8. Stack, hosting, abuse
-
-- **Stack:** Python 3.12 + FastAPI + SQLite (WAL) + Jinja templates. The front end is vanilla JS and CSS, with no build step. `uv` for packaging; pytest. One language serves the engine, the exhibit harness and the site. **No non-Meta ML model runs anywhere in the repo.**
-- **Hosting:** one Fly.io machine plus a volume for SQLite (daily snapshots), with secrets in Fly. Prompts and keys stay on the server; the browser only ever receives events, text and notes.
-- **Spend:**
-  - Every call is priced from `usage` into a spend ledger.
-  - A pre-call estimate is checked against the live-run cap ($0.75), a daily global cap ($10 during judging) and a total cap.
-  - Meta's spend-limit notification is a backstop, not a stop.
-  - A `HOUSE_OPEN=false` kill switch. When the house is closed or the cap is hit, the House shows a replay and says why.
-- **Abuse:**
-  - Live runs only on preset passages, or on Aozora works from the eligible index, ≤2,000 chars. No free paste, so we're not a free translation proxy and there's no copyright risk. **Presets are pre-briefed:** their reading and bible are built in advance, so a live run drafts and checks with the real state rather than translating a passage cold. A whole work under 2,000 characters gets its brief live, inside the run cap.
-  - 2 triggered runs per IP per day.
-  - Reactions are rate-limited by cookie and IP. Comments and proposals are screened by a model, published if they pass, removable by the editor, flat with no reply threads, capped per day, with a takedown contact.
-  - Editor and reviewer powers come through signed, revocable invite links. No passwords.
-
-## 9. What's in this repo
-
-Everything the demo needs runs from this repo: the engine, orchestrator, schemas, the department prompts the demo uses, the demo texts' style sheets and voice briefs, a sample tic list, the Aozora parser, the UI, the exhibit harness, results and raw verdicts, and replay fixtures. An optional private overlay (`KEIKAKU_PRIVATE_DIR`) can add voice profiles for other authors and longer word lists; the demo never depends on it. Copyrighted human translations used in evals are quoted in short excerpts only and never committed whole.
-
-## 10. Cost model
-
-**Assumptions:**
-- Japanese source: 1.5 tokens per character.
-- English: 0.6 tokens per source character.
-- Stable prefix ~5k tokens, 80% of it cached.
-- **Reasoning is billed as output.** Base case: medium effort ≈ 2× visible output, low ≈ 1k tokens per call (Wonder 1.5k). **Pessimistic: double the reasoning.** The first calls (M0) measure the real ratio, and this table gets updated.
-
-Prices per million tokens (in / cached / out): Spark $1.25 / $0.15 / $4.25; Wonder $4 / $0.20 / $20; Glimmer hosted ≈ $0.30 / $0.04 / $1.20; web_search $2.50 per 1k searches.
-
-| Full pipeline, per 1,000 Japanese chars | Base | Pessimistic |
-|---|---|---|
-| First read, Analyst, summaries, continuity read (amortised) | $0.015 | $0.025 |
-| Translation lead draft + second drafts on ~20% of chunks | $0.022 | $0.035 |
-| **Source check, Wonder, draft + diffs** | **$0.068** | **$0.12** |
-| Editor's letter (Wonder, whole draft) + Editorial + copy desk | $0.025 | $0.04 |
-| Notes + fact-check (with search) | $0.022 | $0.035 |
-| Query answers, heads, interns | $0.010 | $0.02 |
-| **Total** | **≈ $0.16** | **≈ $0.27** |
-
-The English-alone side (editor's letter, Editorial) got more and notes got less on 30 Oct: for an edition that's pleasant to read, the revision without the source matters more than another note. The first read (one Wonder call at medium effort over the whole text, plus Spark's independent crux read) adds roughly $0.015 base / $0.025 pessimistic per 1,000 chars on top of the first row; the background brief and the voice trial are fixed costs of a few cents per text. The per-text table below hasn't been rescaled for these; M0 replaces all of these figures anyway.
-
-| Text | Chars | One full run (base / pessimistic) | Planned spend |
+| Model | Input | Cached input | Output, reasoning included |
 |---|---|---|---|
-| Shiraki Shizu 「晩餐」 (development text) | 3,400 | $0.54 / $0.92 | 5 tuning runs, inside "dev" below |
-| Kitamura Tōkoku 「我牢獄」 (the hard text) | 4,500 | $0.72 / $1.22 | 3 runs: $2.2 / $3.6 |
-| Kasai Zenzō 「雪をんな」 (plain control) | 3,200 | $0.51 / $0.86 | 3 runs: $1.5 / $2.6 |
-| Koizumi Setsu 「思い出の記」 (vs its 1918 translation) | 30,700 whole; the brief always runs on the whole text | $4.9 / $8.3 whole; ~$0.9 / $1.5 for three windows after the brief | 1 whole run if the budget holds, else windows |
-| **Showcase: Shiraki Shizu 「三十三の死」** | 13,500 | **$2.16 / $3.65** | 2 runs + rule reruns: $6.5 / $11 |
-| Stretch: Natsume Sōseki 「幻影の盾」 | 22,100 | $3.54 / $5.97 | 1 run |
-| Live demo run (preset passage) | ~1,500 | $0.24 / $0.41 | — |
+| `muse-spark-1.3` | $1.25 | $0.15 | $4.25 |
+| `muse-wonder-1.0` | $4.00 | $0.20 | $20.00 |
 
-| Budget line, inside the $150 credits | Base | Pessimistic |
-|---|---|---|
-| Dev: smoke tests, prompt tuning, failed runs, 晩餐 ×5 | $25 | $40 |
-| The other texts (Tōkoku, Kasai, Setsu whole) | $8.6 | $14.5 |
-| Showcase | $6.5 | $11 |
-| The exhibit (audit on all versions, both auditors) and the planted test | $8 | $14 |
-| Catalogue, 200 reports | $4 | $7 |
-| Rehearsals and video takes; covers | $6 | $11 |
-| Stretch, one run | $3.5 | $6 |
-| **Total** | **≈ $61** | **≈ $103** |
+**Before each live call**, a cautious estimate (1.5 tokens a character, nothing cached) is checked against the run's cap and what's left of today's and the total. A call that would pass any of them raises `CapExceeded`. `HOUSE_OPEN=false` refuses every live call.
 
-**Headline:** everything, the stretch included, fits in the $150 credits even in the pessimistic case. The live site after submission runs on separate billing, capped at $10 a day.
+**Before a run starts**, the whole run is estimated and refused if it won't fit: better no translation than one that stops half-way. `estimate_run` prices each stage per call from token counts fitted on eight runs of 3,400–19,500 characters. A call's input is a fixed part (prompt, reading, bible) plus a part that grows with the source it sees; its output stays about the same whatever the length. The estimate assumes every call is live and every earlier part goes back to the desk once, then adds 15%.
 
-If reasoning turns out worse than pessimistic, there are three levers, in this order:
-1. Move routine Source check to Spark Open on a partner host, and keep Wonder for flagged chunks.
-2. Use Meta's cheaper Contributor tier for the shelf and the other texts.
-3. Drop the stretch.
+| Stage | Calls | Model | Input tokens | Output a call | 「晩餐」, 3,400 chars | 149,000 chars, 8 parts |
+|---|---|---|---|---|---|---|
+| Parts | 1 | Spark | 2,300 + 0.26 a character | 1,500 | $0.01 | $0.06 |
+| First read | 1 | Wonder | 2,100 + 1.1 | 3,900 | $0.10 | $0.74 |
+| Crux check | 2 | Wonder | 4,400 + 0.84 | 2,700 | $0.09 | $0.57 |
+| Bible | 1 | Spark | 5,000 + 0.86 | grows, to 32,000 | $0.04 | $0.30 |
+| Draft | a page | Spark | 8,600 + 1.02 of what it sees, mostly cached | 3,500 | $0.13 | $6.62 |
+| Readers | 2 a part | Spark | 500 + 6.7 of the part | 25,000 together | $0.14 | $2.10 |
+| Desk | a part, plus one per earlier part | Wonder | 8,600 + 2.86 | 6,500 | $0.20 | $5.66 |
+| Final read | a part | Wonder | 7,200 + 2.36 | 9,000 | $0.24 | $3.08 |
+| Copy desk | 2 turns + 1 per 600 chars, at most 30 | Spark | 14,000 + 0.65, mostly cached | 1,400 | $0.10 | $0.62 |
+| Notes | a part | Spark | 8,400 + 2.72 | 2,200 | $0.04 | $0.67 |
+| **Before the 15%** | | | | | **$1.07** | **$20.41** |
+| **The estimate** | | | | | **$1.23** | **$23.47** |
+
+The eight runs came to 0.89–1.10 of the figure before the 15%. The recorded 「晩餐」 run in `fixtures/` (3,410 characters, 26 calls, the default set-up) cost $0.97, 0.91 of it. The recorded 「酒虫」 run (6,731 characters, 23 calls, an earlier set-up with a Spark final read and no copy desk) cost $0.94. A book has been priced, not run. Running the desk on Spark takes 「晩餐」's estimate from $1.23 to $1.05; experiment 2 found no clear difference in quality.
+
+**Caps.** The run cap is `--cap` or `KEIKAKU_CAP_RUN`, default $30, enough for a novel; the daily cap `KEIKAKU_CAP_DAILY`, default $30; the total `KEIKAKU_CAP_TOTAL`, default $100. A resumed run keeps the cap it started with. If a cap is reached mid-run, the run stops, releases nothing, and says which cap to raise and where to resume; the cache means nothing done is paid for twice.
+
+## Drops of ink and allowances
+
+People on the site never see dollars. Effort is counted in **drops of ink** (`house/desk.py`): one drop is `KEIKAKU_DROP_USD`, default $0.0006. Length is counted in **sheets** of 400 source characters, the 原稿用紙 the period's writers were paid by.
+
+- **The estimate an editor sees** is sheets × a rate: the average cost per sheet of the last five finished runs in the ledger (at first-made prices, so replays count), plus a tenth, never below 100 drops a sheet. Before any run has finished it is `DESK_DROPS_PER_SHEET`, default 175, measured on 「晩餐」 (1,486 drops for 8.5 sheets, about $0.89).
+- **An invited editor has an allowance**, 4,000 drops unless `keikaku invite --drops` says otherwise. Starting a run reserves the whole estimate, and the run's cap is the reservation plus 20%. When an attempt ends, the run is charged what it spent, never more than the reservation (an overrun is the house's), and the rest is released. Resuming a run that used its whole reservation holds a quarter more and raises its cap to match.
+- **An editor on their own key** has no allowance. Their runs spend their key, are held to the run cap only, and don't count against the house's daily or total caps. Their desk shows spend in tokens.
+- **Capacity:** one run going per person, at most three queued or running across the site.
+
+## The checkpoint
+
+A run started with `--checkpoint`, or from the desk with the review on, stops after the bible. The checkpoint stage drafts page 1 once in each voice the reading offers, with the run's own drafting prompt and model, keeps the drafts in a `checkpoint` document (not as revisions), and sets the run `waiting`. The editor can then:
+
+- **send a note** (`keikaku steer`, or the desk). One Wonder call with the `steer` prompt carries the note into the reading and the bible and replies; page 1 is drafted again in the chosen voice. New versions are saved only where something changed.
+- **edit by hand** the reading, the voices, the bible, or page 1 in a voice. Every later call reads the editor's version. `keikaku checkpoint <work>` writes these as Markdown under `checkpoints/<work>/` in the data folder and reads back what was changed.
+- **approve a voice** (`keikaku approve --voice N`). The run carries on from the draft, whose page 1 comes from the response cache, since its prefix matches the checkpoint's.
+
+Each round, edit and approval is an event, so the review is part of the record.
+
+## Long texts
+
+What a call sees depends on length, and only `house/context.py` decides it ([STORY-STATE.md](STORY-STATE.md) has the reasons).
+
+- **Pages** are whole paragraphs, about 650 source characters, closing early at a scene break. A drafting call also sees the two paragraphs before it with their English and the next paragraph of Japanese, read-only. From page 2 the house's first page is the voice reference.
+- **Up to 15,000 characters**, every drafting call has the whole source in its cached prefix. Above that, it has its own part in full and every other part in one line, so a page costs the same however long the book is.
+- **Parts.** One cheap Spark call over the book's outline says where parts start. Code checks the answer covers the book once, in order, with no part over 25,000 characters, else falls back to headings or merged scene breaks. The final read works a part at a time above 15,000 characters.
+- **The first read, crux check and bible** always see the whole source.
+
+## The database and the event log
+
+One SQLite file in WAL mode, `keikaku.db`. `house/db.py` applies `db/schema.sql` on every connect and adds columns to older databases. JSON columns hold text shaped by the schemas in `house/schemas/`.
+
+| Tables | Hold |
+|---|---|
+| `work`, `segment` | A work (Aozora card, colophon verbatim, rights record, English title and blurb); its paragraphs `p1`, `p2`… with ruby tokens and sentence anchors `p12-s3` |
+| `run` | One pass of a work: status, last stage done, cap, options (models, prompt, voice, editor, reservation) |
+| `bible` | Versioned documents per work: reading, crux check, story bible, parts plan, checkpoint; each points at the event that made it |
+| `revision` | The English per paragraph, or per group the drafter joined, versioned, each pointing at its cause |
+| `query`, `fork`, `note`, `status` | Readers' notes, code flags and final-read notes with how each was settled; choices sent to the editor with both sides verbatim; reader-facing notes; *draft* or *house-checked* per paragraph |
+| `event`, `call` | The log; the spend ledger |
+| `edition`, `release` | An edition per work and editor; its versions (v0.1, v0.2…) |
+| `person`, `allowance`, `invite`, `session`, `reset` | People, drops, invite links, sign-ins, reset links; tokens stored as hashes only |
+| `comment`, `comment_report`, `comment_digest`, `wish`, `wish_ask` | Comments and reports; the wishlist and who asked, by hashed address |
+
+The schema also has tables no code writes (`author_file`, `rule`, `lock`, `intern`, `reaction`, `proposal`, `report`, `vote`, `request`), and `term`, kept only so `keikaku audit` can read runs recorded before the term ledger was dropped.
+
+**The event log** is append-only: run, sequence number, actor (a department and role, a person, or `house`), type, payload, the cost of the call behind it. The types are listed with a line each in `house/events.py`, and emitting an unknown one is an error. They cover each stage, every call and its `say` line, each version of the reading and bible, the checkpoint, every change to the English, every note and how it was settled, forks and the release. Outside runs, `work.added` and `work.refused` record each Aozora link read.
+
+**The margin is a database read.** Every revision, note, decision and fork is stored against a paragraph, and a paragraph's margin is everything anchored to it. There's no separate collection step, so no decision can happen without showing up somewhere.
+
+**The data folder** is `KEIKAKU_DATA_DIR`, or the repo's `var/`. It holds `keikaku.db`, `cache/responses/`, `sources/` (texts added from links), `releases/`, `audit/` and `checkpoints/`.
+
+## Works and the rights rule
+
+A work is either in the repo's `fixtures/works.json` (texts in `fixtures/sources/`, fetched with `keikaku fetch`) or added from an Aozora link, with an id starting `aozora-`. Links come in through `keikaku add`, the desk, or the wishlist (`/wishlist`, `keikaku wish`), all through `acquire.add`.
+
+The rule is code (`works.eligible`): the author died in 1931 or earlier and the work was first published by 1930. Adding from a link applies it strictly, from the card alone. The death that counts is the latest of everyone credited, a translator's included. A year that can't be read is a refusal, never a guess. A 初出 note naming any year after 1930 is refused, since Aozora's text may be the later version. A work split across cards, or with no ruby text, is refused.
+
+Fetching stays on Aozora: https only, at most two redirects, a 20-second timeout, 5 MB at most. One small Spark call writes the English title, romanised author and blurb; if it fails, the work is added without them and the call is retried at most once an hour. A refusal on what the card says is remembered for 30 days. Limits: ten cards read a day per editor; on the wishlist, five links an hour per address and ten new cards a day in all.
+
+Every release carries the work's Aozora colophon, and the notes prompt never voices a note as the author's.
+
+## The site
+
+`house/web.py` is a FastAPI app serving Jinja templates and plain CSS and JavaScript from `site/`, with no build step.
+
+- **Reading.** `/` is the shelf. `/read/<work>` shows an edition: one English text, the Japanese with ruby, and each paragraph's margin. Presets (Clean, Curious, Annotated) change the layout and which notes show, never the English. `/read/<work>/analysis` shows the reading and the bible the edition was drafted under.
+- **Editions.** An edition belongs to its editor: the house, or the person who ran it from the desk. An editor's next run of a work revises their own edition. After release, the editor can change any paragraph's English by hand; each change is a revision with an event keeping before, after and who.
+- **Replay and live.** `keikaku serve --replay` builds a temporary database from `fixtures/`, starts no runs and takes no comments, so it works from a clean clone with no key. Without `--replay`, it serves the live database, loads the recorded runs into it once, and marks desk runs left going by a stopped process as interrupted.
+
+Every form that changes something carries a CSRF token; responses forbid framing and sniffing; pages with a person's own details are never cached. More in [SITE.md](SITE.md) and [CONVENTIONS.md](CONVENTIONS.md).
+
+## The editors' desk and accounts
+
+Visitors can't start runs; editors can, from the desk, on works that pass the rights rule. Two ways in:
+
+- **An invite link** (`keikaku invite "Name"`) makes a person with an allowance. Only a salted hash of its token is stored. Revoking it (`--revoke`) also ends the person's sessions and removes any email, password or unused reset link they had.
+- **Signing up** (`/signup`: name, email, password) gives a desk with no allowance, where the editor adds their own Meta Model API key. The key is encrypted with `KEIKAKU_SECRET`, shown only as its last four characters, and decrypted only to build the client for that person's runs. Passwords are salted scrypt hashes; sessions last 90 days; a reset link is good for an hour, once.
+
+A desk run uses the same orchestrator as the command line, in a background thread in the web process, so the request that starts it returns at once and the page polls for progress. A run whose own key is turned down can't resume, because a run can't change keys part-way. Before starting, the editor agrees that what they run is published, under the name they give.
+
+## Comments and moderation
+
+Anyone can comment on a paragraph with no account. Code checks come first: 1,200 characters, one link, limits per writer and per address by the hour and day (both stored hashed), 200 a day across the site. Then Spark screens the comment and its name in the background. Until it passes only its writer sees it; if it fails, its writer sees why. A background loop every 15 minutes rescreens any comment whose screen didn't run, giving up after three badly formed answers. Reports from two different addresses hide a published comment. Once a day (after 8:00 UK time) the editor gets an email listing the day's comments, what the screen stopped and what readers reported, each with a signed link to hide or restore it; `keikaku comments` does the same from the terminal. Nothing is deleted. Mail goes through Resend (`RESEND_API_KEY`), or to the server log without a key.
+
+## Hosting
+
+One Railway service, built from the `Dockerfile` on push.
+
+- **The image** is `uv` on Python 3.12 with Litestream 0.3.13. `bin/serve.sh` runs `keikaku serve --host 0.0.0.0 --port $PORT`, under `litestream replicate` when `LITESTREAM_BUCKET` is set.
+- **The volume.** Everything a run makes is in `KEIKAKU_DATA_DIR`, set to the volume's mount path. The rest of the filesystem is wiped on each deploy, and the volume isn't mounted during the build.
+- **One instance.** Run threads, the run locks and the sign-in and edit rate limits live in process memory, so the site runs as a single process. A service with a volume can't have replicas anyway; a redeploy means a few seconds' downtime.
+- **Behind the proxy.** Railway appends the visitor's address to `X-Forwarded-For`. With `KEIKAKU_TRUST_PROXY=true` the rate limits use its right-most value, the one the proxy added. It's off by default: reached directly, a client can put anything in that header.
+- **Backup.** Litestream (`litestream.yml`) streams the database continuously to S3-compatible storage. To restore onto an empty volume, service stopped: `litestream restore -config litestream.yml "$KEIKAKU_DATA_DIR/keikaku.db"`. The response cache isn't backed up; it only saves money. `keikaku download <work>` zips a run's record and editions for its editor.
+
+| Variable (`.env.example`) | What it does |
+|---|---|
+| `MODEL_API_KEY`, `MODEL_API_BASE` | The site's Meta Model API key and an optional base URL. Without a key everything runs on FakeClient and the desk can't start runs |
+| `KEIKAKU_DATA_DIR` | The data folder; on Railway, the volume |
+| `KEIKAKU_CAP_RUN`, `_DAILY`, `_TOTAL` | Spend caps in dollars |
+| `KEIKAKU_PARALLEL`, `HOUSE_OPEN` | Calls a stage may have out at once; the kill switch |
+| `KEIKAKU_SECRET` | Salts token, cookie and address hashes; encrypts editors' keys; signs moderation links. Changing it voids every invite and stored key |
+| `KEIKAKU_BASE_URL`, `KEIKAKU_CONTACT` | The site's address for links in mail and invites; a contact shown when reset mail isn't set up |
+| `KEIKAKU_TRUST_PROXY` | `true` behind Railway's proxy |
+| `RESEND_API_KEY`, `REPORT_EMAIL_TO`, `REPORT_EMAIL_FROM` | Mail: the daily email and reset links |
+| `COMMENTS_*`, `REPORTS_*`, `DIGEST_HOUR` | Comment and report limits; the email's hour |
+| `LITESTREAM_*` | Backup bucket, endpoint, region, keys |
+
+Read by the code but not listed there: `KEIKAKU_DROP_USD`, `DESK_DROPS_PER_SHEET`, `SIGNUPS_PER_HOUR`, `COMMENTS_PER_HOUR_IP`, `COMMENTS_PER_DAY_IP`.

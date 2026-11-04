@@ -1,0 +1,51 @@
+{
+ "prompt": "head-select",
+ "model": "muse-wonder-1.0",
+ "effort": "low",
+ "data": {
+  "decision": "fork",
+  "fork": {
+   "options": [
+    {
+     "author": "the first read (Wonder)",
+     "case": "- The story stands or falls on its title made literal: the sword fails and the rope, in every form, does everything. Ryūjirō's great sword, the 'soul of the samurai', is stolen off a riverbank while he is naked; his small knife is useful only once, thrown at a man and then used as a weed-cutter. What actually saves a life, twice, is the low, female, criminal-adjacent art he learned in captivity from O-Tetsu: rope-escape and rope-cutting, applied underwater to the man-eating weeds that hold Kotora. Around that core the text binds everything to everything else — the invisible rope that keeps him in Awa for three months, the thrown rope that fishes him off the cliff, the ferry's hauling-ropes (themselves donated, used-up capture-ropes, a detail the narrator pauses to savour), the weeds that climb his body 'like a real rope-hold', the jealousy that is also a kind of tying. A translation that treats the rope business as colour, cuts the catalogues, or lets the swordsmanship reassert heroic dignity has lost the book's actual engine, which is a proud hatamoto swordsman being progressively stripped — of movement, of clothes, of his sword, of initiative — and rescued, bound, dressed and finally freed by women. Because the plot is built as a chain of bindings and releases, and because Ryūjirō's passivity is the point, not a flaw to be tidied. He is carried on O-Tetsu's back, nursed, kept, flattered as a house swordsman 'better than Hirate Mikizō', caught mid-escape like a fish on a line; he apologises, weeps, promises, undresses, and is dressed again by O-Tetsu 'like a mother after a child's bath'. Kotora walks the rope he cannot, swims, is cut free by his borrowed skill, and then settles the whole impasse in one stab while he stands by astonished at fate. If the English lets him sound decisive or lets O-Tetsu become a glamorous villainess, the humiliation-comedy and the real menace both go. For the English: Keep the ropes literal. Give the named holds and techniques in a consistent, recognisable set of English terms, and let the catalogue run at its full, slightly excessive length the first time: it is plot, not ornament, because the algae will later bind him 'exactly like a ganjigarame hold'. Do not vary rope, bind, tie, entangle, prisoner for elegance; the text's network of repeated binding-words is its structure, and flattening it is destroying that network.",
+     "tradeoff": "One tightly focused crux: the rope-binds, sword-fails chain and Ryūjirō's consequential passivity."
+    },
+    {
+     "author": "the crux check (Wonder)",
+     "case": "- The whole story is organised by rope displacing the sword, literally and metaphorically — this is what the title announces and what every episode re-enacts. Otetsu is Ikina wa, 'Living Rope': a bondage/arrest-rope (torinawa) expert whose house transmits knot-lists (ganjigarame, kikkou, matsuba, rokuro…) that Ryuujirou studies by being tied and tying her in midnight lessons. He is then held three months by an 'invisible rope' though never locked in, is hauled back by her thrown rope when he escapes, crosses paths with the ferry's hauling-ropes (made, pointedly, from retired arrest-ropes), watches Kotora tightrope the ferry vine, is nearly drowned by man-eating algae that binds him 'like a ganjigarame', and frees himself and her only by applying Otetsu's rope-escape/rope-cutting teaching with his small knife. Even Otetsu's jealous surveillance is described as a net spread along the road. Against this, the samurai's daishou do nothing: the long sword is left on the bank and stolen, and the only blades that work are the kozuka thrown at the monk and the kodachi cutting weeds in the water. For the English: Keep one audible lexical web — rope, cord, bind, tie, tangle, coil, haul, cut loose, escape — recurring even where idiomatic English would vary it, and keep the technical catalogues of knots and holds at full, incantatory length. Likewise let the swords stay inert: never drawn in combat, finally stolen while he is naked; do not heroicise Ryuujirou into a swordsman in action.\n- The ending's moral and narrative abruptness is deliberate pulp mechanics, not a flaw to be repaired: the captive's problem is 'solved' by a near-stranger's sudden murder, and the frame then leaps to Meiji and openly admits it doesn't know the outcome that mattered most. Otetsu is simultaneously rumoured torturer-murderer of five or six men, tender nurse, would-be financier of a forward-looking future (sending Ryuujirou to America or Holland to learn gunnery, having heard Fujita in Mito predict the world overturned), infantilising captor, and pathologically jealous wife-figure. Ryuujirou is a 500-koku hatamoto swordsman of reputed genius who spends the tale sick, bound, carried, stripped and rescued. Kotora, met that afternoon, stabs Otetsu in the side without warning — 'a woman's pride' — hands back the wiped blade, and the narrative declares the insoluble problem simply settled; three asterisks later Ryuujirou is a famous Meiji police detective, Kotora his dead first wife, and whether he ever received the Happou Makigumo secret 'regrettably is not transmitted.' For the English: Preserve the sensational, deadpan narration and its refusals: do not clarify who is villain or victim, do not soften the bondage's erotic charge or the jealous violence, do not give the stabbing a moral build-up it doesn't have, and do not fill the epilogue's gap about the secret transmission. Where a fluent version would explain or resolve, leave the seam showing.",
+     "tradeoff": "The same rope-displaces-sword crux plus a second, independent one: the deliberate pulp abruptness and unresolved refusals of the ending."
+    }
+   ],
+   "question": "Do the two readings name the same crux in different words, or different cruxes? They agree on the rope-displaces-sword structure, but Option 1 adds a second crux — preserving the ending's sudden murder, deadpan non-resolution and the epilogue's admitted gap — which would govern different margin decisions from Option 0's binding-and-passivity crux alone, so the run cannot treat them as interchangeable statements of one reading without an editor ruling on whether the translation stands or falls on one thing or on two."
+  },
+  "pick": null,
+  "reason": "Fork opened because the first parts do name the same rope-over-sword structure, but Option 1 names a materially different second crux about pulp abruptness and refusal to resolve, which Option 0 does not; that difference will drive recurring choices about clarification, moral build-up and the epilogue, and getting its status wrong would be expensive across the text.",
+  "same_or_different": "different",
+  "say": "I recommend we proceed on Option 1 until the editor rules: it preserves the shared rope-displaces-sword finding as written and gives the run an explicit guard against clarifying or resolving the ending, whereas proceeding on Option 0 alone risks letting fluent tidying repair precisely the seams Option 1 identifies; the editor should rule whether that abruptness is a second, co-equal crux or a consequence to be handled under the first."
+ },
+ "usage": {
+  "input_tokens": 2714,
+  "cached_tokens": 0,
+  "output_tokens": 2390,
+  "reasoning_tokens": 712,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.058656,
+ "response_id": "resp_6aeb79ea1f3bf224ec75450e",
+ "latency_s": 13.54,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 7186
+  }
+ ],
+ "created": "2026-11-04T18:31:06Z"
+}

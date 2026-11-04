@@ -1,0 +1,42 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 32237,
+  "cached_tokens": 31988,
+  "output_tokens": 284,
+  "reasoning_tokens": 116,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.013073600000000001,
+ "response_id": "resp_6aeba651565387cacd6a4e9a",
+ "latency_s": 3.24,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_58b3305c-382d-45e3-acb4-4a4063603b64",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"F4\"],\"new\":\"a rich fragrant smell of wine assailed Liu's nose without pause\",\"old\":\"effect without pause\",\"reason\":\"芬々たる酒香 is richly fragrant; \\\"reek\\\" makes it foul and settles a tone the text keeps split.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": "commentary",
+   "chars": 75
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T21:40:33Z"
+}

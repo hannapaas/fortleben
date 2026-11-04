@@ -1,0 +1,129 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "So saying, Ryujiro began to haul. Guilty men or no, that the capture-ropes which had bound men to rob them of their freedom should now serve as ferry ropes to help men on their way, there was something deeply pointed in it even as mere making use of waste.",
+    "ids": [
+     "p118"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Here, let me haul.\"",
+    "ids": [
+     "p119"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Kotora offered to haul in his place.",
+    "ids": [
+     "p120"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"No, I will not have a woman spend her strength, and besides you must not wet your sleeves.\"",
+    "ids": [
+     "p121"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Ryujiro stopped her and kept hauling himself. Kotora lent a hand to it. The boat left the far bank and, empty as it was, came on seven or eight ken, sliding its ring along the creeper.",
+    "ids": [
+     "p122"
+    ],
+    "notes": [
+     "ken: the old measure of about two yards, kept as in the earlier ferry passage"
+    ]
+   },
+   {
+    "english": "VI",
+    "ids": [
+     "p123"
+    ],
+    "notes": []
+   },
+   {
+    "english": "At that moment there suddenly appeared among the reeds of the far bank the figure of a great hulking priest. Mouse-grey temple servant's coat with a narrow white cotton sash tied in front and tucked up behind for work, a twisted headband round a shaven head, vulgarity past all outlandishness. In one hand he carried a bucket dripping with water, in the other he planted a long handled eel rake for a staff. A fallen priest past all breaking and ruin. Yet his eyebrows were thick and heavy, his gaze was sharp, and on his forehead there was even a crescent shaped sword scar.",
+    "ids": [
+     "p124"
+    ],
+    "notes": [
+     "the text writes three-month shape, taken as a crescent moon scar"
+    ]
+   },
+   {
+    "english": "He looked for all the world like Lu Zhishen the Flower Monk of the Water Margin.",
+    "ids": [
+     "p125"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Damn you, a young buck and a young wench tangling together and fooling as you call the boat. Who the shit would let you have it.\"",
+    "ids": [
+     "p126"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Though the far bank lay fifty ken away, his muttering rang out as if taken in the hand, and in a moment he set down his bucket and with one hand gave a hard pull on the opposing bow rope.",
+    "ids": [
+     "p127"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Two against one were beaten in an instant, and the boat that had started out turned back.",
+    "ids": [
+     "p128"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Ah, good priest, I beg you. We are racing a step to visit the sick. Whether we are in time for a deathbed or not is a grave matter for us both, so please let the boat come to this side,\" Ryujiro pleaded aloud.",
+    "ids": [
+     "p129"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"No good. Damn it.\"",
+    "ids": [
+     "p130"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted p118 to p130 keeping the rope web, ferry gear and vulgar priest literal."
+ },
+ "usage": {
+  "input_tokens": 26862,
+  "cached_tokens": 25713,
+  "output_tokens": 3343,
+  "reasoning_tokens": 2615,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01950095,
+ "response_id": "resp_6aeb7c78f7294cf61bd8413a",
+ "latency_s": 39.88,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2748
+  }
+ ],
+ "created": "2026-11-04T18:42:01Z"
+}

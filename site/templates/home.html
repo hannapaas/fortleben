@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block head %}<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@900&text=%E8%BB%A2%E7%94%9F&display=swap" rel="stylesheet">{% endblock %}
+{% block main %}
+<div class="opening">
+{# 転生, printed twice like a riso pass: a halftone layer knocked off register, then a flat one; both in the book's colour. #}
+<div class="riso" aria-hidden="true">
+  <svg viewBox="0 0 760 420" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="riso-ink" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="warp"/>
+        <feDisplacementMap in="SourceGraphic" in2="warp" scale="2.5" result="bleed"/>
+        <feTurbulence type="fractalNoise" baseFrequency="2.2" numOctaves="2" seed="11" result="grain"/>
+        <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -9 0 0 0 5.6" result="speckle"/>
+        <feComposite in="bleed" in2="speckle" operator="in"/>
+      </filter>
+      <pattern id="riso-dots" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(22)">
+        <circle cx="2.5" cy="2.5" r="1.55" class="dots"/>
+      </pattern>
+    </defs>
+    <g class="layer" filter="url(#riso-ink)" transform="translate(-4 3)" opacity=".38"><text x="380" y="355" text-anchor="middle" fill="url(#riso-dots)">転生</text></g>
+    <g class="layer" filter="url(#riso-ink)" opacity=".38"><text x="380" y="355" text-anchor="middle" class="flat">転生</text></g>
+  </svg>
+</div>
+<div>
+<p class="pitch">Most of the world's books have never been translated, and most never will be. <span class="name">Fortleben</span> publishes public-domain literature as living translations.</p>
+<p class="pitch-more">keikaku, an AI translation engine, writes the first draft. Readers can steer it, leave notes in the margin and ask for another reading.</p>
+</div>
+<p class="epigraph side"><i>Fortleben</i> is German for “living on”. Walter Benjamin used it for the life a work goes on to have in translation.</p>
+</div>
+
+<div class="form three">
+  <div><span class="q">Who translates?</span><span class="a">keikaku, running on Meta's models. It is organised like a translation house: a translator drafts, readers comment, an editor decides. The method comes from literary translation practice and how publishing houses work. More on the <a href="/about">About</a> page.</span></div>
+  <div><span class="q">How do I read it?</span><span class="a">Choose your reading view, from a clean text like a printed novel to the Japanese alongside. Open any paragraph to see the reasoning behind it, and the notes other readers have left in the margin.</span></div>
+  <div><span class="q">Can I produce my own edition?</span><span class="a">Yes. <a href="/signup">Sign up</a>, pick a book, plug in your own Meta key and steer the translation. The edition is published under your name.</span></div>
+</div>
+
+{% for lang in shelf %}
+<section class="lang">
+  <h2 class="sec">From the {{ lang.name }} {% if lang.native %}<span lang="{{ lang.code }}">{{ lang.native }}</span>{% endif %}</h2>
+  <ul class="shelf">
+    {% for w in lang.works %}
+    <li{% if w.accent != 'pink' %} class="accent-{{ w.accent }}"{% endif %}>
+      <span class="ja" lang="{{ lang.code }}">{% if w.title_en %}{{ w.title }}{% endif %}</span>
+      <span>
+        {% if w.title_en %}<a class="ttl" href="/read/{{ w.id }}">{{ w.title_en }}</a>{% else %}<a class="ttl" href="/read/{{ w.id }}" lang="{{ lang.code }}">{{ w.title }}</a>{% endif %}<br>
+        <span class="meta">{{ w.author_en or w.author }}{% if w.rights.first_published_year %}, {{ w.rights.first_published_year }}{% endif %} · {{ w.paragraphs }} paragraphs</span><br>
+        {% if w.blurb %}{% if w.about %}<details class="blurb"><summary>{{ w.blurb }}</summary><p>{{ w.about }}</p></details>{% else %}<p class="blurb">{{ w.blurb }}</p>{% endif %}{% endif %}
+        <span class="meta">In English: {% for e in w.editions %}{% if e.here %}<a href="{{ e.url }}">{{ e.by }}</a>{% else %}{{ e.by }}, {{ e.year }}{% endif %}{% if not loop.last %} · {% endif %}{% endfor %}</span>
+      </span>
+      <span class="meta">{% if w.label == 'editor-approved' %}{{ w.label }}{% endif %}</span>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% else %}
+<p class="meta">Nothing on the shelf yet.</p>
+{% endfor %}
+
+<div class="form three more-q">
+  <div><span class="q">When will you translate more?</span><span class="a">Anyone can suggest one: <a href="/wishlist">paste a link</a> to any work on Aozora Bunko. Anyone can be an editor too: <a href="/signup">sign up</a>, plug in your own Meta key and translate a book from the wishlist.</span></div>
+  <div><span class="q">Which languages are available?</span><span class="a">Japanese into English, from Aozora Bunko's free library.</span></div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 48774,
+  "cached_tokens": 48500,
+  "output_tokens": 161,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.014016,
+ "response_id": "resp_6aeb7eef5ee7ddcb49f34638",
+ "latency_s": 2.6,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_f8330b1c-d1dc-4b3c-97fa-8a38e829553a",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"R10\"],\"new\":\"if hummed by a sober face at ease, would no doubt look blatantly forced\",\"old\":\"if hummed by a comfortable sober face at ease, would no doubt look blatantly forced\",\"reason\":\"The Japanese is a sober face living at ease; dropping the piled third synonym keeps the landsman's ease without translationese.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:52:31Z"
+}

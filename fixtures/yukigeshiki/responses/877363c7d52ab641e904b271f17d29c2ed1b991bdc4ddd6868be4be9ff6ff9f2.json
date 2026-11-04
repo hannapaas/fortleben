@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 49335,
+  "cached_tokens": 49140,
+  "output_tokens": 143,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.013468,
+ "response_id": "resp_6aeb7ef66b1b8dd0a7904d96",
+ "latency_s": 2.52,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_1f057224-f7f7-4b6e-bd4e-1859b6242203",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"R13\"],\"new\":\"The cicadas screeched as if scorched.\",\"old\":\"The cicadas cried as if scorching.\",\"reason\":\"焦げつくやうに modifies the cicadas' cry; the English as it stood made them do the scorching.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:52:38Z"
+}

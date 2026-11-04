@@ -1,0 +1,89 @@
+{
+ "prompt": "first-read",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": {
+  "crux": [
+   {
+    "for_the_english": "Keep the ropes literal. Give the named holds and techniques in a consistent, recognisable set of English terms, and let the catalogue run at its full, slightly excessive length the first time: it is plot, not ornament, because the algae will later bind him 'exactly like a ganjigarame hold'. Do not vary rope, bind, tie, entangle, prisoner for elegance; the text's network of repeated binding-words is its structure, and flattening it is destroying that network.",
+    "point": "The story stands or falls on its title made literal: the sword fails and the rope, in every form, does everything. Ryūjirō's great sword, the 'soul of the samurai', is stolen off a riverbank while he is naked; his small knife is useful only once, thrown at a man and then used as a weed-cutter. What actually saves a life, twice, is the low, female, criminal-adjacent art he learned in captivity from O-Tetsu: rope-escape and rope-cutting, applied underwater to the man-eating weeds that hold Kotora. Around that core the text binds everything to everything else — the invisible rope that keeps him in Awa for three months, the thrown rope that fishes him off the cliff, the ferry's hauling-ropes (themselves donated, used-up capture-ropes, a detail the narrator pauses to savour), the weeds that climb his body 'like a real rope-hold', the jealousy that is also a kind of tying. A translation that treats the rope business as colour, cuts the catalogues, or lets the swordsmanship reassert heroic dignity has lost the book's actual engine, which is a proud hatamoto swordsman being progressively stripped — of movement, of clothes, of his sword, of initiative — and rescued, bound, dressed and finally freed by women.",
+    "why": "Because the plot is built as a chain of bindings and releases, and because Ryūjirō's passivity is the point, not a flaw to be tidied. He is carried on O-Tetsu's back, nursed, kept, flattered as a house swordsman 'better than Hirate Mikizō', caught mid-escape like a fish on a line; he apologises, weeps, promises, undresses, and is dressed again by O-Tetsu 'like a mother after a child's bath'. Kotora walks the rope he cannot, swims, is cut free by his borrowed skill, and then settles the whole impasse in one stab while he stands by astonished at fate. If the English lets him sound decisive or lets O-Tetsu become a glamorous villainess, the humiliation-comedy and the real menace both go."
+   }
+  ],
+  "open_questions": [
+   {
+    "anchors": [
+     "p21",
+     "p22"
+    ],
+    "question": "Was Ryūjirō actually poisoned or dosed — the sour-smelling cooled water on the boat, the food-poisoning he half-rejects as an explanation — or is this his retrospective suspicion, and does the text ever settle it? It does not; keep the suspicion as suspicion and do not let the English imply O-Tetsu drugged him.",
+    "why_it_matters": "It decides whether O-Tetsu is a near-supernatural 'demon' of the rumours in p9 or a formidably competent woman whose nursing, watching and rope-work are quite enough. The opening calls her a yōma on hearsay; the narrative never confirms anything uncanny."
+   },
+   {
+    "anchors": [
+     "p219",
+     "p221",
+     "p224"
+    ],
+    "question": "Is O-Tetsu dead? Kotora stabs her in the side, she screams once, and the text moves on within two sentences to 'fate is strange'; no death is stated. How flatly should the English leave that?",
+    "why_it_matters": "A translation that writes 'killed her' tidies what the original elides; one that softens it to a wound invents mercy. The brutal casualness is characteristic and should stay visible as an open question for the editor."
+   },
+   {
+    "anchors": [
+     "p224"
+    ],
+    "question": "The closing redaction '○○○○○' for the famous Meiji detective, and the admission that nobody knows whether Ryūjirō ever received the Happō Makigumo secret: keep the circles and the shrug exactly?",
+    "why_it_matters": "This coda deflates the whole quest — the transmission the story was launched by is simply 'not handed down'. Annotating a guessed name or resolving the question would betray the ending's deliberate anticlimax."
+   },
+   {
+    "anchors": [
+     "p48",
+     "p97",
+     "p107"
+    ],
+    "question": "Are the matching dreams (his master dying, her grand-master dying) meant as genuine presentiment in a pre-telegraph world, as the narrator's essay at p101–102 insists such anxiety was, or as convenient pretexts both escapees half-believe?",
+    "why_it_matters": "It governs tone in the long plea scene: played straight, Ryūjirō's tears and Kinchō oath are sincere period piety about master-and-disciple; played with irony the scene becomes two runaways recognising a fellow-feeling. The narrator seems to endorse the period logic; recommend keeping that endorsement un-ironic."
+   }
+  ],
+  "reading": "The crux is the rope, and everything else in this 1925 kōdan-magazine story hangs off it. Ryūjirō leaves Edo on a pilgrim's progress of shrines to purify himself before receiving the secret transmission of the Happō Makigumo school; he is beached instead at Awa by O-Tetsu — 'Ikina no O-Tetsu', Living-Rope O-Tetsu — a widowed, corpulent, near-forty female oyabun who holds a dead husband's red-tasselled jitte, commands a thousand kobun across the Tone, and is rumoured to have tortured five or six captive men to death. Three months of luxurious imprisonment follow, during which the bored prisoner studies her family's hereditary capture-rope manuals and takes midnight practical lessons, each tying the other up. That tuition, not his sword, is what the story is stockpiling: at the Shin-Tone ferry the villainous fake monk cuts the creeper-rope under Kotora, the weeds take her, and Ryūjirō cuts them both free with a small knife using exactly what O-Tetsu taught him. The translation must therefore keep the technical rope vocabulary — kakenawa, hikinawa, the ganjigarame, kikkō, matsuba and the rest, in their shin-gyō-sō variants — patiently and consistently, and resist impoverishment into generic 'knots and ties'. The catalogue at p25–26 will tempt any fluent draft to summarise; summarising is the single most damaging cut available, because the later underwater fight is written as that catalogue come alive.\n\nThe second thing to hold is the narrator. This is popular Taishō storytelling in formal de-aru narration, and the narrator constantly steps forward: to give rumour as a set-piece speech (p9), to explain the hauling-ferry's mechanism for a full paragraph of tripods, creeper cable and iron ring (p114), to lecture on how, before telegraph or post, a bad dream was reason enough to cross provinces (p101–102), and finally to leap half a century to Meiji and a famous detective whose name is printed as circles. None of this is padding to a kōdan reader; it is the pleasure of the form — digression, explanation and anticlimax delivered with a straight face. Do not rationalise the chronology, do not move the explanations into footnotes where the original performs them in the voice, and do not warm or darken the ending: Kotora's murder of O-Tetsu is dispatched in a breath, and the coda ('whether he received the secret transmission is, regrettably, not known') must stay as flat as it is. A fluent version will instinctively ennoble — make the prose sleeker, the hero worthier, the jealous older woman more tragic, the stabbing more consequential. Every one of those instincts is a deformation here.\n\nRegister needs care in both directions. The narration is literate, even bookish, full of period and Sinitic colour, but it is magazine prose, brisk under the ornament; archaising it into faux-Edo pastiche would be as wrong as modernising it flat. Dialogue does the social work and must stay differentiated: Ryūjirō's samurai formality and self-abasement, O-Tetsu's mixing of wifely cajoling, oyabun command and obscene jealousy, Kotora's polite performer's femininity that can snap into 'you shit of a monk' defiance mid-river (p155) and a flat 'it's a woman's honour' over a bloody knife (p220), the monk's music-hall vulgarity. The comedy and the erotic undertow — the lessons at midnight, the rope biting into O-Tetsu's rich flesh as she writhes free (p31), the faded red crepe loincloth glimpsed against the mud (p139), Ryūjirō naked but for leggings and a knife in his loincloth — should be translated at the original's own level of lingering: neither prudishly veiled nor heated up. Note the physical comedy of scale: she carries him half a ri on her back 'as if he were a child'; he is dressed by her like one. Keep his body failing — pallor, sunken eyes, grown-out topknot — as plainly as her twenty-kan bulk, double chin and charm are kept in the long appraising portrait at p11, which sizes her up as a woman past bloom who might once have moved men; translate that appraisal without either leering or rescuing her from it.\n\nWhat the text leans on, besides rope, is water and masters. Rivers, ferries, weeds, leeches, eels and eel-catching monks saturate the middle chapters; two dying masters, one for each runaway, mirror each other and license both escapes, and the master-disciple ethic is argued aloud at length (p50–54) as a rebuke to an age when the bond has become 'like a business transaction'. The foreign thread — Fujita's Mito prophecy of the world turned upside down, gunnery, America or Holland on her grandfather's hoarded thousands — is not decoration either: it is O-Tetsu's own escape-plan for him, and one of the promises that binds him to return. Likely fluent errors, to be named plainly: cutting or compressing the rope catalogues and the ferry mechanism; varying the binding vocabulary; clarifying the poison suspicion into fact; adding remorse, hesitation or heroism to Ryūjirō; making Kotora's stab reluctant or O-Tetsu's death explicit and mourned; explaining the leeches, the circles in the coda, or the lily-like final shrug; and letting the dream-essay shrink into a sentence. Where the English must choose, choose the rope, the digression, and the flat ending.",
+  "say": "'I think this is wrong, though I'm not sure, and here's why' is worth more than a confident guess; 'none' is a complete answer. Never invent a source or a reading to fill a gap; leave the gap visible. (From the house brief, as reminder to the translator.)",
+  "voice_takes": [
+   {
+    "label": "a. brisk kōdan storyteller (recommended first)",
+    "line": "Narration: a confident popular storyteller in clean, slightly formal English, happy to pause for a rope catalogue or a ferry mechanism and to deliver the Meiji coda with a straight face; pace brisk under the ornament, no archaism. Ryūjirō speaks careful, self-deprecating samurai politeness even when begging; O-Tetsu is warm, cajoling and peremptory in one breath, a boss used to obedience, coarsening as jealousy rises; Kotora is sweetly formal until she isn't; the monk is pure vulgar bluster. Wrong for it: lyrical ennoblement, hard-boiled modern slang, or any hint of parody — the storyteller believes every word."
+   },
+   {
+    "label": "b. drier and more deadpan",
+    "line": "Narration: the same events in plainer, cooler sentences, letting the humiliations and the sudden stab land without emphasis; explanations kept but trimmed of relish. Speakers differ mainly by bluntness: Ryūjirō meeker, O-Tetsu flatter and therefore more frightening, Kotora matter-of-fact about murder. Wrong for it: it risks reading as modern irony about pulp rather than pulp; use only if the house wants the anticlimax underlined."
+   },
+   {
+    "label": "c. fuller period melodrama",
+    "line": "Narration: warmer, more rolling and openly sentimental, leaning into the tearful plea scene, the sunset doubling Kotora on the water, and the rhetoric of master-and-disciple devotion; dialogue more expansive, O-Tetsu's jealousy played at full tragic volume. Wrong for it: it can swell into the very ennoblement the text warns against and slow the kōdan pace; the murder and the shrugging coda would need deliberate flattening to survive it."
+   }
+  ]
+ },
+ "usage": {
+  "input_tokens": 16980,
+  "cached_tokens": 0,
+  "output_tokens": 3600,
+  "reasoning_tokens": 725,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.13992,
+ "response_id": "resp_6aeb79c8d93af14d92fc46ec",
+ "latency_s": 46.34,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 11898
+  }
+ ],
+ "created": "2026-11-04T18:30:32Z"
+}

@@ -1,0 +1,68 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "One",
+    "ids": [
+     "p1"
+    ],
+    "notes": []
+   },
+   {
+    "english": "The dew beneath the wild bush-clover that woos the wicker fence already held the colour of autumn. People vied with one another to hasten home. Upstairs and downstairs of the Umeya, which holds the first place for fine scenery among the hot springs of Komatsu and had been so thronged and merry, now, drawn to sadness by the deer-cries that reached across the ridge, the tread of feet passing to and fro along the corridors grew faintly lonely. Rickshaw after rickshaw, most of them laden with travelling bags and travellers, sped toward the station a ri away. The maids, grown long familiar and fond through the coming and going of trays and of tea, watched the receding figures go and stood a while lingering. The valley stream that winds before the house flowed far away with a murmuring rush. Was it a thrush that sang in the forest beyond?",
+    "ids": [
+     "p2"
+    ],
+    "notes": [
+     "I take kuruma here to be jinrikisha, and render as rickshaw; station keeps the period suteishon sense of a railhead a ri off. Tsugumi I leave as thrush, as context already gives forest and season."
+    ]
+   },
+   {
+    "english": "The mountain fastness that once had known no means for its morning and evening livelihood has gained, with the summer visitors year by year, an unlooked-for increase of smoke, and tiled roofs show here and there through the leaves. Clouds lay along the ridge, rising from the roots of a pine of surpassing height to trail above the ivy that clings to the crags. Ranges standing on and on hide the sky of the market town, and the thousand streaks of waterfalls tumbling in rivalry toss abroad as it were threads of silver. To the north, as far as the eye can reach the gaze is far, the deer-fences stand stark and the clappers run far in a line, and the autumn of the mountain paddies looks busy. To the west the water shows its far destination, fold on fold of mountains, fold on fold of cloud, birds fly high and the leaves turn of themselves. One or two grass-cutting children, rich at heart, walk their horses slowly and sing after one another in blithe tunes, even now climbing the skirts of the outer hills.",
+    "ids": [
+     "p3"
+    ],
+    "notes": [
+     "Long scenic period kept as one tide of clauses; shishigaki and naruko kept concrete as deer-fences and clappers rather than explained."
+    ]
+   },
+   {
+    "english": "The waves of Lake Ogi were very still. Faintly to be seen were leaf-boats, coaxed by the storm, slipping to hide behind the islands. Just then, brushing aside the wind in the pines, the exquisite sound of a koto rose from a room on the second floor. The newly arrived guest in the detached pavilion inclined his ear.",
+    "ids": [
+     "p4"
+    ],
+    "notes": [
+     "Hanare kept as detached pavilion to mark the best room apart from the main house; leaf-boats kept literal for kiha-bune."
+    ]
+   }
+  ],
+  "say": "Drafted the Komatsu autumn opening in full scenic period, keeping Umeya, Lake Ogi and detached pavilion literal."
+ },
+ "usage": {
+  "input_tokens": 26715,
+  "cached_tokens": 0,
+  "output_tokens": 3151,
+  "reasoning_tokens": 2443,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0467855,
+ "response_id": "resp_6aeb7a8d3fb4cda8547d4822",
+ "latency_s": 31.38,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2945
+  }
+ ],
+ "created": "2026-11-04T18:33:49Z"
+}

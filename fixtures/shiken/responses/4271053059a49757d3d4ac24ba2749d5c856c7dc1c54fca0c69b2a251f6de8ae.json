@@ -1,0 +1,82 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"Hey, woman, do you know of the man-eating weeds of the New Cut? Once you fall in here that is the end of you. The weeds and the water-chestnuts entangle your hands and feet and you can move no way at all. Heh, even carp, even crucian carp, when they grow big they get entangled in the weeds and perish here, this is a haunted place. If you were crossing alone I would do no such mischief to you, but it gripes me that you are with a young man. So then, wench, die and be done with it... or will you ask me to save you? Beg me and I will put the boat out for you...\" There was no telling how hateful he looked as he said it.",
+    "ids": [
+     "p154"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"What, you shit of a monk? Die though I may, I would never be saved by the likes of you. Here, like this, I can swim, I tell you. What are man-eating weeds to me?\"",
+    "ids": [
+     "p155"
+    ],
+    "notes": [
+     "Kotora drops polite feminine speech for coarse abuse here; kept blunt to match the monk's vulgar register."
+    ]
+   },
+   {
+    "english": "Kotora cut even a showy crawl stroke to prove it. But it lasted only a moment. What the monk had said proved true, and at once the tip of a long slender weed entangled her foot. It was slimy and uncanny, as if it were the hand of a demon, so that you might have doubted whether blood ran and a pulse beat even in the water weeds. Once caught in it there was already nothing to be done. Before she knew it the weeds had entangled both her hands, left and right. Waist and arms too, and slantwise from under the arm up over the shoulder, they entangled her thick and fast, weeds of a fearsome and evil nature.",
+    "ids": [
+     "p156"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Seeing this, Ryujiro could by no means leave her to die. But he could not help thinking of the man sent to fetch a mummy becoming a mummy himself. Even if he dived in from this side, by the time he reached the place where Kotora was drowning he was bound to be caught in the same man-eating weeds.",
+    "ids": [
+     "p157"
+    ],
+    "notes": [
+     "Kept the Japanese proverb literal as the image fits the weeds."
+    ]
+   },
+   {
+    "english": "More than that, for the moment he was filled with hatred for the evil monk. Even as mischief there is a limit. Even as meddling it was carried too far. Mad or witless, whichever he was, if he himself dived in now there was no knowing what hindrance the man might do.",
+    "ids": [
+     "p158"
+    ],
+    "notes": [
+     "Oka-yaki here is uncertain; taken as officious meddling or harassing interference, but I am not sure of the period sense."
+    ]
+   },
+   {
+    "english": "In a flash Ryujiro made up his mind.",
+    "ids": [
+     "p159"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted the ferry weeds confrontation keeping the binding vocabulary and the monk-Kotora vulgar exchange blunt."
+ },
+ "usage": {
+  "input_tokens": 26692,
+  "cached_tokens": 25713,
+  "output_tokens": 3156,
+  "reasoning_tokens": 2453,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.018493700000000002,
+ "response_id": "resp_6aeb7cfe4b804d3389334f6d",
+ "latency_s": 37.16,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2707
+  }
+ ],
+ "created": "2026-11-04T18:44:14Z"
+}

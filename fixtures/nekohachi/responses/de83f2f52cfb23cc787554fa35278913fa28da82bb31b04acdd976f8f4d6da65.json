@@ -1,0 +1,186 @@
+{
+ "prompt": "reader-faithful",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "notes": [
+   {
+    "japanese": "廃兵院の森",
+    "paragraph": "p62",
+    "problem": "The same place is rendered five different ways, destroying the garden/institution repetition network.",
+    "span": "I squatted up all night in the woods by the Soldiers' Home over there,",
+    "suggestion": "Unify everywhere to one plain term, e.g. 'the Veterans' Home woods' at p62, p127-p128, p175, p181 and p186.",
+    "sureness": "Sure from concordance — Soldiers' Home / Haiheiin / veterans' hospital / Invalids Home / Disabled Veterans' Hospital are the same 廃兵院; a period check would settle which term to keep."
+   },
+   {
+    "japanese": "というようなシチュエイションにある主人公です",
+    "paragraph": "p51",
+    "problem": "The katakana loanword is flattened into ordinary English, losing that Nekohachi hears foreign sound.",
+    "span": "The hero is in that sort of situation.",
+    "suggestion": "The hero is in that sort of *situation*. Keep loanwords marked throughout.",
+    "sureness": "Sure the Japanese is katakana English; exact house marking for loanwords would settle form."
+   },
+   {
+    "japanese": "そんなところで例のシチュエイションをやっては！",
+    "paragraph": "p67",
+    "problem": "His pet borrowed word is normalized to plain English, so the misapplication joke disappears.",
+    "span": "to do that situation in a place like that!",
+    "suggestion": "to pull that *situation* stunt in a place like that!",
+    "sureness": "Fairly sure; hearing the tape of his earlier use at p53 would confirm he means his own 例の word."
+   },
+   {
+    "japanese": "少しも背景《バック》や深みがない",
+    "paragraph": "p78",
+    "problem": "The ruby-marked loanword BACK is translated away to plain background, merging the two Englishes.",
+    "span": "without a scrap of background or depth.",
+    "suggestion": "without a scrap of *background* — of back — or depth.",
+    "sureness": "Sure the Japanese prints 背景 with バック as reading; how to mark it in English needs an editorial call."
+   },
+   {
+    "japanese": "バックとかハイケイとかが何のヘラだか分りません",
+    "paragraph": "p82",
+    "problem": "One term is translated and the other left as romaji, breaking the paired incomprehension.",
+    "span": "he did not know what the hell a back or a haikei was,",
+    "suggestion": "he did not know what the hell a *back* or a *haikei* was,",
+    "sureness": "Sure on inconsistency; whether to keep both as sound or gloss once would settle it."
+   },
+   {
+    "japanese": "暗い書き割りのかげから『お父さん』と言って自分に飛びついたものがある",
+    "paragraph": "p87",
+    "problem": "The child is turned into a thing, a sense error that dehumanizes the recognition scene.",
+    "span": "when from the shadow of the dark flats something cries 'Father' and clings to him.",
+    "suggestion": "when from the shadow of the dark flats someone cries 'Father!' and flings himself upon him.",
+    "sureness": "Sure — ものがある here is a person, the child; no further check needed."
+   },
+   {
+    "japanese": "びっくり仰天をしたほどに目を見張ってみせた",
+    "paragraph": "p91",
+    "problem": "The performative みせた, that he puts the stare on, is lost in a plain stared.",
+    "span": "Nekohachi stared with his eyes opened wide, as if thunderstruck, when he came to hear of this last business of weeping together.",
+    "suggestion": "Nekohachi opened his eyes wide as if thunderstruck to hear of this last weeping together — made himself stare.",
+    "sureness": "Sure on grammar of -てみせた as showing; degree of emphasis is interpretive."
+   },
+   {
+    "japanese": "これもやはりわざと誇張してみせた表情だとは自分ながら知らないでもなかったが",
+    "paragraph": "p91",
+    "problem": "A hesitant double negative about half-knowing his own exaggeration is rationalised into certainty.",
+    "span": "He knew well enough himself that this too was a face put on and exaggerated on purpose,",
+    "suggestion": "He could not say he did not know himself that this too was a face put on and exaggerated on purpose,",
+    "sureness": "Sure on the grammar of 知らないでもなかった; keeping the awkwardness is the point."
+   },
+   {
+    "japanese": "その横顔をじろりと見上げて、自分は少し不愉快の意を表したけれども、彼は気がつかなかった",
+    "paragraph": "p161",
+    "problem": "The pronoun makes the leaver the looker; in Japanese Nekohachi looks up at the leaver.",
+    "span": "He looked up sidelong at that profile to show a touch of displeasure, but the man never noticed.",
+    "suggestion": "He looked up sidelong at that retreating profile — Nekohachi showed a touch of displeasure — but the man never noticed.",
+    "sureness": "Sure on subjects — 自分 is Nekohachi, 彼 is the near-sighted man; rewording to name them would settle it."
+   },
+   {
+    "japanese": "こちらの味方らしく言った",
+    "paragraph": "p152",
+    "problem": "Third-person narration slips into first person, breaking person.",
+    "span": "as if taking my side.",
+    "suggestion": "as if taking his side.",
+    "sureness": "Sure — narrator is third person throughout; my has no antecedent."
+   },
+   {
+    "japanese": "この虫は泥棒や自分たちと同様、夜業ばかりする奴だから",
+    "paragraph": "p13",
+    "problem": "Vague 自分たち is clarified into people in our trade, narrowing what the text leaves open.",
+    "span": "Like thieves, like people in our trade, the things do their work only by night,",
+    "suggestion": "Like thieves, like us, the things do their work only by night,",
+    "sureness": "Fairly sure it is over-specific; what 自分たち covers here would need a second look at his night work."
+   },
+   {
+    "japanese": "お客の足なら、摺り小木にもなれでさア",
+    "paragraph": "p33",
+    "problem": "An obscure phrase is rendered as literal nonsense English no reader can parse.",
+    "span": "As for customers' feet, I'm seasoned to rubbing little sticks, you know.",
+    "suggestion": null,
+    "sureness": "Unsure what 摺り小木 means here — worn pestle, inured, joke? — needs a period-dictionary check; leave visible until then."
+   },
+   {
+    "japanese": "しかしわたくしならそんなことは",
+    "paragraph": "p71",
+    "problem": "An unfinished, trailing-off defence is completed into a firm denial.",
+    "span": "\"But I would never do such a thing,\"",
+    "suggestion": "\"But as for me — a thing like that —\"",
+    "sureness": "Sure the Japanese breaks off after は; completing it rationalises him."
+   },
+   {
+    "japanese": "その深井とかいう俳優がその場合にせっかく持った真人間らしい考えを",
+    "paragraph": "p69",
+    "problem": "Neutral その場合に is rewritten as his pet fix, importing an interpretation the sentence does not make.",
+    "span": "the decent human thought he had managed to hold in that fix,",
+    "suggestion": "the decent human thought he had managed to hold in that place,",
+    "sureness": "Fairly sure; その場合 is neutral case/moment, not はめ — check whether desk wants his misuse echoed here."
+   },
+   {
+    "japanese": "さて、これからがいよいよおれの世界だと思うと",
+    "paragraph": "p123",
+    "problem": "Free-indirect おれ is normalized to his, losing the slide into his idiom.",
+    "span": "Now this from here on was at last his own world, he thought,",
+    "suggestion": "Now — from here on this was at last my world, he thought,",
+    "sureness": "Sure on おれ in narration; how far to keep first-person pronouns in free indirect needs a rule."
+   },
+   {
+    "japanese": "どこを風が吹くと言わぬばかりにして、ほうほけきょうとやった",
+    "paragraph": "p124",
+    "problem": "A deadpan-face idiom is expanded into ventriloquist direction about where sound comes from.",
+    "span": "he kept his face to tell nothing of where it would come from, and went hohokekyo.",
+    "suggestion": "keeping his face deadpan, giving nothing away, he went hohokekyo.",
+    "sureness": "Sure the idiom is about expressionlessness, not direction; a check of the idiom would confirm."
+   },
+   {
+    "japanese": "最初の日はまるでゼロであったが",
+    "paragraph": "p141",
+    "problem": "Single まるでゼロ is doubled into two English zeros, an expansion.",
+    "span": "The first day was clean nothing, clean zero, and on the second day at last he sold ten sen's worth.",
+    "suggestion": "The first day was clean zero, nothing at all, and on the second day at last he sold ten sen's worth.",
+    "sureness": "Sure there is only one zero in Japanese; keep one."
+   },
+   {
+    "japanese": "おめえさんもずいぶんわからねい、な、疝気の虫が啼けるかい？　それが不満足なら、どうせ、もう木戸銭は取ってあるのだから、とッとと帰ってもいいぞ――だが、おめえさんだッても途中から帰りたくはなかろう。おいらもじつは帰したくねいんだ",
+    "paragraph": "p153",
+    "problem": "A marked shift into coarse beranmei performance voice is flattened to the same polite English.",
+    "span": "You don't understand much yourself, eh, can a colic-worm cry? If that will not do for you, I have taken your wooden gate charge already, so you can get home quick — only that would be too bare, so at the end I let the other fellow save face too — but you don't want to go home halfway either. Truth is, I don't want to go home either — that is what I make of it.",
+    "suggestion": "Yer don't understand much yerself, eh, can a colic-worm cry? If that won't do yer, I got yer gate-money already, so yer can get home quick — only that'd be too bare, so at the end I let the other fellow save face too — but yer don't want to go home halfway neither. Truth is, I don't want to go home neither — that's how I fix it.",
+    "sureness": "Sure on the shift from わたくし to おめえさん／おいら; exact colloquial equivalent needs care to avoid stage dialect."
+   },
+   {
+    "japanese": "げんじつ主義も自分には分らなければ、ぐたいとか空体とかも分らないので",
+    "paragraph": "p118",
+    "problem": "What he hears as mere sound is translated into comprehensible realism while gutai is left foreign.",
+    "span": "What they call realism he didn't understand,",
+    "suggestion": "What they call genjitsu-shugi he didn't understand,",
+    "sureness": "Fairly sure — hiragana げんじつ主義 signals heard sound; keeping it as sound preserves his incomprehension."
+   }
+  ],
+  "say": "Part tracks sense closely but normalizes his borrowed words, flattens his coarse stage voice, and wobbles on names and person."
+ },
+ "usage": {
+  "input_tokens": 54043,
+  "cached_tokens": 0,
+  "output_tokens": 28291,
+  "reasoning_tokens": 25510,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.1877905,
+ "response_id": "resp_6aeb80d3588f8d47cf29468c",
+ "latency_s": 270.43,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 9949
+  }
+ ],
+ "created": "2026-11-04T19:00:35Z"
+}

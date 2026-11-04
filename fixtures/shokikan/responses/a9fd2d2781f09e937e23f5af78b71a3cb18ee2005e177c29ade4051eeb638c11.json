@@ -1,0 +1,80 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"Now, there is nothing particularly difficult about those provisions. The reason for putting out the ordinance is simply this: whatever satisfies every condition laid down in the law shall promptly be granted the disposal, whatever does not shall have its papers rejected all together, and where there are several papers that satisfy the conditions in due form, the first application to arrive shall be adopted. That appears to be the arrangement. If we settle our counsels tonight without delay, and then, on the day this ordinance shows itself in the Official Gazette, lie in wait for it and send in our papers on the instant, the flag is sure to rise on our side.\"",
+    "ids": [
+     "p124"
+    ],
+    "notes": [
+     "\"The flag\" keeps the Japanese figure for victory; \"first application\" renders 第一着の願書."
+    ]
+   },
+   {
+    "english": "\"That being so, I should like to write out the application for the disposal this very night, but what perplexes me for the present is the way to write it. As to that...\"",
+    "ids": [
+     "p125"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Thinking it might come to that, I made provision beforehand, and today at last I have come by a copy of the draft of the ordinance.\"",
+    "ids": [
+     "p126"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Why, that is...\" Zenpei leaned forward before he knew it. \"That is success heaped on success. Forgive my saying so, but I am, as ever, truly lost in admiration at your quick work.\"",
+    "ids": [
+     "p127"
+    ],
+    "notes": []
+   },
+   {
+    "english": "What was in Tatsuya's flashing eyes now leapt up and seized the moment. As one who has got his prize he edged his knees forward, and with the copy of the draft taken out and shown in his hand, his tongue ran light. \"Miyoshi-san, it is this. But a reward goes with this, you know.\"",
+    "ids": [
+     "p128"
+    ],
+    "notes": [
+     "Speaker forms follow the passage: narration names Tatsuya and Miyoshi-san keeps Tatsuya's familiar address to Zenpei."
+    ]
+   },
+   {
+    "english": "\"Yes, yes, anything at all,\" Zenpei answered without a second thought, his heart already half taken by the draft.",
+    "ids": [
+     "p129"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted the cabinet ordinance and draft copy exchange at p124 to p129."
+ },
+ "usage": {
+  "input_tokens": 26970,
+  "cached_tokens": 26225,
+  "output_tokens": 2593,
+  "reasoning_tokens": 2072,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01588525,
+ "response_id": "resp_6aeb7e4c0e49e3c58c7042b3",
+ "latency_s": 23.82,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2141
+  }
+ ],
+ "created": "2026-11-04T18:49:48Z"
+}

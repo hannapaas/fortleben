@@ -1,0 +1,122 @@
+{
+ "prompt": "reader-faithful",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "notes": [
+   {
+    "japanese": "親子は、狭い部屋の壁際にぶらさがった、暗い電燈の下の卓に集まって",
+    "paragraph": "p2",
+    "problem": "Singular 'parent' misreads 親子, which here covers father, mother and child, and loses the crowded household the opening needs.",
+    "span": "The parent and child",
+    "suggestion": "The parents and child had gathered at the table under the dim electric light hanging close to the wall of the narrow room, about to take their supper.",
+    "sureness": "Sure from p2 itself, where both father and mother are present; no further check needed."
+   },
+   {
+    "japanese": "『きかない奴だな。』",
+    "paragraph": "p7",
+    "problem": "Future-tag 'will you' flattens the father's rough-affectionate vernacular 奴だな into a scolding question.",
+    "span": "\"You won't listen, will you.\"",
+    "suggestion": "\"What a disobedient fellow you are.\" The young father gazed steadily at [...]",
+    "sureness": "Fairly sure; a Taisho usage check would settle whether 奴 here is tender-teasing rather than reproachful."
+   },
+   {
+    "japanese": "『坊や、』と強く云ったけれども、笑が顔からあふれて了って",
+    "paragraph": "p8",
+    "problem": "'Firmly' makes her sound stern at the moment the smile overflows, reversing the tone.",
+    "span": "she said firmly, \"Bōya,\"",
+    "suggestion": "she said \"Bōya\" strongly, in a loud voice, but the smile overflowed from her face",
+    "sureness": "Sure; 強く with overflowing smile and asking-for-help look cannot mean stern firmness."
+   },
+   {
+    "japanese": "より合って頭をあつめてながい物語りをしてゐるのだった。",
+    "paragraph": "p16",
+    "problem": "Participles leave the central vision sentence without a finite verb, destroying the long accumulating rhythm.",
+    "span": "three people drawing together with their heads together telling a long story.",
+    "suggestion": "It was in a dim, faint light, and, quiet like that light, three people were drawn together with their heads together telling a long story.",
+    "sureness": "Sure grammatically; whether to keep duplicated 'together' is a desk choice."
+   },
+   {
+    "japanese": "かなしみや苦しみ怒りもなやみも、よろこびも",
+    "paragraph": "p16",
+    "problem": "'Anguish' upgrades なやみ and breaks the flat trouble/suffering network kept elsewhere as 'trouble'.",
+    "span": "anger and anguish",
+    "suggestion": "sorrow and suffering and anger and trouble, and joy, all of it.",
+    "sureness": "Sure that consistency matters here; which English word for なやみ is less sure and the bible's prior choice would settle it."
+   },
+   {
+    "japanese": "若い彼女は一人で淋しいひそかな溜息をついた",
+    "paragraph": "p18",
+    "problem": "'Young as she was' adds a concessive contrast not in 若い彼女は, turning description into commentary.",
+    "span": "Young as she was, she sighed",
+    "suggestion": "Young, she sighed a lonely, secret sigh by herself",
+    "sureness": "Sure; nothing in the sentence marks concession about youth."
+   },
+   {
+    "japanese": "一日々々の苦しみや悲しみがなんだらう。一日々々の疲れやなやみがなんだらう。",
+    "paragraph": "p20",
+    "problem": "Periods turn two rhetorical wonder-questions into flat statements, losing the drifting なんだらう hedge.",
+    "span": "What was the suffering or sorrow of each single day. What was the tiredness or trouble of each single day.",
+    "suggestion": "What was the suffering or sorrow of each single day? What was the tiredness or trouble of each single day?",
+    "sureness": "Sure; the Japanese is interrogative-wondering, not declarative."
+   },
+   {
+    "japanese": "俺たちはいろいろ苦労したなァ。",
+    "paragraph": "p25",
+    "problem": "'Been through a great deal' impoverishes 苦労, the working-poor toil word, into vagueness.",
+    "span": "you and I have been through a great deal.",
+    "suggestion": "\"It is only three years, isn't it. And yet you and I have known a great deal of hardship.\"",
+    "sureness": "Fairly sure; period nuance of 苦労 as labour-hardship could be checked against contemporaneous usage."
+   },
+   {
+    "japanese": "子供はそれと同時に大きな叫声を上げて、母親の顔を見ながら",
+    "paragraph": "p29–p31",
+    "problem": "'Its' for the explicitly girl child dehumanizes her and contradicts p7 'her', breaking pronoun continuity.",
+    "span": "standing with the spoon in its hand as if with nothing to do",
+    "suggestion": "The man looked at the child standing with the spoon in her hand as if with nothing to do. She at once called out gladly in a loud voice, \"Bōya!\" and at the same moment the child gave a loud cry and, looking at her mother's face, banged the spoon upon the table",
+    "sureness": "Sure that 'its' is wrong after p2's 女の子 and p7's 'her'; desk to decide 'her' throughout versus repeating 'the child'."
+   },
+   {
+    "japanese": "小さな乳首をだして乳をのませ初めた。",
+    "paragraph": "p35",
+    "problem": "'Breast' replaces the precise bodily 乳首, small nipple/teat, ennobling poverty-plain detail.",
+    "span": "she bared her small breast",
+    "suggestion": "And holding the child upon her knees, she bared her small nipple and began to suckle her.",
+    "sureness": "Sure on dictionary sense of 乳首 as nipple/teat; rendering of のませる as suckle versus give milk is less sure and house style settles it."
+   },
+   {
+    "japanese": "もはや子供は乳房に頬をつけて眼を閉ぢてゐた。",
+    "paragraph": "p37",
+    "problem": "Same pronoun loss as p29-31: 'its' erases the girl established in p2 and p7.",
+    "span": "with its cheek against the breast",
+    "suggestion": "the child had already closed her eyes with her cheek against the breast.",
+    "sureness": "Sure for same reason as above; no further check needed."
+   }
+  ],
+  "say": "Part is mostly faithful to drift and repetition, but needs fixes to household number, father's voice, mother's loud-affectionate Bōya, vision grammar and word-network, and the girl's pronouns."
+ },
+ "usage": {
+  "input_tokens": 14118,
+  "cached_tokens": 0,
+  "output_tokens": 9740,
+  "reasoning_tokens": 8215,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0590425,
+ "response_id": "resp_6aeb440b5e77eaca14534f5a",
+ "latency_s": 83.41,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 5308
+  }
+ ],
+ "created": "2026-11-04T14:41:15Z"
+}

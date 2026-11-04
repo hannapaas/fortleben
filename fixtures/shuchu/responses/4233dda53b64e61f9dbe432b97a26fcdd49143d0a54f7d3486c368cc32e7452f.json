@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 31010,
+  "cached_tokens": 30836,
+  "output_tokens": 141,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.009683200000000001,
+ "response_id": "resp_6aeba63a452d4acbb1844ab0",
+ "latency_s": 1.57,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_7875feb9-cd02-4a8a-bbe4-e42812989599",
+   "name": "edit",
+   "arguments": "{\"old\":\"So at last Liu bowed his head from his own side\",\"new\":\"So at last Liu was the first to bow his head\",\"reason\":\"こつちから means Liu took the initiative; \\\"from his own side\\\" means nothing in English.\",\"replace_all\":false,\"answers\":[\"R8\"]}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T21:40:11Z"
+}

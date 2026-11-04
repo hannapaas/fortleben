@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{# A forgotten password (house/accounts.py). Asking for a link says the same whether or not the address
+   has an account. With no mail set up on the server, the page says so instead of offering the form, and
+   gives KEIKAKU_CONTACT to write to if the server has one.
+   From the link itself (`token`), the page asks for the new password. #}
+{% block title %}Reset your password · Fortleben{% endblock %}
+{% block head %}<link rel="stylesheet" href="/static/desk.css?v={{ v }}">
+<style>
+.desk input[type="email"], .desk input[type="password"] { font: inherit; width: 100%; max-width: 28rem; padding: 6px 8px; border: 1.5px solid var(--ink); background: var(--paper); color: var(--ink); }
+.desk input[type="email"]:focus-visible, .desk input[type="password"]:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+</style>{% endblock %}
+{% block main %}
+<h1 class="desk-h">{% if token %}Choose a new password{% else %}Forgotten your password?{% endif %}</h1>
+{% if token %}
+<form class="form two desk" method="post" action="/reset/{{ token }}">
+  <input type="hidden" name="csrf" value="{{ request.state.csrf }}">
+  <div class="q"><label for="password">New password?</label></div>
+  <div class="a"><input type="password" id="password" name="password" minlength="8" maxlength="200" required autocomplete="new-password">
+    <span class="sm block">At least 8 characters. Saving it signs you in, and signs out anywhere else you were signed in.</span></div>
+  <div class="q" aria-hidden="true"></div>
+  <div class="a">
+    {% if error %}<p class="err" role="alert">{{ error }}</p>{% endif %}
+    <div class="startrow"><button type="submit" class="btn go">Save and sign in</button></div>
+  </div>
+</form>
+{% elif sent %}
+<p class="desk-lead">If there's an account with that address, a link to reset its password is on its way. It works for an hour, once.</p>
+<p class="line"><a href="/login">Back to sign in</a></p>
+{% elif not can_mail %}
+{% if error %}<p class="err" role="alert">{{ error }}</p>{% endif %}
+{% if contact %}
+<p class="desk-lead">Password reset mail isn't set up on this server. Email <a href="mailto:{{ contact }}?subject=Fortleben%20password%20reset">{{ contact }}</a> from the address you signed up with, and you'll be sent a link to choose a new password.</p>
+{% else %}
+<p class="desk-lead">Password reset mail isn't set up on this server. Ask the person running it.</p>
+{% endif %}
+{% else %}
+<p class="desk-lead">Give the email address you signed up with and we'll send it a link to choose a new password.</p>
+<form class="form two desk" method="post" action="/reset">
+  <input type="hidden" name="csrf" value="{{ request.state.csrf }}">
+  <div class="q"><label for="email">Email?</label></div>
+  <div class="a"><input type="email" id="email" name="email" maxlength="254" required autocomplete="email" value="{{ email or '' }}"></div>
+  <div class="q" aria-hidden="true"></div>
+  <div class="a">
+    {% if error %}<p class="err" role="alert">{{ error }}</p>{% endif %}
+    <div class="startrow"><button type="submit" class="btn go">Send the link</button></div>
+  </div>
+</form>
+{% endif %}
+{% endblock %}
+{# A form sent back with an error opens on the error, not the top of the page (on a phone it would be out of view). #}
+{% block scripts %}{% if error %}<script>var e = document.querySelector(".err[role=alert]"); if (e) e.scrollIntoView({ block: "center" });</script>{% endif %}{% endblock %}

@@ -1,0 +1,27 @@
+"""Cut a work into pages: whole paragraphs, about 650 characters, closing at scene breaks.
+
+Deterministic; the model never decides where a page starts or ends (docs/STAGES.md,
+"How pages are cut").
+"""
+
+from house.parser import Paragraph
+
+TARGET = 650  # about 1k source tokens of whole paragraphs; paragraphs beat sentences (Karpinska & Iyyer 2023)
+NEAR = 0.6  # a scene break past 60% of the target closes the page early
+
+
+def pages(paragraphs: list[Paragraph], target: int = TARGET) -> list[list[Paragraph]]:
+    paras = [p for p in paragraphs if p.translatable]
+    out, cur, size = [], [], 0
+    for i, p in enumerate(paras):
+        n = len(p.text)
+        if cur and size + n > target:
+            out.append(cur)
+            cur, size = [], 0
+        cur.append(p)
+        size += n
+        nxt = paras[i + 1] if i + 1 < len(paras) else None
+        if nxt is not None and nxt.scene_break_before and size >= target * NEAR:
+            out.append(cur)
+            cur, size = [], 0
+    return out + ([cur] if cur else [])

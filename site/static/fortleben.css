@@ -1,0 +1,486 @@
+/* Fortleben: two-colour riso. House blue on cream; each book brings its own accent (pink by default),
+   which marks people, highlights and stamps and never carries text on its own.
+   Display in Sorts Mill Goudy italic, reading in Schibsted Grotesk, Japanese in Zen Old Mincho. */
+:root {
+  --paper: #fcfcfa; --ink: #2a43a0; --ink-2: #4b5fae; --muted: #7b86b8; --rule: #2a43a0;
+  --accent: light-dark(#ff4fa7, #ff5fb0); --accent-wash: color-mix(in srgb, var(--accent) 32%, transparent); --accent-text: light-dark(#c81f73, #ff8cc6);
+  --serif: 'Sorts Mill Goudy', 'Goudy Old Style', Georgia, serif;
+  --sans: 'Schibsted Grotesk', 'Helvetica Neue', Arial, sans-serif;
+  --jp: 'Zen Old Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+  --blend: multiply; --size: 18px; --leading: 1.6;
+  color-scheme: light;
+}
+/* Dark is near-black for legibility; each accent carries a dark shade (light-dark) to hold on it. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="cream"]) {
+    --paper: #121214; --ink: #ece6d4; --ink-2: #c2c0c8; --muted: #8b8a96; --rule: #7f8fd6;
+    --blend: screen; color-scheme: dark;
+  }
+}
+:root[data-theme="cream"] { --paper: #f8f1d9; }
+:root[data-theme="dark"] {
+  --paper: #121214; --ink: #ece6d4; --ink-2: #c2c0c8; --muted: #8b8a96; --rule: #7f8fd6;
+  --blend: screen; color-scheme: dark;
+}
+/* An edition's own colour, picked from these by its editor (house/edition.py ACCENTS); pink is the
+   site's and needs no class. The pale ones carry a darker shade for text on light paper. */
+.accent-lime { --accent: #bfe65a; --accent-text: light-dark(#4d7a00, #cdee7a); }
+.accent-lavender { --accent: #cdbdfb; --accent-text: light-dark(#6a4bd1, #d9cdfc); }
+.accent-peach { --accent: #ffc78f; --accent-text: light-dark(#ad5800, #ffd2a3); }
+.accent-lime, .accent-lavender, .accent-peach { --accent-wash: color-mix(in srgb, var(--accent) 60%, transparent); }
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+a { color: inherit; text-decoration-color: var(--accent); text-underline-offset: 4px; }
+[lang="ja"] { font-family: var(--jp); }
+.q { font-family: var(--serif); font-style: italic; font-weight: 400; }
+::selection { background: var(--accent-wash); }
+
+.wrap { max-width: 80rem; margin: 0 auto; padding: 0 28px; }
+/* The page fills the window, so the footer sits at the bottom of a short page rather than half way up. */
+body > .wrap { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; }
+body > .wrap > * { flex: none; }
+body > .wrap > .push { flex: 1 0 3rem; }
+.top { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0 12px; margin-bottom: 1.25rem; font-size: 14px; border-bottom: 1px solid color-mix(in srgb, var(--rule) 30%, transparent); }
+.top .mark { font-family: var(--serif); font-size: 1.5rem; text-decoration: none; letter-spacing: -.01em; }
+/* Pointing at the name draws a highlight under it, left to right, in the book's colour. */
+.top .mark { background: linear-gradient(var(--accent-wash), var(--accent-wash)) no-repeat 0 70% / 0 .5em; transition: background-size .5s ease-out; }
+.top .mark:hover, .top .mark:focus-visible { background-size: 100% .5em; }
+.top nav { display: flex; gap: 20px; align-items: baseline; }
+.top nav a, .top nav button { text-decoration: none; }
+/* Paper: a small circle filled with the paper in use. Opened, it becomes a pill of the three that
+   grows down from where the circle was, the paper in use first, its outline in the accent. */
+.top nav .paper { position: relative; align-self: center; display: inline-flex; }
+.dot { width: 15px; height: 15px; border-radius: 50%; border: 1.5px solid var(--ink); flex: none; }
+.dot.p-light { background: #fcfcfa; } .dot.p-cream { background: #f8f1d9; } .dot.p-dark { background: #121214; }
+.top nav .paper .now[aria-expanded="true"] { visibility: hidden; }
+.top nav .paper .list { position: absolute; top: -7px; left: 50%; transform: translateX(-50%); z-index: 7; display: flex; flex-direction: column; gap: 9px; padding: 6px; border-radius: 999px; background: var(--paper); border: 1px solid color-mix(in srgb, var(--rule) 35%, transparent); }
+.top nav .paper .list[hidden] { display: none; }
+.top nav .paper .list .dot[aria-pressed="true"] { border-color: var(--accent); }
+.top nav .paper .dot:hover { text-decoration: none; transform: scale(1.12); }
+.top nav .paper .dot:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.top nav .who { white-space: nowrap; }
+.top nav form.out { display: inline; margin: 0; }
+.top nav form.out button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+.top nav a:hover, .top nav button:hover { text-decoration: underline 2px var(--accent); text-underline-offset: 4px; }
+/* The wishlist is a heart that wiggles when you point at it. */
+.top nav .heart { align-self: center; display: inline-flex; color: var(--ink); }
+.top nav .heart svg { width: 19px; height: 19px; transform-origin: 50% 60%; }
+.top nav .heart:hover { text-decoration: none; }
+.top nav .heart:hover svg, .top nav .heart:focus-visible svg { color: var(--accent-text); fill: var(--accent-wash); animation: wiggle .6s ease-in-out; }
+@keyframes wiggle { 0%, 100% { transform: rotate(0); } 20% { transform: rotate(-14deg); } 45% { transform: rotate(11deg); } 70% { transform: rotate(-6deg); } 88% { transform: rotate(3deg); } }
+/* The foot of every page: the licences, where the texts come from, and who made it. */
+.foot { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 0; padding: 18px 0 28px; border-top: 1px solid var(--rule); font-size: 13px; line-height: 1.5; color: var(--ink-2); }
+.wrap:has(.aa) .foot { padding-bottom: 92px; }
+.replay { font-size: 12px; padding: 6px 28px; color: var(--ink-2); border-bottom: 1px solid var(--rule); }
+
+/* The form rows: italic question, plain answer. */
+.form { display: grid; border: 1px solid var(--rule); border-width: 1px 0 1px 1px; }
+.form > div { border-right: 1px solid var(--rule); padding: 6px 12px 10px; min-width: 0; }
+.form .q { display: block; font-size: 1.05rem; line-height: 1.3; margin-bottom: 2px; color: var(--ink-2); }
+.form .a { font-size: 15px; line-height: 1.45; }
+.form.about { grid-template-columns: 1fr 1.3fr 1fr; margin: 0 0 3.5rem; }
+.form.about > div { padding: 12px 20px 16px; }
+.form.about .q { margin-bottom: 6px; }
+.form.about .a { font-size: 16px; line-height: 1.55; }
+.form.about > .yours { grid-column: 1 / -1; border-top: 1px solid var(--rule); }
+.form.two { grid-template-columns: 9rem 1fr; }
+.form.two > div { border-top: 1px solid var(--rule); }
+.form.two > div:nth-child(-n+2) { border-top: 0; }
+
+/* ---------- Poster ---------- */
+.poster { position: relative; padding: 3.5rem 0 30px; min-height: 24rem; display: flex; flex-direction: column; justify-content: flex-end; }
+.poster .plate { position: absolute; right: 2%; top: 2.5rem; writing-mode: vertical-rl; font-family: var(--jp); font-weight: 700; font-size: clamp(6rem, 10.5vw, 8.6rem); line-height: 1; color: var(--accent); mix-blend-mode: var(--blend); letter-spacing: -.02em; user-select: none; opacity: .9; white-space: nowrap; }
+.poster h1 { position: relative; margin: 0; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(4.5rem, 12vw, 11rem); line-height: .8; letter-spacing: -.035em; max-width: 80%; }
+.poster h1 .sub { display: block; font-size: max(.17em, 1rem); letter-spacing: 0; line-height: 1.2; margin: 1.6rem 0 0 32%; }
+.poster .by { position: relative; margin: 1.8rem 0 0 32%; font-size: 16px; line-height: 1.45; max-width: 26rem; }
+
+/* Every English translation of the work: ours, and people's by name and year. */
+.edl { list-style: none; margin: 0; padding: 0; }
+.edl li { display: flex; gap: 10px; align-items: baseline; padding: 3px 0; }
+.edl .bx { width: 13px; height: 13px; border: 1.5px solid var(--ink); border-radius: 50%; flex: none; transform: translateY(1px); }
+.edl .here .bx { background: var(--accent-wash); }
+.edl b { font-weight: 600; }
+.intro { margin: 0 0 1rem; max-width: 52rem; }
+/* The front page: three short answers under the opening, the rest after the books, and the name as an epigraph. */
+.form.three { grid-template-columns: repeat(3, 1fr); margin: 0 0 1rem; }
+.form.three > div { padding: 18px 24px 24px; }
+.form.three .q { margin-bottom: 10px; }
+.form.three .a { font-size: 16px; line-height: 1.6; }
+.form.three.more-q { grid-template-columns: repeat(2, 1fr); margin: 0 0 4rem; }
+.epigraph { font-family: var(--serif); font-style: italic; font-size: 1.15rem; line-height: 1.4; color: var(--muted); max-width: 30rem; margin: 0 0 4rem; }
+.epigraph i { font-style: normal; color: var(--ink-2); }
+/* The opening: the headline and a quieter line under it on the left, the name's meaning on the right,
+   and open paper between them. */
+.opening { display: grid; grid-template-columns: minmax(0, 40rem) minmax(2rem, 1fr) minmax(0, 18rem); align-items: end; margin: 3.5rem 0 5.5rem; }
+.opening > :last-child { grid-column: 3; }
+/* The riso word printed under the page, not beside it: low and right of centre, running behind the
+   quote and into the boxes below; every text and rule stays on top. */
+.opening { position: relative; }
+.opening > :not(.riso) { position: relative; z-index: 1; }
+.opening > .riso { position: absolute; z-index: 0; left: 44%; bottom: -17rem; width: min(40rem, 54%); pointer-events: none; }
+.opening + .form.three { position: relative; z-index: 1; }
+.riso svg { display: block; width: 100%; height: auto; overflow: visible; }
+.riso text { font-family: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif; font-weight: 900; font-size: 340px; }
+.riso .flat { fill: color-mix(in srgb, var(--accent) 45%, var(--paper)); }
+.riso .dots { fill: color-mix(in srgb, var(--accent) 80%, var(--paper)); }
+.riso .layer { mix-blend-mode: var(--blend); }
+.opening .pitch { margin: 0; text-wrap: pretty; }
+.pitch-more { margin: 1.4rem 0 0; max-width: 34rem; font-size: 18px; line-height: 1.55; color: var(--ink-2); text-wrap: pretty; }
+.epigraph.side { margin: 0; font-size: 1.35rem; line-height: 1.3; border-left: 1px solid var(--rule); padding-left: 18px; }
+/* The About page: plain sections, set like the prose of a book's front matter. */
+.aboutp { max-width: 44rem; margin: 1.5rem 0 4rem; font-size: 17px; line-height: 1.6; }
+.aboutp h2 { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.6rem; line-height: 1.2; margin: 2.2rem 0 .5rem; }
+.aboutp h2:first-child { margin-top: 0; }
+.aboutp p, .aboutp ul { margin: 0 0 .8rem; }
+.aboutp ul { padding-left: 1.2rem; }
+.aboutp li + li { margin-top: .3rem; }
+.aboutp .signoff { margin: 4rem 0 0; font-family: var(--serif); font-style: italic; font-size: 1.25rem; color: var(--ink-2); }
+.lang { margin-top: 4.5rem; }
+.shelf .blurb { margin: 12px 0 10px; font-size: 16px; line-height: 1.55; max-width: 38rem; }
+.shelf .blurb summary { cursor: pointer; list-style: none; border-radius: 2px; }
+.shelf .blurb summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 6px; }
+.shelf .blurb summary:focus:not(:focus-visible) { outline: none; }
+.shelf .blurb summary::-webkit-details-marker { display: none; }
+.shelf .blurb summary::after { content: ' more'; font-size: 13px; color: var(--muted); text-decoration: underline 1px var(--muted); text-underline-offset: 3px; }
+.shelf .blurb[open] summary::after { content: ' less'; }
+.shelf .blurb p { margin: 12px 0 0; color: var(--ink-2); font-style: italic; }
+
+/* ---------- Reader: hang | text; settings live behind the Aa button ---------- */
+.page { max-width: 74rem; }
+.reader { font-size: var(--size); line-height: var(--leading); }
+.layout-parallel .reader .body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 28px; }
+.layout-parallel .reader .body > .slip, .layout-parallel .reader .body > .inotes { grid-column: 1 / -1; }
+.unit { display: grid; grid-template-columns: 4rem minmax(0, 36rem) minmax(13rem, 17rem); column-gap: 2.5rem; }
+.layout-parallel .unit { grid-template-columns: 4rem minmax(0, 52rem) minmax(11rem, 14rem); }
+.hang { grid-column: 1; padding: 4px 14px 0 0; text-align: right; font-size: 13px; line-height: 1.35; color: var(--ink-2); }
+.hang { position: relative; }
+.hang .stn { display: block; font-weight: 600; color: var(--ink); }
+/* Paragraph numbers, when asked for: the same numbers the notes use ("paragraph 10"). */
+.hang .pn { display: none; position: absolute; right: 42px; top: 7px; font-size: 12px; line-height: 1; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.numbers .hang .pn { display: block; }
+.no-tools .hang .pn { right: 14px; }
+.st-draft .hang .stn { background: var(--accent-wash); display: inline; padding: 0 3px; }
+.body { grid-column: 2; margin: 0 0 2rem; min-width: 0; }
+.secnum { font-family: var(--serif); font-weight: 400; font-size: 1.5rem; text-align: center; margin: 2.4rem 0 1.6rem 6.5rem; max-width: 36rem; color: var(--ink-2); }
+.secnum-ja { display: none; }
+.bouten { font-style: normal; text-emphasis: filled sesame; -webkit-text-emphasis: filled sesame; }
+.layout-parallel .secnum-ja, .layout-interleaved .secnum-ja { display: inline; margin-right: .6em; }
+.brk { text-align: center; color: var(--ink-2); font-family: var(--serif); font-size: 1.4rem; margin: -.6rem 0 1.4rem 6.5rem; max-width: 36rem; }
+.en { margin: 0; hyphens: auto; -webkit-hyphens: auto; cursor: pointer; }
+.st-draft .en { color: var(--ink-2); }
+.t { text-decoration: underline 1px var(--ink-2); text-underline-offset: .22em; text-decoration-style: dotted; }
+.t:hover, .t.on { text-decoration: underline 3px var(--accent); text-decoration-style: solid; }
+.ja { display: none; font-size: calc(var(--size) - 2px); line-height: 2.1; color: var(--ink-2); }
+.ja p { margin: 0 0 .4rem; }
+.ja rt { font-size: .5em; }
+.no-furigana .ja rt { display: none; }
+.layout-interleaved .ja, .ja-on .ja { display: block; margin-top: .6rem; padding-left: 12px; border-left: 3px solid var(--accent); }
+.layout-parallel .ja { display: block; }
+.layout-parallel .hang .jabtn, .layout-interleaved .hang .jabtn { display: none; }
+
+
+/* A person's mark: a small round seal in the accent, the way a 校了 stamp marks a proofed page. */
+.seal { display: inline-block; width: 11px; height: 11px; border-radius: 50%; background: var(--accent); margin: 6px 0 2px; }
+.hang .seal { display: block; margin-left: auto; }
+
+/* OpenDyslexic for the English, when chosen; Japanese keeps its own face. */
+.font-dyslexic .reader, .font-dyslexic .inotes { font-family: 'OpenDyslexic', var(--sans); }
+
+/* Marks in the left margin, where a book would put them: 原 for the original, and under it * where there
+   are notes and changes. One column, so 原 never moves; each turns the book's accent colour while open. */
+.hang .tools { display: flex; flex-direction: column; align-items: center; gap: 0; width: 34px; margin: -4px -6px 0 auto; font-size: 16px; line-height: 1; }
+/* Each mark is small to look at but a full fingertip to hit. */
+.hang .tools button { color: var(--muted); width: 34px; height: 32px; display: inline-flex; align-items: center; justify-content: center; padding: 0; }
+.hang .tools .open { font-size: 24px; font-weight: 600; padding-top: 7px; }
+.hang .tools button:hover { color: var(--ink); }
+.hang .tools button:focus:not(:focus-visible) { outline: none; }
+.hang .tools button[aria-pressed="true"], .hang .tools button[aria-expanded="true"] { color: var(--accent-text); }
+
+/* ---------- Comments in the margin: small monospace, like a previous owner's notes ---------- */
+.mar { min-width: 0; height: 0; font-family: 'DM Mono', ui-monospace, Menlo, monospace; font-size: 12px; line-height: 1.6; }
+.mar .in { position: relative; padding-top: 5px; }
+.mar .list { border-left: 2px solid var(--accent); padding-left: 12px; }
+.mar .list:empty { display: none; }
+.cm { margin: 0 0 .75rem; }
+.list.folded .cm:nth-child(n+3) { display: none; }
+.morec { display: block; margin: -.4rem 0 .6rem 14px; color: var(--ink-2); font: inherit; text-decoration: underline dotted; text-underline-offset: 3px; }
+.morec:hover { color: var(--ink); }
+.cm p { margin: 0; white-space: pre-line; overflow-wrap: anywhere; }
+.cm .by { color: var(--ink-2); }
+.cm .rp { color: var(--muted); margin-left: .6em; opacity: 0; font: inherit; text-decoration: underline dotted; text-underline-offset: 3px; }
+.cm:hover .rp, .cm:focus-within .rp, .cm .rp:disabled { opacity: 1; }
+.cm.mine p { color: var(--ink-2); }
+.cm.mine .by b { font-weight: 400; background: var(--accent-wash); color: var(--ink); }
+.cm.failed p { text-decoration: line-through 1px var(--muted); }
+.pc { display: inline-flex; align-items: center; gap: 6px; color: var(--ink-2); font: inherit; }
+.pc svg { width: 15px; height: 15px; flex: none; }
+.pc:hover { color: var(--ink); }
+.pc:hover svg { color: var(--accent-text); }
+.mar .add { position: absolute; left: -25px; top: 6px; opacity: .55; }
+.mar .add span { position: absolute; left: 25px; top: -1px; white-space: nowrap; opacity: 0; transition: opacity .15s; pointer-events: none; }
+.unit:hover .mar .add, .mar .add:focus { opacity: 1; }
+.unit:hover .list:empty ~ .add span, .mar .add:focus span { opacity: 1; pointer-events: auto; }  /* the words open the box too, once they show */
+.mar .ph { display: none; }
+.cmp { display: none; margin: 4px 0 0 14px; }
+.mar.writing .cmp { display: block; }
+.mar.writing .add { display: none; }
+.list:empty ~ .cmp { margin-left: 0; }
+.cmp textarea { display: block; width: 100%; resize: vertical; border: 0; outline: 0; padding: 0; font: 12.5px/20px 'DM Mono', ui-monospace, Menlo, monospace; color: var(--ink); caret-color: var(--accent-text);
+  background: linear-gradient(to bottom, transparent 19px, var(--muted) 19px, var(--muted) 20px) 0 0 / 100% 20px local; min-height: 60px; }
+.cmp textarea:focus { background-image: linear-gradient(to bottom, transparent 19px, var(--ink) 19px, var(--ink) 20px); }
+.cmp textarea::placeholder, .cmp input::placeholder { color: var(--muted); opacity: 1; }
+.cmp .cr { display: flex; gap: 10px; align-items: baseline; margin-top: 8px; }
+.cmp input { flex: 1; min-width: 0; border: 0; border-bottom: 1px solid var(--muted); outline: 0; background: transparent; font: 12px 'DM Mono', ui-monospace, Menlo, monospace; color: var(--ink); padding: 2px 0; }
+.cmp input:focus { border-color: var(--ink); }
+.cmp button { font: 500 12px 'DM Mono', ui-monospace, Menlo, monospace; border: 1.5px solid var(--ink); padding: 1px 10px; }
+.cmp button:hover { background: var(--accent-wash); }
+.cmp .err { margin: 6px 0 0; color: var(--accent-text); }
+/* Comments turned down: only a pencil and a count where people wrote; tap it to read them. */
+.quiet-comments .mar .list, .quiet-comments .mar .add, .quiet-comments .mar .cmp, .quiet-comments .unit:not(.show) .morec { display: none; }
+.quiet-comments .mar .ph { display: inline-flex; opacity: .6; }
+.quiet-comments .mar .ph[data-n="0"] { display: none; }
+.quiet-comments .unit.show .mar .list { display: block; }
+.quiet-comments .unit.show .mar:not(.writing) .add { display: inline-flex; }
+.quiet-comments .unit.show .mar.writing .cmp { display: block; }
+.quiet-comments .unit.show .mar .ph { display: none; }
+
+/* What the settings hide. */
+.no-tools .hang .tools { display: none; }
+.marks-none .t, .marks-essential .t:not(.ess) { text-decoration: none; }
+/* Notes opened under each paragraph, as many as the note setting allows. */
+.inotes { display: none; list-style: none; margin: .7rem 0 0; padding: 0; font-size: calc(var(--size) - 3px); line-height: 1.45; color: var(--ink-2); }
+.inotes li { padding: 3px 0 3px 12px; border-left: 3px solid var(--accent); margin-bottom: 4px; }
+.inotes b { color: var(--ink); font-weight: 600; }
+.inline .inotes { display: block; }
+.inline.marks-essential .inotes li:not(.ess), .inline.marks-none .inotes { display: none; }
+
+/* ---------- Slip: the margin, a form tipped in after the paragraph ---------- */
+.slip { position: relative; margin: .9rem 0 .4rem; padding-top: .7rem; font-size: 15px; line-height: 1.5; }
+.slip::before { content: ''; position: absolute; top: 0; left: 0; width: 4rem; border-top: 1px solid var(--ink); }
+.slip[hidden] { display: none; }
+/* With notes open under each paragraph, the footnote doesn't repeat them, and * only opens what's left. */
+.inline .slip .nl { display: none; }
+.inline .unit.only-notes .hang .open, .inline .unit.only-notes .slip { display: none; }
+.slip p { margin: 0 0 .4rem; }
+.slip p:last-child { margin-bottom: 0; }
+.dec + .dec { border-top: 1px dotted var(--muted); margin-top: 10px; padding-top: 10px; }
+.qy { display: grid; grid-template-columns: 2.2rem 1fr; gap: 0 6px; margin-bottom: 8px; }
+.qy p { margin: 0; }
+.qn { font-family: var(--serif); font-style: italic; font-size: 1.05rem; color: var(--ink-2); text-decoration: none; line-height: 1.4; }
+.alt { font-size: 16px; }
+.alt .was { color: var(--ink-2); text-decoration: line-through; text-decoration-color: var(--accent); }
+.alt .arrow { color: var(--muted); margin: 0 6px; }
+.alt .now { background: linear-gradient(transparent 58%, var(--accent-wash) 58%); }
+.why { font-size: 15px; color: var(--ink-2); }
+.why .was { color: var(--ink); }
+.qy .ev { font-size: 13px; color: var(--muted); margin-top: 2px; }
+.slip .key { font-size: 12px; color: var(--muted); margin: 0 0 8px; }
+.slip .out { margin: 2px 0 0 2.6rem; font-size: 14.5px; color: var(--ink-2); }
+.out em { font-family: var(--serif); font-size: 1.08em; color: var(--ink); margin-right: 3px; }
+.rn { list-style: none; margin: 0; padding: 0; }
+.rn > li { padding: 8px 0; }
+.rn > li + li { border-top: 1px dotted var(--muted); }
+.rn .who { font-size: 13px; color: var(--ink-2); }
+.rn .num { font-family: var(--serif); font-style: italic; font-size: 1.15rem; color: var(--ink); margin-right: 6px; }
+.rn .span { background: linear-gradient(transparent 60%, var(--accent-wash) 60%); }
+.rn .ev { font-size: 15px; color: var(--ink-2); }
+.rn .sure { display: block; font-family: var(--serif); font-style: italic; font-size: 15px; color: var(--ink-2); }
+.rn .desk { display: block; margin-top: 4px; }
+.ag { font-weight: 600; letter-spacing: .01em; }
+.at { text-decoration: underline 3px var(--accent); text-underline-offset: 3px; text-decoration-skip-ink: none; white-space: nowrap; font-weight: 600; }
+.stamp { display: inline-block; border: 2px solid var(--accent); color: var(--accent-text); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; padding: 0 6px; transform: rotate(-2deg); margin-right: 8px; }
+.stamp.ink { border-color: var(--ink); color: var(--ink); }
+/* The edition's editor's own changes: a person's, so round-marked, and set apart from keikaku's work under them. */
+.hand p { margin: 0 0 .6rem; }
+.hand .seal { margin: 0 6px 1px 0; vertical-align: middle; }
+.hand .df { display: block; margin-top: 2px; font-size: 16px; }
+.hand del { color: var(--muted); text-decoration: line-through 1px var(--muted); }
+.hand ins { text-decoration: underline 2px var(--accent); text-underline-offset: 3px; }
+.hand del + ins { margin-left: .3em; }
+.difflines { list-style: none; margin: 0 0 1rem; padding: 0 0 0 12px; border-left: 2px solid var(--accent); font-size: 15px; overflow-wrap: anywhere; }
+.difflines li { padding: 2px 0; }
+.hand + .key { border-top: 1px dotted var(--muted); padding-top: 8px; }
+.hang .seal + .seal { margin-left: 3px; }
+.reader.editing .unit .en { cursor: text; border-radius: 2px; }
+.reader.editing .unit .en:hover { outline: 1px dashed var(--muted); outline-offset: 4px; }
+.edbox textarea { display: block; width: 100%; box-sizing: border-box; resize: vertical; font: inherit; font-size: var(--size); line-height: var(--leading);
+  color: var(--ink); background: transparent; border: 1px solid var(--ink); padding: 6px 8px; caret-color: var(--accent-text); }
+.edbox .cr { display: flex; gap: 10px; margin-top: 8px; }
+.edbox button { font: 500 13px 'DM Mono', ui-monospace, Menlo, monospace; border: 1.5px solid var(--ink); padding: 2px 12px; min-height: 32px; }
+.edbox button:hover { background: var(--accent-wash); }
+.edbox .err { margin: 6px 0 0; font-size: 14px; color: var(--accent-text); }
+.hist { list-style: none; margin: 0; padding: 0; }
+.hist li { padding: 5px 0; }
+.hist em { font-family: var(--serif); color: var(--ink); margin-right: 3px; }
+.hist .old { color: var(--ink-2); text-decoration: line-through; text-decoration-color: var(--accent); }
+.note { font-size: 14px; color: var(--ink-2); }
+.nl { list-style: none; margin: 0; padding: 0; }
+.nl li { padding: 3px 0; }
+.nl b { font-weight: 600; }
+.slip > * + .nl, .slip > * + .hist { margin-top: .7rem; }
+.nl li.on { background: var(--accent-wash); }
+
+/* ---------- Settings: a sticky column on wide screens, an "Aa" sheet on phones ---------- */
+/* Settings: a card behind the round Aa button on wide screens, a sheet from the bottom on phones. */
+.aa { position: fixed; right: 24px; bottom: 24px; z-index: 5; width: 52px; height: 52px; border-radius: 50%; background: var(--paper); border: 1.5px solid var(--ink); font-family: var(--serif); font-style: italic; font-size: 1.4rem; box-shadow: 3px 3px 0 var(--accent); }
+.aa[aria-expanded="true"] { background: var(--accent-wash); }
+.settings { position: fixed; right: 24px; bottom: 88px; z-index: 6; width: 21rem; max-height: calc(100vh - 120px); overflow-y: auto; font-size: 15px;
+  background: var(--paper); border: 1.5px solid var(--ink); box-shadow: 4px 4px 0 var(--accent-wash); padding: 12px 14px 14px;
+  opacity: 0; transform: translateY(8px); pointer-events: none; transition: opacity .15s ease, transform .15s ease; }
+.settings.open { opacity: 1; transform: none; pointer-events: auto; }
+.settings .sheethead { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+.settings .intro { font-family: var(--serif); font-style: italic; font-size: 1.1rem; line-height: 1.3; color: var(--ink-2); margin: 0 0 8px; }
+.settings .form { grid-template-columns: 1fr; }
+.settings .form > * + * { border-top: 1px solid var(--rule); }
+.settings .form > details { border-right: 1px solid var(--rule); }
+.settings .row { display: flex; flex-wrap: wrap; gap: 4px 16px; }
+.settings .blurb { font-size: 13px; color: var(--ink-2); margin: 2px 0 0; line-height: 1.35; }
+.settings #custom { margin-top: 12px; }
+.presets { display: grid; gap: 8px; margin-top: 4px; }
+.presets .cb { align-items: flex-start; text-align: left; }
+.presets .cb .bx { margin-top: 5px; }
+.presets .cb:hover { text-decoration: none; }
+.presets .cb:hover b { text-decoration: underline 2px var(--accent); text-underline-offset: 4px; }
+.presets b { font-weight: 600; }
+.more > summary { cursor: pointer; padding: 6px 12px 8px; list-style: none; }
+.more > summary::-webkit-details-marker { display: none; }
+.more > summary::before { content: '+ '; font-style: normal; }
+.more[open] > summary::before { content: '− '; }
+.more .sub { border-top: 1px dotted var(--muted); padding: 6px 12px 10px; }
+.cb { display: inline-flex; align-items: center; gap: 8px; }
+.cb .bx { width: 15px; height: 15px; border: 1.5px solid var(--ink); display: inline-grid; place-items: center; font-size: 13px; line-height: 1; flex: none; }
+.cb .bx.r { border-radius: 50%; }
+.cb[aria-pressed="true"] .bx::before { content: '×'; font-weight: 700; transform: translateY(-1px); }
+.cb[aria-pressed="true"] .bx { background: var(--accent-wash); }
+.cb:hover { text-decoration: underline 2px var(--accent); text-underline-offset: 4px; }
+.keyl { margin: 0; display: grid; grid-template-columns: 3.4rem 1fr; gap: 4px 10px; font-size: 13px; }
+.keyl dt { text-align: right; }
+.keyl dd { margin: 0; color: var(--ink-2); }
+
+/* How the house read it: the reading and the bible, closed until a reader opens it (#reading opens it). */
+.howread { margin: 2.5rem 0 0; }
+.howread > summary { cursor: pointer; list-style: none; padding: 8px 0; border-top: 1px solid var(--rule); }
+.howread > summary::-webkit-details-marker { display: none; }
+.howread > summary .q { font-size: 1.5rem; }
+.howread > summary .q::before { content: '+ '; font-style: normal; }
+.howread[open] > summary .q::before { content: '− '; }
+.howread > summary .hint { display: block; font-size: 14px; color: var(--ink-2); }
+.howread .form { margin-top: .4rem; }
+.howread .a p { margin: 0 0 .6rem; }
+.howread .a p:last-child { margin-bottom: 0; }
+.howread .a { font-size: 16.5px; line-height: 1.55; }
+.howread .a .why { font-size: inherit; }
+.howread .a.prose > p { max-width: 46rem; }
+.howread .crux { margin: 0; padding-left: 1.2rem; }
+.howread .crux li + li, .howread .cast li + li { margin-top: .8rem; }
+.howread .why, .howread .fe, .howread .sm, .howread .lead { color: var(--ink-2); }
+.howread .cast { list-style: none; margin: 0; padding: 0; }
+.howread .cast b { font-weight: 600; }
+.howread .sm { margin: .2rem 0 0 !important; font-size: 15px; }
+.howread .nm { color: var(--ink-2); }
+.howread .kv { margin: 0; display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; }
+.howread .kv dt { font-family: var(--serif); font-style: italic; }
+.howread .kv dd { margin: 0; }
+.howread .kv ul { margin: 0; padding-left: 1.1rem; }
+.steer { margin: .8rem 0 1.6rem; font-size: 15px; }
+
+/* ---------- Tail and home ---------- */
+.endq { font-family: var(--serif); font-style: italic; font-size: 1.5rem; margin: 2rem 0 1rem 8rem; max-width: 34rem; line-height: 1.25; }
+.tail { margin: 1rem 0 4rem; }
+.tail .a { font-size: 15px; }
+.tail pre { font-family: var(--jp); font-size: 13px; white-space: pre-wrap; color: var(--ink-2); margin: 6px 0 0; }
+.tail summary { cursor: pointer; font-size: 14px; color: var(--ink-2); }
+.pitch { font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.25; max-width: 44rem; margin: 2.5rem 0 2rem; }
+.pitch em { background: linear-gradient(transparent 58%, var(--accent-wash) 58%); }
+/* The site's name in the opening, in the book's colour. */
+.pitch .name { color: var(--accent); }
+.shelf { list-style: none; margin: 0 0 4rem; padding: 0; border-top: 1px solid var(--rule); }
+.shelf li { display: grid; grid-template-columns: 5rem 1fr auto; gap: 0 18px; padding: 28px 0 30px; border-bottom: 1px solid var(--rule); align-items: baseline; }
+.shelf .ja { display: block; font-size: 1.6rem; line-height: 1.2; color: var(--accent); mix-blend-mode: var(--blend); }
+.shelf .ttl { font-family: var(--serif); font-style: italic; font-size: 1.8rem; line-height: 1.1; text-decoration: none; }
+.shelf .ttl:hover { text-decoration: underline 2px var(--accent); }
+.shelf .meta { font-size: 14px; line-height: 1.7; color: var(--ink-2); }
+.shelf .ttl + br + .meta { display: inline-block; margin-top: 6px; }
+h2.sec { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.4rem; color: var(--ink-2); margin: 2rem 0 .8rem; }
+
+@media (max-width: 1100px) {
+  .unit, .layout-parallel .unit { grid-template-columns: 2.5rem minmax(0, 1fr) 12rem; column-gap: 1.75rem; }
+  .brk, .secnum { margin-left: 4.25rem; }
+  .endq { margin-left: 6.5rem; }
+}
+@media (max-width: 1000px) {
+  .form.three, .form.three.more-q, .form.about { grid-template-columns: 1fr; }
+  .form.about > div { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 0 20px; }
+  .form.about > div + div { border-top: 1px solid var(--rule); }
+  .form.three > div { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 0 20px; }
+  .form.three > div + div { border-top: 1px solid var(--rule); }
+  .form.three .a { max-width: 40rem; }
+}
+@media (max-width: 860px) {
+  body { font-size: 17px; }
+  .wrap { padding: 0 16px; }
+  .replay { padding: 6px 16px; }
+  .top nav .wide { display: none; }
+  .top { flex-wrap: wrap; gap: 4px 16px; }
+  .top nav { flex-wrap: wrap; gap: 4px 14px; }
+  .poster { min-height: 0; padding: 22px 0; }
+  .poster .plate { writing-mode: horizontal-tb; font-size: 5rem; right: -2px; top: 2px; letter-spacing: -.04em; opacity: .8; }
+  .poster h1 { margin-top: 4.5rem; font-size: 3.8rem; max-width: none; }
+  .poster h1 .sub, .poster .by { margin-left: 0; }
+  .poster h1 .sub { font-size: 1.05rem; margin-top: 1.2rem; }
+  .poster .by { font-size: 15px; }
+  .form.about, .form.three, .form.three.more-q { grid-template-columns: 1fr; }
+  .form.three > div { display: block; padding: 12px 16px 16px; }
+  .shelf li { grid-template-columns: 3.2rem minmax(0, 1fr); gap: 0 12px; padding: 22px 0 24px; }
+  .shelf .ja { font-size: 1.3rem; }
+  .form.three > div + div { border-top: 1px solid var(--rule); }
+  /* On a phone the three texts step down and to the right, like a title page: the headline full width,
+     the keikaku line set in from a short rule, the name's meaning further in with its own rule; the
+     riso word runs off the left edge, under the quote and the first box. */
+  .opening { grid-template-columns: 1fr; gap: 0; margin: 2rem 0 4.5rem; }
+  .opening > :last-child { grid-column: auto; }
+  .opening .pitch { font-size: 1.75rem; line-height: 1.2; }
+  .pitch-more { position: relative; margin: 2.2rem 0 0 18%; padding-top: 1rem; font-size: 16px; }
+  .pitch-more::before { content: ''; position: absolute; top: 0; left: 0; width: 2.5rem; border-top: 1px solid var(--rule); }
+  .epigraph.side { margin: 2.2rem 0 0 36%; font-size: 1.05rem; line-height: 1.35; padding-left: 14px; }
+  .opening > .riso { left: -2.5rem; right: auto; bottom: -9.5rem; width: min(92%, 24rem); }
+  .form.about > div { display: grid; grid-template-columns: 6.6rem 1fr; gap: 8px; padding: 6px 10px; }
+  .form.about > div + div { border-top: 1px solid var(--rule); }
+  .form.about .q { margin: 0; font-size: 1rem; }
+  .form.two, .slip .form { grid-template-columns: 1fr; }
+  .form.two > .q, .slip .form > .q { padding-bottom: 0; border-top: 1px solid var(--rule); }
+  .form.two > .q:first-child, .slip .form > .q:first-child { border-top: 0; }
+  .form.two > div:not(.q), .slip .form > div:not(.q) { border-top: 0; padding-top: 0; }
+  .mar { height: auto; margin: -1.2rem 0 1.6rem; font-size: 12.5px; }
+  .mar .in { transform: none !important; padding: 0; }
+  .mar .ph, .quiet-comments .mar .ph { display: inline-flex; opacity: 1; }
+  .mar .ph[data-n="0"] { display: none; }
+  .unit:not(.show) .mar .list, .unit:not(.show) .mar .add, .unit:not(.show) .mar .cmp, .unit:not(.show) .morec { display: none !important; }
+  .unit.show .mar .list { display: block; margin-top: .5rem; }
+  .unit.show .mar .ph { display: none; }
+  .mar .add { position: static; opacity: 1; margin-top: 2px; }
+  .mar .add span { position: static; opacity: 1; }
+  .cmp, .list:empty ~ .cmp { margin: .5rem 0 0; }
+  .brk, .secnum { margin-left: 0; }
+  /* A slim gutter on phones too, so 原 and * always sit beside the first line of their paragraph. */
+  .unit, .layout-parallel .unit { display: grid; grid-template-columns: 30px minmax(0, 1fr); column-gap: 8px; }
+  .no-tools .unit { grid-template-columns: 0 minmax(0, 1fr); column-gap: 0; }
+  .unit > .mar { grid-column: 2; }
+  .hang { padding: 0; margin-left: -6px; }
+  .hang .tools { margin: -4px 0 0; }
+  .hang .stn { display: block; font-size: 11px; text-align: center; }
+  .hang .pn, .no-tools .hang .pn { position: static; text-align: center; font-size: 12px; margin-bottom: 6px; }
+  .no-tools.numbers .unit { grid-template-columns: 22px minmax(0, 1fr); column-gap: 6px; }
+  .layout-parallel .reader .body { display: block; }
+  .layout-parallel .ja { margin-top: .6rem; padding-left: 12px; border-left: 3px solid var(--accent); }
+  .endq { margin-left: 0; }
+  .howread .kv { grid-template-columns: 1fr; gap: 0; }
+  .howread .kv dd + dt { margin-top: 6px; }
+  /* Settings become a sheet over the text. */
+  .aa { right: 16px; bottom: 16px; }
+  .settings { left: 0; right: 0; bottom: 0; width: auto; max-height: 78vh; border-width: 2px 0 0; box-shadow: none; padding: 12px 16px 24px; transform: translateY(105%); opacity: 1; transition: transform .2s ease; }
+  .settings.open { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) { .settings { transition: none; } .top nav .heart svg { animation: none !important; } .top .mark { transition: none; } }

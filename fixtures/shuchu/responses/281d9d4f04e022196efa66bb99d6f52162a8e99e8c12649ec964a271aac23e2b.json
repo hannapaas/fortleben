@@ -1,0 +1,112 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 29477,
+  "cached_tokens": 0,
+  "output_tokens": 2455,
+  "reasoning_tokens": 1252,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.167008,
+ "response_id": "resp_6aeba6365f70a1c6cc4e49c3",
+ "latency_s": 16.0,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_0f7dec65-be96-42e1-a93e-80fa914ae779",
+   "name": "edit",
+   "arguments": "{\"old\":\"seemed, at this rate, like to steam the chicks and eggs inside them alive where they lay\",\"new\":\"seemed, at this rate, likely to steam the chicks and eggs inside them alive where they lay\",\"reason\":\"The Japanese means likely to steam them alive; \\\"like to\\\" reads as \\\"enjoy\\\" in English.\",\"replace_all\":false,\"answers\":[\"R1\"]}"
+  },
+  {
+   "call_id": "call_5e9534d2-e245-4ead-add4-0fc805f7b708",
+   "name": "edit",
+   "arguments": "{\"old\":\"patiently flourishing a red-handled fly-whisk\",\"new\":\"patiently waving a red-handled fly-whisk\",\"reason\":\"The Japanese is patient shooing, not showy flourishing.\",\"replace_all\":false,\"answers\":[\"R2\"]}"
+  },
+  {
+   "call_id": "call_8549d2cd-394c-4e89-ae12-ac5c2637326e",
+   "name": "edit",
+   "arguments": "{\"old\":\"squatted there ceremoniously, in the attitude of a turkey\",\"new\":\"squatted there with pompous self-importance, like a turkey\",\"reason\":\"勿体らしく is ironic pomposity, not ceremony; \\\"ceremoniously\\\" ennobles the turkey simile.\",\"replace_all\":false,\"answers\":[\"F3\"]}"
+  },
+  {
+   "call_id": "call_b0c89b0d-71f0-471c-ac5f-67ebf4115840",
+   "name": "edit",
+   "arguments": "{\"old\":\"grew on the tip of his chin, by way of apology, a beard like a rat's tail\",\"new\":\"grew on the tip of his chin, as a mere token, a beard like a rat's tail\",\"reason\":\"申訳だけに means a merely token beard, not an apology.\",\"replace_all\":false,\"answers\":[\"F1\",\"R3\"]}"
+  },
+  {
+   "call_id": "call_2085a967-167a-4232-9a6f-1236e26199b5",
+   "name": "edit",
+   "arguments": "{\"old\":\"a hemp robe long enough to hide his heels\",\"new\":\"a black-cloth gown long enough to hide his heels\",\"reason\":\"皁 marks the garment black/dark; \\\"hemp robe\\\" drops that specification.\",\"replace_all\":false,\"answers\":[\"F2\"]}"
+  },
+  {
+   "call_id": "call_c2240901-482a-4e84-bb84-9c7dc7516ba5",
+   "name": "edit",
+   "arguments": "{\"old\":\"was a measure beyond ordinary men\",\"new\":\"was a capacity beyond ordinary men\",\"reason\":\"酒量 is drinking capacity; \\\"measure\\\" is not idiomatic English here.\",\"replace_all\":false,\"answers\":[\"R4\"]}"
+  },
+  {
+   "call_id": "call_61f987fa-a2bb-4073-b8c9-f830f2c602c2",
+   "name": "edit",
+   "arguments": "{\"old\":\"raising his fat body that looked hot of itself\",\"new\":\"heaving up his fat body, hot-looking in itself\",\"reason\":\"\\\"that looked hot of itself\\\" is translationese for 暑さうに肥つた体.\",\"replace_all\":false,\"answers\":[\"R5\"]}"
+  },
+  {
+   "call_id": "call_542c7997-c20a-4dd7-bde6-04cfbd75ba98",
+   "name": "edit",
+   "arguments": "{\"old\":\"rumours all but miraculous were abroad in full force\",\"new\":\"rumours all but miraculous were going round in full force\",\"reason\":\"\\\"abroad in full force\\\" is tangled for rumours circulating widely.\",\"replace_all\":false,\"answers\":[\"R6\"]}"
+  }
+ ],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": "commentary",
+   "chars": 150
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T21:40:07Z"
+}

@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 61242,
+  "cached_tokens": 60916,
+  "output_tokens": 139,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0162672,
+ "response_id": "resp_6aeb7e7eb3b231d755604593",
+ "latency_s": 3.33,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_261a851c-bfa3-4eeb-b033-49bd8a8319ed",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"F10\"],\"new\":\"his muttering rang out as plain as if beside us\",\"old\":\"his muttering rang out as if taken in the hand\",\"reason\":\"手に取るように means vividly, plainly audible, which the literal hand image obscures.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:50:39Z"
+}

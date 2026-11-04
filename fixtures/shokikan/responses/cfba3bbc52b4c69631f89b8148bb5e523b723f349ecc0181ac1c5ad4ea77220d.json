@@ -1,0 +1,74 @@
+{
+ "prompt": "reader-faithful",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "notes": [
+   {
+    "japanese": "親子、国色、東京のもの",
+    "paragraph": "p14",
+    "problem": "Makes both father and daughter beauties, while kokushoku refers to the daughter alone.",
+    "span": "\"Father and daughter, first beauties of the land, Tokyo people,\"",
+    "suggestion": "\"Father and daughter — she a peerless beauty — Tokyo people,\"",
+    "sureness": "Fairly sure the plural number is wrong; kokushoku use elsewhere would settle it."
+   },
+   {
+    "japanese": "これは私の親戚《しんせき》のもので、東条綱雄と申すものです。と善平に紹介《ひきあわ》されたる辰弥は",
+    "paragraph": "p43",
+    "problem": "Dangling participle makes Tatsuya the kinsman presented, when Japanese introduces Tsunao to Tatsuya.",
+    "span": "Presented by Zenpei as \"a kinsman of mine, Tojo Tsunao,\" Tatsuya greeted him",
+    "suggestion": "When Zenpei introduced him as \"a kinsman of mine, Tojo Tsunao,\" Tatsuya greeted him",
+    "sureness": "Certain from syntax and story logic; no check needed beyond the sentence."
+   },
+   {
+    "japanese": "伯父様《おじさま》が用いて下さらねばそれまでのこと",
+    "paragraph": "p63",
+    "problem": "Renders伯父様 as Oji-sama here while p69 and p71 use Uncle, breaking a consistent address term.",
+    "span": "if Oji-sama will not make use of them",
+    "suggestion": "if Uncle will not make use of them",
+    "sureness": "Certain about inconsistency from the English alone; passage wins over bible per instructions."
+   },
+   {
+    "japanese": "鋼雄は黙して俯向きぬ。 / 鋼雄は見もやらずなお口をつぐみぬ",
+    "paragraph": "p77–p78",
+    "problem": "Source twice prints steel-variant鋼雄 for綱雄; English silently normalises to Tsunao with no flag.",
+    "span": "Tsunao said nothing and hung his head.",
+    "suggestion": "Keep Tsunao in English but flag for editor to check 1895 text rather than silently normalise.",
+    "sureness": "Certain the characters differ in the source given; whether press slip needs editorial check."
+   },
+   {
+    "japanese": "明日は誰《た》が身の。",
+    "paragraph": "p132",
+    "problem": "Supplies verb 'fall' and completes a fragment the narrator leaves hanging.",
+    "span": "Tomorrow, upon whom shall it fall.",
+    "suggestion": "Tomorrow — whose — / Tomorrow, who is it to be.",
+    "sureness": "Fairly sure the incompleteness is deliberate withholding; checking final-line syntax would settle it."
+   }
+  ],
+  "say": "The part is largely faithful and preserves key repetitions, with only the sense and consistency slips noted above."
+ },
+ "usage": {
+  "input_tokens": 54755,
+  "cached_tokens": 0,
+  "output_tokens": 18777,
+  "reasoning_tokens": 18115,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.148246,
+ "response_id": "resp_6aeb7ee7114a5ef53fa942f8",
+ "latency_s": 128.63,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2247
+  }
+ ],
+ "created": "2026-11-04T18:52:24Z"
+}

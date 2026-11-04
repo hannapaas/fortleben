@@ -1,0 +1,42 @@
+{
+ "prompt": "copy-desk",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": null,
+ "usage": {
+  "input_tokens": 23337,
+  "cached_tokens": 23153,
+  "output_tokens": 1956,
+  "reasoning_tokens": 1822,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.012015950000000001,
+ "response_id": "resp_6aeb81fc23c1018dd9f44f62",
+ "latency_s": 18.54,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_c842a232-45be-48ca-85e6-7bda6a1a4146",
+   "name": "edit",
+   "arguments": "{\"new\":\"kōza\",\"old\":\"kouza\",\"reason\":\"House form is kōza per style sheet keep list\",\"replace_all\":true}"
+  }
+ ],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": "commentary",
+   "chars": 103
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T19:05:32Z"
+}

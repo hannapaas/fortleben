@@ -1,0 +1,84 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "So what I have to ask of you in confidence is this. As I said a while ago, you see, well, whatever happens, I must have your agreement here, and besides that there is one thing more, of a different nature from this present matter, which I must beg you to grant, but that shall be for after. For today, as to the course I spoke of just now, Miyoshi-san, will you not contrive somehow to promise it? Upon success it is three hundred thousand yen, pure profit to be seen as early as tomorrow itself, is it not?",
+    "ids": [
+     "p103"
+    ],
+    "notes": [
+     "I take the three hundred thousand yen as Tatsuya holding out Zenpei's gain to press him to promise, but the Japanese leaves open whether it names Zenpei's profit or Tatsuya's demand, so I kept wording that does not decide. I kept Miyoshi-san in romanised suffix as the familiarity is part of the pressure."
+    ]
+   },
+   {
+    "english": "\"Indeed, indeed,\" Zenpei answered, lifting his cup again. \"That too is true. To begin with, by some strange fate I came, quite beyond looking for it, upon your acquaintance, and so this consultation has come about. The beginning and the settlement of the matter all lie in your sole exertions, and so in consideration of those exertions...\" Here his words failed him a while, then, \"Very well. That much I will give.\"",
+    "ids": [
+     "p104"
+    ],
+    "notes": [
+     "The referent of that much is left open in the Japanese, whether the ten thousand yen and yearly thanks money of p101 or the three hundred thousand yen just named, so I kept that much flat and did not resolve it."
+    ]
+   },
+   {
+    "english": "Tatsuya drew his knee forward with a still more amused smile. \"Now that you have consented, this Okumura is at ease.\"",
+    "ids": [
+     "p105"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"But,\" he said, brushing the ash from his cigar, \"whatever the result may prove, you will never hereafter raise any objection, will you? We for our part are resolved, should occasion require, to resign our offices together and, as private men together, to take the matter in hand for good.\"",
+    "ids": [
+     "p106"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Of course, if the matter fails and we gain not a whit of profit...?\"",
+    "ids": [
+     "p107"
+    ],
+    "notes": [
+     "The Japanese gives no narrator tag for p107 and p108, leaving speaker to infer. I leave p107 unattributed as the text does, rather than assigning it to Zenpei."
+    ]
+   },
+   {
+    "english": "\"Very well, we will remit half our expenses for good offices,\" showing a smile in the eyes, \"but if, as we have long purposed, the hour of its accomplishment comes...?\"",
+    "ids": [
+     "p108"
+    ],
+    "notes": [
+     "The smile in the eyes has no stated subject in the Japanese. I render it as a subjectless participle to keep the same degree of not knowing, and leave the question unfinished as the text does."
+    ]
+   }
+  ],
+  "say": "Drafted the close bargaining in flat procedural English, keeping speakers unattributed where the text leaves them so."
+ },
+ "usage": {
+  "input_tokens": 28171,
+  "cached_tokens": 26225,
+  "output_tokens": 6449,
+  "reasoning_tokens": 5750,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0337745,
+ "response_id": "resp_6aeb7def9f7c73ead3ed4208",
+ "latency_s": 53.34,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2882
+  }
+ ],
+ "created": "2026-11-04T18:48:15Z"
+}

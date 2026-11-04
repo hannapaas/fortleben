@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{# The page a link in the editor's daily comments email opens (house/comments.py). It only asks:
+   the button does the work, so a mail scanner that follows the link changes nothing. #}
+{% block title %}{{ 'Hide' if action == 'hide' else 'Publish' }} comment {{ c.id }} · Fortleben{% endblock %}
+{% block head %}<meta name="robots" content="noindex"><link rel="stylesheet" href="/static/desk.css?v={{ v }}">{% endblock %}
+{% block main %}
+<section class="wrap" style="max-width: 40rem; padding-top: 2rem">
+  <h1 style="font-weight: 400">{{ 'Hide' if action == 'hide' else 'Publish' }} this comment?</h1>
+  <p class="note">#{{ c.id }} on <a href="/read/{{ c.work_id }}#{{ c.segment_id }}">{{ c.work_id }}, {{ c.segment_id }}</a>, by {{ c.name or 'no name' }}, {{ c.created_at }}. Now {{ c.status }}{% if c.reason %}: {{ c.reason }}{% endif %}.</p>
+  <blockquote style="margin: 1rem 0; padding-left: 12px; border-left: 3px solid var(--accent)">{{ c.body }}</blockquote>
+  <form method="post" action="/moderate/{{ action }}/{{ c.id }}?sig={{ sig }}">
+    <button class="btn" type="submit" style="padding: 6px 14px">{{ 'Hide it' if action == 'hide' else 'Publish it' }}</button>
+  </form>
+  <p class="note">{{ 'It stays in the database and you can publish it again.' if action == 'hide' else 'Its reports are cleared.' }}</p>
+</section>
+{% endblock %}

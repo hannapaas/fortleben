@@ -1,0 +1,62 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 47116,
+  "cached_tokens": 45300,
+  "output_tokens": 489,
+  "reasoning_tokens": 6,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.026104,
+ "response_id": "resp_6aeb7ee1879418c10ad84ff5",
+ "latency_s": 3.86,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_e7475877-07a9-43bf-aa24-2b56c364276b",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"R1\"],\"new\":\"down the stone steps and wavering on down toward the pine wood near the sea\",\"old\":\"down the stone steps and on wavering down toward the pine wood near the sea\",\"reason\":\"'On wavering down' is ungrammatical; this keeps the wobble in speakable English.\",\"replace_all\":false}"
+  },
+  {
+   "call_id": "call_ee2d6b59-7dde-498f-9163-33e39322b022",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"R2\"],\"new\":\"There are hardly any memories in this house, for me —\",\"old\":\"There's hardly any memories in this house, for me —\",\"reason\":\"Agreement in English; the Japanese is flat, not ungrammatical.\",\"replace_all\":false}"
+  },
+  {
+   "call_id": "call_5c3908f1-a6e6-4e0a-9260-8a38fea3513b",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"R3\"],\"new\":\"he thought he could dash it off in one burst! at any time, half or nothing\",\"old\":\"Once he took up his pen, half or nothing, he thought he could write it off in one burst! at any time\",\"reason\":\"'Write off' in English means cancel; 'dash off' keeps his breezy confidence and the fixed slogan.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": "commentary",
+   "chars": 79
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:52:17Z"
+}

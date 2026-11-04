@@ -1,0 +1,177 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "Blown by the salt wind, they came through the pine avenue where passersby had wholly ceased, crossed the bridge, and by the time they neared the town Taki had changed into a feeling close to unbearable loneliness — though there was nothing in particular about his wife he had to endure, he had somehow turned into a peevish chatterbox.",
+    "ids": [
+     "p107"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Oh, you're drinking still! You came meaning hardly to drink!\"",
+    "ids": [
+     "p108"
+    ],
+    "notes": [
+     "Speaker left floating in the Japanese; read as the wife from sequence and purse-money that follows."
+    ]
+   },
+   {
+    "english": "\"How much money have you got?\"",
+    "ids": [
+     "p109"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"As much as you like.\"",
+    "ids": [
+     "p110"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"How is it you had money on you?\"",
+    "ids": [
+     "p111"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"How should I know.\"",
+    "ids": [
+     "p112"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Give it to me!\"",
+    "ids": [
+     "p113"
+    ],
+    "notes": []
+   },
+   {
+    "english": "........",
+    "ids": [
+     "p114"
+    ],
+    "notes": [
+     "Gap left as in the Japanese; speaker and reply withheld."
+    ]
+   },
+   {
+    "english": "\"Then lend it to me.\"",
+    "ids": [
+     "p115"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"No —\"",
+    "ids": [
+     "p116"
+    ],
+    "notes": [
+     "Trailing drawl kept as in the Japanese."
+    ]
+   },
+   {
+    "english": "The wife of the place, whom they had known from before she started the restaurant, put her face out through a gap in the curtain and whispered, \"Madam, you mustn't let yourself be coaxed.\"",
+    "ids": [
+     "p117",
+     "p118"
+    ],
+    "notes": [
+     "Joined in the English as one sentence of narration and speech. Okusan rendered as Madam for an outsider addressing the wife."
+    ]
+   },
+   {
+    "english": "Whether it was admirable or timid I do not know, but when it comes to money this man never runs up any debt without a clear backing, so however drunk he gets he is all right — muttering something to that effect to no one in particular, his wife got to her feet and turned to him.",
+    "ids": [
+     "p119"
+    ],
+    "notes": [
+     "Judgment on Taki left unattributed as in the Japanese; it reads as the wife's aside to no one in particular."
+    ]
+   },
+   {
+    "english": "\"There was only ten yen,\" she said, sticking out her lower lip, and walked briskly off by herself.",
+    "ids": [
+     "p120"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Singing loudly as he came back, Taki met halfway down the pine avenue the old caretaker carrying a lantern, who said he had come out to meet him.",
+    "ids": [
+     "p121"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"If he does not look in here he is sure to go straight back there, it is one road so it is certain, so thinking, your wife telephoned and sent me to fetch him,\" the old man said.",
+    "ids": [
+     "p122"
+    ],
+    "notes": [
+     "The old man's report of the wife's telephone message kept as indirect reasoning without smoothing."
+    ]
+   },
+   {
+    "english": "\"Oh dear, the lantern-bearer gets left behind, what quick legs!\"",
+    "ids": [
+     "p123"
+    ],
+    "notes": [
+     "Speaker left floating in the Japanese; read as likely the old man panting after Taki, but kept unattributed."
+    ]
+   },
+   {
+    "english": "........",
+    "ids": [
+     "p124"
+    ],
+    "notes": []
+   },
+   {
+    "english": "(So there is a telephone!)",
+    "ids": [
+     "p125"
+    ],
+    "notes": [
+     "Kept parenthesised and rhythmically separate as a drunk flash cutting the caretaker's patter, as required."
+    ]
+   }
+  ],
+  "say": "Drafted the restaurant money haggling and lantern meeting, keeping speakers floating and drunk thought separate."
+ },
+ "usage": {
+  "input_tokens": 21811,
+  "cached_tokens": 20465,
+  "output_tokens": 4184,
+  "reasoning_tokens": 3318,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.02253425,
+ "response_id": "resp_6aeb7cd9e5432f8c0bba4b35",
+ "latency_s": 47.59,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 3305
+  }
+ ],
+ "created": "2026-11-04T18:43:37Z"
+}

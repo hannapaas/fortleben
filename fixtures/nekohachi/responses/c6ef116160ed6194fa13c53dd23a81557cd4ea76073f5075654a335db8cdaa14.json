@@ -1,0 +1,53 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "It was close on one in the morning, when the cranes crying over at the veterans' hospital came through clear, and everyone got to their feet. He got to his feet too, brisk on purpose, and went down the stairs with the rest, but with the old magazines and the leftover cakes and senbei stuffed in his breast, if that was to take the place of tonight's thanks, it felt silly, and here in secret he wanted to hold that tiger close and cry a while somehow. It was not that he was fretting because he had got no money, that much he knew from the point of being an Edokko — and that too you would know if you saw how his wife, an Edokko herself, gave in to a woman's weak heart and now and then tried to keep overnight money, and he knocked her about till she spent it all — but set beside a farmer's working life, this body of his that had to show people worthless tricks to live on felt sad somehow, all over again.",
+    "ids": [
+     "p175"
+    ],
+    "notes": [
+     "Veterans' hospital for Haiheiin: the disabled soldiers' home whose wood was his earthworm ground. Overnight money kept as the fixed phrase for yoigoshi no kane. Wife-beating kept blunt as in the text."
+    ]
+   },
+   {
+    "english": "\"It's only a little, you know—\" Takami-san, who was not without thought for others, slipped him two yen coins in secret once they were outside, so he could pull himself together a little. And perhaps for that reason he could pay the more respect even to the host who came along behind saying to them all, \"I'll see you partway, for a walk.\" But for himself — perhaps out of a nasty habit — what a stingy spirit, he thought himself mean. And if he could have it, he wanted to quit being a performer from tomorrow.",
+    "ids": [
+     "p176",
+     "p177"
+    ],
+    "notes": [
+     "Two paragraphs made one in English because one sentence runs across the break from ato kara tsuite kite to the host's offer. En-suke two pieces taken as two one-yen coins. Self-contempt kept flat, without explaining it away."
+    ]
+   }
+  ],
+  "say": "Drafted the 1 a.m. dispersal and the two yen outside without lifting the tone."
+ },
+ "usage": {
+  "input_tokens": 28197,
+  "cached_tokens": 27377,
+  "output_tokens": 4039,
+  "reasoning_tokens": 3539,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0222973,
+ "response_id": "resp_6aeb7f7788f416b57991498f",
+ "latency_s": 45.77,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2057
+  }
+ ],
+ "created": "2026-11-04T18:54:48Z"
+}

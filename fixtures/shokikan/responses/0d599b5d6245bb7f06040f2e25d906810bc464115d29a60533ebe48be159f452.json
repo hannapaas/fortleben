@@ -1,0 +1,59 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "He knew that something had happened, though not what, and Mitsuyo, listless in herself and wanting comfort, resented a father who gave her none. Sorrow heaped with pique came to an ear, \"Father, it is so dull, I shall go home too,\" she said, sullen and sharp with it. Zenpei scarcely took it in. \"If that mine once comes into our hands, the smart I have suffered ever since that blunder over the shares will be quite cured. Besides, the losses the Sino-Japanese troubles brought upon our marine produce, this will make them good. I must bring it off well,\" he ran on, beside himself.",
+    "ids": [
+     "p87"
+    ],
+    "notes": [
+     "日清事件 rendered as Sino-Japanese troubles to keep the period phrasing; left as the cause of losses on marine produce exactly as the text gives it, without explanation."
+    ]
+   },
+   {
+    "english": "\"Father, Father, I say, Father, I am going home,\" Mitsuyo raised her voice and spoke still more keenly. Zenpei, as if he marked her for the first time, \"What, go home? I shall go home too. We must be back in Tokyo with all speed and settle this and that arrangement. Mitsuyo, we start early tomorrow. And that mine, I must have it at any cost,\" his heart already half gone ahead.",
+    "ids": [
+     "p88"
+    ],
+    "notes": []
+   },
+   {
+    "english": "To have their starting fixed so lightly for the very next morning was more than Mitsuyo had looked for, and cheated of her scheme to tease him a little and trouble him and make him sullenly follow her will and so go home together, her maiden heart was displeased, displeased already at being made nothing of from the first, and she pressed close, \"Father, is that truly so, eh, Father, do take it to heart and listen. You are too provoking. Father,\" till at last she pulled his ear. Zenpei, annoyed, \"There, what a noise. Be silent. You disturb my thinking. Come, go and take a bath.\"",
+    "ids": [
+     "p89"
+    ],
+    "notes": [
+     "真実なの kept as truly to hold the echo with Mitsuyo's truly insistence in p27 and Zenpei's mocking answer; 父様 kept throughout as Father to hold her wheedling intimacy."
+    ]
+   }
+  ],
+  "say": null
+ },
+ "usage": {
+  "input_tokens": 27771,
+  "cached_tokens": 26225,
+  "output_tokens": 2536,
+  "reasoning_tokens": 2015,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01664425,
+ "response_id": "resp_6aeb7d0e5f19a1f4f7bf49dc",
+ "latency_s": 22.85,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2053
+  }
+ ],
+ "created": "2026-11-04T18:44:30Z"
+}

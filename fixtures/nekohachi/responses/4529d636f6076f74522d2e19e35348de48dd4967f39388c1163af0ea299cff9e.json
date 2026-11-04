@@ -1,0 +1,94 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"It is irony, to be sure,\" the knowledge-face man answered in a set-piece tone, \"the question is whether the author can be satisfied with irony of so shallow a degree.\"",
+    "ids": [
+     "p77"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"That is it, I suppose.\" The near-sighted man spoke, for a near-sighted man, with unexpected crispness. \"I have not read this one either, but what that lot write is all neatly put together in a small clever way, and without a scrap of background or depth.\"",
+    "ids": [
+     "p78"
+    ],
+    "notes": [
+     "Background renders seikatsu-haikei with ruby bakku in the source; the English word is the point here, used straight by the speaker."
+    ]
+   },
+   {
+    "english": "\"Just as Nekohachi-kun said,\" the knowledge-face man went on, \"the author's sympathy for the hero is to be seen, but the way that sympathy is shown is exceedingly thin.\"",
+    "ids": [
+     "p79"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Thin or not, it is not that it has no background of life.\" That was the host. \"Only, one may say he is an author who can give it no more than a thin background. As for T-kun going out of his way to propose this work, as he is not here tonight his true intent is unclear, but I take it he wanted to make a question for debate of the way it is both put together and yet somehow wanting.\"",
+    "ids": [
+     "p80"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"I daresay that is it.\"",
+    "ids": [
+     "p81"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Nekohachi wanted to make them all laugh by saying he did not know what the hell a back or a haikei was, but as what he had said had been taken up as a point he held his nose high and, with a solemn-looking face, \"And so, is this novel finished with that, eh — is there no other fall to it?\"",
+    "ids": [
+     "p82"
+    ],
+    "notes": [
+     "Back keeps bakku as sound and haikei keeps haikei as sound, against background elsewhere, because here Nekohachi hears both as noise. Fall renders ochi, his rakugo word for a punchline, which he misapplies to a novel."
+    ]
+   },
+   {
+    "english": "ha, ha, ha! Only two or three of them just laughed.",
+    "ids": [
+     "p83"
+    ],
+    "notes": []
+   },
+   {
+    "english": "To Nekohachi it felt like the roar had come at a strange place.",
+    "ids": [
+     "p84"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted p77 to p84 holding the literati flat and leaving Nekohachi's back-haikei and fall as misheard sound."
+ },
+ "usage": {
+  "input_tokens": 28373,
+  "cached_tokens": 27377,
+  "output_tokens": 3675,
+  "reasoning_tokens": 3058,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0209703,
+ "response_id": "resp_6aeb7d047469870bae034c7d",
+ "latency_s": 33.99,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2281
+  }
+ ],
+ "created": "2026-11-04T18:44:20Z"
+}

@@ -1,0 +1,91 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "The truth was, he did not suppose it had gone quite so cleanly as all that, but there was no witness who had stood by and seen it at the time, so with an easy mind he made the story pretty. \"And what I found was, the first way of crying was the females, and the one after was the males. And there were only six or seven males there, and all the rest were females.\"",
+    "ids": [
+     "p142"
+    ],
+    "notes": [
+     "Kept male/female for osu/mesu to leave the frogs as frogs; the tidying is admitted in the narration, so left it visible."
+    ]
+   },
+   {
+    "english": "\"Interesting!\"",
+    "ids": [
+     "p143"
+    ],
+    "notes": [
+     "Speaker not named; took it as the Tenjin-sama, as p144 names his praise."
+    ]
+   },
+   {
+    "english": "\"...\" He had had the Tenjin-sama's praise, and his own delight welled up still more. \"This was my first notion, eh,\" and then when he went to where the children gathered and showed them the mimicry, the candy sold better than you would think. And from the next day the frog candy-man was waited for wherever he went.",
+    "ids": [
+     "p144"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Sensei, candy is quite a paying thing, eh, with only five sen laid out it came to thirty sen, forty sen at the time.\"",
+    "ids": [
+     "p145"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"What made you give up such a good paying line, then?\"",
+    "ids": [
+     "p146"
+    ],
+    "notes": [
+     "Speaker not named; took it as the same questioner continuing the motive talk from p138."
+    ]
+   },
+   {
+    "english": "\"Why, my hobby got too much for me, eh. Shall I say mimicking the cry of things was in me by nature? I mimic anything. No, whatever cries, if I cannot mimic it I study it till I can. Among my customers there are often orders like cry the firefly or cry the colic-worm, but that not even a genius beyond me could likely do. As for me, nowadays cats fighting and the cries of insects and birds have got common, and I cannot keep up unless I mimic aeroplanes and motorcars too.\"",
+    "ids": [
+     "p147"
+    ],
+    "notes": [
+     "Kept cry for hotaru and senki no mushi as orders, and kept the animal list flat as catalogue, not nature writing."
+    ]
+   },
+   {
+    "english": "\"Why, there is carelessness in mimicry too,\" the host said, \"and by that carelessness many things get vulgarised.\"",
+    "ids": [
+     "p148"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted p142 to p148 keeping the frog tale as patter and the host reply flat."
+ },
+ "usage": {
+  "input_tokens": 29128,
+  "cached_tokens": 27377,
+  "output_tokens": 3616,
+  "reasoning_tokens": 3011,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0216633,
+ "response_id": "resp_6aeb7e582676f23a57c74857",
+ "latency_s": 36.51,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2301
+  }
+ ],
+ "created": "2026-11-04T18:50:00Z"
+}

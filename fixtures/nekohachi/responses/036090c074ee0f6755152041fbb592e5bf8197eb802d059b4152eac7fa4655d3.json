@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 66756,
+  "cached_tokens": 65652,
+  "output_tokens": 332,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0241864,
+ "response_id": "resp_6aeb812a55a9d99857a249d1",
+ "latency_s": 2.65,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_d295e31f-6e33-4944-a677-56dbad56f775",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"F18\",\"R8\"],\"new\":\"You don't understand much yourself, eh, can a colic-worm cry? If that will not do for you, I've took your gate money already, so you can get off home quick — only that would be too bare, so at the end I let the other fellow save face too — but you don't want to go home halfway either, do you. Truth is, I don't want to send you home either — that is what I make of it.\",\"old\":\"You don't understand much yourself, eh, can a colic-worm cry? If that will not do for you, I have taken your wooden gate charge already, so you can get home quick — only that would be too bare, so at the end I let the other fellow save face too — but you don't want to go home halfway either. Truth is, I don't want to go home either — that is what I make of it.\",\"reason\":\"The shift to おめえさん/おいら beranmei heckle, and 帰したくねい 'send home', must be audible in dropped, blunter syntax without dialect spelling; 木戸銭 is also unified as gate money.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T19:02:02Z"
+}

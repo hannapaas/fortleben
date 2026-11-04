@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{# The analysis keikaku wrote before drafting (the reading and the bible in the engine), on its own
+   page, like an appendix: for the reader who wants to know how the book was read, and the one who
+   would read it differently. #}
+{% block htmlattrs %}{% if ed.accent and ed.accent != 'pink' %} class="accent-{{ ed.accent }}"{% endif %}{% endblock %}
+{% block title %}How keikaku read {{ ed.title_en or ed.title }} · Fortleben{% endblock %}
+{% block main %}
+{% set hr = analysis %}
+{% macro crux_list(items) -%}
+<ol class="crux">{% for c in items %}<li><p>{{ c.point }}</p><p class="why">{{ c.why }}</p>{% if c.for_the_english %}<p class="fe"><em>In the English:</em> {{ c.for_the_english }}</p>{% endif %}</li>{% endfor %}</ol>
+{%- endmacro %}
+{% macro pairs(items) -%}
+<dl class="kv">{% for p in items %}<dt>{{ p.label }}</dt><dd>{% if p.value is string %}{{ p.value }}{% else %}<ul>{% for v in p.value %}<li>{{ v }}</li>{% endfor %}</ul>{% endif %}</dd>{% endfor %}</dl>
+{%- endmacro %}
+<section class="howread analysis">
+<h1 class="desk-h">How keikaku read <i{% if not ed.title_en %} lang="ja"{% endif %}>{{ ed.title_en or ed.title }}</i></h1>
+<p class="desk-lead">This English was drafted by keikaku, a translation engine running on Meta's models. Before a line was drafted, it wrote an analysis of the book, its people and its tone, and that analysis steered every stage: the draft, the two readings against the Japanese, and the editing. It is published here in full, with the voice the draft was written in.</p>
+{% set editor = ed.commissioned_by or 'the editor' %}
+{% if ed.file_edits %}<p class="desk-lead">{{ ed.commissioned_by or 'The editor' }} then edited it by hand before the draft started. <a href="#by-hand">What they changed</a> is at the end.</p>{% endif %}
+<p class="steer">If you'd read this story differently, <a href="/signup">start your own edition and steer it</a>. Or go back to <a href="/read/{{ ed.work_id }}{% if ed.id %}?edition={{ ed.id }}{% endif %}">the translation</a>.</p>
+<div class="form two">
+  <div class="q">What is it about?</div>
+  <div class="a">{{ crux_list(hr.crux) }}</div>
+  {% if hr.second_crux %}
+  <div class="q">A second reader?</div>
+  <div class="a"><p class="lead">A second reader, who read the Japanese without seeing the reading above, put the heart of the story differently. keikaku drafted with both in mind.</p>{{ crux_list(hr.second_crux) }}</div>
+  {% endif %}
+  {% if hr.reading %}
+  <div class="q">The reading?</div>
+  <div class="a prose">{% for p in hr.reading %}<p>{{ p }}</p>{% endfor %}</div>
+  {% endif %}
+  {% if hr.voice %}
+  <div class="q">In what voice?</div>
+  <div class="a">{{ hr.voice }}{% if hr.voice_by %} <span class="sm">(as {{ hr.voice_by }} rewrote it)</span>{% endif %}</div>
+  {% endif %}
+  {% if hr.cast %}
+  <div class="q">Who's who?</div>
+  <div class="a"><ul class="cast">{% for c in hr.cast %}<li><b>{{ c.handle }}</b>{% if c.name %} <span class="nm">{{ c.name }}</span>{% endif %}. {{ c.role }}
+    {% if c.forms %}<p class="sm"><em>Called:</em> {% for f in c.forms %}<span lang="ja">{{ f.form }}</span> ({{ f.used_by }}){{ '; ' if not loop.last else '.' }}{% endfor %}</p>{% endif %}
+    {% if c.register %}<p class="sm"><em>How they speak:</em> {{ c.register }}</p>{% endif %}</li>{% endfor %}</ul></div>
+  {% endif %}
+  {% if hr.style %}
+  <div class="q">The style sheet?</div>
+  <div class="a">{{ pairs(hr.style) }}</div>
+  {% endif %}
+  {% if hr.narration %}
+  <div class="q">Who tells it?</div>
+  <div class="a">{{ pairs(hr.narration) }}</div>
+  {% endif %}
+  {% if hr.motifs %}
+  <div class="q">What comes back?</div>
+  <div class="a"><ul class="cast">{% for m in hr.motifs %}<li><b>{{ m.motif }}</b>{% if m.forms %} <span lang="ja">{{ m.forms|join("・") }}</span>{% endif %}. {{ m.why }}{% if m.english %}<p class="sm"><em>In the English:</em> {{ m.english }}</p>{% endif %}</li>{% endfor %}</ul></div>
+  {% endif %}
+  {% if hr.hard_spots %}
+  <div class="q">The hard spots?</div>
+  <div class="a"><ul class="cast">{% for h in hr.hard_spots %}<li><b>{{ h.kind|capitalize }}</b>{% if h.anchors %} ({% for a in h.anchors %}{% if a.href %}<a href="/read/{{ ed.work_id }}{% if ed.id %}?edition={{ ed.id }}{% endif %}#{{ a.href }}">{{ a.label }}</a>{% else %}{{ a.label }}{% endif %}{{ ', ' if not loop.last }}{% endfor %}){% endif %}. {{ h.why }}</li>{% endfor %}</ul></div>
+  {% endif %}
+  {% if ed.file_edits %}
+  <div class="q" id="by-hand">Changed by hand?</div>
+  <div class="a hand"><p class="lead">What {{ editor }} changed in the files keikaku drafts from, line by line: struck through where words were taken out, marked where they were put in. Everything above is keikaku's, except where it says otherwise.</p>
+    {% for e in ed.file_edits %}<div class="fe-edit"><p>{% if e.cause == 'note' %}<b>{{ e.title }}</b>, rewritten by keikaku after a note, in place of the edit above, {{ e.date }}{% else %}<span class="seal" aria-hidden="true"></span><b>{{ e.title }}</b>, edited by {{ e.by }}, {{ e.date }}{% endif %}</p>
+      <ul class="difflines">{% for line in e.lines %}<li>{{ line|safe }}</li>{% endfor %}</ul></div>{% endfor %}
+  </div>
+  {% endif %}
+</div>
+</section>
+{% endblock %}

@@ -1,0 +1,45 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"I see, eh — for all you see of me I wasn't a farmer from the first, no, nor any born artiste neither, though I daresay that goes for any of us, eh,\" he joked, and then he told of old days that held memories even for him. After one arm and one leg had gone useless he had talked it over with his wife and turned candy-seller. But just blowing the Chinese flute and hobbling along, hobbling along, not the snottiest-nosed brat would buy from him. The first day was clean nothing, clean zero, and on the second day at last he sold ten sen's worth. He left that one silver coin with the child to please him with it, and child being child, he set it down on the bridge rail and went off to play, and in between another child took it. On the third day too he went out for trade because he went, but this was never going to do, he gave up hope, and stretched his legs out on the Yoshiwara embankment and sat there in a daze, thinking. \"It was here I got a heaven-sent idea, and got in me the makings of the performer I would be one day, eh,\" and having got a small laugh from his hearers with that, he moved on to how he learned the cry of the frogs. \"Before I knew it, any number of frogs were crying out in the paddies.\" As now, he showed how he had turned his eyes that way then, stuck his face a little sideways, and a good deal handier than when he had tried it that time, closing his hand as if round an egg and bringing his mouth to the hole at the top, he let out a little kuk kuk of a cry. \"When I tried it myself, out of all those many frogs just six or seven turned round my way. I thought that strange and wondered a while, and then once more,\" he said, changing to a kak kak of a voice to show them, \"when I tried it, this time all the frogs except those six or seven turned to face me, every one of them.\"",
+    "ids": [
+     "p141"
+    ],
+    "notes": [
+     "Kept Don-geinin as 'any born artiste neither' for the self-deprecating joke; unsure of exact nuance of Don beyond born or proper performer, left as modest denial.",
+     "Kept Chinese flute for toujin-bue as candy-seller's flute without gloss, and Yoshiwara embankment as place-name the passage gives.",
+     "Kept frog cries as kuk kuk / kak kak to read as act rather than nature writing; hand-as-egg description follows the Japanese closely and may still be clumsy."
+    ]
+   }
+  ],
+  "say": null
+ },
+ "usage": {
+  "input_tokens": 28192,
+  "cached_tokens": 27377,
+  "output_tokens": 3073,
+  "reasoning_tokens": 2475,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.018185549999999998,
+ "response_id": "resp_6aeb7e33c36ea13eb1134600",
+ "latency_s": 31.36,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2353
+  }
+ ],
+ "created": "2026-11-04T18:49:24Z"
+}

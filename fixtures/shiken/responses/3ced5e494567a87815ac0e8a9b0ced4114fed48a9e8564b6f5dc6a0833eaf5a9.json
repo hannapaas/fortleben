@@ -1,0 +1,105 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "Ryujiro could not keep from crying out. And no wonder. The half coat he had cast off was gone, and with it the lined robe, the under-robe, even the sash. And not only those. The long sword he had left behind was gone, and everything besides, from the things in his breast to his hand towel and nose papers.",
+    "ids": [
+     "p184"
+    ],
+    "notes": [
+     "Half coat, lined robe, under-robe and sash render han-gappa, awase, juban and obi; breast things, hand towel and nose papers render kaichu-mono, tenugui and hanagami. Left the catalogue complete as in the Japanese."
+    ]
+   },
+   {
+    "english": "\"Who has taken them!\"",
+    "ids": [
+     "p185"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Isogai Ryujiro had been stripped naked. Only his little knife was left to him, and even the long sword, the soul of the samurai, had been carried off by someone.",
+    "ids": [
+     "p186"
+    ],
+    "notes": [
+     "Keeps the p2 phrase soul of the samurai literal, and keeps long sword against little knife distinct: daito left on the bank and stolen, kodachi kept in the loincloth."
+    ]
+   },
+   {
+    "english": "\"Oh, it is because you saved me, sir, that you have been brought to this trouble. I have no excuse,\" Kotora herself turned pale as she said it.",
+    "ids": [
+     "p187"
+    ],
+    "notes": [
+     "Sir renders danna-sama, Kotora's polite address to a samurai gentleman."
+    ]
+   },
+   {
+    "english": "\"My mind was all on cutting weeds and I gave no thought to this side. When did it happen, and who did it?\" Ryujiro raged, but there was nothing to be done.",
+    "ids": [
+     "p188"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Even the bell of a distant temple had begun to sound. With every blink the country round grew darker. A cold wind pressed upon the skin of the two.",
+    "ids": [
+     "p189"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"In any case, let us make for where there are houses, and dry your wet clothes, and put other hands to searching for my lost things. Someone may have seen the thief.\" So saying, Ryujiro went ahead through the reeds toward the foot of the Tatsuki terrace. Kotora followed behind him.",
+    "ids": [
+     "p190"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Apart from the guards on his hands and legs, Ryujiro was naked, with only the little knife stuck in his loincloth, a disgrace beyond disgrace. Strange calamity though it was, what a plight. All of it was rust bred from his own body, from disobeying his sword master's command and letting himself be detained by a woman boss and falling, against his will, into idle ways. That it should come to this was his own doing, and remorse pressed thick upon him.",
+    "ids": [
+     "p191"
+    ],
+    "notes": [
+     "Guards on hands and legs render tekko kyahan, left on his body. Rust renders sabi in its moral sense, as self-earned corrosion, not literal rust."
+    ]
+   },
+   {
+    "english": "They went first into the nearest farmhouse below the terrace, but the house held to the custom of this land, to have nothing to do with travellers once night has fallen, and would not let them in past the threshold. Though they pleaded their case, no one would listen.",
+    "ids": [
+     "p192"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted the stripping on the bank flat and literal, with soul sword against little knife kept distinct."
+ },
+ "usage": {
+  "input_tokens": 26498,
+  "cached_tokens": 25713,
+  "output_tokens": 2878,
+  "reasoning_tokens": 2093,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0170697,
+ "response_id": "resp_6aeb7d745412a5cae8a44ec9",
+ "latency_s": 34.49,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 3096
+  }
+ ],
+ "created": "2026-11-04T18:46:12Z"
+}

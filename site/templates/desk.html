@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{# The editors' desk (docs/EDITORS-DESK.md): who you are, how your runs are paid for, and your translations,
+   each opening its own page (desk_run.html); a new one starts from desk_new.html. #}
+{% from "desk_parts.html" import n, run_row %}
+{% block title %}Your desk · Fortleben{% endblock %}
+{% block head %}<link rel="stylesheet" href="/static/desk.css?v={{ v }}">{% endblock %}
+{% block main %}
+{% set csrf = request.state.csrf if request else '' %}
+<h1 class="desk-h">Your desk</h1>
+{% if not desk %}
+<p class="desk-lead">Translations can't be started from this copy of Fortleben.</p>
+{% else %}
+{% set al = desk.allowance %}
+{% set blocked = closed or desk.busy %}
+
+<div class="form two desk" id="home" data-base="{{ desk.base }}">
+  {# One row of the form per translation, the first one labelled. #}
+  {% for r in desk.runs %}
+  <div class="q">{% if loop.first %}Your translations?{% endif %}</div>
+  <div class="a"><ul class="runs">{{ run_row(r, blocked or desk.keyless, desk.base) }}</ul></div>
+  {% else %}
+  <div class="q">Your translations?</div>
+  <div class="a"><p class="sm">None started.</p></div>
+  {% endfor %}
+
+  <div class="q">A new one?</div>
+  <div class="a"><p class="startrow">{% if closed %}<span class="line">{{ closed }}</span>{% else %}<a class="btn go" href="{{ desk.base }}/new">Start a new translation</a>{% endif %}</p></div>
+
+  <div class="q">Who?</div>
+  <div class="a">{{ desk.editor.name }}, {% if desk.key_tail %}signed up with your own key.{% elif desk.keyless %}signed up.{% else %}invited as an editor.{% endif %}
+    {% if desk.email %}<span class="sm block">You sign in as {{ desk.email }}.</span>{% endif %}</div>
+
+  {% set current %}{% if desk.has_password %}<input type="password" class="field" name="current" form="account" maxlength="200" required autocomplete="current-password" placeholder="Current password" aria-label="Current password">{% endif %}{% endset %}
+  {% if not desk.email %}
+  <div class="q"><label for="login-email">Sign in?</label></div>
+  <div class="a">Add an email and password so you can sign in without the link.
+    <div class="addrow wraps">
+      <input type="email" id="login-email" class="field" name="email" form="account" maxlength="254" required autocomplete="email" placeholder="Email" aria-label="Email" value="{{ login_email or '' }}">
+      {{ current }}
+      <input type="password" class="field" name="password" form="account" minlength="8" maxlength="200" required autocomplete="new-password" placeholder="Password, at least 8 characters" aria-label="Password">
+      <button type="submit" class="btn" form="account">Save</button>
+    </div>
+    {% if login_error %}<p class="err" role="alert">{{ login_error }}</p>{% endif %}</div>
+  {% else %}
+  <div class="q">Sign-in?</div>
+  <div class="a"><details{% if login_error %} open{% endif %}><summary>Change your email or password</summary>
+    <div class="addrow wraps">
+      {{ current }}
+      <input type="email" class="field" name="email" form="account" maxlength="254" required autocomplete="email" placeholder="Email" aria-label="Email" value="{{ login_email or desk.email }}">
+      <input type="password" class="field" name="password" form="account" minlength="8" maxlength="200"{% if not desk.has_password %} required{% endif %} autocomplete="new-password" placeholder="New password, at least 8 characters" aria-label="New password">
+      <button type="submit" class="btn" form="account">Save</button>
+    </div>
+    <span class="sm block">{% if desk.has_password %}Leave the new password empty to change only the email. {% endif %}A new password signs you out anywhere else you're signed in.</span></details>
+    {% if login_error %}<p class="err" role="alert">{{ login_error }}</p>{% endif %}</div>
+  {% endif %}
+
+  {% if desk.key_tail %}
+  <div class="q">Paid by?</div>
+  <div class="a">Runs spend your own key, ending ····{{ desk.key_tail }}.
+    <button type="submit" class="btn forget" form="forget">Forget this key</button></div>
+  {% elif desk.keyless %}
+  <div class="q"><label for="newkey">Your Meta key?</label></div>
+  <div class="a">Your translations run on your own key from the Meta Model API's dashboard. Add one to start.
+    <div class="addrow">
+      <input type="password" id="newkey" class="field" name="key" form="addkey" minlength="12" maxlength="200" required spellcheck="false" autocomplete="off" placeholder="Meta key" aria-label="Meta key">
+      <button type="submit" class="btn" form="addkey">Add a key</button>
+    </div>
+    {% if key_error %}<p class="err" role="alert">{{ key_error }}</p>{% endif %}
+    <span class="sm block">Make a key for this and nothing else. Put on it only what you are willing to spend; start small, you can add more. Turn off automatic top-up so a run can never spend more than you put on it. If the key runs out part-way, the translation stops where it is: top it up and resume it here, and nothing is paid for twice.</span>
+    <span class="sm block">We hold it encrypted and use it only for your own translations. Only its last four characters are ever shown, to you. Press <i>Forget this key</i> and it is deleted.</span></div>
+  {% else %}
+  <div class="q">Allowance?</div>
+  <div class="a"><b class="big" id="avail">{{ n(al.available) }}</b> drops of ink to spend.
+    <span class="sm" id="altail">{{ n(al.granted) }} granted, {{ n(al.spent) }} spent{% if al.reserved %}, {{ n(al.reserved) }} held for a translation in progress{% endif %}.</span>
+    <span class="sm block">A sheet is 400 characters of the original Japanese.</span></div>
+  {% endif %}
+
+</div>
+{% if desk.key_tail %}<form id="forget" method="post" action="{{ desk.base }}/key/forget" hidden><input type="hidden" name="csrf" value="{{ csrf }}"></form>{% endif %}
+{% if desk.keyless %}<form id="addkey" method="post" action="{{ desk.base }}/key" hidden><input type="hidden" name="csrf" value="{{ csrf }}"></form>{% endif %}
+<form id="account" method="post" action="{{ desk.base }}/account" hidden><input type="hidden" name="csrf" value="{{ csrf }}"></form>
+{% endif %}
+{% endblock %}
+{% block scripts %}{% if desk %}<script src="/static/desk.js?v={{ v }}"></script>{% endif %}{% endblock %}

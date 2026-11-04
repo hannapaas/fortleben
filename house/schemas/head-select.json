@@ -1,0 +1,60 @@
+{
+  "type": "object",
+  "properties": {
+    "decision": {
+      "type": "string",
+      "enum": [
+        "pick",
+        "fork"
+      ]
+    },
+    "pick": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Index of the chosen option, from 0. On a fork, the recommendation."
+    },
+    "same_or_different": {
+      "type": "string",
+      "enum": [
+        "same",
+        "different",
+        "not_applicable"
+      ]
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "fork": {
+      "type": "object",
+      "properties": {
+        "question": {
+          "type": "string"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "author": {
+                "type": "string"
+              },
+              "tradeoff": {
+                "type": "string"
+              },
+              "case": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "say": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

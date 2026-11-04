@@ -1,0 +1,33 @@
+{
+ "prompt": "copy-desk",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": {
+  "say": "Made the surname consistent as Tōjō throughout; left quoted, possessive, and plural forms such as Secretary, maids'/maids, truly/'truly', hearts/heart's, and others/other's alone as punctuation or grammar rather than spelling drift, and left Kunitomo and Kijima wordings alone as potentially deliberate variation.",
+  "summary": "Normalised Tojo to house form Tōjō (2 places); left all other listed variants alone as possessives, plurals, or quoted uses."
+ },
+ "usage": {
+  "input_tokens": 22588,
+  "cached_tokens": 22385,
+  "output_tokens": 1135,
+  "reasoning_tokens": 1014,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.00843525,
+ "response_id": "resp_6aeb86ab131d924329534b7e",
+ "latency_s": 15.43,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 463
+  }
+ ],
+ "created": "2026-11-04T19:25:31Z"
+}

@@ -1,0 +1,721 @@
+{
+ "prompt": "analyst-bible",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "cast": [
+   {
+    "first_appearance": "p2",
+    "first_person": "僕 and 俺 — literary/soft 僕 in talk with his wife, rougher 俺 when performing for the workmen or drunk; the slide itself is characterization, evasive agreement rather than decision",
+    "forms": [
+     {
+      "form": "滝",
+      "note": "surname only, no given name given; how the narration always names him",
+      "used_by": "narrator"
+     },
+     {
+      "form": "あなた",
+      "note": "ordinary married address; wife's standard form for him",
+      "used_by": "wife to Taki"
+     },
+     {
+      "form": "あんた",
+      "note": "blunter second-person used when scolding or managing him",
+      "used_by": "old caretaker man to Taki; wife in reported scolding tone"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "husband (細君's husband), son, father-figure anecdotes; 俺/僕; goes to brothel",
+    "handle": "Taki",
+    "id": "c1",
+    "name_ja": "滝",
+    "reading": "たき",
+    "register": "vague, agreeable literary speech; hedges, corrects himself too late, imitates others when excited; interior reverie in high-flown 韻文的 register that tips into self-parody",
+    "relationships": [
+     "husband of c2 (the wife)",
+     "son of c3 (the mother)",
+     "son of c9 (the dead father)",
+     "employer of c4 and c5 (A and B) for the carp hunt",
+     "master of c7 (the old caretaker) in the doomed house"
+    ],
+    "role": "protagonist: a writer living in a seaside villa who has not written the work he claims is half done, absorbed instead by a pond, carp, drink and grandiose head-work",
+    "romanised": "Taki"
+   },
+   {
+    "first_appearance": "p3",
+    "first_person": "あたし — brisk Tokyo feminine first-person; managerial and teasing, not formal わたくし",
+    "forms": [
+     {
+      "form": "細君",
+      "note": "how the narration always names her; no personal name given",
+      "used_by": "narrator"
+     },
+     {
+      "form": "彼女",
+      "note": "occasional narrative pronoun for her",
+      "used_by": "narrator"
+     },
+     {
+      "form": "奥さん",
+      "note": "how outsiders address/refer to her",
+      "used_by": "restaurant proprietress (c12) and old caretaker to Taki"
+     }
+    ],
+    "gender": "female",
+    "gender_evidence": "細君, 奥さん, wife; feminine sentence endings, 帯の間から harmonica, domestic money management",
+    "handle": "the wife",
+    "id": "c2",
+    "name_ja": null,
+    "reading": null,
+    "register": "quick period Tokyo feminine speech; teasing, practical, cost-aware; the only voice that says what things cost and what will happen; plays harmonica well",
+    "relationships": [
+     "wife of c1 (Taki), living in a separate house",
+     "daughter-in-law connected to c3 (the mother)",
+     "elder sister of c9 [younger brother]"
+    ],
+    "role": "Taki's wife: visitor, go-between, musical companion on the pine walk, purse-holder of the ten yen, caller who has the caretaker intercept him",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p21",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "お母さん",
+      "note": "as reported by the wife; likely Taki's mother, but text does not disambiguate mother vs mother-in-law",
+      "used_by": "wife reporting her speech; Taki in reply"
+     }
+    ],
+    "gender": "female",
+    "gender_evidence": "お母さん, reported as worrying/rejoicing over Taki",
+    "handle": "the mother",
+    "id": "c3",
+    "name_ja": null,
+    "reading": null,
+    "register": "only reported indirectly; anxious, approving tone as quoted by the wife",
+    "relationships": [
+     "mother (or mother-in-law) to c1 and c2; may join them in Tokyo whenever she likes"
+    ],
+    "role": "offstage family voice: reassured that Taki no longer grumbles, invoked in plans for Tokyo cohabitation",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p40",
+    "first_person": "手前え (glossed in text as 一人称也) and 俺 — coarse workman first-person; boastful, sweaty, comic",
+    "forms": [
+     {
+      "form": "Ａ",
+      "note": "narrator's label; no name given",
+      "used_by": "narrator"
+     },
+     {
+      "form": "鳶職",
+      "note": "trade label for the pair",
+      "used_by": "narrator"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "tattooed naked torso, 向ふ鉢巻の裸体, workman speech; paired with B",
+    "handle": "A, the tattooed workman with the dragon",
+    "id": "c4",
+    "name_ja": null,
+    "reading": null,
+    "register": "broad working-class vernacular, heavily elided, loud, comic-lamenting; imitated by Taki in p165-176",
+    "relationships": [
+     "workmate of c5 (B)",
+     "hired by c1 (Taki) to catch the carp; reports valuation from c13"
+    ],
+    "role": "workman fishing the pond; bearer of the finished full-back dragon and cloud tattoos; becomes Taki's model and puppet in the hunt",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p41",
+    "first_person": "俺 (shared pond-side vernacular; individual attribution often left floating between A and B)",
+    "forms": [
+     {
+      "form": "Ｂ",
+      "note": "narrator's label; no name given",
+      "used_by": "narrator"
+     },
+     {
+      "form": "鳶職",
+      "note": "trade label for the pair",
+      "used_by": "narrator"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "paired with A, same naked headband description; tattooed torso",
+    "handle": "B, the workman with the unfinished hannya",
+    "id": "c5",
+    "name_ja": null,
+    "reading": null,
+    "register": "same rough vernacular as A; dialogue often unattributed between the two by design",
+    "relationships": [
+     "workmate of c4 (A)",
+     "hired by c1 (Taki)"
+    ],
+    "role": "workman fishing the pond; skin shows only the outline of a hannya mask, work stopped before finishing — Taki wants to ask why but does not",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p49",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "金魚屋",
+      "note": "first as Taki's belated realization of what 'catching specialist' meant, then as the visitor who prices the carp",
+      "used_by": "narrator and A reporting to Taki"
+     },
+     {
+      "form": "商売人",
+      "note": "generic 'a man in the trade' for catching fish",
+      "used_by": "A and Taki"
+     }
+    ],
+    "gender": "not shown",
+    "gender_evidence": "trade only; no pronouns or description",
+    "handle": "the goldfish dealer",
+    "id": "c6",
+    "name_ja": null,
+    "reading": null,
+    "register": "only reported as pricing: so much a fish, about 400 yen",
+    "relationships": [
+     "outside buyer invoked by c4 to c1"
+    ],
+    "role": "offstage trade buyer whose valuation (about 400 yen) turns the nuisance carp into treasure and detonates sections III-IV",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p72",
+    "first_person": "あっし — deferential old-man first-person",
+    "forms": [
+     {
+      "form": "留守居の老夫婦 / 留守居の年寄 / 年寄 / お爺さん",
+      "note": "collective then individuated as the lantern-bearing old man who fetches Taki; Taki calls him お爺さん",
+      "used_by": "narrator and Taki"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "お爺さん, あっし, old man carrying lantern; counterpart to old wife",
+    "handle": "the old caretaker man",
+    "id": "c7",
+    "name_ja": null,
+    "reading": null,
+    "register": "slow, placating old-servant speech; patter about the telephone and stone steps while Taki's drunk parenthetical thoughts interrupt",
+    "relationships": [
+     "husband of c8",
+     "caretaker for c1's house; summoned by c2 by telephone to intercept Taki"
+    ],
+    "role": "resident caretaker; abacus-watcher, messenger, pump-crew member; foil to Taki's telephone-selling inspiration on the drunken walk home",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p72",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "留守居の老夫婦",
+      "note": "appears only as half of the couple; never speaks alone",
+      "used_by": "narrator"
+     }
+    ],
+    "gender": "female",
+    "gender_evidence": "夫婦 as wife of the old man",
+    "handle": "the caretaker's old wife",
+    "id": "c8",
+    "name_ja": null,
+    "reading": null,
+    "register": "none shown",
+    "relationships": [
+     "wife of c7"
+    ],
+    "role": "background resident; marks the house as still kept while awaiting demolition",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p92",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "中学生の弟",
+      "note": "source of流行の曲 for the wife's harmonica practice",
+      "used_by": "narrator"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "弟",
+    "handle": "the wife's middle-school younger brother",
+    "id": "c9",
+    "name_ja": null,
+    "reading": null,
+    "register": "none shown",
+    "relationships": [
+     "younger brother of c2"
+    ],
+    "role": "offstage supplier of tunes (Ai Ai Ai, Valencia, Light Cavalry etc.)",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p104",
+    "first_person": "none in the text (quoted only as 'he used to say')",
+    "forms": [
+     {
+      "form": "滝の亡くなった親父 / 滝の親父 / 父親",
+      "note": "dead father remembered through his oft-repeated whaling tale",
+      "used_by": "narrator"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "親父, 父親; went to school in America, shipped on a whaler",
+    "handle": "Taki's dead father",
+    "id": "c10",
+    "name_ja": null,
+    "reading": null,
+    "register": "remembered as theatrical storyteller with gestures, using the song as 相の手",
+    "relationships": [
+     "father of c1",
+     "learned song from c11"
+    ],
+    "role": "source of Nancy Lee: said to have learned it from sailors on a whaling ship during American schooldays summer vacation and drilled it into the children as whistling",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p104",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "水夫",
+      "note": "crew who habitually hummed Nancy Lee while working",
+      "used_by": "narrator reporting father's tale"
+     }
+    ],
+    "gender": "not shown",
+    "gender_evidence": "trade group; no individualized gender marking though historically male sailors",
+    "handle": "the whaling-ship sailors",
+    "id": "c11",
+    "name_ja": null,
+    "reading": null,
+    "register": "remembered chorus/work-song, not direct speech",
+    "relationships": [
+     "taught song to c10"
+    ],
+    "role": "mythic origin of Nancy Lee; hauling ropes, steering, climbing masts while chorusing",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p117",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "其処の女房",
+      "note": "proprietress known from before the restaurant opened; whispers warning through curtain gap",
+      "used_by": "narrator"
+     },
+     {
+      "form": "奥さん",
+      "note": "form she uses to the wife",
+      "used_by": "c12 to c2"
+     }
+    ],
+    "gender": "female",
+    "gender_evidence": "女房, 奥さん address",
+    "handle": "the restaurant proprietress",
+    "id": "c12",
+    "name_ja": null,
+    "reading": null,
+    "register": "confiding whisper: まかれちゃいけませんよ",
+    "relationships": [
+     "acquaintance of c1 and c2"
+    ],
+    "role": "brief chorus on money: warns the wife not to be taken in while Taki drinks",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p170",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "見物人 / 見物に来た (金魚屋)",
+      "note": "neighbours peering through the hedge whom Taki grandly seats upstairs",
+      "used_by": "narrator"
+     }
+    ],
+    "gender": "not shown",
+    "gender_evidence": "crowd only",
+    "handle": "the onlookers",
+    "id": "c13",
+    "name_ja": null,
+    "reading": null,
+    "register": "none shown",
+    "relationships": [],
+    "role": "audience that turns Taki from fisherman into impresario/general",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p201",
+    "first_person": "none in the text (reported speech only: 僕のこと好きだと言った)",
+    "forms": [
+     {
+      "form": "ぴん子",
+      "note": "pretty お酌 at the brothel; name in hiragana",
+      "used_by": "Taki bragging to A and B"
+     },
+     {
+      "form": "綺麗なお酌",
+      "note": "description by Taki",
+      "used_by": "Taki"
+     }
+    ],
+    "gender": "female",
+    "gender_evidence": "お酌, barmaid/entertainer; reported as liking Taki",
+    "handle": "Pin-ko",
+    "id": "c14",
+    "name_ja": "ぴん子",
+    "reading": "ぴんこ",
+    "register": "only reported by Taki; no direct speech",
+    "relationships": [
+     "entertainer at the brothel visited by c1 with c4 and c5"
+    ],
+    "role": "pretext for further brothel visits funded by the hoped-for carp money; sign of Taki's fantasizing arithmetic",
+    "romanised": "Pinko"
+   },
+   {
+    "first_appearance": "p210",
+    "first_person": "none in the text beyond work-cries",
+    "forms": [
+     {
+      "form": "債権者 / 自動車屋の集金人、料理屋の掛け取り、女郎屋の馬、レストランの亭主、酒屋の番頭、待合のお帳場 etc.",
+      "note": "list of tradesmen-creditors stripped to the skin to work the hand-pump",
+      "used_by": "narrator"
+     }
+    ],
+    "gender": "not shown",
+    "gender_evidence": "occupational group including male-coded roles; not individualized",
+    "handle": "the creditors turned pump crew",
+    "id": "c15",
+    "name_ja": null,
+    "reading": null,
+    "register": "no idle talk, only breath and heave-ho cries; likened to the Nancy Lee chorus",
+    "relationships": [
+     "creditors of c1",
+     "directed by c4 at the pump"
+    ],
+    "role": "collective that performs the story's only decisive act — pumping the pond dry 'in one burst' — while Taki is absent in Tokyo",
+    "romanised": null
+   }
+  ],
+  "hard_spots": [
+   {
+    "anchors": [
+     "p40",
+     "p41",
+     "p42",
+     "p43",
+     "p44",
+     "p45",
+     "p46",
+     "p47"
+    ],
+    "kind": "dialect and vulgar vernacular",
+    "why_hard": "A and B speak fast, elided working-class coastal speech with obscenity at the edges; narrator even glosses 手前え as first-person. Must sound rougher and funnier than Taki without English eye-dialect caricature or pinning them to another country. Keep speaker attribution floating where Japanese leaves it floating."
+   },
+   {
+    "anchors": [
+     "p48"
+    ],
+    "kind": "body description and deliberate omission",
+    "why_hard": "Paired tattoos — A's finished dragon and clouds vs B's abandoned hannya outline — plus Taki's unasked question about why B stopped. Do not explain or complete; the unfinished tattoo belongs with the unfinished house, book, carp-catch and trip."
+   },
+   {
+    "anchors": [
+     "p61",
+     "p62",
+     "p160"
+    ],
+    "kind": "lyrical excess and self-quotation",
+    "why_hard": "The snowscape detonation (owl's eyes in daylight, peony-petal sinful snow) is meant to be a little too much, then punctured flat. p160 lists Taki's slogans back verbatim as they scatter like goose down. Keep images literal and slightly overripe; keep the catalogue recognisable as quotation, not paraphrase."
+   },
+   {
+    "anchors": [
+     "p92",
+     "p93",
+     "p94",
+     "p95",
+     "p96",
+     "p97",
+     "p98",
+     "p99",
+     "p100",
+     "p101",
+     "p104",
+     "p105",
+     "p106",
+     "p210"
+    ],
+    "kind": "song titles and musical allusion",
+    "why_hard": "Harmonica set (Ai Ai Ai, Valencia, Light Cavalry, Tokyo March, American Patrol, Nancy Lee, Mori no Kajiya) was modern popular music in 1927. Nancy Lee travels from father's whaling tale to Taki's whistling to wife's disgust to creditors' pump chorus. Keep title untranslated, unexplained in text; let wife's 'old and vulgar American sailors' song' stand against Taki's sentimentality without adjudicating. Father's tale keeps hearsay colouring ('he used to say')."
+   },
+   {
+    "anchors": [
+     "p108",
+     "p109",
+     "p110",
+     "p111",
+     "p112",
+     "p113",
+     "p114",
+     "p115",
+     "p116",
+     "p117",
+     "p118",
+     "p119",
+     "p120"
+    ],
+    "kind": "unattributed dialogue",
+    "why_hard": "Restaurant haggling over money and drinking leaves speakers to inference with gaps (…………) and fragments. Do not assign names the Japanese withholds; keep stichomythic brevity and the flat ten-yen reveal."
+   },
+   {
+    "anchors": [
+     "p121",
+     "p125",
+     "p128",
+     "p131",
+     "p135",
+     "p139",
+     "p141",
+     "p146"
+    ],
+    "kind": "interrupted drunken narration and typography",
+    "why_hard": "Slow caretaker patter on the pine road is cut by Taki's parenthesised lightning thoughts (telephone! it's mine! sell it!). Keep them typographically and rhythmically separate — drunk insight inside a slow scene — and keep final staggering simile (like walking in deep snow) literal as callback to snowscape."
+   },
+   {
+    "anchors": [
+     "p154",
+     "p165",
+     "p166",
+     "p173",
+     "p176"
+    ],
+    "kind": "mock-heroic register shift and imitation",
+    "why_hard": "Taki slides from eavesdropper to imitator of A's cadence to shouting general/impresario (nets! beat them to death!). Must sound like a different man from the snowscape reverie, brutal and comic, not a polished narrator summarising."
+   }
+  ],
+  "motifs": [
+   {
+    "english": "Keep one fixed English — 'in one burst!' — wherever the slogan appears, from unwritten masterpiece to pumping the pond. The migration is the joke and the verdict.",
+    "id": "m1",
+    "motif": "in one burst",
+    "occurrences": [
+     "p28",
+     "p74",
+     "p75",
+     "p160",
+     "p206"
+    ],
+    "source_forms": [
+     "一気呵勢",
+     "一気"
+    ],
+    "why": "Taki's motto, excuse and sedative: having thought it he can relax into dream. Finally attaches to the only decisive act, performed by others draining the pond."
+   },
+   {
+    "english": "Keep one plain verb — 'catch' — throughout; do not vary into grab/land/net. Let it toll from wife to workmen to Taki's bellowing.",
+    "id": "m2",
+    "motif": "catching",
+    "occurrences": [
+     "p5",
+     "p40",
+     "p41",
+     "p49",
+     "p153",
+     "p160",
+     "p166",
+     "p199"
+    ],
+    "source_forms": [
+     "つかまへる",
+     "つかまらない",
+     "生捕り",
+     "捕獲"
+    ],
+    "why": "The story's engine of frustration; pond clouds whenever anyone moves. Repetition in same words makes the mechanism audible."
+   },
+   {
+    "english": "Keep 'snowscape' as a hard noun everywhere, never softened to snowy scene/wintry view. Keep title Snowscape.",
+    "id": "m3",
+    "motif": "snowscape / snow vision",
+    "occurrences": [
+     "p50",
+     "p58",
+     "p61",
+     "p62",
+     "p76",
+     "p160",
+     "p146"
+    ],
+    "source_forms": [
+     "雪景色",
+     "雪",
+     "吹雪",
+     "白皚々",
+     "雪屑"
+    ],
+    "why": "Wife's mild remark that the finished summer seascape looks like a snowscape triggers full blizzard hallucination and becomes indictment of his fiction and life; recurs in catalogue and final staggering simile."
+   },
+   {
+    "english": "Do not translate; keep 'Nancy Lee' romanised and unexplained in text. Gloss only in margin if needed.",
+    "id": "m4",
+    "motif": "Nancy Lee",
+    "occurrences": [
+     "p99",
+     "p101",
+     "p104",
+     "p105",
+     "p106",
+     "p160",
+     "p210"
+    ],
+    "source_forms": [
+     "ナンシー・リー",
+     "船歌",
+     "口笛",
+     "コーラス"
+    ],
+    "why": "Travels from father's deck-song to Taki's whistling habit to wife's ostentatious ear-covering to creditors' pump chorus — the one genuine collective vigour, owned by men he owes."
+   },
+   {
+    "english": "Keep 'telephone' literal and abrupt wherever it erupts; keep exclamatory repetition in drunk scene.",
+    "id": "m5",
+    "motif": "the telephone",
+    "occurrences": [
+     "p122",
+     "p125",
+     "p128",
+     "p131",
+     "p133",
+     "p139",
+     "p140",
+     "p141",
+     "p143",
+     "p160",
+     "p161"
+    ],
+    "source_forms": [
+     "電話",
+     "受話機"
+    ],
+    "why": "Sudden saleable asset and excuse for absence; daily morning call he dreads; his Hang up! in p164 is his only decisive gesture."
+   },
+   {
+    "english": "Keep 'hold (it) in my head' fixed; keep 'the difficult work' fixed. They must read as self-quotation when listed back in p160.",
+    "id": "m6",
+    "motif": "holding the work in the head / dream / fiction-talk",
+    "occurrences": [
+     "p2",
+     "p28",
+     "p73",
+     "p75",
+     "p135",
+     "p160",
+     "p208"
+    ],
+    "source_forms": [
+     "頭の中に持ち応える",
+     "六ヶ敷い仕事",
+     "架空",
+     "夢",
+     "韻文的",
+     "創作"
+    ],
+    "why": "What stays unwritten while pond business fills the days; p160 throws his phrases back as goose down scattering at the sight of prey and money."
+   },
+   {
+    "english": "Keep cloud/mud vocabulary stable — cloudy, muddy, muddy water — not varied into turbid/murky by turns.",
+    "id": "m7",
+    "motif": "clouding water",
+    "occurrences": [
+     "p40",
+     "p42",
+     "p80",
+     "p82",
+     "p157",
+     "p167",
+     "p180"
+    ],
+    "source_forms": [
+     "濁る",
+     "泥水",
+     "赧土色の水",
+     "澄む"
+    ],
+    "why": "Physical correlative of the whole plot: every attempt to catch makes seeing impossible; clearing takes days. Deadpan mechanism, not metaphor to be polished."
+   }
+  ],
+  "narration": {
+   "english_tense": "Past as default for narrated action, preserving Japanese aspect shifts where they mark tableau vs event (e.g. frozen noon scene p180-181 in a still present-like past; ongoing states with 'would' avoided). Do not archaize to match historical kana.",
+   "frame": "Four numbered sections (一二三四) with diamond breaks; linear summer sequence over a few days (sketch walk → evening carp talk → bus-miss walk to town → drunken return → carp valuation and brothel → full-day hunt → pump-draining). Interior parenthetical flashes (telephone! sell it!) interrupt without leaving third person. Ends flatly on reported absence.",
+   "narrator": "Third-person, close to Taki but even-handed; never calls him lazy or absurd outright. Records dialogue, dialect and interior weather in the same level voice; pauses for relished description (tattoos, noon tableau, pump chorus) then collapses back to mud and bills.",
+   "person": "third person, centred on Taki",
+   "tense_habits": "Literary Taishō-Shōwa written style mixing -ta past, -teiru progressive/resultative, and timeless description; dialogue in period colloquial; tense shifts mid-paragraph for tableau effect. Subjects and speakers routinely dropped.",
+   "timeline": [
+    "I (p1-p70): hot second-day evening walk and sketch; wife meets Taki at stone steps; long talk on carp, doomed house, trip and Tokyo lodging; workmen fail; snowscape remark detonates reverie; dusk grappling in pond",
+    "II (p71-p146): same day to nightfall failure and drinking; moonlit pine-road walk with harmonica medley and Nancy Lee history; restaurant money haggling; drunken lantern walk home with telephone-selling inspiration",
+    "III (p147-p202): next days: 400-yen valuation via goldfish dealer, brothel night, day-long pond siege as Taki bellows and grandstands, evening admission of delay and Pin-ko arithmetic",
+    "IV (p203-p212): night insects and creditors gather; decision to pump pond dry in one burst; mass pumping to Nancy Lee-like chorus while Taki absent in Tokyo to buy a lamp"
+   ]
+  },
+  "part_summaries": [
+   {
+    "starts": "p1",
+    "summary": "Part One. Taki, oppressed by thinking about fiction, walks with sketch-box to the pines above the sea. That evening his wife, who lives separately, meets him by the stone steps hunting for him. They circle through the carp in the pointless pond, the house soon to be cleared for a warehouse, his lack of sentiment, his stalled架空 story he could write 'in one burst', a future trip and Tokyo lodging. Two tattooed tobishoku fail to catch the carp in reddening water. Indoors the wife mistakes his finished summer seascape for a snowscape in midsummer; he flushes, falls into a blizzard hallucination of guilt and flight, then covers with sheepish talk of evening loneliness and heat."
+   },
+   {
+    "starts": "p71",
+    "summary": "Part Two. The workmen fail again till dusk, then drink with the old caretaker couple and refuse to go home. Taki lies in the empty sitting room dreaming and postponing work; his unlit study (meant perhaps for an altar room) lets him keep day-night reversed. He and his wife walk the moonlit pine road missing the bus, discuss seasons, hear her harmonica (Ai Ai Ai, Valencia, Light Cavalry, Tokyo March, American Patrol) and quarrel lightly over Nancy Lee — his dead father's whaling song and his whistling habit she finds vulgar. In town he drinks too much despite promising not to; they haggle over ten yen; she leaves alone. Drunk and singing home, met by the lantern-bearing old man sent by his wife's telephone call, he has parenthetical flashes: the telephone is his! sell it! sell it tomorrow! — to protect head-work and travel — while staggering as if in deep snow."
+   },
+   {
+    "starts": "p147",
+    "summary": "Part Three. A reports the visiting goldfish dealer's valuation: about 400 yen if caught and handed over. Taki says 'Sell.' That night he takes A and B by car to the seaside brothel; drums sound. Next day the house bustles. A and B, with bounties, hunt all day while Taki watches from the veranda over breakfast and new Hakone woodwork, telephones his wife to stay away, and turns general-impresario: imitating A's speech, shouting nets!, beating the table, inviting hedge-peepers to best seats, ordering wading and killing. The noon tableau freezes (A leaning on a net-pole, B with cast-net, bubble bursting) then bursts again. By evening no catch; Taki counsels gentler methods, declares all will be sold, worries about face, and brags that the barmaid Pin-ko likes him, calculating brothel funds from the carp."
+   },
+   {
+    "starts": "p203",
+    "summary": "Part Four. Night frogs and insects; new creditors visit the orange-tree house. A and B resolve to borrow a hand-pump from a villa and drain the pond 'in one burst'. Taki watches the old man's abacus; travel waits on head-work; cloudy midsummer days, rumour of waves. Creditors of every trade — car shop collector, restaurant and brothel dunners, bar owner, liquor clerk, assignation-house clerk — strip and pump in unison to A's lead with Nancy Lee-chorus force, muddy water arcing to the roof. Taki is absent: gone to Tokyo, the caretaker says, to buy a lamp."
+   }
+  ],
+  "say": "Passage wins over this bible where they conflict; record openness (speakers, mother, father's tale, sketch) as openness, not tidiness.",
+  "style_sheet": {
+   "annotation_density": "Sparse. Note only what sentence cannot give: song titles, 400 yen / 10 yen scale, Buddhist altar-room extension, tattoo subjects (dragon, hannya), month-end payment custom, hand-pump and cast-net fishing. Never note what context supplies or resolve deliberate gaps.",
+   "author_voice": "Makino's even, deadpan lyricism: capable of reportorial calm and sudden inflated reverie, then flat puncture. Protect comic disproportion — carp-hunt as battle, chorus, theatre — without winking. Keep grand phrases slightly too much (peony-petal snow, goose down, owl's eyes) so their collapse is funny then briefly sad. Same English must inflate and collapse.",
+   "honorifics_and_names": "Surname order; Taki for 滝 throughout (never 'Mr Taki' in narration). Keep Sensei only if text ever used it — it does not. Keep wife as 'my wife / his wife' or 'the wife' matching 細君, never invent a given name. Keep A and B as A and B. Keep Pin-ko hyphenated. Address forms (あなた, あんた, お爺さん, 奥さん, お母さん) rendered in plain English equivalents (you, old man/grandad, madam/wife, mother) with margin note on first use where needed.",
+   "keep_in_japanese": "Nancy Lee (ナンシー・リー) stays romanised in text. No other Japanese words retained in English text except as needed for nuance in margin (e.g. 一気呵勢, 細君). Food, clothing, housing terms translated; money in yen with figures kept exact.",
+   "quotation": "Use double quotes for speech, single for thought-quotation and Taki's quoted-back slogans in p160. Keep parenthetical drunk flashes — (so there is a telephone!) etc. — in parentheses on their own lines/beats, rhythmically separate from caretaker patter. Keep  ellipsis and white gaps where Japanese leaves floating attribution.",
+   "register": "Four musics kept apart in modern, speakable English: (1) level literary narration, no archaism despite historical kana; (2) Taki's vague agreeable mumble tipping into false grandiose; (3) wife's brisk Tokyo feminine practicality; (4) workmen's coarse compressed rough-speech. No borrowed English dialect for (4), no poetizing of (2). Formality carried in sentence shape, not thee/thou.",
+   "ruby_and_italics": "Ruby glosses in source (創作（小説）, 他人《ひと》, 船歌《ナンシー・リー》, 話が止絶《き》れると) signal reading or irony: follow sense in English (e.g. others for 他人) and note only where ironic (boat-song as Nancy Lee). Italics in English only for song titles and for Taki's slogans when cited back as slogans (in one burst!, telephone!).",
+   "standing_rules": []
+  }
+ },
+ "usage": {
+  "input_tokens": 16128,
+  "cached_tokens": 0,
+  "output_tokens": 10798,
+  "reasoning_tokens": 2707,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0660515,
+ "response_id": "resp_6aeb7a92d89202b9c70b4817",
+ "latency_s": 113.9,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 30636
+  }
+ ],
+ "created": "2026-11-04T18:33:54Z"
+}

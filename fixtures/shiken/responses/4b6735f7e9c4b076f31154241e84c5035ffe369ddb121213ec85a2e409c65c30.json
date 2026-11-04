@@ -1,0 +1,73 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "Before long the two came out at the landing. It was a truly desolate place. Below the upland stood a poor farmhouse here and there, but along the Shin-Tone itself not a single house, only reeds and river willows growing thick, and those not yet withered, which made it oppressively gloomy.",
+    "ids": [
+     "p113"
+    ],
+    "notes": []
+   },
+   {
+    "english": "There is no ferryman at this crossing, only a boat kept ready, what they call a hand-hauled ferry. On either bank three timbers are set up high in a tripod, with a twisted wisteria-vine cable stretched between them, and over the cable is slipped a small ring of wire, and to that ring a cord is tied and made fast to the bow of a field boat. To bow and stern of the field boat besides, long hemp ropes are tied, each long enough to reach to either bank. That is to say, a man riding in the boat hauls in the bow rope himself and so reaches the far bank. When the next man comes after and wants to call the empty boat back to this side, he hauls in the stern rope from the bank and the boat comes back, though there is no one in it, a most primitive contrivance.",
+    "ids": [
+     "p114"
+    ],
+    "notes": [
+     "Kept the mechanism at full length as performed explanation. 藤蔓 as wisteria-vine cable, 綱 as cord, 麻縄 as hemp rope to keep the rope web distinct. Final 房って来る read as 戻って来る, return."
+    ]
+   },
+   {
+    "english": "\"They say it makes a great difference to the distance whether you get across by this ferry or not,\" Ryujiro said.",
+    "ids": [
+     "p115"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"As ill luck will have it the boat is lying at the far bank, but it will come back to this side if we only haul the rope,\" Kotora said, for she knew the place.",
+    "ids": [
+     "p116"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"The hemp ropes here, I hear, are presented by the house of Jinemon in Awa, where I was taken in, old capture-ropes given generation after generation. That house uses choice hemp from Hozoji in Mikawa, vinegar-boiled and laid threefold, and sure enough this is tougher stuff than the common kind.\"",
+    "ids": [
+     "p117"
+    ],
+    "notes": [
+     "Kept the donation of worn-out capture-ropes literal and as hearsay as in the original; it is the engine for the later ferry ropes. 三繰り taken as threefold laying."
+    ]
+   }
+  ],
+  "say": null
+ },
+ "usage": {
+  "input_tokens": 26615,
+  "cached_tokens": 25713,
+  "output_tokens": 2718,
+  "reasoning_tokens": 2140,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01653595,
+ "response_id": "resp_6aeb7c51a4751abaac474d4a",
+ "latency_s": 29.96,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2228
+  }
+ ],
+ "created": "2026-11-04T18:41:21Z"
+}

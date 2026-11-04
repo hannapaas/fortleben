@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 65156,
+  "cached_tokens": 64884,
+  "output_tokens": 150,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0170648,
+ "response_id": "resp_6aeb81014eb046ff57c64da0",
+ "latency_s": 1.54,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_4c27e014-4910-4ad5-bb79-abb3c364b38a",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"F14\"],\"new\":\"the decent human thought he had managed to hold in that case,\",\"old\":\"the decent human thought he had managed to hold in that fix,\",\"reason\":\"その場合 is neutral 'in that case'; 'fix' imports Nekohachi's guess at situation into a sentence that does not make it.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T19:01:21Z"
+}

@@ -1,0 +1,59 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"You won't listen, will you.\" The young father gazed steadily at the small round arms and at the child's eyes with their rather dark, long lashes, moving nimbly and shrewdly without a pause, as if at a loss what to do, and then with a smile over his whole face, pinching lightly with his finger the child's round, thrust-out cheek, he took a large tea-bowl as if groping for it from under the table and put it in her hand.",
+    "ids": [
+     "p7"
+    ],
+    "notes": [
+     "'Her hand' is the child's hand: the Japanese pronoun here gives the large tea-bowl to the child, not to the mother. I kept 'her' because father and child are the only figures in the sentence."
+    ]
+   },
+   {
+    "english": "She served the hot, freshly cooked rice, with its white steam rising thick, from the pot and handed it to him. And her own young, large eyes, too, full of a mother's gladness, gazed at the child, never still for a moment, lovely as a little bird. And as if unable to bear it, murmuring within her mouth, wondering whatever was the matter with this child, with a look of finding her so dear there was nothing to be done about it, she said firmly, \"Bōya,\" but the smile overflowed from her face, and she looked at the man's face as if asking for help. And as if having forgotten everything, the three smiled at one another as if wondering what to do for the child. And for the child they set about their meal with a warm bustle and with the smile and gladness welling up of itself on top of it. And in the clatter and noise, they did not hear the sound of the wind and rain.",
+    "ids": [
+     "p8"
+    ],
+    "notes": [
+     "I keep Bōya in roman letters for 坊や: the child has been stated to be a girl, but the mother calls to her with this affectionate address. 'Boy' or a name would mislead."
+    ]
+   },
+   {
+    "english": "The young father kept his red, big hand spread busily over the table. And his eyes, holding back the smile that welled up helplessly because of the child, as he steadied the child he put a little food into that small red mouth. In between, hastily opening his own big mouth, he pushed rice into it.",
+    "ids": [
+     "p9"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted the noisy supper at p7 to p9, keeping the smile chain and the storm unheard."
+ },
+ "usage": {
+  "input_tokens": 10568,
+  "cached_tokens": 0,
+  "output_tokens": 3934,
+  "reasoning_tokens": 3367,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0299295,
+ "response_id": "resp_6aeb42f816b64fc8897c4153",
+ "latency_s": 41.65,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2219
+  }
+ ],
+ "created": "2026-11-04T14:36:40Z"
+}

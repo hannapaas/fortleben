@@ -1,0 +1,80 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "It was a feat beyond an ordinary person, but for Kotora the woman acrobat it was nothing at all. When she slipped away from the troupe she had feared the changeable autumn sky and snatched up the nearest umbrella to hand, and without knowing it that had proved useful here. With no extra music struck up while the star makes ready, and no flourish at all, she merely tucked up the skirts of her yukata. Her faded red to-chirimen waistcloth stood out against the muddied water of the new cut and the mud below the low bank with an unexpected beauty.",
+    "ids": [
+     "p139"
+    ],
+    "notes": [
+     "\"While the tayu makes ready, another tune\" is a theatre convention for filling time; the sense is she makes no show of preparation."
+    ]
+   },
+   {
+    "english": "In a moment she had clambered to the top of the parent post of the hand-hauled boat.",
+    "ids": [
+     "p140"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Be careful, it is dangerous,\" Ryujiro called up to her from below.",
+    "ids": [
+     "p141"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"I am quite all right,\" Kotora said, smartly opening her dark blue bull's-eye umbrella. What for an instant looked like blood spraying in all directions from the chirimen of her waistcloth was the red dragonflies that had been resting on the creeper-rope, startled into flight.",
+    "ids": [
+     "p142"
+    ],
+    "notes": [
+     "The text gives the mis-seeing first and the correction second; kept in that order."
+    ]
+   },
+   {
+    "english": "Shin-Tone in name, it was a fifty-ken cut. She crossed the creeper-rope of the hand-hauled ferry with a tightrope walker's step. It was truly splendid, no different from an ordinary person walking along a high road.",
+    "ids": [
+     "p143"
+    ],
+    "notes": []
+   },
+   {
+    "english": "The low evening sun struck slantwise and lit half of Kotora bright red. It was mirrored too on the dull face of the sluggish water. A Kotora above, a Kotora below: one person seen as two. Even her stained yukata seemed in that light to give off a glow, and all the more her stage-style bunkin takashimada and her painted, beautiful face, and Ryujiro could not but gaze entranced. He no longer feared she might fall halfway, only that she might finish the crossing by herself and hurry on ahead alone. That alone weighed on him.",
+    "ids": [
+     "p144"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted the creeper-rope crossing at the Shin-Tone ferry."
+ },
+ "usage": {
+  "input_tokens": 26612,
+  "cached_tokens": 25713,
+  "output_tokens": 2513,
+  "reasoning_tokens": 1937,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01566095,
+ "response_id": "resp_6aeb7cb8aaf837e83e7f4dd5",
+ "latency_s": 30.0,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2302
+  }
+ ],
+ "created": "2026-11-04T18:43:05Z"
+}

@@ -1,0 +1,82 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"Then whatever lies within my power, I will meet your wish. Be it a house or a villa, I shall certainly render a fitting thanks besides.\"",
+    "ids": [
+     "p109"
+    ],
+    "notes": [
+     "Kept 'certainly' for きっと to hold the flat contractual echo that answers Mitsuyo's 'truly' insistence."
+    ]
+   },
+   {
+    "english": "\"Nay, I receive your great goodwill with gratitude,\" Tatsuya said, smiling again. \"Well then, whatever lies within your power, you will meet my wish, Miyoshi-san, certainly you will,\" he pressed, as if in jest.",
+    "ids": [
+     "p110"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Now, what might that wish be?\" Zenpei edged his knees forward, buoyed by drink. \"Well, were I to name it for a start, it would be something like asking to receive what you yourself have fashioned,\" Tatsuya said, his voice lifting. \"Ha! That sounds a riddle with something behind it,\" Zenpei laughed aloud.",
+    "ids": [
+     "p111"
+    ],
+    "notes": [
+     "Left 'what you yourself have fashioned' vague as in the Japanese; it points to Mitsuyo only at p130 and must not be clarified here."
+    ]
+   },
+   {
+    "english": "\"Nay, that riddle you shall solve for me another day. First, anew to the fore celebration of this venture,\" Tatsuya said, offering his cup. Left with none to answer him, Zenpei was already at the hour of sleep.",
+    "ids": [
+     "p112"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Things went without hitch, quite as hoped. One item, a slight token, twenty-five thousand yen. That night Tatsuya lodged in Shimbashi, as was his custom.",
+    "ids": [
+     "p113"
+    ],
+    "notes": [
+     "'Slight token' renders 薄儀, a euphemism for the cash payment; 'lodged in Shimbashi' keeps the assignation quarter implication without explaining it."
+    ]
+   },
+   {
+    "english": "Seven",
+    "ids": [
+     "p114"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted the bargain riddle and ledger close, keeping the wish vague and the contractual certainly flat."
+ },
+ "usage": {
+  "input_tokens": 26990,
+  "cached_tokens": 26225,
+  "output_tokens": 3149,
+  "reasoning_tokens": 2675,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01827325,
+ "response_id": "resp_6aeb7e0835368cc2e909489c",
+ "latency_s": 25.06,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1827
+  }
+ ],
+ "created": "2026-11-04T18:48:40Z"
+}

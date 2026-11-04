@@ -1,0 +1,59 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "I",
+    "ids": [
+     "p1"
+    ],
+    "notes": []
+   },
+   {
+    "english": "It was a heat such as had not been known for years. Wherever one looked, the roof-tiles of the houses, set hard with mud, threw back the sunlight dully, like lead, and even the swallows' nests hung beneath them seemed, at this rate, like to steam the chicks and eggs inside them alive where they lay. Still more, every field that was a field, whether hemp or millet, hung its head limply in the reek of the earth, and there was not one thing that, green as it was, was not wilted. The sky seen above those fields, perhaps stricken with the closeness of these past days, though fair, hung thick and turbid in the air near the ground, and here and there mere shapes of towering cloud, like hail parched in a roasting pan, floated in lumps. — The tale of the \"wine worm\" begins with three men who have gone out of their way into the threshing-yard in the blazing sun in such weather.",
+    "ids": [
+     "p2"
+    ],
+    "notes": [
+     "Kept the hail-parched-in-a-pan simile literal though stiff; it is bookish comparison, not to be smoothed. Kept \"wine worm\" as the single fixed term."
+    ]
+   },
+   {
+    "english": "Strangely, one of them lay naked, on his back upon the bare ground. What was more, for some reason, his hands and his feet were wound round and round with thin cord. Yet the man himself showed no particular sign of minding it. He was a short man, of good colour, somehow giving a sense of dull heaviness, fat as a pig. Then a handy unglazed jar stood at this man's pillow, but what was inside that, too, was not to be known.",
+    "ids": [
+     "p3"
+    ],
+    "notes": [
+     "\"thin cord\" renders hosobiki; \"unglazed jar\" renders suyaki no kame. Left the jar's contents withheld as the Japanese does."
+    ]
+   }
+  ],
+  "say": "Drafted the opening tableau holding image before explanation."
+ },
+ "usage": {
+  "input_tokens": 15525,
+  "cached_tokens": 0,
+  "output_tokens": 2819,
+  "reasoning_tokens": 2348,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.031387,
+ "response_id": "resp_6aeb5b9360522adebfd340c1",
+ "latency_s": 32.11,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1811
+  }
+ ],
+ "created": "2026-11-04T16:21:39Z"
+}

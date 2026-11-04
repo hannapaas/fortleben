@@ -1,0 +1,110 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"I went and tumbled right into the trap, so it's not the heat. My arse is grazed raw all over! The water's going to soak in, isn't it?\"",
+    "ids": [
+     "p45"
+    ],
+    "notes": [
+     "Source glosses teme'e in a bracketed note as first person; rendered simply as I since English needs no gloss.",
+     "Exact dialect force uncertain; taken as a fall into the fish trap leaving scraped buttocks that pond water will sting."
+    ]
+   },
+   {
+    "english": "\"It's a queerer job than you'd think, this is. Damn silly and it works you to the bone. My head's gone muzzy with it!\"",
+    "ids": [
+     "p46"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Looks like we'll have to go and fetch a tradesman. If we just catch at them blind we'll kill them, and then there'll be nothing left for it!\"",
+    "ids": [
+     "p47"
+    ],
+    "notes": [
+     "'tradesman' for shobainin, kept vague as Taki has not yet understood it means the goldfish man in p49.",
+     "'catch' kept for the concordance verb tsukamaeru."
+    ]
+   },
+   {
+    "english": "A's was a splendid tattoo, a fine dragon striking a pose across his whole back, with terrible wheeling clouds spreading their wings to the tips of both arms. B's, for some reason, looked to have been left off before it was finished, only the outline of a hannya mask traced at about eight tenths on the bare skin. Taki had sometimes thought of asking B why he had stopped at that, but it felt somehow wrong, and he had held back.",
+    "ids": [
+     "p48"
+    ],
+    "notes": [
+     "'hannya mask' and 'eight tenths' kept literal; the reason for stopping is withheld in the source and left so."
+    ]
+   },
+   {
+    "english": "As he walked straight through to the inner room and opened the lid of his sketch box, the men's shrill talk came sharply to Taki's ears. Catch! Catch! — their words took his interest, and he thought, so there are tradesmen who make a trade of catching fish, then? Only later did he realise this had meant the goldfish man.",
+    "ids": [
+     "p49"
+    ],
+    "notes": [
+     "'tradesman' kept as in p47 to preserve Taki's vagueness before the later realisation.",
+     "'Catch! Catch!' keeps tsukamaeru in the same plain verb used throughout."
+    ]
+   },
+   {
+    "english": "\"Is that what you've been painting?\"",
+    "ids": [
+     "p50"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Mm.\"",
+    "ids": [
+     "p51"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Then his wife said, in the most straightforward tone, \"It's not finished yet, is it.\"",
+    "ids": [
+     "p52",
+     "p53"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Taki blinked for a moment, unnaturally, then said with forced decisiveness, \"No, this is finished as it stands.\"",
+    "ids": [
+     "p54",
+     "p55"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted workmen rough and plain, tattoos level, sketch exchange flat with catch and tradesman held for concordance."
+ },
+ "usage": {
+  "input_tokens": 21283,
+  "cached_tokens": 20465,
+  "output_tokens": 5183,
+  "reasoning_tokens": 4485,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.02612,
+ "response_id": "resp_6aeb7bb82741ff78649c4f36",
+ "latency_s": 65.0,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2632
+  }
+ ],
+ "created": "2026-11-04T18:38:49Z"
+}

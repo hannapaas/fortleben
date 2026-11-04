@@ -1,0 +1,82 @@
+{
+ "prompt": "copy-desk",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": null,
+ "usage": {
+  "input_tokens": 20300,
+  "cached_tokens": 20081,
+  "output_tokens": 1396,
+  "reasoning_tokens": 1141,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0092189,
+ "response_id": "resp_6aeb8f50298e5e8cf10144cc",
+ "latency_s": 14.36,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_b341bf55-1214-4260-ac7e-c1a00503f4bb",
+   "name": "find",
+   "arguments": "{\"words\":\"Awa\"}"
+  },
+  {
+   "call_id": "call_6d1e45cc-da43-45b9-8ab7-bbfc9097f1e5",
+   "name": "find",
+   "arguments": "{\"words\":\"houses\"}"
+  },
+  {
+   "call_id": "call_c4394a30-455d-4ace-b89c-e632d20ee718",
+   "name": "find",
+   "arguments": "{\"words\":\"house's\"}"
+  },
+  {
+   "call_id": "call_47316dfd-1ef9-4b23-bbd6-24d2e1f06cb1",
+   "name": "find",
+   "arguments": "{\"words\":\"Takewari\"}"
+  },
+  {
+   "call_id": "call_31c127c7-085a-41b6-a7da-68345dcc9a2d",
+   "name": "find",
+   "arguments": "{\"words\":\"Ioka\"}"
+  }
+ ],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": "commentary",
+   "chars": 85
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T20:02:24Z"
+}

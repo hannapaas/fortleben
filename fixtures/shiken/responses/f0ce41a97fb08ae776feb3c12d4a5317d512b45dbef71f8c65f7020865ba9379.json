@@ -1,0 +1,82 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"Before that transmission, you must without fail go out on a warrior pilgrimage and travel the provinces once. By that I do not mean for you to go breaking down the doors of ordinary training halls. First visit the three shrines of Katori, Kashima, and Ikisu, and then the Suwa shrine at Nagareyama, in Hitachi the Osugi shrine in Awa village and the Mizuchi shrine in Tatsuki village. Visit those gods, purify both body and mind together, wield and offer up the sacred sword in its full form, and come back having cast off all base intent. Visits to other gods may come afterward at your leisure.\"",
+    "ids": [
+     "p19"
+    ],
+    "notes": [
+     "Master's injunction quoted as reported instruction; shrine circuit kept in full as the pilgrimage program whose interruption at Osugi drives the plot."
+    ]
+   },
+   {
+    "english": "To receive the Happo Makigumo swordsmanship from Akioka Jinpusai as his one master with his one pupil, Ryujiro's journey through the provinces had begun. But he had come to a halt at the Osugi shrine. However one looked at it, it could only be called strange.",
+    "ids": [
+     "p20"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Before landing at Oshisuna-gashi, he had bought a lunch sold early in the morning at Kioroshi-gashi. He could not think it was only the chopped dried squid in it disagreeing with him that had given him the stomach pain. Before that, when he had felt thirst in the closeness of the crowded boat, the cooled boiled water O-Tetsu gave him had something strange in its smell. To think evilly of it, he might have been made to drink some drug.",
+    "ids": [
+     "p21"
+    ],
+    "notes": [
+     "Kept as retrospective suspicion, not fact: the text offers poison only as evil surmise."
+    ]
+   },
+   {
+    "english": "Once taken into O-Tetsu's house, his blood thickened, his sinews slackened, his spirit failed, and he was left helpless in every way. He only grew witless.",
+    "ids": [
+     "p22"
+    ],
+    "notes": []
+   },
+   {
+    "english": "O-Tetsu's house were hereditary police agents. Her grandfather had been especially famed. Hiwatari Jinemon was an adopted husband. For that reason O-Tetsu herself was the better versed in matters of arrest.",
+    "ids": [
+     "p23"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"When it comes to laying a capture-rope, there is none in Hitachi, Shimosa, or Kazusa to match me.\"",
+    "ids": [
+     "p24"
+    ],
+    "notes": [
+     "First full claim of rope mastery; capture-rope kept literal for torinawa network."
+    ]
+   }
+  ],
+  "say": null
+ },
+ "usage": {
+  "input_tokens": 27003,
+  "cached_tokens": 25713,
+  "output_tokens": 2141,
+  "reasoning_tokens": 1539,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0145687,
+ "response_id": "resp_6aeb7af7020621b77be54e0f",
+ "latency_s": 24.63,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2383
+  }
+ ],
+ "created": "2026-11-04T18:35:35Z"
+}

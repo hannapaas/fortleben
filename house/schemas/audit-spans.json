@@ -1,0 +1,60 @@
+{
+  "type": "object",
+  "properties": {
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "paragraph": {
+            "type": "string"
+          },
+          "span": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "name",
+              "term-drift",
+              "wrong-referent",
+              "omission",
+              "addition",
+              "anachronism",
+              "model-habit",
+              "flat-tone",
+              "varied-repetition",
+              "crux",
+              "mistranslation",
+              "other"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "description": "One line in plain words"
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "minor",
+              "serious",
+              "critical"
+            ]
+          },
+          "visible_in_english": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "overall": {
+      "type": "string",
+      "description": "A line on the version as a whole",
+      "minLength": 1
+    },
+    "say": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 62365,
+  "cached_tokens": 62068,
+  "output_tokens": 167,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.016941599999999998,
+ "response_id": "resp_6aeb7e8dd0222f81580e4e66",
+ "latency_s": 2.73,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_e5a6250e-4e10-4cef-b6b7-1202a7fc51be",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"R6\"],\"new\":\"he could not shake the feeling that something strong still tugged him back, as if his hair were being pulled from behind.\",\"old\":\"he could not shake the feeling that something strong still pulled him by the hair from behind.\",\"reason\":\"後髪を引かれる is the image for lingering reluctance; marking it as a feeling keeps the hair image without implying a physical pull.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:50:53Z"
+}

@@ -1,0 +1,59 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "After half a day at go they had opened their hearts to each other, and Zenpei was above all delighted to have won Tatsuya. The few characters that read secretary of such a ministry, of such senior rank rang surpassingly well in old-fashioned ears, and to converse familiarly with such a man he counted as credit to himself, so no sooner visited than he returned the visit at once, wishing only to grow still closer. \"He is a man of talent. A very considerable man of talent,\" he praised over and over, \"and that absence of pride in him, that is grand. The interest of his talk. His pleasant way with people,\" admiring him point by point, till at last he muttered to himself that Tsunao and the like could in no way come up to him. Mitsuyo had been listening at his side, but \"Even so, that Tsunao-san is younger and more refined, calm and high of spirit, and far, far nicer than that gentleman,\" she said with decision, pressing forward on her knees. \"Ho, that was not for your ears.\" Zenpei broke into a laugh, and \"Oh, I did not say it for any such reason. I only said it because it is so,\" she said, her face already tinged a faint pink, \"horrid Father,\" untying and retying the cord of her sash.",
+    "ids": [
+     "p19"
+    ],
+    "notes": [
+     "Mitsuyo calls Tsunao Tsunao-san with intimacy and Tatsuya ano kata, that gentleman, keeping a formal distance. I keep that contrast. Zenpei's hitori-gotsu is a mutter to himself, not addressed to her."
+    ]
+   },
+   {
+    "english": "\"Speaking of Tsunao, he writes from his travels that he will stop here on his way home, and you must be glad of that,\" Zenpei began to tease, and \"There you go again. I know nothing about it now,\" Mitsuyo said, whirling her back to him, angry in the way of a daughter.",
+    "ids": [
+     "p20"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Laughing, Zenpei went on, \"But when Tsunao comes, the two of you will band together and set upon me, I suppose. To be lorded over still more than this I cannot bear. Shall I run away to Okumura-san's rooms? Thinking you have a backer behind you, you are grown quite bold,\" and gave her back a little prod with his pipe, and fell into a hahaha of solitary delight.",
+    "ids": [
+     "p21"
+    ],
+    "notes": [
+     "gur[u] ni natte, literally of one belly, is conspiring or banding together. I render as band together to keep Zenpei's bluff tease without archaism."
+    ]
+   }
+  ],
+  "say": null
+ },
+ "usage": {
+  "input_tokens": 27205,
+  "cached_tokens": 26225,
+  "output_tokens": 2487,
+  "reasoning_tokens": 1884,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0157285,
+ "response_id": "resp_6aeb7b63d59771dd876f4da5",
+ "latency_s": 29.47,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2362
+  }
+ ],
+ "created": "2026-11-04T18:37:23Z"
+}

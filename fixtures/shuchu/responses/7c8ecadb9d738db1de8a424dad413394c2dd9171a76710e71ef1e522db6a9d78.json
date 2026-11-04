@@ -1,0 +1,42 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 32432,
+  "cached_tokens": 32116,
+  "output_tokens": 313,
+  "reasoning_tokens": 171,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0139472,
+ "response_id": "resp_6aeba65411c81e8c02c74d8c",
+ "latency_s": 3.11,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_8e934473-e3db-4487-bc53-5ed308f7d507",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"F4\"],\"new\":\"effect\",\"old\":\"effect\",\"reason\":\"Diagnostic wording check before repair.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": "commentary",
+   "chars": 106
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T21:40:37Z"
+}

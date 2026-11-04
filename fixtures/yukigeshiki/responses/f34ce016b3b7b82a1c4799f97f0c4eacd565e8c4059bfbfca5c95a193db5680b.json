@@ -1,0 +1,122 @@
+{
+ "prompt": "notes",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": {
+  "notes": [
+   {
+    "anchor": "p48",
+    "body": "A full-back dragon with clouds is a classic large tattoo design; a hannya is the horned demon-woman mask from No theatre, another traditional tattoo subject. The story shows one finished and one left as outline only.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "a fine dragon striking a pose across his whole back, with terrible wheeling clouds spreading their wings to the tips of both arms"
+   },
+   {
+    "anchor": "p48",
+    "body": "Only the outline of the demon-mask is inked, about eight-tenths drawn, on bare skin. The text gives no reason for stopping.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "only the outline of a hannya mask traced, about eight-tenths finished, on the bare skin"
+   },
+   {
+    "anchor": "p76",
+    "body": "The guess is that the half-built extension was meant as a room holding the household Buddhist altar. Left unfinished for years, it has no electric light wired in.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "been meant perhaps for a Buddhist altar room"
+   },
+   {
+    "anchor": "p92",
+    "body": "These were current popular tunes in late-1920s Japan, picked up from records, films and schoolboys and practised at home on the harmonica. The trailing (?) is in the Japanese.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "such things as \"Ai Ai Ai\" and \"Valencia\" and \"Light Cavalry.\""
+   },
+   {
+    "anchor": "p104",
+    "body": "Nancy Lee was an English-language sentimental song known in Japan as a sailors' song. Taki's father claims he learned it from sailors while shipping on an American whaler in his schooldays.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "making the 'boat-song' Nancy Lee his refrain"
+   },
+   {
+    "anchor": "p149",
+    "body": "Around four hundred yen is presented as a startlingly high sum, against the wife's ten yen in hand in the restaurant scene. The amount is what turns the nuisance carp into treasure.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "around four hundred yen"
+   },
+   {
+    "anchor": "p163",
+    "body": "Putting things on the month-end bill means leaving shop and restaurant charges to be settled together at the end of the month. It was an ordinary way of running household accounts on credit.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "Put everything on the month-end bill"
+   },
+   {
+    "anchor": "p156",
+    "body": "A cast net is a round weighted net thrown by hand over the water to fall over fish. A hand pump later borrowed from another villa is a portable pump worked by hand to drain the pond.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "Shall we try a first throw with the cast net?"
+   }
+  ],
+  "say": "Notes kept sparse to song titles, tattoos, altar-room, money scale, month-end billing and fishing gear, leaving deliberate gaps untouched."
+ },
+ "usage": {
+  "input_tokens": 41346,
+  "cached_tokens": 0,
+  "output_tokens": 2966,
+  "reasoning_tokens": 2266,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.064288,
+ "response_id": "resp_6aeb7fe545208f4563a84949",
+ "latency_s": 24.83,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2809
+  }
+ ],
+ "created": "2026-11-04T18:56:37Z"
+}

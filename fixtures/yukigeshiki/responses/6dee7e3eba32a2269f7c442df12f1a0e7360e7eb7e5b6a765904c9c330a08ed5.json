@@ -1,0 +1,105 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "— Try that patch with your feet! — Did it get away? It slipped into the trap just now for certain, block the mouth!",
+    "ids": [
+     "p175"
+    ],
+    "notes": [
+     "Taki shouting in imitation of A's rough pond-side cadence; kept blunt and compressed, following the two short orders as printed with ――."
+    ]
+   },
+   {
+    "english": "A and B moved as if they were Taki's puppets. Taki kept chattering on without pause.",
+    "ids": [
+     "p176"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"No good? I was sure it went in there just now. Then open the mouth once more and join hands, the two of you, and work every corner carefully, and at the last drive them in there in one breath, and get to work after that — how would that do?\"",
+    "ids": [
+     "p177"
+    ],
+    "notes": [
+     "一ト息 kept as 'in one breath' rather than the fixed slogan 'in one burst!' (一気呵勢); same root image of doing it at one go, here applied to herding the carp into the trap."
+    ]
+   },
+   {
+    "english": "Before he knew it Taki had forgotten all about his pressing circumstances. As if he were a man of leisure who had ordered out a seine net and was watching from above, sunk in mere pastime, the catch itself a matter of indifference — he had fallen into a rich and causeless easy-mindedness.",
+    "ids": [
+     "p178"
+    ],
+    "notes": []
+   },
+   {
+    "english": "No, more than any eye-opening amusement of any kind, this held a strange fascination — what a merry game it was — Taki's eyes blurred and he grew drowsy, as if drunk on a spring breeze.",
+    "ids": [
+     "p179"
+    ],
+    "notes": [
+     "'spring breeze' kept literal though the scene is high summer; the unseasonable word is in the Japanese and belongs with the snowscape inversion."
+    ]
+   },
+   {
+    "english": "The glaring midday sun shone white on the thick green leaves. Hushed, the water had already returned, muddy as ever, to a calm flat as a board. The cicadas cried as if scorching.",
+    "ids": [
+     "p180"
+    ],
+    "notes": []
+   },
+   {
+    "english": "A, who could only be a playhouse gallant weary from battle, leaned on his long-handled net as on a spear and, half his body thrust out between the fatsia leaves, stared hard at the muddy water where nothing could be seen. By the stone lantern on the far bank, B with his headband twisted about him held his casting net in throwing posture, turned to a living doll.",
+    "ids": [
+     "p181"
+    ],
+    "notes": [
+     "八ツ手 taken as the fatsia plants at the pond edge; 石灯籠 as garden stone lantern. 'Living doll' for 生人形, the lifelike festival figure, kept literal for the frozen tableau."
+    ]
+   },
+   {
+    "english": "Plop! A bubble broke on the water.",
+    "ids": [
+     "p182"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"There!\" At A's shout the net flew from B's arms...",
+    "ids": [
+     "p183"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted the pond-siege orders and noon tableau keeping Taki's imitation rough and the narration level."
+ },
+ "usage": {
+  "input_tokens": 21382,
+  "cached_tokens": 20465,
+  "output_tokens": 2228,
+  "reasoning_tokens": 1516,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.013685,
+ "response_id": "resp_6aeb7dafc073d4894c5f484a",
+ "latency_s": 27.28,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2715
+  }
+ ],
+ "created": "2026-11-04T18:47:11Z"
+}

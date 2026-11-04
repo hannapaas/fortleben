@@ -1,6 +1,6 @@
 # keikaku — story state: how the house remembers a text
 
-Written 28 Oct 2026. This is the long-context design: what every translation call knows about the rest of the text, and how that knowledge is built, kept consistent and checked. It's part of the M1 contract, because every department reads it.
+This is the long-context design: what every call knows about the rest of the text, and how that knowledge is built, kept consistent and checked. `STAGES.md` has the stages that build and use it.
 
 ## The problem
 
@@ -8,101 +8,88 @@ Japanese literary prose drops subjects, leaves speakers unattributed and shifts 
 
 ## What the research says (and why we don't use big overlaps)
 
-- **Paragraph-sized units beat sentences**, but critical errors and omissions remain (Karpinska & Iyyer 2023), and models skip more as the output gets longer. So Translation drafts **about a page at a time** (~1k source tokens, ~650 characters): several whole paragraphs, never splitting one, and breaking at scene breaks where it can. Bigger isn't automatically better: a longer draft hides more dropped sentences, and checking and redoing a page is precise and cheap. Continuity comes from the context in §3 rather than from a longer draft.
+- **Paragraph-sized units beat sentences**, but critical errors and omissions remain (Karpinska & Iyyer 2023), and models skip more as the output gets longer. So the translator drafts **about a page at a time** (~650 characters, ~1k source tokens): several whole paragraphs, never splitting one, breaking at scene breaks where it can. Bigger isn't automatically better: a longer draft hides more dropped sentences, and checking and redoing a page is precise and cheap. Continuity comes from the context in §3, not from a longer draft.
 - **A small curated memory beats a big raw history.** DelTA (ICLR 2025) keeps proper-noun records, a bilingual summary and retrieved earlier pairs, and improves consistency. Loong (2026) finds that unfiltered context, including full history, sometimes scores *below* no context at all.
 - **Models use long contexts worse than their windows suggest.** Information in the middle is used worst (Liu et al. 2024); when the link isn't a literal word match, most long-context models lose half their accuracy by ~32K tokens (NoLiMa 2025).
 
-So we don't feed large raw overlaps (say, the previous two chapters) into every call. That is the "big history" the evidence warns against: it costs tokens, buries the current passage in the middle of the prompt, and still leaves the model to work out who's who by itself. Instead, a source-side **Analyst** reads the whole text first and writes down the decisions explicitly, and every call gets those decisions plus a short window of real text either side.
+So we don't feed large raw overlaps (say, the previous two chapters) into every call. That is the "big history" the evidence warns against: it costs tokens, buries the current passage in the middle of the prompt, and still leaves the model to work out who's who by itself. Instead the house reads the whole text first and writes down what it understands, and every call gets that plus a short window of real text either side. Full references are in `REFERENCES.md`.
 
 ## 0. The first read: forming a reading
 
-Most literary translators read the whole book before translating a word, often twice. The first time they're not taking notes on names; they're forming a reading: what the book is doing, how it sounds, where it turns, what the ending does to everything before it. Every later choice (how formal, how much to explain, when a repetition matters) comes from that reading. A model translating paragraph by paragraph never has one unless we give it one.
+Most literary translators read the whole book before translating a word, often twice. The first time they're not taking notes on names; they're forming a reading: what the book is doing, how it sounds, where it turns, what the ending does to everything before it. Every later choice (how formal, how much to explain, when a repetition matters) comes from that reading. A model translating page by page never has one unless we give it one.
 
-So before anything else, **Wonder reads the whole source once and writes the house's reading**: a page of plain prose, not a form to fill in.
+So before anything else, **Wonder reads the whole source once and writes the house's reading**: plain prose, not a form to fill in. It reads the whole book whatever its length, so a novel gets a whole-book reading, not a chapter-by-chapter one.
 
-**The reading starts from the crux: what a translation of *this* text stands or falls on.** Every book has its own. In one, it's a narrator who has had almost no education: an English version that gives her an educated vocabulary has betrayed the book, however well it reads. In another it's a single word that changes meaning by the last page, or an irony that only works if the English stays deadpan, or a dialect that marks who belongs. The reading names the one or two things that matter most here and says why, in the text's own terms.
+**The reading starts from the crux: what a translation of *this* text stands or falls on.** Every book has its own. In one, it's a narrator who has had almost no education: an English version that gives her an educated vocabulary has betrayed the book, however well it reads. In another it's a single word that changes meaning by the last page, or an irony that only works if the English stays deadpan, or a dialect that marks who belongs. The reading names the one to three things that matter most here and says why, in the text's own terms, and what each means for the English.
 
-Beyond that, it covers whatever this text needs. Often that's tone and voice, the shape of the story, ambiguity the author left open, and where a fluent English draft is likely to go wrong. But those are what readings usually turn out to contain, not headings to fill in. A reading that dutifully covers every usual topic and misses the crux has failed. The prompt teaches what a reading is for and shows a couple of very different examples; it doesn't hand over a template.
+Beyond that, it covers whatever this text needs. Often that's tone and voice, the shape of the story, ambiguity the author left open, and where a fluent English draft is likely to go wrong. But those are what readings usually turn out to contain, not headings to fill in. A reading that dutifully covers every usual topic and misses the crux has failed. The prompt teaches what a reading is for and shows a couple of very different examples; it doesn't hand over a template. The reading also lists its open questions, and offers two or three **voice takes** for the English, the one it recommends first.
 
-**A second, independent reader checks the crux.** Spark reads the text separately, without seeing Wonder's reading, and answers one question: what does a translation of this stand or fall on? It's a cheap call. Where the two agree, the crux goes straight into the reading. Where they disagree, that's the first and most important fork for the editor, at the point where a decision is cheapest and touches everything. As everywhere, the house doesn't wait: until the editor rules, Wonder's reading stands and the disagreement is shown. Any other open questions of interpretation the reading can't settle become forks too.
+**A second, independent reader checks the crux.** A second Wonder call, with a different prompt, reads the text without seeing the first reading and answers one question: what does a translation of this stand or fall on? A third call compares the two. Where they name the same thing, the reading stands as it is. Where they differ, that's the first fork for the editor, at the point where a decision is cheapest and touches everything, and the second crux is added to the reading, marked as a second reader's, so every later call holds both. Nothing waits for the editor: until they rule, the first reading stands.
 
-Wonder writes the reading because it's the strongest reader we have, and one call over the whole text is cheap (it's counted in the whole-text reads in `RUNNING-A-TEXT.md`). Its 1M-token context holds even a full novel, so a novel gets a whole-book first read too, not a chapter-by-chapter one.
-
-The reading is what turns the rest of the house from rule-followers into colleagues with judgement. Every department gets it in its cached prefix, so a drafting call that meets something no rule covers can ask "what fits the reading?" Critics check the crux first: a draft that is accurate line by line but gets the crux wrong is the most serious kind of error, because no single line looks wrong. It's also the editor's best point of leverage: a page to read, and a comment on it changes everything downstream. As everywhere, nothing waits for that comment. And it's published with the edition as **the house's reading**, labelled as the house's and never presented as the author's view or as a human introduction.
+The reading is what turns the rest of the house from rule-followers into colleagues with judgement. Every call after it gets it, and the house brief every call carries says that when a decision isn't covered by a rule, the question is "what fits the reading?" The faithful reader and the final read check the crux first: a draft that is accurate line by line but gets the crux wrong is the most serious kind of error, because no single line looks wrong. It's also the editor's best point of leverage: a page to read at the checkpoint, and a note on it changes everything downstream. It's published with the edition as **the house's reading**, labelled as the house's and never presented as the author's view or as a human introduction.
 
 ## 1. The story bible (built from the reading)
 
-The Analyst (Spark) then builds the bible, with the whole source and the reading in its cached prefix. All our texts fit: the longest, 「幻影の盾」, is ~22k characters, about 33k tokens. Cast, ledger, narration, motifs, style sheet and hard spots come from one call. The referent map is built paragraph by paragraph in a few further calls, because it's long and needs close attention to each line; each of those calls still sees the whole text. For a novel the Analyst works chapter by chapter, updating the same bible. It produces:
+The Analyst (Spark) then builds the bible in one call, with the whole source and the reading in front of it, and, for a book in more than one part, the parts the planner chose. It holds:
 
 | Part | Holds | Why it matters |
 |---|---|---|
-| **Cast** | Every person the text refers to, not only the principals: minor and unnamed figures get a handle ("the old man at the rice shop") and whatever the text shows (親爺, so male and elderly). Per entry: name in kanji and reading where there is one, romanisation, every form they're referred to or addressed by (先生, あなた, お前, kinship terms, nicknames), who uses which form, gender if the text shows it, role, relationships, first-person pronoun (私 / 僕 / 俺 / わたくし) and what it says about them, speech register (keigo level, dialect, 文語), first appearance | Keeps names, address and voice stable; tells the translator what 僕 vs 俺 is doing |
-| **Ledger** | Places, objects, period terms, recurring phrases: the approved English per edition (Casual / Curious / Student), reading, rationale, status `proposed / approved / locked` | One rendering everywhere; editions differ by design, not by drift |
-| **Referent map** (*to be earned on 「晩餐」, see below*) | Per paragraph: the speaker of each line of dialogue and the implicit subject of each sentence that needs one, each named by its cast entry or handle (so a minor character's gender can't drift twenty pages on), with confidence `high / medium / low`, and `deliberately ambiguous` where the original keeps it open | The single biggest JA→EN error source. Low-confidence entries steer Source check; deliberate ambiguity is preserved, not resolved |
+| **Cast** | Every person the text refers to, not only the principals: minor and unnamed figures get a handle ("the old man at the rice shop") and whatever the text shows (親爺, so male and elderly). Per entry: name in kanji and reading where there is one, romanisation, every form they're referred to or addressed by (先生, あなた, お前, kinship terms, nicknames), who uses which form, gender if the text shows it and the evidence, role, relationships, first-person pronoun (私 / 僕 / 俺 / わたくし) and what it says about them, speech register (keigo level, dialect, 文語), first appearance | Keeps names, address and voice stable; tells the translator what 僕 vs 俺 is doing |
 | **Narration** | Narrator (first or third person, who), tense habits and the English default, frame and time structure, a short timeline | Stops tense flip-flopping and confused flashbacks |
-| **Motifs and callbacks** | Repeated images, words and phrases the author uses deliberately, with segment IDs of each occurrence | Literary repetition must stay repetition in English; a fluent model "varies" it away |
-| **Style sheet** | Register, honorific and name-order policy, ruby and italics policy, quotation conventions, notes on the author's voice, annotation density per view, the drafting grain for this text (page or scene, and where to break), standing rules with their scope | The house style for this text; the editor approves it |
-| **Hard spots** | Poems, wordplay, allusions, dialect passages, classical quotations, with segment IDs | Where heads may commission an intern; where Source check looks hardest |
+| **Motifs and callbacks** | The images and key words the author repeats on purpose, with the paragraph IDs of each occurrence and how the English carries them; not phrases Japanese simply repeats as ordinary usage | Literary repetition must stay repetition in English; a fluent model "varies" it away |
+| **Style sheet** | Register, honorifics and names, what to keep in Japanese and why (Sensei, say), ruby and italics, quotation conventions, notes on the author's voice, annotation density, standing rules | The house style for this text |
+| **Hard spots** | Poems, wordplay, allusions, dialect passages, classical quotations, with paragraph IDs | Warns every call that meets them |
+| **Part summaries** | For a book in more than one part, a few plain sentences per part: who appears, what happens, what is established or changes | What a call about one part knows of the others (§3) |
 
-**The referent map has to earn its place.** The whole source is already in every call, so the map is belt and braces: the cast is cheap and obviously worth having (published, checkable, correctable), but a sentence-by-sentence map is the heaviest part of the bible, and if the drafter with the whole book already gets referents right it's a cost without a benefit. So the first run on 「晩餐」 drafts the same pages with and without the referent entries, and the editor reads both. Same result: drop the map, keep the cast. Helps only where the Japanese is genuinely unclear: shrink it to those sentences. Helps broadly: keep it. The design doesn't depend on which; the context order and the drafter's prompt work either way.
+**The cast describes people, not lines.** Who acts or speaks in a particular sentence is worked out by whoever reads that sentence, with the text in front of them, the way a translator does. A claim about one line made at bible time gets carried into every later call as if it were settled: an early run kept a sentence-by-sentence referent map, and on 「晩餐」 a misreading in it (who hands the bowl to whom in p7) went into every call, the draft followed it and the reviewer enforced it, while the same pages drafted without the map read the same everywhere else. So there is no referent map, and a wrong subject is the faithful reader's to catch.
 
-The bible is one flat JSON file per work, with a schema, versioned and stored with the run. Code reads it for the checks in §4; prompts get it rendered as plain Markdown. Deliberately no knowledge graph, vector store or embeddings: a short story's cast and ledger fit in a few thousand tokens, and every extra layer is another place for errors to hide. We'd revisit that only for a house-wide memory across many works. A human-readable view of it is published with each edition: readers can see the cast and ledger the house worked from.
+**No term ledger, no placeholders.** The style sheet says what stays in Japanese and why; the translator writes plain English. A list of approved phrases pasted into the draft made it stiff, doubled words and broke exact edits.
 
-## 1a. The author file
-
-Translators who do several books by one author build up a knowledge of that writer: favoured sentence shapes, the words she leans on, how she handles dialogue, where she's deliberately rough, how her recurring terms were rendered last time and why. Each new book is still read on its own terms; the knowledge is what lets the translator notice when the author has changed register.
-
-The house keeps the same thing, as **an author file**: one per author, built only from completed runs, never written in advance. Each entry says where it came from (which work, which stage: a ledger rendering, a line from the editor's letter or final read, an editor's ruling scoped `author`) and whether the latest reading agreed with it.
-
-- **It informs; it never binds.** The first read gets it as information to weigh. The reading of *this* text, starting from its crux, decides what applies; a habit list can't override that, and a reading that finds the author has changed says so and the file records the disagreement.
-- **Rules can be scoped `author`**, alongside line / character / term / work / house. Like every rule they're visible and revocable, and a rule from one work never rewrites a locked line in another.
-- **It's published**, on the author's page, with its provenance, the same way the bible is. It's also honest about size: with two works by one author it's a few entries, and the page says so rather than dressing it up.
-
-For the hackathon the only author with two works is Shiraki Shizu (「晩餐」 then 「三十三の死」), which makes it a real but small piece of evidence that the house isn't translating each text cold. It should be described that way.
-
+The bible is one flat JSON document per work, with a schema, versioned; every call gets it rendered as plain Markdown under a heading that calls it "the house's best understanding before drafting, which can be wrong". Deliberately no knowledge graph, vector store or embeddings: a short story's bible fits in a few thousand tokens, and every extra layer is another place for errors to hide. It's published with each release, so readers can see the cast and style sheet the house worked from.
 
 ## 2. Changing its mind
 
 Translators' understanding of a book grows while they translate it; close work turns up things a read-through doesn't. Halfway through, a word turns out to echo something on page two, and the rendering chosen for page two now looks wrong. That's why translators draft the whole book before revising anything: late discoveries are cheap until the revision starts. The house works the same way. The reading and the bible are the best view at the start, not a verdict.
 
-- **The view comes from the whole text, not the opening.** The first read sees the whole book, so the reading and the voice trial aren't built on the first few pages alone. The voice trial is judged against the whole reading.
-- **Anyone can propose a change**, and nobody makes one silently. Translation, Source check or Editorial can propose an amendment (a missed echo, a character the Analyst missed, a corrected reading, a better rendering) as a query to the Analyst. Accepted amendments bump the version. The reading can be amended the same way, through Wonder.
-- **Changes reach backwards.** When a rendering changes, or a new motif is found, rule propagation (ARCHITECTURE §3) finds every earlier segment that used the old rendering or holds the motif and queues revisions, each going back through Source check. Locked items need the editor. The reserve in each text's budget is there partly to pay for this.
-- **The editor's letter is the formal second look.** After the full draft, Wonder reads the whole English against the reading. Whatever the house has learned by then, including "the reading was wrong about this", comes out there, and the reading is updated before revision. The published reading is the final one, with a line on what changed.
-- **Old views are kept.** Every version of the bible and the reading stays in the event log, so readers can see how the house's view changed and why.
+- **The view comes from the whole text, not the opening.** The first read and the bible see the whole book, so the reading and its voice takes aren't built on the first few pages.
+- **The editor corrects it before the draft.** At the checkpoint (`STAGES.md`) the editor reads the reading, the bible and page 1 in each voice. A note goes back to the model that wrote the reading, which carries it into the reading and the bible and saves new versions where they change; or the editor rewrites either by hand, and every later call reads their version. Page 1 is drafted again, so the effect shows as English.
+- **The passage wins.** The house brief and the bible's own heading tell every call that the bible can be wrong, and that when the passage says otherwise the passage wins and the call should say so. A reader or the desk that sees otherwise in the text goes by the text.
+- **Changes reach backwards.** When the desk learns in one part something that changes an earlier one (who a character is, what a word means here), it says so; once every part has been through the desk, each earlier part goes back to it once with those findings (`STAGES.md`, the emergency lever). The up-front estimate pays for that pass back.
+- **Old views are kept.** Every version of the reading and the bible stays in the record with the event that wrote it, and a hand edit keeps its before and after.
 
-A version bump changes the cache key, so amendments are batched at the end of each chunk, not applied mid-call.
+The reading and the bible change only before the draft. A new bible version starts a new cached prefix, so changing it mid-stage would cost every later call its cache; after the checkpoint, what the house learns goes into the English through the desk, not back into the bible.
 
 ## 3. What each translation call sees
 
 In this order, stable first (cached) and the passage last (where models attend best):
 
-1. House rules and the department prompt.
-2. The house's reading (§0) and the whole bible: style sheet, cast, ledger, motifs, standing rules. A few thousand tokens for a short story.
-3. **The whole source text.** Every text we run is under ~30k characters, which is cheap in the cached prefix and lets the model look anywhere in the book. If it ever seems to hurt, the exhibit will show it.
-4. The voice reference: the chosen first page.
+1. The house brief and the department prompt.
+2. The house's reading (§0), the voice the run drafts in, and the whole bible (§1). A few thousand tokens for a short story.
+3. **The source, scoped by length.** Up to 15,000 characters the whole source goes in: cheap in the cached prefix, and the model can look anywhere in the text. Above that, a call about a page gets **its own part in full and one line on every other part**: the bible's summary of it, or its heading or first words if the bible has none. The parts are the planner's, checked by code, with a fallback split when its answer fails the check (`STAGES.md`). This is the one place the length of a work changes what a drafting call sees (`house/context.py`), and it is what keeps the cost of a call flat: a novel costs its pages, not its pages times its length.
+4. The voice reference: the house's first page (or the editor's own page 1, if they rewrote it), from page 2 on.
 5. **A window of real text either side:** the previous two paragraphs in Japanese and English, and **the next paragraph in Japanese, marked read-only** (Japanese often resolves a subject or speaker after the fact).
-6. The passage itself, with its referent-map entries printed under each sentence that needs one, naming the cast entry and what the text shows about it:
+6. The page itself, as whole paragraphs with their IDs (numbered sentences invite a sentence-by-sentence draft). Who speaks and who acts the drafter works out from the text, the cast and the window either side, as a translator must.
 
-   ```
-   p47-s2  親爺はそれを聞いて笑った。
-           [subject = #12 the rice-shop keeper, male (high)]
-   p47-s3  「それは売れませんよ」
-           [speaker = #19 the tobacconist, female (medium)]
-   ```
+That's all. No rolling summary and no retrieval of earlier passages: with the source (or the part) in the prefix and the bible carrying what the house understands, both would be a second copy of what's already there.
 
-   So a pronoun is read off the annotation, not inferred from the paragraph. Where the entry is low-confidence or deliberately ambiguous, the drafting prompt teaches the model not to commit a pronoun the text doesn't support.
+The other calls see:
 
-That's all. No rolling summary and no retrieval of earlier passages: with the whole source in the prefix and the bible carrying the decisions, both would be a second copy of what's already there. They come back only for novels (§5), where the whole source can't sit in the prefix.
+| Call | Sees |
+|---|---|
+| First read, crux check | the work's card and the whole source |
+| Bible | the whole source, the reading, and the parts |
+| Readers | the reading, the bible, the part in both languages (the faithful reader meets the Japanese first, the readable reader the English) |
+| Desk | as the readers, plus the translator's notes, what the desk learned in earlier parts, and both readers' notes |
+| Final read | the reading, the bible, and the whole text in both languages up to 15,000 characters; above that a part at a time, with a line on each other part, so a contradiction between parts can still be seen |
+| Copy editor | the bible, the two lists code makes (spelling variants, names against their ruby), and the whole English up to 200,000 characters |
+| Notes | the reading, the bible, the source scoped as for a drafting call, the part in both languages with the translator's notes, and the readers' notes the desk declined and the disagreements it recorded |
 
 ## 4. Checking that it held
 
-- **Ledger checker (code):** every cast name and ledger term in the English matches the approved rendering for that edition.
-- **Voice checker (code + Glimmer):** first-person voice and address forms match the cast entry.
-- **Callback checker (code):** every motif occurrence is rendered consistently, or carries a translator's note saying why not.
-- **Omission guard (code):** length ratio per paragraph against the text's own baseline; outliers go to Source check.
-- **Final read (Wonder):** once per release, the finished English read as a whole and then against the source: seams left by revision, voice drift, whether the crux holds, and continuity (contradictions, a speaker confused across scenes, a fact that changes).
+- **The readers:** the faithful reader catches a wrong subject or speaker, a lost image, a varied repetition, the crux slipping; the readable reader catches English no good writer would sign. Both work a part at a time with the reading and the whole bible.
+- **The final read (Wonder by default):** once per run, the finished English read as a whole and then against the source: sense first, then seams left by revision, voice drift, whether the crux holds, and continuity (contradictions, a speaker confused across scenes, a fact that changes, a word an edit doubled). It fixes the clear cases with the edit tool and sends the rest to the editor.
+- **The copy desk:** code lists the words the English spells more than one way and the names whose spelling doesn't match the reading the ruby gives; the copy editor makes them consistent. Code's omission guard then compares each paragraph's length ratio with the text's own median, and outliers become queries.
 
-## 5. Novels, later
+## 5. Short texts and novels: one pipeline
 
-Same machinery, chapter by chapter: the Analyst updates the bible per chapter, and the whole-source block becomes the current chapter plus short summaries of the neighbouring ones, which is where a rolling summary and retrieved earlier passages earn a place. Measured before it's claimed; not built for the hackathon.
+There is no novel mode. The stages, the prompts and the limits are the same for a 3,000-character story and a 300,000-character novel; only two things read the length of the work: what a per-page call sees of the source (§3, point 3) and whether the final read takes the text whole or a part at a time. That line matters: with the whole text in every call, a call's input grows with the book, so a novel would cost hundreds of dollars for *worse* attention (the research above). With the part in the call instead, the up-front estimate for a 200,000-character novel comes to about $30, every call priced live with no cache, from token counts measured on texts up to about 20,000 characters (`house/budget.py`).

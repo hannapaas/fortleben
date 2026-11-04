@@ -1,0 +1,32 @@
+{
+ "prompt": "final-read",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 36216,
+  "cached_tokens": 35956,
+  "output_tokens": 100,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.010231200000000001,
+ "response_id": "resp_6aeb7f6792f23f7062cb4d7b",
+ "latency_s": 1.96,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_a77f7e84-82c8-4ede-92f0-dbe26356bb50",
+   "name": "edit",
+   "arguments": "{\"old\":\"\\\"Is that what you've been painting?\\\"\",\"new\":\"\\\"Is that what you've been painting?\\\"\",\"reason\":\"Revert identical wording test\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:54:31Z"
+}

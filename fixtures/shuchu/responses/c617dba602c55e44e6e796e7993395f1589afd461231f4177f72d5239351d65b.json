@@ -1,0 +1,72 @@
+{
+ "prompt": "copy-desk",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": null,
+ "usage": {
+  "input_tokens": 10969,
+  "cached_tokens": 0,
+  "output_tokens": 824,
+  "reasoning_tokens": 614,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01721325,
+ "response_id": "resp_6aeba6a2d30c2f9a857b47ad",
+ "latency_s": 8.69,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_bd132f03-db54-4de9-8316-51e7b61f04c9",
+   "name": "find",
+   "arguments": "{\"words\":\"Sensei\"}"
+  },
+  {
+   "call_id": "call_9b0d8835-c78b-4c16-b5eb-1042cf9dca7a",
+   "name": "find",
+   "arguments": "{\"words\":\"Sun\"}"
+  },
+  {
+   "call_id": "call_e36b2780-a0b9-4009-8c63-c5067cc449d4",
+   "name": "find",
+   "arguments": "{\"words\":\"Hodoji\"}"
+  },
+  {
+   "call_id": "call_845eaf05-ceb3-41dd-a293-73b803af1bbd",
+   "name": "find",
+   "arguments": "{\"words\":\"Didacticism\"}"
+  }
+ ],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": "commentary",
+   "chars": 74
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T21:41:54Z"
+}

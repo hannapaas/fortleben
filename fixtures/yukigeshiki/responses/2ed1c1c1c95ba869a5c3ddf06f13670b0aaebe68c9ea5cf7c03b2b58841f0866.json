@@ -1,0 +1,52 @@
+{
+ "prompt": "copy-desk",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": null,
+ "usage": {
+  "input_tokens": 16157,
+  "cached_tokens": 15217,
+  "output_tokens": 1672,
+  "reasoning_tokens": 1438,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01056355,
+ "response_id": "resp_6aeb7fc58df6e376f1fb4bf6",
+ "latency_s": 15.72,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_4591640d-2aa7-4ce0-bef3-7d30a25a544a",
+   "name": "edit",
+   "arguments": "{\"new\":\"verse-like\",\"old\":\"verselike\",\"reason\":\"Make one house form for verse-like, matching p160\",\"replace_all\":true}"
+  },
+  {
+   "call_id": "call_ffb7e398-0407-4dd0-9ee7-1b6565d18fc7",
+   "name": "edit",
+   "arguments": "{\"new\":\"one of the workmen\",\"old\":\"one of the scaffolders\",\"reason\":\"One term for A and B's trade, matching p40 workmen\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": "commentary",
+   "chars": 68
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:56:05Z"
+}

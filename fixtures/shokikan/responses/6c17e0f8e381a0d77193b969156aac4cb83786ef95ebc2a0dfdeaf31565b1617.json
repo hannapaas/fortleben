@@ -1,0 +1,52 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"That Tojo fellow, insolent to the last, who does not count me as a man at all.\" Tatsuya drained a glass of sobering water at a gulp, alone in his room, his eyes bright as he glared into space. What does he take me for, anyway? He never said it to my face, but he plainly insulted me. Just watch. Once I have him neatly in my hands I will smash him to powder. I am not the man to suck my thumb while another walks off with what I have marked. Once I have aimed I never let go. I saw plainly enough how he stands with Mitsuyo. To trample that self satisfied face underfoot will be as easy as breakfast. Does he know who I am? Does he know who I am? Ha ha ha ha, just like a scholar in his naivety. What a fool. Well, it looks as if I shall need a little strategy now. Splendid, splendid. Just when I was beginning to ache with too much quiet, a fine diversion has bubbled up. I will work it well and to the full. This is where my skill comes in. Well, things are getting interesting.",
+    "ids": [
+     "p48"
+    ],
+    "notes": [
+     "The whole passage after the first sentence is soliloquy in coarse ore voice, against Tatsuya's polished public watashi. I kept it in vivid present and bluntly proprietorial, without making it brooding."
+    ]
+   },
+   {
+    "english": "Mitsuyo is only a peeping chick, after all. One blow to pinion her. I will give her no time to say yes or no. Still, a beauty like hers is not to be got elsewhere. I must treasure her for a start. The old man, the old man. I will never let him slip. Talk him round neatly, and my debts that I can never slip out of. Yes, that will do too and this will do too. Now, shall I lay my plot? The quicker the business the better. \"Speed is everything in war.\" I will press hard on the chase and set to work at once. Good. Let me begin. Delay is loss. Hurry, hurry.",
+    "ids": [
+     "p49"
+    ],
+    "notes": [
+     "The opening image is compressed in the Japanese, chick crying and wing clipping in one blow. I take it as contemptuous sporting language for an easy capture, and kept the bird figure rather than smoothing it away."
+    ]
+   }
+  ],
+  "say": "Drafted the waterside soliloquy in brisk ore voice, keeping repetitions and sporting delight intact."
+ },
+ "usage": {
+  "input_tokens": 27101,
+  "cached_tokens": 26225,
+  "output_tokens": 4087,
+  "reasoning_tokens": 3534,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0223985,
+ "response_id": "resp_6aeb7c3710a73ee6008f4766",
+ "latency_s": 36.18,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2175
+  }
+ ],
+ "created": "2026-11-04T18:40:55Z"
+}

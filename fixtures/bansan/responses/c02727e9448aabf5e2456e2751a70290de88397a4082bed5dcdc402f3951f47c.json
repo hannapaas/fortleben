@@ -1,0 +1,178 @@
+{
+ "prompt": "reader-readable",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "notes": [
+   {
+    "japanese": "その顔にはまだ少しの皺もよってなかった",
+    "paragraph": "p3",
+    "problem": "In English wrinkles sit on faces, not in a single face, so the line reads as a dictionary slip.",
+    "span": "Neither the man nor the woman had yet a single wrinkle in the face.",
+    "suggestion": "Neither the man nor the woman had yet a single wrinkle on either face.",
+    "sureness": "Very sure; any idiom check would settle it."
+   },
+   {
+    "japanese": "だるさうな疲れの色が見えてゐた",
+    "paragraph": "p3",
+    "problem": "Colour of tiredness plus was to be seen, twice in one paragraph, turns physical weariness into a report.",
+    "span": "a weary colour of tiredness was to be seen.",
+    "suggestion": "in his hollowed eyes there was a weary, tired look, and about her dark hair and slight shoulders there hung a deeper, sunken tiredness",
+    "sureness": "Fairly sure the stiffness is the translation's; a look at whether the Japanese needs colour kept literally would settle it."
+   },
+   {
+    "japanese": "その子供のすべてに瞳を注いだ",
+    "paragraph": "p4",
+    "problem": "All of the child sounds in English as if the child were a quantity to be consumed.",
+    "span": "they fixed their eyes upon all of the child.",
+    "suggestion": "they fixed their eyes, smiling quietly, on everything in the child.",
+    "sureness": "Fairly sure; keeping all while making it take a normal English object would settle it."
+   },
+   {
+    "japanese": "肥えてまるく鞠のやうに短い両手",
+    "paragraph": "p5",
+    "problem": "Short as balls carries a crude slang meaning in English that undoes the bodily comedy.",
+    "span": "with her fat, round hands short as balls",
+    "suggestion": "with her fat round hands, short and round as little balls,",
+    "sureness": "Very sure; any English ear hears the second meaning."
+   },
+   {
+    "japanese": "暖かい賑かさと、其上に自然に溢れる笑ひと嬉しさを持って食事にとりかゝった",
+    "paragraph": "p8",
+    "problem": "Warm bustle and besides that overflowed of itself is tangled and besides is the wrong word, so the happy rush never lifts.",
+    "span": "they set to their meal with warm bustle and with the smile and happiness besides that overflowed of itself.",
+    "suggestion": "for the child they fell to their meal in a warm bustle, with smiles and happiness overflowing of their own accord.",
+    "sureness": "Fairly sure; a simpler English shape keeps the repetition without the tangle."
+   },
+   {
+    "japanese": "彼は彼自身の口のなかに御飯を押し込んだ",
+    "paragraph": "p9",
+    "problem": "Pushed rice into it leaves it dangling for his own mouth and sounds mechanical.",
+    "span": "pushed rice into it.",
+    "suggestion": "shovelled rice into his own mouth.",
+    "sureness": "Very sure; the pronoun alone decides it."
+   },
+   {
+    "japanese": "彼女の心は、いつか淋しくうつむいてしまってゐた",
+    "paragraph": "p11",
+    "problem": "A heart bowed in English does not droop the way a head does, so the turn goes dead.",
+    "span": "but her heart had already bowed in loneliness, before she knew it.",
+    "suggestion": "but before she knew it her heart had already sunk in loneliness.",
+    "sureness": "Very sure; hearts sink in English, heads bow."
+   },
+   {
+    "japanese": "ジャガ芋の無味な、かゝはりのない冷やかな不味さ",
+    "paragraph": "p12",
+    "problem": "Detached and cold badness are not words English uses for food, so the trigger loses its physical bite.",
+    "span": "the tasteless, detached, cold badness of the potato",
+    "suggestion": "the tasteless, cheerless, cold nastiness of the potato",
+    "sureness": "Fairly sure; tasting the need to stay plain while naming bad food would settle the exact noun."
+   },
+   {
+    "japanese": "物質の為めに脅かされ恐れてすごした日々や、病の為めに悲しみ苦しんだその日その日",
+    "paragraph": "p13",
+    "problem": "Threatened and afraid for material things makes it sound as if objects frightened her, and each day grieved makes the day itself grieve.",
+    "span": "the days spent threatened and afraid for material things, and each day grieved and suffered through sickness.",
+    "suggestion": "the days spent harried and frightened by want, and each day of grieving and suffering through sickness.",
+    "sureness": "Fairly sure; a check that want means poverty here would settle it."
+   },
+   {
+    "japanese": "いつとなく何物にか気をとられたやうに",
+    "paragraph": "p15",
+    "problem": "Had been caught, before she knew when, by something puts the time phrase and the agent back to front and forces a second read.",
+    "span": "as if her attention had been caught, before she knew when, by something.",
+    "suggestion": "as if something had caught her attention before she knew it.",
+    "sureness": "Very sure; word order alone decides it."
+   },
+   {
+    "japanese": "遠い絵が暗く静かに、彼女の眼の底に映ってゐた。また瞳の底を通して遠く未来に、淋しい安らかさを持って、その絵が見える",
+    "paragraph": "p18",
+    "problem": "Bottom of her eyes has no English anatomy and was to be seen plus piled phrases makes the far picture hard to see.",
+    "span": "lay dark and quiet in the bottom of her eyes. And through the bottom of her eyes, far into the future, with a lonely peace, that picture was to be seen.",
+    "suggestion": "lay dark and quiet deep in her eyes. And through them, far into the future, in lonely peace, that picture could still be seen.",
+    "sureness": "Fairly sure about bottom versus deep; whether through them keeps the Japanese seeing would need the other reader."
+   },
+   {
+    "japanese": "一口には何事も云ひかねて黙ってしまふ",
+    "paragraph": "p19",
+    "problem": "Into a single word is not the English idiom and trips an otherwise plain0202 exchange.",
+    "span": "unable to put anything into a single word",
+    "suggestion": "unable to put anything into words",
+    "sureness": "Very sure; idiom decides it."
+   },
+   {
+    "japanese": "一日々々の苦しみや悲しみがなんだらう。一日々々の疲れやなやみがなんだらう",
+    "paragraph": "p20",
+    "problem": "Beginning with What but ending with a full stop leaves the reader waiting for a question that never comes.",
+    "span": "What were the suffering and sorrow of each single day. What were the tiredness and trouble of each single day.",
+    "suggestion": "What were the suffering and sorrow of a single day? What were the tiredness and trouble of a single day?",
+    "sureness": "Fairly sure; hearing them as dismissed rhetorical questions would settle the marks."
+   },
+   {
+    "japanese": "なにか大きな、彼女にはわからないけれども、なにか大きな希みを彼に話さなければならないやうに瞳を輝かした",
+    "paragraph": "p26–p27",
+    "problem": "The shining-eyes clause is wedged between speech tags so it is unclear what is narration and what is spoken.",
+    "span": "her eyes shining as if she must tell him of something great, something she herself did not understand and yet something great",
+    "suggestion": "She said, Truly, and lowered her eyes to try to see that picture again. Then her eyes shone, as if she must tell him something great, something she did not understand and yet something great: But it is only three years yet, you know.",
+    "sureness": "Fairly sure the tangle is English shaping; keeping the repeated great while splitting the sentences would settle it."
+   },
+   {
+    "japanese": "坊やも歩るくやうになるんだから",
+    "paragraph": "p28",
+    "problem": "Will come to walk is not how English marks a baby learning to walk.",
+    "span": "In a little while Bōya will come to walk.",
+    "suggestion": "In a little while Bōya will be walking.",
+    "sureness": "Very sure; usage decides it."
+   },
+   {
+    "japanese": "スプーンを持って立ってる子供 / 母親の顔を見ながら",
+    "paragraph": "p29–p31",
+    "problem": "Switching a baby girl elsewhere called her to its, and to its mother's face, turns tender looking cold in English.",
+    "span": "with the spoon in its hand as if at a loss.",
+    "suggestion": "with the spoon in her hand as if at a loss, and later looking at her mother's face",
+    "sureness": "Very sure for English tone; whether to keep her throughout needs agreement."
+   },
+   {
+    "japanese": "さ、あとを片づけよう。そして寝よう、明日は早く起きようぢゃないか",
+    "paragraph": "p36",
+    "problem": "With no speaker given the reader assigns this clearing and early rising to the mother, who has just spoken.",
+    "span": "Come, let us clear away. And let us sleep; let us get up early tomorrow.",
+    "suggestion": "Come, let us clear away, the man said. And let us sleep; let us get up early tomorrow.",
+    "sureness": "Not fully sure who speaks; hearing whose voice the Japanese ending carries would settle it."
+   },
+   {
+    "japanese": "乳房に頬をつけて眼を閉ぢてゐた",
+    "paragraph": "p37",
+    "problem": "Its cheek against the breast keeps the cold its and loses whose breast holds the sleeping child.",
+    "span": "with its cheek against the breast.",
+    "suggestion": "with her cheek against her mother's breast.",
+    "sureness": "Very sure in English; keeping her for the girl throughout would settle it."
+   }
+  ],
+  "say": "The supper sings but the English stiffens at tiredness, bad potato, far picture and closing pronouns, where plainer syntax and steady her would let it read."
+ },
+ "usage": {
+  "input_tokens": 13255,
+  "cached_tokens": 0,
+  "output_tokens": 12002,
+  "reasoning_tokens": 9707,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.06757725,
+ "response_id": "resp_6aeb475b4c30b40bdb1242c3",
+ "latency_s": 137.71,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 8260
+  }
+ ],
+ "created": "2026-11-04T14:55:23Z"
+}

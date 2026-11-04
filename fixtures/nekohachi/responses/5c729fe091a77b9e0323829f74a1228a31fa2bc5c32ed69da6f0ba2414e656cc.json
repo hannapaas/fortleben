@@ -1,0 +1,85 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "Of late he had set out cucumber and eggplant seedlings as well, so the cutworms had to be watched. Like thieves, like people in our trade, the things do their work only by night, so hunt for them by day and you never see a sign of them. Tonight, he was thinking, the moment supper was done he would strip to his loincloth and have a child hold the lantern for him out in the field, and make a thorough job of doing for the cutworms.",
+    "ids": [
+     "p13"
+    ],
+    "notes": [
+     "Kept cutworms and night work literal: the comparison to thieves and to us is the point that returns at p62 and p158, not decoration."
+    ]
+   },
+   {
+    "english": "Then the little-Buddha Sensei opened his eyes wide. \"No more work tonight, I suppose?\"",
+    "ids": [
+     "p14",
+     "p15"
+    ],
+    "notes": [
+     "Grouped in English as one paragraph: p14 is only the lead into the speech. Kept the private nickname as little-Buddha Sensei rather than explaining it."
+    ]
+   },
+   {
+    "english": "\"Yes, I have got my two kouza behind me, but --\" That did not feel like answer enough, so catching what the other was driving at, \"Might I tag along with you somewhere tasty, eh?\"",
+    "ids": [
+     "p16"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Oh, if it is only home to bed for you, why not come along with me?\"",
+    "ids": [
+     "p17"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"I will come -- on your orders, anywhere.\" Even to Kegon Falls, the song says -- the words came unbidden to his lips.",
+    "ids": [
+     "p18"
+    ],
+    "notes": [
+     "Left the Kegon Falls song as heard: I could not settle which song he means, only that a set phrase about going anywhere has risen to his mouth."
+    ]
+   },
+   {
+    "english": "\"It is a study group of writers, you know, no harm in listening a while. Come now and it is only two hours to stick out. Afterwards I will make it your world.\"",
+    "ids": [
+     "p19"
+    ],
+    "notes": [
+     "Kept your world literal for o-mae no sekai: your turn, your stage, left for the reader to hear."
+    ]
+   }
+  ],
+  "say": "Drafted p13-p19 as tram reverie breaking into invitation, keeping garden work and patter at the same temperature."
+ },
+ "usage": {
+  "input_tokens": 28423,
+  "cached_tokens": 27377,
+  "output_tokens": 3436,
+  "reasoning_tokens": 2905,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.020017049999999998,
+ "response_id": "resp_6aeb7b5451c1a127b5f54d60",
+ "latency_s": 37.4,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2000
+  }
+ ],
+ "created": "2026-11-04T18:37:08Z"
+}

@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 64959,
+  "cached_tokens": 64628,
+  "output_tokens": 171,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.017669599999999997,
+ "response_id": "resp_6aeb7f1039a0833d30a94c98",
+ "latency_s": 1.79,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_759d7c94-61b5-4e47-90ca-1ed34ea231d9",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"R10\"],\"new\":\"The very title — secretary in such a ministry, of such senior rank — rang splendidly in old-fashioned ears\",\"old\":\"The few characters that read secretary of such a ministry, of such senior rank rang surpassingly well in old-fashioned ears\",\"reason\":\"Zenpei hears the rank, not the written characters; the snobbery is kept without the incomprehensible 'few characters that read'.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:53:04Z"
+}

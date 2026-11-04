@@ -1,0 +1,32 @@
+{
+ "prompt": "final-read",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 35646,
+  "cached_tokens": 35444,
+  "output_tokens": 112,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0101368,
+ "response_id": "resp_6aeb7f5e031ee65800cd4b5a",
+ "latency_s": 2.04,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_82567a3d-de13-4ca6-b3be-ddeab769656f",
+   "name": "edit",
+   "arguments": "{\"old\":\"but if you come there there'll be no study, will there?\",\"new\":\"but if you come there there'll be no study, will there?\",\"reason\":\"Revert identical wording test\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:54:22Z"
+}

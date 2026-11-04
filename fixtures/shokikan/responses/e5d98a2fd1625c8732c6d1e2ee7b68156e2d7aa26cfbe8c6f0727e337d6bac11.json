@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 64302,
+  "cached_tokens": 62708,
+  "output_tokens": 203,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.022977599999999997,
+ "response_id": "resp_6aeb7f09d5b639e2a4124c17",
+ "latency_s": 1.88,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_7a7ee74e-df8c-4492-abfb-45815c661504",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"R6\"],\"new\":\"At a loss before so lavish a tip, the master hastily changed his dress and came out to pay his respects, and when he heard 'the Secretary' he revered him only the more.\",\"old\":\"The master, who had lost his bearings before so lavish a tea money, hastily changed his dress and came out to pay his respects, and when he heard Secretary-sama he revered him only the more.\",\"reason\":\"'Tea money' as a tip and the title need plain English here; the lavishness and the added reverence are kept.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:52:57Z"
+}

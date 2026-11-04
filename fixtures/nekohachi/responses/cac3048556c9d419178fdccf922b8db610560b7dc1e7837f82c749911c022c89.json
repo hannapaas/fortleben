@@ -1,0 +1,68 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"That sounds fun, eh, I'll come along too, to learn a thing or two, eh.\" He answered light enough, but he was fretting whether the load he had just set down would be loaded on his back again tonight. For him there was no time when body and mind felt lighter than in the tram on the way home after doing his union turn each night. From what he had heard he could not get home for at least another two or three hours. And in that time those cutworms might have cut through the roots of two or three of the seedlings in his plot, for all he knew.",
+    "ids": [
+     "p20"
+    ],
+    "notes": [
+     "後学のため is a polite self-deprecating formula. I have it as 'to learn a thing or two, eh' to keep his wheedling patter and the sentence-final appeal of な rather than a literal 'for future study'. The cutworm and seedling roots wording is kept the same as p13 to hold the garden network."
+    ]
+   },
+   {
+    "english": "With that worry on one side of his mind, the tram soon reached the terminus, so he stuffed the Kodan Club inside his coat and got up after Takami-san, carrying his crippled body hobble hobble toward the exit. For a dozen years and more now his rheumatism had left him all but palsied down one side. Crippled as no one else is, he was thankful, as the saying goes that art saves the man, that he could still keep wife and children fed like anyone else.",
+    "ids": [
+     "p21"
+    ],
+    "notes": [
+     "ひょこりひょこり is his habitual movement word. I have it as 'hobble hobble' to keep the doubled sound without caricature. 芸が身を助ける is kept close as 'art saves the man' to keep the proverb flat, and 人並み is kept as 'as no one else / like anyone else' to keep the repetition."
+    ]
+   },
+   {
+    "english": "Walking along in silence he was apt to sink into earnest thoughts like these, when a fat woman he knew met him and broke them up again.",
+    "ids": [
+     "p22"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Nekohachi-san!\" Pushing her fat bulk on ahead of her as if proud of it, she called out to him as they passed, though she need not have, in a gentle voice that did not match the bulk, \"Home now?\"",
+    "ids": [
+     "p23"
+    ],
+    "notes": [
+     "でぶでぶ女 and 太った図体 are body-first in the narration. I keep 'fat woman' and 'fat bulk' blunt and unvaried rather than softening it. 止せばいいのに is the narration sliding into his voice, so I keep it as a plain aside, 'though she need not have'."
+    ]
+   }
+  ],
+  "say": "Drafted p20 to p23 as continuous tram to street drift, keeping his patter and garden worry in the same plain register."
+ },
+ "usage": {
+  "input_tokens": 28212,
+  "cached_tokens": 27377,
+  "output_tokens": 4262,
+  "reasoning_tokens": 3616,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.023263799999999998,
+ "response_id": "resp_6aeb7b828e7e47636c0c437c",
+ "latency_s": 45.62,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2442
+  }
+ ],
+ "created": "2026-11-04T18:37:54Z"
+}

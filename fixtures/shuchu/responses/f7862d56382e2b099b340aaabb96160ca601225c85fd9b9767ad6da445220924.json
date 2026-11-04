@@ -1,0 +1,42 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 32043,
+  "cached_tokens": 31732,
+  "output_tokens": 437,
+  "reasoning_tokens": 267,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.016330400000000002,
+ "response_id": "resp_6aeba64ef4055866fe69462b",
+ "latency_s": 5.3,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_98749ec9-f4c8-43f1-a9ee-92e22b9ed672",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"F4\"],\"new\":\"a rich fragrant smell of wine assailed Liu's nose\",\"old\":\"effect Liu's nose\",\"reason\":\"芬々たる酒香 is richly fragrant; \\\"reek\\\" makes it foul and settles a tone the text keeps split.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": "commentary",
+   "chars": 94
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T21:40:30Z"
+}

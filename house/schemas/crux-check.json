@@ -1,0 +1,42 @@
+{
+  "type": "object",
+  "properties": {
+    "crux": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "point": {
+            "type": "string",
+            "minLength": 1
+          },
+          "why": {
+            "type": "string",
+            "minLength": 1
+          },
+          "for_the_english": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "minItems": 1,
+      "maxItems": 2
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "what_would_change_my_mind": {
+      "type": "string"
+    },
+    "say": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

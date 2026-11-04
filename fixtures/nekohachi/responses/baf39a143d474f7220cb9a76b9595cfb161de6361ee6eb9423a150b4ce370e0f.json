@@ -1,0 +1,69 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"There's plenty of fathers like that about, and that's the trouble.\" Nekohachi was none too pleased. A performer is human too, and yet there seemed to be no sympathy for him in this company. Hanging about in a place like this he would likely not get so much as a penny by way of thanks, he thought, and inwardly chanted Tō Enmei's \"let me go home, come—come, let me go home.\" That set him straight. And as the night deepened outside the open second floor, along with his children what worried him most again was the seedlings in his plot.",
+    "ids": [
+     "p100"
+    ],
+    "notes": [
+     "Kept Tō Enmei as inward chant for wanting to leave, literal rather than literary; kept children, fee-thanks and seedlings as repeated network words."
+    ]
+   },
+   {
+    "english": "4",
+    "ids": [
+     "p101"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Then came, \"What sticks in my craw more than any of that,\" and he wanted to say here was the Tenjin-sama fellow off on his chatter again, only it kept the same earnest tone as ever, \"is this author's flippant attitude. An anonymous monthly review in the Jiji Shinpō abused this piece roundly, saying Kume must be a hopeless fellow to rest satisfied with anything so shallow, so I read it myself in earnest to see how shallow a thing it could be, and to me it did not seem anything to sneer at. But when I asked our host here tonight, it seems that reviewer is Kume himself.\"",
+    "ids": [
+     "p102",
+     "p103"
+    ],
+    "notes": [
+     "Joined p102 lead-in with p103 speech as one English paragraph; kept Tenjin-sama nickname and Jiji Shinpō unexplained as in source."
+    ]
+   },
+   {
+    "english": "\"Yes,\" Nekohachi meant to put in unwillingly enough, but without knowing it he was grinning. And just as he had thought, he took it that with this author the fall or conclusion of the piece had not come from his true intent, his real intent was to fool people. And he took to this Kume fellow all at once. \"Isn't he a bit of a witty soul, like Sanba of old, eh?\"",
+    "ids": [
+     "p104"
+    ],
+    "notes": [
+     "Kept ochi as fall to leave his rakugo expectation visible; kept Sanba as bare name without gloss."
+    ]
+   }
+  ],
+  "say": "Drafted p100-p104 keeping the grumble, the seedlings and the flat meeting talk unlyricised."
+ },
+ "usage": {
+  "input_tokens": 28253,
+  "cached_tokens": 27377,
+  "output_tokens": 3848,
+  "reasoning_tokens": 3285,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.02155555,
+ "response_id": "resp_6aeb7d8875d6c06c9c754bfc",
+ "latency_s": 36.23,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2202
+  }
+ ],
+ "created": "2026-11-04T18:46:32Z"
+}

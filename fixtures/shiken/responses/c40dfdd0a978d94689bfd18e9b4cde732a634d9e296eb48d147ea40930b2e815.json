@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 61410,
+  "cached_tokens": 61172,
+  "output_tokens": 164,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.016466400000000003,
+ "response_id": "resp_6aeb7e81d02cffa6b3b94235",
+ "latency_s": 2.32,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_fc38e2d3-e359-4cc4-a856-01ce564abfdd",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"F11\",\"R12\"],\"new\":\"so uncanny you might well have suspected blood ran and a pulse beat even in the water weeds\",\"old\":\"so that you might have doubted whether blood ran and a pulse beat even in the water weeds\",\"reason\":\"かと怪しまれる程 is suspecting the weeds have blood and pulse, the reverse of doubting whether they do.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T18:50:41Z"
+}

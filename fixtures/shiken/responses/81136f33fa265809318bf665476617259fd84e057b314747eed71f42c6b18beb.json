@@ -1,0 +1,130 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "By O-Tetsu's own telling, the man set to watch this ferry was an old kobun of hers, Ahodara Gonji. A gambler by trade, and a sham monk.",
+    "ids": [
+     "p207"
+    ],
+    "notes": [
+     "True identity revealed late here: the blocking monk of p124 was O-Tetsu's man all along. Kept romanisation as in bible."
+    ]
+   },
+   {
+    "english": "It was clear now too that the reason every farmhouse below the Tatsuki bluff had shut its doors to the two of them was that O-Tetsu's word had gone round.",
+    "ids": [
+     "p208"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"There, that is the reach I have. And yet you go trailing off on a lovers' road with a snivelling brat like this? A drenched wench and a naked man, there is nothing very stylish in that.\"",
+    "ids": [
+     "p209"
+    ],
+    "notes": [
+     "O-Tetsu's jealous register: coarsening and possessive. Kept lovers' road for michiyuki/doubly-suicidal elopement sense without explaining."
+    ]
+   },
+   {
+    "english": "Against a heart burning with blind, sick jealousy, neither reason nor feeling could prevail.",
+    "ids": [
+     "p210"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"No, we two are nothing of that sort, neither fond nor anything,\" Ryujiro set about excusing himself.",
+    "ids": [
+     "p211"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Mistress, please do not think ill of us,\" Kotora too tried to make her peace.",
+    "ids": [
+     "p212"
+    ],
+    "notes": [
+     "Kotora addresses O-Tetsu as okami-san; rendered as Mistress to keep placating senior-woman sense in English."
+    ]
+   },
+   {
+    "english": "\"Eh? What is this tadpole saying? What right have you to speak straight to a great boss like myself, woman though I am? Hold your tongue and get back,\" O-Tetsu suddenly thrust Kotora away.",
+    "ids": [
+     "p213"
+    ],
+    "notes": [
+     "o-tamajakushi is literally tadpole, used as belittling brat. Kept literal."
+    ]
+   },
+   {
+    "english": "Kotora as she fell struck her side on an old stake and went sprawling. O-Tetsu with شع vindictive spite kicked her as she lay and even spat on her. Ryujiro felt at last he could no longer bear this ignorant bullying of O-Tetsu's. With this woman, he thought, he could never make anything of his life. And yet now there was nothing to be done.",
+    "ids": [
+     "p214"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Well, I give up going to Edo. We will go back to Awa from here. There I will clear myself. In any case, my clothes,\" he said.",
+    "ids": [
+     "p215"
+    ],
+    "notes": [
+     "Speaker unstated in Japanese; from context it is Ryujiro submitting."
+    ]
+   },
+   {
+    "english": "O-Tetsu's delight at this was beyond all measure.",
+    "ids": [
+     "p216"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Here they are, see. I have them all safe. Come, you will catch cold. Put them on quickly.\"",
+    "ids": [
+     "p217"
+    ],
+    "notes": []
+   },
+   {
+    "english": "She dressed him as a mother dresses a child fresh from the bath. That Ryujiro first drew the small knife from his loincloth and laid it by the roadside goes without saying.",
+    "ids": [
+     "p218"
+    ],
+    "notes": [
+     "Kept the scale-comedy simile literal. The laying aside of the knife, stated as obvious, is what lets Kotora take it unseen in next paragraph."
+    ]
+   }
+  ],
+  "say": "Drafted p207-p218 in brisk kodan voice, keeping jealous registers and the laid-aside knife literal."
+ },
+ "usage": {
+  "input_tokens": 26828,
+  "cached_tokens": 25713,
+  "output_tokens": 3817,
+  "reasoning_tokens": 2986,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.02147295,
+ "response_id": "resp_6aeb7dc578151d9dbfe740a3",
+ "latency_s": 42.79,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 3072
+  }
+ ],
+ "created": "2026-11-04T18:47:34Z"
+}

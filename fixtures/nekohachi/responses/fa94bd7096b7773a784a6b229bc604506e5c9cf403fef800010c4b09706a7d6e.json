@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 65335,
+  "cached_tokens": 65140,
+  "output_tokens": 153,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.016868,
+ "response_id": "resp_6aeb81024105f2a83cde43fd",
+ "latency_s": 1.4,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_0d49813c-25ff-444e-a6ac-36f5da25c75e",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"F16\"],\"new\":\"keeping his face deadpan, giving nothing away, he went hohokekyo.\",\"old\":\"he kept his face to tell nothing of where it would come from, and went hohokekyo.\",\"reason\":\"The idiom is about a face that gives nothing away, not about where a sound comes from.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T19:01:23Z"
+}

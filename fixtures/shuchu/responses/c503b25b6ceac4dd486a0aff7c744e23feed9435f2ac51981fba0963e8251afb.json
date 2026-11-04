@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 31511,
+  "cached_tokens": 31348,
+  "output_tokens": 149,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0099016,
+ "response_id": "resp_6aeba64172a0acc247894fbd",
+ "latency_s": 2.79,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_d3e7c8c3-c130-43ce-98ff-27c75cfdf412",
+   "name": "edit",
+   "arguments": "{\"old\":\"while the skin itself had not a hair of spring to answer them\",\"new\":\"while the skin itself had not an ounce of elasticity to answer them\",\"reason\":\"毫も弾力 is \\\"not the least elasticity\\\"; \\\"a hair of spring\\\" stops the reader cold in the bodily passage.\",\"replace_all\":false,\"answers\":[\"R11\"]}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T21:40:18Z"
+}

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en-GB"{% block htmlattrs %}{% endblock %}>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Fortleben{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&family=Schibsted+Grotesk:ital,wght@0,400..700;1,400..700&family=Zen+Old+Mincho:wght@400;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/fortleben.css?v={{ v }}">
+{% block head %}{% endblock %}
+<script>try { var t = localStorage.getItem('fl-theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+</head>
+<body class="{% block bodyclass %}{% endblock %}">
+{% block bodystart %}{% endblock %}
+{% if replay %}<div class="replay">Replay: you're looking at recorded runs from the repo. Nothing here calls a model.</div>{% endif %}
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="/">Fortleben</a>
+    {% set me = request.state.person if request and request.state.person is defined else none %}
+    <nav><a class="wide" href="/">Library</a><a class="heart" href="/wishlist" aria-label="Wishlist" title="Wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0112 7.6a4.3 4.3 0 017.5 2.7c0 5.6-7.5 10.2-7.5 10.2z"/></svg></a><a href="/about">About</a>{% if me %}<span class="who"><a href="/desk">Your desk</a> · <form class="out" method="post" action="/logout"><input type="hidden" name="csrf" value="{{ request.state.csrf }}"><button type="submit">Sign out</button></form></span>{% elif request and not replay %}<a href="/login">Sign in</a>{% endif %}<span class="paper"><button type="button" class="dot now" id="paperNow" aria-haspopup="true" aria-expanded="false" aria-controls="paperList" aria-label="Paper colour" title="Paper colour"></button><span class="list" id="paperList" role="group" aria-label="Paper colour" hidden><button type="button" class="dot p-light" data-paper="light" aria-label="White" title="White"></button><button type="button" class="dot p-cream" data-paper="cream" aria-label="Cream" title="Cream"></button><button type="button" class="dot p-dark" data-paper="dark" aria-label="Dark" title="Dark"></button></span></span></nav>
+  </header>
+  {% block main %}{% endblock %}
+  <div class="push" aria-hidden="true"></div>
+  <footer class="foot">
+    <span>Translations free to share and adapt under <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license noopener">CC BY-SA 4.0</a></span>
+    <span>Japanese texts from <a href="https://www.aozora.gr.jp/" rel="noopener">Aozora Bunko</a></span>
+    <span><a href="/about">About</a></span>
+  </footer>
+</div>
+<script>
+(function () {
+  // Paper: white, cream or dark. Until a reader picks one, it follows the system's light or dark.
+  // One circle shows the paper in use; it opens the three to choose from.
+  var root = document.documentElement, btns = document.querySelectorAll('[data-paper]');
+  var now = document.getElementById('paperNow'), list = document.getElementById('paperList');
+  function current() { return root.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }
+  function sync() {
+    btns.forEach(function (b) {
+      var on = b.dataset.paper === current();
+      b.setAttribute('aria-pressed', on);
+      if (on) list.prepend(b);  // the paper in use sits where the circle was
+    });
+    now.className = 'dot now p-' + current();
+  }
+  function show(on) { list.hidden = !on; now.setAttribute('aria-expanded', on); }
+  // Focus moves only for the keyboard (a click reports detail > 0), so a mouse never leaves a focus ring.
+  now.onclick = function (e) { show(list.hidden); if (!list.hidden && !e.detail) list.firstChild.focus(); };
+  btns.forEach(function (b) {
+    b.onclick = function (e) {
+      root.dataset.theme = b.dataset.paper; try { localStorage.setItem('fl-theme', b.dataset.paper); } catch (e) {}
+      sync(); show(false); if (!e.detail) now.focus();
+    };
+  });
+  document.addEventListener('click', function (e) { if (!list.hidden && !e.target.closest('.paper')) show(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !list.hidden) { show(false); now.focus(); } });
+  sync();
+})();
+</script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

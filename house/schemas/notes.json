@@ -1,0 +1,46 @@
+{
+  "type": "object",
+  "properties": {
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "anchor": {
+            "type": "string",
+            "description": "Paragraph or sentence ID"
+          },
+          "span": {
+            "type": "string",
+            "description": "The English the note hangs on, quoted exactly"
+          },
+          "editions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "casual",
+                "curious",
+                "student"
+              ]
+            }
+          },
+          "body": {
+            "type": "string",
+            "description": "The note as a reader meets it: about the text and its English, never about how the translation was made, never in the author's voice"
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Sources, or ['unsourced']"
+          }
+        }
+      }
+    },
+    "say": {
+      "type": "string"
+    }
+  }
+}

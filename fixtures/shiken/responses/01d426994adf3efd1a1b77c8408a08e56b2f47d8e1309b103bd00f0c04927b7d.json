@@ -1,0 +1,122 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "In return, she left no itch unscratched and showed him every indulgence.",
+    "ids": [
+     "p33"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"The Living-Rope house's guard, Isogai Sensei, is a greater man than Hirate Miki at Sasagawa Shigezo's, whose name lives on in stories to this day.\"",
+    "ids": [
+     "p34"
+    ],
+    "notes": [
+     "Speaker not named in the text; taken as O-Tetsu's boast to others, lifting Ryujiro as her house swordsman. Sensei kept for the irony."
+    ]
+   },
+   {
+    "english": "Lift him as high as they would, in truth it was no different from being locked in gaol.",
+    "ids": [
+     "p35"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"If I go on like this, I can never face Akioka Sensei.\"",
+    "ids": [
+     "p36"
+    ],
+    "notes": []
+   },
+   {
+    "english": "His soul had not rotted through entirely. Unable to bear the pricks of conscience, he seized the opening he had at last found and, from the back garden of O-Tetsu's house, clinging to the wild grass, climbed down the cliff to the path between the rice fields in the valley.",
+    "ids": [
+     "p37"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Before he had time to think how glad he was, a snare fell from above with a snap. It caught him from under his left arm to over his right shoulder and, with a sharp tightening, he was fished straight up. His body hung in midair.",
+    "ids": [
+     "p38"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Sensei, why do such a thing? Whatever happens, I shall never let you escape.\"",
+    "ids": [
+     "p39"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Above him O-Tetsu's voice, pitched high with rage, rang and rang.",
+    "ids": [
+     "p40"
+    ],
+    "notes": []
+   },
+   {
+    "english": "III",
+    "ids": [
+     "p41"
+    ],
+    "notes": []
+   },
+   {
+    "english": "O-Tetsu, returned by the narrowest chance, had stopped Ryujiro's flight with a ready thrown rope. She bound him up in a high-hands, small-hands tie and left him tumbled in the back loft, and beside him, gulping teacup sake in spite, she opened her mouth as if full of regret.",
+    "ids": [
+     "p42"
+    ],
+    "notes": [
+     "Takade-kote rendered literally to keep the binding vocabulary; first-use gloss left to the catalogue passage."
+    ]
+   },
+   {
+    "english": "\"Why, Sensei, did you try to run? In the little while I let my watch slip... And I had not gone out on other business either. From the pool at Sugatsu I went to fetch sesame eels to give you whole-boiled and put a little strength into you, and that from my own single heart, without leaving it to other hands. And to think of this.\"",
+    "ids": [
+     "p43"
+    ],
+    "notes": []
+   },
+   {
+    "english": "O-Tetsu was even in tears.",
+    "ids": [
+     "p44"
+    ],
+    "notes": []
+   }
+  ],
+  "say": null
+ },
+ "usage": {
+  "input_tokens": 26834,
+  "cached_tokens": 25713,
+  "output_tokens": 3321,
+  "reasoning_tokens": 2635,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01937245,
+ "response_id": "resp_6aeb7b3e1f402dfc53e841cf",
+ "latency_s": 34.74,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2472
+  }
+ ],
+ "created": "2026-11-04T18:36:46Z"
+}

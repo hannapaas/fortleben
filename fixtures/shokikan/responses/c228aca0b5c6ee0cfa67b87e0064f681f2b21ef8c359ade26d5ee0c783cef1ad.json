@@ -1,0 +1,91 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"When I think what may become of me I grow frightened, so while you are here, please, I beg you, stay beside me. When I think of such things I wish we might soon... oh...\" She smiled shyly. \"Well, let us stop.\"",
+    "ids": [
+     "p68"
+    ],
+    "notes": [
+     "The sentence breaks off at 'hayaku nee... ano...': marriage is implied but not said, so the English leaves the break as it stands."
+    ]
+   },
+   {
+    "english": "\"What are you saying?\" Tsunao for the first time laughed clear and bright, but then, \"I came all this way to come here, yet Uncle is as you see him, and that fellow will be coming in every day. The mere sight of him offends me, and there is no way for things to go on peacefully. I think I had best go home at once.\"",
+    "ids": [
+     "p69"
+    ],
+    "notes": [
+     "Tsunao calls Zenpei 'Uncle' where Mitsuyo would say 'Father'; the English keeps Uncle to preserve the relation as spoken."
+    ]
+   },
+   {
+    "english": "\"Oh, if you do such a thing it will seem all the more as if you are striking at Father, and besides, what is to become of me? To be left alone, it is hateful. If you go home, I shall go home with you.\"",
+    "ids": [
+     "p70"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"That will not do.\" Tsunao spoke firmly. \"You must stay and nurse Uncle. You are still a daughter of the Miyoshi. Do you not hold Uncle dear? What foolishness to be in tears.\"",
+    "ids": [
+     "p71"
+    ],
+    "notes": [
+     "'Uncle' renders ojisama; Tsunao uses his own kin term for a man who is Mitsuyo's father."
+    ]
+   },
+   {
+    "english": "\"Even so, I... You are too cruel.\" She had begun to bite the sleeve of her juban, then, \"Then I shall beg Father, whether he will or no, for us all to go home together. Why have you so little feeling for me? You think nothing at all of me. You are glad to make me cry.\"",
+    "ids": [
+     "p72"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"You must not talk like that, it puts me in difficulty.\" Tsunao gave a wry smile. \"Have no worry for what comes after. I shall without fail give Uncle a quiet word of warning. Nor do I myself wish to go home if I can help it.\"",
+    "ids": [
+     "p73"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"No, I will not let you go.\" Mitsuyo clung and coaxed.",
+    "ids": [
+     "p74"
+    ],
+    "notes": [
+     "Kone mawasu is wheedling persistence rather than argument; the English keeps it physical and childish."
+    ]
+   }
+  ],
+  "say": "Drafted the Tsunao and Mitsuyo farewell talk keeping her wheedling close and his stiffness intact."
+ },
+ "usage": {
+  "input_tokens": 27155,
+  "cached_tokens": 26225,
+  "output_tokens": 3228,
+  "reasoning_tokens": 2576,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01881525,
+ "response_id": "resp_6aeb7cb195427ae480204221",
+ "latency_s": 27.56,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2366
+  }
+ ],
+ "created": "2026-11-04T18:42:57Z"
+}

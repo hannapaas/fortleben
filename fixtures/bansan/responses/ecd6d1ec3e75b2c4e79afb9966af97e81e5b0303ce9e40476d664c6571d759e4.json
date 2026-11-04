@@ -1,0 +1,46 @@
+{
+ "prompt": "crux-check",
+ "model": "muse-wonder-1.0",
+ "effort": "low",
+ "data": {
+  "confidence": "high",
+  "crux": [
+   {
+    "for_the_english": "Do not label it — not 'she imagined heaven', 'she dreamed', 'she thought of death'. Keep the modal, unresolved terms ('that day', 'would', 'seemed', 'as if'), let the vision arrive and recede unexplained, and keep it visually still rather than turning it into narrative action.",
+    "point": "The bad potato turns an ordinary supper into life seen from beyond its end, and that vision must stay unexplained.",
+    "why": "Nothing dramatic happens: in p11–13 the potato is inexplicably hard, 'frozen', tasteless, and its 'unconnected cold badness' detaches the young mother from the room. She feels suddenly old, remembers the three married years as if from far away — suffering already 'like a dream' (p13) — then sees, p16–18, three motionless figures in dim light telling an endless story in which good, evil, sorrow, anger and joy are all spoken of, yet wrapped only in 'nostalgia and forgiveness' and deep rest, 'like night'. In p20 she repeats the turn as certainty: 'that day exists', after long life, long sorrow. The story stands on this not being reduced to a cause: not simply fatigue, not a stated premonition of death, not religious consolation, not a daydream about old age. It is the present moment already viewed from after time has passed over it (p17: life will pass, and only on that passed day does everything change to nostalgia and forgiveness)."
+   },
+   {
+    "for_the_english": "Resist rationalisation, expansion and synonym-variation (Berman's tidyings). Keep long cumulative sentences where the Japanese accumulates, repeat the same English words for the same Japanese ones — quiet, lonely, far, rest/peace, nostalgic/dear, smile, dream — even where elegant English would vary them, and keep dialogue plain and slightly unfinished ('It's only been... hasn't it', 'just a little longer').",
+    "point": "The incantatory repetition and unbroken domestic surface are how three years become a lifetime; varied, tightened prose would make the vision an inserted purple passage instead of a change of distance.",
+    "why": "The text works by recurrence, not event: storm heard at start, forgotten in the child's noise (p8, p19, p38), people repeatedly 'young' yet exhausted (p2–3 against p13–14: barely three years, yet she feels wholly aged), words circling — 静か, 淋しい, 遠い, 安らかさ, なつかしみ, 許し, 微笑, 夢 — across both the noisy supper and the silent vision, so the vision feels like the same room seen from far off rather than another world. Sentences also drift: dropped subjects, tense loosening, だろう / やうだ speculation, and dialogue that resolves nothing except 'let us work', 'clear up', 'get up early tomorrow' (p34–36)."
+   }
+  ],
+  "say": "The translation stands or falls on keeping the mother's vision in p16–20 ambiguous and on letting repetition, not event, stretch three years into a lifetime.",
+  "what_would_change_my_mind": "Evidence from elsewhere in Shiraki's work or contemporary reception that the 'day' is a specific, named doctrine (e.g. an explicit Christian afterlife or Buddhist rite she elsewhere names) would justify one clarifying note; nothing in this text names it, so any such label here would be invention."
+ },
+ "usage": {
+  "input_tokens": 4125,
+  "cached_tokens": 0,
+  "output_tokens": 1193,
+  "reasoning_tokens": 433,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.04036,
+ "response_id": "resp_6aeb456b60a8de12150f4451",
+ "latency_s": 17.43,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 3167
+  }
+ ],
+ "created": "2026-11-04T14:47:07Z"
+}

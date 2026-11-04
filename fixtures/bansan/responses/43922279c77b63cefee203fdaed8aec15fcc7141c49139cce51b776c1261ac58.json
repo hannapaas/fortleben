@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 21500,
+  "cached_tokens": 21236,
+  "output_tokens": 148,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0082632,
+ "response_id": "resp_6aeb44984053ffb582984a76",
+ "latency_s": 2.04,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_2dcff320-e693-4e66-be83-5063fe6e7170",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"F5\"],\"new\":\"sorrow and suffering and anger and trouble, and joy, all of it\",\"old\":\"sorrow and suffering and anger and anguish, and joy, all of it\",\"reason\":\"なやみ is kept as plain 'trouble', as elsewhere, not upgraded to anguish.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T14:43:36Z"
+}

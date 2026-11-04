@@ -1,0 +1,165 @@
+{
+ "prompt": "notes",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": {
+  "notes": [
+   {
+    "anchor": "p8",
+    "body": "Hotei is one of the Seven Lucky Gods, shown as a fat, laughing monk. His bulk and laugh mark Zenpei throughout.",
+    "editions": [
+     "casual",
+     "curious",
+     "student"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "for all the world a Hotei, the squat laughing god, in a square sleeved robe"
+   },
+   {
+    "anchor": "p7",
+    "body": "A secretary in a Meiji ministry held an elite bureaucratic post, with rank that impressed old-fashioned ears. That is why Zenpei fusses over the title.",
+    "editions": [
+     "curious",
+     "student"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "The guest was a secretary in one of the ministries"
+   },
+   {
+    "anchor": "p5",
+    "body": "The Ikuta school is one of the two main schools of koto playing. The phrase marks the singing as trained and fashionable.",
+    "editions": [
+     "curious",
+     "student"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "poured forth, with practised ease, a phrase in the Ikuta manner"
+   },
+   {
+    "anchor": "p5",
+    "body": "Korin refers to Ogata Korin, known for bold pine and flower designs. Pines casting Korin-style shadows likens the shoji light to such a painting.",
+    "editions": [
+     "curious",
+     "student"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "the pines, heedless, cast Kōrin-style shadows across it"
+   },
+   {
+    "anchor": "p29",
+    "body": "Ninsei is the Kyoto potter Nonomura Ninsei, famed for enamelled earthenware. A Ninsei incense box would be a treasured tea-utensil.",
+    "editions": [
+     "curious",
+     "student"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "that Ninsei incense box you gave me before"
+   },
+   {
+    "anchor": "p97",
+    "body": "Tanyu is the Kano-school painter Kano Tanyu, whose work was a standard boast in a formal alcove. Soho names a vase-maker prized for tea flower-vases. The Three Evenings are three celebrated autumn-verse topics, here as a set of three scrolls.",
+    "editions": [
+     "student"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "in the alcove his boast, a Tanyu, the set of three scrolls of the Three Evenings poems for all to look at"
+   },
+   {
+    "anchor": "p97",
+    "body": "Kinuta is a type of grey-green celadon, named after stone beaters for cloth. Kintame is a gold-rich lacquer finish, and makie is lacquer sprinkled with gold or silver powder, here plovers over waves.",
+    "editions": [
+     "student"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "the stacked incense box in kintame lacquer said to be of Kamakura, set beside the kinuta celadon censer"
+   },
+   {
+    "anchor": "p86",
+    "body": "The Kijima coal mine is the government mine whose sale is being canvassed. Disposal meant its lease or sale to private buyers by application, where order and influence counted.",
+    "editions": [
+     "curious",
+     "student"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "The famous Kijima coal mine at any rate"
+   },
+   {
+    "anchor": "p119",
+    "body": "A cabinet ordinance was a government order laying down rules without a Diet law. Here it resets all mine applications, so only papers filed under its terms, first first, will count.",
+    "editions": [
+     "curious",
+     "student"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "and so it came to the issuing of a single cabinet ordinance"
+   },
+   {
+    "anchor": "p120",
+    "body": "A machiai was a house of assignation, often used for discreet political meetings. The earlier machiai affair is an earlier scandal of the same sort, now raising the risk of exposure.",
+    "editions": [
+     "curious",
+     "student"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "to the upstairs of a certain machiai, an assignation house"
+   },
+   {
+    "anchor": "p113",
+    "body": "Shimbashi was Tokyo's entertainment and assignation quarter by the railway terminus. Lodging there signals paid company after the cash payment.",
+    "editions": [
+     "curious",
+     "student"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "That night Tatsuya lodged in Shimbashi, as was his custom"
+   }
+  ],
+  "say": "Kept notes to rank, Hotei and Korin, vessels, mine procedure, machiai and Shimbashi, leaving repetitions and the withheld ending untouched."
+ },
+ "usage": {
+  "input_tokens": 58999,
+  "cached_tokens": 0,
+  "output_tokens": 2101,
+  "reasoning_tokens": 1089,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.082678,
+ "response_id": "resp_6aeb86bfca732c9aab36485f",
+ "latency_s": 19.93,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 3796
+  }
+ ],
+ "created": "2026-11-04T19:25:51Z"
+}

@@ -1,0 +1,91 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"I do not know. But night after night I see it in dreams. It weighs on me till I cannot bear it. Please, sister, let me go to Edo once. I do not ask you to let me return to Edo for good. Only let me go. If my master is safe, I will come straight back here. If the dream is true and he is ill, I will nurse him, and after that I will surely return. I swear it solemnly.\"",
+    "ids": [
+     "p54"
+    ],
+    "notes": [
+     "金打致して誓い申す is an oath formula I could not settle literally; I have rendered it as a solemn vow rather than invent a rite. Ryujiro's 姉御 to O-Tetsu rendered as sister throughout."
+    ]
+   },
+   {
+    "english": "His sincerity rose to Ryujiro's eyes and stood there as tears. Even Living-Rope O-Tetsu could not but be moved. The complete expression of a human being's sincerity does not always need many words.",
+    "ids": [
+     "p55"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"If that is all, you need not have kept it from me and run off by the back garden. I am not a mere common woman, you know. If the reason runs straight, I will send you off in good cheer.\" She was surprisingly quick to understand. And at once she untied Ryujiro's bonds and stroked the marks where the rope had bitten, to bring the blood back into them.",
+    "ids": [
+     "p56"
+    ],
+    "notes": [
+     "Kept bonds and rope literal for the binding web; 縄の喰入った痕 stroked 血の通うように is stroking to restore circulation."
+    ]
+   },
+   {
+    "english": "\"I apologise to you many times over, but this morning my master weighed on my mind more than ever, and I felt as if I were racing the moments... I felt that by the difference of one step I might miss my master's last hour, and so without waiting for your return, sister, I rushed out. Pray do not think ill of me...\"",
+    "ids": [
+     "p57"
+    ],
+    "notes": []
+   },
+   {
+    "english": "So saying, Ryujiro timidly stretched his arms and legs.",
+    "ids": [
+     "p58"
+    ],
+    "notes": [
+     "He has just been untied; the stretching is testing freed limbs, not exercise."
+    ]
+   },
+   {
+    "english": "\"Oh, once the reason is clear, the rest is clean away. I think nothing of it. But, Sensei, you will truly come back to me, will you not?\"",
+    "ids": [
+     "p59"
+    ],
+    "notes": [
+     "Kept Sensei for O-Tetsu to Ryujiro to hold the house-swordsman irony."
+    ]
+   },
+   {
+    "english": "\"I will surely return.\"",
+    "ids": [
+     "p60"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted Ryujiro's plea, untying, and promise to return."
+ },
+ "usage": {
+  "input_tokens": 26823,
+  "cached_tokens": 25713,
+  "output_tokens": 3516,
+  "reasoning_tokens": 2879,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.02018745,
+ "response_id": "resp_6aeb7b8238d5d786082d44b1",
+ "latency_s": 37.63,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2295
+  }
+ ],
+ "created": "2026-11-04T18:37:54Z"
+}

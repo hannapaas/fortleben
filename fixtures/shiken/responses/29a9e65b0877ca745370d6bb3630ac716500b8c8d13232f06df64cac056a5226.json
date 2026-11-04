@@ -1,0 +1,939 @@
+{
+ "prompt": "analyst-bible",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "cast": [
+   {
+    "first_appearance": "p2",
+    "first_person": "拙者 (sessha) — samurai humble first person; marks him as hatamoto swordsman. No watashi/boku in the text.",
+    "forms": [
+     {
+      "form": "磯貝竜次郎",
+      "note": "full name used by narrator for formal introduction and at moral low points",
+      "used_by": "narrator"
+     },
+     {
+      "form": "竜次郎",
+      "note": "ordinary narrative shorthand after introduction",
+      "used_by": "narrator"
+     },
+     {
+      "form": "先生",
+      "note": "respect + dependence; keeps him as house swordsman-pupil even while captive",
+      "used_by": "O-Tetsu to Ryūjirō"
+     },
+     {
+      "form": "旦那様",
+      "note": "polite travelling-performer address to a samurai gentleman",
+      "used_by": "Kotora to Ryūjirō"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "次男ながらも旗本五百石の家に産まれた, 男振り, 月代毛, explicitly male samurai",
+    "handle": "Isogai Ryūjirō",
+    "id": "c1",
+    "name_ja": "磯貝竜次郎",
+    "reading": "いそがいりゅうじろう",
+    "register": "Formal samurai speech: polite de-gozaru / de-aru forms, apologetic and self-abasing toward masters and O-Tetsu; plain explanatory toward Kotora",
+    "relationships": [
+     "disciple (sole direct pupil) of Akioka Jinpūsai",
+     "pupil of Imahori Settsu-no-kami at Kōbusho",
+     "captive-lover / house swordsman of O-Tetsu for three months",
+     "fellow runaway with Kotora; later (coda) her husband and later famous Meiji detective"
+    ],
+    "role": "Protagonist: hatamoto second son and reputed swordsman whose sword does nothing and who is carried, kept, stripped, rescued, dressed and freed by women",
+    "romanised": "Isogai Ryūjirō"
+   },
+   {
+    "first_appearance": "p6",
+    "first_person": "私 (watashi) with oyabun bluntness; also 手前共 in invitation formula. Mix of wifely cajoling and command.",
+    "forms": [
+     {
+      "form": "生縄のお鉄",
+      "note": "epithet + name: Living-Rope O-Tetsu; title-word and professional reputation",
+      "used_by": "narrator and rumour"
+     },
+     {
+      "form": "お鉄",
+      "note": "ordinary reference once established",
+      "used_by": "narrator"
+     },
+     {
+      "form": "姉御",
+      "note": "Ryūjirō's placating address; acknowledges her seniority and underworld standing without calling her wife",
+      "used_by": "Ryūjirō to O-Tetsu"
+     },
+     {
+      "form": "おかみさん",
+      "note": "Kotora's placating address as senior woman / boss's wife",
+      "used_by": "Kotora to O-Tetsu"
+     }
+    ],
+    "gender": "female",
+    "gender_evidence": "女侠客, 後家, 大年増, 姥桜, explicitly a woman; fortyish widow",
+    "handle": "O-Tetsu",
+    "id": "c2",
+    "name_ja": "お鉄",
+    "reading": "おてつ",
+    "register": "Mixed: polite-cajoling hostess speech, oyabun command and obscenely jealous abuse; frank about money, sex, violence",
+    "relationships": [
+     "widow of Hiwatari Jin'emon (adopted husband)",
+     "heir of hereditary mekashi / torinawa family",
+     "holder of dead husband's authority; oyabun of ~1000 kobun across Hitachi-Shimōsa-Tone",
+     "keeper, nurse, rope-teacher and jealous lover of Ryūjirō for one summer into autumn"
+    ],
+    "role": "Antagonist-captor, teacher and erotic-comic centre: corpulent near-forty female boss famed for capture-rope art and rumoured torture-murders",
+    "romanised": "O-Tetsu"
+   },
+   {
+    "first_appearance": "p7",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "火渡り甚右衛門",
+      "note": "nickname + name; fire-walking denotes ordeal / goyōkiki role",
+      "used_by": "narrator"
+     },
+     {
+      "form": "甚右衛門",
+      "note": "short form",
+      "used_by": "narrator, Ryūjirō in p117"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "亭主, 養子, male goyōkiki with red-tasselled jitte",
+    "handle": "Hiwatari Jin'emon",
+    "id": "c3",
+    "name_ja": "火渡り甚右衛門",
+    "reading": "ひわたりじんえもん",
+    "register": "none in the text; dead before story time",
+    "relationships": [
+     "adopted husband of O-Tetsu, now dead of illness",
+     "brother-sworn to Ioka Sukegorō",
+     "holder of朱房の十手・捕縄預かり; authority O-Tetsu inherits in popular fear"
+    ],
+    "role": "Dead husband whose office and rope-house lineage empower O-Tetsu",
+    "romanised": "Hiwatari Jinʼemon"
+   },
+   {
+    "first_appearance": "p7",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "飯岡の助五郎",
+      "note": "territorial + name, chivalrous-commoner style",
+      "used_by": "narrator"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "兄弟分 with Jin'emon; known kyōkaku figure",
+    "handle": "Ioka no Sukegorō",
+    "id": "c4",
+    "name_ja": "飯岡の助五郎",
+    "reading": "いいおかのすけごろう",
+    "register": "none in the text; name only as credential",
+    "relationships": [
+     "brother-sworn to Hiwatari Jin'emon"
+    ],
+    "role": "Name credential to place Jin'emon / O-Tetsu house in Kantō kyōkaku network; also gloss for Hirate Miki comparison",
+    "romanised": "Ioka no Sukegorō"
+   },
+   {
+    "first_appearance": "p9",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "阿波の高市に来た旅役者の嵐雛丸",
+      "note": "full rumour label as victim",
+      "used_by": "rumour speech quoted by narrator"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "旅役者 with male stage-name pattern; listed among men killed by O-Tetsu's torture",
+    "handle": "Arashi Hinamaru",
+    "id": "c5",
+    "name_ja": "嵐雛丸",
+    "reading": "あらしひなまる",
+    "register": "none; only rumoured dead",
+    "relationships": [],
+    "role": "Rumoured victim of O-Tetsu's deep-jealousy torture: travelling actor, dead within three months",
+    "romanised": "Arashi Hinamaru"
+   },
+   {
+    "first_appearance": "p9",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "越後の縮売の若い者",
+      "note": "common-noun label, no personal name",
+      "used_by": "rumour speech"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "若い者 in list of men killed by O-Tetsu",
+    "handle": "the young Echigo chijimi-seller",
+    "id": "c6",
+    "name_ja": null,
+    "reading": null,
+    "register": "none; only rumoured dead",
+    "relationships": [],
+    "role": "Rumoured victim of O-Tetsu",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p9",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "京の旅画師",
+      "note": "common-noun label",
+      "used_by": "rumour speech"
+     }
+    ],
+    "gender": "not shown",
+    "gender_evidence": "occupation only; listed among O-Tetsu's captives but gender not stated",
+    "handle": "the Kyoto travelling painter",
+    "id": "c7",
+    "name_ja": null,
+    "reading": null,
+    "register": "none; only rumoured dead",
+    "relationships": [],
+    "role": "Rumoured victim of O-Tetsu",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p9",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "小田原の渡り大工",
+      "note": "common-noun label",
+      "used_by": "rumour speech"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "渡り大工 in context of male victims; trade implies male in period usage but not explicit, treat as male by context",
+    "handle": "the Odawara itinerant carpenter",
+    "id": "c8",
+    "name_ja": null,
+    "reading": null,
+    "register": "none; only rumoured dead",
+    "relationships": [],
+    "role": "Rumoured victim of O-Tetsu",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p9",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "浮島の真菰大尽の次男坊",
+      "note": "kin label, no personal name",
+      "used_by": "rumour speech"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "次男坊, explicitly son",
+    "handle": "the second son of the Ukishima makomo magnate",
+    "id": "c9",
+    "name_ja": null,
+    "reading": null,
+    "register": "none; only rumoured ensnared",
+    "relationships": [],
+    "role": "Rumoured victim of O-Tetsu",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p18",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "今堀摂津守",
+      "note": "formal domain-school title",
+      "used_by": "narrator"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "摂津守, 指南, sword master; male role",
+    "handle": "Imahori Settsu-no-kami",
+    "id": "c10",
+    "name_ja": "今堀摂津守",
+    "reading": "いまぼりせっつのかみ",
+    "register": "none quoted",
+    "relationships": [
+     "one of Ryūjirō's Kōbusho instructors"
+    ],
+    "role": "Official sword instructor contrasted with rōnin master Akioka",
+    "romanised": "Imahori Settsu-no-kami"
+   },
+   {
+    "first_appearance": "p18",
+    "first_person": "none in the text except reported instruction in p19",
+    "forms": [
+     {
+      "form": "秋岡陣風斎",
+      "note": "full rōnin-master name",
+      "used_by": "narrator"
+     },
+     {
+      "form": "秋岡先生",
+      "note": "respectful pupil address",
+      "used_by": "Ryūjirō"
+     },
+     {
+      "form": "恩師",
+      "note": "moral weight: the master to whom duty is owed",
+      "used_by": "Ryūjirō, narrator"
+     },
+     {
+      "form": "大師匠 in Kotora parallel is not this man; keep distinct",
+      "note": "do not confuse with Toradayū",
+      "used_by": "editorial caution"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "剣道師範, 浪居, 弟子を持つ master; male",
+    "handle": "Akioka Jinpūsai",
+    "id": "c11",
+    "name_ja": "秋岡陣風斎",
+    "reading": "あきおかじんぷうさい",
+    "register": "Reported speech is formal masterly injunction (pilgrimage to shrines to purify before transmission)",
+    "relationships": [
+     "master with single disciple Ryūjirō; holder of Happō Makigumo secret",
+     "kinless solitary poor rōnin in Azabu Furukawabata"
+    ],
+    "role": "Absent dying-or-dreamt master who motivates Ryūjirō's escape; mirror to Kotora's grand-master",
+    "romanised": "Akioka Jinpūsai"
+   },
+   {
+    "first_appearance": "p34",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "笹川繁蔵の処の平手酒造",
+      "note": "house-retainer formula: Hirate at Sasagawa's house; 酒造 likely Miki (みき); keep house reading note",
+      "used_by": "O-Tetsu flattering Ryūjirō"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "用心棒, classic kyōkaku retainer figure",
+    "handle": "Hirate Miki at Sasagawa Shigezō's",
+    "id": "c12",
+    "name_ja": "笹川繁蔵・平手酒造",
+    "reading": "ささがわしげぞう・ひらてみき",
+    "register": "none quoted; invoked as famous yōjinbō precedent",
+    "relationships": [
+     "retainer of Sasagawa Shigezō"
+    ],
+    "role": "Comparison point: O-Tetsu claims Ryūjirō as her house swordsman is greater",
+    "romanised": "Sasagawa Shigezō, Hirate Miki"
+   },
+   {
+    "first_appearance": "p105",
+    "first_person": "私 (watashi) polite feminine; snaps into rough defiance only at p155 and flat resolve at p220",
+    "forms": [
+     {
+      "form": "小虎",
+      "note": "stage / troupe name; also used by narrator throughout",
+      "used_by": "narrator, Ryūjirō, self"
+     },
+     {
+      "form": "竹割り小虎",
+      "note": "full troupe title claimed at moment of killing",
+      "used_by": "Kotora of herself in p220"
+     }
+    ],
+    "gender": "female",
+    "gender_evidence": "娘, 女軽業師, 別嬪, 浴衣・腰巻・化粧 description; explicitly young woman",
+    "handle": "Kotora",
+    "id": "c13",
+    "name_ja": "小虎",
+    "reading": "ことら",
+    "register": "Polite performer's femininity (です・ます, 旦那様); can snap into vulgar abuse to monk and deadpan honour-speech over bloody knife",
+    "relationships": [
+     "foundling picked up by Toradayū couple; true parents unknown",
+     "junior in Take-wari troupe under Toramatsu, grand-pupil of Toradayū",
+     "fellow dream-runaway with Ryūjirō; later (coda) his first wife, dead early Meiji"
+    ],
+    "role": "Second heroine who walks the rope, swims, is cut free, and settles the plot by stabbing O-Tetsu",
+    "romanised": "Kotora"
+   },
+   {
+    "first_appearance": "p105",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "竹割り虎松",
+      "note": "troupe head, middle generation",
+      "used_by": "Kotora explaining"
+     },
+     {
+      "form": "今の師匠",
+      "note": "current master contrasted with grand-master",
+      "used_by": "Kotora"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "実子 of Toradayū, 師匠 of troupe; male",
+    "handle": "Take-wari Toramatsu",
+    "id": "c14",
+    "name_ja": "竹割り虎松",
+    "reading": "たけわりとらまつ",
+    "register": "none quoted; described as miserly (邪慳) and neglectful",
+    "relationships": [
+     "real son of Toradayū",
+     "current master of Kotora; refuses to release her or care for father"
+    ],
+    "role": "Reason Kotora must desert to visit dying grand-master",
+    "romanised": "Take-wari Toramatsu"
+   },
+   {
+    "first_appearance": "p105",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "竹割り虎太夫",
+      "note": "grand-master title",
+      "used_by": "Kotora"
+     },
+     {
+      "form": "大師匠",
+      "note": "great-master of the art; mirror to Ryūjirō's恩師",
+      "used_by": "Kotora"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "師匠, 夫婦, male head of acrobat line",
+    "handle": "Take-wari Toradayū",
+    "id": "c15",
+    "name_ja": "竹割り虎太夫",
+    "reading": "たけわりとらだゆう",
+    "register": "none quoted",
+    "relationships": [
+     "foster father (with late wife) of foundling Kotora",
+     "father of Toramatsu; master of masters, now paralysed (中気) in Honjo Ishihara"
+    ],
+    "role": "Mirroring dying master whose dreamed illness licenses Kotora's flight",
+    "romanised": "Take-wari Toradayū"
+   },
+   {
+    "first_appearance": "p124",
+    "first_person": "俺 (ore) coarse music-hall vulgarity; 狗鼠 etc.",
+    "forms": [
+     {
+      "form": "悪僧",
+      "note": "narrator's label: evil / fallen monk",
+      "used_by": "narrator"
+     },
+     {
+      "form": "和尚さん",
+      "note": "Ryūjirō's placating address across river",
+      "used_by": "Ryūjirō"
+     },
+     {
+      "form": "狗鼠坊主",
+      "note": "Kotora's abuse mid-river",
+      "used_by": "Kotora"
+     },
+     {
+      "form": "阿法陀羅権次",
+      "note": "true identity revealed late: old kobun, gambler by trade, fake monk watching ferry",
+      "used_by": "narrator via O-Tetsu's account in p207"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "坊主頭, 大入道, 眉毛・刀痕 description; male monk figure",
+    "handle": "the evil monk at the Shin-Tone ferry / Ahodara Gonji",
+    "id": "c16",
+    "name_ja": "阿法陀羅権次",
+    "reading": "あほだらごんじ",
+    "register": "Coarse Edo-vulgar abuse (畜生, 狗鼠, ざまあ見やあがれ); taunting showman speech",
+    "relationships": [
+     "old kobun of O-Tetsu, posted to watch ferry and block Ryūjirō"
+    ],
+    "role": "Blocking villain who wins tug-of-war, cuts creeper under Kotora, is felled by thrown kozuka",
+    "romanised": "Ahodara Gonji"
+   },
+   {
+    "first_appearance": "p23",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "祖父",
+      "note": "O-Tetsu's grandfather, especially famous as mekashi",
+      "used_by": "narrator"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "祖父, 代々の目明し; male house head",
+    "handle": "O-Tetsu's grandfather",
+    "id": "c17",
+    "name_ja": null,
+    "reading": null,
+    "register": "none quoted; source of hoarded money and rope manuscripts",
+    "relationships": [
+     "grandfather of O-Tetsu; founder of rope manuscripts and hoarded 2000–3000 ryō fortune"
+    ],
+    "role": "Ancestral authority for hereditary capture-rope lore and foreign-voyage funding plan",
+    "romanised": null
+   },
+   {
+    "first_appearance": "p61",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "水戸の藤田先生",
+      "note": "Mito school authority cited second-hand",
+      "used_by": "O-Tetsu"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "先生, Mito scholar predicting world overturn; male by historical role",
+    "handle": "Fujita-sensei of Mito",
+    "id": "c18",
+    "name_ja": "水戸の藤田先生",
+    "reading": "みとのふじたせんせい",
+    "register": "none quoted; reported prophecy",
+    "relationships": [],
+    "role": "Source of prophecy that world will turn upside-down and samurai must learn gunnery abroad",
+    "romanised": "Fujita-sensei of Mito"
+   },
+   {
+    "first_appearance": "p62",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "吉田松陰",
+      "note": "historical failed stowaway cited as precedent",
+      "used_by": "Ryūjirō"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "historical male figure",
+    "handle": "Yoshida Shōin",
+    "id": "c19",
+    "name_ja": "吉田松陰",
+    "reading": "よしだしょういん",
+    "register": "none quoted",
+    "relationships": [],
+    "role": "Historical warning for foreign-travel ban; Ryūjirō concedes ban then hopes to go",
+    "romanised": "Yoshida Shōin"
+   },
+   {
+    "first_appearance": "p74",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "斎藤弥九郎",
+      "note": "famous sword master listed for comparison",
+      "used_by": "narrator in Ryūjirō's meditation"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "剣道師範; historical male",
+    "handle": "Saitō Yakurō",
+    "id": "c20",
+    "name_ja": "斎藤弥九郎",
+    "reading": "さいとうやくろう",
+    "register": "none quoted",
+    "relationships": [],
+    "role": "Fashionable successful master contrasted with neglected Akioka",
+    "romanised": "Saitō Yakurō"
+   },
+   {
+    "first_appearance": "p74",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "千葉周作",
+      "note": "famous sword master listed for comparison",
+      "used_by": "narrator"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "剣道師範; historical male",
+    "handle": "Chiba Shūsaku",
+    "id": "c21",
+    "name_ja": "千葉周作",
+    "reading": "ちばしゅうさく",
+    "register": "none quoted",
+    "relationships": [],
+    "role": "Fashionable successful master contrasted with neglected Akioka",
+    "romanised": "Chiba Shūsaku"
+   },
+   {
+    "first_appearance": "p74",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "桃井春蔵",
+      "note": "famous sword master listed for comparison",
+      "used_by": "narrator"
+     }
+    ],
+    "gender": "male",
+    "gender_evidence": "剣道師範; historical male",
+    "handle": "Momoi Shunzō",
+    "id": "c22",
+    "name_ja": "桃井春蔵",
+    "reading": "ももいしゅんぞう",
+    "register": "none quoted",
+    "relationships": [],
+    "role": "Fashionable successful master contrasted with neglected Akioka",
+    "romanised": "Momoi Shunzō"
+   },
+   {
+    "first_appearance": "p7",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "乾漢",
+      "note": "O-Tetsu's retainers; also kobun, 身内; used as watchers, net along road, inhospitable farmers",
+      "used_by": "narrator, O-Tetsu"
+     },
+     {
+      "form": "乾分",
+      "note": "variant kanji for kobun in p68 warning",
+      "used_by": "O-Tetsu"
+     }
+    ],
+    "gender": "not shown",
+    "gender_evidence": "collective of gamblers, farmers, watchers; gender not stated though period kobun typically male — leave open",
+    "handle": "O-Tetsu's kobun",
+    "id": "c23",
+    "name_ja": "乾漢",
+    "reading": "こぶん",
+    "register": "none quoted directly; act as silent surveillance net",
+    "relationships": [
+     "retainers of O-Tetsu / Jin'emon house; ~1000 across territory"
+    ],
+    "role": "Net of surveillance: watch Ryūjirō, guard ferry, refuse lodging, steal clothes",
+    "romanised": "kobun"
+   },
+   {
+    "first_appearance": "p107",
+    "first_person": "none in the text",
+    "forms": [
+     {
+      "form": "お神さん",
+      "note": "deceased wife of grand-master, foster mother to Kotora",
+      "used_by": "Kotora"
+     }
+    ],
+    "gender": "female",
+    "gender_evidence": "お神さん, 夫婦, foster mother; female",
+    "handle": "Toradayū's late wife",
+    "id": "c24",
+    "name_ja": null,
+    "reading": null,
+    "register": "none quoted; dead years before",
+    "relationships": [
+     "wife of Toradayū; with him picked up foundling Kotora as true parents"
+    ],
+    "role": "Dead foster mother explaining Kotora's debt to grand-master line",
+    "romanised": null
+   }
+  ],
+  "hard_spots": [
+   {
+    "anchors": [
+     "p25",
+     "p26"
+    ],
+    "kind": "technical catalogue",
+    "why_hard": "Two-paragraph incantatory list of rope arts (kakenawa, toinawa, hikinawa etc.) and holds (ganjigarame, kikkō, matsuba, rokuro-maki, takade, kote...) plus sō-returns in shin-gyō-sō variants. Tempts summarising; must be kept at full length because p164 later binds Ryūjirō 'exactly like a ganjigarame'. Requires consistent English set, not varied synonyms."
+   },
+   {
+    "anchors": [
+     "p114",
+     "p116",
+     "p117",
+     "p118"
+    ],
+    "kind": "mechanism description",
+    "why_hard": "Full-paragraph kōdan explanation of hand-hauled ferry: tripods, creeper cable, iron ring, bow/stern hemp lines. Narrator pauses to savour it and adds donated retired capture-ropes from Hōzōji hemp. Do not move to footnote or compress into efficient summary."
+   },
+   {
+    "anchors": [
+     "p9",
+     "p10"
+    ],
+    "kind": "rumour set-piece",
+    "why_hard": "Single-speech village rumour listing five-six dead captives with kirishitan-bateren joke and evil-eye paralysis. Delivers O-Tetsu's menace as hearsay, not fact. Keep as reported speech, not settled history."
+   },
+   {
+    "anchors": [
+     "p101",
+     "p102"
+    ],
+    "kind": "digression-essay",
+    "why_hard": "Narrator's lecture that before telegraph/telephone/post, bad dreams and broken sandal-thongs were reason to cross provinces. Pulp sociology that licenses both escapes. Do not shrink to a sentence."
+   },
+   {
+    "anchors": [
+     "p21",
+     "p22"
+    ],
+    "kind": "suspicion left open",
+    "why_hard": "Sour-smelling cooled water and chopped surume lunch as possible poisoning. Text offers as retrospective evil surmise (邪推), never confirmed. English must keep as suspicion, not fact that O-Tetsu drugged him."
+   },
+   {
+    "anchors": [
+     "p139",
+     "p142",
+     "p31"
+    ],
+    "kind": "erotic-comic physicality",
+    "why_hard": "Rope biting into O-Tetsu's rich flesh as she slips free; faded red crepe loincloth against muddy water; blood-spray that is only red dragonflies. Linger at original level: neither veiled nor heated up."
+   },
+   {
+    "anchors": [
+     "p160",
+     "p219",
+     "p220",
+     "p222"
+    ],
+    "kind": "abrupt violence and flat aftermath",
+    "why_hard": "Kozuka thrown 50 ken into monk's brow; Kotora's sudden side-stab of O-Tetsu, one scream, knife wiped on sleeve and returned. No remorse build-up, no confirmed death statement. Keep breath-short and deadpan."
+   },
+   {
+    "anchors": [
+     "p224"
+    ],
+    "kind": "coda redaction",
+    "why_hard": "Leap to mid-Meiji: famous First detective printed as circles ○○○○○ as Ryūjirō's later self, Kotora as dead first wife, and flat shrug whether Happō Makigumo secret was ever transmitted. Keep circles and shrug; do not explain or resolve."
+   }
+  ],
+  "motifs": [
+   {
+    "english": "Keep one audible web: rope / cord / vine / line / bind / tie / fasten / entangle / coil / haul / cut loose / slip free. Do not vary for elegance. Technical holds keep same English each time.",
+    "id": "m1",
+    "motif": "rope that displaces the sword",
+    "occurrences": [
+     "p5",
+     "p6",
+     "p24",
+     "p25",
+     "p26",
+     "p27",
+     "p28",
+     "p29",
+     "p30",
+     "p31",
+     "p32",
+     "p38",
+     "p42",
+     "p56",
+     "p114",
+     "p117",
+     "p118",
+     "p122",
+     "p131",
+     "p137",
+     "p143",
+     "p146",
+     "p150",
+     "p156",
+     "p164",
+     "p166",
+     "p167"
+    ],
+    "source_forms": [
+     "生縄",
+     "捕縄・捕物",
+     "掛縄・投縄・引縄・釣縄・抜縄",
+     "雁字搦み・亀甲繋ぎ・松葉締め・轆轤巻・高手・小手・片手上げ・逆結び・総角・十文字・菱・蟹・鱗",
+     "縛る・繋ぐ・搦む・縺れる",
+     "縄抜け・縄切り",
+     "藤蔓・綱・麻縄",
+     "人喰い藻・菱 as living rope"
+    ],
+    "why": "The book's engine and title made literal. Every episode re-enacts binding and release; the underwater weeds bind 'exactly like a ganjigarame'. Varying the vocabulary destroys the structure."
+   },
+   {
+    "english": "Keep swords inert: worn, left on bank, stolen, never drawn in combat. Knife only as thrown kozuka and underwater weed-cutter.",
+    "id": "m2",
+    "motif": "failed sword versus useful small blade",
+    "occurrences": [
+     "p2",
+     "p160",
+     "p162",
+     "p167",
+     "p184",
+     "p186",
+     "p218"
+    ],
+    "source_forms": [
+     "武士の魂・大小の二刀",
+     "刀の小柄・手裏剣",
+     "小刀・下帯に後差し",
+     "大刀・腰の物",
+     "霊剣振り納め"
+    ],
+    "why": "Samurai soul-swords do nothing heroic; long sword is stolen while owner is naked. Only small blades work, once thrown and once as tool. Heroicising swordsmanship betrays the humiliation-comedy."
+   },
+   {
+    "english": "Keep water words wet and repeated: river, ferry, channel, mud, weeds, leeches, eels.",
+    "id": "m3",
+    "motif": "water, ferries and man-eating weeds",
+    "occurrences": [
+     "p76",
+     "p109",
+     "p110",
+     "p112",
+     "p113",
+     "p114",
+     "p139",
+     "p144",
+     "p154",
+     "p156",
+     "p163",
+     "p180"
+    ],
+    "source_forms": [
+     "利根川・新利根・渡し・渡頭",
+     "堀割・沼・川・堀割端",
+     "人喰い藻・菱・水草・水妖",
+     "蛭・鰻・鰻掻き・胡麻鰻"
+    ],
+    "why": "Middle chapters are saturated with Tone water-world; eel-catching monk, leeches, mud set the low bodily register against shrine-pilgrimage purity."
+   },
+   {
+    "english": "Keep master / grand-master / transmission / dream language parallel for both runaways.",
+    "id": "m4",
+    "motif": "paired masters and paired dreams",
+    "occurrences": [
+     "p19",
+     "p20",
+     "p50",
+     "p52",
+     "p54",
+     "p83",
+     "p95",
+     "p96",
+     "p97",
+     "p98",
+     "p101",
+     "p105",
+     "p107",
+     "p224"
+    ],
+    "source_forms": [
+     "恩師・大師匠・師匠",
+     "夢見・正夢・夢は五臓のつかれ",
+     "看病・臨終・瀕死",
+     "八方巻雲・極意秘伝・一子相伝",
+     "師弟・義理人情・商売取引"
+    ],
+    "why": "Two dying masters mirror each other and license both escapes; master-disciple ethic is argued aloud as rebuke to mercenary age. Coda's shrug about transmission closes the motif flat."
+   },
+   {
+    "english": "Keep foreign-modernity terms as period flavour, not updated: gunnery, America, Holland, Mito prophecy.",
+    "id": "m5",
+    "motif": "world overturned: gunnery and foreign voyage",
+    "occurrences": [
+     "p61",
+     "p62",
+     "p75"
+    ],
+    "source_forms": [
+     "どんでん返し",
+     "砲術",
+     "米利堅・和蘭陀・毛唐人",
+     "国禁・吉田松陰の失敗",
+     "二千や三千の金"
+    ],
+    "why": "Not decoration: O-Tetsu's own escape-plan and promise binding Ryūjirō to return. Links 1925 print present to Bakumatsu future and Meiji coda detective."
+   }
+  ],
+  "narration": {
+   "english_tense": "Past for narrated action (de-aru / -ta habits rendered as simple past); keep present only where narrator steps forward to explain custom or mechanism in general truth",
+   "frame": "Third-person popular-Taishō kōdan narration in formal de-aru style with frequent stepping-forward: rumour speech, how-things-work lectures, dream sociology, half-century leap to Meiji coda. Nine titled sections (一–九) plus asterisk break and flat epilogue.",
+   "narrator": "Extra-diegetic kōdan storyteller who knows rumour, rope lore, ferry gear and postal history and performs them in voice; straight-faced, digressive, anticlimactic",
+   "person": "third",
+   "tense_habits": "Literary de-aru / -tari past narration with mid-paragraph gnomic asides; dreams and rumour in reported present; dialogue in period Edo speech. Do not normalise shifts or tidy chronology.",
+   "timeline": [
+    "Edo departure for musha-shugyō + shrine purification circuit (Katori-Kashima-Ikisu, Nagareyama Suwa, Awa Ōsugi, Tatsuki Mizuchi)",
+    "Night boat via Tone, sour yuhashi + surume lunch; carried half-ri by O-Tetsu to Awa house",
+    "Three months luxurious captivity (summer into early autumn): midnight rope lessons, invisible rope, thrown-rope recapture",
+    "Escape in O-Tetsu's absence; afternoon meeting with Kotora fugitive from Edosaki via back roads",
+    "Shin-Tone ferry blockage, tightrope attempt, creeper cut, weed struggle, naked robbery at dusk",
+    "O-Tetsu reveal, stab, walk toward Edo; coda leap to mid-Meiji detective and unknown transmission"
+   ]
+  },
+  "part_summaries": [
+   {
+    "starts": "p1",
+    "summary": "一: Ryūjirō readies to flee. Set-up: hatamoto swordsman on shrine-purification pilgrimage for Happō Makigumo transmission, beached three months at Awa by Living-Rope O-Tetsu, widowed oyabun with 1000 kobun and rumoured torture-murders of five-six men. Portrait of fortyish corpulent O-Tetsu; carrying on back, nursing, invisible sickness, decision to slip via back cliff to Fukuda."
+   },
+   {
+    "starts": "p16",
+    "summary": "二: Conscience and backstory. Training under Imahori and sole pupil of rōnin Akioka Jinpūsai; pilgrimage order to shrines. Poison suspicion (surume, sour yuhashi). Hereditary mekashi house; midnight rope-lesson catalogue (holds and shin-gyō-sō variants), mutual tying, O-Tetsu slipping bonds. Flattered as house swordsman better than Hirate Miki; thrown-rope recapture from cliff."
+   },
+   {
+    "starts": "p41",
+    "summary": "三: Recapture and bargaining. Hog-tied in back upstairs while O-Tetsu drinks. Ryūjirō invents/ reports nightly dream of dying kinless master; pleads one Edo nursing visit on oath to return. O-Tetsu releases and strokes rope-marks, extracts promises: foreign gunnery voyage on hoarded thousands, and jealous ban on other women. Jealousy as stored bulk."
+   },
+   {
+    "starts": "p65",
+    "summary": "四: Send-off and new companion. O-Tetsu kits him out (michiyuki, tsuka-bukuro, tekko-kyahan) and warns kobun everywhere. Ryūjirō hurries via Fukuda-Ichizaki toward Fūkawa-Fussa-Abiko. Meets incongruous beauty: high coiffure and heavy makeup with shabby dyed yukata and rain umbrella, bare feet. She shadows him; both claim night road for sick masters."
+   },
+   {
+    "starts": "p100",
+    "summary": "五: Dream essay and Kotora's tale. Narrator lectures that without telegraph/post a bad dream justified crossing provinces. Girl is Take-wari Kotora, foundling of grand-master Toradayū (now paralysed in Honjo), fleeing miserly Toramatsu from Edosaki engagement. They hurry for Hontone crossing before dark; reach lonely Shin-Tone hand-hauled ferry and begin hauling."
+   },
+   {
+    "starts": "p123",
+    "summary": "六: Ferry blocked. Giant fallen monk (earth-coloured nasshogi, twisted headband, sword scar) hauls opposite rope one-handed, wins tug, stern line snaps. He jeers, hides for eels. Kotora offers tightrope on creeper via umbrella; red loincloth flash, dragonflies like blood-spray, sunset double on water. Midway creeper snaps; she falls with loud splash."
+   },
+   {
+    "starts": "p148",
+    "summary": "七: Water rescue. Monk reappears with eel-knife, boasts he cut vine, taunts about man-eating weeds/algae. Kotora swims then is seized hand-foot-side-shoulder like living hands. Ryūjirō throws kozuka 50 ken into monk's brow, strips to tekko-kyahan and loincloth dirk, swims, finds weeds like ganjigarame, cuts free with O-Tetsu's rope-cutting method."
+   },
+   {
+    "starts": "p171",
+    "summary": "八: Naked robbery. Ryūjirō cuts weeds one-handed while guarding blade near Kotora, swims back to same bank. Leeches mistaken for knife wounds. Clothes, two swords, pocket things, towel and nose-paper gone. Farmhouses refuse lodging at night rule. They return to ferry under evening moon; Ryūjirō tells Kotora go on alone; she refuses, offers belly-band savings for secondhand clothes in Fūkawa."
+   },
+   {
+    "starts": "p202",
+    "summary": "九 + coda: O-Tetsu springs from reeds, owns theft via forward net of kobun, reveals monk as old kobun Ahodara Gonji and farmers silenced. Jealous rage beats and spits on Kotora. Ryūjirō gives up Edo trip to prove innocence; while mother-dressing him she is side-stabbed by Kotora with his dirk — one scream, woman's pride, knife wiped and returned. Asterisks: Ryūjirō as Meiji's First detective ○○○○○, Kotora dead first wife; whether secret transmitted unknown."
+   }
+  ],
+  "say": "Rope is plot, not colour: keep catalogues full and binding-words literal; keep hero passive, O-Tetsu unglamorous-menacing, Kotora polite then abrupt, ending flat. Where passage contradicts this bible, passage wins — say so.",
+  "style_sheet": {
+   "annotation_density": "Sparse, for what sentence cannot give: torinawa arts, jitte / aka-fusa, Shin-Tone / Hontone geography, kirishitan-bateren joke, Mito prophecy, circles redaction. Never for what context supplies. Margin explains choices; text wins over reader ease.",
+   "author_voice": "Brisk magazine kōdan under bookish Sinitic ornament: formal de-aru narration, performed rumour, lingering erotic-comic body description, deadpan anticlimax. Neither faux-Edo pastiche nor sleek modern flat. Keep scale comedy (carried like child, dressed after bath) and failing body (pallor, sunken eyes, grown topknot) plain.",
+   "honorifics_and_names": "Japanese order surname-first; macrons (Ryūjirō, Jinpūsai, Toradayū). Keep Sensei for Akioka where pupil-duty weight matters; keep O- prefix (O-Tetsu, not Tetsu). 先生 addressed to Ryūjirō as 'Sensei' to keep house-swordsman irony. Danna-sama for Kotora's address. No -san/-sama beyond what English needs.",
+   "keep_in_japanese": "Sensei, hatamoto, kobun, jitte, torinawa/kakenawa etc. with first-use gloss; place-names in romanisation (Awa, Shin-Tone, Tatsuki). Named holds in consistent English with Japanese first time (e.g. ganjigarame cross-lattice bind) then English alone.",
+   "quotation": "Dialogue in double quotes; rumour speech and reported injunctions as quoted blocks where original sets them as performance. Keep who-said-what spare as original leaves it.",
+   "register": "Narration literate-formal but brisk; dialogue sharply differentiated: Ryūjirō samurai-formal self-abasing, O-Tetsu cajoling-commanding-jealous, Kotora polite-feminine snapping to vulgar then flat, monk music-hall vulgar.",
+   "ruby_and_italics": "Ruby readings (e.g. 磯貝竜次郎いそがいりゅうじろう) do not appear in English; use romanised name. Italics only for coda circles ○○○○○ and for blood-spray/dragonfly feint if needed. No italics for Japanese terms after first gloss.",
+   "standing_rules": []
+  }
+ },
+ "usage": {
+  "input_tokens": 20128,
+  "cached_tokens": 0,
+  "output_tokens": 13514,
+  "reasoning_tokens": 3063,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0825945,
+ "response_id": "resp_6aeb7a5db66390b0f01c4693",
+ "latency_s": 114.81,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 36339
+  }
+ ],
+ "created": "2026-11-04T18:33:01Z"
+}

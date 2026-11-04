@@ -1,0 +1,89 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"But what merit is there in that man? In the first place—\" He was stopped before he could go on. \"Enough. You may dislike him on your own reckoning. I shall keep company with him on mine, and we will say no more of this. That will do. There is nothing to be got by reddening our faces at each other.\" For all he said it, displeasure showed in his colour, and Tsunao held all the more stiffly to his own. \"Still, if he were a stranger it would be another matter, but as it is you, I must tell you all that I believe. I must earnestly beg you to have done with him.\"",
+    "ids": [
+     "p55"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Be silent!\" The harsh voice burst out at last. \"I will hear no more. What presumption.\"",
+    "ids": [
+     "p56"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Oh Father, you are angry. Tsunao-san said it with no ill meaning. What a face you are making.\"",
+    "ids": [
+     "p57"
+    ],
+    "notes": [
+     "Kept Mitsuyo's Tsunao-san with suffix as heard intimacy, against Zenpei's bluntness."
+    ]
+   },
+   {
+    "english": "\"Nay, keep out of it. It is nothing you know of.\" Silenced by the unexpected volley, she had just closed her lips when a messenger from Tatsuya came in haste and delivered his message word for word as he had been told. Zenpei, half out of bravado, gave his assent with a ready answer and sent him back. Tsunao sat with folded arms and bowed head.",
+    "ids": [
+     "p58"
+    ],
+    "notes": [
+     "Source has a missing or illegible character in 飛〓しり; read as unexpected broadside of anger falling on Mitsuyo."
+    ]
+   },
+   {
+    "english": "Mitsuyo looked anxiously from one to the other, and held back her father as he rose to go as he was. \"Father, to part like this leaves an ill feeling on both sides, does it not? Do make your peace somehow before you go. It puts me in difficulty.\"",
+    "ids": [
+     "p59"
+    ],
+    "notes": []
+   },
+   {
+    "english": "At the pretty meekness with which she bowed her head, Zenpei paused a moment and turned back. Tsunao did not unbend his grave face, but sat silent with knitted brows. To see it set his own heart ablaze too. 'Very well, leave him be!'",
+    "ids": [
+     "p60"
+    ],
+    "notes": [
+     "Last sentence reads as Zenpei's unspoken flare rather than speech; set in single quotes as thought. Japanese leaves the subject of the burning heart unstated."
+    ]
+   },
+   {
+    "english": "Shaking off his sleeve, Zenpei went out with loud steps. Tsunao sank into himself and said not another word. All at once the water running through the valley struck upon the ear.",
+    "ids": [
+     "p61"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted the inn quarrel through Zenpei's angry exit to Tatsuya's summons."
+ },
+ "usage": {
+  "input_tokens": 27294,
+  "cached_tokens": 26225,
+  "output_tokens": 4027,
+  "reasoning_tokens": 3342,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.02238475,
+ "response_id": "resp_6aeb7c774ed23e063c0345b2",
+ "latency_s": 37.32,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2561
+  }
+ ],
+ "created": "2026-11-04T18:42:00Z"
+}

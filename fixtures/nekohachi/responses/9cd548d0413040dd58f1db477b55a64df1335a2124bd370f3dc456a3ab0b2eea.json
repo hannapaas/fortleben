@@ -1,0 +1,32 @@
+{
+ "prompt": "desk",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": null,
+ "usage": {
+  "input_tokens": 65517,
+  "cached_tokens": 65268,
+  "output_tokens": 154,
+  "reasoning_tokens": 0,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0171296,
+ "response_id": "resp_6aeb8104239eacb0cf7249f2",
+ "latency_s": 2.01,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_45d1821f-19e3-4580-8f7b-2ee9cde4b0d2",
+   "name": "edit",
+   "arguments": "{\"answers\":[\"F17\"],\"new\":\"The first day was clean zero and on the second day at last he sold ten sen's worth.\",\"old\":\"The first day was clean nothing, clean zero, and on the second day at last he sold ten sen's worth.\",\"reason\":\"The Japanese has one まるでゼロ; doubling it expands the text.\",\"replace_all\":false}"
+  }
+ ],
+ "items": [
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T19:01:25Z"
+}

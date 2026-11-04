@@ -1,0 +1,57 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "So long as he heard people laughing it rang pleasant in him, and yet it was strange that there was nothing funny to himself at all. If you wanted the comedian's logic for it, there was plenty and to spare. That to make people laugh there is no effect in laughing yourself is one of them. And yet, though he held off even from the drink people like, to protect this voice he uses for the trade, when he faced people he still had to make it look as if he drank. Could there be such hardship in any other work. People think a comedian just breezes along with no troubles in the world, but let them try being the man himself. He is thick with troubles people know nothing of. A man like himself is as if made out of a lump of trouble.",
+    "ids": [
+     "p10"
+    ],
+    "notes": []
+   },
+   {
+    "english": "Still, for one pleasure, he had pulled out the back fence of his row-house lodgings, and from there rented cheap from long back the open ground that lay beyond, and grew vegetables there. And when they came up plenty, not only did his own family eat them, he shared them out to the neighbours round about as well. Just to see the neighbours pleased was another pleasure in itself.",
+    "ids": [
+     "p11"
+    ],
+    "notes": []
+   },
+   {
+    "english": "The green caterpillars and black worms that get on the leaves of little turnips and daikon, you dig a ditch along the ridges, and shake the leaves toward it, and they all come rolling down. Then you stamp them all at once, or the children prod them with the end of a stick, and kill them.",
+    "ids": [
+     "p12"
+    ],
+    "notes": [
+     "Kept ditch, ridges, caterpillars and worms in the bible's plain set, and kept pleasure repeated in p11 as in the Japanese."
+    ]
+   }
+  ],
+  "say": "Drafted p10-p12 in close plodding narration with the garden work kept flat."
+ },
+ "usage": {
+  "input_tokens": 28577,
+  "cached_tokens": 27377,
+  "output_tokens": 2258,
+  "reasoning_tokens": 1833,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01520305,
+ "response_id": "resp_6aeb7b2f74fabeda6a964478",
+ "latency_s": 24.38,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1757
+  }
+ ],
+ "created": "2026-11-04T18:36:31Z"
+}

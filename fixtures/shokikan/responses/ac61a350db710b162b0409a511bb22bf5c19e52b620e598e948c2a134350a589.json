@@ -1,0 +1,84 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"Tsunao-san, why do you dislike Okumura-sama so much? Could you not simply humour him and let it pass? Oh, do try to do so. When it comes to this I no longer know which side to take, and I truly feel like bursting into tears,\" Mitsuyo said earnestly. \"If you can, do try to think better of it. Won't you?\" she said, peering into his face. Her winning air was beyond telling.",
+    "ids": [
+     "p62"
+    ],
+    "notes": [
+     "Kept honorifics as Tsunao-san and Okumura-sama to hold distance: she is intimate with him, distant from Tatsuya."
+    ]
+   },
+   {
+    "english": "Moved, Tsunao lifted his face and somewhat recovered his colour. Yet his words yielded nothing. \"I cannot bend myself. That man displeases me through and through. I spoke from grounds of my own, but if Oji-sama will not make use of them, then that is that. And you, what do you think of the fellow?\"",
+    "ids": [
+     "p63"
+    ],
+    "notes": [
+     "Kept Oji-sama in romanised form rather than Uncle, since Tsunao's formal kin address matters and the bible asks for suffixes to stay."
+    ]
+   },
+   {
+    "english": "\"I hardly know about such things, but a man who chatters so, I should think, can have little that is solid at bottom.\"",
+    "ids": [
+     "p64"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Yes. Well said,\" Tsunao said with a trace of a smile. \"You understand the better. A thing to admire.\" Plainly said, yet his face held tenderness.",
+    "ids": [
+     "p65"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"And, you know, there is something creepy about him. Perhaps it is only my fancy, but he is altogether strange.\"",
+    "ids": [
+     "p66"
+    ],
+    "notes": [
+     "Kept bodily terms creepy and strange for kimi ga warui and hen, to leave her intuition bodily rather than reasoned."
+    ]
+   },
+   {
+    "english": "\"Why is that?\" Tsunao sent her a look, and she answered, with eyes that made her meaning speak, \"Oh, it is nothing in particular, only, only, he is somehow queer. So I think I dislike him.\" \"Hm,\" Tsunao said, as if with a cold smile, \"with that fellow, it may well be so. Should he utter even a hint of such a thing, I will teach him shame to his heart's content. To fall prey to such a wretch would be a misfortune worse than death.\"",
+    "ids": [
+     "p67"
+    ],
+    "notes": [
+     "Kept prey for ejiki to preserve echo with Tatsuya's utsukushiki emono in p16. The threat in katakoto demo... is left as Tsunao's resolve against any advance, though the Japanese leaves the exact occasion unsaid."
+    ]
+   }
+  ],
+  "say": "Drafted p62 to p67 in Mitsuyo's wheedling voice against Tsunao's stiff refusal."
+ },
+ "usage": {
+  "input_tokens": 27138,
+  "cached_tokens": 26225,
+  "output_tokens": 3210,
+  "reasoning_tokens": 2547,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0187175,
+ "response_id": "resp_6aeb7c95b69b22ab37c64e3c",
+ "latency_s": 29.82,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2461
+  }
+ ],
+ "created": "2026-11-04T18:42:30Z"
+}

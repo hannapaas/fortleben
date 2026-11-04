@@ -1,0 +1,79 @@
+{
+ "prompt": "notes",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": {
+  "notes": [
+   {
+    "anchor": "p8",
+    "body": "Bōya is an affectionate way of addressing a very small child, though literally it suggests a boy; the child here has been introduced as a little girl.",
+    "editions": [
+     "casual",
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "\"Bōya,\""
+   },
+   {
+    "anchor": "p5",
+    "body": "An aluminium pot, a Western-style table, and beef stewed with potato mark a poor but modern city household of the period.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "aluminium pot"
+   },
+   {
+    "anchor": "p16",
+    "body": "The Japanese, natsukashimi, means a warm, longing fondness for what is past, held here together with forgiveness and peace.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "fond remembrance"
+   },
+   {
+    "anchor": "p31",
+    "body": "The baby's babble also sounds like the Japanese word for tasty, good-good.",
+    "editions": [
+     "curious"
+    ],
+    "sources": [
+     "unsourced"
+    ],
+    "span": "\"Uma-uma-uma-uma.\""
+   }
+  ],
+  "say": "Kept four sparse notes for what the English cannot carry alone; left vision, that day, and storm frame unnnoted per reading."
+ },
+ "usage": {
+  "input_tokens": 16327,
+  "cached_tokens": 0,
+  "output_tokens": 2277,
+  "reasoning_tokens": 1976,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.030086,
+ "response_id": "resp_6aeb451e6356b7e823674b48",
+ "latency_s": 30.2,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 1066
+  }
+ ],
+ "created": "2026-11-04T14:45:50Z"
+}

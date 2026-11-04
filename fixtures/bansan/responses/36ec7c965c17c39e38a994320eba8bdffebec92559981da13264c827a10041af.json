@@ -1,0 +1,90 @@
+{
+ "prompt": "first-read",
+ "model": "muse-wonder-1.0",
+ "effort": "medium",
+ "data": {
+  "crux": [
+   {
+    "for_the_english": "So: keep the trigger physical and uninterpreted. The potato is hard — “as if frozen”, gritty between her teeth, tasteless — and the distance it opens in her is rendered in the narration's ordinary diction of distance itself (“far”, “far off”, “far heart”, “rate”, repeated until it becomes a place). Do not name what she sees: not heaven, not death, not her own old age, not a judgement day, though it has something of all of them. “あの日” is only “that day”. The picture must stay a picture — 幻のような絵, “a picture like a phantom”, something her eye sees, not a doctrine she arrives at. An English version that upgrades the vision into consolation — that lets her (or the narrator) conclude anything — has written a religious tract over a story about a bad potato. Likewise keep the return unexalted: “もう少しの間だ” — “just a little longer” — nursing the child, clearing the table, getting up early tomorrow. The vision does not solve the poverty. It sits next to it, and the story ends not on it but on a man standing still, whispering, 「嵐だな」 — “a storm”. That bare last line is the frame closing: the storm announced in p1, unheard through the child's noise in p8, heard by her alone inside her silence in p19, and finally heard by everyone in the quiet of p37–38. Keep it exactly that plain and that short; do not let it swell into a symbol at the last moment.",
+    "point": "\"The crux is the mother's mid-mouthful slide out of time. For five paragraphs this is a warm, crowded, slightly comic supper: a fat baby girl just able to stand by holding the table, banging a spoon, everything swept out of her reach, two young parents — not a wrinkle on either face, but a deep, drowsy tiredness already in his hollowed eyes and her fine shoulders — laughing helplessly and forgetting, in the racket, even to hear the storm outside. Then, in p10–p11, the mother puts a potato in her mouth. It is hard, gritty, as if frozen, thoroughly nasty. She says nothing. And the prose, without any marker of a scene-change, drifts with her: the three years since her marriage stretch until she feels she has lived a whole long life and grown quite old; the sufferings of those three years come back “dreamlike”, and she is suddenly seeing, from very far away, a dim picture (絵) of three people with their heads together telling one endless story in which everything — good and evil, sorrow, suffering, anger, joy — is told, while nobody moves, nobody is disturbed, and all of it is wrapped in 懐かしみ (natsukashimi, fond remembrance) and 許し (forgiveness) and a deep peace like the night's. The story stands or falls on whether the English lets that expansion happen inside an ordinary sentence at an ordinary table, and then lets it contract again to “only three years” (p14, p22, p27) and to work tomorrow.\"",
+    "why": "Everything else in the text serves that one movement. The frame is built for it: storm heard / storm unheard / storm heard again. The child's noise in the first movement is not decoration — it is what the world sounds like from inside a life being lived at full stretch, and the mother's silence in the second half is set against her husband's repeated, puzzled 「どうして黙ってるの」 (“why are you so quiet?”, p19, p21) precisely because he cannot follow her where she has gone. And the vision's content is all summary and no event: nothing is shown happening, only everything having already happened and turned, in the telling, into fondness and pardon. If the English makes the vision vivid, specific or dramatic, the ratio inverts and it becomes a fantasy interrupting a domestic sketch, rather than the domestic sketch briefly seen from the far side of a whole life."
+   }
+  ],
+  "open_questions": [
+   {
+    "anchors": [
+     "p16",
+     "p17",
+     "p18"
+    ],
+    "question": "Who are the three people in dim picture? Family aged, themselves in afterlife, humanity generic? Text keeps three quiet people, heads together. Don't identify.",
+    "why_it_matters": "If identified as family in old age/heaven, vision becomes specific consolation and loses universality/ambiguity."
+   },
+   {
+    "anchors": [
+     "p17",
+     "p20"
+    ],
+    "question": "\"That day\" when all becomes nostalgia/forgiveness - death, old age, far future, eternity before night-like rest? Keep literal that day/night-like rest unresolved.",
+    "why_it_matters": "Naming death/heaven clarifies author's deliberate vagueness and changes theology/tone."
+   },
+   {
+    "anchors": [
+     "p2",
+     "p8",
+     "p30"
+    ],
+    "question": "Baby explicitly girl in p2, yet parents call her Bōya (boy/baby lad). Keep Bōya as affectionate generic 'baby/little one' without correcting gender or inventing name?",
+    "why_it_matters": "Correcting to 'little girl' erases period colloquial address; transliterating unexplained confuses."
+   },
+   {
+    "anchors": [
+     "p11",
+     "p12"
+    ],
+    "question": "Potato: frozen-like hard gritty undercooked potato - literal poor cooking/storage period detail, not metaphor invented. Keep texture words close.",
+    "why_it_matters": "Symbolising potato destroys crux trigger's ordinariness."
+   }
+  ],
+  "reading": " The crux must stay first in drafting. Beyond it, notice the narration's slide: begins outside ('a parent and child', 'the man', 'the woman') and imperceptibly becomes the mother's interior in same past-tense explanatory endings (de atta / no datta) and same 'as if', 'somehow', 'before she knew it' hedges. No italics, dreams marked, or psychologising verbs should separate reverie. Long sentences accumulate repetitions - smile (hohoemi), eyes/gaze, quiet/still, dream, all/everything (subete), long (nagai), far - then dialogue punctures with short exchanges. Repeat English words even unfashionably; vary only when Japanese does. Register Taishō literary with old kana but not quaint: clean, soft, slightly formal English, poverty plain (rice, aluminium pot, beef onion carrot potato) without ennobling supper. Parents unnamed, young yet exhausted; child noisy bodily comedy prevents sentimentality. Husband's practical hope ('little one will soon walk', 'let's work') not lesser than vision. Fluent risks: rationalising potato-to-vision causality, clarifying 'that day', expanding abstract nouns into explanations, destroying rhythm by splitting drift or joining dialogue, impoverishing subete/nagai/far repetitions, making mother eloquent - she can say almost nothing, repeatedly 'only three years', and husband misunderstands kindly.",
+  "say": "I can't settle identity of three figures or nature of that day from text; that's intentional ambiguity, not gap to fill. Also Bōya for girl child likely generic affectionate address in period, but keep visible as choice/fork.",
+  "voice_takes": [
+   {
+    "label": "Quiet drift (recommended)",
+    "line": "\"叙述は温かい同室の声から、区切りなく母の遠い心へ滑る\" — narration slides without break from warm room to mother's far heart. Clean slightly formal prose, long looping sentences, repeated plain words; parents young plainspoken, husband blunt warm ('sa da naa' as soft 'that's so'), mother halting almost monosyllabic; wrong: lyrical uplift, heaven language, modern therapy idiom, cute baby-talk."
+   },
+   {
+    "label": "Plainer and drier",
+    "line": "Shorter English sentences, abstract nouns kept bare (fondness, forgiveness, peace) without softening, dialogue working-plain. Risk: vision reads stark/fatalistic rather than tender."
+   },
+   {
+    "label": "Slightly period-formal",
+    "line": "More formal diction and slower cadence matching 1917 literary surface, parents courteous-distanced. Risk: archaism makes poverty picturesque and mother remote, wrong if it sounds translated-old rather than young."
+   }
+  ]
+ },
+ "usage": {
+  "input_tokens": 5182,
+  "cached_tokens": 0,
+  "output_tokens": 2921,
+  "reasoning_tokens": 858,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.079148,
+ "response_id": "resp_6aeb426e16089d18892542c6",
+ "latency_s": 39.1,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 8121
+  }
+ ],
+ "created": "2026-11-04T14:34:23Z"
+}

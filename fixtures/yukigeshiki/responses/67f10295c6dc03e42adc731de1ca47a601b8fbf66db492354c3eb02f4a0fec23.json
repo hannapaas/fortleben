@@ -1,0 +1,149 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "\"Looks like one went in!\"",
+    "ids": [
+     "p184"
+    ],
+    "notes": [
+     "Speaker left floating as in Japanese."
+    ]
+   },
+   {
+    "english": "\"Tch!\"",
+    "ids": [
+     "p185"
+    ],
+    "notes": []
+   },
+   {
+    "english": "They jumped back into the water, crying \"Oh, deep, deep!\" and stamping their feet and thrashing their arms like figures in a picture of men bewitched by a fox.",
+    "ids": [
+     "p186",
+     "p187"
+    ],
+    "notes": [
+     "Joined in English as p186 ends on the quotative to leading into p187."
+    ]
+   },
+   {
+    "english": "\"Thrash them in every which way!\" Taki ordered.",
+    "ids": [
+     "p188"
+    ],
+    "notes": []
+   },
+   {
+    "english": "A and B themselves looked like leaping fish. Spray like a fountain came pattering like rain on the leaves of the pondweed at the water's edge.",
+    "ids": [
+     "p189"
+    ],
+    "notes": [
+     "Kawahone, a pond lily, rendered plainly as pondweed."
+    ]
+   },
+   {
+    "english": "\"A water fight on a hot day!\" A muttered, abashed.",
+    "ids": [
+     "p190"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Yikes! Something brushed past my calf going by, ugh, creepy!\" B said, rubbing his chest.",
+    "ids": [
+     "p191"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"All out attack!\" A shouted, and with a whoop the two closed in on the mouth of the trap.",
+    "ids": [
+     "p192"
+    ],
+    "notes": [
+     "Oikomi no kuchi kept as mouth of the trap for the drive net enclosure."
+    ]
+   },
+   {
+    "english": "\"Ah, what fun, what fun.\" Taki clapped his hands, his mouth wide open.",
+    "ids": [
+     "p193"
+    ],
+    "notes": []
+   },
+   {
+    "english": "When evening came the two came up beside Taki and, scratching their heads, said, \"At this rate, well...\"",
+    "ids": [
+     "p194",
+     "p195",
+     "p196"
+    ],
+    "notes": [
+     "Joined in English as one movement: approach, trailing remark and gesture. Speakers left floating as in Japanese."
+    ]
+   },
+   {
+    "english": "\"Oh, take your time over it. From tomorrow let's lay off the rough stuff and think it over somehow. It would be silly to damage such fine things.\"",
+    "ids": [
+     "p197"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"Still, it's taking nothing but days...\"",
+    "ids": [
+     "p198"
+    ],
+    "notes": []
+   },
+   {
+    "english": "\"You need not stand on ceremony about that. Once we catch them to our satisfaction there is nothing to worry about. I have made up my mind to sell the lot, not one left.\"",
+    "ids": [
+     "p199"
+    ],
+    "notes": [
+     "Kept plain catch for tsukamaeru throughout."
+    ]
+   },
+   {
+    "english": "\"Won't we lose face with the people at the other house?\"",
+    "ids": [
+     "p200"
+    ],
+    "notes": [
+     "Speaker and which house is meant left as in Japanese, not settled from the passage."
+    ]
+   }
+  ],
+  "say": "Pond siege drafted with workmen rough and catch kept plain."
+ },
+ "usage": {
+  "input_tokens": 21330,
+  "cached_tokens": 20465,
+  "output_tokens": 3840,
+  "reasoning_tokens": 3157,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.020471,
+ "response_id": "resp_6aeb7dda2ffdea4867a742d1",
+ "latency_s": 42.54,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2462
+  }
+ ],
+ "created": "2026-11-04T18:47:54Z"
+}

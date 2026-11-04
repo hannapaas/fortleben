@@ -1,0 +1,146 @@
+{
+ "prompt": "reader-faithful",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "notes": [
+   {
+    "japanese": "一文にもならないんぢや！",
+    "paragraph": "p13",
+    "problem": "Substitutes an English coin for a Japanese mon, domesticating the money ballast the story keeps exact.",
+    "span": "It won't fetch a penny!",
+    "suggestion": "\"It won't fetch a single mon!\" — or, if mon needs help, \"It won't bring in a thing!\" with mon in the margin.",
+    "sureness": "Sure; 一文 is one mon, not a penny — period currency tables settle it."
+   },
+   {
+    "japanese": "全くの架空的な物語の構想",
+    "paragraph": "p28",
+    "problem": "Renders 架空 as 'imaginary' here but as 'fanciful' in the p160 catalogue, breaking the repeated-word network.",
+    "span": "wholly imaginary story",
+    "suggestion": "\"wholly fanciful story\" to match p160 — or change p160 to 'imaginary'; keep one fixed word for 架空.",
+    "sureness": "Very sure; check the concordance list — 架空 must read as self-quotation in p160."
+   },
+   {
+    "japanese": "すっかりおぢけがついてしまやあがって",
+    "paragraph": "p41",
+    "problem": "\"Shy\" makes spooked carp sound bashful, softening the workmen's rough complaint.",
+    "span": "It's no use, they're thoroughly shy now.",
+    "suggestion": "\"It's no use, they're good and spooked now.\"",
+    "sureness": "Sure; おぢけ is fright / gun-shyness — any dictionary settles it."
+   },
+   {
+    "japanese": "薄暮の泥水の中で二人の倶利加羅紋々が狂気の如く打ち騒いでゐる光景",
+    "paragraph": "p70",
+    "problem": "Reduces the specific tattoo-name to generic 'tattooed men', flattening the link to the dragon/hannya description in p48.",
+    "span": "In the muddy water of the dusk, the sight of the two tattooed men raging about like madmen struck Taki as eerie.",
+    "suggestion": "\"In the muddy water of the dusk, the sight of the two kurikara-tattooed figures raging about like madmen struck Taki as eerie.\"",
+    "sureness": "Fairly sure; need to confirm whether 倶利加羅紋々 means the Fudo-linked motif generally or just heavily tattooed men — the p48 pairing suggests keep the tattoo word."
+   },
+   {
+    "japanese": "察するところ其処は仏間にでもする思案があつたらしかつた",
+    "paragraph": "p76",
+    "problem": "\"Altar room\" suggests a Christian altar and loses the specifically Buddhist room.",
+    "span": "it had, one gathered, been meant perhaps for an altar room.",
+    "suggestion": "\"it had, one gathers, been meant perhaps for a Buddhist altar room.\"",
+    "sureness": "Sure; 仏間 is the Buddhist family-altar room — house dictionary settles it."
+   },
+   {
+    "japanese": "感心なのか、臆病なのか知らないが",
+    "paragraph": "p119",
+    "problem": "Inserts a first-person narrator the Japanese never uses, breaking the even third-person voice.",
+    "span": "Whether it was admirable or timid I do not know,",
+    "suggestion": "\"Whether admirable or timid, when it comes to money...\" with no I.",
+    "sureness": "Very sure; Japanese leaves the knower indefinite and the narration elsewhere never says I."
+   },
+   {
+    "japanese": "――（あれを売らう、売つた〳〵、そこで一番息がつけるといふものだ。）――「お爺さん、誰か電話を買ふ人はないかしら？」",
+    "paragraph": "p131",
+    "problem": "Runs the parenthetical drunk flash and the spoken address together, destroying the rhythmic cut the text marks with dashes.",
+    "span": "(I'll sell it, sell it, that's where I can get my breath back.) \"Grandad, isn't there someone who would buy a telephone?\"",
+    "suggestion": "Put the flash on its own beat: \"(I'll sell it, sell it — that's where I can get my breath back.) — 'Grandad, isn't there someone who would buy a telephone?'\"",
+    "sureness": "Sure; the bible asks for typographically separate beats — layout will settle it."
+   },
+   {
+    "japanese": "お爺さん――俺はね、今、六ヶ敷い仕事を持つてゐるんだよ、それはね……何アに、やれア何時からやつたつて好いわけなんだがね、今の僕としてはね、出来るだけ頭の中に持ち応えてゐたいんだ",
+    "paragraph": "p135",
+    "problem": "Flattens Taki's 俺-to-僕 slide into one uniform I, losing the rough-to-soft shift the story uses for character.",
+    "span": "\"Grandad, I've got the difficult work on me now, you see, that is... well, I can start it any time really, but as I am now I want to hold it in my head as long as I can, even if I go on holding it and holding it it doesn't matter, it's interesting! Mother and my wife wouldn't understand.\"",
+    "suggestion": "Keep the roughness then softening, e.g. \"Grandad — me, I've got the difficult work on me now... well, I can start it any time, but as for myself now, I want to hold it in my head...\" with a margin note on the pronoun shift.",
+    "sureness": "Moderately sure the slide is deliberate; what would settle it is checking Taki's 俺/僕 distribution elsewhere — here both occur in one speech."
+   },
+   {
+    "japanese": "盲滅法にやつつけて見るか、もう一ト息！",
+    "paragraph": "p43",
+    "problem": "Renders 一息 as 'push', breaking the visible migration of Taki's 'in one burst!' slogan into the pond work.",
+    "span": "\"Shall we just go at them blind, one more push!\"",
+    "suggestion": "\"Shall we just go at them blind — one more burst!\"",
+    "sureness": "Fairly sure; 一息 and 一気呵勢 are not identical, but the bible wants one fixed English for the slogan family so p160/p206 land — editor to decide if 一息 belongs."
+   },
+   {
+    "japanese": "最後に、一ト息であの中へ追ひ込んでしまへ",
+    "paragraph": "p177",
+    "problem": "Uses 'in one breath' for 一息, hiding the 'in one burst!' echo the catalogue throws back.",
+    "span": "drive them in there in one breath",
+    "suggestion": "\"drive them in there in one burst\"",
+    "sureness": "Same as p43; check whether the house wants 一息 unified with 一気呵勢."
+   },
+   {
+    "japanese": "腹ん逼ひになつて覗いてばかりゐたつて埒あ明くめえぜ、そんなに濁るのが怕けれあ、小ツちえのを先へねらつたらどうだい――やい、間抜け！　何をボヤボヤしてやがるんだい、此方の隅にマダラが浮いてるぢやねえかよ！",
+    "paragraph": "p165",
+    "problem": "Renders Taki's imitation of A's rough elided bark in clean grammatical English, ennobling the brutal comic voice the crux requires.",
+    "span": "Lying on your bellies just peering in will get you nowhere — if you're so afraid of clouding it, go for the little ones first, hey, you idiot! What are you gaping at, there's a mottled one surfacing in this corner!",
+    "suggestion": "Rougher, still without dialect caricature, e.g. \"Belly-down peeping gets you nowhere — scared to cloud it, are you? Go for the little ones first — hey, dumbass! What're you gawping at, there's a mottled one up in this corner!\"",
+    "sureness": "Sure about the loss, less sure about wording; reading aloud against p40–p47 will settle tone."
+   },
+   {
+    "japanese": "暑い時の水遊びだ！",
+    "paragraph": "p190",
+    "problem": "Adds 'fight' where Japanese says play, keeping the war language at the moment A deflates it.",
+    "span": "\"A water fight on a hot day!\"",
+    "suggestion": "\"Playing in the water on a hot day!\"",
+    "sureness": "Very sure linguistically; 水遊び is water play / paddling — check whether the house wants the established 'water-fight' gloss despite that."
+   },
+   {
+    "japanese": "滝の知らない「森の鍛冶屋」の練習にとりかゝつた",
+    "paragraph": "p98–p99",
+    "problem": "Leaves a meaningful title in romaji while all other popular tunes are given in English, leaving the reader blind.",
+    "span": "\"Mori no Kajiya,\" which Taki did not know.",
+    "suggestion": "\"The Village Blacksmith,\" which Taki did not know — with romaji in the margin if needed.",
+    "sureness": "Moderately sure; need to confirm the song is indeed the 'village blacksmith' piece and the house rule for titles."
+   },
+   {
+    "japanese": "目を瞑ぢ胸を伏せて",
+    "paragraph": "p61",
+    "problem": "\"Bowing his chest\" is unidiomatic and obscures the crouching physical attitude.",
+    "span": "closing his eyes and bowing his chest",
+    "suggestion": "\"closing his eyes and ducking his head\"",
+    "sureness": "Fairly sure; 胸を伏せる is to crouch with chest low — a native check would settle the best English verb."
+   }
+  ],
+  "say": "The draft is mostly accurate on sense but slogan concordance, workman roughness versus Taki's imitation, and several small softenings and additions need desk attention."
+ },
+ "usage": {
+  "input_tokens": 37301,
+  "cached_tokens": 0,
+  "output_tokens": 19028,
+  "reasoning_tokens": 16820,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.12749525,
+ "response_id": "resp_6aeb7eb5406ab96905f242be",
+ "latency_s": 139.69,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 7391
+  }
+ ],
+ "created": "2026-11-04T18:51:33Z"
+}

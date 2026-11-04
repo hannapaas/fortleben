@@ -1,0 +1,42 @@
+{
+ "prompt": "copy-desk",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": null,
+ "usage": {
+  "input_tokens": 21039,
+  "cached_tokens": 20849,
+  "output_tokens": 1316,
+  "reasoning_tokens": 1243,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.00895785,
+ "response_id": "resp_6aeb8f6c5be7c915748f4a63",
+ "latency_s": 12.31,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_52fcdb2d-4258-46c7-aa24-d6080ade3112",
+   "name": "find",
+   "arguments": "{\"words\":\"Imahori\"}"
+  }
+ ],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": "commentary",
+   "chars": 84
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T20:02:52Z"
+}

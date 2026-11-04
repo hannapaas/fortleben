@@ -1,0 +1,42 @@
+{
+ "prompt": "copy-desk",
+ "model": "muse-spark-1.3",
+ "effort": "low",
+ "data": null,
+ "usage": {
+  "input_tokens": 22354,
+  "cached_tokens": 20849,
+  "output_tokens": 147,
+  "reasoning_tokens": 80,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0056333500000000005,
+ "response_id": "resp_6aeb86885024c566b18a432c",
+ "latency_s": 2.66,
+ "citations": [],
+ "tool_calls": [
+  {
+   "call_id": "call_e71122fa-b14b-42c9-b83b-a0dca38ad2b0",
+   "name": "find",
+   "arguments": "{\"words\":\"Secretary\"}"
+  }
+ ],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": "commentary",
+   "chars": 53
+  },
+  {
+   "type": "function_call",
+   "phase": null,
+   "chars": 0
+  }
+ ],
+ "created": "2026-11-04T19:24:56Z"
+}

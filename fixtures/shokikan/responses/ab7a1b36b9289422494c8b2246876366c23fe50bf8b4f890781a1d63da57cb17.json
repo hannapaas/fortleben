@@ -1,0 +1,61 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "Word that Tsunao had at last come home reached the Miyoshi house through another mouth. Yet he did not readily show his face this way, and Zenpei, worldly-minded as he was, took it greatly amiss. With \"he is always despising me, to begin with,\" uncle and nephew grew by degrees more strained. Mitsuyo's mother, a hater of scholars from of old, was not silent at such a time. Cold by nature at the best of days, such slights were nothing new in Tsunao. He had not come with condolences after the recent fire; the congratulations on the recent birth had come only long after, when the time was near forgotten, and so on and on without end were counted the faults of a Tsunao ignorant of the ways of the world.",
+    "ids": [
+     "p115"
+    ],
+    "notes": [
+     "Kept the litany of slights as the household's counting, not the narrator's judgment; \"ignorant of the ways of the world\" for 世情に疎き to keep the worldly register against Tsunao."
+    ]
+   },
+   {
+    "english": "Unable to bear it, Mitsuyo stole to call on Tsunao in secret. Tsunao was not at home. Mitsuyo waited and waited, as long as the hour allowed. Tsunao never came. Rising with a body ready to weep, she drooped her way home at last, only to learn that Tsunao had called in her absence. Ah, what a want of meeting, she wept in her heart.",
+    "ids": [
+     "p116"
+    ],
+    "notes": [
+     "Kept the repeated waiting and not-coming unvaried; \"what a want of meeting\" holds back from naming fate more strongly than 縁のない allows."
+    ]
+   },
+   {
+    "english": "Within, Zenpei was raging as if afire. At sight of his daughter he raised his voice, \"Mitsuyo, the match with Tsunao is broken off. I cannot give you to such a perverse, incomprehensible fellow. Count all promises until now as no more.\"",
+    "ids": [
+     "p117"
+    ],
+    "notes": [
+     "Kept 縁 and 約束 as \"match\" and \"promises\" without naming Tsunao fiancé, per the open question on how formal the understanding is."
+    ]
+   }
+  ],
+  "say": "Drafted p115 to p117 in high narrative register with the household's grievances and the broken match left as stated."
+ },
+ "usage": {
+  "input_tokens": 26823,
+  "cached_tokens": 26225,
+  "output_tokens": 1995,
+  "reasoning_tokens": 1430,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.01316,
+ "response_id": "resp_6aeb7e1bfb8171f1165b4eb1",
+ "latency_s": 18.77,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2074
+  }
+ ],
+ "created": "2026-11-04T18:48:59Z"
+}

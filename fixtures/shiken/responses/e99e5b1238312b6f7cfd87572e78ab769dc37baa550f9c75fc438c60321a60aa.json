@@ -1,0 +1,98 @@
+{
+ "prompt": "translate-draft-plain",
+ "model": "muse-spark-1.3",
+ "effort": "medium",
+ "data": {
+  "items": [
+   {
+    "english": "I",
+    "ids": [
+     "p1"
+    ],
+    "notes": []
+   },
+   {
+    "english": "The soul of the samurai. With only his pair of long and short swords at his waist, with nothing in his hands and his straw sandals barely thrust on, Isogai Ryujiro stepped out into the back garden.",
+    "ids": [
+     "p2"
+    ],
+    "notes": [
+     "Kept the opening fragment as a short sentence, as in the Japanese, and left the swords worn but inert."
+    ]
+   },
+   {
+    "english": "\"Whatever may happen, today I shall make up my mind and set out.\"",
+    "ids": [
+     "p3"
+    ],
+    "notes": []
+   },
+   {
+    "english": "He had left Edo on warrior pilgrimage, yet with a wish of a rather special kind. He should long since have gained his end and be back in Edo by now, gazing on the glad face of his master and receiving without hindrance the uttermost secret transmitted alone in his house. Instead he had been caught upon an unforeseen hindrance and spent more than three months all but a prisoner.",
+    "ids": [
+     "p4"
+    ],
+    "notes": []
+   },
+   {
+    "english": "In the province of Hitachi, Kochi district, near the Osugi shrine of Anba village, there lived a fearsome demon. Ryujiro had been taken by it, no different from a water bird tangled in a mist net, and could do nothing about it. Against his heart he had spent a whole summer in that demon's house, and it had become this autumn morning.",
+    "ids": [
+     "p5"
+    ],
+    "notes": [
+     "Anba follows the ruby in the passage; the bible has Awa."
+    ]
+   },
+   {
+    "english": "The Osugi shrine is said to enshrine Hitachi-bo Kaison, in common speech the rough tengu god. Nearby there lived a demon of renown. She was a woman boss called Living-Rope O-Tetsu.",
+    "ids": [
+     "p6"
+    ],
+    "notes": [
+     "Keeps ikinawa literal as Living-Rope per the crux; first full epithet."
+    ]
+   },
+   {
+    "english": "Country business it was, to be sure, and earthy with it, but nonetheless her ground straddled Hitachi and Shimosa across the Tone River, and of kobun followers she could muster a full thousand, second to none. O-Tetsu's husband, Hiwatari Jinemon by name, was a police agent entrusted by the authorities with a red-tasselled jitte and the capture ropes, and he wore two pairs of straw sandals at once. He was sworn brother to Ioka no Sukegoro.",
+    "ids": [
+     "p7"
+    ],
+    "notes": [
+     "Wore two pairs of straw sandals keeps the Japanese idiom for a double life literal, rather than clarifying it away."
+    ]
+   },
+   {
+    "english": "Though that Hiwatari Jinemon had died of illness, his widow O-Tetsu was more than a match for a man, quite like a woman police agent herself, so that people dreaded her still as though she yet held the red-tasselled jitte.",
+    "ids": [
+     "p8"
+    ],
+    "notes": []
+   }
+  ],
+  "say": "Drafted the opening escape and O-Tetsu introduction keeping swords inert and rope names literal."
+ },
+ "usage": {
+  "input_tokens": 26157,
+  "cached_tokens": 0,
+  "output_tokens": 2913,
+  "reasoning_tokens": 2221,
+  "web_searches": 0
+ },
+ "list_cost_usd": 0.0450765,
+ "response_id": "resp_6aeb7a80421f3202940144da",
+ "latency_s": 35.37,
+ "citations": [],
+ "items": [
+  {
+   "type": "reasoning",
+   "phase": null,
+   "chars": 0
+  },
+  {
+   "type": "message",
+   "phase": null,
+   "chars": 2653
+  }
+ ],
+ "created": "2026-11-04T18:33:37Z"
+}
