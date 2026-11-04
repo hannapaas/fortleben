@@ -99,7 +99,7 @@
 .rounds .round + .round { border-top: 1px dotted var(--muted); }
 .rounds .note { font-style: italic; }
 .rounds .changed { font-size: 15px; }
-.note-box { display: block; width: 100%; max-width: 40rem; box-sizing: border-box; font: inherit; padding: 8px; border: 1.5px solid var(--ink); background: var(--paper); color: var(--ink); }
+.note-box { display: block; width: 100%; max-width: 40rem; box-sizing: border-box; margin-top: 1rem; font: inherit; padding: 8px; border: 1.5px solid var(--ink); background: var(--paper); color: var(--ink); }
 .note-box:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .checkpoint .reading-note { background: linear-gradient(transparent 60%, var(--accent-wash) 60%); display: inline-block; }
 .checkpoint .reading-note[hidden] { display: none; }
