@@ -256,6 +256,7 @@
       fetch('/comments/' + id).then(function (r) { return r.ok ? r.json() : null; }).then(function (st) {
         if (!st || st.status === 'pending') return watch(el, id, tries + 1);
         var b = el.querySelector('.by b');
+        el.dataset.status = st.status;
         if (st.status === 'published') { el.classList.remove('mine'); b.remove(); }
         else { el.classList.add('failed'); b.textContent = 'Not posted: ' + st.reason; }
         layout();
@@ -277,6 +278,7 @@
         .then(function (res) {
           if (!res.ok) { err.textContent = res.j.error || res.j.detail || 'That didn’t post.'; err.hidden = false; layout(); return; }
           var c = document.createElement('div'); c.className = 'cm mine';
+          c.dataset.id = res.j.id; c.dataset.status = 'pending';
           var p = document.createElement('p'); p.textContent = text; c.appendChild(p);
           c.appendChild(by(name, 'Only you can see this until it’s checked.'));
           var mar = f.closest('.mar'), list = mar.querySelector('.list');

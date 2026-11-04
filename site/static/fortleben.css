@@ -221,7 +221,7 @@ body > .wrap > .push { flex: 1 0 3rem; }
 .mar .add { position: absolute; left: -25px; top: 6px; opacity: .55; }
 .mar .add span { position: absolute; left: 25px; top: -1px; white-space: nowrap; opacity: 0; transition: opacity .15s; pointer-events: none; }
 .unit:hover .mar .add, .mar .add:focus { opacity: 1; }
-.unit:hover .list:empty ~ .add span, .mar .add:focus span { opacity: 1; }
+.unit:hover .list:empty ~ .add span, .mar .add:focus span { opacity: 1; pointer-events: auto; }  /* the words open the box too, once they show */
 .mar .ph { display: none; }
 .cmp { display: none; margin: 4px 0 0 14px; }
 .mar.writing .cmp { display: block; }
