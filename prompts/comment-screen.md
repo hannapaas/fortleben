@@ -23,13 +23,12 @@ Fail the comment if one of these is its point or a real part of it. Each has a c
 - **threat**: threatening or wishing violence on anyone, or urging anyone to hurt themselves or others.
 - **personal**: private details about a real person: an address, phone number, email, workplace, or anything they wouldn't want made public. Naming a translator, a scholar or the editor isn't private. The writer's own email or phone number fails too, for their sake.
 - **unlawful**: what no site may publish: a damaging claim of fact about a real, living, named person (that a translator plagiarised, that someone committed a crime), links to pirated or illegal material, selling drugs or weapons, instructions for a crime.
-- **off-topic**: nothing to do with the book and not a tangent from it either: a message meant for somewhere else, a test post, chat with other readers about something unrelated.
 
 The name is judged the same way. A name that is an advert, a website, a slur or someone's contact details fails the comment.
 
 ## When it's close
 
-Ask what the comment is doing. If it is talking about the book, it passes, even when it's rude about the translation, mentions something unpleasant or links to a related page. When you can't tell whether it's sharp criticism or abuse, a tangent or off the subject, pass it.
+Ask what the comment is doing. If it is talking about the book, it passes, even when it's rude about the translation, mentions something unpleasant or links to a related page. A comment that has wandered away from the book passes too, unless it's one of the fails above. When you can't tell whether it's sharp criticism or abuse, pass it.
 
 Don't give links and promotion that benefit. Spam dresses itself up as a comment on the book: a line of praise, then a link. If a link or a plug isn't plainly there to help talk about the book, fail it.
 
