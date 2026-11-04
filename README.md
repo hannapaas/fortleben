@@ -84,6 +84,8 @@ uv run pytest                           # the tests, also keyless
 | `shiken` | 「死剣と生縄」 Dead Sword, Living Rope | Emi Suiin |
 | `nekohachi` | 「猫八」 Nekohachi | Iwano Hōmei |
 
+The site replays all six. In the terminal, `keikaku --replay run` finishes the first four; 「猫八」 and 「雪景色」 stop at the copy desk, whose prompt changed after they were recorded, so that stage has no recording to serve.
+
 To run live, copy `.env.example` to `.env` and set `MODEL_API_KEY` (a Meta Model API key). Then:
 
 ```sh
