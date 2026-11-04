@@ -65,8 +65,7 @@
 /* Your translations. */
 .runs { list-style: none; margin: 0; padding: 0; }
 .run { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 14px; padding: 8px 0; }
-/* On your desk each translation is a box of its own; on its own page, a plain line. */
-#home .run { border: 1px solid color-mix(in srgb, var(--rule) 45%, transparent); padding: 10px 14px; margin: 4px 0 10px; }
+
 .run .rt { flex: 1 1 100%; }
 .run .rt i { font-family: var(--serif); font-size: 1.2rem; }
 .run .rs { flex: 0 1 auto; }
@@ -74,6 +73,7 @@
 .run .rr { flex: 1 1 100%; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
 .run .resume { font-size: 14px; padding: 1px 12px; }
 .run .read { font-weight: 600; margin-left: auto; }
+.run .read + .read { margin-left: 0; }
 
 /* The checkpoint: the house's reading, the voices side by side, the bible, the notes. */
 .checkpoint { border-top: 1.5px solid var(--ink); padding-top: 1.2rem; }

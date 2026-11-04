@@ -14,13 +14,14 @@
 {% set blocked = closed or desk.busy %}
 
 <div class="form two desk" id="home" data-base="{{ desk.base }}">
+  {# One row of the form per translation, the first one labelled. #}
+  {% for r in desk.runs %}
+  <div class="q">{% if loop.first %}Your translations?{% endif %}</div>
+  <div class="a"><ul class="runs">{{ run_row(r, blocked or desk.keyless, desk.base) }}</ul></div>
+  {% else %}
   <div class="q">Your translations?</div>
-  <div class="a">
-    <ul class="runs" id="runs">
-      {% for r in desk.runs %}{{ run_row(r, blocked or desk.keyless, desk.base) }}{% endfor %}
-    </ul>
-    <p class="sm" id="noruns"{% if desk.runs %} hidden{% endif %}>None started.</p>
-  </div>
+  <div class="a"><p class="sm">None started.</p></div>
+  {% endfor %}
 
   <div class="q">A new one?</div>
   <div class="a"><p class="startrow">{% if closed %}<span class="line">{{ closed }}</span>{% else %}<a class="btn go" href="{{ desk.base }}/new">Start a new translation</a>{% endif %}</p></div>

@@ -9,7 +9,7 @@
   var page = document.querySelector('#home, #desk, #run');
   if (!page) return;
   var base = page.dataset.base;  // /desk when signed in, /desk/<token> from an invite link
-  var runs = document.getElementById('runs');
+  var runs = page;  // where the translations' rows are: one per row of your desk, or the one on its own page
   var onRun = page.id === 'run';
   var EVERY = 5000;
   var watching = {};
@@ -70,8 +70,8 @@
     var old = runs.querySelector('[data-run="' + r.id + '"]');
     var li = row(r);
     // Keep the old row's live region when the words haven't changed, so a screen reader isn't told twice.
-    if (old && old.dataset.status === r.status && old.innerHTML === li.innerHTML) return;
-    if (old) runs.replaceChild(li, old); else runs.insertBefore(li, runs.firstChild);
+    if (!old || (old.dataset.status === r.status && old.innerHTML === li.innerHTML)) return;
+    old.parentNode.replaceChild(li, old);
   }
 
   var ACTIVE = { queued: true, running: true };
