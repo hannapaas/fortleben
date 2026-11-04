@@ -1,9 +1,11 @@
 {
   "type": "object",
   "additionalProperties": false,
-  "required": ["verdict", "reason", "say"],
+  "required": ["verdict", "category", "reason", "say"],
   "properties": {
     "verdict": {"type": "string", "enum": ["pass", "fail"]},
+    "category": {"type": "string", "enum": ["none", "spam", "promotion", "link", "hate", "abuse", "sexual", "threat", "personal", "unlawful", "off-topic"],
+                 "description": "Why it failed, the most serious if several fit. none when it passes."},
     "reason": {"type": "string", "description": "One line the writer can read and act on. Empty when it passes."},
     "say": {"type": "string", "description": "One plain sentence for the record: what you decided and why."}
   }

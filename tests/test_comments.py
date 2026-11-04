@@ -26,9 +26,15 @@ def site(db, monkeypatch):
     return TestClient(create_app(db, screen=False))
 
 
-def fake_screen(monkeypatch, verdict, reason=""):
-    client = SimpleNamespace(call=lambda call: SimpleNamespace(data={"verdict": verdict, "reason": reason}))
+def fake_screen(monkeypatch, verdict, reason="", category="none"):
+    client = SimpleNamespace(call=lambda call: SimpleNamespace(data={"verdict": verdict, "reason": reason, "category": category}))
     monkeypatch.setattr(comments, "make_client", lambda conn: client)
+
+
+def broken_screen(monkeypatch, error):
+    def call(call):
+        raise error
+    monkeypatch.setattr(comments, "make_client", lambda conn: SimpleNamespace(call=call))
 
 
 def post(site, body="This is the turn of the story.", name="Ines", segment="p11"):
@@ -71,6 +77,50 @@ def test_a_failed_comment_tells_its_writer_why(site, db, monkeypatch):
     comments.screen(db, cid)
     assert site.get(f"/comments/{cid}").json() == {"status": "failed", "reason": "Advertising."}
     assert "Not posted: Advertising." in site.get("/read/bansan").text
+
+
+def test_a_fail_keeps_its_category_and_never_shows_an_empty_reason(site, db, monkeypatch):
+    cid = post(site, body="Buy cheap watches").json()["id"]
+    fake_screen(monkeypatch, "fail", " ", "promotion")
+    comments.screen(db, cid)
+    st = site.get(f"/comments/{cid}").json()
+    assert st["status"] == "failed" and st["reason"].strip()
+    c = connect(db)
+    assert c.execute("SELECT category FROM comment WHERE id=?", (cid,)).fetchone()[0] == "promotion"
+    assert "promotion" in comments.digest_email(c, "1970-01-01")[1]
+
+
+def test_a_comment_the_model_keeps_answering_badly_is_left_for_the_editor(site, db, monkeypatch):
+    from house.client import SchemaError
+
+    cid = post(site).json()["id"]
+    broken_screen(monkeypatch, SchemaError("output failed twice"))
+    for _ in range(comments.MAX_TRIES):
+        assert comments.screen_pending(db, older_than="+1 minute") == 1
+    assert comments.screen_pending(db, older_than="+1 minute") == 0  # it stops trying
+    c = connect(db)
+    _, text = comments.digest_email(c, "1970-01-01")
+    assert f"/moderate/restore/{cid}" in text and "failed 3 times" in text
+    assert comments.restore(c, cid)
+    assert site.get(f"/comments/{cid}").json()["status"] == "published"
+
+
+def test_a_closed_house_doesnt_count_as_a_failed_screen(site, db, monkeypatch):
+    from house.budget import HouseClosed
+
+    cid = post(site).json()["id"]
+    broken_screen(monkeypatch, HouseClosed("closed"))
+    for _ in range(comments.MAX_TRIES + 1):
+        comments.screen(db, cid)
+    assert connect(db).execute("SELECT screen_tries FROM comment WHERE id=?", (cid,)).fetchone()[0] == 0
+
+
+def test_the_screen_goes_without_the_house_brief():
+    from house.client import instructions
+
+    text = instructions("comment-screen")
+    assert text.startswith("# Screening a reader's comment") and "house brief" not in text.lower()
+    assert instructions("desk").startswith("# The house brief")
 
 
 def test_free_checks_refuse_before_any_model_call(site):

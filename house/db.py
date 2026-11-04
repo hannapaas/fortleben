@@ -50,7 +50,8 @@ ADDED = {"person": {"api_key": "TEXT", "key_tail": "TEXT", "email": "TEXT", "pas
                     "created_at": "TEXT"},
          "work": {"language": "TEXT NOT NULL DEFAULT 'ja'", "title_en": "TEXT", "author_en": "TEXT",
                   "blurb": "TEXT", "added_by": "INTEGER"},
-         "edition": {"accent": "TEXT"}}
+         "edition": {"accent": "TEXT"},
+         "comment": {"category": "TEXT", "screen_tries": "INTEGER NOT NULL DEFAULT 0"}}
 
 
 def _migrate(conn: sqlite3.Connection) -> None:
